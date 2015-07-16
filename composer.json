@@ -8,7 +8,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "doctrine/dbal": "^2.5",
-        "laravelcollective/html": "^5.1"
+        "laravelcollective/html": "^5.1",
+        "barryvdh/laravel-ide-helper": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -35,7 +36,9 @@
             "php artisan optimize"
         ],
         "pre-update-cmd": [
-            "php artisan clear-compiled"
+            "php artisan clear-compiled",
+            "php artisan ide-helper:generate",
+            "php artisan optimize"
         ],
         "post-update-cmd": [
             "php artisan optimize"
