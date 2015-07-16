@@ -13,7 +13,9 @@ class Images extends Migration {
 		Schema::create('images', function (Blueprint $table) {
 			$table->increments('id');
 			$table->string('name');
-			$table->string('url');
+			$table->string('extension');
+			$table->integer('size')->unsigned();
+			$table->text('mime');
 			$table->boolean('archived');
 
 			$table->integer('created_by')->unsigned();
