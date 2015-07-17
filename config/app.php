@@ -4,6 +4,15 @@ return [
 
 	/*
 	|--------------------------------------------------------------------------
+	| Application Specific Configs
+	|--------------------------------------------------------------------------
+	|
+	 */
+	'name' => "Pixbo",
+
+
+	/*
+	|--------------------------------------------------------------------------
 	| Application Debug Mode
 	|--------------------------------------------------------------------------
 	|
@@ -148,6 +157,8 @@ return [
 		App\Providers\EventServiceProvider::class,
 		App\Providers\RouteServiceProvider::class,
 
+		'Lavary\Menu\ServiceProvider',
+
 	],
 
 	/*
@@ -198,6 +209,7 @@ return [
 
 		'Form' => 'Collective\Html\FormFacade',
 		'Html' => 'Collective\Html\HtmlFacade',
+		'Menu'       => 'Lavary\Menu\Facade',
 
 	],
 

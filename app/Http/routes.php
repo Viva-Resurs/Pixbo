@@ -15,4 +15,30 @@ Route::get('/', function () {
 	return view('welcome');
 });
 
-Route::resource('admin/client', 'ClientController');
+Menu::make('topNav', function($menu){
+
+  $menu->add('Home');
+  $menu->add('Dashboard',    'dashboard');
+  $menu->add('Profile', 'profile');
+  $menu->add('Help',  'help');
+
+});
+
+Menu::make('adminNav', function($menu) {
+
+    $menu->add('Overview', 'dashboard');
+
+    $menu->add('Clients', 'clients');
+    $menu->add('Screen Groups', 'screengroups');
+    $menu->add('Screens', 'screens');
+    $menu->add('Calendar', 'calendar');
+    $menu->add('Events', 'events');
+    $menu->add('Event Metas', 'eventmetas');
+    $menu->add('Users', 'Users');
+    $menu->add('User Groups', 'usergoups');
+    $menu->add('Group Permissions', 'grouppermissions');
+
+});
+
+
+Route::resource('client', 'ClientController');
