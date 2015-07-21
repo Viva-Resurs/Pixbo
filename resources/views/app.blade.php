@@ -44,8 +44,8 @@
     @include('navs.topnav')
     <!--  errors -->
 
-    @yield('content')
-
+    @yield('body')
+    @yield('footer')
 
 </body>
 </html>

@@ -5,8 +5,8 @@
 @stop
 
 
-@section('admin_content')
+@section('content')
 
-"client index"
+@include('client.__list')
 
 @stop

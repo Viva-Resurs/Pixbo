@@ -12,4 +12,17 @@ class Client extends Model {
 	 */
 	protected $table = 'clients';
 
+	/**
+	 * [$fillable variables allowed for massallocation]
+	 * @var [String]
+	 */
+	protected $fillable = [
+		'name',
+		'ip_address',
+		'mac_address',
+		'is_active',
+		'user_id',
+		'screengroup_id',
+	];
+
 }

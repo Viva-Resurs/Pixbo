@@ -12,7 +12,7 @@
  */
 
 Route::get('/', function () {
-	return view('welcome');
+	return view('auth.login');
 });
 
 Menu::make('topNav', function ($menu) {
@@ -40,4 +40,4 @@ Menu::make('adminNav', function ($menu) {
 
 });
 
-Route::resource('client', 'ClientController');
+Route::resource('clients', 'ClientsController');
