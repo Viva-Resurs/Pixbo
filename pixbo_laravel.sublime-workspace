@@ -3,27 +3,48 @@
 	{
 		"selected_items":
 		[
+			[
+				"r",
+				"resources〔function〕"
+			],
+			[
+				"fore",
+				"foreign"
+			],
+			[
+				"screen",
+				"screengroup_id"
+			],
+			[
+				"for",
+				"foreign"
+			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"contents": "<?php\n\nuse Illuminate\\Database\\Migrations\\Migration;\n\nclass Clients extends Migration {\n	/**\n	 * Run the migrations.\n	 *\n	 * @return void\n	 */\n	public function up() {\n        Schema::create('clients', function (Blueprint $table) {\n            $table->increments('id');\n            $table->string('name');\n            $table->string('ip_address');\n            $table->string('mac_address');\n		\n		// user_id\n		// screengroup_id\n		// is_active\n            $table->boolean('is_active');\n            $table->timestamps();\n        });\n	}\n\n	/**\n	 * Reverse the migrations.\n	 *\n	 * @return void\n	 */\n	public function down() {\n		// drop column\n	}\n}\n",
-			"file": "database/migrations/2015_07_16_111328_Clients.php",
-			"file_size": 377,
-			"file_write_time": 130815190195744600,
+			"file": "app/Client.php",
 			"settings":
 			{
-				"buffer_size": 640,
+				"buffer_size": 178,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "database/migrations/2014_10_12_000000_create_users_table.php",
+			"file": "app/Http/routes.php",
 			"settings":
 			{
-				"buffer_size": 703,
+				"buffer_size": 507,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "database/migrations/2015_07_16_111217_Images.php",
+			"settings":
+			{
+				"buffer_size": 718,
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -34,10 +55,22 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 344.0,
-		"last_filter": "install",
+		"height": 368.0,
+		"last_filter": "gitg",
 		"selected_items":
 		[
+			[
+				"gitg",
+				"GitGutter: Compare Against Origin"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"ind",
+				"Indentation: Reindent Lines"
+			],
 			[
 				"install",
 				"Package Control: Install Package"
@@ -66,6 +99,9 @@
 	[
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/Admin",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources",
@@ -73,6 +109,16 @@
 	],
 	"file_history":
 	[
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/Admin/ClientController.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2015_07_16_111349_EventMetas.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2015_07_16_111342_Events.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2015_07_16_111328_Clients.php",
+		"/C/Users/Christoffer/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/.phpstorm.meta.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2014_10_12_000000_create_users_table.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2015_07_16_111217_Images.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2015_07_16_111230_Screens.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2015_07_16_111241_ScreenGroups.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/config/database.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/.env",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/config/app.php",
@@ -112,24 +158,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "database/migrations/2015_07_16_111328_Clients.php",
+					"file": "app/Client.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 640,
+						"buffer_size": 178,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								482,
-								482
+								178,
+								178
 							]
 						],
 						"settings":
@@ -138,21 +184,41 @@
 							"auto_complete": false,
 							"bh_regions":
 							[
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
@@ -163,26 +229,6 @@
 								"bh_curly_open",
 								"bh_curly_close",
 								"bh_curly_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
@@ -195,53 +241,73 @@
 								"bh_regex_content"
 							],
 							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "database/migrations/2014_10_12_000000_create_users_table.php",
+					"file": "app/Http/routes.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 703,
+						"buffer_size": 507,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								503,
-								503
+								507,
+								507
 							]
 						],
 						"settings":
 						{
 							"BracketHighlighterBusy": false,
+							"auto_complete": false,
 							"bh_regions":
 							[
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
 								"bh_double_quote_close",
 								"bh_double_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
@@ -252,26 +318,6 @@
 								"bh_curly_open",
 								"bh_curly_close",
 								"bh_curly_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
@@ -284,7 +330,6 @@
 								"bh_regex_content"
 							],
 							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
@@ -292,6 +337,95 @@
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "database/migrations/2015_07_16_111217_Images.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 718,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								95,
+								95
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_complete": false,
+							"bh_regions":
+							[
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -303,7 +437,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 56.0
 	},
 	"layout":
 	{
@@ -374,7 +508,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 103.0,
+	"side_bar_width": 375.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

@@ -13,16 +13,35 @@
 
     @yield('links')
     @yield('styles')
+    <style>
+        body {
+          padding-top: 70px;
+          padding-bottom: 30px;
+      }
 
-    <!-- Application files -->
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+      .theme-dropdown .dropdown-menu {
+          position: static;
+          display: block;
+          margin-bottom: 20px;
+      }
+
+      .theme-showcase > p > .btn {
+          margin: 5px 0;
+      }
+
+      .theme-showcase .navbar .container {
+          width: auto;
+      }
+</style>
+<!-- Application files -->
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
 
 </head>
 <body>
 
     <!-- top_nav -->
-    @extends('navs.topnav')
+    @include('navs.topnav')
     <!--  errors -->
 
     @yield('content')

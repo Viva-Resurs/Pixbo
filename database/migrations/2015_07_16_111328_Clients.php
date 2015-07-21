@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class Clients extends Migration {
 	/**
@@ -22,7 +23,7 @@ class Clients extends Migration {
 
 			$table->integer('screengroup_id')->unsigned();
 			$table->foreign('screengroup_id')
-			->references('id')->on('screengroup');
+			->references('id')->on('screengroups');
 
 			$table->boolean('is_active');
 			$table->timestamps();
