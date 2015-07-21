@@ -24,7 +24,7 @@
                 {{ "Screengroup id with link" }}
             </td>
             <td>{{ $client->is_active ? "Yes" : "No" }}</td>
-            <td>{{ "created timestamp" }}</td>
+            <td>{{ $client->created_at }}</td>
             <td class="actions">
                 {{ "Preview" }}
                 {{ "Show" }}
