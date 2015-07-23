@@ -12,9 +12,14 @@
  */
 
 Route::get('/', function () {
-	return view('auth.login');
+	return view('');
 });
 
+Route::resource('clients', 'ClientsController');
+
+/**
+ * Top menu
+ */
 Menu::make('topNav', function ($menu) {
 
 	$menu->add('Home');
@@ -24,6 +29,9 @@ Menu::make('topNav', function ($menu) {
 
 });
 
+/**
+ * Side menu
+ */
 Menu::make('adminNav', function ($menu) {
 
 	$menu->add('Overview', 'dashboard');
@@ -39,5 +47,3 @@ Menu::make('adminNav', function ($menu) {
 	//$menu->add('Group Permissions', 'grouppermissions');
 
 });
-
-Route::resource('clients', 'ClientsController');

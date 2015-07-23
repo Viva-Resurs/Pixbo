@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.1.7 (LTS) on 2015-07-17.
+ * Generated for Laravel 5.1.7 (LTS) on 2015-07-23.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -12582,6 +12582,65 @@ namespace {
          */
         public static function hasMacro($name){
             return \Collective\Html\HtmlBuilder::hasMacro($name);
+        }
+        
+    }
+
+
+    class Menu extends \Lavary\Menu\Facade{
+        
+        /**
+         * Create a new menu instance
+         *
+         * @param string $name
+         * @param callable $callback
+         * @return \Lavary\Menu\Menu 
+         * @static 
+         */
+        public static function make($name, $callback){
+            return \Lavary\Menu\Menu::make($name, $callback);
+        }
+        
+        /**
+         * Loads and merges configuration data
+         *
+         * @param string $name
+         * @return array 
+         * @static 
+         */
+        public static function loadConf($name){
+            return \Lavary\Menu\Menu::loadConf($name);
+        }
+        
+        /**
+         * Return Menu instance from the collection by key
+         *
+         * @param string $key
+         * @return \Lavary\Menu\Item 
+         * @static 
+         */
+        public static function get($key){
+            return \Lavary\Menu\Menu::get($key);
+        }
+        
+        /**
+         * Return Menu collection
+         *
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */
+        public static function getCollection(){
+            return \Lavary\Menu\Menu::getCollection();
+        }
+        
+        /**
+         * Alias for getCollection
+         *
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */
+        public static function all(){
+            return \Lavary\Menu\Menu::all();
         }
         
     }

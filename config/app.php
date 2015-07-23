@@ -10,7 +10,6 @@ return [
 	 */
 	'name' => "Pixbo",
 
-
 	/*
 	|--------------------------------------------------------------------------
 	| Application Debug Mode
@@ -146,7 +145,7 @@ return [
 		Illuminate\Validation\ValidationServiceProvider::class,
 		Illuminate\View\ViewServiceProvider::class,
 
-		Collective\Html\HtmlServiceProvider::class,
+		'Collective\Html\HtmlServiceProvider',
 
 		Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
@@ -209,7 +208,7 @@ return [
 
 		'Form' => 'Collective\Html\FormFacade',
 		'Html' => 'Collective\Html\HtmlFacade',
-		'Menu'       => 'Lavary\Menu\Facade',
+		'Menu' => 'Lavary\Menu\Facade',
 
 	],
 

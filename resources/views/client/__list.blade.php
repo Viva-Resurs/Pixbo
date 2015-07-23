@@ -7,7 +7,7 @@
             <th>name</th>
             <th>ip</th>
             <th>mac_address</th>
-            <th>screen_group_id</th>
+            <th>screengroup_id</th>
             <th>is_active</th>
             <th>created</th>
             <th class="actions">Actions</th>

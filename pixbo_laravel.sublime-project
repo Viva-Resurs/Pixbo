@@ -2,7 +2,28 @@
 	"folders":
 	[
 		{
-			"path": "."
+            "folder_exclude_patterns": [
+                "bootstrap",
+                "tests",
+                "vendor",
+            ],
+			"path": ".",
+
+            "file_exclude_patterns": [
+                ".env.example",
+                "readme.md",
+                "artisan",
+                ".phpstorm.meta.php",
+                "_ide_helper.php",
+                ".htaccess",
+                ".gitattributes",
+                "LICENSE",
+                "package.json",
+                ".gitignore",
+                "composer.lock",
+                "phpspec.yml",
+                "phpunit.xml"
+            ]
 		}
 	]
 }

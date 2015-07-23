@@ -23,7 +23,7 @@ class ClientsController extends Controller {
 	 */
 	public function create() {
 
-		return view('clients.create');
+		return view('client.create');
 	}
 
 	/**
@@ -44,7 +44,7 @@ class ClientsController extends Controller {
 	 */
 	public function show(Client $client) {
 
-		return view('clients.show', compact('client'));
+		return view('client.show', compact('client'));
 	}
 
 	/**
