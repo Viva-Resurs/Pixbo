@@ -17,9 +17,9 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('screen_group_id', 'Screen Group') !!}
-    {!! Form::number('screen_group_id', null, ['class' => 'form-control']) !!}
-    <small class="text-danger">{{ $errors->first('screen_group_id') }}</small>
+    {!! Form::label('screengroup_id', 'Screen Group') !!}
+    {!! Form::select('screengroup_id', $screenGroups, $client->screengroup_id, ['class' => 'form-control', 'required' => 'required']) !!}
+    <small class="text-danger">{{ $errors->first('screengroup_id') }}</small>
 </div>
 
 <div class="btn-group pull-right">

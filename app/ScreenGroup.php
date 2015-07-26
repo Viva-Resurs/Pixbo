@@ -19,7 +19,6 @@ class ScreenGroup extends Model
     protected $fillable = [
         'name',
         'desc',
-        'mac_address',
         'rss_feed',
         'event_id',
         'created_by',
@@ -40,6 +39,8 @@ class ScreenGroup extends Model
  */
     public function client()
     {
-        return $this->belongsTo('App\Client');
+        return $this->hasMany('\App\Client');
     }
 }
+
+//$screengroup = App\ScreenGroup::create(['name' => 'SG1', 'desc' => 'test1', 'rss_feed' => 'bla', 'event_id' => 0, 'created_by' => 0]);

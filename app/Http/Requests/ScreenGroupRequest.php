@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class ClientRequest extends Request
+class ScreenGroupRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,7 +18,6 @@ class ClientRequest extends Request
 
     /**
      * Get the validation rules that apply to the request.
-     * TODO: Add MAC Address rule!
      *
      * @return array
      */
@@ -26,12 +25,11 @@ class ClientRequest extends Request
     {
         return [
             'name' => 'required',
-            'ip_address' => 'required|ip',
-            //'mac_address' => array('regex:/^(([0-9a-fA-F]{2}-){5}|([0-9a-fA-F]{2}:){5})[0-9a-fA-F]{2}$/'),
-            //'user_id' => 'requred',
-            'screengroup_id' => 'required',
-            'is_active' => 'requried',
+            'desc' => 'required',
+            'rss_feed',
+            //'event_id',
+            //'created_by',
+            //
         ];
     }
 }
-

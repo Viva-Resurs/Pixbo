@@ -6,6 +6,7 @@ use Request;
 use App\Http\Requests\ClientRequest;
 use App\Http\Controllers\Controller;
 use App\Client;
+use App\ScreenGroup;
 
 //App\Client::create(['name' => 'test1', 'ip:address' => '0.0.0.0', 'mac_address' => '00:00:00:00:00:00', 'user_id' => 1, 'screengroup_id' => 0, 'is_active' =>0]);
 
@@ -35,8 +36,9 @@ class ClientsController extends Controller {
 	public function create()
 	{
 		$client = new Client;
+		$screenGroups = ScreenGroup::lists('name', 'id')->all();
 
-		return view('clients.create', compact('client'));
+		return view('clients.create', compact('client', 'screenGroups'));
 
 	}
 
@@ -81,7 +83,9 @@ class ClientsController extends Controller {
 	 */
 	public function edit(Client $client)
 	{
-		return view('clients.edit', compact('client'));
+		$screenGroups = ScreenGroup::lists('name', 'id')->all();
+
+		return view('clients.edit', compact('client', 'screenGroups'));
 	}
 
 	/**

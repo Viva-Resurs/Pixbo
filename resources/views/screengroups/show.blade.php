@@ -1,13 +1,13 @@
 @extends('admin')
 
 @section('title')
-Client index
+ScreenGroup index
 @stop
 
 
 @section('content')
 
-<h1 class="page-header">{{ "Client Show" }}</h1>
+<h1 class="page-header">{{ "ScreenGroup Show" }}</h1>
 
 <div class="row">
     <div class="col-lg-6 col-md-6 col-xs-12">
@@ -22,35 +22,23 @@ Client index
                     <tbody>
                         <tr>
                             <td>{{ 'Id' }}</td>
-                            <td>{{ $client->id }}</td>
+                            <td>{{ $screenGroup->id }}</td>
                         </tr>
                         <tr>
                             <td>{{ 'Name' }}</td>
-                            <td>{{ $client->name }}</td>
+                            <td>{{ $screenGroup->name }}</td>
                         </tr>
                         <tr>
-                            <td>{{ 'IP' }}</td>
-                            <td>{{ $client->ip_address }}</td>
-                        </tr>
-                        <tr>
-                            <td>{{ 'MAC' }}</td>
-                            <td>{{ $client->mac_address }}</td>
-                        </tr>
-                        <tr>
-                            <td>{{ 'Screen Group' }}</td>
-                            <td>{{ $client->screengroup->name }}</td>
+                            <td>{{ 'Desc' }}</td>
+                            <td>{{ $screenGroup->desc }}</td>
                         </tr>
                         <tr>
                             <td>{{ 'Created' }}</td>
-                            <td>{{ $client->created_at }}</td>
+                            <td>{{ $screenGroup->created_at }}</td>
                         </tr>
                         <tr>
                             <td>{{ 'Modified' }}</td>
-                            <td>{{ $client->modified }}</td>
-                        </tr>
-                        <tr>
-                            <td>{{ 'Is Active' }}</td>
-                            <td>{{ $client->is_active ? "Yes" : "No" }}</td>
+                            <td>{{ $screenGroup->modified }}</td>
                         </tr>
                     </tbody>
                 </table>
