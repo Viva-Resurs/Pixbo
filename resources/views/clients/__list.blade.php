@@ -18,7 +18,7 @@
         <tr>
             <td>{{ $client->id }}</td>
             <td>{{ $client->name }}</td>
-            <td>{{ $client->ip }}</td>
+            <td>{{ $client->ip_address }}</td>
             <td>{{ $client->mac_address }}</td>
             <td>
                 {{ "Screengroup id with link" }}
@@ -26,10 +26,12 @@
             <td>{{ $client->is_active ? "Yes" : "No" }}</td>
             <td>{{ $client->created_at }}</td>
             <td class="actions">
-                {{ "Preview" }}
-                {{ "Show" }}
-                {{ "Edit" }}
-                {{ "Delete" }}
+
+                {!! link_to_route('clients.show', 'Show', $client->id) !!}
+                {!! link_to_route('clients.edit', 'Edit', $client->id) !!}2
+                {!! Form::open(['method' => 'DELETE', 'route' => ['clients.destroy', $client->id]]) !!}
+                    <button type="submit">Delete</button>
+                {!! Form::close() !!}
             </td>
         </tr>
         @endforeach

@@ -1,9 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Client;
+
+use Request;
+use App\Http\Requests\ClientRequest;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Client;
+
+//App\Client::create(['name' => 'test1', 'ip:address' => '0.0.0.0', 'mac_address' => '00:00:00:00:00:00', 'user_id' => 1, 'screengroup_id' => 0, 'is_active' =>0]);
+
 
 class ClientsController extends Controller {
 	/**
@@ -11,9 +16,15 @@ class ClientsController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index() {
-		$clients = Client::all();
-		return view('client.index', compact('clients'));
+	public function index()
+	{
+		$clients =  Client::all();
+
+		if(Request::wantsJson()) {
+			return $clients;
+		} else {
+			return view('clients.index', compact('clients'));
+		}
 	}
 
 	/**
@@ -21,9 +32,12 @@ class ClientsController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create() {
+	public function create()
+	{
+		$client = new Client;
 
-		return view('client.create');
+		return view('clients.create', compact('client'));
+
 	}
 
 	/**
@@ -32,8 +46,16 @@ class ClientsController extends Controller {
 	 * @param  Request  $request
 	 * @return Response
 	 */
-	public function store(Request $request) {
-		//
+	public function store(ClientRequest $request)
+	{
+		$client = Client::create($request->all());
+
+		if(Request::wantsJson()) {
+			return $client;
+		} else {
+			return redirect('clients');
+		}
+
 	}
 
 	/**
@@ -42,9 +64,13 @@ class ClientsController extends Controller {
 	 * @param  Client $client
 	 * @return Response
 	 */
-	public function show(Client $client) {
-
-		return view('client.show', compact('client'));
+	public function show(Client $client)
+	{
+		if(Request::wantsJson()) {
+			return $client;
+		} else {
+			return view('clients.show', compact('client'));
+		}
 	}
 
 	/**
@@ -53,8 +79,9 @@ class ClientsController extends Controller {
 	 * @param  Client $client
 	 * @return Response
 	 */
-	public function edit(Client $client) {
-		//
+	public function edit(Client $client)
+	{
+		return view('clients.edit', compact('client'));
 	}
 
 	/**
@@ -64,8 +91,16 @@ class ClientsController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update(Request $request, Client $client) {
-		//
+	public function update(ClientRequest $request, Client $client)
+	{
+		$client->update($request->all());
+
+		if(Request::wantsJson()) {
+			return $client;
+		} else {
+			return redirect('clients');
+		}
+
 	}
 
 	/**
@@ -75,6 +110,13 @@ class ClientsController extends Controller {
 	 * @return Response
 	 */
 	public function destroy(Client $client) {
-		//
+		$deleted = $client->delete();
+
+		if(Request::wantsJson()) {
+			return (string) $deleted;
+		} else {
+			return redirect('clients');
+		}
+
 	}
 }

@@ -9,6 +9,6 @@
 
 <h1 class="page-header">{{ "Client Index" }}</h1>
 
-@include('client.__list')
+@include('clients.__list')
 
 @stop

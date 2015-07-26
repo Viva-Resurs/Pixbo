@@ -1,10 +1,3 @@
-@extends('admin')
-
-@section('content')
-
-<h1 class="page-header">{{ 'Add Client' }}</h1>
-
-{!! Form::open() !!}
 <div class="form-group">
     {!! Form::label('name', 'Name:') !!}
     {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required']) !!}
@@ -30,9 +23,5 @@
 </div>
 
 <div class="btn-group pull-right">
-    {!! Form::reset("Reset", ['class' => 'btn btn-warning']) !!}
-    {!! Form::submit("Add", ['class' => 'btn btn-success']) !!}
+    {!! Form::submit($submitButtonText, ['class' => 'btn btn-success']) !!}
 </div>
-
-{!! Form::close() !!}
-@stop
