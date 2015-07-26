@@ -1,5 +1,7 @@
 /vendor
 /node_modules
+/public/js/*
+/public/css/
 Homestead.yaml
 .env
 /storage/database.sqlite
