@@ -28,7 +28,7 @@
             <td class="actions">
 
                 {!! link_to_route('clients.show', 'Show', $client->id) !!}
-                {!! link_to_route('clients.edit', 'Edit', $client->id) !!}2
+                {!! link_to_route('clients.edit', 'Edit', $client->id) !!}
                 {!! Form::open(['method' => 'DELETE', 'route' => ['clients.destroy', $client->id]]) !!}
                     <button type="submit">Delete</button>
                 {!! Form::close() !!}

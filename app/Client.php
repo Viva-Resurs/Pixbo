@@ -25,4 +25,14 @@ class Client extends Model {
 		'screengroup_id',
 	];
 
+	public function screenGroup()
+	{
+		return $this->hasOne('\App\ScreenGroup');
+	}
+
+	public function user()
+	{
+		return $this->hasOne('\App\User');
+	}
+
 }
