@@ -27,16 +27,18 @@
             <td>{{ $client->created_at }}</td>
             <td class="actions">
 
-                {!! link_to_route('clients.show', 'Show', $client->id, ['class' => 'btn btn-default']) !!}
-                {!! link_to_route('clients.edit', 'Edit', $client->id, ['class' => 'btn btn-default']) !!}
+                {!! link_to_route_html('clients.show', '<i rel="tooltip" title="Show" class="glyphicon glyphicon-zoom-in"></i>', $client->id, ['class' => 'btn btn-default']) !!}
+                {!! link_to_route_html('clients.edit', '<i rel="tooltip" title="Edit" class="glyphicon glyphicon-edit"></i>', $client->id, ['class' => 'btn btn-default']) !!}
                 {!! Form::open(['method' => 'DELETE', 'route' => ['clients.destroy', $client->id]]) !!}
-                    <button type="submit" class="btn btn-warning">Delete</button>
+                {!!Form::button('<i rel="tooltip" title="Remove" class="glyphicon glyphicon-remove"></i>', array('type' => 'submit', 'class' => 'btn btn-default'))!!}
                 {!! Form::close() !!}
             </td>
         </tr>
         @endforeach
     </tbody>
 </table>
+
+
 
 @else
 {{ "No clients exist." }}

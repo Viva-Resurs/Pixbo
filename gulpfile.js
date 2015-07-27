@@ -10,12 +10,19 @@ var elixir = require('laravel-elixir');
  | file for our application, as well as publishing vendor resources.
  |
  */
+var paths = {
+    'bootstrap': '/node_modules/bootstrap-sass/assets/'
+}
+
 
 elixir(function(mix) {
     mix.sass('app.scss');
-
-    mix.scripts([
+    mix.sass("style.scss", 'public/css/', {includePaths: [paths.bootstrap + 'stylesheets/']})
+        .copy(paths.bootstrap + 'fonts/bootstrap/**', 'public/fonts')
+        .scripts([
             'bootstrap.js',
         ], 'public/js/bootstrap.js', 'node_modules/bootstrap-sass/assets/javascripts');
-
+/*
+    mix
+*/
 });

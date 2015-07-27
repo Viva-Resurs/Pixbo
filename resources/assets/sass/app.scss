@@ -80,6 +80,13 @@ body {
   padding-right: 20px;
   padding-left: 20px;
 }
+
+.nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
 .nav-sidebar > .active > a,
 .nav-sidebar > .active > a:hover,
 .nav-sidebar > .active > a:focus {
@@ -124,3 +131,8 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url("/fonts/glyphicons-halflings-regular.eot");
+  src: url("/fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("/fonts/glyphicons-halflings-regular.woff2") format("woff2"), url("/fonts/glyphicons-halflings-regular.woff") format("woff"), url("/fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg"); }

@@ -2,6 +2,7 @@
 /node_modules
 /public/js/*
 /public/css/
+/public/fonts/
 Homestead.yaml
 .env
 /storage/database.sqlite

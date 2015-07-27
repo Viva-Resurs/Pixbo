@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.1.7 (LTS) on 2015-07-27.
+ * Generated for Laravel 5.1.8 (LTS) on 2015-07-27.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -429,6 +429,16 @@ namespace {
          */
         public static function handle($request, $type = 1, $catch = true){
             return \Illuminate\Foundation\Application::handle($request, $type, $catch);
+        }
+        
+        /**
+         * Determine if middleware has been disabled for the application.
+         *
+         * @return bool 
+         * @static 
+         */
+        public static function shouldSkipMiddleware(){
+            return \Illuminate\Foundation\Application::shouldSkipMiddleware();
         }
         
         /**
@@ -2833,7 +2843,7 @@ namespace {
          *
          * @param \Closure $callback
          * @return mixed 
-         * @throws \Exception
+         * @throws \Throwable
          * @static 
          */
         public static function transaction($callback){
@@ -7604,7 +7614,7 @@ namespace {
          * @param mixed $data
          * @param string $queue
          * @return mixed 
-         * @throws \Exception
+         * @throws \Throwable
          * @static 
          */
         public static function push($job, $data = '', $queue = null){
@@ -12641,6 +12651,88 @@ namespace {
          */
         public static function all(){
             return \Lavary\Menu\Menu::all();
+        }
+        
+    }
+
+
+    class Flash extends \Laracasts\Flash\Flash{
+        
+        /**
+         * Flash an information message.
+         *
+         * @param string $message
+         * @static 
+         */
+        public static function info($message){
+            return \Laracasts\Flash\FlashNotifier::info($message);
+        }
+        
+        /**
+         * Flash a success message.
+         *
+         * @param string $message
+         * @return $this 
+         * @static 
+         */
+        public static function success($message){
+            return \Laracasts\Flash\FlashNotifier::success($message);
+        }
+        
+        /**
+         * Flash an error message.
+         *
+         * @param string $message
+         * @return $this 
+         * @static 
+         */
+        public static function error($message){
+            return \Laracasts\Flash\FlashNotifier::error($message);
+        }
+        
+        /**
+         * Flash a warning message.
+         *
+         * @param string $message
+         * @return $this 
+         * @static 
+         */
+        public static function warning($message){
+            return \Laracasts\Flash\FlashNotifier::warning($message);
+        }
+        
+        /**
+         * Flash an overlay modal.
+         *
+         * @param string $message
+         * @param string $title
+         * @return $this 
+         * @static 
+         */
+        public static function overlay($message, $title = 'Notice'){
+            return \Laracasts\Flash\FlashNotifier::overlay($message, $title);
+        }
+        
+        /**
+         * Flash a general message.
+         *
+         * @param string $message
+         * @param string $level
+         * @return $this 
+         * @static 
+         */
+        public static function message($message, $level = 'info'){
+            return \Laracasts\Flash\FlashNotifier::message($message, $level);
+        }
+        
+        /**
+         * Add an "important" flash to the session.
+         *
+         * @return $this 
+         * @static 
+         */
+        public static function important(){
+            return \Laracasts\Flash\FlashNotifier::important();
         }
         
     }

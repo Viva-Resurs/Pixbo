@@ -3,17 +3,15 @@
 @section('body')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-3">
+        <div class="col-sm-3 col-md-2 sidebar">
             <!--  side_nav -->
             <ul role="menu" class="nav nav-sidebar">
                 @include(config('laravel-menu.views.bootstrap-items'), array('items' => $adminNav->roots()))
             </ul>
 
         </div>
-        <div class="col-lg-9 col-md-9 col-sm-9">
-            <div class="content">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             @yield('content')
-            </div>
         </div>
     </div>
 </div>
