@@ -23,13 +23,10 @@
     <!-- top_nav -->
     @include('navs.topnav')
 
-    <!--  errors -->
-    @include ('flash::message')
     <!-- body -->
     @yield('body')
     @yield('footer')
-    <script src="/js/bootstrap.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
+    <script src="/js/bootstrap.js"></script>
 </body>
 </html>

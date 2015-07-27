@@ -53,6 +53,8 @@ class ClientsController extends Controller {
 	 */
 	public function store(ClientRequest $request)
 	{
+		flash()->success('Client created successfully.');
+
 		$client = new Client($request->all());
 		Auth::user()->clients()->save($client);
 		//$client = Client::create($request->all());
@@ -102,6 +104,8 @@ class ClientsController extends Controller {
 	 */
 	public function update(ClientRequest $request, Client $client)
 	{
+		flash()->success('Client updated successfully.');
+
 		$client->update($request->all());
 
 		if(Request::wantsJson()) {
