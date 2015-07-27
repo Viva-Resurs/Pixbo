@@ -18,6 +18,13 @@ Route::get('/', function () {
 Route::resource('clients', 'ClientsController');
 Route::resource('screengroups', 'ScreenGroupController');
 
+
+Route::controllers([
+	'auth' => 'Auth\AuthController',
+	'password' => 'Auth\PasswordController',
+	]);
+
+
 /**
  * Top menu
  */

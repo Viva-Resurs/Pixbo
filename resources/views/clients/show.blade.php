@@ -49,6 +49,10 @@ Client index
                             <td>{{ $client->modified }}</td>
                         </tr>
                         <tr>
+                            <td>{{ 'Created by' }}</td>
+                            <td>{{ $client->user->name }}</td>
+                        </tr>
+                        <tr>
                             <td>{{ 'Is Active' }}</td>
                             <td>{{ $client->is_active ? "Yes" : "No" }}</td>
                         </tr>

@@ -23,6 +23,8 @@ class Client extends Model {
 		'is_active',
 		'user_id',
 		'screengroup_id',
+		'created_at',
+		'updated_at'
 	];
 
 	public function screengroup()
@@ -33,7 +35,7 @@ class Client extends Model {
 
 	public function user()
 	{
-		return $this->hasOne('\App\User');
+		return $this->belongsTo('App\User');
 	}
 
 }

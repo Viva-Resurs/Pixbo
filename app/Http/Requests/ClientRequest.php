@@ -27,10 +27,10 @@ class ClientRequest extends Request
         return [
             'name' => 'required',
             'ip_address' => 'required|ip',
-            //'mac_address' => array('regex:/^(([0-9a-fA-F]{2}-){5}|([0-9a-fA-F]{2}:){5})[0-9a-fA-F]{2}$/'),
-            //'user_id' => 'requred',
+            'mac_address' => array('required', 'regex:/^(([0-9a-fA-F]{2}-){5}|([0-9a-fA-F]{2}:){5})[0-9a-fA-F]{2}$/'),
+            //'user_id' => 'required',
             'screengroup_id' => 'required',
-            'is_active' => 'requried',
+            'is_active' => 'required',
         ];
     }
 }

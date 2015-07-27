@@ -27,10 +27,10 @@
             <td>{{ $client->created_at }}</td>
             <td class="actions">
 
-                {!! link_to_route('clients.show', 'Show', $client->id) !!}
-                {!! link_to_route('clients.edit', 'Edit', $client->id) !!}
+                {!! link_to_route('clients.show', 'Show', $client->id, ['class' => 'btn btn-default']) !!}
+                {!! link_to_route('clients.edit', 'Edit', $client->id, ['class' => 'btn btn-default']) !!}
                 {!! Form::open(['method' => 'DELETE', 'route' => ['clients.destroy', $client->id]]) !!}
-                    <button type="submit">Delete</button>
+                    <button type="submit" class="btn btn-warning">Delete</button>
                 {!! Form::close() !!}
             </td>
         </tr>

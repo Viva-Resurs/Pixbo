@@ -1,3 +1,8 @@
+@include('shared.alert')
+
+
+{!! Form::hidden('is_active', 0) !!}
+
 <div class="form-group">
     {!! Form::label('name', 'Name:') !!}
     {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required']) !!}
@@ -23,5 +28,5 @@
 </div>
 
 <div class="btn-group pull-right">
-    {!! Form::submit($submitButtonText, ['class' => 'btn btn-success']) !!}
+    {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
 </div>

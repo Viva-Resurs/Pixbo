@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Request;
 use App\Http\Requests\ClientRequest;
 use App\Http\Controllers\Controller;
@@ -20,6 +21,8 @@ class ClientsController extends Controller {
 	public function index()
 	{
 		$clients =  Client::all();
+
+		//flash()->success('Listing index');
 
 		if(Request::wantsJson()) {
 			return $clients;
@@ -50,7 +53,9 @@ class ClientsController extends Controller {
 	 */
 	public function store(ClientRequest $request)
 	{
-		$client = Client::create($request->all());
+		$client = new Client($request->all());
+		Auth::user()->clients()->save($client);
+		//$client = Client::create($request->all());
 
 		if(Request::wantsJson()) {
 			return $client;

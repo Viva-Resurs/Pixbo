@@ -32,4 +32,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+/**
+ * Client association
+ * @return [type] [description]
+ */
+    public function clients()
+    {
+        return $this->hasMany('\App\Client');
+    }
 }

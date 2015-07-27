@@ -157,6 +157,7 @@ return [
 		App\Providers\RouteServiceProvider::class,
 
 		'Lavary\Menu\ServiceProvider',
+		'Laracasts\Flash\FlashServiceProvider',
 
 	],
 
@@ -209,6 +210,7 @@ return [
 		'Form' => 'Collective\Html\FormFacade',
 		'Html' => 'Collective\Html\HtmlFacade',
 		'Menu' => 'Lavary\Menu\Facade',
+		'Flash' => 'Laracasts\Flash\Flash'
 
 	],
 
