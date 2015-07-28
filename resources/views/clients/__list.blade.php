@@ -29,9 +29,13 @@
 
                 {!! link_to_route_html('clients.show', '<i rel="tooltip" title="Show" class="glyphicon glyphicon-zoom-in"></i>', $client->id, ['class' => 'btn btn-default']) !!}
                 {!! link_to_route_html('clients.edit', '<i rel="tooltip" title="Edit" class="glyphicon glyphicon-edit"></i>', $client->id, ['class' => 'btn btn-default']) !!}
-                {!! Form::open(['method' => 'DELETE', 'route' => ['clients.destroy', $client->id]]) !!}
-                {!!Form::button('<i rel="tooltip" title="Remove" class="glyphicon glyphicon-remove"></i>', array('type' => 'submit', 'class' => 'btn btn-default'))!!}
+                {!! Form::open(['method' => 'DELETE', 'route' => ['clients.destroy', $client->id], 'style' => 'display:inline']) !!}
+                    <button class="btn btn-default" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Delete User" data-message="Are you sure you want to delete this user ?">
+                        <i rel="tooltip" title="Remove" class="glyphicon glyphicon-trash"></i>
+                    </button>
+                    @include('shared.delete_message')
                 {!! Form::close() !!}
+                @include('shared.delete_message')
             </td>
         </tr>
         @endforeach

@@ -123,6 +123,9 @@ class ClientsController extends Controller {
 	 * @return Response
 	 */
 	public function destroy(Client $client) {
+
+		flash()->success('Client removed successfully.');
+
 		$deleted = $client->delete();
 
 		if(Request::wantsJson()) {
