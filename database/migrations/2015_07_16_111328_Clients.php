@@ -18,8 +18,7 @@ class Clients extends Migration {
 
 			$table->integer('user_id')->unsigned();
 			$table->foreign('user_id')
-			->references('id')->on('users')
-			->onDelete('cascade');
+			->references('id')->on('users');
 
 			$table->integer('screengroup_id')->unsigned();
 			$table->foreign('screengroup_id')

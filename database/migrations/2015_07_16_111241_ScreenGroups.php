@@ -24,8 +24,8 @@ class ScreenGroups extends Migration {
 			->references('id')->on('events');
 
 			// Users
-			$table->integer('created_by')->unsigned();
-			$table->foreign('created_by')
+			$table->integer('user_id')->unsigned();
+			$table->foreign('user_id')
 			->references('id')->on('users');
 
 			$table->timestamps();
