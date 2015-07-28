@@ -8,7 +8,7 @@ use App\ScreenGroup;
 use Auth;
 use Request;
 
-class ScreenGroupController extends Controller {
+class ScreenGroupsController extends Controller {
 	/**
 	 * Display a listing of the resource.
 	 *

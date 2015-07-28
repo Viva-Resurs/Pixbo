@@ -16,14 +16,13 @@ Route::get('/', function () {
 });
 
 Route::resource('clients', 'ClientsController');
-Route::resource('screengroups', 'ScreenGroupController');
-
+Route::resource('screengroups', 'ScreenGroupsController');
+Route::resource('screens', 'ScreensController');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
-	]);
-
+]);
 
 /**
  * Top menu

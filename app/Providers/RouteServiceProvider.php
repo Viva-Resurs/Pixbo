@@ -27,6 +27,7 @@ class RouteServiceProvider extends ServiceProvider {
 		parent::boot($router);
 
 		$router->model('clients', 'App\Client');
+		$router->model('screens', 'App\Screen');
 		$router->model('screengroups', 'App\ScreenGroup');
 	}
 

@@ -2,86 +2,121 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ScreenRequest;
+use App\Screen;
+use App\ScreenGroup;
+use Auth;
+use Request;
 
-class ScreensController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        //
-    }
+class ScreensController extends Controller {
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function index() {
+		$screens = Screen::all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
+		if (Request::wantsJson()) {
+			return $screens;
+		} else {
+			return view('screens.index', compact('screens'));
+		}
+	}
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function create() {
+		$screens = new Screen;
+		$screenGroups = ScreenGroup::lists('name', 'id')->all();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
+		return view('screens.create', compact('screens', 'screenGroups'));
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+	}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  Request  $request
+	 * @return Response
+	 */
+	public function store(ScreenRequest $request) {
+		flash()->success('Screen created successfully.');
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+		$screen = new Screen($request->all());
+		Auth::user()->screens()->save($screen);
+
+		if (Request::wantsJson()) {
+			return $screen;
+		} else {
+			return redirect('screens');
+		}
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  Screen  $screen
+	 * @return Response
+	 */
+	public function show(Screen $screen) {
+		if (Request::wantsJson()) {
+			return $screen;
+		} else {
+			return view('screens.show', compact('screen'));
+		}
+	}
+
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  Screen  $screen
+	 * @return Response
+	 */
+	public function edit(Screen $screen) {
+		$screenGroups = ScreenGroup::lists('name', 'id')->all();
+
+		return view('screens.edit', compact('screen', 'screenGroups'));
+	}
+
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  Request  $request
+	 * @param  Screen  $screen
+	 * @return Response
+	 */
+	public function update(ScreenRequest $request, Screen $screen) {
+		flash()->success('Screen updated successfully.');
+
+		$screen->update($request->all());
+
+		if (Request::wantsJson()) {
+			return $screen;
+		} else {
+			return redirect('screens');
+		}
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  Screen  $screen
+	 * @return Response
+	 */
+	public function destroy(Screen $screen) {
+		flash()->success('Screen removed successfully.');
+
+		$deleted = $screen->delete();
+
+		if (Request::wantsJson()) {
+			return (string) $deleted;
+		} else {
+			return redirect('screens');
+		}
+	}
 }

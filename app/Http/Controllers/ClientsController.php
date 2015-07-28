@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ClientRequest;
+use App\ScreenGroup;
 use Auth;
 use Request;
-use App\Http\Requests\ClientRequest;
-use App\Http\Controllers\Controller;
-use App\Client;
-use App\ScreenGroup;
 
 //App\Client::create(['name' => 'test1', 'ip:address' => '0.0.0.0', 'mac_address' => '00:00:00:00:00:00', 'user_id' => 1, 'screengroup_id' => 0, 'is_active' =>0]);
-
 
 class ClientsController extends Controller {
 	/**
@@ -18,13 +17,12 @@ class ClientsController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
-	{
-		$clients =  Client::all();
+	public function index() {
+		$clients = Client::all();
 
 		//flash()->success('Listing index');
 
-		if(Request::wantsJson()) {
+		if (Request::wantsJson()) {
 			return $clients;
 		} else {
 			return view('clients.index', compact('clients'));
@@ -36,8 +34,7 @@ class ClientsController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
-	{
+	public function create() {
 		$client = new Client;
 		$screenGroups = ScreenGroup::lists('name', 'id')->all();
 
@@ -51,15 +48,14 @@ class ClientsController extends Controller {
 	 * @param  Request  $request
 	 * @return Response
 	 */
-	public function store(ClientRequest $request)
-	{
+	public function store(ClientRequest $request) {
 		flash()->success('Client created successfully.');
 
 		$client = new Client($request->all());
 		Auth::user()->clients()->save($client);
 		//$client = Client::create($request->all());
 
-		if(Request::wantsJson()) {
+		if (Request::wantsJson()) {
 			return $client;
 		} else {
 			return redirect('clients');
@@ -73,9 +69,8 @@ class ClientsController extends Controller {
 	 * @param  Client $client
 	 * @return Response
 	 */
-	public function show(Client $client)
-	{
-		if(Request::wantsJson()) {
+	public function show(Client $client) {
+		if (Request::wantsJson()) {
 			return $client;
 		} else {
 			return view('clients.show', compact('client'));
@@ -88,8 +83,7 @@ class ClientsController extends Controller {
 	 * @param  Client $client
 	 * @return Response
 	 */
-	public function edit(Client $client)
-	{
+	public function edit(Client $client) {
 		$screenGroups = ScreenGroup::lists('name', 'id')->all();
 
 		return view('clients.edit', compact('client', 'screenGroups'));
@@ -102,13 +96,12 @@ class ClientsController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update(ClientRequest $request, Client $client)
-	{
+	public function update(ClientRequest $request, Client $client) {
 		flash()->success('Client updated successfully.');
 
 		$client->update($request->all());
 
-		if(Request::wantsJson()) {
+		if (Request::wantsJson()) {
 			return $client;
 		} else {
 			return redirect('clients');
@@ -119,7 +112,7 @@ class ClientsController extends Controller {
 	/**
 	 * Remove the specified resource from storage.
 	 *
-	 * @param  int  $id
+	 * @param  Client  $client
 	 * @return Response
 	 */
 	public function destroy(Client $client) {
@@ -128,7 +121,7 @@ class ClientsController extends Controller {
 
 		$deleted = $client->delete();
 
-		if(Request::wantsJson()) {
+		if (Request::wantsJson()) {
 			return (string) $deleted;
 		} else {
 			return redirect('clients');
