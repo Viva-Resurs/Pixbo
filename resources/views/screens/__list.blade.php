@@ -20,10 +20,33 @@
             <td>{{ $screen->image_id }}</td>
             <td class="actions">
 
-                {!! link_to_route_html('screens.show', '<i rel="tooltip" title="Show" class="glyphicon glyphicon-zoom-in"></i>', $screen->id, ['class' => 'btn btn-default']) !!}
-                {!! link_to_route_html('screens.edit', '<i rel="tooltip" title="Edit" class="glyphicon glyphicon-edit"></i>', $screen->id, ['class' => 'btn btn-default']) !!}
-                {!! Form::open(['method' => 'DELETE', 'route' => ['screens.destroy', $screen->id], 'style' => 'display:inline']) !!}
-                    <button class="btn btn-default" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Delete ScreenGroup" data-message="Are you sure you want to delete this screen group ?">
+                {!!
+                    link_to_route_html('screens.show',
+                        '<i rel="tooltip" title="Show" class="glyphicon glyphicon-zoom-in"></i>',
+                        $screen->id,
+                        ['class' => 'btn btn-default']
+                    )
+                !!}
+                {!!
+                    link_to_route_html('screens.edit',
+                        '<i rel="tooltip" title="Edit" class="glyphicon glyphicon-edit"></i>',
+                        $screen->id,
+                        ['class' => 'btn btn-default']
+                    )
+                !!}
+                {!!
+                    Form::open(['method' => 'DELETE',
+                        'route' => ['screens.destroy', $screen->id],
+                        'style' => 'display:inline']
+                    )
+                !!}
+                    <button
+                        class="btn btn-default"
+                        type="button"
+                        data-toggle="modal"
+                        data-target="#confirmDelete"
+                        data-title="Delete ScreenGroup"
+                        data-message="Are you sure you want to delete this screen group ?">
                         <i rel="tooltip" title="Remove" class="glyphicon glyphicon-trash"></i>
                     </button>
                     @include('shared.delete_message')

@@ -20,12 +20,12 @@ class ClientsController extends Controller {
 	public function index() {
 		$clients = Client::all();
 
-		//flash()->success('Listing index');
 
 		if (Request::wantsJson()) {
 			return $clients;
 		} else {
-			return view('clients.index', compact('clients'));
+			$data = Client::paginate(10);
+			return view('clients.index')->with('data', $data);
 		}
 	}
 

@@ -20,7 +20,8 @@ class ScreenGroupsController extends Controller {
 		if (Request::wantsJson()) {
 			return $screenGroups;
 		} else {
-			return view('screengroups.index', compact('screenGroups'));
+			$data = ScreenGroup::paginate(10);
+			return view('screengroups.index')->with('data', $data);
 		}
 	}
 
@@ -99,10 +100,20 @@ class ScreenGroupsController extends Controller {
 	/**
 	 * Remove the specified resource from storage.
 	 *
-	 * @param  int  $id
+	 * @param  ScreenGroup  $screenGroup
 	 * @return Response
 	 */
 	public function destroy(ScreenGroup $screenGroup) {
+		$deleted = $screenGroup->delete();
+
+		if (Request::wantsJson()) {
+			return (string) deleted;
+		} else {
+			return redirect('screengroups');
+		}
+	}
+
+	public function delete(ScreenGroup $screenGroup) {
 		$deleted = $screenGroup->delete();
 
 		if (Request::wantsJson()) {

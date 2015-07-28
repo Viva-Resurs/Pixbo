@@ -16,12 +16,16 @@ class ScreensController extends Controller {
 	 * @return Response
 	 */
 	public function index() {
+
 		$screens = Screen::all();
 
 		if (Request::wantsJson()) {
 			return $screens;
 		} else {
-			return view('screens.index', compact('screens'));
+			$data = Screen::paginate(10);
+			//dd($data);
+			return view('screens.index')->with('data', $data);
+			//return view('screens.index', compact('screens'));
 		}
 	}
 

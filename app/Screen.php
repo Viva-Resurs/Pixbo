@@ -10,7 +10,7 @@ class Screen extends Model {
  * Database table
  * @var string
  */
-	protected $table = 'screengroups';
+	protected $table = 'screens';
 
 /**
  * The attributes that are mass assignable.
