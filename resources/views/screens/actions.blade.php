@@ -5,29 +5,27 @@
 
     <ul class="dropdown-menu" role="menu">
 
-        <li><a href="{{ route('clients.show', array($item['id'])) }}">View</a></li>
+        <li><a href="{{ route('screens.show', array($item['id'])) }}">View</a></li>
 
-        <li><a href="{{ route('clients.edit', array($item['id'])) }}">Edit</a></li>
+        <li><a href="{{ route('screens.edit', array($item['id'])) }}">Edit</a></li>
 
-        <!-- <li><a href="{{ route('clients.destroy', array($item['id'])) }}">Delete</a></li> -->
-            <li>
+        <li>
          {!!
             Form::open(['method' => 'DELETE',
-                'route' => ['clients.destroy', $item['id']],
+                'route' => ['screens.destroy', $item['id']],
                 'style' => 'display:inline']) !!}
                     <button
                         class="delete-button"
                         type="button"
                         data-toggle="modal"
                         data-target="#confirmDelete"
-                        data-title="Delete Client"
-                        data-message="Are you sure you want to delete this client ?"
+                        data-title="Delete Screen"
+                        data-message="Are you sure you want to delete this screen?"
                     >
                         Delete
                     </button>
                     @include('shared.delete_message')
                 {!! Form::close() !!}
                 </li>
-
     </ul>
 </div>

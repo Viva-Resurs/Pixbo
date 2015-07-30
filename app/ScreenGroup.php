@@ -20,7 +20,7 @@ class ScreenGroup extends Model {
 		'desc',
 		'rss_feed',
 		'event_id',
-		'created_by',
+		'user_id',
 		'created_at',
 		'updated_at',
 	];
@@ -46,7 +46,15 @@ class ScreenGroup extends Model {
  * @return [type] [description]
  */
 	public function user() {
-		return $this->belongsTo('App\User');
+		return $this->belongsTo('\App\User');
+	}
+
+/**
+ * Event association
+ * @return [type] [description]
+ */
+	public function event() {
+		return $this->morphMany('\App\Event', 'eventable');
 	}
 }
 

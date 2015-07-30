@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="/pixbo" class="navbar-brand">{{ config('app.name') }}</a>
+            <a href="/" class="navbar-brand">{{ config('app.name') }}</a>
         </div>
 
         <div class="navbar-collapse collapse">

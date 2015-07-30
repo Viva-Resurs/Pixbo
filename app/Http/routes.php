@@ -12,12 +12,17 @@
  */
 
 Route::get('/', function () {
-	return view('');
+	return view('pages.welcome');
+});
+
+Route::get('/dashboard', function () {
+	return view('pages.dashboard');
 });
 
 Route::resource('clients', 'ClientsController');
 Route::resource('screengroups', 'ScreenGroupsController');
 Route::resource('screens', 'ScreensController');
+Route::resource('events', 'EventsController');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

@@ -29,6 +29,7 @@ class RouteServiceProvider extends ServiceProvider {
 		$router->model('clients', 'App\Client');
 		$router->model('screens', 'App\Screen');
 		$router->model('screengroups', 'App\ScreenGroup');
+		$router->model('events', 'App\Event');
 	}
 
 	/**

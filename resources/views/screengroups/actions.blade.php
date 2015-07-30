@@ -9,7 +9,23 @@
 
         <li><a href="{{ route('screengroups.edit', array($item['id'])) }}">Edit</a></li>
 
-        <li><a href="{{ route('screengroups.delete', array($item['id'])) }}">Delete</a></li>
-
+        <li>
+           {!!
+            Form::open(['method' => 'DELETE',
+                'route' => ['screengroups.destroy', $item['id']],
+                'style' => 'display:inline']) !!}
+                <button
+                class="delete-button"
+                type="button"
+                data-toggle="modal"
+                data-target="#confirmDelete"
+                data-title="Delete ScreenGroup"
+                data-message="Are you sure you want to delete this screen group?"
+                >
+                Delete
+            </button>
+            @include('shared.delete_message')
+            {!! Form::close() !!}
+        </li>
     </ul>
 </div>

@@ -16,6 +16,9 @@ class Events extends Migration {
 			$table->date('date');
 			$table->time('start_time');
 			$table->time('end_time');
+			$table->boolean('recurring');
+			$table->integer('eventable_id');
+			$table->string('eventable_type');
 
 			$table->integer('eventmeta_id')->unsigned();
 			$table->foreign('eventmeta_id')

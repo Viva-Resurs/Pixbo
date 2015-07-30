@@ -13,15 +13,15 @@
             <li>
          {!!
             Form::open(['method' => 'DELETE',
-                'route' => ['clients.destroy', $item['id']],
+                'route' => ['events.destroy', $item['id']],
                 'style' => 'display:inline']) !!}
                     <button
                         class="delete-button"
                         type="button"
                         data-toggle="modal"
                         data-target="#confirmDelete"
-                        data-title="Delete Client"
-                        data-message="Are you sure you want to delete this client ?"
+                        data-title="Delete Event"
+                        data-message="Are you sure you want to delete this event?"
                     >
                         Delete
                     </button>

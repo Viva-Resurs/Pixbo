@@ -20,16 +20,25 @@ class Screen extends Model {
 		'name',
 		'event_id',
 		'image_id',
-		'event_id',
 		'user_id',
 		'created_at',
 		'updated_at',
 	];
 	/**
 	 * User association
-	 * @return Illuminate\Database\Eloquent\Model
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
 	public function user() {
 		return $this->belongsTo('App\User');
+	}
+
+/**
+ * Event association
+ *
+ * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+ */
+	public function event() {
+		return $this->morphToMany('App\Event', 'eventable');
 	}
 }

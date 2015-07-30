@@ -47,4 +47,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	public function screengroups() {
 		return $this->hasMany('\App\ScreenGroup');
 	}
+
+/**
+ * Event association
+ * @return [type] [description]
+ */
+	public function events() {
+		return $this->hasMany('\App\Event');
+	}
 }
