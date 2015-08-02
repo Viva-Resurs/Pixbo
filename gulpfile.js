@@ -1,4 +1,5 @@
 var elixir = require('laravel-elixir');
+require('laravel-elixir-livereload');
 
 /*
  |--------------------------------------------------------------------------
@@ -16,8 +17,10 @@ var paths = {
 
 
 elixir(function(mix) {
-    mix.sass('app.scss');
-    mix.sass("style.scss", 'public/css/', {includePaths: [paths.bootstrap + 'stylesheets/']})
+
+    mix.livereload();
+    //mix.sass('app.scss');
+    mix.sass("app.scss", 'public/css/', {includePaths: [paths.bootstrap + 'stylesheets/']})
         .copy(paths.bootstrap + 'fonts/bootstrap/**', 'public/fonts')
         .scripts([
             'bootstrap.js',
@@ -25,4 +28,5 @@ elixir(function(mix) {
 /*
     mix
 */
+
 });
