@@ -6,7 +6,7 @@
 
 <div class="form-group">
     {!! Form::label('screengroup_id', 'Screen Group') !!}
-    {!! Form::select('screengroup_id', $screenGroups, $screen->screengroup_id, ['class' => 'form-control', 'required' => 'required']) !!}
+    {!! Form::select('screengroup_id', $screenGroups, null, ['class' => 'form-control', 'required' => 'required']) !!}
     <small class="text-danger">{{ $errors->first('screengroup_id') }}</small>
 </div>
 

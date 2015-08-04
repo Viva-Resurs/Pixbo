@@ -2,7 +2,8 @@
   "private": true,
   "devDependencies": {
     "gulp": "^3.8.8",
-    "laravel-elixir-livereload": "0.0.3"
+    "laravel-elixir-livereload": "0.0.3",
+    "vue-resource": "^0.1.11"
   },
   "dependencies": {
     "bootstrap-sass": "^3.0.0",

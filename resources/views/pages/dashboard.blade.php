@@ -15,7 +15,15 @@
             @include ('flash::message')
 
             <div class="content">
-
+                <div id="client">
+                    <article v-repeat="clients">
+                        <h3>@{{ name }}</h3>
+                        <div class="body">@{{ mac_address }}</div>
+                    </article>
+                    <pre>
+                        @{{ $data | json }}
+                    </pre>
+                </div>
             </div>
         </div>
     </div>

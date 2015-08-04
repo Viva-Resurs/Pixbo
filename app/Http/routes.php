@@ -11,6 +11,14 @@
 |
  */
 
+// API stuff Vue
+Route::get('api/clients', function() {
+	return App\Client::all();
+});
+Route::post('api/clients', function() {
+	App\Client::create(Request::all());
+});
+
 Route::get('/', function () {
 	return view('pages.welcome');
 });
