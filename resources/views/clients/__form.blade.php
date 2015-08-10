@@ -26,7 +26,6 @@
     {!! Form::select('screengroup_id', $screenGroups, $client->screengroup_id, ['class' => 'form-control', 'required' => 'required']) !!}
     <small class="text-danger">{{ $errors->first('screengroup_id') }}</small>
 </div>
-
 <div class="btn-group pull-right">
     {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
 </div>

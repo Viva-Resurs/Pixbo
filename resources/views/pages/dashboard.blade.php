@@ -15,17 +15,24 @@
             @include ('flash::message')
 
             <div class="content">
-                <div id="client">
-                    <article v-repeat="clients">
-                        <h3>@{{ name }}</h3>
-                        <div class="body">@{{ mac_address }}</div>
-                    </article>
-                    <pre>
-                        @{{ $data | json }}
-                    </pre>
-                </div>
+
+                @include ('shared.datagrid');
+
+                <!-- demo root element -->
+                <div id="demo">
+                    <form id="search">
+                        Search <input name="query" v-model="searchQuery">
+                    </form>
+                    <demo-grid
+                    data="@{{gridData}}"
+                    columns="@{{gridColumns}}"
+                    filter-key="@{{searchQuery}}">
+                </demo-grid>
+                <pre>@{{ $data | json }}</pre>
+
             </div>
         </div>
     </div>
+</div>
 </div>
 @stop
