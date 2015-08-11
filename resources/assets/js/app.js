@@ -1,6 +1,7 @@
 var Vue = require('vue');
 Vue.use(require('vue-resource'));
 var bootstrap = require('bootstrap-sass');
+
 Vue.component('demo-grid', {
   template: '#grid-template',
   replace: true,

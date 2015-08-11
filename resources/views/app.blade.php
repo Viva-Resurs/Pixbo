@@ -7,7 +7,7 @@
     </title>
     <link rel="stylesheet" type="text/css" href="/css/app.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    
+
 
     @if ( Config::get('app.debug') )
         <script type="text/javascript">
@@ -15,7 +15,7 @@
         </script>
     @endif
 
-
+    @yield('header')
     @yield('links')
     @yield('styles')
 
@@ -31,8 +31,8 @@
 
     <!-- body -->
     @yield('body')
-    @yield('footer')
     <script src="/js/bundle.js"></script>
+    @yield('footer')
 
 </body>
 </html>

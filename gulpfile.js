@@ -19,7 +19,7 @@ var paths = {
 elixir(function(mix) {
 
     mix.livereload();
-    mix.sass('app.scss');
+    mix.sass('app.scss'); //.coffee()
     /*
     mix.sass("app.scss", 'public/css/', {includePaths: [paths.bootstrap + 'stylesheets/']})
         .copy(paths.bootstrap + 'fonts/bootstrap/**', 'public/fonts')
