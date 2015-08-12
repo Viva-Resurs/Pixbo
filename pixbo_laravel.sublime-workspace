@@ -4,32 +4,20 @@
 		"selected_items":
 		[
 			[
+				"getCli",
+				"getClientOriginalName〔function〕"
+			],
+			[
+				"Ima",
+				"ImagesController"
+			],
+			[
 				"boot",
-				"boottext	text"
+				"bootstrap-sass"
 			],
 			[
-				"bootd",
-				"bootdateh	datehorizontal"
-			],
-			[
-				"has",
-				"hasMany"
-			],
-			[
-				"mo",
-				"morphToMany〔function〕"
-			],
-			[
-				"mor",
-				"morphTo〔function〕"
-			],
-			[
-				"Screen",
-				"ScreenGroup〔class〕"
-			],
-			[
-				"text",
-				"textarea	Tag"
+				"as",
+				"assets"
 			],
 			[
 				"r",
@@ -52,22 +40,6 @@
 	"buffers":
 	[
 		{
-			"file": "resources/assets/sass/app.scss",
-			"settings":
-			{
-				"buffer_size": 2418,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "resources/views/app.blade.php",
-			"settings":
-			{
-				"buffer_size": 850,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "resources/views/images/index.blade.php",
 			"settings":
 			{
@@ -76,10 +48,10 @@
 			}
 		},
 		{
-			"file": "resources/views/clients/create.blade.php",
+			"file": "app/Http/Controllers/ImagesController.php",
 			"settings":
 			{
-				"buffer_size": 228,
+				"buffer_size": 1808,
 				"line_ending": "Windows"
 			}
 		},
@@ -87,31 +59,7 @@
 			"file": "app/Http/routes.php",
 			"settings":
 			{
-				"buffer_size": 1581,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/Providers/RouteServiceProvider.php",
-			"settings":
-			{
-				"buffer_size": 1149,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/Http/Controllers/ImagesController.php",
-			"settings":
-			{
-				"buffer_size": 1349,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "gulpfile.js",
-			"settings":
-			{
-				"buffer_size": 999,
+				"buffer_size": 1642,
 				"line_ending": "Windows"
 			}
 		}
@@ -123,20 +71,20 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 368.0,
-		"last_filter": "isnt",
+		"height": 354.0,
+		"last_filter": "rein",
 		"selected_items":
 		[
 			[
-				"isnt",
-				"Package Control: Install Package"
+				"rein",
+				"Indentation: Reindent Lines"
 			],
 			[
-				"inst",
-				"Package Control: Install Package"
+				"fm",
+				"phpfmt: toggle auto align"
 			],
 			[
-				"insta",
+				"install",
 				"Package Control: Install Package"
 			],
 			[
@@ -144,51 +92,31 @@
 				"Indentation: Reindent Lines"
 			],
 			[
-				"ind",
-				"Indentation: Reindent Lines"
-			],
-			[
-				"doc",
-				"DocBlockr: Reparse comment block"
-			],
-			[
-				"rein",
-				"Indentation: Reindent Lines"
-			],
-			[
-				"instal",
+				"insta",
 				"Package Control: Install Package"
 			],
 			[
-				"pack",
-				"Package Control: List Packages"
+				"remove",
+				"Package Control: Remove Package"
 			],
 			[
-				"git  com",
-				"Git: Commit"
-			],
-			[
-				"git ",
-				"Git: Add..."
-			],
-			[
-				"git c",
-				"Git: Commit"
-			],
-			[
-				"git",
-				"Git: Pull"
+				"inde",
+				"Indentation: Reindent Lines"
 			],
 			[
 				"gitg",
 				"GitGutter: Compare Against Origin"
 			],
 			[
-				"install",
+				"inst",
 				"Package Control: Install Package"
+			],
+			[
+				"ind",
+				"Indentation: Reindent Lines"
 			]
 		],
-		"width": 496.0
+		"width": 510.0
 	},
 	"console":
 	{
@@ -209,113 +137,123 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Providers",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/assets",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/clients",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/images",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/vendor/enyo/dropzone/src"
+		"/C/Users/xergo/Documents/Work/pixbo_laravel",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/app",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/app/Http",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/app/Http/Controllers",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/app/Http/Requests",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/resources",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/resources/assets",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/resources/assets/js",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/resources/views",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/resources/views/clients",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/resources/views/images",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/resources/views/pages",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/resources/views/shared"
 	],
 	"file_history":
 	[
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/vendor/enyo/dropzone/Gruntfile.coffee",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/assets/js/app.js",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/resources/views/shared/datagrid.blade.php",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/app/Http/Controllers/ClientsController.php",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/resources/assets/js/app.js",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/resources/views/pages/dashboard.blade.php",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/resources/views/clients/__form.blade.php",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/app/Http/Controllers/EventsController.php",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/app/Http/Controllers/ScreenGroupsController.php",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/app/Http/Controllers/ScreensController.php",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/app/Client.php",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/resources/views/app.blade.php",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/app/Http/Controllers/EventMetas.php",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/gulpfile.js",
+		"/C/Users/xergo/Documents/Work/pixbo_laravel/app/Http/routes.php",
 		"/C/Users/Christoffer/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/ScreensController.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/gulpfile.js",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/assets/sass/app.scss",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/vendor/enyo/dropzone/src/dropzone.coffee",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/ClientsController.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2015_07_16_111217_Images.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/ImagesController.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/images/index.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/pages/dashboard.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php",
+		"/C/Users/Christoffer/AppData/Roaming/Sublime Text 3/Packages/phpfmt/phpfmt.sublime-settings",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/routes.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Image.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Client.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/clients/index.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/assets/js/app.js",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screens/__form.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/pixbo_laravel.sublime-project",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/assets/sass/app.scss",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/gulpfile.js",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/public/js/bundle.js",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/app.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/package.json",
+		"/C/Users/Christoffer/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/assets/js/filters/reverse.js",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/EventMetas.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/EventsController.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/.gitignore",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/ScreenGroupsController.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2015_07_16_111230_Screens.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Events/Event.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screens/__form.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screens/edit.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/ClientsController.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screens/index.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/events/__form.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/clients/__form.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/events/actions.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/events/create.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Requests/ClientRequest.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Requests/EventRequest.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/pages/welcome.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/admin.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/app.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/events/edit.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/events/index.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/events/show.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/navs/topnav.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/pages/dashboard.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Screen.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/User.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screengroups/actions.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/clients/index.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screengroups/index.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/lang/en/pagination.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/lang/en/auth.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/factories/ModelFactory.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/ScreenGroup.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2015_07_16_111241_ScreenGroups.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screens/actions.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/.env",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/shared/delete_message.blade.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/clients/actions.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screens/create.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Requests/ScreenRequest.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Providers/RouteServiceProvider.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2015_07_16_111349_EventMetas.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2015_07_16_111342_Events.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/welcome.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screengroups/actions.blade.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screens/__list.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screens/show.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screengroups/index.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/ScreenGroupsController.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Helpers.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Kernel.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Console/Kernel.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Console/Commands/Inspire.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Commands/ActionCommand.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/vendor/laravel/framework/src/Illuminate/Foundation/Console/ConsoleMakeCommand.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/vendor/laravel/framework/src/Illuminate/Console/GeneratorCommand.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/vendor/laravel/framework/src/Illuminate/Console/Command.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/ScreensController.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Screen.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/shared/actions.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/admin.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/config/app.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/clients/show.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/public/css/app.css",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/ScreenGroup.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/User.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Client.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/clients/__form.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/clients/__list.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/composer.json",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/node_modules/bootstrap-sass/package.json",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/node_modules/bootstrap-sass/bower.json",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Requests/ClientRequest.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/.gitignore",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/auth/password.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/auth/register.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/auth/reset.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/auth/login.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/clients/create.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/shared/alert.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/Auth/AuthController.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/node_modules/gulp/package.json",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/clients/edit.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screengroups/__form.blade.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screengroups/show.blade.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/ScreenGroupController.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Requests/ScreenGroupRequest.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2015_07_16_111328_Clients.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/clients/__list.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screengroups/__list.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Providers/RouteServiceProvider.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screengroups/create.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/clients/create.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/storage/database.sqlite",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2014_10_12_000000_create_users_table.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/pixbo_laravel.sublime-project",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/readme.md",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/config/app.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/client/show.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/client/__list.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/client/index.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/client/create.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Providers/AppServiceProvider.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/composer.json",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/Auth/AuthController.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/config/database.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/vendor/laravel/framework/src/Illuminate/Database/PostgresConnection.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/vendor/symfony/http-kernel/Client.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/.env",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/ClientController.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/assets/style.css",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/assets/script.js",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screengroups/edit.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screengroups/__list.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Requests/ScreenGroupRequest.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Requests/Request.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2015_07_16_111241_ScreenGroups.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/clients/form.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Middleware/VerifyCsrfToken.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/factories/ModelFactory.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2015_07_16_111328_Clients.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2015_07_16_111217_Images.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/Admin/ClientController.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2015_07_16_111349_EventMetas.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2015_07_16_111342_Events.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/.phpstorm.meta.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2014_10_12_000000_create_users_table.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2015_07_16_111230_Screens.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/config/database.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/composer.lock"
 	],
 	"find":
 	{
-		"height": 0.0
+		"height": 41.0
 	},
 	"find_in_files":
 	{
@@ -329,6 +267,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"0"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -346,346 +285,11 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "resources/assets/sass/app.scss",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2418,
-						"regions":
-						{
-							"gutter_color_1113":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/#f5f5f5.png",
-								"regions":
-								[
-									[
-										1124,
-										1154
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_1124":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/#f5f5f5.png",
-								"regions":
-								[
-									[
-										1124,
-										1154
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_1144":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/#eee.png",
-								"regions":
-								[
-									[
-										1155,
-										1188
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_1155":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/#eee.png",
-								"regions":
-								[
-									[
-										1155,
-										1188
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_1571":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/#fff.png",
-								"regions":
-								[
-									[
-										1582,
-										1596
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_1582":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/#fff.png",
-								"regions":
-								[
-									[
-										1582,
-										1596
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_1586":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/#428bca.png",
-								"regions":
-								[
-									[
-										1597,
-										1625
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_1597":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/#428bca.png",
-								"regions":
-								[
-									[
-										1597,
-										1625
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_2259":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/#333333.png",
-								"regions":
-								[
-									[
-										2270,
-										2289
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_2270":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/#333333.png",
-								"regions":
-								[
-									[
-										2270,
-										2289
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_618":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/#eee.png",
-								"regions":
-								[
-									[
-										629,
-										661
-									]
-								],
-								"scope": "gutter_color"
-							},
-							"gutter_color_629":
-							{
-								"flags": 144,
-								"icon": "Cache/GutterColor/#eee.png",
-								"regions":
-								[
-									[
-										629,
-										661
-									]
-								],
-								"scope": "gutter_color"
-							}
-						},
-						"selection":
-						[
-							[
-								184,
-								184
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content"
-							],
-							"syntax": "Packages/CSS/CSS.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "resources/views/app.blade.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 850,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								522,
-								522
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"auto_complete": false,
-							"bh_regions":
-							[
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content"
-							],
-							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
 					"file": "resources/views/images/index.blade.php",
 					"semi_transient": false,
 					"settings":
@@ -697,8 +301,8 @@
 						"selection":
 						[
 							[
-								571,
-								571
+								879,
+								879
 							]
 						],
 						"settings":
@@ -712,346 +316,83 @@
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
-								"bh_round_content"
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
 							],
 							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage",
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 390.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "resources/views/clients/create.blade.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 228,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content"
-							],
-							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "app/Http/routes.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1581,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								769,
-								785
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content"
-							],
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 156.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "app/Providers/RouteServiceProvider.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1149,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								306,
-								427
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"auto_complete": false,
-							"bh_regions":
-							[
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content"
-							],
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 234.0,
+						"translation.y": 819.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 1,
 					"file": "app/Http/Controllers/ImagesController.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1349,
+						"buffer_size": 1808,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								39,
-								39
+								872,
+								872
 							]
 						],
 						"settings":
@@ -1065,155 +406,154 @@
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
-								"bh_round_content"
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1530.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/Http/routes.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1642,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								776,
+								776
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_complete": false,
+							"bh_regions":
+							[
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
 							],
 							"syntax": "Packages/PHP/PHP.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": -0.0,
-						"translation.y": 26.0,
+						"translation.y": 468.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "gulpfile.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 999,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								635,
-								635
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"auto_complete": false,
-							"bh_regions":
-							[
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content"
-							],
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 234.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -1221,7 +561,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 0.0
+		"height": 41.0
 	},
 	"input":
 	{
@@ -1254,15 +594,11 @@
 	{
 		"height": 0.0
 	},
-	"output.git":
-	{
-		"height": 152.0
-	},
 	"pinned_build_system": "",
 	"project": "pixbo_laravel.sublime-project",
 	"replace":
 	{
-		"height": 0.0
+		"height": 78.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1272,32 +608,40 @@
 		"selected_items":
 		[
 			[
-				"",
-				"app\\Http\\Controllers\\ImagesController.php"
-			],
-			[
-				"route",
-				"app\\Providers\\RouteServiceProvider.php"
-			],
-			[
 				"clientc",
 				"app\\Http\\Controllers\\ClientsController.php"
 			],
 			[
-				"rou",
+				"screens",
+				"app\\Http\\Controllers\\ScreensController.php"
+			],
+			[
+				"app",
+				"config\\app.php"
+			],
+			[
+				"rout",
+				"app\\Providers\\RouteServiceProvider.php"
+			],
+			[
+				"route",
 				"app\\Http\\routes.php"
 			],
 			[
-				"clients",
-				"database\\migrations\\2015_07_16_111328_Clients.php"
+				"routes",
+				"app\\Providers\\RouteServiceProvider.php"
 			],
 			[
-				"postgre",
-				"vendor\\laravel\\framework\\src\\Illuminate\\Database\\PostgresConnection.php"
+				"__list",
+				"resources\\views\\clients\\__list.blade.php"
+			],
+			[
+				"ver",
+				"app\\Http\\Middleware\\VerifyCsrfToken.php"
 			],
 			[
 				"client",
-				"vendor\\symfony\\http-kernel\\Client.php"
+				"database\\migrations\\2015_07_16_111328_Clients.php"
 			]
 		],
 		"width": 0.0
@@ -1328,7 +672,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 429.0,
+	"side_bar_width": 259.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

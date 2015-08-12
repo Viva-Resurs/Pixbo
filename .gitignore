@@ -3,6 +3,7 @@
 /public/js/*
 /public/css/
 /public/fonts/
+/public/screens/*
 Homestead.yaml
 .env
 /storage/database.sqlite
