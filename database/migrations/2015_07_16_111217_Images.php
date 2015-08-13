@@ -14,12 +14,6 @@ class Images extends Migration {
 			$table->increments('id');
 			$table->string('path');
 			$table->boolean('archived');
-			$table->integer('imageable_id');
-			$table->string('imageable_type');
-
-			$table->integer('created_by')->unsigned();
-			$table->foreign('created_by')
-			->references('id')->on('users');
 
 			$table->timestamps();
 		});

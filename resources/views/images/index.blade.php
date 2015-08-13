@@ -32,7 +32,7 @@
 <form action="{{ action('ImagesController@store') }}"
       method="POST"
       class="dropzone"
-      id="upload_photos"
+      id="addImageForm"
 >
     {{ csrf_field() }}
 </form>
@@ -40,4 +40,11 @@
 
 @section('footer')
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.js"></script>
+    <script>
+    Dropzone.options.addImageForm = {
+        paramName: 'image',
+        maxFileSize: 10,
+        acceptedFiles: '.jpg .jpeg .png .bmp'
+    };
+    </script>
 @stop

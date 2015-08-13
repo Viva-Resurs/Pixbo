@@ -19,4 +19,12 @@ class Image extends Model {
 		'path',
 		'archived',
 	];
+
+/**
+ * Get the screens associated with the given image
+ * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+ */
+	public function screens() {
+		$this->belongsToMany('App\Screen')->withTimestamps();
+	}
 }

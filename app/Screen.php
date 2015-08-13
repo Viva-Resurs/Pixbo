@@ -41,4 +41,8 @@ class Screen extends Model {
 	public function event() {
 		return $this->morphToMany('App\Event', 'eventable');
 	}
+
+	public function image() {
+		$this->hasOne('App\Image');
+	}
 }
