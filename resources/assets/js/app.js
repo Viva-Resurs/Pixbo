@@ -44,7 +44,7 @@ var demo = new Vue({
     },
     methods: {
         fetchClients: function() {
-            this.$http.get('/clients', function(clients) {
+            this.$http.get('/admin/clients', function(clients) {
             this.$set('gridData', clients);
             });
         }

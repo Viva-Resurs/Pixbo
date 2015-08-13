@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Image;
+use Illuminate\Http\Request as Requests;
+use Request;
 
-class EventMetas extends Controller
+class ImagesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,14 @@ class EventMetas extends Controller
      */
     public function index()
     {
-        //
+        $images = Image::all();
+
+        if (Request::wantsJson()) {
+            return $images;
+        } else {
+            $data = Image::paginate(10);
+            return view('images.index')->with('data', $data);
+        }
     }
 
     /**
@@ -35,9 +42,20 @@ class EventMetas extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(Requests $request)
     {
-        //
+
+        $this->validate($request, [
+            'image' => 'required|mimes:jpeg,jpg,png,bmp',
+        ]);
+
+        $file = $request->file('image');
+
+        $name = time() . $file->getClientOriginalName();
+
+        $file->move('screens/images', $name);
+
+        Image::create(['path' => "/screens/images/{$name}", 'archived' => 0]);
     }
 
     /**

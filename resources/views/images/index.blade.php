@@ -14,13 +14,13 @@
 
     <h1 class="page-header">{{ "Images Index" }}</h1>
 
-    {!! link_to_route_html('images.create', '<i rel="tooltip" title="Create" class="glyphicon glyphicon-plus">New</i>', null,['class' => 'btn btn-primary']) !!}
+    {!! link_to_route_html('admin.images.create', '<i rel="tooltip" title="Create" class="glyphicon glyphicon-plus">New</i>', null,['class' => 'btn btn-primary']) !!}
     <br>
     @if (Count($data))
         {!!
             toTable($data->toArray()['data'], array(
                 'attributes' => array('class' => 'table'),
-                'only' => array('id', 'path', 'archived', 'created_at'),
+                'only' => array('id', 'name', 'archived', 'created_at'),
                 'action' => 'images.actions'
             ))
         !!}
@@ -44,7 +44,7 @@
     Dropzone.options.addImageForm = {
         paramName: 'image',
         maxFileSize: 10,
-        acceptedFiles: '.jpg .jpeg .png .bmp'
+        acceptedFiles: '.jpg,.jpeg,.png,.bmp'
     };
     </script>
 @stop

@@ -12,7 +12,6 @@
                 "artisan",
                 ".phpstorm.meta.php",
                 "_ide_helper.php",
-                ".htaccess",
                 ".gitattributes",
                 "LICENSE",
                 "composer.lock",

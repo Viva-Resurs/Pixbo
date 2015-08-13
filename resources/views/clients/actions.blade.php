@@ -5,15 +5,15 @@
 
     <ul class="dropdown-menu" role="menu">
 
-        <li><a href="{{ route('clients.show', array($item['id'])) }}">View</a></li>
+        <li><a href="{{ route('admin.clients.show', array($item['id'])) }}">View</a></li>
 
-        <li><a href="{{ route('clients.edit', array($item['id'])) }}">Edit</a></li>
+        <li><a href="{{ route('admin.clients.edit', array($item['id'])) }}">Edit</a></li>
 
         <!-- <li><a href="{{ route('clients.destroy', array($item['id'])) }}">Delete</a></li> -->
             <li>
          {!!
             Form::open(['method' => 'DELETE',
-                'route' => ['clients.destroy', $item['id']],
+                'route' => ['admin.clients.destroy', $item['id']],
                 'style' => 'display:inline']) !!}
                     <button
                         class="delete-button"

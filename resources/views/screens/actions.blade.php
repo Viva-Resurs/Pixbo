@@ -5,14 +5,14 @@
 
     <ul class="dropdown-menu" role="menu">
 
-        <li><a href="{{ route('screens.show', array($item['id'])) }}">View</a></li>
+        <li><a href="{{ route('admin.screens.show', array($item['id'])) }}">View</a></li>
 
-        <li><a href="{{ route('screens.edit', array($item['id'])) }}">Edit</a></li>
+        <li><a href="{{ route('admin.screens.edit', array($item['id'])) }}">Edit</a></li>
 
         <li>
          {!!
             Form::open(['method' => 'DELETE',
-                'route' => ['screens.destroy', $item['id']],
+                'route' => ['admin.screens.destroy', $item['id']],
                 'style' => 'display:inline']) !!}
                     <button
                         class="delete-button"
