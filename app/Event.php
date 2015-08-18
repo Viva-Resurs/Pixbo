@@ -34,4 +34,13 @@ class Event extends Model {
 	public function eventable() {
 		return $this->morphTo();
 	}
+
+/**
+ * MetaEvent association
+ *
+ * @return \Illuminate\Database\Eloquent\Relations\HasOne
+ */
+	public function meta() {
+		return $this->hasOne('App\EventMeta');
+	}
 }
