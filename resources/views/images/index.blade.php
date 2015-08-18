@@ -29,7 +29,7 @@
         {{ "No images found." }}
     @endif
 
-<form action="{{ action('ImagesController@store') }}"
+<form action="{{ action('Admin\ImagesController@store') }}"
       method="POST"
       class="dropzone"
       id="addImageForm"
