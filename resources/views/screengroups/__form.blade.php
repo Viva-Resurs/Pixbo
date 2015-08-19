@@ -1,11 +1,11 @@
 <div class="form-group">
-    {!! Form::label('name', 'Name:') !!}
+    <label for="name">{{ trans('messages.name') }}:</label>
     {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required']) !!}
     <small class="text-danger">{{ $errors->first('name') }}</small>
 </div>
 
 <div class="form-group">
-    {!! Form::label('desc', 'Description:') !!}
+    <label for="desc">{{ trans('messages.desc') }}:</label>
     {!! Form::text('desc', null, ['class' => 'form-control', 'required' => 'required']) !!}
     <small class="text-danger">{{ $errors->first('desc') }}</small>
 </div>

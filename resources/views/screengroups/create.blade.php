@@ -2,9 +2,12 @@
 
 @section('content')
 
-<h1 class="page-header">{{ 'Add ScreenGroup' }}</h1>
+<h1 class="page-header">{{ trans('messages.add_screengroup') }}</h1>
 
-{!! Form::open(['route' => 'admin.screengroups.store']) !!}
-    @include ('screengroups.__form', ['submitButtonText' => 'Add'])
-{!! Form::close() !!}
+<div class="row">
+<div class="col-md-6">
+    {!! Form::open(['route' => 'admin.screengroups.store']) !!}
+        @include ('screengroups.__form', ['submitButtonText' => trans('messages.add')])
+    {!! Form::close() !!}
+</div>
 @stop

@@ -22,9 +22,25 @@ class AuthController extends Controller
 
     use AuthenticatesUsers, ThrottlesLogins;
 
+    /**
+     * Where to redirect after logout.
+     * @var string
+     */
     protected $redirectAfterLogout = '/auth/login';
-    protected $redirectTo          = '/admin/dashboard';
-    protected $username            = 'name';
+
+    /**
+     * Where to redirect at login.
+     * @var string
+     */
+    protected $redirectTo = '/admin/dashboard';
+
+    /**
+     * Table row in Users for username, also sets login to use
+     * username instead of email.
+     *
+     * @var string
+     */
+    protected $username = 'name';
 
     /**
      * Create a new authentication controller instance.

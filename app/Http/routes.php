@@ -22,6 +22,9 @@ Route::group([
     Route::get('admin/dashboard', function () {
         return view('pages.dashboard');
     });
+    Route::get('admin', function () {
+        return redirect('/admin/dashboard');
+    });
     Route::resource('admin/clients', 'ClientsController');
     Route::resource('admin/screengroups', 'ScreenGroupsController');
     Route::resource('admin/screens', 'ScreensController');
