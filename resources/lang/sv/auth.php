@@ -13,10 +13,10 @@ return [
     |
      */
 
-    'failed'      => 'These credentials do not match our records.',
-    'throttle'    => 'Too many login attempts. Please try again in :seconds seconds.',
-    'username'    => 'Username',
-    'password'    => 'Password',
-    'remember_me' => 'Remember Me',
+    'failed'      => 'Ogiltiga uppgifter, försök igen.',
+    'throttle'    => 'För många login försök. Försök igen om :seconds sekunder.',
+    'username'    => 'Användarnamn',
+    'password'    => 'Lösenord',
+    'remember_me' => 'Kom ihåg mig',
 
 ];
