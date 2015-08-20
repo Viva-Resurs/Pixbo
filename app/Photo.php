@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Image extends Model {
+class Photo extends Model {
 	/**
 	 * Table name of model.
 	 *
 	 * @var string
 	 */
-	protected $table = 'images';
+	protected $table = 'photos';
 
 	/**
 	 * [$fillable variables allowed for massallocation]
@@ -18,10 +18,12 @@ class Image extends Model {
 	 * @var [String]
 	 */
 	protected $fillable = [
+		'name',
 		'path',
+		'thumb_path',
 		'archived',
+		'sha1',
 	];
-	protected $appends = array('name');
 
 /**
  * Get the screens associated with the given image.
@@ -30,15 +32,6 @@ class Image extends Model {
  */
 	public function screens() {
 		$this->belongsToMany('App\Screen')->withTimestamps();
-	}
-
-/**
- * Return the attribute accessor name.
- *
- * @return String
- */
-	public function getNameAttribute() {
-		return basename($this->attributes['path']);
 	}
 
 /**

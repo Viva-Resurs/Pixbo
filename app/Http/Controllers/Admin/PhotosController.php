@@ -3,24 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Image;
+use App\Photo;
 use Illuminate\Http\Request as Requests;
 use Request;
 
-class ImagesController extends Controller {
+class PhotosController extends Controller {
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
 	public function index() {
-		$images = Image::all();
+		$images = Photo::all();
 
 		if (Request::wantsJson()) {
 			return $images;
 		} else {
-			$data = Image::paginate(10);
-			return view('images.index')->with('data', $data);
+			$data = Photo::paginate(10);
+			return view('photos.index')->with('data', $data);
 		}
 	}
 
@@ -51,7 +51,13 @@ class ImagesController extends Controller {
 
 		$file->move('screens/images', $name);
 
-		Image::create(['path' => "/screens/images/{$name}", 'archived' => 0]);
+		$image = Photo::create([
+			'name' => $file->getClientOriginalName(),
+			'path' => "/screens/images/{$name}",
+			'thumb_path' => "/screens/images/th_{$name}",
+			'archived' => 0,
+			'sha1' => sha1_file('screens/images/' . $name),
+		]);
 	}
 
 	/**
@@ -60,8 +66,8 @@ class ImagesController extends Controller {
 	 * @param  Image  $image
 	 * @return Response
 	 */
-	public function show(Image $image) {
-		//
+	public function show(Photo $image) {
+		dd($image);
 	}
 
 	/**
@@ -70,7 +76,7 @@ class ImagesController extends Controller {
 	 * @param  Image  $image
 	 * @return Response
 	 */
-	public function edit(Image $image) {
+	public function edit(Photo $image) {
 		//
 	}
 
@@ -81,7 +87,7 @@ class ImagesController extends Controller {
 	 * @param  Image  $image
 	 * @return Response
 	 */
-	public function update(Request $request, Image $image) {
+	public function update(Request $request, Photo $image) {
 		//
 	}
 
@@ -91,7 +97,7 @@ class ImagesController extends Controller {
 	 * @param  Image  $image
 	 * @return Response
 	 */
-	public function destroy(Image $image) {
+	public function destroy(Photo $image) {
 		flash()->success('Image removed successfully.');
 		$deleted = $image->delete();
 

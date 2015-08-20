@@ -14,7 +14,7 @@
 
     <h1 class="page-header">{{ "Images Index" }}</h1>
 
-    {!! link_to_route_html('admin.images.create', '<i rel="tooltip" title="Create" class="glyphicon glyphicon-plus">New</i>', null,['class' => 'btn btn-primary']) !!}
+    {!! link_to_route_html('admin.photos.create', '<i rel="tooltip" title="Create" class="glyphicon glyphicon-plus">New</i>', null,['class' => 'btn btn-primary']) !!}
     <br>
     @if (Count($data))
         {!!
@@ -29,7 +29,7 @@
         {{ "No images found." }}
     @endif
 
-<form action="{{ action('Admin\ImagesController@store') }}"
+<form action="{{ action('Admin\PhotosController@store') }}"
       method="POST"
       class="dropzone"
       id="addImageForm"

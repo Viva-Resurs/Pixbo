@@ -5,12 +5,12 @@
 
     <ul class="dropdown-menu" role="menu">
 
-        <li><a href="{{ route('admin.images.show', array($item['id'])) }}">View</a></li>
-        <li><a href="{{ route('admin.images.edit', array($item['id'])) }}">Edit</a></li>
+        <li><a href="{{ route('admin.photos.show', array($item['id'])) }}">View</a></li>
+        <li><a href="{{ route('admin.photos.edit', array($item['id'])) }}">Edit</a></li>
         <li>
             {!!
                 Form::open(['method' => 'DELETE',
-                    'route' => ['admin.images.destroy', $item['id']],
+                    'route' => ['admin.photos.destroy', $item['id']],
                     'style' => 'display:inline']) !!}
                 <button
                     class="delete-button"

@@ -25,9 +25,9 @@ class Screens extends Migration {
 			->references('id')->on('events');
 
 			// Images
-			$table->integer('image_id')->unsigned();
-			$table->foreign('image_id')
-			->references('id')->on('images');
+			$table->integer('photo_id')->unsigned();
+			$table->foreign('photo_id')
+			->references('id')->on('photos');
 
 			// Users
 			$table->integer('user_id')->unsigned();

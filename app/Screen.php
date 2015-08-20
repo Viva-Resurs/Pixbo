@@ -19,7 +19,7 @@ class Screen extends Model {
 	protected $fillable = [
 		'name',
 		'event_id',
-		'image_id',
+		'photo_id',
 		'user_id',
 		'created_at',
 		'updated_at',
@@ -42,7 +42,7 @@ class Screen extends Model {
 		return $this->morphToMany('App\Event', 'eventable');
 	}
 
-	public function image() {
-		$this->hasOne('App\Image');
+	public function photo() {
+		$this->hasOne('App\Photo');
 	}
 }
