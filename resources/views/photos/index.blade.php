@@ -21,7 +21,7 @@
             toTable($data->toArray()['data'], array(
                 'attributes' => array('class' => 'table'),
                 'only' => array('id', 'name', 'archived', 'created_at'),
-                'action' => 'images.actions'
+                'action' => 'photos.actions'
             ))
         !!}
         {!! $data->render() !!}

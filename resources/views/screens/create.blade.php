@@ -4,6 +4,7 @@
 
 <h1 class="page-header">{{ 'Add Screen' }}</h1>
 
+@include('shared/alert')
 {!! Form::open(['route' => 'admin.screens.store']) !!}
     @include ('screens.__form', ['submitButtonText' => 'Add'])
 {!! Form::close() !!}

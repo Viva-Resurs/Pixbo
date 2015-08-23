@@ -22,10 +22,10 @@ class ScreenRequest extends Request {
 	public function rules() {
 		return [
 			'name' => 'required',
-			//'screengroup_id' => '',
+			'screengroup_id' => 'required',
 			//'event_id' => '',
-			//'image_id' => '',
-			'user_id' => 'required',
+			'photo_id' => 'required',
+			//'user_id' => 'required',
 			'created_at',
 			'updated_at',
 		];

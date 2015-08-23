@@ -11,9 +11,9 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('image_id', 'Image:') !!}
-    {!! Form::number('image_id', null, ['class' => 'form-control']) !!}
-    <small class="text-danger">{{ $errors->first('image_id') }}</small>
+    {!! Form::label('photo_id', 'Image:') !!}
+    {!! Form::number('photo_id', null, ['class' => 'form-control']) !!}
+    <small class="text-danger">{{ $errors->first('photo_id') }}</small>
 </div>
 
 <div class="form-group">

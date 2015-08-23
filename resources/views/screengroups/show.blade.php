@@ -1,5 +1,10 @@
 @extends('admin')
 
+
+@section('header')
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.css">
+@stop
+
 @section('title')
 ScreenGroup index
 @stop
@@ -40,11 +45,38 @@ ScreenGroup index
                             <td>{{ 'Modified' }}</td>
                             <td>{{ $screenGroup->updated_at }}</td>
                         </tr>
+                        <tr>
+                            @foreach ($screenGroup->screens() as $screen)
+                                Screen: {{ $screen->name }}
+                            @endforeach
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+    <div class="col-lg-6 col-md-6 col-xs-12">
+        <form action="/screengroups/{{ $screenGroup->id }}/addphoto"
+            method="POST"
+            class="dropzone"
+            id="addImageForm"
+        >
+        {{ csrf_field() }}
+        </form>
+    </div>
 </div>
+@stop
+
+@section('footer')
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.js"></script>
+    <script>
+    Dropzone.options.addImageForm = {
+        paramName: 'photo',
+        maxFileSize: 10,
+        acceptedFiles: '.jpg,.jpeg,.png,.bmp'
+    };
+    </script>
+@stop
+
 
 @stop

@@ -18,6 +18,7 @@ class Screen extends Model {
  */
 	protected $fillable = [
 		'name',
+		'screengroup_id',
 		'event_id',
 		'photo_id',
 		'user_id',
