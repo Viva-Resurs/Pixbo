@@ -15,8 +15,8 @@ class Screens extends Migration {
 			$table->string('name');
 
 			// ScreenGroup
-			$table->integer('screengroup_id')->unsigned();
-			$table->foreign('screengroup_id')
+			$table->integer('screen_group_id')->unsigned();
+			$table->foreign('screen_group_id')
 			->references('id')->on('screengroups');
 
 			// Event

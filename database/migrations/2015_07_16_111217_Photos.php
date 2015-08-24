@@ -12,6 +12,7 @@ class Photos extends Migration {
 	public function up() {
 		Schema::create('photos', function (Blueprint $table) {
 			$table->increments('id');
+			$table->integer('screen_id')->nullable();
 			$table->string('name');
 			$table->string('path');
 			$table->string('thumb_path');

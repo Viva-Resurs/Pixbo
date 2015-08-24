@@ -14,7 +14,7 @@
 Route::get('/', 'PagesController@home');
 Route::get('admin/dashboard', 'PagesController@dashboard');
 Route::get('admin/calendars', 'PagesController@calendars');
-Route::post('screengroups/{id}/addphoto', 'Admin\ScreenGroupsController@addScreenFromPhoto');
+Route::post('admin/screengroups/{screengroups}/addphoto', 'Admin\ScreenGroupsController@addScreenFromPhoto');
 
 Route::group([
 	'namespace' => 'Admin',
@@ -25,7 +25,6 @@ Route::group([
 		return redirect('/admin/dashboard');
 	});
 	Route::resource('admin/clients', 'ClientsController');
-
 	Route::resource('admin/screengroups', 'ScreenGroupsController');
 	Route::resource('admin/screens', 'ScreensController');
 	Route::resource('admin/photos', 'PhotosController');

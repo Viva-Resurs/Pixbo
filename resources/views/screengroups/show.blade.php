@@ -46,8 +46,9 @@ ScreenGroup index
                             <td>{{ $screenGroup->updated_at }}</td>
                         </tr>
                         <tr>
-                            @foreach ($screenGroup->screens() as $screen)
-                                Screen: {{ $screen->name }}
+                        <td> {{ 'Screens' }} </td>
+                            @foreach ($screenGroup->screens()->getResults() as $screen)
+                                <td>{{ $screen->name }}</td>
                             @endforeach
                         </tr>
                     </tbody>
@@ -56,7 +57,7 @@ ScreenGroup index
         </div>
     </div>
     <div class="col-lg-6 col-md-6 col-xs-12">
-        <form action="/screengroups/{{ $screenGroup->id }}/addphoto"
+        <form action="/admin/screengroups/{{ $screenGroup->id }}/addphoto"
             method="POST"
             class="dropzone"
             id="addImageForm"

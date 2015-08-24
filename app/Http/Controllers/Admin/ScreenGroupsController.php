@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ScreenGroupRequest;
 use App\Photo;
+use App\Screen;
 use App\ScreenGroup;
 use Auth;
 use Illuminate\Http\Request as Requests;
@@ -51,7 +52,7 @@ class ScreenGroupsController extends Controller {
 		if (Request::wantsJson()) {
 			return $screenGroup;
 		} else {
-			return redirect('screengroups');
+			return redirect('admin/screengroups');
 		}
 	}
 
@@ -141,11 +142,25 @@ class ScreenGroupsController extends Controller {
 			'photo' => 'required|mimes:jpg,jpeg,png,bmp',
 		]);
 
-		//$photo = $this->makePhoto($request->file('photo'));
-
 		// find or create screen and add photo to it.
-		$photo = Photo::getOrCreate($request->file('photo'))->move($request->file('photo'))->save();
-		dd($photo);
+		$photo = Photo::getOrCreate($request->file('photo'))->move($request->file('photo'));
+		$photo->save();
+
+		// Get a the existing screen and attatch it to screengroup.
+		// Otherwise create a new screen with the photo and then attatch it to the screengroup.
+		$screen = Screen::where(['photo_id' => $photo->id])->first();
+		if (!is_null($screen)) {
+			$screengroup->screens()->save($screen);
+		} else {
+			$screengroup->screens()->create([
+				'name' => $photo->name,
+				'screen_group_id' => $screengroup->id,
+				'event_id' => null,
+				'photo_id' => $photo->id,
+				'user_id' => Auth::user()->id,
+			])->save();
+		}
+
 	}
 
 /**

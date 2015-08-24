@@ -34,6 +34,10 @@ class Screen extends Model {
 		return $this->belongsTo('App\User');
 	}
 
+	public function screengroups() {
+		return $this->belongsToMany('App\ScreenGroup');
+	}
+
 /**
  * Event association
  *
@@ -44,6 +48,6 @@ class Screen extends Model {
 	}
 
 	public function photo() {
-		$this->hasOne('App\Photo');
+		return $this->hasOne('App\Photo');
 	}
 }

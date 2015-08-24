@@ -21,6 +21,7 @@ class Photo extends Model {
 	 */
 	protected $fillable = [
 		'name',
+		'screen_id',
 		'path',
 		'thumb_path',
 		'archived',
@@ -35,7 +36,7 @@ class Photo extends Model {
  * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
  */
 	public function screen() {
-		$this->belongsTo('App\Screen')->withTimestamps();
+		return $this->belongsTo('App\Screen')->withTimestamps();
 	}
 
 /**
