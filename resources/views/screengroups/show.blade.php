@@ -64,7 +64,7 @@ ScreenGroup index
         <div class="panel-body">
            <div class="row">
                @foreach ($screenGroup->screens as $screen)
-                   {{ $screen->photo }}
+                   {{ $screen->photo()->get()}}
                @endforeach
            </div>
         </div>

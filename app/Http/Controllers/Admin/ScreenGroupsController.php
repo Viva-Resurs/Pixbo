@@ -148,18 +148,25 @@ class ScreenGroupsController extends Controller {
 
 		// Get a the existing screen and attatch it to screengroup.
 		// Otherwise create a new screen with the photo and then attatch it to the screengroup.
-		$screen = Screen::where(['photo_id' => $photo->id])->first();
+		$screen = $photo->screen;
+
 		if (!is_null($screen)) {
-			$screengroup->screens()->attach($screen);
+			if (!$screen->screengroups->contains($screengroup->id)) {
+				$screengroup->screens()->save($screen);
+				flash()->success('Screen attached successfully.');
+			}
 		} else {
-			$screengroup->screens()->create([
+			$screen = Screen::create([
 				'name' => $photo->name,
 				'screen_group_id' => $screengroup->id,
 				'event_id' => null,
-				'photo_id' => $photo->id,
 				'user_id' => Auth::user()->id,
-			])->save();
+			]);
+			$screen->photo()->save($photo);
+			$screengroup->screens()->attach($screen);
+			flash()->success('Screen created successfully.');
 		}
+		//dd($screen);
 
 	}
 
