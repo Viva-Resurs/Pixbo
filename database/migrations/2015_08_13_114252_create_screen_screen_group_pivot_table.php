@@ -15,6 +15,7 @@ class CreateScreenScreenGroupPivotTable extends Migration {
 			$table->foreign('screen_group_id')->references('id')->on('screengroups')->onDelete('cascade');
 			$table->integer('screen_id')->unsigned()->index();
 			$table->foreign('screen_id')->references('id')->on('screens')->onDelete('cascade');
+			$table->timestamps();
 		});
 	}
 

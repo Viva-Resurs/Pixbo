@@ -150,7 +150,7 @@ class ScreenGroupsController extends Controller {
 		// Otherwise create a new screen with the photo and then attatch it to the screengroup.
 		$screen = Screen::where(['photo_id' => $photo->id])->first();
 		if (!is_null($screen)) {
-			$screengroup->screens()->save($screen);
+			$screengroup->screens()->attach($screen);
 		} else {
 			$screengroup->screens()->create([
 				'name' => $photo->name,
