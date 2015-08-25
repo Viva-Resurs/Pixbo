@@ -18,7 +18,6 @@ class Screen extends Model {
  */
 	protected $fillable = [
 		'name',
-		'screengroup_id',
 		'event_id',
 		'photo_id',
 		'user_id',
@@ -34,8 +33,12 @@ class Screen extends Model {
 		return $this->belongsTo('App\User');
 	}
 
+/**
+ * [screengroups description]
+ * @return [type] [description]
+ */
 	public function screengroups() {
-		return $this->belongsToMany('App\ScreenGroup');
+		return $this->belongsToMany('App\ScreenGroup', 'screen_screen_group')->withTimestamps();
 	}
 
 /**

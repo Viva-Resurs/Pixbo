@@ -47,7 +47,7 @@ ScreenGroup index
                         </tr>
                         <tr>
                         <td> {{ 'Screens' }} </td>
-                            @foreach ($screenGroup->screens()->getResults() as $screen)
+                            @foreach ($screenGroup->screens as $screen)
                                 <td>{{ $screen->name }}</td>
                             @endforeach
                         </tr>
@@ -56,6 +56,23 @@ ScreenGroup index
             </div>
         </div>
     </div>
+    <div class="col-lg-6 col-md-6 col-xs-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {{ 'Screens' }}
+        </div>
+        <div class="panel-body">
+           <div class="row">
+               @foreach ($screenGroup->screens as $screen)
+                   {{ $screen->photo }}
+               @endforeach
+           </div>
+        </div>
+    </div>
+
+    </div>
+</div>
+<div class="row">
     <div class="col-lg-6 col-md-6 col-xs-12">
         <form action="/admin/screengroups/{{ $screenGroup->id }}/addphoto"
             method="POST"

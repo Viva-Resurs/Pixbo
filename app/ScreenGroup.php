@@ -30,7 +30,7 @@ class ScreenGroup extends Model {
  * @return [type] [description]
  */
 	public function screens() {
-		return $this->hasMany('App\Screen');
+		return $this->belongsToMany('App\Screen', 'screen_screen_group')->withTimestamps();
 	}
 
 /**

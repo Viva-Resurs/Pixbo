@@ -42,22 +42,10 @@ class PhotosController extends Controller {
 	public function store(Requests $request) {
 
 		$this->validate($request, [
-			'image' => 'required|mimes:jpeg,jpg,png,bmp',
+			'photo' => 'required|mimes:jpeg,jpg,png,bmp',
 		]);
 
-		$file = $request->file('image');
-
-		$name = time() . $file->getClientOriginalName();
-
-		$file->move('screens/images', $name);
-
-		$image = Photo::create([
-			'name' => $file->getClientOriginalName(),
-			'path' => "/screens/images/{$name}",
-			'thumb_path' => "/screens/images/th_{$name}",
-			'archived' => 0,
-			'sha1' => sha1_file('screens/images/' . $name),
-		]);
+		Photo::getOrCreate($request->file('photo'))->move($request->file('photo'))->save();
 	}
 
 	/**
