@@ -15,7 +15,7 @@ ScreenGroup index
 <h1 class="page-header">{{ "ScreenGroup Show" }}</h1>
 
 <div class="row">
-    <div class="col-lg-6 col-md-6 col-xs-12">
+    <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="panel-title">
@@ -45,35 +45,36 @@ ScreenGroup index
                             <td>{{ 'Modified' }}</td>
                             <td>{{ $screenGroup->updated_at }}</td>
                         </tr>
-                        <tr>
-                        <td> {{ 'Screens' }} </td>
-                            @foreach ($screenGroup->screens as $screen)
-                                <td>{{ $screen->name }}</td>
-                            @endforeach
-                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <div class="col-lg-6 col-md-6 col-xs-12">
+    <div class="col-md-8 photo__gallery">
     <div class="panel panel-default">
         <div class="panel-heading">
             {{ 'Screens' }}
         </div>
         <div class="panel-body">
-           <div class="row">
-               @foreach ($screenGroup->screens as $screen)
-                   {{ $screen->photo()->get()}}
-               @endforeach
-           </div>
+            @foreach ($screenGroup->screens->chunk(3) as $set)
+                <div class="row">
+                    @foreach ($set as $element)
+                        <div class="col-md-3 gallery__image">
+                            <a href="/admin/screens/{{ $element->id }}"</a>
+                                <img src="/{{ $element->photo->thumb_path }}" alt="">
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+            @endforeach
+
         </div>
     </div>
 
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-6 col-md-6 col-xs-12">
+    <div class="col-md-12">
         <form action="/admin/screengroups/{{ $screenGroup->id }}/addphoto"
             method="POST"
             class="dropzone"
