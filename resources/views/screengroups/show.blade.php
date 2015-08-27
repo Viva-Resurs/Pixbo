@@ -59,7 +59,7 @@ ScreenGroup index
             @foreach ($screenGroup->screens->chunk(3) as $set)
                 <div class="row">
                     @foreach ($set as $element)
-                        <div class="col-md-3 gallery__image">
+                        <div class="col-md-4 gallery__image">
                             <a href="/admin/screens/{{ $element->id }}"</a>
                                 <img src="/{{ $element->photo->thumb_path }}" alt="">
                             </a>

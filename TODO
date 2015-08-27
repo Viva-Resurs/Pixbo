@@ -1,6 +1,8 @@
 Features:
-
+    *
 
 Bugs:
-    * Found a bug when trying to upload the Bistro image,
-      something goes wrong with the creation of thumbnail or there about.
+    *
+
+Remember:
+    * Set PHP memory size and upload file size properly.

@@ -159,6 +159,7 @@ return [
 		'Lavary\Menu\ServiceProvider',
 		'Laracasts\Flash\FlashServiceProvider',
 		Intervention\Image\ImageServiceProvider::class,
+		MaddHatter\LaravelFullcalendar\ServiceProvider::class,
 
 	],
 
@@ -213,6 +214,7 @@ return [
 		'Menu' => 'Lavary\Menu\Facade',
 		'Flash' => 'Laracasts\Flash\Flash',
 		'Image' => Intervention\Image\Facades\Image::class,
+		'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
 
 	],
 

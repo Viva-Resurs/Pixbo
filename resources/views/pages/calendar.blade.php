@@ -1,5 +1,11 @@
 @extends('app')
 
+@section ('header')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
+@stop
+
 @section('body')
 <div class="container-fluid">
     <div class="row">
@@ -16,19 +22,8 @@
 
             <div class="content">
 
-                @include ('shared.datagrid')
-
-                <!-- demo root element -->
-                <div id="demo">
-                    <form id="search">
-                        Search <input name="query" v-model="searchQuery">
-                    </form>
-                    <demo-grid
-                    data="@{{gridData}}"
-                    columns="@{{gridColumns}}"
-                    filter-key="@{{searchQuery}}">
-                </demo-grid>
-                <pre>@{{ $data | json }}</pre>
+                 {!! $calendar->calendar() !!}
+                {!! $calendar->script() !!}
 
             </div>
         </div>
