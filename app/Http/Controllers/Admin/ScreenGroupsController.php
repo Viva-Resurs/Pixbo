@@ -45,14 +45,14 @@ class ScreenGroupsController extends Controller {
 	 * @return Response
 	 */
 	public function store(ScreenGroupRequest $request) {
-		flash()->success('Client created successfully.');
+		flash()->success('ScreenGroup created successfully.');
 		$screenGroup = new ScreenGroup($request->all());
 		Auth::user()->screengroups()->save($screenGroup);
 
 		if (Request::wantsJson()) {
 			return $screenGroup;
 		} else {
-			return redirect('admin/screengroups');
+			return view('screengroups.show', compact('screenGroup'));
 		}
 	}
 
@@ -90,6 +90,7 @@ class ScreenGroupsController extends Controller {
 	 */
 	public function update(ScreenGroupRequest $request, ScreenGroup $screenGroup) {
 		$screenGroup->update($request->all());
+		flash()->success('ScreenGroup updated successfully.');
 
 		if (Request::wantsJson()) {
 			return $screenGroup;
@@ -107,6 +108,7 @@ class ScreenGroupsController extends Controller {
 	 */
 	public function destroy(ScreenGroup $screenGroup) {
 		$deleted = $screenGroup->delete();
+		flash()->success('ScreenGroup removed successfully.');
 
 		if (Request::wantsJson()) {
 			return (string) deleted;
@@ -153,7 +155,6 @@ class ScreenGroupsController extends Controller {
 		if (!is_null($screen)) {
 			if (!$screen->screengroups->contains($screengroup->id)) {
 				$screengroup->screens()->save($screen);
-				flash()->success('Screen attached successfully.');
 			}
 		} else {
 			$screen = Screen::create([
@@ -164,10 +165,7 @@ class ScreenGroupsController extends Controller {
 			]);
 			$screen->photo()->save($photo);
 			$screengroup->screens()->attach($screen);
-			flash()->success('Screen created successfully.');
 		}
-		//dd($screen);
-
 	}
 
 /**

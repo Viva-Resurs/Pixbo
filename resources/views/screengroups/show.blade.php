@@ -16,7 +16,7 @@ ScreenGroup index
 
 <div class="row">
     <div class="col-md-4">
-        <div class="panel panel-default">
+        <div class="panel panel-info">
             <div class="panel-heading">
                 <div class="panel-title">
                     {{ 'Info' }}
@@ -35,7 +35,11 @@ ScreenGroup index
                         </tr>
                         <tr>
                             <td>{{ 'Desc' }}</td>
-                            <td>{{ $screenGroup->desc }}</td>
+                            <td>{{ $screenGroup->desc  ? $screenGroup->desc : '-' }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ 'Rss Feed' }}</td>
+                            <td>{{ $screenGroup->rss_feed ? $screenGroup->rss_feed : '-' }}</td>
                         </tr>
                         <tr>
                             <td>{{ 'Created' }}</td>
@@ -47,30 +51,37 @@ ScreenGroup index
                         </tr>
                     </tbody>
                 </table>
-            </div>
+            </div>   <!-- Info -->
+        </div>
+        <div class="panel panel-info">
+              <div class="panel-heading">
+                    <h3 class="panel-title">Event</h3>
+              </div>
+              <div class="panel-body">
+                    Event content
+              </div>   <!-- Event Info -->
         </div>
     </div>
     <div class="col-md-8 photo__gallery">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            {{ 'Screens' }}
-        </div>
-        <div class="panel-body">
-            @foreach ($screenGroup->screens->chunk(3) as $set)
-                <div class="row">
-                    @foreach ($set as $element)
-                        <div class="col-md-4 gallery__image">
-                            <a href="/admin/screens/{{ $element->id }}"</a>
-                                <img src="/{{ $element->photo->thumb_path }}" alt="">
-                            </a>
-                        </div>
-                    @endforeach
-                </div>
-            @endforeach
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                {{ 'Screens' }}
+            </div>
+            <div class="panel-body">
+                @foreach ($screenGroup->screens->chunk(3) as $set)
+                    <div class="row">
+                        @foreach ($set as $element)
+                            <div class="col-md-4 gallery__image">
+                                <a href="/admin/screens/{{ $element->id }}"</a>
+                                    <img src="/{{ $element->photo->thumb_path }}" alt="">
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                @endforeach
 
-        </div>
-    </div>
-
+            </div>
+        </div><!-- Gallery -->
     </div>
 </div>
 <div class="row">
@@ -81,7 +92,7 @@ ScreenGroup index
             id="addImageForm"
         >
         {{ csrf_field() }}
-        </form>
+        </form>              <!-- File upload -->
     </div>
 </div>
 @stop
