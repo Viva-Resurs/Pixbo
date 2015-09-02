@@ -64,3 +64,4 @@ class ScreenGroup extends Model
 }
 
 //$screengroup = App\ScreenGroup::create(['name' => 'SG1', 'desc' => 'test1', 'rss_feed' => 'bla', 'event_id' => 0, 'created_by' => 0]);
+

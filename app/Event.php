@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Event extends Model
 {
     /**
- * [$table description]
- * @var string
- */
+     * [$table description]
+     * @var string
+     */
     protected $table = "events";
 
 /**
@@ -34,7 +34,7 @@ class Event extends Model
  */
     public function eventable()
     {
-        return $this->morphTo();
+        return $this->morphTo()->withTimeStamps();
     }
 
 /**

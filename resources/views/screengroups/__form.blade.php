@@ -16,12 +16,6 @@
     <small class="text-danger">{{ $errors->first('rss_feed') }}</small>
 </div>
 
-<div class="form-group">
-    {!! Form::label('event_id', 'Event:') !!}
-    {!! Form::number('event_id', null, ['class' => 'form-control']) !!}
-    <small class="text-danger">{{ $errors->first('event_id') }}</small>
-</div>
-
 <div class="btn-group pull-right">
     {!! Form::submit($submitButtonText, ['class' => 'btn btn-success']) !!}
 </div>

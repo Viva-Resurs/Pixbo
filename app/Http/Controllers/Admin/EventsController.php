@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Event;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EventRequest;
 use Request;
 
 class EventsController extends Controller
@@ -92,12 +93,12 @@ class EventsController extends Controller
     public function update(EventRequest $request, Event $event)
     {
         flash()->success('Event updated successfully.');
-        $client->update($request->all());
+        $event->update($request->all());
 
         if (Request::wantsJson()) {
             return $event;
         } else {
-            return redirect('events');
+            return redirect()->back();
         }
     }
 

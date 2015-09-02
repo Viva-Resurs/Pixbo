@@ -27,7 +27,7 @@ class EventRequest extends Request
             'date' => 'required|date',
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i',
-            'recurring' => 'required',
+            'recurring' => '',
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Event;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ScreenGroupRequest;
 use App\Photo;
@@ -51,12 +52,21 @@ class ScreenGroupsController extends Controller
     {
         flash()->success('ScreenGroup created successfully.');
         $screenGroup = new ScreenGroup($request->all());
+        $event = new Event([
+            'date' => '2015-01-01',
+            'start_time' => '00:00',
+            'end_time' => '00:01',
+            'eventmeta_id' => null,
+            'recurring' => false,
+        ]);
+
         Auth::user()->screengroups()->save($screenGroup);
+        $screenGroup->event()->save($event);
 
         if (Request::wantsJson()) {
             return $screenGroup;
         } else {
-            return view('screengroups.show', compact('screenGroup'));
+            return view('screengroups.edit', compact('screenGroup'));
         }
     }
 
@@ -101,7 +111,7 @@ class ScreenGroupsController extends Controller
         if (Request::wantsJson()) {
             return $screenGroup;
         } else {
-            return redirect('screengroups');
+            return redirect()->back();
         }
     }
 
