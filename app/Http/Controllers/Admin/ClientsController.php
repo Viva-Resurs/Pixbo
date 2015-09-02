@@ -57,7 +57,6 @@ class ClientsController extends Controller
         } else {
             return redirect('clients');
         }
-
     }
 
     /**

@@ -35,7 +35,6 @@ class EventsController extends Controller
         $client = new Event;
 
         return view('events.create', compact('event'));
-
     }
 
     /**
@@ -55,7 +54,6 @@ class EventsController extends Controller
         } else {
             return redirect('events');
         }
-
     }
 
     /**
@@ -101,7 +99,6 @@ class EventsController extends Controller
         } else {
             return redirect('events');
         }
-
     }
 
     /**
@@ -120,6 +117,5 @@ class EventsController extends Controller
         } else {
             return redirect('events');
         }
-
     }
 }

@@ -34,4 +34,3 @@ class ClientRequest extends Request
         ];
     }
 }
-
