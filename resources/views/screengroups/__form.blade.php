@@ -17,5 +17,5 @@
 </div>
 
 <div class="btn-group pull-right">
-    {!! Form::submit($submitButtonText, ['class' => 'btn btn-success']) !!}
+    {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
 </div>
