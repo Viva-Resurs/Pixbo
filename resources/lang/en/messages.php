@@ -24,6 +24,8 @@ return [
      * Commonly used words.
      */
     'add'             => 'Add',
+    'close'           => 'Close',
+    'save'            => 'Save',
 
     /**
      * Models
@@ -36,4 +38,31 @@ return [
     'clients'         => 'Clients',
     'screen'          => 'Screen',
     'screens'         => 'Screens',
+
+    /**
+     * Time/Date
+     */
+    'repeat'          => 'Repeat:',
+    'repeat_every'    => 'Repeat every:',
+    'repeat_each'     => 'Repeat each:',
+    'starts'          => 'Starts:',
+    'ends'            => 'Ends:',
+    'never'           => 'Never',
+    'at'              => 'At',
+
+    'daily'           => 'Daily',
+    'weekly'          => 'Weekly',
+    'weeks'           => 'weeks',
+    'monthly'         => 'Monthly',
+    'yearly'          => 'Yearly',
+
+    'days'            => 'day(s)',
+
+    'monday_short'    => 'M',
+    'tuesday_short'   => 'T',
+    'wednesday_short' => 'W',
+    'thursday_short'  => 'T',
+    'friday_short'    => 'F',
+    'saturday_short'  => 'S',
+    'sunday_short'    => 'S',
 ];

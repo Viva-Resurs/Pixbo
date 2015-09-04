@@ -52,12 +52,12 @@ class ScreenGroupsController extends Controller
     {
         flash()->success('ScreenGroup created successfully.');
         $screenGroup = new ScreenGroup($request->all());
-        $event = new Event([
-            'date' => '2015-01-01',
-            'start_time' => '00:00',
-            'end_time' => '00:01',
+        $event       = new Event([
+            'date'         => '2015-01-01',
+            'start_time'   => '07:30',
+            'end_time'     => '18:00',
             'eventmeta_id' => null,
-            'recurring' => false,
+            'recurring'    => false,
         ]);
 
         Auth::user()->screengroups()->save($screenGroup);
@@ -176,10 +176,10 @@ class ScreenGroupsController extends Controller
             }
         } else {
             $screen = Screen::create([
-                'name' => $photo->name,
+                'name'            => $photo->name,
                 'screen_group_id' => $screengroup->id,
-                'event_id' => null,
-                'user_id' => Auth::user()->id,
+                'event_id'        => null,
+                'user_id'         => Auth::user()->id,
             ]);
             $screen->photo()->save($photo);
             $screengroup->screens()->attach($screen);

@@ -25,7 +25,7 @@
                 <div class="panel-body">
                     <table class="table">
                         {!! Form::model($screenGroup, ['method' => 'PATCH', 'route' => ['admin.screengroups.update', $screenGroup->id]]) !!}
-                            @include ('screengroups.__form', ['submitButtonText' => 'Edit'])
+                            @include ('screengroups.__form', ['submitButtonText' => trans('messages.save')])
                         {!! Form::close() !!}
                     </table>
                 </div>
@@ -42,7 +42,7 @@
                         <tbody>
                             @foreach($screenGroup->event as $event)
                                 {!! Form::model($event, ['method' => 'PATCH', 'route' => ['admin.events.update', $event->id]]) !!}
-                                    @include ('events.__form', ['submitButtonText' => 'Edit'])
+                                    @include ('events.__form', ['submitButtonText' => trans('messages.save')])
                                 {!! Form::close() !!}
                             @endforeach
                         </tbody>
