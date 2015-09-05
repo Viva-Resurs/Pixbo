@@ -1,11 +1,20 @@
-<div class="weekly">
-    <div class="form-group">
-        {!! Form::label('frequency', 'Every: ') !!}
-        {!! Form::number('frequency', null, ['class' => 'form-control', 'required' => 'required']) !!}
-        <small class="text-danger">{{ $errors->first('frequency') }}</small>
-        {{ 'th week on: ' }}
-    </div>
-    @include('events.meta.days__form')
-</div>
+<div class="weekly" style="display: none;">
 
-<hr/>
+    <div class="col-md-4">
+        {{ trans('messages.repeat_every') }}
+    </div>
+    <div class="col-md-8">
+        <div class="form-group">
+            <input type="number" name="frequency" id="inputFrequency" value="1" min="1" max="31" step="1" required="required">
+            {{ trans('messages.weeks') }}
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        {{ trans('messages.repeat_each') }}
+    </div>
+    <div class="col-md-8">
+        @include('events.meta.days__form')
+    </div>
+
+</div>

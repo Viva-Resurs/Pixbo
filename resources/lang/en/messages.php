@@ -49,14 +49,16 @@ return [
     'ends'            => 'Ends:',
     'never'           => 'Never',
     'at'              => 'At',
+    'the'             => 'The',
 
     'daily'           => 'Daily',
     'weekly'          => 'Weekly',
-    'weeks'           => 'weeks',
     'monthly'         => 'Monthly',
     'yearly'          => 'Yearly',
 
     'days'            => 'day(s)',
+    'weeks'           => 'week(s)',
+    'months'          => 'month(s)',
 
     'monday_short'    => 'M',
     'tuesday_short'   => 'T',

@@ -41,6 +41,7 @@
 
                     <div class="recurrence-settings">
                         @include('events.meta.daily__form')
+                        @include('events.meta.weekly__form')
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -57,5 +58,29 @@
         $('#event_meta').on('shown.bs.modal', function () {
             $('#recurrence').focus();
         })
+        $('select').on('change', function() {
+            var val = this.value;
+            if(val == 'daily') {
+                $('.daily').removeAttr('style');
+                $('.weekly').attr('style', "display: none;");
+                $('.monthly').attr('style', "display: none;");
+                $('.yearly').attr('style', "display: none;");
+            } else if(val == 'weekly') {
+                $('.daily').attr('style', "display: none;");
+                $('.weekly').removeAttr('style');
+                $('.monthly').attr('style', "display: none;");
+                $('.yearly').attr('style', "display: none;");
+            } else if(val == 'monthly') {
+                $('.daily').attr('style', "display: none;");
+                $('.weekly').attr('style', "display: none;");
+                $('.monthly').removeAttr('style');
+                $('.yearly').attr('style', "display: none;");
+            } else if(val == 'yearly') {
+                $('.daily').attr('style', "display: none;");
+                $('.weekly').attr('style', "display: none;");
+                $('.monthly').attr('style', "display: none;");
+                $('.yearly').removeAttr('style');
+            }
+        });
     </script>
 @stop
