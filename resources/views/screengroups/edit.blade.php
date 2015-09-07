@@ -43,6 +43,7 @@
                             @foreach($screenGroup->event as $event)
                                 {!! Form::model($event, ['method' => 'PATCH', 'route' => ['admin.events.update', $event->id]]) !!}
                                     @include ('events.__form', ['submitButtonText' => trans('messages.save')])
+                                    <a class="btn btn-primary" data-toggle="modal" href='#event_meta'>Trigger modal</a>
                                 {!! Form::close() !!}
                             @endforeach
                         </tbody>
@@ -83,6 +84,10 @@
         </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    @include('events.meta.__form')
+
 @stop
 
 @section('footer')
@@ -93,5 +98,17 @@
         maxFileSize: 10,
         acceptedFiles: '.jpg,.jpeg,.png,.bmp'
     };
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#recurring').click(function () {
+                if ($(this).is(':checked')) {
+                    $('.modal').modal('show');
+                } else {
+
+                }
+            });
+        });
     </script>
 @stop

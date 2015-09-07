@@ -1,20 +1,5 @@
-<div id="alerts"></div>
 
-<div class="form-group">
-    {!! Form::label('recur_start', 'Start:') !!}
-    {!! Form::date('recur_start', null, ['class' => 'form-control', 'required' => 'required']) !!}
-    <small class="text-danger">{{ $errors->first('recur_start') }}</small>
-</div>
 
-<div class="form-group">
-    {!! Form::label('recur_end', 'End:') !!}
-    {!! Form::date('recur_end', null, ['class' => 'form-control']) !!}
-    <small class="text-danger">{{ $errors->first('recur_end') }}</small>
-</div>
-
-<hr/>
-
-<a class="btn btn-primary" data-toggle="modal" href='#event_meta'>Trigger modal</a>
 <div class="modal fade" id="event_meta">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
@@ -26,20 +11,19 @@
             {!! Form::open(['method' => 'POST', 'route' => 'admin.eventmetas.store', 'class' => 'form-horizontal', 'id' => 'event_meta_form']) !!}
             {{ csrf_field() }}
                 <div class="modal-body row">
-
-                        <div class="col-md-4">
-                            {{ trans('messages.repeat') }}
+                    <div class="col-md-4">
+                        {{ trans('messages.repeat') }}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <select name="recurrence" id="recurrence" class="" required="required">
+                                <option value="daily">{{ trans('messages.daily') }}</option>
+                                <option value="weekly">{{ trans('messages.weekly') }}</option>
+                                <option value="monthly">{{ trans('messages.monthly') }}</option>
+                                <option value="Yearly">{{ trans('messages.yearly') }}</option>
+                            </select>
                         </div>
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <select name="recurrence" id="recurrence" class="" required="required">
-                                    <option value="daily">{{ trans('messages.daily') }}</option>
-                                    <option value="weekly">{{ trans('messages.weekly') }}</option>
-                                    <option value="monthly">{{ trans('messages.monthly') }}</option>
-                                    <option value="Yearly">{{ trans('messages.yearly') }}</option>
-                                </select>
-                            </div>
-                        </div>
+                    </div>
 
                     <div class="recurrence-settings">
                         @include('events.meta.daily__form')
@@ -57,6 +41,8 @@
 </div>
 
 @section('footer')
+    @parent
+
     <script type="text/javascript">
         $('#event_meta').on('shown.bs.modal', function () {
             $('#recurrence').focus();
@@ -88,15 +74,11 @@
     </script>
     <script type="text/javascript">
 
-        function addAlert(message) {
+        function addAlert(message, type) {
             $('#alerts').append(
-                '<div class="alert alert-success">' +
+                '<div class="alert alert-'+ type +'">' +
                 '<button type="button" class="close" data-dismiss="alert">' +
                 '&times;</button>' + message + '</div>');
-        }
-
-        function onError() {
-            addAlert('Lost connection to server.');
         }
 
         var frm = $('#event_meta_form');
@@ -107,7 +89,11 @@
                 data: frm.serialize(),
                 success: function (data) {
                     $('#event_meta').modal('hide');
-                    addAlert("{{ trans('messages.repeat_success_updated') }}");
+                    addAlert("{{ trans('messages.repeat_success_updated') }}", "success");
+                },
+                error: function (data) {
+                    $('#event_meta').modal('hide');
+                    addAlert("{{ trans('messages.repeat_error_updated') }}", 'danger');
                 }
             });
             ev.preventDefault();

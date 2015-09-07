@@ -44,12 +44,13 @@ var demo = new Vue({
     },
     methods: {
         fetchClients: function() {
-            this.$http.get('/admin/clients', function(clients) {
+            this.$http.get('/admin/screengroups', function(clients) {
             this.$set('gridData', clients);
             });
         }
     }
 });
+
 /*
 new Vue({
     el: '#client',
