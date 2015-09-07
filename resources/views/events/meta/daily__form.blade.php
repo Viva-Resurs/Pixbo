@@ -16,15 +16,15 @@
         <div class="row">
             <div class="form-group col-md-12">
                 <label>
-                    <input type="radio" name="end_type" id="check_never" value="never" checked="checked" class="recur_type">
+                    <input type="radio" name="daily_end_type" id="check_never" value="never" checked="checked" class="recur_type">
                     {{ trans('messages.never') }}
                 </label>
             </div>
             <div class="form-group col-md-12">
                 <label>
-                    <input type="radio" name="end_type" id="check_after" value="at" class="recur_type">
+                    <input type="radio" name="daily_end_type" id="check_after" value="at" class="recur_type">
                     {{ trans('messages.the') }}
-                    <input type="date" name="meta_recur_end" id="meta_recur_end" value="" required="required" class="recur_end">
+                    <input type="date" name="meta_recur_end" id="daily_meta_recur_end" value="" required="required" class="recur_end">
                 </label>
             </div>
         </div>
@@ -33,13 +33,13 @@
 
 <script type="text/javascript">
     function checkDisabled(evt) {
-        var val = $("input[name=end_type]:checked").val();
+        var val = $("input[name=daily_end_type]:checked").val();
         if(val == 'never') {
-            $('#meta_recur_end').attr('disabled', true);
+            $('#daily_meta_recur_end').attr('disabled', true);
         } else {
-            $('#meta_recur_end').removeAttr('disabled');
+            $('#daily_meta_recur_end').removeAttr('disabled');
         }
     }
-    $('input[name=end_type]:radio').change(checkDisabled);
+    $('input[name=daily_end_type]:radio').change(checkDisabled);
     checkDisabled();
 </script>

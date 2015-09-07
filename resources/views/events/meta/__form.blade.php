@@ -42,6 +42,7 @@
                     <div class="recurrence-settings">
                         @include('events.meta.daily__form')
                         @include('events.meta.weekly__form')
+                        @include('events.meta.monthly__form')
                     </div>
                 </div>
                 <div class="modal-footer">

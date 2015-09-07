@@ -60,6 +60,14 @@ return [
     'weeks'           => 'week(s)',
     'months'          => 'month(s)',
 
+    'monday'          => 'Monday',
+    'tuesday'         => 'Tuesday',
+    'wednesday'       => 'Wednesday',
+    'thursday'        => 'Thursday',
+    'friday'          => 'Friday',
+    'saturday'        => 'Saturday',
+    'sunday'          => 'Sunday',
+
     'monday_short'    => 'M',
     'tuesday_short'   => 'T',
     'wednesday_short' => 'W',
@@ -67,4 +75,10 @@ return [
     'friday_short'    => 'F',
     'saturday_short'  => 'S',
     'sunday_short'    => 'S',
+
+    'first'           => 'First',
+    'second'          => 'Second',
+    'third'           => 'Third',
+    'fourth'          => 'Fourth',
+    'last'            => 'Last',
 ];

@@ -1,53 +1,41 @@
-<div class="monthly">
-    <div class="checkbox">
-        <label for="day" class="checkbox">
-            {!! Form::radio('day', null,  true, [
-                'class' => 'form-control',
-                'id'    => 'day',
-            ]) !!}
-            {{ 'Day ' }}
-            <div class="form-group">
-                {!! Form::label('recur_day_num', 'Day') !!}
-                {!! Form::number('recur_day_num', null, ['class' => 'form-control']) !!}
-                <small class="text-danger">{{ $errors->first('recur_day_num') }}</small>
-            </div>
-            <div class="form-group">
-                {!! Form::label('frequency', ' every ') !!}
-                {!! Form::number('frequency', null, ['class' => 'form-control', 'required' => 'required']) !!}
-                <small class="text-danger">{{ $errors->first('frequency') }}</small>
-                {{ 'th month.' }}
-            </div>
-        </label>
+<div class="monthly" style="display: none;">
+
+   <div class="col-md-4">
+        {{ trans('messages.repeat_every') }}
     </div>
-    <div class="checkbox">
-        <label for="every" class="checkbox">
-            {!! Form::radio('day', null,  null, [
-                'class' => 'form-control',
-                'id'    => 'every',
-            ]) !!}
-            {{ 'The ' }}
-        </label>
-         <div class="form-group">
-             {!! Form::label('recur_week', 'The') !!}
-             {!! Form::select('recur_week', [
-                'first' => 'first',
-                'second' => 'second',
-                'third' => 'third',
-                'fourth' => 'fourth'
-             ], null, ['class' => 'form-control', 'required' => 'required']) !!}
-             <small class="text-danger">{{ $errors->first('recur_week') }}</small>
-         </div>
-
-        @include('events.meta.days__form')
-
+    <div class="col-md-8">
         <div class="form-group">
-            {!! Form::label('month_freq', 'every') !!}
-            {!! Form::number('month_freq', null, ['class' => 'form-control', 'required' => 'required']) !!}
-            <small class="text-danger">{{ $errors->first('month_freq') }}</small>
-        {{ ' month(s)' }}
+            <input type="number" name="frequency" id="inputFrequency" value="1" min="1" max="31" step="1" required="required">
+            {{ trans('messages.months') }}
         </div>
-
     </div>
+
+    <div class="col-md-4">
+        {{ trans('messages.the') }}
+    </div>
+    <div class="col-md-8">
+    <div>
+        <select name="recur_monthly_week" id="inputRecur_monthly_week" class="form-group" required="required">
+            <option value="first">{{ trans('messages.first') }}</option>
+            <option value="second">{{ trans('messages.second') }}</option>
+            <option value="third">{{ trans('messages.third') }}</option>
+            <option value="fourth">{{ trans('messages.fourth') }}</option>
+            <option value="last">{{ trans('messages.last') }}</option>
+        </select>
+        </div>
+        <div>
+        <select name="recur_monthly_week_day" id="inputRecur_monthly_week_day" class="form-group" required="required">
+            <option value="0">{{ trans('messages.monday') }}</option>
+            <option value="1">{{ trans('messages.tuesday') }}</option>
+            <option value="2">{{ trans('messages.wednesday') }}</option>
+            <option value="3">{{ trans('messages.thursday') }}</option>
+            <option value="4">{{ trans('messages.friday') }}</option>
+            <option value="5">{{ trans('messages.saturday') }}</option>
+            <option value="6">{{ trans('messages.sunday') }}</option>
+        </select>
+        </div>
+    </div>
+
 </div>
 
 <hr/>

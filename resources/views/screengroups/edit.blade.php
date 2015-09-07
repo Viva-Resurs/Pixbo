@@ -71,6 +71,7 @@
                     @endforeach
                 </div>
             </div>
+            <hr>
             <div> <!-- File upload -->
             <form action="/admin/screengroups/{{ $screenGroup->id }}/addphoto"
                 method="POST"
