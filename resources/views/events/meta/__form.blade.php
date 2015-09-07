@@ -1,3 +1,5 @@
+<div id="alerts"></div>
+
 <div class="form-group">
     {!! Form::label('recur_start', 'Start:') !!}
     {!! Form::date('recur_start', null, ['class' => 'form-control', 'required' => 'required']) !!}
@@ -21,7 +23,7 @@
                 <h4 class="modal-title">{{ 'Recurring' }}</h4>
             </div>
 
-            {!! Form::open(['method' => 'POST', 'route' => 'admin.eventmetas.store', 'class' => 'form-horizontal']) !!}
+            {!! Form::open(['method' => 'POST', 'route' => 'admin.eventmetas.store', 'class' => 'form-horizontal', 'id' => 'event_meta_form']) !!}
             {{ csrf_field() }}
                 <div class="modal-body row">
 
@@ -82,6 +84,33 @@
                 $('.monthly').attr('style', "display: none;");
                 $('.yearly').removeAttr('style');
             }
+        });
+    </script>
+    <script type="text/javascript">
+
+        function addAlert(message) {
+            $('#alerts').append(
+                '<div class="alert alert-success">' +
+                '<button type="button" class="close" data-dismiss="alert">' +
+                '&times;</button>' + message + '</div>');
+        }
+
+        function onError() {
+            addAlert('Lost connection to server.');
+        }
+
+        var frm = $('#event_meta_form');
+        frm.submit(function (ev) {
+            $.ajax({
+                type: frm.attr('method'),
+                url: frm.attr('action'),
+                data: frm.serialize(),
+                success: function (data) {
+                    $('#event_meta').modal('hide');
+                    addAlert("{{ trans('messages.repeat_success_updated') }}");
+                }
+            });
+            ev.preventDefault();
         });
     </script>
 @stop
