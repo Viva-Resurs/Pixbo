@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Event;
+use App\EventMeta;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ScreenGroupRequest;
 use App\Photo;
@@ -13,125 +14,122 @@ use Illuminate\Http\Request as Requests;
 use Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class ScreenGroupsController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        $screenGroups = ScreenGroup::all();
+class ScreenGroupsController extends Controller {
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function index() {
+		$screenGroups = ScreenGroup::all();
 
-        if (Request::wantsJson()) {
-            return $screenGroups;
-        } else {
-            $data = ScreenGroup::paginate(10);
-            return view('screengroups.index')->with('data', $data);
-        }
-    }
+		if (Request::wantsJson()) {
+			return $screenGroups;
+		} else {
+			$data = ScreenGroup::paginate(10);
+			return view('screengroups.index')->with('data', $data);
+		}
+	}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        return view('screengroups.create');
-    }
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function create() {
+		return view('screengroups.create');
+	}
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function store(ScreenGroupRequest $request)
-    {
-        flash()->success('ScreenGroup created successfully.');
-        $screenGroup = new ScreenGroup($request->all());
-        $event       = new Event([
-            'date'         => '2015-01-01',
-            'start_time'   => '07:30',
-            'end_time'     => '18:00',
-            'eventmeta_id' => null,
-            'recurring'    => false,
-        ]);
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  Request  $request
+	 * @return Response
+	 */
+	public function store(ScreenGroupRequest $request) {
+		flash()->success('ScreenGroup created successfully.');
+		$screenGroup = new ScreenGroup($request->all());
+		$event = new Event([
+			'date' => '2015-01-01',
+			'start_time' => '07:30',
+			'end_time' => '18:00',
+			'eventmeta_id' => null,
+			'recurring' => false,
+		]);
 
-        Auth::user()->screengroups()->save($screenGroup);
-        $screenGroup->event()->save($event);
+		Auth::user()->screengroups()->save($screenGroup);
+		$screenGroup->event()->save($event);
 
-        if (Request::wantsJson()) {
-            return $screenGroup;
-        } else {
-            return view('screengroups.edit', compact('screenGroup'));
-        }
-    }
+		if (Request::wantsJson()) {
+			return $screenGroup;
+		} else {
+			return view('screengroups.edit', compact('screenGroup'));
+		}
+	}
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show(ScreenGroup $screenGroup)
-    {
-        if (Request::wantsJson()) {
-            return $screenGroup;
-        } else {
-            return view('screengroups.show', compact('screenGroup'));
-        }
-    }
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show(ScreenGroup $screenGroup) {
+		if (Request::wantsJson()) {
+			return $screenGroup;
+		} else {
+			return view('screengroups.show', compact('screenGroup'));
+		}
+	}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit(ScreenGroup $screenGroup)
-    {
-        return view('screengroups.edit', compact('screenGroup'));
-    }
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function edit(ScreenGroup $screenGroup) {
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(ScreenGroupRequest $request, ScreenGroup $screenGroup)
-    {
-        $screenGroup->update($request->all());
-        flash()->success('ScreenGroup updated successfully.');
+		$event = $screenGroup->getEvent()->first();
+		$event_meta = EventMeta::where('event_id', $event->id)->first();
+		dd($event_meta);
 
-        if (Request::wantsJson()) {
-            return $screenGroup;
-        } else {
-            return redirect()->back();
-        }
-    }
+		return view('screengroups.edit', compact(['screenGroup', 'event']));
+	}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  ScreenGroup  $screenGroup
-     * @return Response
-     */
-    public function destroy(ScreenGroup $screenGroup)
-    {
-        $deleted = $screenGroup->delete();
-        flash()->success('ScreenGroup removed successfully.');
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  Request  $request
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function update(ScreenGroupRequest $request, ScreenGroup $screenGroup) {
+		$screenGroup->update($request->all());
+		flash()->success('ScreenGroup updated successfully.');
 
-        if (Request::wantsJson()) {
-            return (string) deleted;
-        } else {
-            return redirect('screengroups');
-        }
-    }
+		if (Request::wantsJson()) {
+			return $screenGroup;
+		} else {
+			return redirect()->back();
+		}
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  ScreenGroup  $screenGroup
+	 * @return Response
+	 */
+	public function destroy(ScreenGroup $screenGroup) {
+		$deleted = $screenGroup->delete();
+		flash()->success('ScreenGroup removed successfully.');
+
+		if (Request::wantsJson()) {
+			return (string) deleted;
+		} else {
+			return redirect('screengroups');
+		}
+	}
 
 /**
  * Remove the given ScreenGroup
@@ -139,16 +137,15 @@ class ScreenGroupsController extends Controller
  * @param ScreenGroup $screenGroup
  * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
  */
-    public function delete(ScreenGroup $screenGroup)
-    {
-        $deleted = $screenGroup->delete();
+	public function delete(ScreenGroup $screenGroup) {
+		$deleted = $screenGroup->delete();
 
-        if (Request::wantsJson()) {
-            return (string) deleted;
-        } else {
-            return redirect('screengroups');
-        }
-    }
+		if (Request::wantsJson()) {
+			return (string) deleted;
+		} else {
+			return redirect('screengroups');
+		}
+	}
 
 /**
  * Add or find a screen from given file and attatch it to the screengroup.
@@ -156,44 +153,42 @@ class ScreenGroupsController extends Controller
  * @param ScreenGroup $screengroup
  * @param Request $request
  */
-    public function addScreenFromPhoto(Requests $request, ScreenGroup $screengroup)
-    {
-        $this->validate($request, [
-            'photo' => 'required|mimes:jpg,jpeg,png,bmp',
-        ]);
+	public function addScreenFromPhoto(Requests $request, ScreenGroup $screengroup) {
+		$this->validate($request, [
+			'photo' => 'required|mimes:jpg,jpeg,png,bmp',
+		]);
 
-        // find or create screen and add photo to it.
-        $photo = Photo::getOrCreate($request->file('photo'))->move($request->file('photo'));
-        $photo->save();
+		// find or create screen and add photo to it.
+		$photo = Photo::getOrCreate($request->file('photo'))->move($request->file('photo'));
+		$photo->save();
 
-        // Get a the existing screen and attatch it to screengroup.
-        // Otherwise create a new screen with the photo and then attatch it to the screengroup.
-        $screen = $photo->screen;
+		// Get a the existing screen and attatch it to screengroup.
+		// Otherwise create a new screen with the photo and then attatch it to the screengroup.
+		$screen = $photo->screen;
 
-        if (!is_null($screen)) {
-            if (!$screen->screengroups->contains($screengroup->id)) {
-                $screengroup->screens()->save($screen);
-            }
-        } else {
-            $screen = Screen::create([
-                'name'            => $photo->name,
-                'screen_group_id' => $screengroup->id,
-                'event_id'        => null,
-                'user_id'         => Auth::user()->id,
-            ]);
-            $screen->photo()->save($photo);
-            $screengroup->screens()->attach($screen);
-        }
-    }
+		if (!is_null($screen)) {
+			if (!$screen->screengroups->contains($screengroup->id)) {
+				$screengroup->screens()->save($screen);
+			}
+		} else {
+			$screen = Screen::create([
+				'name' => $photo->name,
+				'screen_group_id' => $screengroup->id,
+				'event_id' => null,
+				'user_id' => Auth::user()->id,
+			]);
+			$screen->photo()->save($photo);
+			$screengroup->screens()->attach($screen);
+		}
+	}
 
 /**
  * Make the photo from the given file.
  * @param  UploadedFile $file
  * @return Photo
  */
-    public function makePhoto(UploadedFile $file)
-    {
-        return Photo::named($file->getClientOriginalName())
-            ->move($file);
-    }
+	public function makePhoto(UploadedFile $file) {
+		return Photo::named($file->getClientOriginalName())
+			->move($file);
+	}
 }
