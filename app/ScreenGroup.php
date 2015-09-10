@@ -61,7 +61,7 @@ class ScreenGroup extends Model {
 		return Event::where([
 			'eventable_type' => 'App\ScreenGroup',
 			'eventable_id' => $this->getAttribute('id'),
-		])->get();
+		])->get()->first();
 	}
 }
 

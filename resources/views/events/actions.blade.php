@@ -9,7 +9,6 @@
 
         <li><a href="{{ route('admin.clients.edit', array($item['id'])) }}">Edit</a></li>
 
-        <!-- <li><a href="{{ route('clients.destroy', array($item['id'])) }}">Delete</a></li> -->
             <li>
          {!!
             Form::open(['method' => 'DELETE',

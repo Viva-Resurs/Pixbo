@@ -40,12 +40,12 @@
                 <div class="panel-body">
                     <table class="table">
                         <tbody>
-                            @foreach($screenGroup->event as $event)
+
                                 {!! Form::model($event, ['method' => 'PATCH', 'route' => ['admin.events.update', $event->id]]) !!}
                                     @include ('events.__form', ['submitButtonText' => trans('messages.save')])
                                     <a class="btn btn-primary" data-toggle="modal" href='#event_meta'>Trigger modal</a>
                                 {!! Form::close() !!}
-                            @endforeach
+
                         </tbody>
                     </table>
                 </div>

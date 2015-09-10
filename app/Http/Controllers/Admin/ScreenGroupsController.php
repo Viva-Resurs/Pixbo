@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Event;
-use App\EventMeta;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ScreenGroupRequest;
 use App\Photo;
@@ -49,11 +48,12 @@ class ScreenGroupsController extends Controller {
 	public function store(ScreenGroupRequest $request) {
 		flash()->success('ScreenGroup created successfully.');
 		$screenGroup = new ScreenGroup($request->all());
+
 		$event = new Event([
-			'date' => '2015-01-01',
-			'start_time' => '07:30',
+			'date' => date("Y-m-d"),
+			'start_time' => '07:00',
 			'end_time' => '18:00',
-			'eventmeta_id' => null,
+			'event_meta_id' => null,
 			'recurring' => false,
 		]);
 
@@ -63,7 +63,8 @@ class ScreenGroupsController extends Controller {
 		if (Request::wantsJson()) {
 			return $screenGroup;
 		} else {
-			return view('screengroups.edit', compact('screenGroup'));
+			$event_meta = "";
+			return redirect()->action('Admin\ScreenGroupsController@edit', compact(['screenGroup', 'event', 'event_meta']));
 		}
 	}
 
@@ -89,11 +90,10 @@ class ScreenGroupsController extends Controller {
 	 */
 	public function edit(ScreenGroup $screenGroup) {
 
-		$event = $screenGroup->getEvent()->first();
-		$event_meta = EventMeta::where('event_id', $event->id)->first();
-		dd($event_meta);
+		$event = $screenGroup->getEvent();
+		$event_meta = $event->getEventMeta();
 
-		return view('screengroups.edit', compact(['screenGroup', 'event']));
+		return view('screengroups.edit', compact(['screenGroup', 'event', 'event_meta']));
 	}
 
 	/**
@@ -123,22 +123,6 @@ class ScreenGroupsController extends Controller {
 	public function destroy(ScreenGroup $screenGroup) {
 		$deleted = $screenGroup->delete();
 		flash()->success('ScreenGroup removed successfully.');
-
-		if (Request::wantsJson()) {
-			return (string) deleted;
-		} else {
-			return redirect('screengroups');
-		}
-	}
-
-/**
- * Remove the given ScreenGroup
- *
- * @param ScreenGroup $screenGroup
- * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
- */
-	public function delete(ScreenGroup $screenGroup) {
-		$deleted = $screenGroup->delete();
 
 		if (Request::wantsJson()) {
 			return (string) deleted;
