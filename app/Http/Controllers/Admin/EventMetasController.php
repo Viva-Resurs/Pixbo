@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\EventMeta;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\EventMetaRequest;
+use Request;
 
 class EventMetasController extends Controller
 {
@@ -67,9 +69,17 @@ class EventMetasController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(EventMetaRequest $request, EventMeta $eventmeta)
     {
-        //
+        $eventmeta->decodeAndUpdate($request->all());
+
+        flash()->success('EventMeta updated successfully.');
+
+        if (Request::wantsJson()) {
+            return $eventmeta;
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**

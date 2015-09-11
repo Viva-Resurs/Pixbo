@@ -5,7 +5,7 @@
     </div>
     <div class="col-md-8">
         <div class="form-group">
-            <input type="number" name="frequency" id="inputFrequency" value="1" min="1" max="31" step="1" required="required">
+            <input type="number" name="weekly_frequency" id="weekly_frequency" value="1" min="1" max="31" step="1" required="required">
             {{ trans('messages.weeks') }}
         </div>
     </div>
@@ -32,7 +32,7 @@
                 <label>
                     <input type="radio" name="weekly_end_type" id="check_after" value="at" class="recur_type">
                     {{ trans('messages.the') }}
-                    <input type="date" name="meta_recur_end" id="weekly_meta_recur_end" value="" required="required" class="recur_end">
+                    <input type="date" name="weekly_meta_recur_end" id="weekly_meta_recur_end" value="" required="required" class="recur_end">
                 </label>
             </div>
         </div>

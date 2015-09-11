@@ -8,7 +8,7 @@
                 <h4 class="modal-title">{{ 'Recurring' }}</h4>
             </div>
 
-            {!! Form::open(['method' => 'POST', 'route' => 'admin.eventmetas.store', 'class' => 'form-horizontal', 'id' => 'event_meta_form']) !!}
+            {!! Form::model($event_meta, ['method' => 'PATCH', 'route' => ['admin.eventmetas.update', $event_meta->id]], ['class' => 'form-horizontal', 'id' => 'event_meta_form']) !!}
             {{ csrf_field() }}
                 <div class="modal-body row">
                     <div class="col-md-4">

@@ -13,7 +13,7 @@ class EventMetaRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,13 +24,7 @@ class EventMetaRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required|string',
-            'frequency' => 'integer',
-            'recur_type' => 'string'
-            'recur_day_num' => 'integer',
-            'recur_day' => 'string',
-            'recur_start' => 'date',
-            'recur_end' => 'date',
+            'recurrence' => 'required|string',
         ];
     }
 }

@@ -5,7 +5,7 @@
     </div>
     <div class="col-md-8">
         <div class="form-group">
-            <input type="number" name="frequency" id="inputFrequency" value="1" min="1" max="31" step="1" required="required">
+            <input type="number" name="monthly_frequency" id="monthly_frequency" value="1" min="1" max="31" step="1" required="required">
             {{ trans('messages.months') }}
         </div>
     </div>
