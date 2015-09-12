@@ -17,7 +17,7 @@ Route::get('admin/calendars', 'PagesController@calendars');
 Route::post('admin/screengroups/{screengroups}/addphoto', 'Admin\ScreenGroupsController@addScreenFromPhoto');
 
 Route::group([
-    'namespace' => 'Admin',
+    'namespace'  => 'Admin',
     'middleware' => 'auth',
 ], function () {
 

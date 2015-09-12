@@ -65,8 +65,8 @@ class ScreenGroupsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return Response
+     * @param  ScreenGroup $screenGroup
+     * @return \Illuminate\View\View
      */
     public function show(ScreenGroup $screenGroup)
     {
@@ -80,8 +80,8 @@ class ScreenGroupsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return Response
+     * @param  ScreenGroup $screenGroup
+     * @return \Illuminate\View\View
      */
     public function edit(ScreenGroup $screenGroup)
     {
@@ -94,19 +94,21 @@ class ScreenGroupsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
+     * @param  ScreenGroupRequest $request
+     * @param  ScreenGroup $screenGroup
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function update(ScreenGroupRequest $request, ScreenGroup $screenGroup)
     {
-        $screenGroup->update($request->all());
-        flash()->success('ScreenGroup updated successfully.');
-
-        if (Request::wantsJson()) {
-            return $screenGroup;
+        if ($screenGroup->update($request->all())) {
+            flash()->success('ScreenGroup updated successfully.');
+            if (Request::wantsJson()) {
+                return $screenGroup;
+            } else {
+                return redirect()->back();
+            }
         } else {
-            return redirect()->back();
+            return abort(500, 'Unable to update the screengroup');
         }
     }
 
@@ -114,7 +116,7 @@ class ScreenGroupsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  ScreenGroup  $screenGroup
-     * @return Response
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function destroy(ScreenGroup $screenGroup)
     {
@@ -146,7 +148,7 @@ class ScreenGroupsController extends Controller
 
         // Get a the existing screen and attatch it to screengroup.
         // Otherwise create a new screen with the photo and then attatch it to the screengroup.
-        $screengroup->assignIfNeeded($photo);
+        $screengroup->assignOrCreateAndAssign($photo);
     }
 
 /**

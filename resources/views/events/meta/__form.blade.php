@@ -5,7 +5,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">{{ 'Recurring' }}</h4>
+                <h4 class="modal-title">{{ trans('messages.recurring') }}</h4>
             </div>
 
             {!! Form::model($event_meta, ['method' => 'PATCH', 'route' => ['admin.eventmetas.update', $event_meta->id]], ['class' => 'form-horizontal', 'id' => 'event_meta_form']) !!}
