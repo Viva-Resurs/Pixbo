@@ -41,7 +41,7 @@ class EventMeta extends Model
 
         $validator = null;
 
-        switch ($request['recurrence']) {
+        switch ($request['recur_type']) {
         case 'daily':
             $validator = $this->updateDaily($request);
             break;

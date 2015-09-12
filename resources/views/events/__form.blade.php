@@ -1,4 +1,3 @@
-@include('shared.alert')
 
 <div class="form-group">
     {!! Form::label('date', 'Date:') !!}

@@ -1,5 +1,3 @@
-
-
 <div class="modal fade" id="event_meta">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
@@ -16,12 +14,14 @@
                     </div>
                     <div class="col-md-8">
                         <div class="form-group">
-                            <select name="recurrence" id="recurrence" class="" required="required">
-                                <option value="daily">{{ trans('messages.daily') }}</option>
-                                <option value="weekly">{{ trans('messages.weekly') }}</option>
-                                <option value="monthly">{{ trans('messages.monthly') }}</option>
-                                <option value="Yearly">{{ trans('messages.yearly') }}</option>
-                            </select>
+                            {!! Form::select('recur_type', array(
+                                'daily' => trans("messages.daily"),
+                                'weekly' => trans('messages.weekly'),
+                                'monthly' => trans('messages.monthly'),
+                                'yearly' => trans('messages.yearly')
+                            ), null)
+                            !!}
+
                         </div>
                     </div>
 
@@ -45,10 +45,10 @@
 
     <script type="text/javascript">
         $('#event_meta').on('shown.bs.modal', function () {
-            $('#recurrence').focus();
-        })
-        $('select').on('change', function() {
-            var val = this.value;
+            $('#recur_type').focus();
+        });
+
+        function updateForm(val) {
             if(val == 'daily') {
                 $('.daily').removeAttr('style');
                 $('.weekly').attr('style', "display: none;");
@@ -70,7 +70,16 @@
                 $('.monthly').attr('style', "display: none;");
                 $('.yearly').removeAttr('style');
             }
+        }
+        $('select').on('change', function() {
+            var val = this.value;
+            updateForm(val);
         });
+        $(document).ready(function() {
+            var val = $("select option:selected" ).attr('value');
+            updateForm(val);
+        });
+
     </script>
     <script type="text/javascript">
 

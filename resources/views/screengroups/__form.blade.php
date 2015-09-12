@@ -12,7 +12,7 @@
 
 <div class="form-group">
     {!! Form::label('rss_feed', 'RSS Feed:') !!}
-    {!! Form::text('rss_feed', null, ['class' => 'form-control']) !!}
+    {!! Form::text('rss_feed', null, ['class' => 'form-control', 'placeholder' => 'http://www.google.se']) !!}
     <small class="text-danger">{{ $errors->first('rss_feed') }}</small>
 </div>
 

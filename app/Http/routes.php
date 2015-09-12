@@ -56,9 +56,6 @@ Menu::make('adminNav', function ($menu) {
     $menu->add('Clients', 'admin/clients');
     $menu->add('Screen Groups', 'admin/screengroups');
     $menu->add('Screens', 'admin/screens');
-    $menu->add('Images', 'admin/photos');
     $menu->add('Calendar', 'admin/calendars');
-    $menu->add('Events', 'admin/events');
-    $menu->add('Event Metas', 'admin/eventmetas');
     $menu->add('Users', 'admin/users');
 });

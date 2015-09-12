@@ -24,7 +24,7 @@ class EventMetaRequest extends Request
     public function rules()
     {
         return [
-            'recurrence' => 'required|string',
+            'recur_type' => 'required|string',
         ];
     }
 }

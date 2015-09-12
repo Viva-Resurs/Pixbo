@@ -25,9 +25,9 @@ class ScreenGroupRequest extends Request
     {
         //dd($this->screengroups->id);
         return [
-            'name' => 'required|unique:screengroups,name,' . $this->screengroups->id,
-            'desc' => 'required',
-            'rss_feed',
+            'name'     => 'required|unique:screengroups,name,' . $this->screengroups->id,
+            'desc'     => 'required',
+            'rss_feed' => 'url',
         ];
     }
 }
