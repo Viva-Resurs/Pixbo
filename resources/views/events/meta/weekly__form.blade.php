@@ -5,7 +5,15 @@
     </div>
     <div class="col-md-8">
         <div class="form-group">
-            <input type="number" name="weekly_frequency" id="weekly_frequency" value="1" min="1" max="31" step="1" required="required">
+            {!!
+                Form::number('weekly_frequency', 1, [
+                    'id' => 'weekly_frequency',
+                    'required' => 'required',
+                    'min'=>'1',
+                    'max' => '52',
+                    'step' => '1',
+                ])
+            !!}
             {{ trans('messages.weeks') }}
         </div>
     </div>
@@ -24,15 +32,25 @@
         <div class="row">
             <div class="form-group col-md-12">
                 <label>
-                    <input type="radio" name="weekly_end_type" id="check_never" value="never" checked="checked" class="recur_type">
+                    {!! Form::radio('weekly_end_type', 'never', null, ['id' => 'check_never', 'class' => 'recur_type']) !!}
                     {{ trans('messages.never') }}
                 </label>
             </div>
             <div class="form-group col-md-12">
                 <label>
-                    <input type="radio" name="weekly_end_type" id="check_after" value="at" class="recur_type">
+                    {!!
+                        Form::radio('weekly_end_type', 'at', null, [
+                            'id' => 'check_after',
+                            'class' => 'recur_type'
+                        ])
+                    !!}
                     {{ trans('messages.the') }}
-                    <input type="date" name="weekly_meta_recur_end" id="weekly_meta_recur_end" value="" required="required" class="recur_end">
+                    {!!
+                        Form::date('weekly_meta_recur_end', null, [
+                            'id' => 'weekly_meta_recur_end',
+                            'class' => 'recur_end'
+                        ])
+                    !!}
                 </label>
             </div>
         </div>
