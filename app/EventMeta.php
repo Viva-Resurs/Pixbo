@@ -33,7 +33,7 @@ class EventMeta extends Model
  * Takes the request array and sends it to the corresponding update method.
  *
  * @param  Array $request
- * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
+ * @return Validator
  */
     public function decodeAndUpdate($request)
     {
@@ -56,9 +56,8 @@ class EventMeta extends Model
             abort(500, trans('messages.unable_to_determ_recur_type'));
             break;
         }
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator->errors());
-        }
+
+        return $validator;
     }
 
 /**
@@ -74,6 +73,10 @@ class EventMeta extends Model
             'daily_frequency'      => 'required|integer',
             'daily_meta_recur_end' => 'required_if:daily_end_type,at',
         ]);
+        if ($validator->fails()) {
+            return $validator;
+        }
+
         $recur_end = null;
         if ($request['daily_end_type'] == 'at') {
             $recur_end = $request['daily_meta_recur_end'];
@@ -105,6 +108,9 @@ class EventMeta extends Model
             'weekly_meta_recur_end' => 'required_if:weekly_end_type,at',
 
         ]);
+        if ($validator->fails()) {
+            return $validator;
+        }
 
         $recur_end = null;
         if ($request['weekly_end_type'] == 'at') {
@@ -137,6 +143,9 @@ class EventMeta extends Model
             'monthly_meta_recur_end' => 'required_if:weekly_end_type,at',
 
         ]);
+        if ($validator->fails()) {
+            return $validator;
+        }
 
         $recur_end = null;
 
@@ -163,6 +172,9 @@ class EventMeta extends Model
             'yearly_meta_recur_end' => 'required_if:weekly_end_type,at',
 
         ]);
+        if ($validator->fails()) {
+            return $validator;
+        }
 
         $recur_end = null;
 
