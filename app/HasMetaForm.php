@@ -2,14 +2,16 @@
 
 namespace App;
 
+use Validator;
+
 trait HasMetaForm
 {
     /**
- * Takes the request array and sends it to the corresponding update method.
- *
- * @param  Array $request
- * @return Validator
- */
+     * Takes the request array and sends it to the corresponding update method.
+     *
+     * @param  Array $request
+     * @return Validator
+     */
     public function decodeAndUpdate($request)
     {
         $validator = null;
