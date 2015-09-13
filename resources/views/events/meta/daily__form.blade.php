@@ -5,7 +5,7 @@
     <div class="col-md-8">
         <div class="form-group">
         {!!
-            Form::number('daily_frequency', 1, [
+            Form::number('daily_frequency', null, [
                 'id' => 'daily_frequency',
                 'required' => 'required',
                 'min'=>'1',

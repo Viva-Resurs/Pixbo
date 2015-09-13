@@ -37,8 +37,6 @@ class EventMeta extends Model
  */
     public function decodeAndUpdate($request)
     {
-        //dd($request);
-
         $validator = null;
 
         switch ($request['recur_type']) {
@@ -55,6 +53,7 @@ class EventMeta extends Model
             $validator = $this->updateYearly($request);
             break;
         default:
+            abort(500, trans('messages.unable_to_determ_recur_type'));
             break;
         }
         if ($validator->fails()) {
@@ -99,7 +98,6 @@ class EventMeta extends Model
  */
     private function updateWeekly($request)
     {
-        //dd($request);
         $validator = Validator::make($request, [
             'weekly_end_type'       => 'required',
             'weekly_recur_day'      => 'required|array',
@@ -131,26 +129,26 @@ class EventMeta extends Model
  */
     private function updateMonthly($request)
     {
-        //dd($request);
         $validator = Validator::make($request, [
-            //'monthly_end_type'      => 'required',
-            'monthly_recur_day'     => 'required|integer',
-            'monthly_frequency'     => 'required|integer',
-            'monthly_recur_day_num' => 'required|integer',
-            //'monthly_meta_recur_end' => 'required_if:weekly_end_type,at',
+            'monthly_end_type'       => 'required',
+            'monthly_recur_day'      => 'required|integer',
+            'monthly_frequency'      => 'required|integer',
+            'monthly_recur_day_num'  => 'required|integer',
+            'monthly_meta_recur_end' => 'required_if:weekly_end_type,at',
 
         ]);
-/*
-$recur_end = null;
-if ($request['monthly_end_type'] == 'at') {
-$recur_end = $request['monthly_meta_recur_end'];
-}
- */
+
+        $recur_end = null;
+
+        if ($request['monthly_end_type'] == 'at') {
+            $recur_end = $request['monthly_meta_recur_end'];
+        }
+
         $this->update([
             'frequency'     => $request['monthly_frequency'],
             'recur_type'    => 'monthly',
             'recur_day'     => $request['monthly_recur_day'],
-            'recur_end'     => null, //$recur_end,
+            'recur_end'     => $recur_end,
             'recur_day_num' => $request['monthly_recur_day_num'],
         ]);
 
@@ -159,6 +157,196 @@ $recur_end = $request['monthly_meta_recur_end'];
 
     private function updateYearly($request)
     {
-        dd($request);
+        $validator = Validator::make($request, [
+            'yearly_end_type'       => 'required',
+            'yearly_frequency'      => 'required|integer',
+            'yearly_meta_recur_end' => 'required_if:weekly_end_type,at',
+
+        ]);
+
+        $recur_end = null;
+
+        if ($request['yearly_end_type'] == 'at') {
+            $recur_end = $request['yearly_meta_recur_end'];
+        }
+
+        $this->update([
+            'frequency'     => $request['yearly_frequency'],
+            'recur_type'    => 'yearly',
+            'recur_day'     => null,
+            'recur_end'     => $recur_end,
+            'recur_day_num' => null,
+        ]);
+
+        return $validator;
+    }
+
+    /****************************************************************
+     *	Yearly														*
+     *****************************************************************/
+
+/**
+ * Gets the Yearly end type attribute for the yearly form.
+ *
+ * @param  $value
+ * @return String
+ */
+    public function getYearlyEndTypeAttribute($value)
+    {
+        if (!is_null($this->getAttribute('recur_end')) && $this->getAttribute('recur_type') == 'yearly') {
+            return 'at';
+        } else {
+            return 'never';
+        }
+    }
+
+/**
+ * Gets the Yearly recurrence end attribute for the yearly form.
+ *
+ * @param  $value
+ * @return Date or null
+ */
+    public function getYearlyMetaRecurEndAttribute($value)
+    {
+        if (!is_null($this->getAttribute('recur_end')) && $this->getAttribute('recur_type') == 'yearly') {
+            return $this->getAttribute('recur_end');
+        } else {
+            return null;
+        }
+    }
+
+/**
+ * [getYearlyFrequencyAttribute description]
+ *
+ * @param  $value
+ * @return Integer
+ */
+    public function getYearlyFrequencyAttribute($value)
+    {
+        if ($this->getAttribute('recur_type') == 'yearly') {
+            return $this->getAttribute('frequency');
+        } else {
+            return 1;
+        }
+    }
+
+    /****************************************************************
+     *	Monthly														*
+     *****************************************************************/
+
+    public function getMonthlyFrequencyAttribute($value)
+    {
+        if ($this->getAttribute('recur_type') == 'monthly') {
+            return $this->getAttribute('frequency');
+        } else {
+            return 1;
+        }
+    }
+
+    public function getMonthlyRecurDayNumAttribute($value)
+    {
+        if ($this->getAttribute('recur_type') == 'monthly') {
+            return $this->getAttribute('recur_day_num');
+        } else {
+            return null;
+        }
+    }
+
+    public function getMonthlyRecurDayAttribute($value)
+    {
+        if ($this->getAttribute('recur_type') == 'monthly') {
+            return $this->getAttribute('recur_day');
+        } else {
+            return null;
+        }
+    }
+
+    public function getMonthlyEndTypeAttribute($value)
+    {
+        if (!is_null($this->getAttribute('recur_end')) && $this->getAttribute('recur_type') == 'monthly') {
+            return 'at';
+        } else {
+            return 'never';
+        }
+    }
+
+    public function getMonthlyMetaRecurEndAttribute($value)
+    {
+        if (!is_null($this->getAttribute('recur_end')) && $this->getAttribute('recur_type') == 'monthly') {
+            return $this->getAttribute('recur_end');
+        } else {
+            return null;
+        }
+    }
+
+    /****************************************************************
+     *	Weekly														*
+     *****************************************************************/
+
+    public function getWeeklyFrequencyAttribute($value)
+    {
+        if ($this->getAttribute('recur_type') == 'weekly') {
+            return $this->getAttribute('frequency');
+        } else {
+            return 1;
+        }
+    }
+
+    public function getWeeklyRecurDayAttribute($value)
+    {
+        if ($this->getAttribute('recur_type') == 'weekly') {
+            return unserialize($this->getAttribute('recur_day'));
+        } else {
+            return null;
+        }
+    }
+
+    public function getWeeklyEndTypeAttribute($value)
+    {
+        if (!is_null($this->getAttribute('recur_end')) && $this->getAttribute('recur_type') == 'weekly') {
+            return 'at';
+        } else {
+            return 'never';
+        }
+    }
+
+    public function getWeeklyMetaRecurEndAttribute($value)
+    {
+        if (!is_null($this->getAttribute('recur_end')) && $this->getAttribute('recur_type') == 'weekly') {
+            return $this->getAttribute('recur_end');
+        } else {
+            return null;
+        }
+    }
+
+    /****************************************************************
+     *	Daily														*
+     *****************************************************************/
+
+    public function getDailyFrequencyAttribute($value)
+    {
+        if ($this->getAttribute('recur_type') == 'daily') {
+            return $this->getAttribute('frequency');
+        } else {
+            return 1;
+        }
+    }
+
+    public function getDailyEndTypeAttribute($value)
+    {
+        if (!is_null($this->getAttribute('recur_end')) && $this->getAttribute('recur_type') == 'daily') {
+            return 'at';
+        } else {
+            return 'never';
+        }
+    }
+
+    public function getDailyMetaRecurEndAttribute($value)
+    {
+        if (!is_null($this->getAttribute('recur_end')) && $this->getAttribute('recur_type') == 'daily') {
+            return $this->getAttribute('recur_end');
+        } else {
+            return null;
+        }
     }
 }
