@@ -27,7 +27,7 @@ class PagesController extends Controller
         $events[] = \Calendar::event(
             'Event One', //event title
             false, //full day event?
-            '2015-08-17T0800', //start time (you can also use Carbon instead of DateTime)
+            '2015-09-17T0800', //start time (you can also use Carbon instead of DateTime)
             '2015-08-17T0800', //end time (you can also use Carbon instead of DateTime)
             0//optionally, you can specify an event ID
         );

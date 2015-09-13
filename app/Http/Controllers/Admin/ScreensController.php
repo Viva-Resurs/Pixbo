@@ -24,6 +24,7 @@ class ScreensController extends Controller
             return $screens;
         } else {
             $data = Screen::paginate(10);
+            //dd($data);
             return view('screens.index')->with('data', $data);
         }
     }
@@ -35,7 +36,7 @@ class ScreensController extends Controller
      */
     public function create()
     {
-        $screens = new Screen;
+        $screens      = new Screen;
         $screenGroups = ScreenGroup::lists('name', 'id')->all();
 
         return view('screens.create', compact('screens', 'screenGroups'));
@@ -115,8 +116,12 @@ class ScreensController extends Controller
      */
     public function destroy(Screen $screen)
     {
-        flash()->success('Screen removed successfully.');
         $deleted = $screen->delete();
+        if ($deleted) {
+            flash()->success('Screen removed successfully.');
+        } else {
+            flash()->error('Was not able to remove the screen.');
+        }
 
         if (Request::wantsJson()) {
             return (string) $deleted;

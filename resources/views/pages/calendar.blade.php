@@ -22,9 +22,25 @@
 
             <div class="content">
 
-                 {!! $calendar->calendar() !!}
-                {!! $calendar->script() !!}
-
+            <div class="page-header">
+              <h1>Events Calendar</h1>
+            </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        {!! $calendar->calendar() !!}
+                        {!! $calendar->script() !!}
+                    </div>
+                    <div class="col-md-4">
+                        <div class="panel panel-info">
+                              <div class="panel-heading">
+                                    <h3 class="panel-title">Events</h3>
+                              </div>
+                              <div class="panel-body">
+                                    Panel content
+                              </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
