@@ -12,7 +12,7 @@
 
 @section('content')
 
-    <h1 class="page-header">{{ "ScreenGroup Show" }}</h1>
+    <h1 class="page-header">{{ trans("messages.show_screen_group") }}</h1>
 
     <div class="row">
         <div class="col-md-4">
@@ -26,27 +26,27 @@
                     <table class="table">
                         <tbody>
                             <tr>
-                                <td>{{ 'Id' }}</td>
+                                <td>{{ trans('messages.id') }}</td>
                                 <td>{{ $screenGroup->id }}</td>
                             </tr>
                             <tr>
-                                <td>{{ 'Name' }}</td>
+                                <td>{{ trans('messages.name') }}</td>
                                 <td>{{ $screenGroup->name }}</td>
                             </tr>
                             <tr>
-                                <td>{{ 'Desc' }}</td>
+                                <td>{{ trans('messages.desc') }}</td>
                                 <td>{{ $screenGroup->desc  ? $screenGroup->desc : '-' }}</td>
                             </tr>
                             <tr>
-                                <td>{{ 'Rss Feed' }}</td>
+                                <td>{{ trans('messages.rss_feed') }}</td>
                                 <td>{{ $screenGroup->rss_feed ? $screenGroup->rss_feed : '-' }}</td>
                             </tr>
                             <tr>
-                                <td>{{ 'Created' }}</td>
+                                <td>{{ trans('messages.created') }}</td>
                                 <td>{{ $screenGroup->created_at }}</td>
                             </tr>
                             <tr>
-                                <td>{{ 'Modified' }}</td>
+                                <td>{{ trans('messages.updated') }}</td>
                                 <td>{{ $screenGroup->updated_at }}</td>
                             </tr>
                         </tbody>
@@ -57,7 +57,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <div class="panel-title">
-                        {{ 'Event' }}
+                        {{ trans('messages.event') }}
                     </div>
                 </div>
                 <div class="panel-body">
@@ -67,24 +67,24 @@
                         @if(count($screenGroup->event))
                             @foreach($screenGroup->event as $event)
                                 <tr>
-                                    <td>{{ 'Date' }}</td>
+                                    <td>{{ trans('messages.date') }}</td>
                                     <td>{{ $event->date }}</td>
                                 </tr>
                                 <tr>
-                                    <td>{{ 'Start' }}</td>
+                                    <td>{{ trans('messages.start') }}</td>
                                     <td>{{ $event->start_time }}</td>
                                 </tr>
                                 <tr>
-                                    <td>{{ 'End' }}</td>
+                                    <td>{{ trans('messages.end') }}</td>
                                     <td>{{ $event->end_time }}</td>
                                 </tr>
                                 <tr>
-                                    <td>{{ 'Is Recurring' }}</td>
-                                    <td>{{ $event->recurring ? "Yes" : "No" }}</td>
+                                    <td>{{ trans('messages.recurring') }}</td>
+                                    <td>{{ $event->recurring ? trans("messages.yes") : trans("messages.no") }}</td>
                                 </tr>
                             @endforeach
                         @else
-                            {{ 'Schedule' }}
+                            {{ trans('messages.schedule') }}
                         @endif
 
                         </tbody>
@@ -97,7 +97,7 @@
         <div class="col-md-8 photo__gallery">
             <div class="panel panel-info"> <!-- Gallery -->
                 <div class="panel-heading">
-                    {{ 'Screens' }}
+                    {{ trans('messages.screens') }}
                 </div>
                 <div class="panel-body">
                     @foreach ($screenGroup->screens->chunk(3) as $set)

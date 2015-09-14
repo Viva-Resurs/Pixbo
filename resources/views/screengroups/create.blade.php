@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1 class="page-header">{{ trans('messages.add_screengroup') }}</h1>
+<h1 class="page-header">{{ trans('messages.add_screen_group') }}</h1>
 
 <div class="row">
 <div class="col-md-6">

@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Screen extends Model
 {
+    use HasEvents;
     /**
- * Database table
- * @var string
- */
+     * Database table
+     * @var string
+     */
     protected $table = 'screens';
 
 /**
@@ -50,7 +51,7 @@ class Screen extends Model
  */
     public function event()
     {
-        return $this->morphToMany('App\Event', 'eventable');
+        return $this->morphMany('\App\Event', 'eventable');
     }
 
     public function photo()

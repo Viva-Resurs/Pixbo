@@ -63,7 +63,7 @@
                         <div class="row">
                             @foreach ($set as $element)
                                 <div class="col-md-4 gallery__image">
-                                    <a href="/admin/screens/{{ $element->id }}"</a>
+                                    <a href="/admin/screens/{{ $element->id }}/edit"</a>
                                         <img src="/{{ $element->photo->thumb_path }}" alt="">
                                     </a>
                                 </div>

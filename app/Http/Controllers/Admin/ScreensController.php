@@ -50,14 +50,16 @@ class ScreensController extends Controller
      */
     public function store(ScreenRequest $request)
     {
-        flash()->success('Screen created successfully.');
         $screen = new Screen($request->all());
+        flash()->success('Screen created successfully.');
         Auth::user()->screens()->save($screen);
+        $event      = $screen->createAndReturnEvent();
+        $event_meta = $event->createAndReturnMeta();
 
         if (Request::wantsJson()) {
             return $screen;
         } else {
-            return redirect('admin.screens');
+            return redirect()->action('Admin\ScreensController@edit', compact(['screen', 'event', 'event_meta']));
         }
     }
 
@@ -69,10 +71,13 @@ class ScreensController extends Controller
      */
     public function show(Screen $screen)
     {
+        $event      = $screen->getEvent();
+        $event_meta = $event->getEventMeta();
+
         if (Request::wantsJson()) {
             return $screen;
         } else {
-            return view('screens.show', compact('screen'));
+            return view('screens.show', compact(['screen', 'event', 'event_meta']));
         }
     }
 
@@ -85,8 +90,10 @@ class ScreensController extends Controller
     public function edit(Screen $screen)
     {
         $screenGroups = ScreenGroup::lists('name', 'id')->all();
+        $event        = $screen->getEvent();
+        $event_meta   = $event->getEventMeta();
 
-        return view('screens.edit', compact('screen', 'screenGroups'));
+        return view('screens.edit', compact('screen', 'screenGroups', 'event', 'event_meta'));
     }
 
     /**
@@ -98,8 +105,8 @@ class ScreensController extends Controller
      */
     public function update(ScreenRequest $request, Screen $screen)
     {
-        flash()->success('Screen updated successfully.');
         $screen->update($request->all());
+        flash()->success('Screen updated successfully.');
 
         if (Request::wantsJson()) {
             return $screen;

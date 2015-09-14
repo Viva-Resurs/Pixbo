@@ -18,7 +18,11 @@ return [
     'desc'                        => 'Description',
     'id'                          => 'Id',
     'created'                     => 'Created',
+    'modified'                    => 'Modified',
     'updated'                     => 'Updated',
+    'info'                        => 'Info',
+    'image'                       => 'Image',
+    'rss_feed'                    => 'RSS Feed',
 
     /**
      * Commonly used words.
@@ -26,22 +30,33 @@ return [
     'add'                         => 'Add',
     'close'                       => 'Close',
     'save'                        => 'Save',
+    'yes'                         => 'Yes',
+    'no'                          => 'No',
 
     /**
      * Models
      */
     'screen_group'                => 'Screen Group',
     'screen_groups'               => 'Screen Groups',
-    'add_screengroup'             => 'Add ScreenGroup',
+    'add_screen_group'            => 'Add Screen Group',
+    'show_screen_group'           => 'Show Screen Group',
+    'show_screen'                 => 'Show Screen',
+    'edit_screen'                 => 'Edit Screen',
 
     'client'                      => 'Client',
     'clients'                     => 'Clients',
     'screen'                      => 'Screen',
     'screens'                     => 'Screens',
+    'event'                       => 'Event',
+    'events'                      => 'Events',
 
     /**
      * Time/Date
      */
+
+    'date'                        => 'Date',
+    'start'                       => 'Start',
+    'end'                         => 'End',
 
     'recurring'                   => 'Recurring',
 
