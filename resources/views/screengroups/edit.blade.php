@@ -23,7 +23,6 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <table class="table">
                         {!! Form::model($screenGroup, ['method' => 'PATCH', 'route' => ['admin.screengroups.update', $screenGroup->id]]) !!}
                             @include ('screengroups.__form', ['submitButtonText' => trans('messages.save')])
                         {!! Form::close() !!}

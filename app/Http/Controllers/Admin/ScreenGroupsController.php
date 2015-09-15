@@ -57,7 +57,6 @@ class ScreenGroupsController extends Controller
         if (Request::wantsJson()) {
             return $screenGroup;
         } else {
-            $event_meta = "";
             return redirect()->action('Admin\ScreenGroupsController@edit', compact(['screenGroup', 'event', 'event_meta']));
         }
     }
