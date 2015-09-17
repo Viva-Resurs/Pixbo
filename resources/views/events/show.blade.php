@@ -45,10 +45,6 @@ Client index
                             <td>{{ $event->updated_at }}</td>
                         </tr>
                         <tr>
-                            <td>{{ 'Created by' }}</td>
-                            <td>{{ $event->user->name }}</td>
-                        </tr>
-                        <tr>
                             <td>{{ 'Is Recurring' }}</td>
                             <td>{{ $event->recurring ? "Yes" : "No" }}</td>
                         </tr>

@@ -66,7 +66,17 @@ class Event extends Model {
 		$this->meta()->save($event_meta);
 	}
 
-	public function scopeGetAllEventsInInterval($begin, $end) {
-
+/**
+ * Get events for today for the given model.
+ * @param  string $model
+ * @param integer $model_id
+ * @return array
+ */
+	public function scopeGetTodaysEvents() {
+		return static::with('meta')->where(['date' => date('Y-m-d')])->get();
 	}
 }
+
+/*
+$b = App\Event::join('event_metas', 'event_metas.event_id', '=', 'events.id')->whereNotNull('recur_type')->groupBy('events.id')->get(['recur_type', 'events.id']);
+ */
