@@ -3,6 +3,7 @@
 namespace App;
 
 use App\EventMeta;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model {
@@ -32,7 +33,7 @@ class Event extends Model {
  * @return \Illuminate\Database\Eloquent\Relations\MorphTo
  */
 	public function eventable() {
-		return $this->morphTo()->withTimeStamps();
+		return $this->morphTo();
 	}
 
 /**
@@ -108,10 +109,15 @@ class Event extends Model {
 
 	}
 
+	private function generateShadowEvent($date) {
+
+	}
+
 	protected function generateShadowEvents() {
 		$meta = $this->getEventMeta();
 		switch ($meta->getAttributes('recur_type')) {
 		case 'daily':
+			generateDaily();
 			break;
 		case 'weekly':
 			break;
@@ -124,6 +130,20 @@ class Event extends Model {
 		}
 
 	}
+
+	public function generateDaily() {
+		$meta = $this->getEventMeta();
+		$end = Carbon::now()->addMonth();
+		$frequency = $meta->frequency;
+
+		for ($initial = Carbon::now();
+			$initial->lt($end);
+			$initial->addDays($frequency)) {
+			return ShadowEvent::generateFromEvent($initial, $this);
+		}
+
+	}
+
 }
 
 /*
