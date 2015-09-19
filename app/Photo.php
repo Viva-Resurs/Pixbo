@@ -36,7 +36,7 @@ class Photo extends Model {
  * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
  */
 	public function screen() {
-		return $this->belongsTo(App\Screen::class);
+		return $this->belongsTo(Screen::class);
 	}
 
 /**

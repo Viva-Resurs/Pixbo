@@ -13,7 +13,7 @@ class ShadowEvent extends Model {
 	];
 
 	public function event() {
-		return $this->belongsTo(App\Event::class);
+		return $this->belongsTo(Event::class);
 	}
 
 }

@@ -35,7 +35,7 @@ class ScreenGroup extends Model {
  * @return [type] [description]
  */
 	public function screens() {
-		return $this->belongsToMany(App\Screen::class, 'screen_screen_group')->withTimestamps();
+		return $this->belongsToMany(Screen::class, 'screen_screen_group')->withTimestamps();
 	}
 
 /**
@@ -43,7 +43,7 @@ class ScreenGroup extends Model {
  * @return [type] [description]
  */
 	public function client() {
-		return $this->hasMany(App\Client::class);
+		return $this->hasMany(Client::class);
 	}
 
 /**

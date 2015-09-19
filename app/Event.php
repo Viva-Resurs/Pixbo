@@ -41,11 +41,11 @@ class Event extends Model {
  * @return \Illuminate\Database\Eloquent\Relations\HasOne
  */
 	public function meta() {
-		return $this->hasOne(App\EventMeta::class);
+		return $this->hasOne(EventMeta::class);
 	}
 
 	public function shadow_events() {
-		return $this->hasMany(App\ShadowEvent::class);
+		return $this->hasMany(ShadowEvent::class);
 	}
 
 /**
@@ -109,6 +109,19 @@ class Event extends Model {
 	}
 
 	protected function generateShadowEvents() {
+		$meta = $this->getEventMeta();
+		switch ($meta->getAttributes('recur_type')) {
+		case 'daily':
+			break;
+		case 'weekly':
+			break;
+		case 'monthly':
+			break;
+		case 'yearly':
+			break;
+		default:
+			break;
+		}
 
 	}
 }

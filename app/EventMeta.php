@@ -24,6 +24,6 @@ class EventMeta extends Model {
  * @return \Illuminate\Database\Eloquent\Relations\HasMany
  */
 	public function events() {
-		return $this->belongsTo(App\Event::class)->withTimestamps();
+		return $this->belongsTo(Event::class)->withTimestamps();
 	}
 }

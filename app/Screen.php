@@ -30,7 +30,7 @@ class Screen extends Model {
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
 	public function user() {
-		return $this->belongsTo(App\User::class);
+		return $this->belongsTo(User::class);
 	}
 
 /**
@@ -38,10 +38,10 @@ class Screen extends Model {
  * @return [type] [description]
  */
 	public function screengroups() {
-		return $this->belongsToMany(App\ScreenGroup::class, 'screen_screen_group')->withTimestamps();
+		return $this->belongsToMany(ScreenGroup::class, 'screen_screen_group')->withTimestamps();
 	}
 
 	public function photo() {
-		return $this->hasOne(App\Photo::class);
+		return $this->hasOne(Photo::class);
 	}
 }

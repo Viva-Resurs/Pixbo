@@ -37,7 +37,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
  * @return [type] [description]
  */
 	public function clients() {
-		return $this->hasMany(App\Client::class);
+		return $this->hasMany(Client::class);
 	}
 
 /**
@@ -45,7 +45,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
  * @return [type] [description]
  */
 	public function screengroups() {
-		return $this->hasMany(App\ScreenGroup::class);
+		return $this->hasMany(ScreenGroup::class);
 	}
 
 /**
@@ -53,10 +53,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
  * @return [type] [description]
  */
 	public function events() {
-		return $this->hasMany(App\Event::class);
+		return $this->hasMany(Event::class);
 	}
 
 	public function screens() {
-		return $this->hasMany(App\Screen::class);
+		return $this->hasMany(Screen::class);
 	}
 }
