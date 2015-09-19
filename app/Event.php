@@ -41,7 +41,11 @@ class Event extends Model {
  * @return \Illuminate\Database\Eloquent\Relations\HasOne
  */
 	public function meta() {
-		return $this->hasOne('App\EventMeta');
+		return $this->hasOne(App\EventMeta::class);
+	}
+
+	public function shadow_events() {
+		return $this->hasMany(App\ShadowEvent::class);
 	}
 
 /**
@@ -54,6 +58,11 @@ class Event extends Model {
 		)->get()->first();
 	}
 
+/**
+ * Creates and returns a new EventMeta for the Event.
+ *
+ * @return [type] [description]
+ */
 	public function createAndReturnMeta() {
 		$event_meta = new EventMeta;
 		$event_meta->fill([
@@ -64,16 +73,43 @@ class Event extends Model {
 			'recur_end' => null,
 		]);
 		$this->meta()->save($event_meta);
+
+		return $event_meta;
 	}
 
 /**
  * Get events for today for the given model.
+ *
  * @param  string $model
  * @param integer $model_id
  * @return array
  */
 	public function scopeGetTodaysEvents() {
 		return static::with('meta')->where(['date' => date('Y-m-d')])->get();
+	}
+
+/**
+ * Checks if a given date matches the events date.
+ *
+ * @param  string $date
+ * @return boolean
+ */
+	public function matchDate(string $date) {
+		if ($this->attributes('date') == $date) {
+			return true;
+		} else if ($this->attributes('recurring') == 0) {
+			return false;
+		} else {
+			return $this->matchRecurrence($date);
+		}
+	}
+
+	protected function matchRecurrence(string $date) {
+
+	}
+
+	protected function generateShadowEvents() {
+
 	}
 }
 

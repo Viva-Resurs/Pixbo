@@ -36,7 +36,7 @@ class Photo extends Model {
  * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
  */
 	public function screen() {
-		return $this->belongsTo('App\Screen');
+		return $this->belongsTo(App\Screen::class);
 	}
 
 /**
@@ -61,8 +61,8 @@ class Photo extends Model {
 
 	protected function saveAs($name) {
 		$this->archived = 0;
-		$this->name     = sprintf("%s-%s", time(), $name);
-		$this->path     = sprintf("%s/%s", $this->baseDir, $this->name);
+		$this->name = sprintf("%s-%s", time(), $name);
+		$this->path = sprintf("%s/%s", $this->baseDir, $this->name);
 
 		$this->thumb_path = sprintf("%s/tn-%s", $this->baseDir, $this->name);
 
@@ -99,10 +99,10 @@ class Photo extends Model {
 		} else {
 			$screen = new Screen;
 			$screen->fill([
-				'name'            => $photo->name,
+				'name' => $photo->name,
 				'screen_group_id' => $screengroup->id,
-				'event_id'        => null,
-				'user_id'         => Auth::user()->id,
+				'event_id' => null,
+				'user_id' => Auth::user()->id,
 			]);
 			$this->photo()->save($photo);
 			$screengroup->screens()->attach($screen);
