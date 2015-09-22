@@ -15,8 +15,8 @@ class CreateShadowEventTable extends Migration {
 
 			$table->string('title');
 			$table->boolean('isAllDay');
-			$table->dateTime('start_time');
-			$table->dateTime('end_time');
+			$table->dateTime('start');
+			$table->dateTime('end');
 			$table->integer('event_id')->unsigned();
 			$table->timestamps();
 

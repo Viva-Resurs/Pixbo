@@ -45,7 +45,7 @@ class Event extends Model {
 		return $this->hasOne(EventMeta::class);
 	}
 
-	public function shadow_events() {
+	public function event_shadows() {
 		return $this->hasMany(ShadowEvent::class);
 	}
 
@@ -109,10 +109,6 @@ class Event extends Model {
 
 	}
 
-	private function generateShadowEvent($date) {
-
-	}
-
 	protected function generateShadowEvents() {
 		$meta = $this->getEventMeta();
 		switch ($meta->getAttributes('recur_type')) {
@@ -133,13 +129,19 @@ class Event extends Model {
 
 	public function generateDaily() {
 		$meta = $this->getEventMeta();
-		$end = Carbon::now()->addMonth();
-		$frequency = $meta->frequency;
 
-		for ($initial = Carbon::now();
+		// ADD GENERIC hour/minute explode!!
+		$start = Carbon::parse($this->getAttribute('date'));
+		$start->hour = $this->getAttribute('start_time')
+
+		$end = Carbon::now()->addMonth();
+		$frequency = is_null($meta->frequency) ?: 1;
+
+		for ($initial = Carbon::parse($start);
 			$initial->lt($end);
-			$initial->addDays($frequency)) {
-			return ShadowEvent::generateFromEvent($initial, $this);
+			$initial = $initial->addDays($frequency)) {
+			var_dump($initial);
+			ShadowEvent::generateFromEvent($initial, $this);
 		}
 
 	}
