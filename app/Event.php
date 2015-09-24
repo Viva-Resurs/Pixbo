@@ -164,7 +164,49 @@ class Event extends Model {
 		}
 
 	}
+	public function generateWeekly() {
+		$id = $this->getAttribute('id');
+		$meta = $this->getEventMeta();
+		$start_date = $this->getAttribute('date');
+		$frequency = is_null($meta->frequency) ?: 1;
+		$timeArray = extractTime($this->getAttribute('start_time'));
 
+		$end = Carbon::parse($start_date)->addMonth();
+
+		$start = ShadowEvent::where(function ($q) use ($id, $frequency, $start_date) {
+			$q->where('event_id', $id);
+			$q->where('start', '>=', $start_date);
+			$q->where('start', '>=', Carbon::now()->subWeeks($frequency));
+			$q->where('start', '<=', Carbon::now()->addWeeks($frequency));
+		})->get();
+
+		$filtered = $start->filter(function ($item) {
+			dd(Carbon::parse($item->start));
+		});
+
+		dd($filtered);
+
+		if (is_null($start)) {
+			$start = Carbon::parse($start_date);
+		} else {
+			$start = Carbon::parse($start['start']);
+		}
+
+		$start->hour = $timeArray[0];
+		$start->minute = $timeArray[1];
+
+		ShadowEvent::clearEvent($id);
+
+		for ($initial = $start;
+			$initial->lt($end);
+			$initial = $initial->addWeeks($frequency)) {
+
+			//for($day_of_week = 0;)
+			$initial->hour = $timeArray[0];
+			$initial->minute = $timeArray[1];
+			ShadowEvent::generateFromEvent(Carbon::parse($initial), $this);
+		}
+	}
 }
 
 /*
