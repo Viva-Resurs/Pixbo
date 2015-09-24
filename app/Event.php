@@ -128,20 +128,39 @@ class Event extends Model {
 	}
 
 	public function generateDaily() {
+
+		$id = $this->getAttribute('id');
 		$meta = $this->getEventMeta();
-
-		// ADD GENERIC hour/minute explode!!
-		$start = Carbon::parse($this->getAttribute('date'));
-		$start->hour = $this->getAttribute('start_time')
-
-		$end = Carbon::now()->addMonth();
+		$start_date = $this->getAttribute('date');
 		$frequency = is_null($meta->frequency) ?: 1;
+		$timeArray = extractTime($this->getAttribute('start_time'));
 
-		for ($initial = Carbon::parse($start);
+		$end = Carbon::parse($start_date)->addMonth();
+
+		$start = ShadowEvent::where(function ($q) use ($id, $frequency, $start_date) {
+			$q->where('event_id', $id);
+			$q->where('start', '>=', $start_date);
+			$q->where('start', '>=', Carbon::now()->subDays($frequency));
+			$q->where('start', '<=', Carbon::now()->addDays($frequency));
+		})->first();
+
+		if (is_null($start)) {
+			$start = Carbon::parse($start_date);
+		} else {
+			$start = Carbon::parse($start['start']);
+		}
+
+		$start->hour = $timeArray[0];
+		$start->minute = $timeArray[1];
+
+		ShadowEvent::clearEvent($id);
+
+		for ($initial = $start;
 			$initial->lt($end);
 			$initial = $initial->addDays($frequency)) {
-			var_dump($initial);
-			ShadowEvent::generateFromEvent($initial, $this);
+			$initial->hour = $timeArray[0];
+			$initial->minute = $timeArray[1];
+			ShadowEvent::generateFromEvent(Carbon::parse($initial), $this);
 		}
 
 	}

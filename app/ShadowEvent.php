@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class ShadowEvent extends Model {
@@ -24,15 +25,20 @@ class ShadowEvent extends Model {
 		$shadow->title = $model['name'];
 		$shadow->start = $start;
 
-		$endArray = explode(':', $event['end_time']);
-		$end = $start;
-		$end->hour = $endArray[0];
-		$end->minute = $endArray[1];
+		$timeArray = extractTime($event['end_time']);
+		$end = Carbon::parse($start);
+		$end->hour = $timeArray[0];
+		$end->minute = $timeArray[1];
 
 		$shadow->end = $end;
 		$shadow->isAllDay = 1;
+		var_dump($start);
 
 		$event->event_shadows()->save($shadow);
+	}
+
+	public static function clearEvent($id) {
+		$delete_rows = ShadowEvent::where('event_id', $id)->delete();
 	}
 
 }
