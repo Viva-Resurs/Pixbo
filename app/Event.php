@@ -109,13 +109,14 @@ class Event extends Model {
 
 	}
 
-	protected function generateShadowEvents() {
+	public function generateShadowEvents() {
 		$meta = $this->getEventMeta();
 		switch ($meta->getAttributes('recur_type')) {
 		case 'daily':
 			generateDaily();
 			break;
 		case 'weekly':
+			generateWeekly();
 			break;
 		case 'monthly':
 			break;
@@ -127,7 +128,7 @@ class Event extends Model {
 
 	}
 
-	public function generateDaily() {
+	protected function generateDaily() {
 
 		$id = $this->getAttribute('id');
 		$meta = $this->getEventMeta();
@@ -164,7 +165,7 @@ class Event extends Model {
 		}
 
 	}
-	public function generateWeekly() {
+	protected function generateWeekly() {
 		$id = $this->getAttribute('id');
 		$meta = $this->getEventMeta();
 		$start_date = $this->getAttribute('date');
@@ -192,18 +193,17 @@ class Event extends Model {
 		$start->hour = $timeArray[0];
 		$start->minute = $timeArray[1];
 
-		var_dump($end);
-
 		ShadowEvent::clearEvent($id);
 
 		for ($initial = $start;
 			$initial->lt($end);
 			$initial = $initial->addWeeks($frequency)) {
-			var_dump($frequency);
 
 			for ($i = 1; $i < 8; $i++) {
-				$day = Carbon::parse($initial)->subDays($initial->dayOfWeek)->addDays($i);
-				//var_dump($day);
+				$day = Carbon::parse($initial)
+					->subDays($initial->dayOfWeek)
+					->addDays($i);
+
 				if (in_array($day->dayOfWeek, $weekDays)
 					&& $day->lt($end)
 					&& $day->gt($start)) {
@@ -212,7 +212,62 @@ class Event extends Model {
 					ShadowEvent::generateFromEvent(Carbon::parse($day), $this);
 				}
 			}
+		}
+	}
 
+	public function generateMonthly() {
+		$id = $this->getAttribute('id');
+		$meta = $this->getEventMeta();
+		$start_date = $this->getAttribute('date');
+		$weekDay = unserialize($meta->recur_day);
+		$week_in_month = $meta->getAttribute('recur_day_num');
+
+		$frequency = !is_null($meta->frequency) ? $meta->frequency : 1;
+		$timeArray = extractTime($this->getAttribute('start_time'));
+
+		$started = Carbon::parse($start_date);
+		$end = Carbon::parse($start_date)->addMonths(2);
+
+		$start = ShadowEvent::where(function ($q) use ($id, $frequency, $started) {
+			$q->where('event_id', $id);
+			$q->where('start', '>=', $started);
+			$q->where('start', '>=', $started->subMonths($frequency));
+			$q->where('start', '<=', $started->addMonths($frequency));
+		})->first();
+
+		if (is_null($start)) {
+			$start = Carbon::parse($start_date);
+		} else {
+			$start = Carbon::parse($start['start']);
+		}
+
+		$start->hour = $timeArray[0];
+		$start->minute = $timeArray[1];
+
+		ShadowEvent::clearEvent($id);
+
+		// TODO: fix finding a given week and day from given values...
+		for ($initial = $start;
+			$initial->lt($end);
+			$initial = $initial->addMonths($frequency)) {
+
+			for ($i = 1; $i < 6; $i++) {
+				$week = Carbon::parse($initial)
+				// week start on monday not sunday ie 1 day offset.
+				->subDays($initial->dayOfWeek - 1)
+					->subWeeks($initial->weekOfMonth)
+					->addWeeks($i);
+				//var_dump($week->weekOfMonth);
+				//var_dump(intval($week_in_month));
+
+				if (($week->weekOfMonth == intval($week_in_month))
+					//&& $week->gt($start)
+					//&& $week->lt($end)
+				) {
+					var_dump($week);
+				}
+
+			}
 		}
 	}
 }
