@@ -5,7 +5,7 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
-class ShadowEvent extends Model {
+class ShadowEvent extends Model implements \MaddHatter\LaravelFullcalendar\Event {
 	protected $fillable = [
 		'title',
 		'isAllDay',
@@ -54,6 +54,38 @@ class ShadowEvent extends Model {
  */
 	public static function clearEvent($id) {
 		$delete_rows = ShadowEvent::where('event_id', $id)->delete();
+		return $delete_rows;
+	}
+
+/**
+ * Removes all old shadow event with a given event id.
+ *
+ * @param  integer $id
+ * @return bool|null
+ */
+	public static function clearOldEvents($id) {
+		$now = Carbon::now();
+		$delete_rows = ShadowEvent::where(function ($q) use ($id, $now) {
+			$q->where('event_id', $id);
+			$q->where('end', '<', $now);
+		})->delete();
+		return $delete_rows;
+	}
+
+	public function getTitle() {
+		return $this->getAttribute('title');
+	}
+
+	public function isAllDay() {
+		return ($this->getAttributes('isAllDay') ? true : false);
+	}
+
+	public function getStart() {
+		return Carbon::parse($this->getAttribute('start'));
+	}
+
+	public function getEnd() {
+		return Carbon::parse($this->getAttribute('end'));
 	}
 
 }
