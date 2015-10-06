@@ -19,15 +19,15 @@ class PagesController extends Controller {
 
 	public function calendars() {
 
-		$eloquentEvent = ShadowEvent::first(); //EventModel implements MaddHatter\LaravelFullcalendar\Event
+		$events = ShadowEvent::all(); //EventModel implements MaddHatter\LaravelFullcalendar\Event
 
-		$calendar = \Calendar::addEvent($eloquentEvent, [ //set custom color fo this event
+		$calendar = \Calendar::addEvents($events, [ //set custom color fo this event
 			'color' => '#800',
 		])->setOptions([ //set fullcalendar options
 			'firstDay' => 1,
-		])->setCallbacks([ //set fullcalendar callback options (will not be JSON encoded)
-			'viewRender' => 'function() {alert("Callbacks!");}',
-		]);
+		]) /*->setCallbacks([ //set fullcalendar callback options (will not be JSON encoded)
+		'viewRender' => 'function() {alert("Callbacks!");}',
+		])*/;
 
 		return view('pages.calendar', compact('calendar'));
 		//return view('pages.calendar');
