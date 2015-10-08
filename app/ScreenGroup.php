@@ -34,6 +34,7 @@ class ScreenGroup extends Model
 
 /**
  * Screen association
+ *
  * @return [type] [description]
  */
     public function screens()

@@ -28,6 +28,6 @@ class EventMeta extends Model
  */
     public function events()
     {
-        return $this->belongsTo(Event::class)->withTimestamps();
+        return $this->belongsTo(Event::class);
     }
 }

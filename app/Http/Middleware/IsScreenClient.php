@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\User;
+use Auth;
 use Closure;
 
 class IsScreenClient
@@ -15,8 +17,16 @@ class IsScreenClient
      */
     public function handle($request, Closure $next)
     {
-        $client = \App\Client::where(['ip' => $request->getClientIp(true)])->get();
-        dd($client);
+        $ip_address = $request->getClientIp(true);
+        $client = \App\Client::where(['ip_address' => $ip_address])->first();
+
+        if (!is_null($client)) {
+            $user = User::where(['id' => $client->user_id])->first();
+            Auth::logout();
+            Auth::login($user);
+            return redirect('play');
+        }
+
         return $next($request);
     }
 }

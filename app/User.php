@@ -24,7 +24,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['name', 'email', 'password', 'client_id'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -37,9 +37,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
  * Client association
  * @return [type] [description]
  */
-    public function clients()
+    public function client()
     {
-        return $this->hasMany(Client::class);
+        return $this->hasOne(Client::class);
     }
 
 /**

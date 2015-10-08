@@ -5,7 +5,9 @@ use App\Client;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ClientRequest;
 use App\ScreenGroup;
-use Auth;
+use App\User;
+use DB;
+use Hash;
 use Request;
 
 class ClientsController extends Controller
@@ -34,7 +36,7 @@ class ClientsController extends Controller
      */
     public function create()
     {
-        $client       = new Client;
+        $client = new Client;
         $screenGroups = ScreenGroup::lists('name', 'id')->all();
 
         return view('clients.create', compact('client', 'screenGroups'));
@@ -48,10 +50,18 @@ class ClientsController extends Controller
      */
     public function store(ClientRequest $request)
     {
-        flash()->success('Client created successfully.');
-        $client = new Client($request->all());
-        Auth::user()->clients()->save($client);
+        DB::transaction(function () use ($request) {
+            $client = new Client($request->all());
+            $user = new User;
+            $user->fill([
+                'name' => $client->name,
+                'email' => $client->name . '@viva.se',
+                'password' => Hash::make($client->name),
+            ])->save();
+            $user->client()->save($client);
+        });
 
+        flash()->success('Client created successfully.');
         if (Request::wantsJson()) {
             return $client;
         } else {
@@ -115,8 +125,8 @@ class ClientsController extends Controller
      */
     public function destroy(Client $client)
     {
-        flash()->success('Client removed successfully.');
         $deleted = $client->delete();
+        flash()->success('Client removed successfully.');
 
         if (Request::wantsJson()) {
             return (string) $deleted;
