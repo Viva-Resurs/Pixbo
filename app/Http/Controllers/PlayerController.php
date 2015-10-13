@@ -15,15 +15,19 @@ class PlayerController extends Controller
      */
     public function index()
     {
-        $client = Auth::user()->client->with('screengroup.screens')->get();
-        dd($client->screengroup);
-        //$screengroup = $client->screengroup;
+        $client = Auth::user()->client->with('screengroup.screens.photo')->get();
 
-        //$screens = \App\Screen::where(['client_id' => $client->id]);
-        //dd($screengroup);
-        $screens = $screengroup->screens()->get();
+        if ($client->count() > 0) {
+            $client = $client->toArray();
+            $screens = $client[0]['screengroup']['screens'];
+            $list;
 
-        dd($screens);
+            foreach ($screens as $screen) {
+                $list[] = $screen['photo'];
+            }
+            return view('player.index')->with('list', $list);
+        }
+        return abort(404, 'You lack permission to view this content.');
     }
 
     /**

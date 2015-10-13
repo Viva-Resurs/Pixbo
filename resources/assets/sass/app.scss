@@ -158,3 +158,10 @@ body {
     white-space: nowrap;
 }
 // background-color: transparent;text-decoration: underline;border: none;color: blue;cursor: pointer;
+
+.element {
+  min-width: 100%;
+  min-height: 100%;
+  max-width:100%;
+  max-height:100%;
+}
