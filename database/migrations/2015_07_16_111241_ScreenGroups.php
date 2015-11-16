@@ -16,12 +16,21 @@ class ScreenGroups extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('desc');
-            $table->text('rss_feed')->nullable();
 
             // Users
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')
-            ->references('id')->on('users');
+                ->references('id')->on('users');
+
+            $table->timestamps();
+        });
+
+        Schema::create('tickers', function (Blueprint $table) {
+            $table->increments('id');
+            $table->text('text');
+
+            $table->integer('screen_group_id')->unsigned()->index();
+            $table->foreign('screen_group_id')->references('id')->on('screengroups')->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -35,5 +44,6 @@ class ScreenGroups extends Migration
     public function down()
     {
         Schema::drop('screengroups');
+        Schema::drop('tickers');
     }
 }

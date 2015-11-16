@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use Request as Requests;
 
 class ScreenGroupRequest extends Request
 {
@@ -21,13 +22,27 @@ class ScreenGroupRequest extends Request
      *
      * @return array
      */
-    public function rules()
+    public function rules(Requests $request)
     {
-        //dd($this->screengroups->id);
-        return [
-            //'name'     => 'required|unique:screengroups,name,' . $this->screengroups->id,
-            'desc'     => 'required',
-            'rss_feed' => 'url',
-        ];
+        switch ($this->method()) {
+        case 'GET':
+        case 'DELETE':
+        case 'POST':
+            {
+                return [
+                    'name' => 'required|unique:screengroups',
+                    'desc' => 'required',
+                ];
+            }
+        case 'PUT':
+        case 'PATCH':
+            {
+                return [
+                    'name' => 'required|unique:screengroups,name' . Request::get('name'),
+                    'desc' => 'required',
+                ];
+            }
+        default:break;
+        }
     }
 }

@@ -45,8 +45,7 @@ Menu::make('topNav', function ($menu) {
 
     $menu->add('Home');
     $menu->add('Dashboard', 'admin/dashboard');
-    $menu->add('Profile', 'profile');
-    $menu->add('Help', 'help');
+    $menu->add('Settings', 'settings');
 });
 
 /**

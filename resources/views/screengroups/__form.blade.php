@@ -10,12 +10,6 @@
     <small class="text-danger">{{ $errors->first('desc') }}</small>
 </div>
 
-<div class="form-group">
-    {!! Form::label('rss_feed', 'RSS Feed:') !!}
-    {!! Form::text('rss_feed', null, ['class' => 'form-control', 'placeholder' => 'http://www.google.se']) !!}
-    <small class="text-danger">{{ $errors->first('rss_feed') }}</small>
-</div>
-
 <div class="btn-group pull-right">
     {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
 </div>

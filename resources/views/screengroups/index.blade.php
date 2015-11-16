@@ -15,7 +15,7 @@
         {!!
             toTable($data->toArray()['data'], array(
             'attributes' => array('class' => 'table'),
-            'only' => array('id', 'name', 'rss_feed', 'created_at'),
+            'only' => array('id', 'name', 'created_at'),
             'action' => 'screengroups.actions'
        ))
     !!}

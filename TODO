@@ -22,7 +22,7 @@ Features:
 
 
 Bugs:
-    * Player not "rewinding" properly...
+
 
 Remember:
     * Set PHP memory size and upload file size properly.

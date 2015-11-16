@@ -24,7 +24,6 @@ class ScreensController extends Controller
             return $screens;
         } else {
             $data = Screen::paginate(10);
-            //dd($data);
             return view('screens.index')->with('data', $data);
         }
     }

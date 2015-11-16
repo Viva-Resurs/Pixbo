@@ -113,7 +113,7 @@ class ClientsController extends Controller
         if (Request::wantsJson()) {
             return $client;
         } else {
-            return redirect('clients');
+            return redirect('admin/clients');
         }
     }
 
