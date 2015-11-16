@@ -1,8 +1,28 @@
 Features:
     * Remove screen overlay on each screen in screengroup.
 
+    * Client
+        * Creation
+            * Create user and associate it to the new client.
+        * Deletion
+            * Remove the user and flag the ScreenGroup as having no client to play it.
+
+    * Player
+        * Login client. (middleware) (Done)
+        * Load shadow events for current time.
+        * AJAX update every n minutes.
+        * Add ticker feed to player.
+
+    * Shadow Events
+        * Make job to generate shadow events every n days.
+        * Generate shadow event on event changes.
+
+    * Screen Group
+        * Add (x) button to remove screen association to the current screen group.
+
+
 Bugs:
-    *
+    * Player not "rewinding" properly...
 
 Remember:
     * Set PHP memory size and upload file size properly.

@@ -1,7 +1,8 @@
 /vendor
 /node_modules
-/public/js/*
-/public/css/
+/public/css/app.css
+/public/css/app.css.map
+/public/js/bundle.js
 /public/fonts/
 /public/screens/*
 Homestead.yaml

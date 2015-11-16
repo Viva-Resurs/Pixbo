@@ -25,6 +25,7 @@ class PlayerController extends Controller
             foreach ($screens as $screen) {
                 $list[] = $screen['photo'];
             }
+            //dd($list);
             return view('player.index')->with('list', $list);
         }
         return abort(404, 'You lack permission to view this content.');
