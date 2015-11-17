@@ -26,3 +26,4 @@ Bugs:
 
 Remember:
     * Set PHP memory size and upload file size properly.
+    * Set environment variable for phpunit \vendor\bin

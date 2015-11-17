@@ -3,7 +3,6 @@
 	[
 		{
             "folder_exclude_patterns": [
-                "tests",
             ],
 			"path": ".",
 
@@ -15,8 +14,6 @@
                 ".gitattributes",
                 "LICENSE",
                 "composer.lock",
-                "phpspec.yml",
-                "phpunit.xml"
             ]
 		}
 	]

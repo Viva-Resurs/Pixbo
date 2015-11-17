@@ -35,7 +35,7 @@ var demo = new Vue({
   el: '#demo',
   data: {
     searchQuery: '',
-    gridColumns: ['id', 'name', 'mac_address'],
+    gridColumns: ['id', 'name', 'actions'],
     gridData: [
     ]
   },
