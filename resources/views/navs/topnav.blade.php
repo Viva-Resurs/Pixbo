@@ -16,9 +16,20 @@
             </ul>
 
             @if($signedIn)
-                <p class="navbar-text navbar-right">
-                    Hello, {{ $user->name }}<a href="/auth/logout"> Logout</a>
-                </p>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><p class="navbar-text">
+                        Hello, {{ $user->name }}
+                    </p></li>
+                    <li>
+                        <a href="/auth/logout">{{ trans('auth.logout') }}</a>
+                    </li>
+                </ul>
+            @else
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/auth/login">{{ trans('auth.login') }}</a>
+                    </li>
+                </ul>
             @endif
         </div>
     </div>
