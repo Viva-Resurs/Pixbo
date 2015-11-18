@@ -13,11 +13,11 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
                 @include(config('laravel-menu.views.bootstrap-items'), array('items' => $topNav->roots()))
-                <li><a href="/auth/logout">Logout</a></li>
             </ul>
+
             @if($signedIn)
                 <p class="navbar-text navbar-right">
-                    Hello, {{ $user->name }}
+                    Hello, {{ $user->name }}<a href="/auth/logout"> Logout</a>
                 </p>
             @endif
         </div>

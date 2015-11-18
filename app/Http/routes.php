@@ -13,7 +13,6 @@
 
 Route::resource('play', 'PlayerController');
 Route::get('/', 'PagesController@home');
-Route::get('/home', 'PagesController@home');
 Route::get('admin/dashboard', 'PagesController@dashboard');
 Route::get('admin/calendars', 'PagesController@calendars');
 Route::post('admin/screengroups/{screengroups}/addphoto', 'Admin\ScreenGroupsController@addScreenFromPhoto');
@@ -43,20 +42,11 @@ Route::controllers([
  */
 Menu::make('topNav', function ($menu) {
 
-    $menu->add('Home');
     $menu->add('Dashboard', 'admin/dashboard');
-    $menu->add('Settings', 'settings');
-});
-
-/**
- * Side menu
- */
-Menu::make('adminNav', function ($menu) {
-
-    $menu->add('Overview', 'admin/dashboard');
     $menu->add('Clients', 'admin/clients');
     $menu->add('Screen Groups', 'admin/screengroups');
     $menu->add('Screens', 'admin/screens');
     $menu->add('Calendar', 'admin/calendars');
     $menu->add('Users', 'admin/users');
+    $menu->add('Settings', 'settings');
 });
