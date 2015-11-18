@@ -16,12 +16,6 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('mac_address', 'MAC Address') !!}
-    {!! Form::text('mac_address', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'HH:HH:HH:HH:HH:HH']) !!}
-    <small class="text-danger">{{ $errors->first('mac_address') }}</small>
-</div>
-
-<div class="form-group">
     {!! Form::label('screengroup_id', 'Screen Group') !!}
     {!! Form::select('screengroup_id', $screenGroups, $client->screengroup_id, ['class' => 'form-control', 'required' => 'required']) !!}
     <small class="text-danger">{{ $errors->first('screengroup_id') }}</small>

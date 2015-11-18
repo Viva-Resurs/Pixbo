@@ -13,8 +13,7 @@ class Clients extends Migration {
 		Schema::create('clients', function (Blueprint $table) {
 			$table->increments('id');
 			$table->string('name');
-			$table->string('ip_address')->nullable();
-			$table->string('mac_address')->nullable();
+			$table->string('ip_address')->unique();;
 
 			$table->integer('user_id')->unsigned();
 			$table->foreign('user_id')

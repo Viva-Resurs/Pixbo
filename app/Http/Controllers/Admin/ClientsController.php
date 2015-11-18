@@ -24,7 +24,7 @@ class ClientsController extends Controller
         if (Request::wantsJson()) {
             return $clients;
         } else {
-            $data = Client::paginate(10);
+            $data = Client::paginate(50);
             return view('clients.index')->with('data', $data);
         }
     }
@@ -50,18 +50,10 @@ class ClientsController extends Controller
      */
     public function store(ClientRequest $request)
     {
-        DB::transaction(function () use ($request) {
-            $client = new Client($request->all());
-            $user = new User;
-            $user->fill([
-                'name' => $client->name,
-                'email' => $client->name . '@viva.se',
-                'password' => Hash::make($client->name),
-            ])->save();
-            $user->client()->save($client);
-        });
+        if ($this->createClientUser($request)) {
+            flash()->success('Client created successfully.');
+        }
 
-        flash()->success('Client created successfully.');
         if (Request::wantsJson()) {
             return $client;
         } else {
@@ -126,12 +118,31 @@ class ClientsController extends Controller
     public function destroy(Client $client)
     {
         $deleted = $client->delete();
-        flash()->success('Client removed successfully.');
+
+        if ($deleted) {
+            flash()->success('Client removed successfully.');
+        }
 
         if (Request::wantsJson()) {
             return (string) $deleted;
         } else {
             return redirect('clients');
         }
+    }
+
+    private function createClientUser(ClientRequest $request)
+    {
+        $results = DB::transaction(function () use ($request) {
+            $client = new Client($request->all());
+            $user = new User;
+            $user->fill([
+                'name' => $client->name,
+                'email' => $client->name . '@viva.se',
+                'password' => Hash::make($client->name),
+            ])->save();
+            $user->client()->save($client);
+        });
+
+        return $results;
     }
 }

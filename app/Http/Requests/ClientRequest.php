@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-use Request as Requests;
 
 class ClientRequest extends Request
 {
@@ -22,7 +21,7 @@ class ClientRequest extends Request
      *
      * @return array
      */
-    public function rules(Requests $request)
+    public function rules()
     {
         switch ($this->method()) {
         case 'GET':
@@ -31,11 +30,8 @@ class ClientRequest extends Request
             {
                 return [
                     'name' => 'required|unique:clients',
-                    'ip_address' => 'required|ip',
-                    'mac_address' => array('required', 'unique:clients', 'regex:/^(([0-9a-fA-F]{2}-){5}|([0-9a-fA-F]{2}:){5})[0-9a-fA-F]{2}$/'),
-                    //'user_id' => 'required',
+                    'ip_address' => 'required|ip|unique:clients',
                     'screengroup_id' => 'required',
-                    //'is_active' => 'required',
                 ];
             }
         case 'PUT':
@@ -43,7 +39,7 @@ class ClientRequest extends Request
             {
                 return [
                     'name' => 'required|unique:clients,name' . Request::get('name'),
-                    'mac_address' => array('required', 'unique:clients,mac_address' . Request::get('mac_address'), 'regex:/^(([0-9a-fA-F]{2}-){5}|([0-9a-fA-F]{2}:){5})[0-9a-fA-F]{2}$/'),
+                    'ip_address' => 'required|ip|unique:clients,ip_address' . Request::get('ip_address'),
                 ];
             }
         default:break;

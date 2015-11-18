@@ -19,7 +19,6 @@ class Client extends Model
     protected $fillable = [
         'name',
         'ip_address',
-        'mac_address',
         'is_active',
         'user_id',
         'screengroup_id',
