@@ -21,19 +21,9 @@ class Screen extends Model
         'name',
         'scheduled',
         'photo_id',
-        'user_id',
         'created_at',
         'updated_at',
     ];
-    /**
-     * User association
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 
 /**
  * [screengroups description]

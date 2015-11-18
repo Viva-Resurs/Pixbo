@@ -1,5 +1,8 @@
 <?php
 
+use App\ScreenGroup;
+use App\User;
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -11,7 +14,7 @@
 |
  */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(User::class, function (Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,
@@ -20,13 +23,9 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\ScreenGroup::class, function (Faker\Generator $faker) {
+$factory->define(ScreenGroup::class, function (Generator $faker) {
     return [
         'name' => $faker->name,
-        'desc' => $faker->text,
-        // 'event_id',
-        //'user_id',
-        'rss_feed' => $faker->domainName,
-
+        'desc' => $faker->sentence,
     ];
 });

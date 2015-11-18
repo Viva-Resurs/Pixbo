@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ScreenGroupRequest;
 use App\Photo;
 use App\ScreenGroup;
-use Auth;
+use DB;
 use Illuminate\Http\Request as Requests;
 use Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -48,16 +48,17 @@ class ScreenGroupsController extends Controller
      */
     public function store(ScreenGroupRequest $request)
     {
-        flash()->success('ScreenGroup created successfully.');
-        $screenGroup = new ScreenGroup($request->all());
-        Auth::user()->screengroups()->save($screenGroup);
-        $event      = $screenGroup->createAndReturnEvent();
-        $event_meta = $event->createAndReturnMeta();
+        if ($screenGroup = new ScreenGroup($request->all())) {
+            $screenGroup->save();
+            $event = $screenGroup->createAndReturnEvent();
+            $event_meta = $event->createAndReturnMeta();
+            flash()->success('ScreenGroup created successfully.');
 
-        if (Request::wantsJson()) {
-            return $screenGroup;
-        } else {
-            return redirect()->action('Admin\ScreenGroupsController@edit', compact(['screenGroup', 'event', 'event_meta']));
+            if (Request::wantsJson()) {
+                return $screenGroup;
+            } else {
+                return redirect()->action('Admin\ScreenGroupsController@edit', compact(['screenGroup', 'event', 'event_meta']));
+            }
         }
     }
 
@@ -84,7 +85,7 @@ class ScreenGroupsController extends Controller
      */
     public function edit(ScreenGroup $screenGroup)
     {
-        $event      = $screenGroup->getEvent();
+        $event = $screenGroup->getEvent();
         $event_meta = $event->getEventMeta();
 
         return view('screengroups.edit', compact(['screenGroup', 'event', 'event_meta']));
@@ -97,12 +98,13 @@ class ScreenGroupsController extends Controller
      * @param  ScreenGroup $screenGroup
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
-    public function update(ScreenGroupRequest $request, ScreenGroup $screenGroup)
+    public function update(ScreenGroupRequest $request, ScreenGroup $screengroup)
     {
-        if ($screenGroup->update($request->all())) {
+        if ($screengroup->update($request->all())) {
             flash()->success('ScreenGroup updated successfully.');
+            //$screengroup->generateShadowEvents();
             if (Request::wantsJson()) {
-                return $screenGroup;
+                return $screengroup;
             } else {
                 return redirect()->back();
             }
@@ -159,5 +161,15 @@ class ScreenGroupsController extends Controller
     {
         return Photo::named($file->getClientOriginalName())
             ->move($file);
+    }
+
+    private function createScreenGroupMetaData(ScreenGroupRequest $request)
+    {
+        $result = DB::transaction(function () use ($request) {
+
+            //$screenGroup->generateShadowEvents();
+        });
+
+        return $result;
     }
 }

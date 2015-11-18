@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Event;
+use DB;
 
 trait HasEvents
 {
@@ -16,6 +17,11 @@ trait HasEvents
         return $this->morphMany('\App\Event', 'eventable');
     }
 
+/**
+ * [getEvent description]
+ *
+ * @return App\Event
+ */
     public function getEvent()
     {
         return Event::where([
@@ -24,18 +30,28 @@ trait HasEvents
         ])->get()->first();
     }
 
+/**
+ * [createAndReturnEvent description]
+ *
+ * @return App\Event [description]
+ */
     public function createAndReturnEvent()
     {
         $event = new Event;
-        $event->fill([
-            'eventable_id' => $this->getAttribute('id'),
-            'eventable_type' => get_class($this),
-            'date' => date('Y-m-d'),
-            'start_time' => '07:00',
-            'end_time' => '18:00',
-            'recurring' => false,
-        ]);
-        $this->event()->save($event);
+
+        DB::transaction(function () use ($event) {
+            $event->fill([
+
+                'eventable_id' => $this->getAttribute('id'),
+                'eventable_type' => get_class($this),
+                'date' => date('Y-m-d'),
+                'start_time' => '07:00',
+                'end_time' => '18:00',
+                'recurring' => false,
+            ]);
+            $this->event()->save($event);
+        });
+
         return $event;
     }
 }
