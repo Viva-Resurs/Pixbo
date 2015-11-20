@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\EventMeta;
+use App\ShadowEvent;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,6 +15,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        EventMeta::saved(function ($event) {
+            ShadowEvent::__callStatic('generateShadowEvents', [$event]);
+        });
     }
 
     /**

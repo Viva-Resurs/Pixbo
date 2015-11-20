@@ -30,4 +30,9 @@ class EventMeta extends Model
     {
         return $this->belongsTo(Event::class);
     }
+
+    public function scopeOfEvent($query, $id)
+    {
+        return $query->where('event_id', $id);
+    }
 }

@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Event;
+use App\EventMeta;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,6 +26,131 @@ class ShadowEvent extends Model implements \MaddHatter\LaravelFullcalendar\Event
     public function event()
     {
         return $this->belongsTo(Event::class);
+    }
+
+/**
+ * Generate Shadow events from the given screengroup
+ *
+ * @return [type] [description]
+ */
+    public static function generateShadowEvents(EventMeta $meta)
+    {
+        //$meta = EventMeta::ofEvent($sg->getAttribute('id'))->first();
+
+        switch ($meta->getAttribute('recur_type')) {
+        case 'daily':
+            ShadowEvent::generateDaily($meta);
+            break;
+        case 'weekly':
+            ShadowEvent::generateWeekly($meta);
+            break;
+        case 'monthly':
+            $sg->generateMonthly();
+            break;
+        case 'yearly':
+            $sg->generateYearly();
+            break;
+        }
+    }
+
+/**
+ * Generate shadow events with daily recursion with the given meta event
+ *
+ * @param  MetaEvent $meta
+ * @return
+ */
+    public static function generateDaily($meta)
+    {
+        $id = $meta->getAttribute('event_id');
+
+        $event = Event::where('id', $id)->first();
+
+        $start_date = $event->getAttribute('date');
+        $frequency = !is_null($meta->frequency) ? $meta->frequency : 1;
+        $timeArray = extractTime($event->getAttribute('start_time'));
+
+        // TODO: set duration in cfg file.
+        $end = Carbon::parse($start_date)->addDays(90);
+
+        $start = ShadowEvent::where(function ($q) use ($id, $frequency, $start_date) {
+            $q->where('event_id', $id);
+            $q->where('start', '>=', $start_date);
+            $q->where('start', '>=', Carbon::now()->subDays($frequency));
+            $q->where('start', '<=', Carbon::now()->addDays($frequency));
+        })->first();
+
+        if (is_null($start)) {
+            $start = Carbon::parse($start_date);
+        } else {
+            $start = Carbon::parse($start['start']);
+        }
+
+        $start->hour = $timeArray[0];
+        $start->minute = $timeArray[1];
+
+        ShadowEvent::clearEvent($id);
+
+        for ($initial = Carbon::parse($start);
+            $initial->lt($end);
+            $initial = $initial->addDays($frequency)) {
+            $initial->hour = $timeArray[0];
+            $initial->minute = $timeArray[1];
+            ShadowEvent::generateFromEvent(Carbon::parse($initial), $event);
+        }
+    }
+
+    /**
+     * Generates shadow events for weekly recurring events.
+     *
+     */
+    protected function generateWeekly()
+    {
+        $id = $this->getAttribute('id');
+        $meta = $this->getEventMeta();
+        $start_date = $this->getAttribute('date');
+        $weekDays = unserialize($meta->recur_day);
+
+        $frequency = !is_null($meta->frequency) ? $meta->frequency : 1;
+        $timeArray = extractTime($this->getAttribute('start_time'));
+
+        $started = Carbon::parse($start_date);
+        $end = Carbon::parse($start_date)->addWeeks($this->duration['weekly']);
+
+        $start = ShadowEvent::where(function ($q) use ($id, $frequency, $started) {
+            $q->where('event_id', $id);
+            $q->where('start', '>=', $started);
+            $q->where('start', '>=', $started->subWeeks($frequency));
+            $q->where('start', '<=', $started->addWeeks($frequency));
+        })->first();
+
+        if (is_null($start)) {
+            $start = Carbon::parse($start_date);
+        } else {
+            $start = Carbon::parse($start['start']);
+        }
+
+        $start->hour = $timeArray[0];
+        $start->minute = $timeArray[1];
+
+        ShadowEvent::clearEvent($id);
+
+        for ($initial = Carbon::parse($start);
+            $initial->lt($end);
+            $initial = $initial->addWeeks($frequency)) {
+            for ($i = 1; $i < 8; $i++) {
+                $day = Carbon::parse($initial)
+                    ->subDays($initial->dayOfWeek)
+                    ->addDays($i);
+
+                if (in_array($day->dayOfWeek, $weekDays)
+                    && $day->lt($end)
+                    && $day->gt($start)) {
+                    $day->hour = $timeArray[0];
+                    $day->minute = $timeArray[1];
+                    ShadowEvent::generateFromEvent(Carbon::parse($day), $this);
+                }
+            }
+        }
     }
 
 /**
