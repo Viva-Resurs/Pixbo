@@ -4,53 +4,34 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Auth;
-use Illuminate\Http\Request;
+use Request as R;
 
-class PlayerController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        $client = Auth::user()->client->with('screengroup.screens.photo')->get();
+class PlayerController extends Controller {
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function index() {
+		//dd(R::get('ip'));
 
-        if ($client->count() > 0) {
-            $client = $client->toArray();
-            $screens = $client[0]['screengroup']['screens'];
-            $list;
+		$client = Auth::user()->client->with(['screengroup.screens.photo', 'screengroup.event'])->get();
 
-            foreach ($screens as $screen) {
-                $list[] = $screen['photo'];
-            }
-            //dd($list);
-            return view('player.index')->with('list', $list);
-        }
-        return abort(404, 'You lack permission to view this content.');
-    }
+		if ($client->count() > 0) {
+			$client  = $client->toArray();
+			$screens = $client[0]['screengroup']['screens'];
+			$list;
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
+			foreach ($screens as $screen) {
+				$list[] = $screen['photo'];
+			}
+			if (!empty($list)) {
+				return view('player.index')->with('list', $list);
+			} else {
+				return abort(500, 'No screen available.');
+			}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+		}
+		return abort(404, 'You lack permission to view this content.');
+	}
 }

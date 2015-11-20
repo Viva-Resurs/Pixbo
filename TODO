@@ -3,7 +3,7 @@ Features:
 
     * Client
         * Creation
-            * Create user and associate it to the new client.
+            * Create user and associate it to the new client. (Done)
         * Deletion
             * Remove the user and flag the ScreenGroup as having no client to play it.
 
