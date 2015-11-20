@@ -19,7 +19,7 @@
             <div class="panel panel-info"> <!-- Info -->
                 <div class="panel-heading">
                     <div class="panel-title">
-                        {{ 'Info' }}
+                        {{ trans('messages.info') }}
                     </div>
                 </div>
                 <div class="panel-body">
@@ -33,7 +33,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <div class="panel-title">
-                        {{ 'Event' }}
+                        {{ trans('messages.event') }}
                     </div>
                 </div>
                 <div class="panel-body">
@@ -42,11 +42,20 @@
 
                                 {!! Form::model($event, ['method' => 'PATCH', 'route' => ['admin.events.update', $event->id]]) !!}
                                     @include ('events.__form', ['submitButtonText' => trans('messages.save')])
-                                    <a class="btn btn-primary" data-toggle="modal" href='#event_meta'>Trigger modal</a>
+                                    <a class="btn btn-primary" data-toggle="modal" href='#event_meta'>{{ trans('messages.recurring') }}</a>
                                 {!! Form::close() !!}
 
                         </tbody>
                     </table>
+                </div>
+            </div>
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ trans('messages.ticker') }}</h3>
+                </div>
+                <div class="panel-body">
+                    Panel content
                 </div>
             </div>
 
