@@ -34,7 +34,8 @@ class ShadowEvent extends Model implements \MaddHatter\LaravelFullcalendar\Event
 	public static function generateFromEvent($start, Event $event) {
 		$shadow     = new static;
 		$base_model = get_class($event->eventable()->getRelated());
-		$model      = $base_model::find(['id' => $event->id])->first();
+		$model      = $base_model::find(['id' => $event->eventable_id])->first();
+		//dd($model);
 
 		$shadow->title = $model['name'];
 		$shadow->start = $start;
