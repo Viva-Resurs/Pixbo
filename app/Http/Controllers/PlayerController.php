@@ -9,58 +9,80 @@ use Auth;
 use Carbon\Carbon;
 use Request as R;
 
-class PlayerController extends Controller {
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index() {
-		//dd(R::get('ip'));
+class PlayerController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        //dd(R::get('ip'));
 
-		$client               = Auth::user()->client->with(['screengroup.event', 'screengroup.screens.event'])->first();
-		$client_id            = $client->pluck('id');
-		$screengroup          = $client->screengroup;
-		$screengroup_event_id = $screengroup->event->pluck('id')[0];
-		$event_ids[]          = $client->screengroup->event->pluck('id')[0];
+        $client = Auth::user()->client->with(['screengroup.event', 'screengroup.screens.event'])->first();
+        $client_id = $client->pluck('id');
+        $screengroup = $client->screengroup;
+        $screengroup_event_id = $screengroup->event->pluck('id')[0];
+        $event_ids[] = $client->screengroup->event->pluck('id')[0];
 
-		// Get all events associated with the screengroup
-		foreach ($client->screengroup->screens as $screen) {
-			$event_ids[] = implode($screen->event->pluck('id')->toArray());
-		}
-		//dd($screen_ids);
+        // Get all events associated with the screengroup
+        foreach ($client->screengroup->screens as $screen) {
+            $event_ids[] = implode($screen->event->pluck('id')->toArray());
+        }
 
-		// Get all shadow events associated with events given and are happening right now
-		$shadows = ShadowEvent::whereIn('event_id', $event_ids)
-			->with('event.eventable')
-			->where('start', '<=', Carbon::now())
-			->where('end', '>=', Carbon::now())
-			->get();
+        // Get all shadow events associated with events given and are happening right now
+        $shadows = ShadowEvent::whereIn('event_id', $event_ids)
+            ->with('event.eventable')
+            ->where('start', '<=', Carbon::now())
+            ->where('end', '>=', Carbon::now())
+            ->get();
 
-		dd($shadows);
+        //dd($shadows);
 
-		dd($shadows->events);
+        // Collect the type and ID of the scheduled events.
+        $shadow_event_id = collect([]);
+        foreach ($shadows as $shadow) {
+            $shadow_event_id->push([
+                'type' => $shadow->event->getAttribute('eventable_type'),
+                'id' => $shadow->event->getAttribute('id'),
+            ]);
+        }
 
-		$events = Event::with('eventable')->whereIn('id', $shadow_ids)->get();
+        // Group the collection for easier handling.
+        $scheduled_screens = $shadow_event_id->groupBy('type')->get('App\Screen');
+        $scheduled_screengroups = $shadow_event_id->groupBy('type')->get('App\ScreenGroup');
 
-		dd($events);
-		//$events = Event::
+        //dd($scheduled_screens);
 
-		if ($client->count() > 0) {
-			$client  = $client->toArray();
-			$screens = $client[0]['screengroup']['screens'];
-			$list;
+        // Create the list of photos to show and send the list to the view.
+        foreach ($scheduled_screengroups as $scheduled_screengroup) {
+            if ($scheduled_screengroup['id'] == $screengroup->getAttribute('id')) {
+                $screens = $screengroup['screens'];
+                $list;
 
-			foreach ($screens as $screen) {
-				$list[] = $screen['photo'];
-			}
-			if (!empty($list)) {
-				return view('player.index')->with('list', $list);
-			} else {
-				return abort(500, 'No screen available.');
-			}
+                //dd($scheduled_screens);
 
-		}
-		return abort(404, 'You lack permission to view this content.');
-	}
+                foreach ($screens as $screen) {
+                    if ($screen['scheduled'] == 0) {
+                        $list[] = $screen['photo'];
+                    } else {
+                        foreach ($scheduled_screens as $scheduled_screen) {
+                            if ($scheduled_screen['id'] == $screen['id']) {
+                                $list[] = $screen['photo'];
+                            }
+                        }
+                    }
+                }
+                //dd($list);
+
+                if (!empty($list)) {
+                    return view('player.index')->with('list', $list);
+                } else {
+                    return abort(500, 'No screen available.');
+                }
+            }
+        }
+        return abort(404, 'You lack permission to view this content.');
+    }
 }
