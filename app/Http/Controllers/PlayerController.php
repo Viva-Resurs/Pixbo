@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Event;
 use App\Http\Controllers\Controller;
 use App\ShadowEvent;
 use Auth;
@@ -17,24 +18,33 @@ class PlayerController extends Controller {
 	public function index() {
 		//dd(R::get('ip'));
 
-		$client      = Auth::user()->client->with(['screengroup.event', 'screengroup.screens.event'])->first();
-		$client_id   = $client->pluck('id');
-		$event_ids[] = $client->screengroup->event->pluck('id')[0];
+		$client               = Auth::user()->client->with(['screengroup.event', 'screengroup.screens.event'])->first();
+		$client_id            = $client->pluck('id');
+		$screengroup          = $client->screengroup;
+		$screengroup_event_id = $screengroup->event->pluck('id')[0];
+		$event_ids[]          = $client->screengroup->event->pluck('id')[0];
 
+		// Get all events associated with the screengroup
 		foreach ($client->screengroup->screens as $screen) {
 			$event_ids[] = implode($screen->event->pluck('id')->toArray());
 		}
+		//dd($screen_ids);
 
-		//dd($event_ids);
-
-		$shadows = ShadowEvent::where(function ($q) use ($event_ids) {
-			// Get all Shadow Events matching current time.
-			$q->where('start', '<=', Carbon::now());
-			$q->where('end', '>=', Carbon::now());
-			$q->whereIn('event_id', $event_ids);
-		})->get();
+		// Get all shadow events associated with events given and are happening right now
+		$shadows = ShadowEvent::whereIn('event_id', $event_ids)
+			->with('event.eventable')
+			->where('start', '<=', Carbon::now())
+			->where('end', '>=', Carbon::now())
+			->get();
 
 		dd($shadows);
+
+		dd($shadows->events);
+
+		$events = Event::with('eventable')->whereIn('id', $shadow_ids)->get();
+
+		dd($events);
+		//$events = Event::
 
 		if ($client->count() > 0) {
 			$client  = $client->toArray();
