@@ -3,12 +3,12 @@
 return [
 
     /*
-            |--------------------------------------------------------------------------
-            | Application Language Lines
-            |--------------------------------------------------------------------------
-            |
-            | The following language lines are used for general application messages.
-            |
+                    |--------------------------------------------------------------------------
+                    | Application Language Lines
+                    |--------------------------------------------------------------------------
+                    |
+                    | The following language lines are used for general application messages.
+                    |
     */
 
     /**
@@ -23,6 +23,7 @@ return [
     'info' => 'Info',
     'image' => 'Image',
     'rss_feed' => 'RSS Feed',
+    'schedule' => 'Schedule',
 
     /**
      * Commonly used words.

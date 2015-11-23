@@ -17,6 +17,17 @@
     <small class="text-danger">{{ $errors->first('end_time') }}</small>
 </div>
 
+{!! Form::hidden('recurring', false) !!}
+
+<div class="form-group">
+    <div class="checkbox @if($errors->first('recurring')) has-error @endif">
+        <label for="recurring">
+            {!! Form::checkbox('recurring', 1, true,['id' => 'recurring']) !!} {{ trans('recurring') }}
+        </label>
+    </div>
+    <small class="text-danger">{{ $errors->first('recurring') }}</small>
+</div>
+
 <div class="btn-group pull-right">
     {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
 </div>

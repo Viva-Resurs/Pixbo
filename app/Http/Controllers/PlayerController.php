@@ -53,7 +53,9 @@ class PlayerController extends Controller
         $scheduled_screens = $shadow_event_id->groupBy('type')->get('App\Screen');
         $scheduled_screengroups = $shadow_event_id->groupBy('type')->get('App\ScreenGroup');
 
-        //dd($scheduled_screens);
+        if (is_null($scheduled_screengroups)) {
+            return abort(500, 'No screen available.');
+        }
 
         // Create the list of photos to show and send the list to the view.
         foreach ($scheduled_screengroups as $scheduled_screengroup) {

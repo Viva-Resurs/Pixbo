@@ -20,6 +20,12 @@ Features:
     * Screen Group
         * Add (x) button to remove screen association to the current screen group.
 
+    * Screen
+        * Set and view scheduled variable to control screen viewing.
+
+    * Event
+        * Let user set recurring and use it to generate shadow events.
+
 
 Bugs:
 
