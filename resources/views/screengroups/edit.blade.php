@@ -55,10 +55,23 @@
                     <h3 class="panel-title">{{ trans('messages.ticker') }}</h3>
                 </div>
                 <div class="panel-body">
-                    Panel content
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            {!! Form::text('ticker', null, [
+                                'class' => '',
+                                'style' => 'border: none; margin: 0px;padding: 0px',
+                                'required' => 'required',
+                                'placeholder' => trans('messages.add_ticker')])
+                            !!}
+                        </li>
+                        @foreach ($tickers as $ticker)
+                            <li class="list-group-item">
+                                {{ $ticker->text }}
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
-
         </div>
 
         <div class="col-md-8 photo__gallery">
@@ -100,23 +113,13 @@
 
 @section('footer')
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.10/vue.min.js"></script>
+    <script type="text/javascript" src="/js/ticker.js"></script>
     <script>
     Dropzone.options.addImageForm = {
         paramName: 'photo',
         maxFileSize: 10,
         acceptedFiles: '.jpg,.jpeg,.png,.bmp'
     };
-    </script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#recurring').click(function () {
-                if ($(this).is(':checked')) {
-                    $('.modal').modal('show');
-                } else {
-
-                }
-            });
-        });
     </script>
 @stop

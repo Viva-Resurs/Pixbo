@@ -17,14 +17,10 @@
     <small class="text-danger">{{ $errors->first('end_time') }}</small>
 </div>
 
-{!! Form::hidden('recurring', false) !!}
-
 <div class="form-group">
-    <div class="checkbox @if($errors->first('recurring')) has-error @endif">
-        <label for="recurring">
-            {!! Form::checkbox('recurring', 1, true,['id' => 'recurring']) !!} {{ trans('recurring') }}
-        </label>
-    </div>
+    {!! Form::hidden('recurring', '0') !!}
+    {!! Form::label('recurring', trans('messages.recurring')) !!}
+    {!! Form::checkbox('recurring', 1, null,['value' => '1', 'id' => 'recurring']) !!}
     <small class="text-danger">{{ $errors->first('recurring') }}</small>
 </div>
 
