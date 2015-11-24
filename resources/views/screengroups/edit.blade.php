@@ -52,25 +52,27 @@
 
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h3 class="panel-title">{{ trans('messages.ticker') }}</h3>
+                    <h3 class="panel-title">{{ trans('messages.tickers') }}</h3>
                 </div>
                 <div class="panel-body">
+                    <tickers list="{{ $tickers }}"></tickers>
+                </div>
+                <template id="tickers-template">
                     <ul class="list-group">
-                        <li class="list-group-item">
+                        <li class="list-group-item" style="padding:0px;height: 30px; line-height: 30px;">
                             {!! Form::text('ticker', null, [
                                 'class' => '',
-                                'style' => 'border: none; margin: 0px;padding: 0px',
+                                'style' => 'border: none; background:none; outline: none;width: 100%; height:30px; padding-left:1em;',
                                 'required' => 'required',
                                 'placeholder' => trans('messages.add_ticker')])
                             !!}
                         </li>
-                        @foreach ($tickers as $ticker)
-                            <li class="list-group-item">
-                                {{ $ticker->text }}
-                            </li>
-                        @endforeach
+                        <li class="list-group-item" v-for="ticker in list">
+                            @{{ ticker.text }}
+                            <strong @click="delete(ticker)">X</strong>
+                        </li>
                     </ul>
-                </div>
+                </template>
             </div>
         </div>
 
@@ -113,7 +115,7 @@
 
 @section('footer')
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.10/vue.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.10/vue.js"></script>
     <script type="text/javascript" src="/js/ticker.js"></script>
     <script>
     Dropzone.options.addImageForm = {

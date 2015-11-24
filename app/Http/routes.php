@@ -14,6 +14,7 @@
 use App\EventMeta;
 
 Route::resource('play', 'PlayerController');
+Route::resource('api/tickers', 'Admin\TickersController');
 Route::get('/', 'PagesController@home');
 Route::get('admin/dashboard', 'PagesController@dashboard');
 Route::get('admin/calendars', 'PagesController@calendars');

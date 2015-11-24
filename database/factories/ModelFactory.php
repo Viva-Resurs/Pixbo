@@ -1,6 +1,7 @@
 <?php
 
 use App\ScreenGroup;
+use App\Ticker;
 use App\User;
 
 /*
@@ -15,17 +16,24 @@ use App\User;
  */
 
 $factory->define(User::class, function (Generator $faker) {
-    return [
-        'name' => $faker->name,
-        'email' => $faker->email,
-        'password' => bcrypt(str_random(10)),
-        'remember_token' => str_random(10),
-    ];
+	return [
+		'name'           => $faker->name,
+		'email'          => $faker->email,
+		'password'       => bcrypt(str_random(10)),
+		'remember_token' => str_random(10),
+	];
 });
 
 $factory->define(ScreenGroup::class, function (Generator $faker) {
-    return [
-        'name' => $faker->name,
-        'desc' => $faker->sentence,
-    ];
+	return [
+		'name' => $faker->name,
+		'desc' => $faker->sentence,
+	];
+});
+
+$factory->define(App\Ticker::class, function (Faker\Generator $faker) {
+	return [
+		'text'            => $faker->paragraph,
+		'screen_group_id' => 1,
+	];
 });
