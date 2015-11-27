@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                        {!! Form::model($screenGroup, ['method' => 'PATCH', 'route' => ['admin.screengroups.update', $screenGroup->id]]) !!}
+                        {!! Form::model($screengroup, ['method' => 'PATCH', 'route' => ['admin.screengroups.update', $screengroup->id]]) !!}
                             @include ('screengroups.__form', ['submitButtonText' => trans('messages.save')])
                         {!! Form::close() !!}
                     </table>
@@ -180,7 +180,7 @@ li label {
                     {{ 'Screens' }}
                 </div>
                 <div class="panel-body">
-                    @foreach ($screenGroup->screens->chunk(3) as $set)
+                    @foreach ($screengroup->screens->chunk(3) as $set)
                         <div class="row">
                             @foreach ($set as $element)
                                 <div class="col-md-4 gallery__image">
@@ -195,7 +195,7 @@ li label {
             </div>
             <hr>
             <div> <!-- File upload -->
-            <form action="/admin/screengroups/{{ $screenGroup->id }}/addphoto"
+            <form action="/admin/screengroups/{{ $screengroup->id }}/addphoto"
                 method="POST"
                 class="dropzone"
                 id="addImageForm"
@@ -214,6 +214,7 @@ li label {
 @section('footer')
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.10/vue.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.1.17/vue-resource.js"></script>
     <script type="text/javascript" src="/js/ticker.js"></script>
     <script>
     Dropzone.options.addImageForm = {

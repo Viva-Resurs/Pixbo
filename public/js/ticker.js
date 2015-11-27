@@ -10,7 +10,7 @@ Vue.component('tickers', {
     },
 
     created: function() {
-        $.getJSON('/api/tickers', function(tickers) {
+        this.$http.get('tickers', function(tickers) {
             this.list = tickers;
         }.bind(this));
     },
@@ -49,6 +49,8 @@ Vue.component('tickers', {
             ticker.text = ticker.text.trim();
             if(!ticker.text) {
                 this.deleteTicker(ticker);
+            } else {
+                this.$http.patch('tickers/' + ticker.id, ticker);
             }
         },
 
