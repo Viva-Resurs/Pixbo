@@ -46,8 +46,11 @@ class TickersController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(ScreenGroup $screengroup, Request $request, Ticker $ticker)
+    public function update(ScreenGroup $screengroup, Request $request)
     {
+        $ticker_request = $request->all();
+        $ticker = Ticker::where(['id' => $ticker_request['id']])->first();
+
         if ($ticker->update($request->all())) {
             if (RF::wantsJson()) {
                 return $screengroup;
@@ -61,8 +64,11 @@ class TickersController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy(ScreenGroup $screengroup, Ticker $ticker)
+    public function destroy(ScreenGroup $screengroup, Request $request)
     {
+        $ticker_request = $request->all();
+        $ticker = Ticker::where(['id' => $ticker_request['id']])->first();
+
         $deleted = $ticker->delete();
         if (RF::wantsJson()) {
             return (string) $deleted;

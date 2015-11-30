@@ -25,6 +25,7 @@ Vue.component('tickers', {
 
         deleteTicker: function(ticker) {
             this.list.$remove(ticker);
+            this.$http.delete('tickers/' + ticker.id, ticker);
         },
 
         addTicker: function() {

@@ -29,21 +29,7 @@
     </div>
 
     <div class="col-md-6">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    {{ 'Event' }}
-                </div>
-            </div>
-            <div class="panel-body">
-                <table class="table">
-                    {!! Form::model($event, ['method' => 'PATCH', 'route' => ['admin.events.update', $event->id]]) !!}
-                        @include ('events.__form', ['submitButtonText' => trans('messages.save')])
-                        <a class="btn btn-primary" data-toggle="modal" href='#event_meta'>Trigger modal</a>
-                    {!! Form::close() !!}
-                </table>
-            </div>
-        </div>
+        @include('shared.edit__event')
     </div>
 
     <!-- Modal -->

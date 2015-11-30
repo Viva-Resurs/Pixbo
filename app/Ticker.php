@@ -14,6 +14,7 @@ class Ticker extends Model
  */
     protected $fillable = [
         'text',
+        'id',
     ];
 
     public function screengroup()
