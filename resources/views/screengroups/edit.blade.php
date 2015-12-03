@@ -37,9 +37,6 @@
 @section('footer')
 
     <!-- Required for tickers -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.10/vue.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.1.17/vue-resource.js"></script>
-    <script type="text/javascript" src="/js/ticker.js"></script>
 
     <!-- Required for screen uploading -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.js"></script>

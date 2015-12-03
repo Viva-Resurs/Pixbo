@@ -12877,6 +12877,26 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = Vue;
 }).call(this,require('_process'))
 },{"_process":2}],13:[function(require,module,exports){
+var inserted = exports.cache = {}
+
+exports.insert = function (css) {
+  if (inserted[css]) return
+  inserted[css] = true
+
+  var elem = document.createElement('style')
+  elem.setAttribute('type', 'text/css')
+
+  if ('textContent' in elem) {
+    elem.textContent = css
+  } else {
+    elem.styleSheet.cssText = css
+  }
+
+  document.getElementsByTagName('head')[0].appendChild(elem)
+  return elem
+}
+
+},{}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12916,12 +12936,159 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, module.exports.template)
   }
 })()}
-},{"vue":12,"vue-hot-reload-api":3}],14:[function(require,module,exports){
+},{"vue":12,"vue-hot-reload-api":3}],15:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    props: ['screengroup_id'],
+
+    data: function data() {
+        return {
+            screens: []
+        };
+    },
+
+    ready: function ready() {
+        this.$http.get('screens', (function (screens) {
+            this.screens = screens;
+        }).bind(this));
+    },
+
+    methods: {
+        remove_screen: function remove_screen(screen) {
+            this.list.$remove(screen);
+            this.$http.post('screens/remove/' + screen.id, screen);
+        }
+    }
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <div class=\"screen_gallery\">\n        <ul v-for=\"screen in screens\">\n            <li class=\"screen_gallery__entity\">\n                <a href=\"/admin/screens/{{ $element->id }}/edit\">\n                    <img src=\"/{{ $element->photo->thumb_path }}\" alt=\"\">\n                </a>\n            </li>\n        </ul>\n    </div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "C:\\pixbo_laravel\\resources\\assets\\js\\components\\ScreenGallery.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, module.exports.template)
+  }
+})()}
+},{"vue":12,"vue-hot-reload-api":3}],16:[function(require,module,exports){
+var __vueify_style__ = require("vueify-insert-css").insert("\n    button {\n    margin: 0;\n    padding: 0;\n    border: 0;\n    background: none;\n    font-size: 100%;\n    vertical-align: baseline;\n    font-family: inherit;\n    font-weight: inherit;\n    color: inherit;\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    -webkit-font-smoothing: antialiased;\n    -moz-font-smoothing: antialiased;\n    font-smoothing: antialiased;\n}\n.destroy {\n    display: none;\n    position: absolute;\n    top: 0;\n    right: 10px;\n    bottom: 0;\n    width: 40px;\n    height: 40px;\n    margin: auto 0;\n    font-size: 30px;\n    color: #cc9a9a;\n    margin-bottom: 11px;\n    -webkit-transition: color 0.2s ease-out;\n    transition: color 0.2s ease-out;\n}\n\n.destroy:hover {\n    color: #af5b5e;\n}\n\n.destroy:after {\n    content: '×';\n}\n\nli:hover .destroy {\n    display: block;\n}\n.edit {\n    position: relative;\n    margin: 0;\n    width: 100%;\n    font-size: 24px;\n    font-family: inherit;\n    font-weight: inherit;\n    line-height: 1.4em;\n    border: 0;\n    outline: none;\n    color: inherit;\n    padding: 6px;\n    border: 1px solid #999;\n    box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);\n    box-sizing: border-box;\n    -webkit-font-smoothing: antialiased;\n    -moz-font-smoothing: antialiased;\n    font-smoothing: antialiased;\n}\nli .edit {\n    display: none;\n}\nli.editing {\n    border-bottom: none;\n    padding: 0;\n}\n\nli.editing .edit {\n    display: block;\n    width: 506px;\n    padding: 13px 17px 12px 17px;\n    margin: 0 0 0 43px;\n}\nli label {\n    white-space: pre;\n    word-break: break-word;\n    /*padding: 15px 60px 15px 15px; */\n    margin-right: 2em;\n    display: block;\n    line-height: 1.2;\n    -webkit-transition: color 0.4s;\n    transition: color 0.4s;\n}\n")
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    data: function data() {
+        return {
+            list: [],
+            newTicker: '',
+            editedTicker: null
+        };
+    },
+
+    created: function created() {
+        this.$http.get('tickers', (function (tickers) {
+            this.list = tickers;
+        }).bind(this));
+    },
+
+    computed: {
+        filtered: function filtered() {
+            return this.list;
+        }
+    },
+
+    methods: {
+
+        deleteTicker: function deleteTicker(ticker) {
+            this.list.$remove(ticker);
+            this.$http.delete('tickers/' + ticker.id, ticker);
+        },
+
+        addTicker: function addTicker() {
+            var value = this.newTicker && this.newTicker.trim();
+            if (!value) {
+                return;
+            }
+            this.list.push({ text: value });
+            this.newTicker = '';
+        },
+
+        editTicker: function editTicker(ticker) {
+            this.beforeEditCache = ticker.text;
+            this.editedTicker = ticker;
+        },
+
+        doneEdit: function doneEdit(ticker) {
+            if (!this.editedTicker) {
+                return;
+            }
+            this.editedTicker = null;
+            ticker.text = ticker.text.trim();
+            if (!ticker.text) {
+                this.deleteTicker(ticker);
+            } else {
+                this.$http.patch('tickers/' + ticker.id, ticker);
+            }
+        },
+
+        cancelEdit: function cancelEdit(ticker) {
+            this.editedTicker = null;
+            ticker.text = this.beforeEditCache;
+        }
+
+    },
+
+    directives: {
+        'ticker-focus': function tickerFocus(value) {
+            if (!value) {
+                return;
+            }
+            var el = this.el;
+            parent.nextTick(function () {
+                el.focus();
+            });
+        }
+    }
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <ul class=\"list-group\">\n        <li class=\"list-group-item\" style=\"padding:0px;height: 30px; line-height: 30px;\">\n            <input name=\"ticker\" class=\"\" placeholder=\"Ticker text\" v-model=\"newTicker\" @keyup.enter=\"addTicker\" style=\"border: none; background:none; outline: none;width: 100%; height:30px; padding-left:1em;\">\n        </li>\n        <li class=\"list-group-item\" v-for=\"ticker in filtered\" :class=\"{editing: ticker == editedTicker}\">\n            <div class=\"view\">\n                <label @dblclick=\"editTicker(ticker)\">@{{ticker.text}}</label>\n                <button class=\"destroy\" @click=\"deleteTicker(ticker)\"></button>\n            </div>\n            <input class=\"edit\" type=\"text\" v-model=\"ticker.text\" v-ticker-focus=\"ticker == editedTicker\" @blur=\"doneEdit(ticker)\" @keyup.enter=\"doneEdit(ticker)\" @keyup.esc=\"cancelEdit(ticker)\">\n\n        </li>\n    </ul>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "C:\\pixbo_laravel\\resources\\assets\\js\\components\\Ticker.vue"
+  module.hot.dispose(function () {
+    require("vueify-insert-css").cache["\n    button {\n    margin: 0;\n    padding: 0;\n    border: 0;\n    background: none;\n    font-size: 100%;\n    vertical-align: baseline;\n    font-family: inherit;\n    font-weight: inherit;\n    color: inherit;\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    -webkit-font-smoothing: antialiased;\n    -moz-font-smoothing: antialiased;\n    font-smoothing: antialiased;\n}\n.destroy {\n    display: none;\n    position: absolute;\n    top: 0;\n    right: 10px;\n    bottom: 0;\n    width: 40px;\n    height: 40px;\n    margin: auto 0;\n    font-size: 30px;\n    color: #cc9a9a;\n    margin-bottom: 11px;\n    -webkit-transition: color 0.2s ease-out;\n    transition: color 0.2s ease-out;\n}\n\n.destroy:hover {\n    color: #af5b5e;\n}\n\n.destroy:after {\n    content: '×';\n}\n\nli:hover .destroy {\n    display: block;\n}\n.edit {\n    position: relative;\n    margin: 0;\n    width: 100%;\n    font-size: 24px;\n    font-family: inherit;\n    font-weight: inherit;\n    line-height: 1.4em;\n    border: 0;\n    outline: none;\n    color: inherit;\n    padding: 6px;\n    border: 1px solid #999;\n    box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);\n    box-sizing: border-box;\n    -webkit-font-smoothing: antialiased;\n    -moz-font-smoothing: antialiased;\n    font-smoothing: antialiased;\n}\nli .edit {\n    display: none;\n}\nli.editing {\n    border-bottom: none;\n    padding: 0;\n}\n\nli.editing .edit {\n    display: block;\n    width: 506px;\n    padding: 13px 17px 12px 17px;\n    margin: 0 0 0 43px;\n}\nli label {\n    white-space: pre;\n    word-break: break-word;\n    /*padding: 15px 60px 15px 15px; */\n    margin-right: 2em;\n    display: block;\n    line-height: 1.2;\n    -webkit-transition: color 0.4s;\n    transition: color 0.4s;\n}\n"] = false
+    document.head.removeChild(__vueify_style__)
+  })
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, module.exports.template)
+  }
+})()}
+},{"vue":12,"vue-hot-reload-api":3,"vueify-insert-css":13}],17:[function(require,module,exports){
 'use strict';
 
 var _Alert = require('./components/Alert.vue');
 
 var _Alert2 = _interopRequireDefault(_Alert);
+
+var _ScreenGallery = require('./components/ScreenGallery.vue');
+
+var _ScreenGallery2 = _interopRequireDefault(_ScreenGallery);
+
+var _Ticker = require('./components/Ticker.vue');
+
+var _Ticker2 = _interopRequireDefault(_Ticker);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12933,9 +13100,13 @@ var bootstrap = require('bootstrap-sass');
 new Vue({
     el: '#app',
 
-    components: { Alert: _Alert2.default }
+    components: {
+        'Alert': _Alert2.default,
+        'screengallery': _ScreenGallery2.default,
+        'Tickers': _Ticker2.default
+    }
 });
 
-},{"./components/Alert.vue":13,"bootstrap-sass":1,"vue":12,"vue-resource":5}]},{},[14]);
+},{"./components/Alert.vue":14,"./components/ScreenGallery.vue":15,"./components/Ticker.vue":16,"bootstrap-sass":1,"vue":12,"vue-resource":5}]},{},[17]);
 
 //# sourceMappingURL=main.js.map

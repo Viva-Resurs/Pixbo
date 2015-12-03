@@ -4,9 +4,16 @@ Vue.use(require('vue-resource'));
 var bootstrap = require('bootstrap-sass');
 
 import Alert from './components/Alert.vue';
+import ScreenGallery from './components/ScreenGallery.vue';
+import Ticker from './components/Ticker.vue';
+
 
 new Vue({
     el: '#app',
 
-    components: { Alert }
+    components: { 
+        'Alert': Alert, 
+        'screengallery': ScreenGallery, 
+        'Tickers': Ticker 
+    }
 });
