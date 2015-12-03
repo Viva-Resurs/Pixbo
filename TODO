@@ -1,5 +1,4 @@
 Features:
-    * Remove screen overlay on each screen in screengroup.
 
     * Client
         * Creation
@@ -9,22 +8,22 @@ Features:
 
     * Player
         * Login client. (middleware) (Done)
-        * Load shadow events for current time.
+        * Load shadow events for current time. (Done)
         * AJAX update every n minutes.
         * Add ticker feed to player.
 
     * Shadow Events
         * Make job to generate shadow events every n days.
-        * Generate shadow event on event changes.
+        * Generate shadow event on event changes. (Done)
 
     * Screen Group
         * Add (x) button to remove screen association to the current screen group.
 
     * Screen
-        * Set and view scheduled variable to control screen viewing.
+        * Set and view scheduled variable to control screen viewing. (Done)
 
     * Event
-        * Let user set recurring and use it to generate shadow events.
+        * Let user set recurring and use it to generate shadow events. (Done)
 
 
 Bugs:

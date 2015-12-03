@@ -14,34 +14,35 @@
 use App\EventMeta;
 
 Route::resource('play', 'PlayerController');
-Route::resource('api/tickers', 'Admin\TickersController');
+Route::resource('admin/screengroups/{screengroup}/tickers', 'Admin\TickersController');
 Route::get('/', 'PagesController@home');
 Route::get('admin/dashboard', 'PagesController@dashboard');
 Route::get('admin/calendars', 'PagesController@calendars');
 Route::post('admin/screengroups/{screengroups}/addphoto', 'Admin\ScreenGroupsController@addScreenFromPhoto');
 
 Route::get('/event', function () {
-	event('GenerateShadowEvents', EventMeta::first());
+    event('GenerateShadowEvents', EventMeta::first());
 });
 
 Route::group([
-	'namespace'  => 'Admin',
-	'middleware' => 'auth',
+    'namespace' => 'Admin',
+    'middleware' => 'auth',
 ], function () {
 
-	Route::get('admin', function () {
-		return redirect('/admin/dashboard');
-	});
-	Route::resource('admin/clients', 'ClientsController');
-	Route::resource('admin/screengroups', 'ScreenGroupsController');
-	Route::resource('admin/screens', 'ScreensController');
-	Route::resource('admin/photos', 'PhotosController');
-	Route::resource('admin/events', 'EventsController');
-	Route::resource('admin/eventmetas', 'EventMetasController');
+    Route::get('admin', function () {
+        return redirect('/admin/dashboard');
+    });
+    Route::resource('admin/clients', 'ClientsController');
+    Route::resource('admin/screengroups/{screengroup_id}/tickers', 'TickersController');
+    Route::resource('admin/screengroups', 'ScreenGroupsController');
+    Route::resource('admin/screens', 'ScreensController');
+    Route::resource('admin/photos', 'PhotosController');
+    Route::resource('admin/events', 'EventsController');
+    Route::resource('admin/eventmetas', 'EventMetasController');
 });
 
 Route::controllers([
-	'auth' => 'Auth\AuthController',
+    'auth' => 'Auth\AuthController',
 ]);
 
 /**
@@ -49,11 +50,11 @@ Route::controllers([
  */
 Menu::make('topNav', function ($menu) {
 
-	$menu->add('Dashboard', 'admin/dashboard');
-	$menu->add('Clients', 'admin/clients');
-	$menu->add('Screen Groups', 'admin/screengroups');
-	$menu->add('Screens', 'admin/screens');
-	$menu->add('Calendar', 'admin/calendars');
-	$menu->add('Users', 'admin/users');
-	$menu->add('Settings', 'settings');
+    $menu->add('Dashboard', 'admin/dashboard');
+    $menu->add('Clients', 'admin/clients');
+    $menu->add('Screen Groups', 'admin/screengroups');
+    $menu->add('Screens', 'admin/screens');
+    $menu->add('Calendar', 'admin/calendars');
+    $menu->add('Users', 'admin/users');
+    $menu->add('Settings', 'settings');
 });

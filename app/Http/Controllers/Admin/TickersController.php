@@ -3,75 +3,75 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Screengroup;
 use App\Ticker;
 use Illuminate\Http\Request;
+use Request as RF;
 
-class TickersController extends Controller {
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index() {
-		return Ticker::latest()->get();
-	}
+class TickersController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index(ScreenGroup $screengroup)
+    {
+        return $screengroup->tickers;
+    }
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create() {
-		//
-	}
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function store(ScreenGroup $screengroup, Request $request)
+    {
+        $ticker = new Ticker($request->all());
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param  Request  $request
-	 * @return Response
-	 */
-	public function store(Request $request) {
-		//
-	}
+        $screengroup->save($ticker);
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id) {
-	}
+        if (RF::wantsJson()) {
+            return $screen;
+        } else {
+            abort(500, 'API only returns JSON.');
+        }
+    }
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id) {
-		//
-	}
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  Request  $request
+     * @param  int  $id
+     * @return Response
+     */
+    public function update(ScreenGroup $screengroup, Request $request)
+    {
+        $ticker_request = $request->all();
+        $ticker = Ticker::where(['id' => $ticker_request['id']])->first();
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  Request  $request
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update(Request $request, $id) {
-		//
-	}
+        if ($ticker->update($request->all())) {
+            if (RF::wantsJson()) {
+                return $screengroup;
+            }
+        }
+    }
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id) {
-		//
-	}
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function destroy(ScreenGroup $screengroup, Request $request)
+    {
+        $ticker_request = $request->all();
+        $ticker = Ticker::where(['id' => $ticker_request['id']])->first();
+
+        $deleted = $ticker->delete();
+        if (RF::wantsJson()) {
+            return (string) $deleted;
+        }
+    }
 }

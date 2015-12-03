@@ -16,97 +16,18 @@
 
     <div class="row">
         <div class="col-md-4">
-            <div class="panel panel-info"> <!-- Info -->
-                <div class="panel-heading">
-                    <div class="panel-title">
-                        {{ trans('messages.info') }}
-                    </div>
-                </div>
-                <div class="panel-body">
-                        {!! Form::model($screenGroup, ['method' => 'PATCH', 'route' => ['admin.screengroups.update', $screenGroup->id]]) !!}
-                            @include ('screengroups.__form', ['submitButtonText' => trans('messages.save')])
-                        {!! Form::close() !!}
-                    </table>
-                </div>
-            </div>
 
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <div class="panel-title">
-                        {{ trans('messages.event') }}
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <table class="table">
-                        <tbody>
+            @include('screengroups.edit.edit__info')
+            @include('shared.edit__event')
 
-                                {!! Form::model($event, ['method' => 'PATCH', 'route' => ['admin.events.update', $event->id]]) !!}
-                                    @include ('events.__form', ['submitButtonText' => trans('messages.save')])
-                                    <a class="btn btn-primary" data-toggle="modal" href='#event_meta'>{{ trans('messages.recurring') }}</a>
-                                {!! Form::close() !!}
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{{ trans('messages.tickers') }}</h3>
-                </div>
-                <div class="panel-body">
-                    <tickers list="{{ $tickers }}"></tickers>
-                </div>
-                <template id="tickers-template">
-                    <ul class="list-group">
-                        <li class="list-group-item" style="padding:0px;height: 30px; line-height: 30px;">
-                            {!! Form::text('ticker', null, [
-                                'class' => '',
-                                'style' => 'border: none; background:none; outline: none;width: 100%; height:30px; padding-left:1em;',
-                                'required' => 'required',
-                                'placeholder' => trans('messages.add_ticker')])
-                            !!}
-                        </li>
-                        <li class="list-group-item" v-for="ticker in list">
-                            @{{ ticker.text }}
-                            <strong @click="delete(ticker)">X</strong>
-                        </li>
-                    </ul>
-                </template>
-            </div>
         </div>
 
-        <div class="col-md-8 photo__gallery">
-            <div class="panel panel-info"> <!-- Gallery -->
-                <div class="panel-heading">
-                    {{ 'Screens' }}
-                </div>
-                <div class="panel-body">
-                    @foreach ($screenGroup->screens->chunk(3) as $set)
-                        <div class="row">
-                            @foreach ($set as $element)
-                                <div class="col-md-4 gallery__image">
-                                    <a href="/admin/screens/{{ $element->id }}/edit"</a>
-                                        <img src="/{{ $element->photo->thumb_path }}" alt="">
-                                    </a>
-                                </div>
-                            @endforeach
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-            <hr>
-            <div> <!-- File upload -->
-            <form action="/admin/screengroups/{{ $screenGroup->id }}/addphoto"
-                method="POST"
-                class="dropzone"
-                id="addImageForm"
-            >
-            {{ csrf_field() }}
-            </form>
+        <div class="col-md-8">
+
+            @include('screengroups.edit.edit__ticker')
+            @include('screengroups.edit.edit__screens')
+
         </div>
-        </div>
-    </div>
 
     <!-- Modal -->
     @include('events.meta.__form')
@@ -114,14 +35,20 @@
 @stop
 
 @section('footer')
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.js"></script>
+
+    <!-- Required for tickers -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.10/vue.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.1.17/vue-resource.js"></script>
     <script type="text/javascript" src="/js/ticker.js"></script>
+
+    <!-- Required for screen uploading -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.js"></script>
     <script>
-    Dropzone.options.addImageForm = {
-        paramName: 'photo',
-        maxFileSize: 10,
-        acceptedFiles: '.jpg,.jpeg,.png,.bmp'
-    };
+        Dropzone.options.addImageForm = {
+            paramName: 'photo',
+            maxFileSize: 10,
+            acceptedFiles: '.jpg,.jpeg,.png,.bmp'
+        };
     </script>
+
 @stop
