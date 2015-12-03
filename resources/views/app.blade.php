@@ -26,14 +26,14 @@
 <script src="script.js"></script>
  -->
 </head>
-<body>
+<body id="app">
 
     <!-- top_nav -->
     @include('navs.topnav')
 
     <!-- body -->
     @yield('body')
-    <script src="/js/bundle.js"></script>
+    <script src="/js/main.js"></script>
     @yield('footer')
 
 </body>

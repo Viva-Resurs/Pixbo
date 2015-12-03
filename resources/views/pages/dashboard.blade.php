@@ -17,12 +17,12 @@
                         Search <input name="query" v-model="searchQuery">
                     </form>
                     <demo-grid
-                    data="@{{gridData}}"
-                    columns="@{{gridColumns}}"
-                    filter-key="@{{searchQuery}}">
-                </demo-grid>
-                <pre>@{{ $data | json }}</pre>
-
+                        data="@{{gridData}}"
+                        columns="@{{gridColumns}}"
+                        filter-key="@{{searchQuery}}">
+                    </demo-grid>
+                    <pre>@{{ $data | json }}</pre>
+                </div>
             </div>
         </div>
     </div>

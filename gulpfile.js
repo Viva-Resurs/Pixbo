@@ -1,5 +1,5 @@
 var elixir = require('laravel-elixir');
-require('laravel-elixir-livereload');
+require('laravel-elixir-vueify');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,10 +11,6 @@ require('laravel-elixir-livereload');
  | file for our application, as well as publishing vendor resources.
  |
  */
-var paths = {
-    'bootstrap': '/node_modules/bootstrap-sass/assets/'
-}
-
 
 elixir(function(mix) {
 
@@ -29,7 +25,7 @@ elixir(function(mix) {
 /*
     mix
 */
-
-    mix.browserify('app.js');
+    mix.browserify('main.js');
+    //mix.vueify('main.js', {insertGlobals: true, transform: "vueify", output: "public/js"});
 
 });
