@@ -99,7 +99,7 @@ li label {
                 v-for="ticker in filtered"
                 :class="{editing: ticker == editedTicker}">
             <div class="view">
-                <label @dblclick="editTicker(ticker)">@{{ticker.text}}</label>
+                <label @dblclick="editTicker(ticker)">{{ticker.text}}</label>
                 <button class="destroy" @click="deleteTicker(ticker)"></button>
             </div>
             <input class="edit" type="text"
@@ -148,6 +148,7 @@ li label {
                     return;
                 }
                 this.list.push({ text: value });
+                this.$http.post('tickers', { text: value });
                 this.newTicker = '';
             },
 
@@ -187,5 +188,5 @@ li label {
                 });
             }
         }
-    }; 
+    };
 </script>

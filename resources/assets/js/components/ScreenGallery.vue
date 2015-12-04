@@ -2,16 +2,19 @@
     .screen_gallery {
 
     }
+    .screen_gallery__entity {
+
+    }
 </style>
 
 
 
 <template>
-    <ul v-for="screen in screens" class="screen_gallery">
-        <li class="screen_gallery__entity">
+    <ul class="screen_gallery">
+        <li v-for="screen in screens" class="screen_gallery__entity">
             <a href="/admin/screens/{{ screen.id }}/edit">
                 <img v-bind:src="'/' + screen.photo.thumb_path" alt="">
-            </a>
+            </a><button @click="removeScreen(screen)">x</button>
         </li>
     </ul>
 </template>
@@ -32,9 +35,9 @@
         },
 
         methods: {
-            remove_screen: function (screen) {
-                this.list.$remove(screen);
-                this.$http.post('screens/' + screen.id + '/remove' , screen);
+            removeScreen: function (screen) {
+                this.screens.$remove(screen);
+                this.$http.get('screens/' + screen.id + '/remove_association' , screen);
             }
         }
     };

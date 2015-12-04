@@ -12937,7 +12937,7 @@ if (module.hot) {(function () {  module.hot.accept()
   }
 })()}
 },{"vue":12,"vue-hot-reload-api":3}],15:[function(require,module,exports){
-var __vueify_style__ = require("vueify-insert-css").insert("\n    .screen_gallery {\n\n    }\n")
+var __vueify_style__ = require("vueify-insert-css").insert("\n    .screen_gallery {\n\n    }\n    .screen_gallery__entity {\n\n    }\n")
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12958,21 +12958,21 @@ exports.default = {
     },
 
     methods: {
-        remove_screen: function remove_screen(screen) {
-            this.list.$remove(screen);
-            this.$http.post('screens/' + screen.id + '/remove', screen);
+        removeScreen: function removeScreen(screen) {
+            this.screens.$remove(screen);
+            this.$http.get('screens/' + screen.id + '/remove_association', screen);
         }
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <ul v-for=\"screen in screens\" class=\"screen_gallery\">\n        <li class=\"screen_gallery__entity\">\n            <a href=\"/admin/screens/{{ screen.id }}/edit\">\n                <img v-bind:src=\"'/' + screen.photo.thumb_path\" alt=\"\">\n            </a>\n        </li>\n    </ul>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <ul class=\"screen_gallery\">\n        <li v-for=\"screen in screens\" class=\"screen_gallery__entity\">\n            <a href=\"/admin/screens/{{ screen.id }}/edit\">\n                <img v-bind:src=\"'/' + screen.photo.thumb_path\" alt=\"\">\n            </a><button @click=\"removeScreen(screen)\">x</button>\n        </li>\n    </ul>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   var id = "C:\\Users\\Christoffer\\Documents\\Work\\pixbo_laravel\\resources\\assets\\js\\components\\ScreenGallery.vue"
   module.hot.dispose(function () {
-    require("vueify-insert-css").cache["\n    .screen_gallery {\n\n    }\n"] = false
+    require("vueify-insert-css").cache["\n    .screen_gallery {\n\n    }\n    .screen_gallery__entity {\n\n    }\n"] = false
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {
@@ -13022,6 +13022,7 @@ exports.default = {
                 return;
             }
             this.list.push({ text: value });
+            this.$http.post('tickers', { text: value });
             this.newTicker = '';
         },
 
@@ -13063,7 +13064,7 @@ exports.default = {
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <ul class=\"list-group\">\n        <li class=\"list-group-item\" style=\"padding:0px;height: 30px; line-height: 30px;\">\n            <input name=\"ticker\" class=\"\" placeholder=\"Ticker text\" v-model=\"newTicker\" @keyup.enter=\"addTicker\" style=\"border: none; background:none; outline: none;width: 100%; height:30px; padding-left:1em;\">\n        </li>\n        <li class=\"list-group-item\" v-for=\"ticker in filtered\" :class=\"{editing: ticker == editedTicker}\">\n            <div class=\"view\">\n                <label @dblclick=\"editTicker(ticker)\">@{{ticker.text}}</label>\n                <button class=\"destroy\" @click=\"deleteTicker(ticker)\"></button>\n            </div>\n            <input class=\"edit\" type=\"text\" v-model=\"ticker.text\" v-ticker-focus=\"ticker == editedTicker\" @blur=\"doneEdit(ticker)\" @keyup.enter=\"doneEdit(ticker)\" @keyup.esc=\"cancelEdit(ticker)\">\n\n        </li>\n    </ul>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <ul class=\"list-group\">\n        <li class=\"list-group-item\" style=\"padding:0px;height: 30px; line-height: 30px;\">\n            <input name=\"ticker\" class=\"\" placeholder=\"Ticker text\" v-model=\"newTicker\" @keyup.enter=\"addTicker\" style=\"border: none; background:none; outline: none;width: 100%; height:30px; padding-left:1em;\">\n        </li>\n        <li class=\"list-group-item\" v-for=\"ticker in filtered\" :class=\"{editing: ticker == editedTicker}\">\n            <div class=\"view\">\n                <label @dblclick=\"editTicker(ticker)\">{{ticker.text}}</label>\n                <button class=\"destroy\" @click=\"deleteTicker(ticker)\"></button>\n            </div>\n            <input class=\"edit\" type=\"text\" v-model=\"ticker.text\" v-ticker-focus=\"ticker == editedTicker\" @blur=\"doneEdit(ticker)\" @keyup.enter=\"doneEdit(ticker)\" @keyup.esc=\"cancelEdit(ticker)\">\n\n        </li>\n    </ul>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
