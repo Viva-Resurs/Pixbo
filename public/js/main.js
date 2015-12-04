@@ -12929,7 +12929,7 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "C:\\pixbo_laravel\\resources\\assets\\js\\components\\Alert.vue"
+  var id = "C:\\Users\\Christoffer\\Documents\\Work\\pixbo_laravel\\resources\\assets\\js\\components\\Alert.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
@@ -12937,13 +12937,13 @@ if (module.hot) {(function () {  module.hot.accept()
   }
 })()}
 },{"vue":12,"vue-hot-reload-api":3}],15:[function(require,module,exports){
+var __vueify_style__ = require("vueify-insert-css").insert("\n    .screen_gallery {\n\n    }\n")
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.default = {
-    props: ['screengroup_id'],
 
     data: function data() {
         return {
@@ -12960,24 +12960,28 @@ exports.default = {
     methods: {
         remove_screen: function remove_screen(screen) {
             this.list.$remove(screen);
-            this.$http.post('screens/remove/' + screen.id, screen);
+            this.$http.post('screens/' + screen.id + '/remove', screen);
         }
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <div class=\"screen_gallery\">\n        <ul v-for=\"screen in screens\">\n            <li class=\"screen_gallery__entity\">\n                <a href=\"/admin/screens/{{ $element->id }}/edit\">\n                    <img src=\"/{{ $element->photo->thumb_path }}\" alt=\"\">\n                </a>\n            </li>\n        </ul>\n    </div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <ul v-for=\"screen in screens\" class=\"screen_gallery\">\n        <li class=\"screen_gallery__entity\">\n            <a href=\"/admin/screens/{{ screen.id }}/edit\">\n                <img v-bind:src=\"'/' + screen.photo.thumb_path\" alt=\"\">\n            </a>\n        </li>\n    </ul>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "C:\\pixbo_laravel\\resources\\assets\\js\\components\\ScreenGallery.vue"
+  var id = "C:\\Users\\Christoffer\\Documents\\Work\\pixbo_laravel\\resources\\assets\\js\\components\\ScreenGallery.vue"
+  module.hot.dispose(function () {
+    require("vueify-insert-css").cache["\n    .screen_gallery {\n\n    }\n"] = false
+    document.head.removeChild(__vueify_style__)
+  })
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, module.exports.template)
   }
 })()}
-},{"vue":12,"vue-hot-reload-api":3}],16:[function(require,module,exports){
+},{"vue":12,"vue-hot-reload-api":3,"vueify-insert-css":13}],16:[function(require,module,exports){
 var __vueify_style__ = require("vueify-insert-css").insert("\n    button {\n    margin: 0;\n    padding: 0;\n    border: 0;\n    background: none;\n    font-size: 100%;\n    vertical-align: baseline;\n    font-family: inherit;\n    font-weight: inherit;\n    color: inherit;\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    -webkit-font-smoothing: antialiased;\n    -moz-font-smoothing: antialiased;\n    font-smoothing: antialiased;\n}\n.destroy {\n    display: none;\n    position: absolute;\n    top: 0;\n    right: 10px;\n    bottom: 0;\n    width: 40px;\n    height: 40px;\n    margin: auto 0;\n    font-size: 30px;\n    color: #cc9a9a;\n    margin-bottom: 11px;\n    -webkit-transition: color 0.2s ease-out;\n    transition: color 0.2s ease-out;\n}\n\n.destroy:hover {\n    color: #af5b5e;\n}\n\n.destroy:after {\n    content: '×';\n}\n\nli:hover .destroy {\n    display: block;\n}\n.edit {\n    position: relative;\n    margin: 0;\n    width: 100%;\n    font-size: 24px;\n    font-family: inherit;\n    font-weight: inherit;\n    line-height: 1.4em;\n    border: 0;\n    outline: none;\n    color: inherit;\n    padding: 6px;\n    border: 1px solid #999;\n    box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);\n    box-sizing: border-box;\n    -webkit-font-smoothing: antialiased;\n    -moz-font-smoothing: antialiased;\n    font-smoothing: antialiased;\n}\nli .edit {\n    display: none;\n}\nli.editing {\n    border-bottom: none;\n    padding: 0;\n}\n\nli.editing .edit {\n    display: block;\n    width: 506px;\n    padding: 13px 17px 12px 17px;\n    margin: 0 0 0 43px;\n}\nli label {\n    white-space: pre;\n    word-break: break-word;\n    /*padding: 15px 60px 15px 15px; */\n    margin-right: 2em;\n    display: block;\n    line-height: 1.2;\n    -webkit-transition: color 0.4s;\n    transition: color 0.4s;\n}\n")
 'use strict';
 
@@ -13064,7 +13068,7 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "C:\\pixbo_laravel\\resources\\assets\\js\\components\\Ticker.vue"
+  var id = "C:\\Users\\Christoffer\\Documents\\Work\\pixbo_laravel\\resources\\assets\\js\\components\\Ticker.vue"
   module.hot.dispose(function () {
     require("vueify-insert-css").cache["\n    button {\n    margin: 0;\n    padding: 0;\n    border: 0;\n    background: none;\n    font-size: 100%;\n    vertical-align: baseline;\n    font-family: inherit;\n    font-weight: inherit;\n    color: inherit;\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    -webkit-font-smoothing: antialiased;\n    -moz-font-smoothing: antialiased;\n    font-smoothing: antialiased;\n}\n.destroy {\n    display: none;\n    position: absolute;\n    top: 0;\n    right: 10px;\n    bottom: 0;\n    width: 40px;\n    height: 40px;\n    margin: auto 0;\n    font-size: 30px;\n    color: #cc9a9a;\n    margin-bottom: 11px;\n    -webkit-transition: color 0.2s ease-out;\n    transition: color 0.2s ease-out;\n}\n\n.destroy:hover {\n    color: #af5b5e;\n}\n\n.destroy:after {\n    content: '×';\n}\n\nli:hover .destroy {\n    display: block;\n}\n.edit {\n    position: relative;\n    margin: 0;\n    width: 100%;\n    font-size: 24px;\n    font-family: inherit;\n    font-weight: inherit;\n    line-height: 1.4em;\n    border: 0;\n    outline: none;\n    color: inherit;\n    padding: 6px;\n    border: 1px solid #999;\n    box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);\n    box-sizing: border-box;\n    -webkit-font-smoothing: antialiased;\n    -moz-font-smoothing: antialiased;\n    font-smoothing: antialiased;\n}\nli .edit {\n    display: none;\n}\nli.editing {\n    border-bottom: none;\n    padding: 0;\n}\n\nli.editing .edit {\n    display: block;\n    width: 506px;\n    padding: 13px 17px 12px 17px;\n    margin: 0 0 0 43px;\n}\nli label {\n    white-space: pre;\n    word-break: break-word;\n    /*padding: 15px 60px 15px 15px; */\n    margin-right: 2em;\n    display: block;\n    line-height: 1.2;\n    -webkit-transition: color 0.4s;\n    transition: color 0.4s;\n}\n"] = false
     document.head.removeChild(__vueify_style__)

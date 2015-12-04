@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ScreenGroupRequest;
 use App\Photo;
+use App\Screen;
 use App\ScreenGroup;
 use DB;
 use Illuminate\Http\Request as Requests;
@@ -151,6 +152,15 @@ class ScreenGroupsController extends Controller
         // Get a the existing screen and attatch it to screengroup.
         // Otherwise create a new screen with the photo and then attatch it to the screengroup.
         $screengroup->assignOrCreateAndAssign($photo);
+    }
+
+    public function postRemoveAssociation(Request $request, $id)
+    {
+    }
+
+    public function screens(Request $request, ScreenGroup $screengroup)
+    {
+        return ScreenGroup::with('screens.photo')->where('id', $screengroup->id)->get()[0]['screens'];
     }
 
 /**
