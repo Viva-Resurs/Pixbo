@@ -11,20 +11,19 @@
 |
  */
 
-use App\EventMeta;
-
 Route::resource('play', 'PlayerController');
 Route::resource('admin/screengroups/{screengroup}/tickers', 'Admin\TickersController');
 Route::get('admin/screengroups/{screengroup}/screens', 'Admin\ScreenGroupsController@screens');
+Route::post('admin/screengroups/{screengroup}/screens/{screens}/remove_association', 'Admin\ScreenGroupsController@remove_association');
 
 Route::get('/', 'PagesController@home');
 Route::get('admin/dashboard', 'PagesController@dashboard');
-Route::get('admin/calendars', 'PagesController@calendars');
+//Route::get('admin/calendars', 'PagesController@calendars');
 Route::post('admin/screengroups/{screengroups}/addphoto', 'Admin\ScreenGroupsController@addScreenFromPhoto');
 
-Route::get('/event', function () {
-    event('GenerateShadowEvents', EventMeta::first());
-});
+// Route::get('/event', function () {
+//     event('GenerateShadowEvents', EventMeta::first());
+// });
 
 Route::group([
     'namespace' => 'Admin',
@@ -56,7 +55,7 @@ Menu::make('topNav', function ($menu) {
     $menu->add('Clients', 'admin/clients');
     $menu->add('Screen Groups', 'admin/screengroups');
     $menu->add('Screens', 'admin/screens');
-    $menu->add('Calendar', 'admin/calendars');
+    //$menu->add('Calendar', 'admin/calendars');
     $menu->add('Users', 'admin/users');
     $menu->add('Settings', 'settings');
 });

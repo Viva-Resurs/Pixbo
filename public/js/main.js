@@ -12960,8 +12960,9 @@ exports.default = {
     methods: {
         removeScreen: function removeScreen(screen) {
             this.screens.$remove(screen);
-            this.$http.get('screens/' + screen.id + '/remove_association', screen);
-        }
+            this.$http.post('screens/' + screen.id + '/remove_association', screen);
+        },
+        editScreen: function editScreen(screen) {}
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
@@ -13022,6 +13023,7 @@ exports.default = {
                 return;
             }
             this.list.push({ text: value });
+
             this.$http.post('tickers', { text: value });
             this.newTicker = '';
         },

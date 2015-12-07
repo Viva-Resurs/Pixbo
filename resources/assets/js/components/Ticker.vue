@@ -84,6 +84,7 @@ li label {
     transition: color 0.4s;
 }
 </style>
+
 <template>
     <ul class="list-group">
         <li class="list-group-item" style="padding:0px;height: 30px; line-height: 30px;">
@@ -148,6 +149,7 @@ li label {
                     return;
                 }
                 this.list.push({ text: value });
+
                 this.$http.post('tickers', { text: value });
                 this.newTicker = '';
             },

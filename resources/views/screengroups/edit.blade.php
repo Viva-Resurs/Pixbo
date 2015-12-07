@@ -12,7 +12,7 @@
 
 @section('content')
 
-    <h1 class="page-header">{{ "ScreenGroup Edit" }}</h1>
+    <h1 class="page-header">{{ trans("messages.edit_screen_group") }}</h1>
 
     <div class="row">
         <div class="col-md-4">
@@ -24,7 +24,8 @@
 
         <div class="col-md-8">
 
-            @include('screengroups.edit.edit__ticker')
+
+            <!-- Add ticker here -->
             @include('screengroups.edit.edit__screens')
 
         </div>
@@ -36,15 +37,14 @@
 
 @section('footer')
 
-    <!-- Required for tickers -->
-
     <!-- Required for screen uploading -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.js"></script>
     <script>
         Dropzone.options.addImageForm = {
             paramName: 'photo',
             maxFileSize: 10,
-            acceptedFiles: '.jpg,.jpeg,.png,.bmp'
+            acceptedFiles: '.jpg,.jpeg,.png,.bmp',
+            dictDefaultMessage: 'Drop files here to be uploaded.'
         };
     </script>
 

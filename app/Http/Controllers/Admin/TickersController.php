@@ -28,7 +28,6 @@ class TickersController extends Controller
      */
     public function store(ScreenGroup $screengroup, Request $request)
     {
-        dd($request->all());
         $ticker = new Ticker($request->all());
 
         $screengroup->save($ticker);

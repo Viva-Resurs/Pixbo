@@ -3,12 +3,12 @@
 return [
 
     /*
-        |--------------------------------------------------------------------------
-        | Application Language Lines
-        |--------------------------------------------------------------------------
-        |
-        | The following language lines are used for general application messages.
-        |
+                        |--------------------------------------------------------------------------
+                        | Application Language Lines
+                        |--------------------------------------------------------------------------
+                        |
+                        | The following language lines are used for general application messages.
+                        |
     */
 
     /**
@@ -42,6 +42,7 @@ return [
     'screen_groups' => 'Screen Groups',
     'add_screen_group' => 'Add Screen Group',
     'show_screen_group' => 'Show Screen Group',
+    'edit_screen_group' => 'Edit Screen Group',
     'show_screen' => 'Show Screen',
     'edit_screen' => 'Edit Screen',
     'add_ticker' => 'Ticker text',
@@ -113,5 +114,7 @@ return [
      */
     'repeat_success_updated' => 'The recurrence has been updated successfully.',
     'unable_to_determ_recur_type' => 'Unable to determine recurrence type.',
+
+    'drop_files' => 'Drop files here to be uploaded.',
 
 ];

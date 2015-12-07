@@ -37,7 +37,10 @@
         methods: {
             removeScreen: function (screen) {
                 this.screens.$remove(screen);
-                this.$http.get('screens/' + screen.id + '/remove_association' , screen);
+                this.$http.post('screens/' + screen.id + '/remove_association' , screen);
+            },
+            editScreen: function (screen) {
+
             }
         }
     };

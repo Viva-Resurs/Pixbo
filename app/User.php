@@ -64,4 +64,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->hasMany(Screen::class);
     }
+
+    public function roles()
+    {
+        return $this->belongsToMany(App\Role::class);
+    }
+
+    public function hasRole($role)
+    {
+        if (is_string($role)) {
+            return $this->roles->contains('name', $role);
+        }
+
+        return !!$role->intersection($this->roles)->count();
+    }
 }

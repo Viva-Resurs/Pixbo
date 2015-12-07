@@ -154,10 +154,6 @@ class ScreenGroupsController extends Controller
         $screengroup->assignOrCreateAndAssign($photo);
     }
 
-    public function postRemoveAssociation(Request $request, $id)
-    {
-    }
-
     public function screens(Request $request, ScreenGroup $screengroup)
     {
         return ScreenGroup::with('screens.photo')->where('id', $screengroup->id)->get()[0]['screens'];
@@ -182,5 +178,12 @@ class ScreenGroupsController extends Controller
         });
 
         return $result;
+    }
+
+    public function remove_association(Requests $request, ScreenGroup $screengroup, Screen $screen)
+    {
+        if (not_null($screengroup) && not_null($screen)) {
+            $screengroup->screens()->detach($screen->id);
+        }
     }
 }
