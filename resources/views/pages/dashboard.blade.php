@@ -22,6 +22,9 @@
                         filter-key="@{{searchQuery}}">
                     </demo-grid>
                     <pre>@{{ $data | json }}</pre>
+                    @can('view_dashboard')
+                        <h1>CAN VIEW THIS</h1>
+                    @endcan
                 </div>
             </div>
         </div>

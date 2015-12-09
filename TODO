@@ -25,6 +25,19 @@ Features:
     * Event
         * Let user set recurring and use it to generate shadow events. (Done)
 
+    * Authorization
+        * Roles:
+            * Admin
+                * Everything
+            * Moderator
+                * -Remove ScreenGroup
+                * -View, Edit, Remove Users
+                * -Player
+
+            * Client
+                * Only View Player
+
+
 
 Bugs:
 

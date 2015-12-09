@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
@@ -17,7 +18,7 @@ class PagesController extends Controller
         return view('pages.home');
     }
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
         return view('pages.dashboard');
     }

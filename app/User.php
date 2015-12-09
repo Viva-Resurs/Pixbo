@@ -67,7 +67,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function roles()
     {
-        return $this->belongsToMany(App\Role::class);
+        return $this->belongsToMany(Role::class);
     }
 
     public function hasRole($role)
@@ -76,6 +76,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             return $this->roles->contains('name', $role);
         }
 
-        return !!$role->intersection($this->roles)->count();
+        return !!$role->intersect($this->roles)->count();
+    }
+
+    public function assignRole($role)
+    {
+        if (is_string($role)) {
+            $role_model = Role::where('name', $role)->firstOrFail();
+            return $this->roles()->save($role_model);
+        }
+
+        return $this->roles()->save($role);
     }
 }

@@ -182,7 +182,7 @@ class ScreenGroupsController extends Controller
 
     public function remove_association(Requests $request, ScreenGroup $screengroup, Screen $screen)
     {
-        if (not_null($screengroup) && not_null($screen)) {
+        if (!is_null($screengroup) && !is_null($screen)) {
             $screengroup->screens()->detach($screen->id);
         }
     }

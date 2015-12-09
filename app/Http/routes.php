@@ -40,6 +40,7 @@ Route::group([
     Route::resource('admin/photos', 'PhotosController');
     Route::resource('admin/events', 'EventsController');
     Route::resource('admin/eventmetas', 'EventMetasController');
+    Route::resource('admin/users', 'UsersController');
 });
 
 Route::controllers([
