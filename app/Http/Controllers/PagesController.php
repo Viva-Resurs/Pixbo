@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\ScreenGroup;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -20,7 +21,8 @@ class PagesController extends Controller
 
     public function dashboard(Request $request)
     {
-        return view('pages.dashboard');
+        $screengroups = ScreenGroup::all();
+        return view('pages.dashboard', compact('screengroups'));
     }
 
 //     public function calendars()

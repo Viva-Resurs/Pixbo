@@ -23,8 +23,7 @@ class ScreensController extends Controller
         if (Request::wantsJson()) {
             return $screens;
         } else {
-            $data = Screen::paginate(10);
-            return view('screens.index')->with('data', $data);
+            return view('screens.index', compact('screens'));
         }
     }
 

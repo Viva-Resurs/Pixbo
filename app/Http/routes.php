@@ -52,11 +52,9 @@ Route::controllers([
  */
 Menu::make('topNav', function ($menu) {
 
-    $menu->add('Dashboard', 'admin/dashboard');
-    $menu->add('Clients', 'admin/clients');
-    $menu->add('Screen Groups', 'admin/screengroups');
-    $menu->add('Screens', 'admin/screens');
-    //$menu->add('Calendar', 'admin/calendars');
-    $menu->add('Users', 'admin/users');
-    $menu->add('Settings', 'settings');
+    $menu->add(trans('messages.screen_groups'), 'admin/screengroups');
+    $menu->add(trans('messages.clients'), 'admin/clients');
+    $menu->add(trans('messages.screens'), 'admin/screens');
+    $menu->add(trans('messages.users'), 'admin/users');
+    $menu->add(trans('messages.settings'), 'settings');
 });

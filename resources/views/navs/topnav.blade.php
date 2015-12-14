@@ -14,23 +14,12 @@
             <ul class="nav navbar-nav navbar-left">
                 @include(config('laravel-menu.views.bootstrap-items'), array('items' => $topNav->roots()))
             </ul>
+                @if($signedIn)
+                    <p class="navbar-text navbar-right">Signed in as {{ $user->name }}. <a href="/auth/logout" class="navbar-link">{{ trans('auth.logout') }}</a></p>
+                @else
+                    <p class="navbar-text navbar-right"><a href="/auth/login" class="navbar-link">{{ trans('auth.login') }}</a></p>
+                @endif
 
-            @if($signedIn)
-                <ul class="nav navbar-nav navbar-right">
-                    <li><p class="navbar-text">
-                        Hello, {{ $user->name }}
-                    </p></li>
-                    <li>
-                        <a href="/auth/logout">{{ trans('auth.logout') }}</a>
-                    </li>
-                </ul>
-            @else
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/auth/login">{{ trans('auth.login') }}</a>
-                    </li>
-                </ul>
-            @endif
         </div>
     </div>
 </div>

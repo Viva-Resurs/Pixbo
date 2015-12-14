@@ -3,12 +3,12 @@
 return [
 
     /*
-                        |--------------------------------------------------------------------------
-                        | Application Language Lines
-                        |--------------------------------------------------------------------------
-                        |
-                        | The following language lines are used for general application messages.
-                        |
+                                                |--------------------------------------------------------------------------
+                                                | Application Language Lines
+                                                |--------------------------------------------------------------------------
+                                                |
+                                                | The following language lines are used for general application messages.
+                                                |
     */
 
     /**
@@ -34,6 +34,7 @@ return [
     'save' => 'Save',
     'yes' => 'Yes',
     'no' => 'No',
+    'active' => 'Active',
 
     /**
      * Models
@@ -53,8 +54,11 @@ return [
     'screens' => 'Screens',
     'event' => 'Event',
     'events' => 'Events',
+    'user' => 'User',
+    'users' => 'Users',
     'ticker' => 'Ticker',
     'tickers' => 'Tickers',
+    'settings' => 'Settings',
 
     /**
      * Time/Date

@@ -9,26 +9,15 @@
 
             <div class="content">
 
-                @include ('shared.datagrid')
-
-                <!-- demo root element -->
-                <div id="demo">
-                    <form id="search">
-                        Search <input name="query" v-model="searchQuery">
-                    </form>
-                    <demo-grid
-                        data="@{{gridData}}"
-                        columns="@{{gridColumns}}"
-                        filter-key="@{{searchQuery}}">
-                    </demo-grid>
-                    <pre>@{{ $data | json }}</pre>
-                    @can('view_dashboard')
-                        <h1>CAN VIEW THIS</h1>
-                    @endcan
+                <div class="row">
+                    @include('screengroups.screengroup__card')
                 </div>
+
+                @can('view_dashboard')
+
+                @endcan
             </div>
         </div>
     </div>
-</div>
 </div>
 @stop

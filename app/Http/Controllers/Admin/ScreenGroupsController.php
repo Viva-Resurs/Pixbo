@@ -21,13 +21,12 @@ class ScreenGroupsController extends Controller
      */
     public function index()
     {
-        $screenGroups = ScreenGroup::all();
+        $screengroups = ScreenGroup::all();
 
         if (Request::wantsJson()) {
-            return $screenGroups;
+            return $screengroups;
         } else {
-            $data = ScreenGroup::paginate(10);
-            return view('screengroups.index')->with('data', $data);
+            return view('screengroups.index', compact('screengroups'));
         }
     }
 
@@ -69,12 +68,12 @@ class ScreenGroupsController extends Controller
      * @param  ScreenGroup $screenGroup
      * @return \Illuminate\View\View
      */
-    public function show(ScreenGroup $screenGroup)
+    public function show(ScreenGroup $screengroup)
     {
         if (Request::wantsJson()) {
-            return $screenGroup;
+            return $screengroup;
         } else {
-            return view('screengroups.show', compact('screenGroup'));
+            return view('screengroups.show', compact('screengroup'));
         }
     }
 

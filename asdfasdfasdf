@@ -1,0 +1,21 @@
+<table>
+        <thead>
+            @foreach ($headers as $header)
+                <td>{{ $header }}</td>
+            @endforeach
+            <td>Actions</td>
+        </thead>
+        <tbody>
+            @foreach ($data as $element)
+                @foreach($headers as $header)
+                    <td>{{ $element[$header] }}</td>
+                @endforeach
+            @endforeach
+            <td>
+                {!! link_to_route_html('admin.screengroups.edit', '<i rel="tooltip" title="Edit" class="glyphicon glyphicon-plus">Edit</i>', null,['class' => 'btn btn-primary']) !!}
+                <form>
+                    <button><i rel="tooltip" title="Edit" class="glyphicon glyphicon-plus"></i></button>
+                </form>
+            </td>
+        </tbody>
+    </table>
