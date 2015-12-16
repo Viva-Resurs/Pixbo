@@ -9,7 +9,7 @@
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </div>
             <div class="row" style="padding-left: 1em;">
-                <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
             </div>
             <div class="row" style="padding-left: 1em;">
                 <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>

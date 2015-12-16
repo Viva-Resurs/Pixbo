@@ -79,3 +79,8 @@ function extractTime($time)
     $timeArray = explode(':', $time);
     return $timeArray;
 }
+
+function set_active($route)
+{
+    return (\Request::is($route . '/*') || \Request::is($route)) ? "active" : '';
+}

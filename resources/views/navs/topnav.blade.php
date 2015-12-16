@@ -12,7 +12,9 @@
 
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
-                @include(config('laravel-menu.views.bootstrap-items'), array('items' => $topNav->roots()))
+
+
+                @include('navs.topnav__links')
             </ul>
                 @if($signedIn)
                     <p class="navbar-text navbar-right">Signed in as {{ $user->name }}. <a href="/auth/logout" class="navbar-link">{{ trans('auth.logout') }}</a></p>

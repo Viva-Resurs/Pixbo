@@ -68,8 +68,12 @@ class ScreenGroupsController extends Controller
      * @param  ScreenGroup $screenGroup
      * @return \Illuminate\View\View
      */
+
+    // TODO: NOT WORKING!
     public function show(ScreenGroup $screengroup)
     {
+        $screengroup = ScreenGroup::findOrFail($screengroup->id)->with(['screens', 'event.meta'])->get();
+        dd($screengroup);
         if (Request::wantsJson()) {
             return $screengroup;
         } else {

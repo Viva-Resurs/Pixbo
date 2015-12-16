@@ -3,12 +3,12 @@
 return [
 
     /*
-                                                |--------------------------------------------------------------------------
-                                                | Application Language Lines
-                                                |--------------------------------------------------------------------------
-                                                |
-                                                | The following language lines are used for general application messages.
-                                                |
+                                                        |--------------------------------------------------------------------------
+                                                        | Application Language Lines
+                                                        |--------------------------------------------------------------------------
+                                                        |
+                                                        | The following language lines are used for general application messages.
+                                                        |
     */
 
     /**
@@ -58,6 +58,8 @@ return [
     'users' => 'Users',
     'ticker' => 'Ticker',
     'tickers' => 'Tickers',
+    'role' => 'Role',
+    'roles' => 'Roles',
     'settings' => 'Settings',
 
     /**

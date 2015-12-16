@@ -70,7 +70,7 @@ class RolesTablesSeeder extends Seeder
 
         // ScreenGroup
         $view_screengroup = Permission::create([
-            'name' => 'view_screengroup',
+            'name' => 'view_screengroups',
             'label' => 'auth.view_screengroup',
         ]);
 
@@ -80,12 +80,12 @@ class RolesTablesSeeder extends Seeder
         ]);
 
         $edit_screengroup = Permission::create([
-            'name' => 'edit_screengroup',
+            'name' => 'edit_screengroups',
             'label' => 'auth.edit_screengroup',
         ]);
 
         $remove_screengroup = Permission::create([
-            'name' => 'remove_screengroup',
+            'name' => 'remove_screengroups',
             'label' => 'auth.remove_screengroup',
         ]);
 
@@ -131,6 +131,48 @@ class RolesTablesSeeder extends Seeder
             'label' => 'auth.remove_users',
         ]);
 
+        // Roles
+        $view_roles = Permission::create([
+            'name' => 'view_roles',
+            'label' => 'auth.view_roles',
+        ]);
+
+        $add_roles = Permission::create([
+            'name' => 'add_roles',
+            'label' => 'auth.add_roles',
+        ]);
+
+        $edit_roles = Permission::create([
+            'name' => 'edit_roles',
+            'label' => 'auth.edit_roles',
+        ]);
+
+        $remove_roles = Permission::create([
+            'name' => 'remove_roles',
+            'label' => 'auth.remove_roles',
+        ]);
+
+        // Tickers
+        $view_tickers = Permission::create([
+            'name' => 'view_tickers',
+            'label' => 'auth.view_tickers',
+        ]);
+
+        $add_tickers = Permission::create([
+            'name' => 'add_tickers',
+            'label' => 'auth.add_tickers',
+        ]);
+
+        $edit_tickers = Permission::create([
+            'name' => 'edit_tickers',
+            'label' => 'auth.edit_tickers',
+        ]);
+
+        $remove_tickers = Permission::create([
+            'name' => 'remove_tickers',
+            'label' => 'auth.remove_tickers',
+        ]);
+
         /**
          * Roles
          */
@@ -143,22 +185,41 @@ class RolesTablesSeeder extends Seeder
 
         $admin->givePermissionTo($dash);
         $admin->givePermissionTo($player);
+        // Clients
         $admin->givePermissionTo($view_clients);
         $admin->givePermissionTo($add_clients);
         $admin->givePermissionTo($edit_clients);
         $admin->givePermissionTo($remove_clients);
+
+        // ScreenGroup
         $admin->givePermissionTo($view_screengroup);
         $admin->givePermissionTo($add_screengroups);
         $admin->givePermissionTo($edit_screengroup);
         $admin->givePermissionTo($remove_screengroup);
+
+        // Screen
         $admin->givePermissionTo($view_screens);
         $admin->givePermissionTo($add_screens);
         $admin->givePermissionTo($edit_screens);
         $admin->givePermissionTo($remove_screens);
+
+        // User
         $admin->givePermissionTo($view_users);
         $admin->givePermissionTo($add_users);
         $admin->givePermissionTo($edit_users);
         $admin->givePermissionTo($remove_users);
+
+        // Role
+        $admin->givePermissionTo($view_roles);
+        $admin->givePermissionTo($add_roles);
+        $admin->givePermissionTo($edit_roles);
+        $admin->givePermissionTo($remove_roles);
+
+        // Ticker
+        $admin->givePermissionTo($view_tickers);
+        $admin->givePermissionTo($add_tickers);
+        $admin->givePermissionTo($edit_tickers);
+        $admin->givePermissionTo($remove_tickers);
 
         // Moderator
         $moderator = Role::create([
@@ -172,6 +233,12 @@ class RolesTablesSeeder extends Seeder
         $moderator->givePermissionTo($add_screens);
         $moderator->givePermissionTo($edit_screens);
         $moderator->givePermissionTo($remove_screens);
+
+        // Ticker
+        $moderator->givePermissionTo($view_tickers);
+        $moderator->givePermissionTo($add_tickers);
+        $moderator->givePermissionTo($edit_tickers);
+        $moderator->givePermissionTo($remove_tickers);
 
         // Client
         $client = Role::create([
