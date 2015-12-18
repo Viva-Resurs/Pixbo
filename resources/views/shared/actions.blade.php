@@ -5,11 +5,11 @@
 
     <ul class="dropdown-menu" role="menu">
 
-        <li><a href="{{ route('clients.show', array($item['id'])) }}">View</a></li>
+        <li><a href="{{ route($model.'.show', array($item['id'])) }}">{{ trans('messages.show') }}</a></li>
 
-        <li><a href="{{ route('clients.edit', array($item['id'])) }}">Edit</a></li>
+        <li><a href="{{ route($model.'.edit', array($item['id'])) }}">{{ trans('messages.edit') }}</a></li>
 
-        <li><a href="{{ route('clients.destroy', array($item['id'])) }}">Delete</a></li>
+        <li><a href="{{ route($model.'.destroy', array($item['id'])) }}">{{ trans('messages.destroy') }}</a></li>
 
     </ul>
 </div>

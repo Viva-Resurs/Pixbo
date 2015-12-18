@@ -31,6 +31,9 @@
     <div class="col-md-6">
         @include('shared.edit__event')
     </div>
+    <div class="col-md-6">
+      @include('screens.screengroups')
+    </div>
 
     <!-- Modal -->
     @include('events.meta.__form')

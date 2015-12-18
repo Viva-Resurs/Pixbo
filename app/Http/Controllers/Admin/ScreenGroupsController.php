@@ -72,8 +72,7 @@ class ScreenGroupsController extends Controller
     // TODO: NOT WORKING!
     public function show(ScreenGroup $screengroup)
     {
-        $screengroup = ScreenGroup::findOrFail($screengroup->id)->with(['screens', 'event.meta'])->get();
-        dd($screengroup);
+        //$screengroup = ScreenGroup::findOrFail($screengroup->id)->with(['event.meta'])->get();
         if (Request::wantsJson()) {
             return $screengroup;
         } else {

@@ -1,8 +1,8 @@
 @can('view_screengroups')
-  <li class="{{ set_active('admin/screengroups') }}"><a href="/admin/screengroups">{{ trans('messages.screen_group') }}</a></li>
+  <li class="{{ set_active('admin/screengroups') }}"><a href="/admin/screengroups">{{ trans('messages.screen_groups') }}</a></li>
 @endcan
 @can('view_screens')
-  <li class="{{ set_active('admin/screens') }}"><a href="/admin/screens">{{ trans('messages.screen') }}</a></li>
+  <li class="{{ set_active('admin/screens') }}"><a href="/admin/screens">{{ trans('messages.screens') }}</a></li>
 @endcan
 @can('view_clients')
   <li class="{{ set_active('admin/clients') }}"><a href="/admin/clients">{{ trans('messages.clients') }}</a></li>
