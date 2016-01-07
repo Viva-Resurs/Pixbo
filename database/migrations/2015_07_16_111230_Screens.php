@@ -14,8 +14,7 @@ class Screens extends Migration
     {
         Schema::create('screens', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->boolean('scheduled');
+            $table->integer('tag');
 
             $table->timestamps();
         });

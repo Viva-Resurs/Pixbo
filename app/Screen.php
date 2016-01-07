@@ -18,9 +18,6 @@ class Screen extends Model
  * @var [type]
  */
     protected $fillable = [
-        'name',
-        'scheduled',
-        'photo_id',
         'created_at',
         'updated_at',
     ];
@@ -37,5 +34,10 @@ class Screen extends Model
     public function photo()
     {
         return $this->hasOne(Photo::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'screen_tag')->withTimestamps();
     }
 }
