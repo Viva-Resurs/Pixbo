@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ScreenGroup extends Model
 {
-    use HasEvents;
     /**
      * Database table
      * @var string
@@ -21,7 +20,6 @@ class ScreenGroup extends Model
     protected $fillable = [
         'name',
         'desc',
-        'event_id',
         'created_at',
         'updated_at',
     ];
@@ -34,6 +32,10 @@ class ScreenGroup extends Model
     public function screens()
     {
         return $this->belongsToMany(Screen::class, 'screen_screen_group')->withTimestamps();
+    }
+
+    public function tickers() {
+    	return $this->belongsToMany(Ticker::class, 'screen_group_ticker')->withTimestamps();
     }
 
 /**
@@ -65,12 +67,10 @@ class ScreenGroup extends Model
                 $screen = new Screen;
                 $screen->fill([
                     'name' => $photo->name,
-                    'scheduled' => 0,
-                    'screen_group_id' => $this->getAttribute('id'),
                 ]);
                 $screen->save();
-                $event = $screen->createAndReturnEvent();
-                $event->createAndReturnMeta();
+                //$event = $screen->createAndReturnEvent();
+                //$event->createAndReturnMeta();
                 $screen->photo()->save($photo);
                 $this->screens()->attach($screen);
             });
