@@ -25,6 +25,10 @@ Features:
     * Event
         * Let user set recurring and use it to generate shadow events. (Done)
 
+    * Tags
+        * Let the user give a screen one or many tags associated with it.
+        * Ajax to give the user suggestion of already existing tags.
+
     * Authorization
         * Roles:
             * Admin

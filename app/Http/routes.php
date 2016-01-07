@@ -20,6 +20,7 @@ Route::get('/', 'PagesController@home');
 Route::get('admin/dashboard', 'PagesController@dashboard');
 //Route::get('admin/calendars', 'PagesController@calendars');
 Route::post('admin/screengroups/{screengroups}/addphoto', 'Admin\ScreenGroupsController@addScreenFromPhoto');
+Route::post('admin/screens/addphoto', 'Admin\ScreensController@addScreenFromPhoto');
 
 // Route::get('/event', function () {
 //     event('GenerateShadowEvents', EventMeta::first());

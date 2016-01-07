@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ScreenRequest;
+use App\Photo;
 use App\Screen;
 use App\ScreenGroup;
 use Auth;
-use Request;
+use Illuminate\Http\Request;
+use Request as Requests;
 
 class ScreensController extends Controller
 {
@@ -20,7 +22,7 @@ class ScreensController extends Controller
     {
         $screens = Screen::all();
 
-        if (Request::wantsJson()) {
+        if (Requests::wantsJson()) {
             return $screens;
         } else {
             return view('screens.index', compact('screens'));
@@ -143,18 +145,25 @@ class ScreensController extends Controller
      * @param ScreenGroup $screengroup
      * @param Request $request
      */
-    public function addScreenFromPhoto(Requests $request, ScreenGroup $screengroup)
+    public function addScreenFromPhoto(Request $request)
     {
         $this->validate($request, [
             'photo' => 'required|mimes:jpg,jpeg,png,bmp',
         ]);
-
+        $screen = null;
         // find or create screen and add photo to it.
         $photo = Photo::getOrCreate($request->file('photo'))->move($request->file('photo'));
-        $photo->save();
+        if (!is_null($photo->screen)) {
+            $screen = $photo->screen;
+        } else {
+            $screen = new Screen;
+            $screen->save();
+        }
+
+        $screen->photo()->save($photo);
 
         // Get a the existing screen and attatch it to screengroup.
         // Otherwise create a new screen with the photo and then attatch it to the screengroup.
-        $screengroup->assignOrCreateAndAssign($photo);
+        // $screengroup->assignOrCreateAndAssign($photo);
     }
 }

@@ -6,6 +6,6 @@
 
 
 @section('content')
-    @include('screengroups.screen__card', ['screens' => $screengroup->screens]);
+    @include('screengroups.screen__card', ['screens' => $screengroup->screens])
 
 @stop

@@ -50,9 +50,8 @@ class ScreenGroupsController extends Controller
     {
         if ($screengroup = new ScreenGroup($request->all())) {
             $screengroup->save();
-            $event = $screengroup->createAndReturnEvent();
-            $event_meta = $event->createAndReturnMeta();
-            flash()->success('ScreenGroup created successfully.');
+
+            flash()->success(trans('messages.screen_group_created_ok'));
 
             if (Request::wantsJson()) {
                 return $screengroup;
@@ -105,7 +104,7 @@ class ScreenGroupsController extends Controller
     public function update(ScreenGroupRequest $request, ScreenGroup $screengroup)
     {
         if ($screengroup->update($request->all())) {
-            flash()->success('ScreenGroup updated successfully.');
+            flash()->success(trans('messages.screen_group_updated_ok'));
             //$screengroup->generateShadowEvents();
             if (Request::wantsJson()) {
                 return $screengroup;
@@ -113,7 +112,7 @@ class ScreenGroupsController extends Controller
                 return redirect()->back();
             }
         } else {
-            return abort(500, 'Unable to update the screengroup');
+            return abort(500, trans('messages.screen_group_updated_failed'));
         }
     }
 

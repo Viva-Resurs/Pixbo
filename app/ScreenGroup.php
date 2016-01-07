@@ -34,8 +34,9 @@ class ScreenGroup extends Model
         return $this->belongsToMany(Screen::class, 'screen_screen_group')->withTimestamps();
     }
 
-    public function tickers() {
-    	return $this->belongsToMany(Ticker::class, 'screen_group_ticker')->withTimestamps();
+    public function tickers()
+    {
+        return $this->belongsToMany(Ticker::class, 'screen_group_ticker')->withTimestamps();
     }
 
 /**
@@ -45,11 +46,6 @@ class ScreenGroup extends Model
     public function client()
     {
         return $this->hasMany(Client::class);
-    }
-
-    public function tickers()
-    {
-        return $this->hasMany(Ticker::class);
     }
 
     public function assignOrCreateAndAssign($photo)
