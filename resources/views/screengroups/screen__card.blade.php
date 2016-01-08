@@ -5,9 +5,9 @@
       <div class="caption screens_card__caption">
         <p>
           @if(Count($card->event))
-          {{ $card->event[0]['date'] }} - {{ $card->event }}
+          {{ $card->event[0]['start_date'] }} - {{ $card->event[0]['end_date'] }}
           @else
-          {{ 'date_string' }}
+            <span class="warning">{{ trans('messages.incorrectly_scheduled') }}</span>
           @endif
         </p>
         <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>

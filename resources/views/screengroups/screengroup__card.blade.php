@@ -4,11 +4,10 @@
             <div class="caption">
                 <a href="/admin/screengroups/{{ $card->id }}" class="btn btn-primary btn-block" role="button">{{ $card->name }}</a>
                 <div class="screengroup_card__info" style="padding-top: 1em;">
-                    <p>{{ Count($card->screens) }} {{ trans('messages.active') }}</p>
-                    <p>1 Återkommande</p>
-                    <p>1 Ticker</p>
+                    <p>{{ Count($card->screens) }} {{ trans('messages.screens') }}</p>
+                    <p>{{ Count($card->tickers) }} {{ trans('messages.tickers') }}</p>
                     @can('view_clients')
-                        <p>x Skärmar</p>
+                        <p>{{ Count($card->clients) }} {{ trans('messages.clients') }}</p>
                     @endcan
                 </div>
             </div>

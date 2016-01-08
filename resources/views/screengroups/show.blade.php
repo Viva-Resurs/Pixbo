@@ -6,6 +6,7 @@
 
 
 @section('content')
-    @include('screengroups.screen__card', ['screens' => $screengroup->screens])
+    @include('screens.screens__card', ['screens' => $screengroup->screens])
+    @include('tickers.ticker__card', ['tickers' => $screengroup->tickers])
 
 @stop
