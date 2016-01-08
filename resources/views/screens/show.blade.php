@@ -1,7 +1,7 @@
 @extends('admin')
 
 @section('title')
-Screen index
+{{ trans("messages.show_screen") }}
 @stop
 
 
@@ -10,80 +10,54 @@ Screen index
 <h1 class="page-header">{{ trans("messages.show_screen") }}</h1>
 
 <div class="row">
-    <div class="col-lg-6 col-md-6 col-xs-12">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    {{ trans('messages.info') }}
-                </div>
-            </div>
+    <div class="col-sm-6 col-md-6">
+        <div class="panel panel-default">
             <div class="panel-body">
-                <table class="table">
-                    <tbody>
-                        <tr>
-                            <td>{{ trans('messages.id') }}</td>
-                            <td>{{ $screen->id }}</td>
-                        </tr>
-                        <tr>
-                            <td>{{ trans('messages.name') }}</td>
-                            <td>{{ $screen->name }}</td>
-                        </tr>
-                        <tr>
-                            <td>{{ trans('messages.event') }}</td>
-                            <td>TODO</td>
-                        </tr>
-                        <tr>
-                            <td>{{ trans('messages.screen_groups') }}</td>
-                            <td>
-                            @foreach ($screen->screengroups as $index => $screengroup)
-                                @if($index != count($screen->screengroups) -1)
-                                    {{ $screengroup->name }},
-                                @else
-                                    {{ $screengroup->name }}
-                                @endif
-                            @endforeach
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>{{ trans('messages.created') }}</td>
-                            <td>{{ $screen->created_at }}</td>
-                        </tr>
-                        <tr>
-                            <td>{{ trans('messages.updated') }}</td>
-                            <td>{{ $screen->updated_at }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <img src="/{{ $screen->photo->path }}" style="max-height: 100%; max-width: 100%">
             </div>
         </div>
     </div>
-    <div class="col-lg-6 col-md-6 col-xs-12">
-        <div class="panel panel-info">
-              <div class="panel-heading">
-                    <h3 class="panel-title">{{ trans('messages.image') }}</h3>
-              </div>
+    <div class="col-sm-6 col-md-6">
+        <div class="panel panel-default">
               <div class="panel-body">
-                    <img src="/{{ $screen->photo->thumb_path }}">
-              </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    {{ 'Event' }}
+                    Tags
+                    Område
+                    Schemalägg
+                    {!! Form::model($event, ['method' => 'PATCH', 'route' => ['admin.events.update', $event->id]], ['class' => 'form-horizontal', 'id' => 'event_meta_form']) !!}
+            {{ csrf_field() }}
+                <div class="modal-body row">
+                    <div class="col-md-4">
+                        {{ trans('messages.repeat') }}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            {!! Form::select('recur_type', array(
+                                'daily' => trans("messages.daily"),
+                                'weekly' => trans('messages.weekly'),
+                                'monthly' => trans('messages.monthly'),
+                                'yearly' => trans('messages.yearly')
+                            ), null)
+                            !!}
+
+                        </div>
+                    </div>
+
+                    <div class="recurrence-settings">
+                        @include('events.meta.daily__form')
+                        @include('events.meta.weekly__form')
+                        @include('events.meta.monthly__form')
+                        @include('events.meta.yearly__form')
+                    </div>
                 </div>
-            </div>
-            <div class="panel-body">
-                <table class="table">
-                    {!! Form::model($event, ['method' => 'PATCH', 'route' => ['admin.events.update', $event->id]]) !!}
-                        @include ('events.__form', ['submitButtonText' => trans('messages.save')])
-                        <a class="btn btn-primary" data-toggle="modal" href='#event_meta'>Trigger modal</a>
-                    {!! Form::close() !!}
-                </table>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('messages.close') }}</button>
+                    {!! Form::submit(trans('messages.save'), ['class' => 'btn btn-primary']) !!}
+                </div>
+            {!! Form::close() !!}
+              </div>
         </div>
     </div>
 </div>
+
 
 @stop

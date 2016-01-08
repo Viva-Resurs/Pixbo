@@ -72,12 +72,11 @@ class ScreensController extends Controller
     public function show(Screen $screen)
     {
         $event = $screen->getEvent();
-        $event_meta = $event->getEventMeta();
 
-        if (Request::wantsJson()) {
+        if (Requests::wantsJson()) {
             return $screen;
         } else {
-            return view('screens.show', compact(['screen', 'event', 'event_meta']));
+            return view('screens.show', compact(['screen', 'event']));
         }
     }
 
@@ -113,7 +112,7 @@ class ScreensController extends Controller
                 return redirect()->back();
             }
         } else {
-            return abort(500, 'Unable to update the screen');
+            return abort(500, trans('messages.screen_update_failed'));
         }
     }
 
@@ -129,7 +128,7 @@ class ScreensController extends Controller
         if ($deleted) {
             flash()->success('Screen removed successfully.');
         } else {
-            flash()->error('Was not able to remove the screen.');
+            flash()->error(trans('messages.screen_delete_failed'));
         }
 
         if (Request::wantsJson()) {
