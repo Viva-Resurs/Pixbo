@@ -12,7 +12,7 @@
  */
 
 Route::resource('play', 'PlayerController');
-Route::resource('admin/screengroups/{screengroup}/tickers', 'Admin\TickersController');
+
 Route::get('admin/screengroups/{screengroup}/screens', 'Admin\ScreenGroupsController@screens');
 Route::post('admin/screengroups/{screengroup}/screens/{screens}/remove_association', 'Admin\ScreenGroupsController@remove_association');
 
@@ -35,7 +35,8 @@ Route::group([
         return redirect('/admin/dashboard');
     });
     Route::resource('admin/clients', 'ClientsController');
-    Route::resource('admin/screengroups/{screengroup_id}/tickers', 'TickersController');
+    //Route::resource('admin/screengroups/{screengroup_id}/tickers', 'TickersController');
+    Route::resource('admin/tickers', 'TickersController');
     Route::resource('admin/screengroups', 'ScreenGroupsController');
     Route::resource('admin/screens', 'ScreensController');
     Route::resource('admin/photos', 'PhotosController');

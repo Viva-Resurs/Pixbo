@@ -15,9 +15,22 @@ class TickersController extends Controller
      *
      * @return Response
      */
-    public function index(ScreenGroup $screengroup)
+    public function index()
     {
-        return $screengroup->tickers;
+        $tickers = Ticker::all();
+
+        if (RF::wantsJson()) {
+            return $tickers;
+        } else {
+            return view('tickers.index', compact('tickers'));
+        }
+    }
+
+    public function create()
+    {
+        $ticker = new Ticker;
+
+        return view('tickers.create', compact('ticker'));
     }
 
     /**
@@ -26,16 +39,18 @@ class TickersController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(ScreenGroup $screengroup, Request $request)
+    public function store(Request $request)
     {
-        $ticker = new Ticker($request->all());
+        if ($ticker = new Ticker($request->all())) {
+            $ticker->save();
 
-        $screengroup->save($ticker);
+            flash()->success(trans('messages.ticker_created_ok'));
 
-        if (RF::wantsJson()) {
-            return $screen;
-        } else {
-            abort(500, 'API only returns JSON.');
+            if (RF::wantsJson()) {
+                return $ticker;
+            } else {
+                return redirect('/admin/dashboard/');
+            }
         }
     }
 
@@ -46,15 +61,17 @@ class TickersController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(ScreenGroup $screengroup, Request $request)
+    public function update(Ticker $ticker, Request $request)
     {
-        $ticker_request = $request->all();
-        $ticker = Ticker::where(['id' => $ticker_request['id']])->first();
-
         if ($ticker->update($request->all())) {
-            if (RF::wantsJson()) {
-                return $screengroup;
+            flash()->success(trans('messages.ticker_updated_ok'));
+            if (Request::wantsJson()) {
+                return $ticker;
+            } else {
+                return redirect()->back();
             }
+        } else {
+            return abort(500, trans('messages.ticker_updated_failed'));
         }
     }
 

@@ -4,6 +4,9 @@
 @can('view_screens')
   <li class="{{ set_active('admin/screens') }}"><a href="/admin/screens">{{ trans('messages.screens') }}</a></li>
 @endcan
+@can('view_tickers')
+  <li class="{{ set_active('admin/tickers') }}"><a href="/admin/tickers">{{ trans('messages.tickers') }}</a></li>
+@endcan
 @can('view_clients')
   <li class="{{ set_active('admin/clients') }}"><a href="/admin/clients">{{ trans('messages.clients') }}</a></li>
 @endcan
