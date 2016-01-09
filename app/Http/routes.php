@@ -22,31 +22,41 @@ Route::get('admin/dashboard', 'PagesController@dashboard');
 Route::post('admin/screengroups/{screengroups}/addphoto', 'Admin\ScreenGroupsController@addScreenFromPhoto');
 Route::post('admin/screens/addphoto', 'Admin\ScreensController@addScreenFromPhoto');
 
+Route::get('/api/screengroups', function () {
+	$screengroups = App\ScreenGroup::all(['id', 'name']);
+	return $screengroups->map(function ($screengroups) {
+		return [
+			'text'  => $screengroups->name,
+			'value' => $screengroups->id,
+		];
+	})->toArray();
+});
+
 // Route::get('/event', function () {
 //     event('GenerateShadowEvents', EventMeta::first());
 // });
 
 Route::group([
-    'namespace' => 'Admin',
-    'middleware' => 'auth',
+	'namespace'  => 'Admin',
+	'middleware' => 'auth',
 ], function () {
 
-    Route::get('admin', function () {
-        return redirect('/admin/dashboard');
-    });
-    Route::resource('admin/clients', 'ClientsController');
-    //Route::resource('admin/screengroups/{screengroup_id}/tickers', 'TickersController');
-    Route::resource('admin/tickers', 'TickersController');
-    Route::resource('admin/screengroups', 'ScreenGroupsController');
-    Route::resource('admin/screens', 'ScreensController');
-    Route::resource('admin/photos', 'PhotosController');
-    Route::resource('admin/events', 'EventsController');
-    Route::resource('admin/eventmetas', 'EventMetasController');
-    Route::resource('admin/users', 'UsersController');
+	Route::get('admin', function () {
+		return redirect('/admin/dashboard');
+	});
+	Route::resource('admin/clients', 'ClientsController');
+	//Route::resource('admin/screengroups/{screengroup_id}/tickers', 'TickersController');
+	Route::resource('admin/tickers', 'TickersController');
+	Route::resource('admin/screengroups', 'ScreenGroupsController');
+	Route::resource('admin/screens', 'ScreensController');
+	Route::resource('admin/photos', 'PhotosController');
+	Route::resource('admin/events', 'EventsController');
+	Route::resource('admin/eventmetas', 'EventMetasController');
+	Route::resource('admin/users', 'UsersController');
 });
 
 Route::controllers([
-    'auth' => 'Auth\AuthController',
+	'auth' => 'Auth\AuthController',
 ]);
 
 /**
@@ -54,9 +64,9 @@ Route::controllers([
  */
 Menu::make('topNav', function ($menu) {
 
-    $menu->add(trans('messages.screen_groups'), 'admin/screengroups');
-    $menu->add(trans('messages.clients'), 'admin/clients');
-    $menu->add(trans('messages.screens'), 'admin/screens');
-    $menu->add(trans('messages.users'), 'admin/users');
-    $menu->add(trans('messages.settings'), 'settings');
+	$menu->add(trans('messages.screen_groups'), 'admin/screengroups');
+	$menu->add(trans('messages.clients'), 'admin/clients');
+	$menu->add(trans('messages.screens'), 'admin/screens');
+	$menu->add(trans('messages.users'), 'admin/users');
+	$menu->add(trans('messages.settings'), 'settings');
 });

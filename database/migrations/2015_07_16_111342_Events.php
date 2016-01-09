@@ -14,10 +14,10 @@ class Events extends Migration {
 			$table->increments('id');
 
 			$table->date('start_date');
-			$table->date('end_date');
+			$table->date('end_date')->nullable();
 
-			$table->time('start_time');
-			$table->time('end_time');
+			$table->time('start_time')->nullable();
+			$table->time('end_time')->nullable();
 
 			$table->integer('frequency')->unsigned()->nullable();
 			$table->string('recur_type')->nullable();

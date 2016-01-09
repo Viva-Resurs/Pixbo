@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.1.26 (LTS) on 2016-01-07.
+ * Generated for Laravel 5.1.24 (LTS) on 2016-01-09.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -2544,7 +2544,6 @@ namespace {
          *
          * @param string $value
          * @return string 
-         * @throws \Illuminate\Contracts\Encryption\EncryptException
          * @static 
          */
         public static function encrypt($value){
@@ -2556,7 +2555,6 @@ namespace {
          *
          * @param string $payload
          * @return string 
-         * @throws \Illuminate\Contracts\Encryption\DecryptException
          * @static 
          */
         public static function decrypt($payload){
@@ -3452,7 +3450,7 @@ namespace {
          * Get an array with the values of a given column.
          *
          * @param string $column
-         * @param string|null $key
+         * @param string $key
          * @return \Illuminate\Support\Collection 
          * @static 
          */
@@ -6940,7 +6938,7 @@ namespace {
          * Determine if a translation exists for a given locale.
          *
          * @param string $key
-         * @param string|null $locale
+         * @param string $locale
          * @return bool 
          * @static 
          */
@@ -6952,7 +6950,7 @@ namespace {
          * Determine if a translation exists.
          *
          * @param string $key
-         * @param string|null $locale
+         * @param string $locale
          * @param bool $fallback
          * @return bool 
          * @static 
@@ -6966,7 +6964,7 @@ namespace {
          *
          * @param string $key
          * @param array $replace
-         * @param string|null $locale
+         * @param string $locale
          * @param bool $fallback
          * @return string 
          * @static 
@@ -9925,6 +9923,7 @@ namespace {
          *
          * @param array $controllers
          * @return void 
+         * @deprecated since version 5.1.
          * @static 
          */
         public static function controllers($controllers){
@@ -9938,6 +9937,7 @@ namespace {
          * @param string $controller
          * @param array $names
          * @return void 
+         * @deprecated since version 5.1.
          * @static 
          */
         public static function controller($uri, $controller, $names = array()){
@@ -10815,16 +10815,6 @@ namespace {
         }
         
         /**
-         * Remove data that was flashed for only the current request.
-         *
-         * @return void 
-         * @static 
-         */
-        public static function removeFlashNowData(){
-            \Illuminate\Session\Store::removeFlashNowData();
-        }
-        
-        /**
          * Checks if an attribute is defined.
          *
          * @param string $name The attribute name
@@ -10927,19 +10917,6 @@ namespace {
          */
         public static function flash($key, $value){
             \Illuminate\Session\Store::flash($key, $value);
-        }
-        
-        /**
-         * Flash a key / value pair to the session
-         * for immediate use.
-         *
-         * @param string $key
-         * @param mixed $value
-         * @return void 
-         * @static 
-         */
-        public static function now($key, $value){
-            \Illuminate\Session\Store::now($key, $value);
         }
         
         /**
@@ -11484,29 +11461,6 @@ namespace {
             return \Illuminate\Routing\UrlGenerator::setRootControllerNamespace($rootNamespace);
         }
         
-        /**
-         * Register a custom macro.
-         *
-         * @param string $name
-         * @param callable $macro
-         * @return void 
-         * @static 
-         */
-        public static function macro($name, $macro){
-            \Illuminate\Routing\UrlGenerator::macro($name, $macro);
-        }
-        
-        /**
-         * Checks if macro is registered.
-         *
-         * @param string $name
-         * @return bool 
-         * @static 
-         */
-        public static function hasMacro($name){
-            return \Illuminate\Routing\UrlGenerator::hasMacro($name);
-        }
-        
     }
 
 
@@ -11819,7 +11773,6 @@ namespace {
          *
          * @param bool $overwrite
          * @return string 
-         * @throws \InvalidArgumentException
          * @static 
          */
         public static function stopSection($overwrite = false){
@@ -11830,7 +11783,6 @@ namespace {
          * Stop injecting content into a section and append it.
          *
          * @return string 
-         * @throws \InvalidArgumentException
          * @static 
          */
         public static function appendSection(){
@@ -12461,19 +12413,6 @@ namespace {
         }
         
         /**
-         * Create a color input field.
-         *
-         * @param string $name
-         * @param string $value
-         * @param array $options
-         * @return string 
-         * @static 
-         */
-        public static function color($name, $value = null, $options = array()){
-            return \Collective\Html\FormBuilder::color($name, $value, $options);
-        }
-        
-        /**
          * Create a submit button element.
          *
          * @param string $value
@@ -12545,7 +12484,7 @@ namespace {
         /**
          * Get the session store implementation.
          *
-         * @return \Illuminate\Session\SessionInterface $session
+         * @return \Illuminate\Session\Store $session
          * @static 
          */
         public static function getSessionStore(){
@@ -12555,7 +12494,7 @@ namespace {
         /**
          * Set the session store implementation.
          *
-         * @param \Illuminate\Session\SessionInterface $session
+         * @param \Illuminate\Session\Store $session
          * @return $this 
          * @static 
          */

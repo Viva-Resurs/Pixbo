@@ -6,7 +6,7 @@ var bootstrap = require('bootstrap-sass');
 import Alert from './components/Alert.vue';
 import ScreenGallery from './components/ScreenGallery.vue';
 import Ticker from './components/Ticker.vue';
-
+import Screen from './components/Screen.vue';
 
 new Vue({
     el: '#app',
@@ -14,6 +14,7 @@ new Vue({
     components: { 
         'Alert': Alert, 
         'screengallery': ScreenGallery, 
-        'Tickers': Ticker 
+        'Tickers': Ticker,
+        'Screen': Screen
     }
 });
