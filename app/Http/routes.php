@@ -32,6 +32,25 @@ Route::get('/api/screengroups', function () {
 	})->toArray();
 });
 
+Route::get('/api/tags', function () {
+	$tags = App\Tag::all(['id', 'name']);
+	return $tags->map(function ($tags) {
+		return [
+			'name' => $tags->name,
+			'id'   => $tags->id,
+		];
+	})->toArray();
+});
+
+Route::get('/api/event/screen/{id}', function ($id) {
+	$screen = App\Screen::find($id)->first();
+	return $screen->event;
+});
+
+Route::get('/api/lang/{string}', function ($string) {
+	return trans($string);
+});
+
 // Route::get('/event', function () {
 //     event('GenerateShadowEvents', EventMeta::first());
 // });

@@ -12945,23 +12945,56 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = {
 
-    props: ['type'],
+    template: '#screen-template',
+    props: ['id'],
 
     data: function data() {
         return {
-            screengroups: []
+            screengroups: [],
+            tags: [],
+            event: '',
+            messages: [],
+            recur_type: [],
+            day_num: []
         };
     },
 
-    computed: function computed() {},
+    methods: {
+        getMessage: function getMessage(message) {
+            this.$http.get('/api/lang/' + message, function (translated) {
+                this.messages.push({ message: message, translated: translated });
+            });
+        },
+        getTranslated: function getTranslated(message) {
+
+            console.log(this.messages);
+            for (var msg in msgs) {
+                if (msg.message == msg) {
+                    console.log(msg);
+                    return msg.translated;
+                }
+            }
+        }
+    },
+
+    computed: {
+        summary: function summary() {
+            return 'summary_text';
+        }
+    },
     ready: function ready() {
         this.$http.get('/api/screengroups', (function (screengroups) {
             this.screengroups = screengroups;
         }).bind(this));
+        this.$http.get('/api/tags', (function (tags) {
+            this.tags = tags;
+        }).bind(this));
+        this.$http.get('/api/event/screen/' + this.id, (function (event) {
+            this.event = event.pop();
+        }).bind(this));
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <form action=\"\" method=\"POST\" role=\"form\">\n        <legend>Taggar</legend>\n\n        <div class=\"form-group\">\n            <label for=\"inputTags\" class=\"col-sm-2 control-label\">Taggar:</label>\n            <div class=\"col-sm-10\">\n                <input type=\"text\" name=\"tags\" id=\"inputTags\" class=\"form-control\" required=\"required\">\n            </div>\n        </div>\n\n        <legend>Område</legend>\n        <select class=\"form-control\" multiple=\"\">\n            <option v-for=\"screengroup in screengroups\" v-bind:value=\"screengroup.value\">{{screengroup.text}}</option>\n        </select>\n\n        <legend>Planera</legend>\n    \n        <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\n    </form>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)

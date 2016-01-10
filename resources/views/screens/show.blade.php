@@ -20,7 +20,8 @@
     <div class="col-sm-6 col-md-4">
         <div class="panel panel-default">
               <div class="panel-body">
-                    <screen></screen>
+                    <screen id="{{ $screen->id }}"></screen>
+                    @include('screens.screen__template')
               </div>
         </div>
     </div>

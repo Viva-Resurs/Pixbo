@@ -22,9 +22,11 @@ return [
 	'updated'                     => 'Uppdaterad',
 	'info'                        => 'Info',
 	'image'                       => 'Bild',
-	'schedule'                    => 'Schema',
+	'schedule'                    => 'Schemalägg',
 	'scheduled'                   => 'Schemalagd',
 	'ip_address'                  => 'IP adress',
+	'summary'                     => 'Sammanfattning',
+	//'schedule'                    => 'Planering',
 
 	/**
 	 * Commonly used words.
@@ -64,8 +66,7 @@ return [
 	'roles'                       => 'Roller',
 	'settings'                    => 'Inställningar',
 	'tag'                         => 'Tag',
-
-	'screen_group_created_ok'     => 'Område skapat.',
+	'tags'                        => 'Taggar',
 
 	/**
 	 * Time/Date
@@ -85,6 +86,17 @@ return [
 	'never'                       => 'Aldrig',
 	'at'                          => 'På:',
 	'the'                         => 'Den:',
+	'days_before_event'           => 'Visa n dagar innan',
+
+	'start_date'                  => 'Start datum',
+	'end_date'                    => 'Slut datum',
+	'start_time'                  => 'Start tid',
+	'end_time'                    => 'Slut tid',
+
+	'day_frequency'               => 'Var n:te dag',
+	'week_frequency'              => 'Var n:te vecka',
+	'month_frequency'             => 'Var n:te månad',
+	'year_frequency'              => 'Var n:te år',
 
 	'daily'                       => 'Dagligen',
 	'weekly'                      => 'Veckovis',
@@ -125,6 +137,7 @@ return [
 	 */
 	'repeat_success_updated'      => 'Schemaläggningen har uppdaterats.',
 	'unable_to_determ_recur_type' => 'Unable to determine recurrence type.',
+	'screen_group_created_ok'     => 'Område skapat.',
 
 	'drop_files'                  => 'Dra bild hit för att lägga till.',
 

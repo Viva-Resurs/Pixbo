@@ -8,6 +8,8 @@ import ScreenGallery from './components/ScreenGallery.vue';
 import Ticker from './components/Ticker.vue';
 import Screen from './components/Screen.vue';
 
+
+
 new Vue({
     el: '#app',
 
