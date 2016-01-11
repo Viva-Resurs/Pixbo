@@ -1,16 +1,17 @@
 <template id="screen-template">
-    <form action="" method="POST" role="form" v-on:submit.prevent>
+    <form id="screenform" action="" method="POST" role="form" v-on:submit.prevent="send_post">
+        {{ csrf_field () }}
         <legend>{{ trans('messages.tags') }}</legend>
 
         <div class="form-group">
-            <label for="inputTags" class="control-label">{{ trans('messages.tag') }}:</label>
+            <label for="inputTags" class="control-label" title="{{ trans('messages.tag_tooltip') }}">{{ trans('messages.tag') }}:</label>
             <div class="">
-                <input type="text" name="tags" id="inputTags" class="form-control" required="required" placeholder="tag_1, tag_2, ..., tag_n">
+                <input type="text" v-model="selected_tags" v-bind:value="tagged" name="tags" id="inputTags" class="form-control" required="required" placeholder="tag tag">
             </div>
         </div>
 
         <legend>{{ trans('messages.screen_group') }}</legend>
-        <select class="form-control" multiple>
+        <select class="form-control" multiple v-model="selected_screengroups">
             <option v-for="screengroup in screengroups" v-bind:value="screengroup.value">@{{screengroup.text}}</option>
         </select>
 
@@ -46,7 +47,8 @@
             </div>
 
             <label for="inputRecur_type" class="control-label">{{ trans('messages.repeat') }}</label>
-            <select v-model="event.recur_type" name="recur_type" id="inputRecur_type" class="form-control" required="required">
+            <select v-model="event.recur_type" v-bind:value="event.recur_type" name="recur_type" id="inputRecur_type" class="form-control">
+                <option value=""> {{ trans('messages.never') }}</option>
                 <option value="daily">{{ trans('messages.daily') }}</option>
                 <option value="weekly">{{ trans('messages.weekly') }}</option>
                 <option value="monthly">{{ trans('messages.monthly') }}</option>
@@ -60,7 +62,7 @@
                             <input v-model="event.frequency" type="number" name="frequency" id="inputFrequency" class="form-control" v-bind:value="event.frequency" min='1' max='365' step='1' required="required" title="">
                     </div>
                 </div>
-                <label>{{ trans('messages.summary') }}</label> @{{ summary }}
+
             </template>
             <template v-if="event.recur_type == 'weekly'">
                 <div class="form-group">
@@ -99,7 +101,6 @@
                         {{ trans('messages.sunday_short') }}
                     </label>
                 </div>
-                <label>{{ trans('messages.summary') }}</label>@{{ summary }}
             </template>
             <template v-if="event.recur_type == 'monthly'">
                 <div class="form-group">
@@ -110,7 +111,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="inputRecur_day_num" class="control-label">{{ 'messages.recur_day_num' }}:</label>
+
                     <div class="">
                         <select v-model="event.recur_day_num" name="recur_day_num" id="inputRecur_day_num" class="form-control">
                             <option value="1">{{ trans('messages.first') }}</option>
@@ -122,7 +123,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputRecur_day_num" class="control-label">{{ trans('messages.recur_day') }}:</label>
+
                     <div class="">
                         <select v-model="event.recur_day" name="recur_day" id="inputRecur_day" class="form-control">
                             <option value="1">{{ trans('messages.monday') }}</option>
@@ -142,7 +143,6 @@
                             <input v-model="event.days_before_event" type="number" name="days_before" id="inputDays_before" class="form-control" v-bind:value="event.days_before_event" min='0' max='30' step='1' title="">
                     </div>
                 </div>
-                <label>{{ trans('messages.summary') }}</label>@{{ summary }}
             </template>
             <template v-if="event.recur_type == 'yearly'">
                 <div class="form-group">
@@ -151,11 +151,13 @@
                             <input v-model="event.frequency" type="number" name="frequency" id="inputFrequency" class="form-control" v-bind:value="event.frequency" min='1' max='365' step='1' required="required" title="">
                     </div>
                 </div>
-                <label>{{ trans('messages.summary') }}</label> @{{ summary }}
             </template>
+            <div class="row"></div>
+            <label>{{ trans('messages.summary') }}</label> @{{ summary }}
         </div>
+
+
 
         <button type="submit" class="btn btn-primary">{{ trans('messages.save') }}</button>
     </form>
-    <span>@{{ event | json }}</span>
 </template>

@@ -5,38 +5,40 @@
         props: ['id'],
 
         data: function() {
-            return {  
+            return {
                 screengroups: [],
-                tags: [],
+                screen: '',
                 event: '',
-                messages: [],
-                recur_type: [],
+                selected_screengroups: [],
+                selected_tags: '',
+                tags: [],
                 day_num: [],
             };
         },
 
         methods: {
-            getMessage: function(message) {
-                this.$http.get('/api/lang/' + message, function(translated) {
-                    this.messages.push({message: message, translated: translated}); 
-                });
+            update_tags: function() {
+
             },
-            getTranslated: function(message) {
-                
-                console.log(this.messages);
-                for (var msg in msgs) {
-                    if(msg.message == msg) {
-                        console.log(msg);
-                        return msg.translated;
-                    }
-                }
-            },
+            send_post: function() {
+                var raw_data = {event: this.event, selected_screengroups: this.selected_screengroups, selected_tags: this.selected_tags, day_num: this.day_num};
+                this.$http.post('/api/screen/' + this.screen.id, raw_data);
+            }
         },
 
         computed: {
             summary: function() {
                 return 'summary_text';
-            }
+            },
+            tagged: function() {
+                var tag_string = '';
+                for (var i =0;i<this.tags.length;i++) {
+                    tag_string += this.tags[i].name;
+                    if(i != this.tags.length -1)
+                        tag_string += ' ';
+                }
+                return tag_string;
+            },
         },
          ready: function () {
             this.$http.get('/api/screengroups', function(screengroups) {
@@ -45,13 +47,18 @@
             this.$http.get('/api/tags', function(tags) {
                 this.tags = tags;
             }.bind(this));
-            this.$http.get('/api/event/screen/' + this.id, function(event) {
-                this.event = event.pop();
+            this.$http.get('/api/screen/' + this.id, function(screen) {
+                this.screen = screen;
+                this.event = screen.event.pop();
+                this.tags = screen.tags;
+                for (var i =0;i<screen.screengroups.length;i++) {
+                    this.selected_screengroups.push(screen.screengroups[i].id);
+                }
             }.bind(this));
         },
     };
 </script>
 
 <style>
-    
+
 </style>
