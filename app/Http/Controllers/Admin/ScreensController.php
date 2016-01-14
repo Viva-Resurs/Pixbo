@@ -101,14 +101,14 @@ class ScreensController extends Controller {
 	 */
 	public function update(Request $request, $screen) {
 
-		$event   = $request->get('event');
-		$day_num = $request->get('day_num');
-		if (!is_null($day_num) && $event['recur_type'] == 'weekly') {
-			$event['recur_day_num'] = serialize($day_num);
+		$event          = $request->get('event');
+		$weekly_day_num = $request->get('weekly_day_num');
+		if (!is_null($weekly_day_num) && $event['recur_type'] == 'weekly') {
+			$event['recur_day_num'] = json_encode(($weekly_day_num));
 		}
 		$tags = $request->get('selected_tags');
 		$tags = explode(' ', $tags);
-		//dd($tags);
+
 		$screengroups = $request->get('selected_screengroups');
 
 		$result = DB::transaction(function () use ($screen, $event, $tags, $screengroups) {

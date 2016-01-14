@@ -12956,15 +12956,16 @@ exports.default = {
             selected_screengroups: [],
             selected_tags: '',
             tags: [],
-            day_num: []
+            weekly_day_num: [],
+            monthly_day_num: ''
         };
     },
 
     methods: {
         update_tags: function update_tags() {},
         send_post: function send_post() {
-            var raw_data = { event: this.event, selected_screengroups: this.selected_screengroups, selected_tags: this.selected_tags, day_num: this.day_num };
-            this.$http.put('/admin/screens/' + this.screen.id, raw_data);
+            var payload = { event: this.event, selected_screengroups: this.selected_screengroups, selected_tags: this.selected_tags, weekly_day_num: this.weekly_day_num };
+            this.$http.put('/admin/screens/' + this.screen.id, payload);
         }
     },
 
@@ -12992,6 +12993,14 @@ exports.default = {
             this.screen = screen;
             this.event = screen.event.pop();
             this.tags = screen.tags;
+            if (this.event.recur_day_num == null) {
+                this.weekly_day_num = [];
+                this.monthly_day_num = '1';
+            } else {
+                this.weekly_day_num = JSON.parse(this.event.recur_day_num);
+                if (this.event.recur_type == 'monthly') this.monthly_day_num = this.event.recur_day_num;else this.monthly_day_num = '1';
+            }
+
             for (var i = 0; i < screen.screengroups.length; i++) {
                 this.selected_screengroups.push(screen.screengroups[i].id);
             }

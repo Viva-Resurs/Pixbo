@@ -7,23 +7,14 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class ShadowEvent extends Model implements \MaddHatter\LaravelFullcalendar\Event {
+	use HasEvents;
+
 	protected $fillable = [
 		'title',
 		'isAllDay',
 		'start',
 		'end',
 	];
-
-	protected $touches = ['event'];
-
-/**
- * Event association.
- *
- * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
- */
-	public function event() {
-		return $this->belongsTo(Event::class);
-	}
 
 /**
  * Generates a shadow event from the given date with the info from given Event.
@@ -32,9 +23,9 @@ class ShadowEvent extends Model implements \MaddHatter\LaravelFullcalendar\Event
  * @param  Event  $event
  */
 	public static function generateFromEvent($start, Event $event) {
-		$shadow     = new static;
-		$base_model = get_class($event->eventable()->getRelated());
-		$model      = $base_model::find(['id' => $event->eventable_id])->first();
+		$shadow = new static;
+		//$base_model = get_class($event->eventable()->getRelated());
+		//$model      = $base_model::find(['id' => $event->eventable_id])->first();
 
 		$shadow->title = ''; //$model['name'];
 		$shadow->start = $start;
@@ -46,7 +37,7 @@ class ShadowEvent extends Model implements \MaddHatter\LaravelFullcalendar\Event
 		$shadow->end      = $end;
 		$shadow->isAllDay = 1;
 
-		$event->event_shadows()->save($shadow);
+		$event->shadow_events()->save($shadow);
 	}
 
 /**

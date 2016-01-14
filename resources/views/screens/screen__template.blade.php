@@ -73,31 +73,31 @@
                 </div>
                 <div class="checkbox">
                     <label>
-                        <input v-model="day_num" type="checkbox" value="1">
+                        <input v-model="weekly_day_num" type="checkbox" value="1">
                         {{ trans('messages.monday_short') }}
                     </label>
                     <label>
-                        <input v-model="day_num" type="checkbox" value="2">
+                        <input v-model="weekly_day_num" type="checkbox" value="2">
                         {{ trans('messages.tuesday_short') }}
                     </label>
                     <label>
-                        <input v-model="day_num" type="checkbox" value="3">
+                        <input v-model="weekly_day_num" type="checkbox" value="3">
                         {{ trans('messages.wednesday_short') }}
                     </label>
                     <label>
-                        <input v-model="day_num" type="checkbox" value="4">
+                        <input v-model="weekly_day_num" type="checkbox" value="4">
                         {{ trans('messages.thursday_short') }}
                     </label>
                     <label>
-                        <input v-model="day_num" type="checkbox" value="5">
+                        <input v-model="weekly_day_num" type="checkbox" value="5">
                         {{ trans('messages.friday_short') }}
                     </label>
                     <label>
-                        <input v-model="day_num" type="checkbox" value="6">
+                        <input v-model="weekly_day_num" type="checkbox" value="6">
                         {{ trans('messages.saturday_short') }}
                     </label>
                     <label>
-                        <input v-model="day_num" type="checkbox" value="0">
+                        <input v-model="weekly_day_num" type="checkbox" value="0">
                         {{ trans('messages.sunday_short') }}
                     </label>
                 </div>
@@ -113,7 +113,7 @@
                 <div class="form-group">
 
                     <div class="">
-                        <select v-model="event.recur_day_num" name="recur_day_num" id="inputRecur_day_num" class="form-control">
+                        <select v-model="monthly_day_num" value="1" name="recur_day_num" id="inputRecur_day_num" class="form-control">
                             <option value="">{{ trans('messages.undefined') }}</option>
                             <option value="1">{{ trans('messages.first') }}</option>
                             <option value="2">{{ trans('messages.second') }}</option>
@@ -126,7 +126,7 @@
                 <div class="form-group">
 
                     <div class="">
-                        <select v-model="event.recur_day" name="recur_day" id="inputRecur_day" class="form-control">
+                        <select v-model="event.recur_day" v-bind:value="1" name="recur_day" id="inputRecur_day" class="form-control">
                         <option value="1">{{ trans('messages.undefined') }}</option>
                             <option value="1">{{ trans('messages.monday') }}</option>
                             <option value="2">{{ trans('messages.tuesday') }}</option>

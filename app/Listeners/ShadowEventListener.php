@@ -130,9 +130,6 @@ class ShadowEventListener {
 		$timeArray  = !is_null($event->getAttribute('start_time')) ? extractTime($event->getAttribute('start_time')) : extractTime('00:00');
 
 		$end = Carbon::parse($start_date)->addDays($this->duration['daily']);
-		if ($event->getAttribute('recurring') == 0) {
-			$end = Carbon::parse($start_date);
-		}
 
 		$start = ShadowEvent::where(function ($q) use ($id, $frequency, $start_date) {
 			$q->where('event_id', $id);
@@ -152,13 +149,27 @@ class ShadowEventListener {
 
 		ShadowEvent::clearEvent($id);
 
+		$shadow_list = [];
+
 		for ($initial = Carbon::parse($start);
 			$initial->lte($end);
 			$initial = $initial->addDays($frequency)) {
-			$initial->hour   = $timeArray[0];
-			$initial->minute = $timeArray[1];
-			ShadowEvent::generateFromEvent(Carbon::parse($initial), $event);
-			dd($event);
+
+			$shadow             = new ShadowEvent;
+			$timeArray          = !is_null($event['end_time']) ? extractTime($event['end_time']) : extractTime('23:59:59');
+			$shadow_end         = Carbon::parse($initial);
+			$shadow_end->hour   = $timeArray[0];
+			$shadow_end->minute = $timeArray[1];
+			$shadow_end->second = $timeArray[2];
+
+			$shadow->fill([
+				'title'    => '',
+				'start'    => $initial,
+				'end'      => $shadow_end,
+				'isAllDay' => 1,
+			]);
+
+			$event->shadow_events()->save($shadow);
 		}
 	}
 
@@ -170,7 +181,7 @@ class ShadowEventListener {
 	private function generateWeekly(Event $event) {
 
 		$start_date = $event->getAttribute('start_date');
-		$weekDays   = unserialize($event->recur_day_num);
+		$weekDays   = json_decode(($event->recur_day_num));
 
 		$id = $event->getAttribute('id');
 
@@ -180,9 +191,6 @@ class ShadowEventListener {
 		$started = Carbon::parse($start_date);
 
 		$end = Carbon::parse($start_date)->addWeeks($this->duration['weekly']);
-		if ($event->getAttribute('recurring') == 0) {
-			$end = Carbon::parse($start_date);
-		}
 
 		$start = ShadowEvent::where(function ($q) use ($id, $frequency, $started) {
 			$q->where('event_id', $id);
@@ -231,7 +239,7 @@ class ShadowEventListener {
 
 		$id            = $event->getAttribute('id');
 		$start_date    = $event->getAttribute('start_date');
-		$weekDay       = unserialize($event->recur_day);
+		$weekDay       = json_decode($event->recur_day);
 		$week_in_month = $event->getAttribute('recur_day_num');
 
 		$frequency = !is_null($event->frequency) ? $event->frequency : 1;

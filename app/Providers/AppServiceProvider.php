@@ -18,11 +18,6 @@ class AppServiceProvider extends ServiceProvider {
 			event('GenerateFromEvent', $event);
 		});
 
-		// Fire event when Event changes.
-		Event::updated(function ($event) {
-			event('GenerateFromEvent', $event);
-		});
-
 		Event::deleted(function ($event) {
 			event('RemoveFromEvent', $event);
 		});
