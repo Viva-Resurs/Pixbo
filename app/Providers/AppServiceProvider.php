@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Event;
-use App\EventMeta;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider {
@@ -14,9 +13,9 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function boot() {
 
-		// Fire event when EventMeta changes.
-		EventMeta::saved(function ($meta) {
-			event('GenerateFromEventMeta', $meta);
+		// Fire event when Event changes.
+		Event::saved(function ($event) {
+			event('GenerateFromEvent', $event);
 		});
 
 		// Fire event when Event changes.

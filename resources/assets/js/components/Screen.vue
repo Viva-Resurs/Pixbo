@@ -22,7 +22,7 @@
             },
             send_post: function() {
                 var raw_data = {event: this.event, selected_screengroups: this.selected_screengroups, selected_tags: this.selected_tags, day_num: this.day_num};
-                this.$http.post('/api/screen/' + this.screen.id, raw_data);
+                this.$http.put('/admin/screens/' + this.screen.id, raw_data);
             }
         },
 

@@ -114,6 +114,7 @@
 
                     <div class="">
                         <select v-model="event.recur_day_num" name="recur_day_num" id="inputRecur_day_num" class="form-control">
+                            <option value="">{{ trans('messages.undefined') }}</option>
                             <option value="1">{{ trans('messages.first') }}</option>
                             <option value="2">{{ trans('messages.second') }}</option>
                             <option value="3">{{ trans('messages.third') }}</option>
@@ -126,6 +127,7 @@
 
                     <div class="">
                         <select v-model="event.recur_day" name="recur_day" id="inputRecur_day" class="form-control">
+                        <option value="1">{{ trans('messages.undefined') }}</option>
                             <option value="1">{{ trans('messages.monday') }}</option>
                             <option value="2">{{ trans('messages.tuesday') }}</option>
                             <option value="3">{{ trans('messages.wednesday') }}</option>

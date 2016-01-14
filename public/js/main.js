@@ -12929,7 +12929,7 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "C:\\Users\\Christoffer\\Documents\\Work\\pixbo_laravel\\resources\\assets\\js\\components\\Alert.vue"
+  var id = "C:\\pixbo_laravel\\resources\\assets\\js\\components\\Alert.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
@@ -12964,7 +12964,7 @@ exports.default = {
         update_tags: function update_tags() {},
         send_post: function send_post() {
             var raw_data = { event: this.event, selected_screengroups: this.selected_screengroups, selected_tags: this.selected_tags, day_num: this.day_num };
-            this.$http.post('/api/screen/' + this.screen.id, raw_data);
+            this.$http.put('/admin/screens/' + this.screen.id, raw_data);
         }
     },
 
@@ -13003,7 +13003,7 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "C:\\Users\\Christoffer\\Documents\\Work\\pixbo_laravel\\resources\\assets\\js\\components\\Screen.vue"
+  var id = "C:\\pixbo_laravel\\resources\\assets\\js\\components\\Screen.vue"
   module.hot.dispose(function () {
     require("vueify-insert-css").cache["\n\n"] = false
     document.head.removeChild(__vueify_style__)
@@ -13049,7 +13049,7 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "C:\\Users\\Christoffer\\Documents\\Work\\pixbo_laravel\\resources\\assets\\js\\components\\ScreenGallery.vue"
+  var id = "C:\\pixbo_laravel\\resources\\assets\\js\\components\\ScreenGallery.vue"
   module.hot.dispose(function () {
     require("vueify-insert-css").cache["\n    .screen_gallery {\n\n    }\n    .screen_gallery__entity {\n\n    }\n"] = false
     document.head.removeChild(__vueify_style__)
@@ -13149,7 +13149,7 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "C:\\Users\\Christoffer\\Documents\\Work\\pixbo_laravel\\resources\\assets\\js\\components\\Ticker.vue"
+  var id = "C:\\pixbo_laravel\\resources\\assets\\js\\components\\Ticker.vue"
   module.hot.dispose(function () {
     require("vueify-insert-css").cache["\n    button {\n    margin: 0;\n    padding: 0;\n    border: 0;\n    background: none;\n    font-size: 100%;\n    vertical-align: baseline;\n    font-family: inherit;\n    font-weight: inherit;\n    color: inherit;\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    -webkit-font-smoothing: antialiased;\n    -moz-font-smoothing: antialiased;\n    font-smoothing: antialiased;\n}\n.destroy {\n    display: none;\n    position: absolute;\n    top: 0;\n    right: 10px;\n    bottom: 0;\n    width: 40px;\n    height: 40px;\n    margin: auto 0;\n    font-size: 30px;\n    color: #cc9a9a;\n    margin-bottom: 11px;\n    -webkit-transition: color 0.2s ease-out;\n    transition: color 0.2s ease-out;\n}\n\n.destroy:hover {\n    color: #af5b5e;\n}\n\n.destroy:after {\n    content: '×';\n}\n\nli:hover .destroy {\n    display: block;\n}\n.edit {\n    position: relative;\n    margin: 0;\n    width: 100%;\n    font-size: 24px;\n    font-family: inherit;\n    font-weight: inherit;\n    line-height: 1.4em;\n    border: 0;\n    outline: none;\n    color: inherit;\n    padding: 6px;\n    border: 1px solid #999;\n    box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);\n    box-sizing: border-box;\n    -webkit-font-smoothing: antialiased;\n    -moz-font-smoothing: antialiased;\n    font-smoothing: antialiased;\n}\nli .edit {\n    display: none;\n}\nli.editing {\n    border-bottom: none;\n    padding: 0;\n}\n\nli.editing .edit {\n    display: block;\n    width: 506px;\n    padding: 13px 17px 12px 17px;\n    margin: 0 0 0 43px;\n}\nli label {\n    white-space: pre;\n    word-break: break-word;\n    /*padding: 15px 60px 15px 15px; */\n    margin-right: 2em;\n    display: block;\n    line-height: 1.2;\n    -webkit-transition: color 0.4s;\n    transition: color 0.4s;\n}\n"] = false
     document.head.removeChild(__vueify_style__)

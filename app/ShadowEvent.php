@@ -35,16 +35,14 @@ class ShadowEvent extends Model implements \MaddHatter\LaravelFullcalendar\Event
 		$shadow     = new static;
 		$base_model = get_class($event->eventable()->getRelated());
 		$model      = $base_model::find(['id' => $event->eventable_id])->first();
-		//dd($model);
 
-		$shadow->title = $model['name'];
+		$shadow->title = ''; //$model['name'];
 		$shadow->start = $start;
 
-		$timeArray   = extractTime($event['end_time']);
-		$end         = Carbon::parse($start);
-		$end->hour   = $timeArray[0];
-		$end->minute = $timeArray[1];
-
+		$timeArray        = !is_null($event['end_time']) ? extractTime($event['end_time']) : extractTime('23:59');
+		$end              = Carbon::parse($start);
+		$end->hour        = $timeArray[0];
+		$end->minute      = $timeArray[1];
 		$shadow->end      = $end;
 		$shadow->isAllDay = 1;
 
