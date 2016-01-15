@@ -22,7 +22,28 @@
 
             },
             send_post: function() {
-                var payload = {event: this.event, selected_screengroups: this.selected_screengroups, selected_tags: this.selected_tags, weekly_day_num: this.weekly_day_num};
+
+                var day_num = null;
+                var recur = this.event.recur_type;
+
+                switch(recur) {
+                    case "weekly":
+                        day_num = this.weekly_day_num;
+                        break;
+                    case "monthly":
+                        day_num = this.monthly_day_num;
+                        break;
+                    default:
+                        day_num = '';
+                        break;
+                }
+
+                var payload = {
+                    event: this.event,
+                    selected_screengroups: this.selected_screengroups,
+                    selected_tags: this.selected_tags,
+                    day_num: day_num,
+                };
                 this.$http.put('/admin/screens/' + this.screen.id, payload);
             }
         },
@@ -52,16 +73,19 @@
                 this.screen = screen;
                 this.event = screen.event.pop();
                 this.tags = screen.tags;
-                if(this.event.recur_day_num == null) {
+                if(this.event.recur_day_num.length == null) {
                     this.weekly_day_num = [];
                     this.monthly_day_num = '1';
                 } else {
                     this.weekly_day_num = JSON.parse(this.event.recur_day_num);
-                    if(this.event.recur_type == 'monthly')
-                        this.monthly_day_num = this.event.recur_day_num;
-                    else
-                        this.monthly_day_num = '1';
+                    this.monthly_day_num = JSON.parse(this.event.recur_day_num);
                 }
+
+                if(this.event.recur_day == null)
+                    this.event.recur_day = '1';
+
+                if(this.monthly_day_num.length > 1)
+                    this.monthly_day_num = '1';
 
                 for (var i =0;i<screen.screengroups.length;i++) {
                     this.selected_screengroups.push(screen.screengroups[i].id);

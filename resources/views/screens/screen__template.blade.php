@@ -126,8 +126,7 @@
                 <div class="form-group">
 
                     <div class="">
-                        <select v-model="event.recur_day" v-bind:value="1" name="recur_day" id="inputRecur_day" class="form-control">
-                        <option value="1">{{ trans('messages.undefined') }}</option>
+                        <select v-model="event.recur_day" name="recur_day" id="inputRecur_day" class="form-control">
                             <option value="1">{{ trans('messages.monday') }}</option>
                             <option value="2">{{ trans('messages.tuesday') }}</option>
                             <option value="3">{{ trans('messages.wednesday') }}</option>
