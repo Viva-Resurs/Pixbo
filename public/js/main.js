@@ -12897,46 +12897,68 @@ exports.insert = function (css) {
 }
 
 },{}],14:[function(require,module,exports){
-'use strict';
+var __vueify_style__ = require("vueify-insert-css").insert("\n.fade-transition {\n  -webkit-transition: opacity .3s ease;\n  transition: opacity .3s ease;\n}\n.fade-enter,\n.fade-leave {\n  opacity: 0;\n}\n.alert.top {\n  position: fixed;\n  top: 30px;\n  margin: 0 auto;\n  left: 0;\n  right: 0;\n  z-index: 2;\n}\n.alert.top-right {\n  position: fixed;\n  top: 30px;\n  right: 50px;\n  z-index: 2;\n}\n")
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 exports.default = {
-
-    props: ['type'],
-
-    data: function data() {
-        return {
-            show: true
-        };
+  props: {
+    type: {
+      type: String
     },
-
-    computed: {
-        alertClasses: function alertClasses() {
-            var type = this.type;
-            return {
-                'Alert': true,
-                'Alert--Success': type == 'success',
-                'Alert--Error': type == 'error'
-            };
-        }
+    dismissable: {
+      type: Boolean,
+      default: false
+    },
+    show: {
+      type: Boolean,
+      default: true,
+      twoWay: true
+    },
+    duration: {
+      type: Number,
+      default: 0
+    },
+    width: {
+      type: String
+    },
+    placement: {
+      type: String
     }
+  },
+  watch: {
+    show: function show(val) {
+      var _this = this;
+
+      if (this._timeout) clearTimeout(this._timeout);
+      if (val && !!this.duration) {
+        this._timeout = setTimeout(function () {
+          return _this.show = false;
+        }, this.duration);
+      }
+    }
+  }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <div v-bind:class=\"alertClasses\" v-show=\"show\">\n        <slot></slot>\n        <span class=\"Alert__close\" @click=\"show = false\">x</span>\n    </div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n  <div v-show=\"show\" v-bind:class=\"{\n      'alert':      true,\n      'alert-success':(type == 'success'),\n      'alert-warning':(type == 'warning'),\n      'alert-info': (type == 'info'),\n      'alert-danger':   (type == 'danger'),\n      'top':            (placement === 'top'),\n      'top-right':  (placement === 'top-right')\n    }\" transition=\"fade\" v-bind:style=\"{width:width}\" role=\"alert\">\n    <button v-show=\"dismissable\" type=\"button\" class=\"close\" @click=\"show = false\">\n      <span>×</span>\n    </button>\n    <slot></slot>\n  </div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   var id = "C:\\Users\\Christoffer\\Documents\\Work\\pixbo_laravel\\resources\\assets\\js\\components\\Alert.vue"
+  module.hot.dispose(function () {
+    require("vueify-insert-css").cache["\n.fade-transition {\n  -webkit-transition: opacity .3s ease;\n  transition: opacity .3s ease;\n}\n.fade-enter,\n.fade-leave {\n  opacity: 0;\n}\n.alert.top {\n  position: fixed;\n  top: 30px;\n  margin: 0 auto;\n  left: 0;\n  right: 0;\n  z-index: 2;\n}\n.alert.top-right {\n  position: fixed;\n  top: 30px;\n  right: 50px;\n  z-index: 2;\n}\n"] = false
+    document.head.removeChild(__vueify_style__)
+  })
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
     hotAPI.update(id, module.exports, module.exports.template)
   }
 })()}
-},{"vue":12,"vue-hot-reload-api":3}],15:[function(require,module,exports){
+},{"vue":12,"vue-hot-reload-api":3,"vueify-insert-css":13}],15:[function(require,module,exports){
 var __vueify_style__ = require("vueify-insert-css").insert("\n\n")
 'use strict';
 
@@ -12986,7 +13008,14 @@ exports.default = {
                 selected_tags: this.selected_tags,
                 day_num: day_num
             };
-            this.$http.put('/admin/screens/' + this.screen.id, payload);
+            this.$http.put('/admin/screens/' + this.screen.id, payload).then(function (response) {
+                if (response.ok) {
+                    // Flash message ok!
+                } else {
+                        // Flash message ERROR
+                    }
+                console.log(response.data);
+            });
         }
     },
 
@@ -13018,13 +13047,14 @@ exports.default = {
                 this.weekly_day_num = [];
                 this.monthly_day_num = '1';
             } else {
-                this.weekly_day_num = JSON.parse(this.event.recur_day_num);
+                var parsed_week = JSON.parse(this.event.recur_day_num);
+                if (typeof parsed_week == 'string') this.weekly_day_num = [];else this.weekly_day_num = parsed_week;
                 this.monthly_day_num = JSON.parse(this.event.recur_day_num);
             }
 
             if (this.event.recur_day == null) this.event.recur_day = '1';
 
-            if (this.monthly_day_num.length > 1) this.monthly_day_num = '1';
+            if (this.monthly_day_num.length > 1 || this.monthly_day_num == "") this.monthly_day_num = '1';
 
             for (var i = 0; i < screen.screengroups.length; i++) {
                 this.selected_screengroups.push(screen.screengroups[i].id);
@@ -13218,7 +13248,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // browserify entrypoint
 var Vue = require('vue');
 Vue.use(require('vue-resource'));
+//Vue.use(require('vue-strap'));
 var bootstrap = require('bootstrap-sass');
+//var vue_strap = require('vue-strap');
+
+//import Alert from './components/Alert.vue';
+
+//var alert = require('vue-strap');//src/alert');
 
 new Vue({
     el: '#app',
@@ -13228,6 +13264,16 @@ new Vue({
         'screengallery': _ScreenGallery2.default,
         'Tickers': _Ticker2.default,
         'Screen': _Screen2.default
+    },
+
+    data: function data() {
+        return {
+            alerts: []
+        };
+    },
+
+    methods: {
+        AddAlert: function AddAlert(message, type) {}
     }
 });
 

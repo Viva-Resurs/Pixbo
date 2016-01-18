@@ -44,7 +44,15 @@
                     selected_tags: this.selected_tags,
                     day_num: day_num,
                 };
-                this.$http.put('/admin/screens/' + this.screen.id, payload);
+                this.$http.put('/admin/screens/' + this.screen.id, payload).then(function (response) {
+                    if(response.ok) {
+                        // Flash message ok!
+                    }
+                    else {
+                        // Flash message ERROR
+                    }
+                    console.log(response.data);
+                });
             }
         },
 
@@ -77,14 +85,18 @@
                     this.weekly_day_num = [];
                     this.monthly_day_num = '1';
                 } else {
-                    this.weekly_day_num = JSON.parse(this.event.recur_day_num);
+                    var parsed_week = JSON.parse(this.event.recur_day_num);
+                    if(typeof parsed_week == 'string')
+                        this.weekly_day_num = [];
+                    else
+                        this.weekly_day_num = parsed_week;
                     this.monthly_day_num = JSON.parse(this.event.recur_day_num);
                 }
 
                 if(this.event.recur_day == null)
                     this.event.recur_day = '1';
 
-                if(this.monthly_day_num.length > 1)
+                if(this.monthly_day_num.length > 1 || this.monthly_day_num == "")
                     this.monthly_day_num = '1';
 
                 for (var i =0;i<screen.screengroups.length;i++) {

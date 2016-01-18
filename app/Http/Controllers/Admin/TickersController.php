@@ -54,6 +54,11 @@ class TickersController extends Controller
         }
     }
 
+    public function show(Ticker $ticker)
+    {
+        return $ticker;
+    }
+
     /**
      * Update the specified resource in storage.
      *

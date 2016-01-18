@@ -109,9 +109,7 @@ class ScreensController extends Controller
     {
         $event = $request->get('event');
         $day_num = $request->get('day_num');
-        //if (!is_null($weekly_day_num) && $event['recur_type'] == 'weekly') {
         $event['recur_day_num'] = json_encode(($day_num));
-        //}
         $tags = $request->get('selected_tags');
         $tags = explode(' ', $tags);
 
@@ -138,6 +136,11 @@ class ScreensController extends Controller
             $screen->tags()->sync($tagged);
             $screen->screengroups()->sync($screengroups);
         });
+        if (is_null($result)) {
+            return trans('messages.screen_updated_ok');
+        } else {
+            return trans('messages.screen_updated_fail');
+        }
     }
 
     /**

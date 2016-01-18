@@ -118,7 +118,26 @@ class ShadowEventListener
         case 'yearly':
             $this->generateYearly($event);
             break;
+        case '':
+            $this->generateOnce($event);
         }
+    }
+
+    private function generateOnce(Event $event)
+    {
+        $id = $event->getAttribute('id');
+        $start_date = $event->getAttribute('start_date');
+        $timeArray = !is_null($event->getAttribute('start_time')) ?
+        extractTime($event->getAttribute('start_time')) :
+        extractTime('00:00:00');
+
+        $date = Carbon::parse($start_date);
+        $date->hour = $timeArray[0];
+        $date->minute = $timeArray[1];
+        $date->second = $timeArray[2];
+        ShadowEvent::clearEvent($id);
+
+        ShadowEvent::generateFromEvent($date, $event);
     }
 
 /**
@@ -241,12 +260,12 @@ class ShadowEventListener
  */
     private function generateMonthly(Event $event)
     {
-        //dd($event);
         $id = $event->getAttribute('id');
         $start_date = $event->getAttribute('start_date');
         $weekDay = $event->getAttribute('recur_day');
         $week_in_month = (int) json_decode($event->getAttribute('recur_day_num'));
-        //dd($week_in_month);
+
+        $days_ahead = $event->getAttribute('days_before_event');
 
         $frequency = !is_null($event->frequency) ? $event->frequency : 1;
         $timeArray = !is_null($event->getAttribute('start_time')) ? extractTime($event->getAttribute('start_time')) : extractTime('00:00');
@@ -281,8 +300,19 @@ class ShadowEventListener
             $this->months[$initial->month] . ' ' .
             $initial->year;
             $date = Carbon::parse($date_string);
+            if ($week_in_month == 1 && $date->day >= 7) {
+                $date->subDays(7);
+            }
+
             if ($date->gte($start) && $date->lte($end)) {
-                ShadowEvent::generateFromEvent(Carbon::parse($date), $event);
+                if (!is_null($days_ahead) && $days_ahead > 0) {
+                    for ($i = $days_ahead; $i >= 0; $i--) {
+                        $ahead_date = Carbon::parse($date)->subDays($i);
+                        ShadowEvent::generateFromEvent($ahead_date, $event);
+                    }
+                } else {
+                    ShadowEvent::generateFromEvent(Carbon::parse($date), $event);
+                }
             }
         }
     }

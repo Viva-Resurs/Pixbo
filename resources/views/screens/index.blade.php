@@ -7,6 +7,6 @@
 
 @section('content')
 
-    @include('screens.screens__card')
+    @include('screens.screens__card', ['from' => 'screen'])
 
 @stop

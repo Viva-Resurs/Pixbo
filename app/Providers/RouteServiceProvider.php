@@ -30,7 +30,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $router->model('clients', 'App\Client');
         $router->model('screens', 'App\Screen');
-        $router->model('ticker', 'App\Ticker');
+        $router->model('tickers', 'App\Ticker');
         $router->model('screengroup', 'App\ScreenGroup');
         $router->model('screengroups', 'App\ScreenGroup');
         $router->model('events', 'App\Event');

@@ -1,5 +1,6 @@
 var elixir = require('laravel-elixir');
 require('laravel-elixir-vueify');
+require('vue-strap');
 
 /*
  |--------------------------------------------------------------------------
@@ -14,7 +15,7 @@ require('laravel-elixir-vueify');
 
 elixir(function(mix) {
 
-    //mix.livereload(); 
+    //mix.livereload();
     mix.sass('app.scss'); //.coffee()
     /*
     mix.sass("app.scss", 'public/css/', {includePaths: [paths.bootstrap + 'stylesheets/']})

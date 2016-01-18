@@ -5,11 +5,17 @@
               <a href="/admin/screens/{{ $card->id }}"><img class="screens_card__img" src="/{{ $card->photo->thumb_path }}" style="padding: 0em; margin: 0em;"></a>
             </div>
             <div class="caption screens_card__caption col-sm-2 col-md-2 col-lg-2">
+            @if($from == 'screengroup')
+                <div class="row" style="padding-left: 1em;">
+                        <a href="/admin/screengroups/{{ $screengroup->id }}/screens/{{ $card->id }}/remove_association"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                </div>
+            @else
                 <div class="row" style="padding-left: 1em;">
                         <a href="#"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
                 </div>
+            @endif
                 <div class="row" style="padding-left: 1em;">
-                    <a href="#"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></a>
+                    <a href="/admin/screens/{{ $card->id }}"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></a>
                 </div>
             </div>
 

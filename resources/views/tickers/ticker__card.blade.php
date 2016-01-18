@@ -9,7 +9,7 @@
                         <a href="#"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
                 </div>
                 <div class="row" style="padding-left: 1em;">
-                    <a href="#"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></a>
+                    <a href="/admin/tickers/{{ $card->id }}"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></a>
                 </div>
             </div>
         </div>
