@@ -4,8 +4,25 @@
 		"selected_items":
 		[
 			[
+<<<<<<< HEAD
 				"da",
 				"day_num"
+=======
+				"tagg",
+				"$tagged_pivot〔variable〕"
+			],
+			[
+				"recur",
+				"recur_day_num"
+			],
+			[
+				"json",
+				"json_encode〔function〕"
+			],
+			[
+				"bs3-inp",
+				"bs3-input:number	bs3-input-number"
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 			],
 			[
 				"selec",
@@ -296,14 +313,12 @@
 			}
 		},
 		{
+<<<<<<< HEAD
 			"file": "app/Http/routes.php",
 			"settings":
 			{
 				"buffer_size": 3097,
-				"line_ending": "Unix"
-			}
-		},
-		{
+=======
 			"file": "resources/views/screens/screen__template.blade.php",
 			"settings":
 			{
@@ -312,18 +327,101 @@
 			}
 		},
 		{
-			"file": "resources/views/screens/show.blade.php",
+			"file": "resources/assets/js/components/Screen.vue",
 			"settings":
 			{
-				"buffer_size": 738,
+				"buffer_size": 2495,
 				"line_ending": "Windows"
 			}
 		},
 		{
+			"file": "app/Http/Controllers/Admin/ScreensController.php",
+			"settings":
+			{
+				"buffer_size": 4496,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/Listeners/ShadowEventListener.php",
+			"settings":
+			{
+				"buffer_size": 8438,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "resources/views/events/meta/days__form.blade.php",
+			"settings":
+			{
+				"buffer_size": 1445,
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/Helpers.php",
+			"settings":
+			{
+<<<<<<< HEAD
+				"buffer_size": 9400,
+=======
+				"buffer_size": 2611,
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+				"line_ending": "Windows"
+			}
+		},
+		{
+<<<<<<< HEAD
+			"file": "resources/views/screens/show.blade.php",
+			"settings":
+			{
+				"buffer_size": 738,
+=======
+			"file": "app/ShadowEvent.php",
+			"settings":
+			{
+				"buffer_size": 1974,
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+				"line_ending": "Windows"
+			}
+		},
+		{
+<<<<<<< HEAD
 			"file": "resources/assets/js/main.js",
 			"settings":
 			{
 				"buffer_size": 502,
+=======
+			"file": "app/Event.php",
+			"settings":
+			{
+				"buffer_size": 650,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/HasShadowEvents.php",
+			"settings":
+			{
+				"buffer_size": 152,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/Providers/AppServiceProvider.php",
+			"settings":
+			{
+				"buffer_size": 669,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/Http/Controllers/Admin/ScreenGroupsController.php",
+			"settings":
+			{
+				"buffer_size": 5310,
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 				"line_ending": "Windows"
 			}
 		}
@@ -429,6 +527,7 @@
 	},
 	"expanded_folders":
 	[
+<<<<<<< HEAD
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http",
@@ -451,6 +550,35 @@
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screengroups/edit",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screens",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/tickers"
+=======
+		"/C/pixbo_laravel",
+		"/C/pixbo_laravel/app",
+		"/C/pixbo_laravel/app/Http",
+		"/C/pixbo_laravel/app/Http/Controllers",
+		"/C/pixbo_laravel/app/Http/Controllers/Admin",
+		"/C/pixbo_laravel/app/Listeners",
+		"/C/pixbo_laravel/app/Policies",
+		"/C/pixbo_laravel/app/Providers",
+		"/C/pixbo_laravel/database",
+		"/C/pixbo_laravel/database/migrations",
+		"/C/pixbo_laravel/resources",
+		"/C/pixbo_laravel/resources/assets",
+		"/C/pixbo_laravel/resources/assets/js",
+		"/C/pixbo_laravel/resources/assets/js/components",
+		"/C/pixbo_laravel/resources/assets/sass",
+		"/C/pixbo_laravel/resources/assets/sass/components",
+		"/C/pixbo_laravel/resources/lang",
+		"/C/pixbo_laravel/resources/lang/sv",
+		"/C/pixbo_laravel/resources/views",
+		"/C/pixbo_laravel/resources/views/clients",
+		"/C/pixbo_laravel/resources/views/events",
+		"/C/pixbo_laravel/resources/views/events/meta",
+		"/C/pixbo_laravel/resources/views/pages",
+		"/C/pixbo_laravel/resources/views/screengroups",
+		"/C/pixbo_laravel/resources/views/screengroups/edit",
+		"/C/pixbo_laravel/resources/views/screens",
+		"/C/pixbo_laravel/resources/views/shared"
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 	],
 	"file_history":
 	[
@@ -585,7 +713,11 @@
 	],
 	"find":
 	{
+<<<<<<< HEAD
 		"height": 70.0
+=======
+		"height": 79.0
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 	},
 	"find_in_files":
 	{
@@ -599,7 +731,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+<<<<<<< HEAD
 			"App",
+=======
+			"generateW",
+			"});\n",
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 			"form",
 			"runUp",
 			"resolve",
@@ -623,7 +760,11 @@
 	"groups":
 	[
 		{
+<<<<<<< HEAD
 			"selected": 1,
+=======
+			"selected": 3,
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 			"sheets":
 			[
 				{
@@ -639,8 +780,13 @@
 						"selection":
 						[
 							[
+<<<<<<< HEAD
 								140,
 								140
+=======
+								2408,
+								2408
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 							]
 						],
 						"settings":
@@ -649,16 +795,8 @@
 							"auto_complete": false,
 							"bh_regions":
 							[
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
+<<<<<<< HEAD
+=======
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
@@ -669,6 +807,105 @@
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+<<<<<<< HEAD
+=======
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+<<<<<<< HEAD
+								"bh_default_content",
+=======
+								"bh_default_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "resources/views/screens/screen__template.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9400,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5583,
+								5583
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_complete": false,
+							"bh_regions":
+							[
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+<<<<<<< HEAD
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
@@ -679,21 +916,42 @@
 								"bh_curly_open",
 								"bh_curly_close",
 								"bh_curly_content",
+=======
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
+<<<<<<< HEAD
+=======
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
 								"bh_round_content",
+<<<<<<< HEAD
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
@@ -704,33 +962,69 @@
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content"
+=======
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 							],
 							"syntax": "Packages/Vue Syntax Highlight/vue.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
+<<<<<<< HEAD
 						"translation.x": 180.0,
 						"translation.y": 0.0,
+=======
+						"translation.x": 0.0,
+						"translation.y": 3510.0,
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
+<<<<<<< HEAD
 					"buffer": 1,
 					"file": "app/Http/Controllers/Admin/ScreensController.php",
 					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 4496,
+=======
+					"buffer": 2,
+					"file": "resources/assets/js/components/Screen.vue",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2495,
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
+<<<<<<< HEAD
 								3875,
 								3875
+=======
+								542,
+								542
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 							]
 						],
 						"settings":
@@ -739,6 +1033,7 @@
 							"auto_complete": false,
 							"bh_regions":
 							[
+<<<<<<< HEAD
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
@@ -749,6 +1044,8 @@
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
+=======
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
@@ -759,6 +1056,7 @@
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
+<<<<<<< HEAD
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
@@ -769,11 +1067,14 @@
 								"bh_curly_open",
 								"bh_curly_close",
 								"bh_curly_content",
+=======
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
+<<<<<<< HEAD
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
@@ -784,6 +1085,13 @@
 								"bh_round_open",
 								"bh_round_close",
 								"bh_round_content",
+=======
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
@@ -869,6 +1177,11 @@
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
@@ -924,11 +1237,58 @@
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
+<<<<<<< HEAD
+=======
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
+<<<<<<< HEAD
 								"bh_default_content",
+=======
+								"bh_default_content"
+							],
+							"syntax": "Packages/Vue Syntax Highlight/vue.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 819.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/Http/Controllers/Admin/ScreensController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4496,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2553,
+								2553
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_complete": false,
+							"bh_regions":
+							[
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
@@ -939,6 +1299,7 @@
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
+<<<<<<< HEAD
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
@@ -949,21 +1310,45 @@
 								"bh_curly_open",
 								"bh_curly_close",
 								"bh_curly_content",
+=======
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
+<<<<<<< HEAD
+=======
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
+<<<<<<< HEAD
+=======
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
 								"bh_round_content",
+<<<<<<< HEAD
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
@@ -976,36 +1361,76 @@
 								"bh_single_quote_content"
 							],
 							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage",
+=======
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
+<<<<<<< HEAD
 						"translation.y": 2325.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
+=======
+						"translation.y": 3744.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 					"type": "text"
 				},
 				{
 					"buffer": 4,
+<<<<<<< HEAD
 					"file": "resources/views/screens/show.blade.php",
 					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 738,
+=======
+					"file": "app/Listeners/ShadowEventListener.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8438,
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
+<<<<<<< HEAD
 								593,
 								610
+=======
+								6083,
+								6083
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 							]
 						],
 						"settings":
 						{
 							"BracketHighlighterBusy": false,
+<<<<<<< HEAD
 							"bh_regions":
 							[
 								"bh_regex",
@@ -1018,6 +1443,11 @@
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
+=======
+							"auto_complete": false,
+							"bh_regions":
+							[
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
@@ -1028,6 +1458,7 @@
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
+<<<<<<< HEAD
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
@@ -1038,21 +1469,45 @@
 								"bh_curly_open",
 								"bh_curly_close",
 								"bh_curly_content",
+=======
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
+<<<<<<< HEAD
+=======
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
+<<<<<<< HEAD
+=======
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
 								"bh_round_content",
+<<<<<<< HEAD
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
@@ -1065,31 +1520,70 @@
 								"bh_single_quote_content"
 							],
 							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage",
+=======
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
+<<<<<<< HEAD
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 5,
+=======
+						"translation.y": 9243.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 					"type": "text"
 				},
 				{
 					"buffer": 5,
+<<<<<<< HEAD
 					"file": "resources/assets/js/main.js",
 					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 502,
+=======
+					"file": "resources/views/events/meta/days__form.blade.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1445,
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
+<<<<<<< HEAD
 								501,
 								501
+=======
+								0,
+								0
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 							]
 						],
 						"settings":
@@ -1097,6 +1591,7 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
+<<<<<<< HEAD
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
@@ -1107,6 +1602,8 @@
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
+=======
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
@@ -1117,6 +1614,7 @@
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
+<<<<<<< HEAD
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
@@ -1127,21 +1625,45 @@
 								"bh_curly_open",
 								"bh_curly_close",
 								"bh_curly_content",
+=======
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
+<<<<<<< HEAD
+=======
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
+<<<<<<< HEAD
+=======
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
 								"bh_round_content",
+<<<<<<< HEAD
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
@@ -1152,6 +1674,23 @@
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content"
+=======
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 							],
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
@@ -1159,7 +1698,544 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+<<<<<<< HEAD
 					"stack_index": 4,
+=======
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/Helpers.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2611,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2412,
+								2412
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2466.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "app/ShadowEvent.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1974,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								718,
+								943
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_complete": false,
+							"bh_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 819.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "app/Event.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 650,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								460,
+								460
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": -0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "app/HasShadowEvents.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 152,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								41,
+								41
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_complete": false,
+							"bh_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "app/Providers/AppServiceProvider.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 669,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								188,
+								188
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_complete": false,
+							"bh_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 234.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "app/Http/Controllers/Admin/ScreenGroupsController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5310,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4917,
+								5036
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 6552.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+>>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 					"type": "text"
 				}
 			]
