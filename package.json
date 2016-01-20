@@ -14,6 +14,7 @@
     "jquery": "^2.1.4",
     "laravel-elixir": "^4.0.0",
     "vue": "^1.0.10",
-    "vue-strap": "^1.0.3"
+    "vue-strap": "^1.0.3",
+    "vueboot": "^0.3.0"
   }
 }

@@ -36,7 +36,6 @@ class ShadowEvent extends Model implements \MaddHatter\LaravelFullcalendar\Event
         $end = Carbon::parse($start);
         $end->hour = $timeArray[0];
         $end->minute = $timeArray[1];
-        $end->second = $timeArray[2];
         $shadow->end = $end;
         $shadow->isAllDay = 1;
 

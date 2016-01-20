@@ -14,27 +14,37 @@ import ScreenGallery from './components/ScreenGallery.vue';
 import Ticker from './components/Ticker.vue';
 import Screen from './components/Screen.vue';
 
+var vueboot = require('vueboot');
+
 
 
 new Vue({
     el: '#app',
 
     components: {
-        'Alert': Alert,
+        //'Alert': Alert,
         'screengallery': ScreenGallery,
         'Tickers': Ticker,
-        'Screen': Screen
+        'Screen': Screen,
+        'Alert': vueboot.alert,
+        'Toast': vueboot.toast,
     },
 
     data: function () {
         return {
-            alerts: [],
+            show: false,
         };
     },
 
     methods: {
-        AddAlert: function(message, type) {
+        AddAlert: function(toast) {
+            vueboot.toastService.create(toast);
+        }
+    },
 
+    events: {
+        'add-alert': function(toast) {
+            vueboot.toastService.create(toast);
         }
     }
 });

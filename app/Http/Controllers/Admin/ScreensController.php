@@ -137,9 +137,9 @@ class ScreensController extends Controller
             $screen->screengroups()->sync($screengroups);
         });
         if (is_null($result)) {
-            return trans('messages.screen_updated_ok');
+            return ['type' => 'success', 'dismissible' => true, 'content' => trans('messages.screen_updated_ok'), 'timeout' => 3000];
         } else {
-            return trans('messages.screen_updated_fail');
+            return ['type' => 'danger', 'dismissible' => true, 'content' => trans('messages.screen_updated_fail'), 'timeout' => false];
         }
     }
 

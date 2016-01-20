@@ -4,25 +4,28 @@
 		"selected_items":
 		[
 			[
-<<<<<<< HEAD
+				"mon",
+				"monthly_day_num"
+			],
+			[
+				"week",
+				"weekly_day_num"
+			],
+			[
+				"day",
+				"days_ahead"
+			],
+			[
 				"da",
-				"day_num"
-=======
-				"tagg",
-				"$tagged_pivot〔variable〕"
+				"days_ahead"
+			],
+			[
+				"sub",
+				"subDays"
 			],
 			[
 				"recur",
-				"recur_day_num"
-			],
-			[
-				"json",
-				"json_encode〔function〕"
-			],
-			[
-				"bs3-inp",
-				"bs3-input:number	bs3-input-number"
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+				"recur_type"
 			],
 			[
 				"selec",
@@ -147,14 +150,6 @@
 			[
 				"req",
 				"request"
-			],
-			[
-				"week",
-				"$weekDays〔variable〕"
-			],
-			[
-				"day",
-				"dayOfWeek"
 			],
 			[
 				"var",
@@ -300,129 +295,160 @@
 			"file": "resources/assets/js/components/Screen.vue",
 			"settings":
 			{
-				"buffer_size": 2495,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/Http/Controllers/Admin/ScreensController.php",
-			"settings":
-			{
-				"buffer_size": 4496,
-				"line_ending": "Windows"
-			}
-		},
-		{
-<<<<<<< HEAD
-			"file": "app/Http/routes.php",
-			"settings":
-			{
-				"buffer_size": 3097,
-=======
-			"file": "resources/views/screens/screen__template.blade.php",
-			"settings":
-			{
-				"buffer_size": 9400,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "resources/assets/js/components/Screen.vue",
-			"settings":
-			{
-				"buffer_size": 2495,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/Http/Controllers/Admin/ScreensController.php",
-			"settings":
-			{
-				"buffer_size": 4496,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/Listeners/ShadowEventListener.php",
-			"settings":
-			{
-				"buffer_size": 8438,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "resources/views/events/meta/days__form.blade.php",
-			"settings":
-			{
-				"buffer_size": 1445,
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+				"buffer_size": 3645,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/Helpers.php",
-			"settings":
-			{
-<<<<<<< HEAD
-				"buffer_size": 9400,
-=======
-				"buffer_size": 2611,
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
-				"line_ending": "Windows"
-			}
-		},
-		{
-<<<<<<< HEAD
-			"file": "resources/views/screens/show.blade.php",
-			"settings":
-			{
-				"buffer_size": 738,
-=======
-			"file": "app/ShadowEvent.php",
-			"settings":
-			{
-				"buffer_size": 1974,
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
-				"line_ending": "Windows"
-			}
-		},
-		{
-<<<<<<< HEAD
 			"file": "resources/assets/js/main.js",
 			"settings":
 			{
-				"buffer_size": 502,
-=======
-			"file": "app/Event.php",
-			"settings":
-			{
-				"buffer_size": 650,
-				"line_ending": "Windows"
+				"buffer_size": 832,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/HasShadowEvents.php",
+			"file": "node_modules/vue-strap/src/Tab.vue",
 			"settings":
 			{
-				"buffer_size": 152,
-				"line_ending": "Windows"
+				"buffer_size": 1044,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/Providers/AppServiceProvider.php",
+			"file": "node_modules/vue-strap/src/Tabset.vue",
 			"settings":
 			{
-				"buffer_size": 669,
-				"line_ending": "Windows"
+				"buffer_size": 1024,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/Http/Controllers/Admin/ScreenGroupsController.php",
+			"file": "node_modules/vue-strap/src/Modal.vue",
 			"settings":
 			{
-				"buffer_size": 5310,
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
-				"line_ending": "Windows"
+				"buffer_size": 3269,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "node_modules/vue-strap/dist/vue-strap.js",
+			"settings":
+			{
+				"buffer_size": 148275,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "node_modules/vue-strap/src/utils/callAjax.js",
+			"settings":
+			{
+				"buffer_size": 412,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "node_modules/vue-strap/src/utils/getScrollBarWidth.js",
+			"settings":
+			{
+				"buffer_size": 642,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "node_modules/vue-strap/src/popoverMixins.js",
+			"settings":
+			{
+				"buffer_size": 2723,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "node_modules/vue-strap/src/index.js",
+			"settings":
+			{
+				"buffer_size": 1109,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "node_modules/vue-strap/src/main.js",
+			"settings":
+			{
+				"buffer_size": 855,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "node_modules/vue-strap/src/Alert.vue",
+			"settings":
+			{
+				"buffer_size": 1538,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "node_modules/vue-strap/README.md",
+			"settings":
+			{
+				"buffer_size": 1814,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "node_modules/vue-strap/src/Accordion.vue",
+			"settings":
+			{
+				"buffer_size": 470,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "gulpfile.js",
+			"settings":
+			{
+				"buffer_size": 1040,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/assets/js/components/Alert.vue",
+			"settings":
+			{
+				"buffer_size": 1551,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/app.blade.php",
+			"settings":
+			{
+				"buffer_size": 896,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/admin.blade.php",
+			"settings":
+			{
+				"buffer_size": 558,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/Http/Controllers/Admin/ScreensController.php",
+			"settings":
+			{
+				"buffer_size": 5423,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/lang/sv/messages.php",
+			"settings":
+			{
+				"buffer_size": 3664,
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -434,7 +460,7 @@
 	"command_palette":
 	{
 		"height": 354.0,
-		"last_filter": "gitgutter",
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -506,7 +532,7 @@
 				"Indentation: Reindent Lines"
 			]
 		],
-		"width": 510.0
+		"width": 838.0
 	},
 	"console":
 	{
@@ -527,21 +553,27 @@
 	},
 	"expanded_folders":
 	[
-<<<<<<< HEAD
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/Admin",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Requests",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Listeners",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Providers",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/config",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/seeds",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/node_modules",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/node_modules/vue-strap",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/node_modules/vue-strap/dist",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/node_modules/vue-strap/src",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/assets",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/assets/js",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/assets/js/components",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/lang",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/lang/sv",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/events",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/events/meta",
@@ -550,38 +582,32 @@
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screengroups/edit",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screens",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/tickers"
-=======
-		"/C/pixbo_laravel",
-		"/C/pixbo_laravel/app",
-		"/C/pixbo_laravel/app/Http",
-		"/C/pixbo_laravel/app/Http/Controllers",
-		"/C/pixbo_laravel/app/Http/Controllers/Admin",
-		"/C/pixbo_laravel/app/Listeners",
-		"/C/pixbo_laravel/app/Policies",
-		"/C/pixbo_laravel/app/Providers",
-		"/C/pixbo_laravel/database",
-		"/C/pixbo_laravel/database/migrations",
-		"/C/pixbo_laravel/resources",
-		"/C/pixbo_laravel/resources/assets",
-		"/C/pixbo_laravel/resources/assets/js",
-		"/C/pixbo_laravel/resources/assets/js/components",
-		"/C/pixbo_laravel/resources/assets/sass",
-		"/C/pixbo_laravel/resources/assets/sass/components",
-		"/C/pixbo_laravel/resources/lang",
-		"/C/pixbo_laravel/resources/lang/sv",
-		"/C/pixbo_laravel/resources/views",
-		"/C/pixbo_laravel/resources/views/clients",
-		"/C/pixbo_laravel/resources/views/events",
-		"/C/pixbo_laravel/resources/views/events/meta",
-		"/C/pixbo_laravel/resources/views/pages",
-		"/C/pixbo_laravel/resources/views/screengroups",
-		"/C/pixbo_laravel/resources/views/screengroups/edit",
-		"/C/pixbo_laravel/resources/views/screens",
-		"/C/pixbo_laravel/resources/views/shared"
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 	],
 	"file_history":
 	[
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screengroups/screen__card.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screens/screens__card.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screengroups/screengroup__card.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screengroups/show.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screens/index.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/Admin/ScreensController.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/routes.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/Admin/ScreenGroupsController.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/assets/js/components/Alert.vue",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/tickers/ticker__card.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Ticker.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/Admin/TickersController.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Providers/RouteServiceProvider.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screens/screen__template.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/ShadowEvent.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Listeners/ShadowEventListener.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screens/show.blade.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/assets/js/main.js",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/vendor/laravel/framework/src/Illuminate/Support/Facades/DB.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/vendor/laravel/framework/src/Illuminate/Database/DatabaseManager.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Providers/AppServiceProvider.php",
+		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/config/app.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/app.blade.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/assets/js/components/Ticker.vue",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screengroups/edit.blade.php",
@@ -591,16 +617,12 @@
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screens/create.blade.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/PagesController.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/lang/en/messages.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Ticker.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2016_01_07_134346_add_language_to_user.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2015_09_19_110510_CreateShadowEventTable.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/Admin/TickersController.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/tickers/index.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/tickers/ticker__card.blade.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screengroups/create.blade.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/tickers/create.blade.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/assets/js/components/ScreenGallery.vue",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/Admin/ScreenGroupsController.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screens/screengroups.blade.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/clients/create.blade.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screengroups/edit/edit__info.blade.php",
@@ -618,7 +640,6 @@
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2016_01_07_133332_create_ticker.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/PlayerController.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Middleware/IsScreenClient.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/Admin/ScreensController.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/HasMetaForm.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/Admin/PhotosController.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screens/__form.blade.php",
@@ -626,7 +647,6 @@
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/tickers/__form.blade.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screens/edit.blade.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/shared/actions.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/routes.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/assets/js/components/Screen.vue",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/lang/en/auth.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/lang/en/validation.php",
@@ -647,30 +667,22 @@
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/Auth/AuthController.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Controllers/Admin/ClientsController.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/config/auth.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/config/app.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Policies/ClientPolicy.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2015_12_07_150659_create_roles_tables.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2014_10_12_100000_create_password_resets_table.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2014_10_12_000000_create_users_table.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2015_07_16_111349_EventMetas.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Role.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/ShadowEvent.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Photo.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Screen.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Tag.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/HasEvents.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/User.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/pages/dashboard.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screengroups/screengroup__card.blade.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/shared/delete_message.blade.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/shared/modal.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screengroups/screen__card.blade.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Event.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/EventMeta.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screens/screens__card.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screens/show.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screens/screen__template.blade.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screens/index.blade.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/navs/topnav.blade.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/lang/sv/auth.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Helpers.php",
@@ -679,19 +691,15 @@
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Requests/Request.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Http/Requests/ScreenRequest.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Providers/AuthServiceProvider.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/screengroups/show.blade.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Permission.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2015_07_16_111342_Events.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2015_07_16_111230_Screens.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/database/migrations/2016_01_07_130414_Tag.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/vendor/laravel/framework/src/Illuminate/Auth/AuthServiceProvider.php",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/app/Providers/AppServiceProvider.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/public/js/ticker.js",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/gulpfile.js",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/assets/js/main.js",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/assets/sass/app.scss",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/assets/js/app.js",
-		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/assets/js/components/Alert.vue",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/resources/views/shared/datagrid.blade.php",
 		"/C/Users/Christoffer/Documents/Work/pixbo_laravel/package.json",
 		"/C/pixbo_laravel/resources/assets/sass/components/Alert.sass",
@@ -704,20 +712,11 @@
 		"/C/pixbo_laravel/app/Listeners/ShadowEventListener.php",
 		"/C/pixbo_laravel/app/Providers/EventServiceProvider.php",
 		"/C/pixbo_laravel/app/ScreenGroup.php",
-		"/C/pixbo_laravel/resources/lang/en/messages.php",
-		"/C/pixbo_laravel/app/Http/Requests/ScreenRequest.php",
-		"/C/pixbo_laravel/app/Http/routes.php",
-		"/C/pixbo_laravel/app/Http/Controllers/Admin/TickersController.php",
-		"/C/pixbo_laravel/resources/views/events/__form.blade.php",
-		"/C/pixbo_laravel/vendor/lavary/laravel-menu/src/Lavary/Menu/Collection.php"
+		"/C/pixbo_laravel/resources/lang/en/messages.php"
 	],
 	"find":
 	{
-<<<<<<< HEAD
 		"height": 70.0
-=======
-		"height": 79.0
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 	},
 	"find_in_files":
 	{
@@ -731,12 +730,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-<<<<<<< HEAD
 			"App",
-=======
-			"generateW",
-			"});\n",
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 			"form",
 			"runUp",
 			"resolve",
@@ -760,11 +754,7 @@
 	"groups":
 	[
 		{
-<<<<<<< HEAD
-			"selected": 1,
-=======
-			"selected": 3,
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -773,20 +763,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2495,
+						"buffer_size": 3645,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-<<<<<<< HEAD
-								140,
-								140
-=======
-								2408,
-								2408
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+								2144,
+								2164
 							]
 						],
 						"settings":
@@ -795,8 +780,16 @@
 							"auto_complete": false,
 							"bh_regions":
 							[
-<<<<<<< HEAD
-=======
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
@@ -807,245 +800,263 @@
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-<<<<<<< HEAD
-=======
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
-<<<<<<< HEAD
 								"bh_default_content",
-=======
-								"bh_default_content"
-							],
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "resources/views/screens/screen__template.blade.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9400,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5583,
-								5583
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"auto_complete": false,
-							"bh_regions":
-							[
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-<<<<<<< HEAD
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-=======
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-<<<<<<< HEAD
-=======
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
-								"bh_square_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-<<<<<<< HEAD
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content"
-=======
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content"
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+								"bh_square_content"
 							],
+							"color_scheme": "Packages/Material Theme/schemes/Material-Theme.tmTheme",
 							"syntax": "Packages/Vue Syntax Highlight/vue.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-<<<<<<< HEAD
-						"translation.x": 180.0,
-						"translation.y": 0.0,
-=======
 						"translation.x": 0.0,
-						"translation.y": 3510.0,
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+						"translation.y": 1350.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 15,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "resources/assets/js/main.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 832,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								569,
+								569
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_complete": false,
+							"bh_regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 225.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "node_modules/vue-strap/src/Tab.vue",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1044,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"syntax": "Packages/Vue Syntax Highlight/vue.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 525.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-<<<<<<< HEAD
-					"buffer": 1,
-					"file": "app/Http/Controllers/Admin/ScreensController.php",
+					"buffer": 3,
+					"file": "node_modules/vue-strap/src/Tabset.vue",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4496,
-=======
-					"buffer": 2,
-					"file": "resources/assets/js/components/Screen.vue",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2495,
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+						"buffer_size": 1024,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-<<<<<<< HEAD
-								3875,
-								3875
-=======
-								542,
-								542
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+								503,
+								503
 							]
 						],
 						"settings":
 						{
 							"BracketHighlighterBusy": false,
-							"auto_complete": false,
 							"bh_regions":
 							[
-<<<<<<< HEAD
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-=======
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
@@ -1056,398 +1067,85 @@
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
-<<<<<<< HEAD
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-=======
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-<<<<<<< HEAD
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-=======
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content"
-							],
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 175.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "app/Http/routes.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3097,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1732,
-								1732
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"auto_complete": false,
-							"bh_regions":
-							[
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
 								"bh_round_close",
 								"bh_round_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content"
-							],
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 750.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "resources/views/screens/screen__template.blade.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9400,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								893,
-								893
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"auto_complete": false,
-							"bh_regions":
-							[
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-<<<<<<< HEAD
-=======
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
-<<<<<<< HEAD
 								"bh_default_content",
-=======
-								"bh_default_content"
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
 							],
 							"syntax": "Packages/Vue Syntax Highlight/vue.tmLanguage",
-							"tab_size": 4,
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 819.0,
+						"translation.x": -0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "app/Http/Controllers/Admin/ScreensController.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4496,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2553,
-								2553
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"auto_complete": false,
-							"bh_regions":
-							[
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-<<<<<<< HEAD
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-=======
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-<<<<<<< HEAD
-=======
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-<<<<<<< HEAD
-=======
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-<<<<<<< HEAD
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content"
-							],
-							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage",
-=======
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content"
-							],
-							"syntax": "Packages/PHP/PHP.tmLanguage",
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-<<<<<<< HEAD
-						"translation.y": 2325.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-=======
-						"translation.y": 3744.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-<<<<<<< HEAD
-					"file": "resources/views/screens/show.blade.php",
+					"file": "node_modules/vue-strap/src/Modal.vue",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 738,
-=======
-					"file": "app/Listeners/ShadowEventListener.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8438,
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+						"buffer_size": 3269,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-<<<<<<< HEAD
-								593,
-								610
-=======
-								6083,
-								6083
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+								0,
+								0
 							]
 						],
 						"settings":
 						{
 							"BracketHighlighterBusy": false,
-<<<<<<< HEAD
 							"bh_regions":
 							[
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-=======
-							"auto_complete": false,
-							"bh_regions":
-							[
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
@@ -1458,132 +1156,68 @@
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
-<<<<<<< HEAD
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-=======
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-<<<<<<< HEAD
-=======
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-<<<<<<< HEAD
-=======
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-<<<<<<< HEAD
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content"
-							],
-							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage",
-=======
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
-								"bh_default_content"
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
 							],
-							"syntax": "Packages/PHP/PHP.tmLanguage",
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
-							"tab_size": 4,
+							"syntax": "Packages/Vue Syntax Highlight/vue.tmLanguage",
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-<<<<<<< HEAD
-						"translation.y": 0.0,
+						"translation.x": -0.0,
+						"translation.y": 2625.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
-=======
-						"translation.y": 9243.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 5,
-<<<<<<< HEAD
-					"file": "resources/assets/js/main.js",
+					"file": "node_modules/vue-strap/dist/vue-strap.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 502,
-=======
-					"file": "resources/views/events/meta/days__form.blade.php",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 1445,
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+						"buffer_size": 148275,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-<<<<<<< HEAD
-								501,
-								501
-=======
-								0,
-								0
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+								528,
+								528
 							]
 						],
 						"settings":
@@ -1591,19 +1225,104 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-<<<<<<< HEAD
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
-=======
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": -0.0,
+						"translation.y": 2775.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "node_modules/vue-strap/src/utils/callAjax.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 412,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
@@ -1614,208 +1333,85 @@
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
-<<<<<<< HEAD
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-=======
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-<<<<<<< HEAD
-=======
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-<<<<<<< HEAD
-=======
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-<<<<<<< HEAD
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content"
-=======
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
-								"bh_default_content"
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
 							],
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-<<<<<<< HEAD
-					"stack_index": 4,
-=======
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "app/Helpers.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2611,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2412,
-								2412
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content"
-							],
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2466.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
 					"buffer": 7,
-					"file": "app/ShadowEvent.php",
+					"file": "node_modules/vue-strap/src/utils/getScrollBarWidth.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1974,
+						"buffer_size": 642,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								718,
-								943
+								0,
+								0
 							]
 						],
 						"settings":
 						{
 							"BracketHighlighterBusy": false,
-							"auto_complete": false,
 							"bh_regions":
 							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
@@ -1826,144 +1422,47 @@
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
-								"bh_default_content"
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
 							],
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 819.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "app/Event.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 650,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								460,
-								460
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content"
-							],
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": -0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
@@ -1971,28 +1470,37 @@
 					"type": "text"
 				},
 				{
-					"buffer": 9,
-					"file": "app/HasShadowEvents.php",
+					"buffer": 8,
+					"file": "node_modules/vue-strap/src/popoverMixins.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 152,
+						"buffer_size": 2723,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								41,
-								41
+								0,
+								0
 							]
 						],
 						"settings":
 						{
 							"BracketHighlighterBusy": false,
-							"auto_complete": false,
 							"bh_regions":
 							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
@@ -2003,56 +1511,47 @@
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
-								"bh_default_content"
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
 							],
-							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
+						"translation.x": -0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
@@ -2060,20 +1559,461 @@
 					"type": "text"
 				},
 				{
-					"buffer": 10,
-					"file": "app/Providers/AppServiceProvider.php",
+					"buffer": 9,
+					"file": "node_modules/vue-strap/src/index.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 669,
+						"buffer_size": 1109,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								188,
-								188
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "node_modules/vue-strap/src/main.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 855,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								542,
+								542
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": -0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "node_modules/vue-strap/src/Alert.vue",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1538,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1537,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"syntax": "Packages/Vue Syntax Highlight/vue.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1050.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "node_modules/vue-strap/README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1814,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								555,
+								598
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 450.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "node_modules/vue-strap/src/Accordion.vue",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 470,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"syntax": "Packages/Vue Syntax Highlight/vue.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "gulpfile.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1040,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								74,
+								74
 							]
 						],
 						"settings":
@@ -2082,6 +2022,16 @@
 							"auto_complete": false,
 							"bh_regions":
 							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
@@ -2092,77 +2042,158 @@
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
-								"bh_default_content"
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
 							],
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Material Theme/langs/Gulpfile JS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 234.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 12,
 					"type": "text"
 				},
 				{
-					"buffer": 11,
-					"file": "app/Http/Controllers/Admin/ScreenGroupsController.php",
+					"buffer": 15,
+					"file": "resources/assets/js/components/Alert.vue",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5310,
+						"buffer_size": 1551,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4917,
-								5036
+								1342,
+								1342
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_complete": false,
+							"bh_regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"syntax": "Packages/Vue Syntax Highlight/vue.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "resources/views/app.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 896,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
 							]
 						],
 						"settings":
@@ -2170,6 +2201,16 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
@@ -2180,62 +2221,320 @@
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
-								"bh_default_content"
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 375.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 17,
+					"type": "text"
+				},
+				{
+					"buffer": 17,
+					"file": "resources/views/admin.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 558,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								425,
+								425
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_complete": false,
+							"bh_regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 16,
+					"type": "text"
+				},
+				{
+					"buffer": 18,
+					"file": "app/Http/Controllers/Admin/ScreensController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5423,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								608,
+								608
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_complete": false,
+							"bh_regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
 							],
 							"syntax": "Packages/PHP/PHP.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": -0.0,
-						"translation.y": 6552.0,
+						"translation.x": 0.0,
+						"translation.y": 400.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 11,
->>>>>>> 97e5986ce4782e1075d8a385fcd6892bc4e224d7
+					"stack_index": 19,
+					"type": "text"
+				},
+				{
+					"buffer": 19,
+					"file": "resources/lang/sv/messages.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3664,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								528,
+								528
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_complete": false,
+							"bh_regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 150.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 18,
 					"type": "text"
 				}
 			]
@@ -2293,6 +2592,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"db",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Support\\Facades\\DB.php"
+			],
 			[
 				"messages",
 				"resources\\lang\\en\\messages.php"

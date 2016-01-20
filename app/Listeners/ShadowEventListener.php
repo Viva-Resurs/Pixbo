@@ -66,17 +66,6 @@ class ShadowEventListener
     ];
 
 /**
- * Fires when EventMeta has changed.
- *
- * @param  EventMeta $meta
- * @return
- */
-    public function whenEventMetaChanged(Event $event)
-    {
-        $this->generateShadowEvents($event);
-    }
-
-/**
  * Fires when Event has changed.
  * @param  Event  $event [description]
  * @return [type]        [description]
@@ -93,7 +82,7 @@ class ShadowEventListener
  */
     public function whenEventRemoved(Event $event)
     {
-        ShadowEvent::clearEvent($event->getAttribute('id'));
+        ShadowEvent::clearEvent($event->id);
     }
 
 /**
@@ -104,7 +93,7 @@ class ShadowEventListener
  */
     private function generateShadowEvents(Event $event)
     {
-        switch ($event->getAttribute('recur_type')) {
+        switch ($event->recur_type) {
 
         case 'daily':
             $this->generateDaily($event);
@@ -125,19 +114,25 @@ class ShadowEventListener
 
     private function generateOnce(Event $event)
     {
-        $id = $event->getAttribute('id');
-        $start_date = $event->getAttribute('start_date');
-        $timeArray = !is_null($event->getAttribute('start_time')) ?
+        $date = $this->getDate($event);
+
+        ShadowEvent::clearEvent($event->id);
+
+        ShadowEvent::generateFromEvent($date, $event);
+    }
+
+    private function getDate(Event $event)
+    {
+        $timeArray = !is_null($event->start_time) ?
         extractTime($event->getAttribute('start_time')) :
         extractTime('00:00:00');
 
-        $date = Carbon::parse($start_date);
+        $date = Carbon::parse($event->start_date);
+
         $date->hour = $timeArray[0];
         $date->minute = $timeArray[1];
-        $date->second = $timeArray[2];
-        ShadowEvent::clearEvent($id);
 
-        ShadowEvent::generateFromEvent($date, $event);
+        return $date;
     }
 
 /**
@@ -148,12 +143,12 @@ class ShadowEventListener
  */
     private function generateDaily(Event $event)
     {
-        $id = $event->getAttribute('id');
-        $start_date = $event->getAttribute('start_date');
-        $frequency = !is_null($event->frequency) ? $event->frequency : 1;
-        $timeArray = !is_null($event->getAttribute('start_time')) ? extractTime($event->getAttribute('start_time')) : extractTime('00:00');
+        $id = $event->id;
+        $start_date = $this->getDate($event);
 
         $end = Carbon::parse($start_date)->addDays($this->duration['daily']);
+
+        $frequency = $event->frequency;
 
         $start = ShadowEvent::where(function ($q) use ($id, $frequency, $start_date) {
             $q->where('event_id', $id);
@@ -168,9 +163,6 @@ class ShadowEventListener
             $start = Carbon::parse($start['start']);
         }
 
-        $start->hour = $timeArray[0];
-        $start->minute = $timeArray[1];
-
         ShadowEvent::clearEvent($id);
 
         $shadow_list = [];
@@ -178,21 +170,7 @@ class ShadowEventListener
         for ($initial = Carbon::parse($start);
             $initial->lte($end);
             $initial = $initial->addDays($frequency)) {
-            $shadow = new ShadowEvent;
-            $timeArray = !is_null($event['end_time']) ? extractTime($event['end_time']) : extractTime('23:59:59');
-            $shadow_end = Carbon::parse($initial);
-            $shadow_end->hour = $timeArray[0];
-            $shadow_end->minute = $timeArray[1];
-            $shadow_end->second = $timeArray[2];
-
-            $shadow->fill([
-                'title' => '',
-                'start' => $initial,
-                'end' => $shadow_end,
-                'isAllDay' => 1,
-            ]);
-
-            $event->shadow_events()->save($shadow);
+            ShadowEvent::generateFromEvent(Carbon::parse($initial), $event);
         }
     }
 

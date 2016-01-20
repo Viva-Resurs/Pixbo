@@ -15,6 +15,7 @@
             <!--  Flash messages -->
             <div id="alerts">
                 @include ('flash::message')
+                <toast></toast>
             </div>
 
             @yield('content')
