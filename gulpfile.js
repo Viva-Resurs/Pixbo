@@ -1,6 +1,5 @@
 var elixir = require('laravel-elixir');
 require('laravel-elixir-vueify');
-require('vue-strap');
 
 /*
  |--------------------------------------------------------------------------

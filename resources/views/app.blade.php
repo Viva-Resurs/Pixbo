@@ -36,5 +36,11 @@
     <script src="/js/main.js"></script>
     @yield('footer')
 
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+
 </body>
 </html>
