@@ -20,8 +20,8 @@
     <div class="col-sm-6 col-md-4">
         <div class="panel panel-default">
               <div class="panel-body">
-                    <screen id="{{ $screen->id }}"></screen>
-                    @include('screens.screen__template')
+                    <schedule id="{{ $screen->id }}" model="screen"></schedule>
+                    @include('shared.schedule__template')
               </div>
         </div>
     </div>

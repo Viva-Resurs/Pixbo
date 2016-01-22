@@ -12,7 +12,7 @@ import Alert from './components/Alert.vue';
 //var alert = require('vue-strap');//src/alert');
 import ScreenGallery from './components/ScreenGallery.vue';
 import Ticker from './components/Ticker.vue';
-import Screen from './components/Screen.vue';
+import Schedule from './components/Schedule.vue';
 
 var vueboot = require('vueboot');
 
@@ -25,7 +25,7 @@ new Vue({
         //'Alert': Alert,
         'screengallery': ScreenGallery,
         'Tickers': Ticker,
-        'Screen': Screen,
+        'Schedule': Schedule,
         'Alert': vueboot.alert,
         'Toast': vueboot.toast,
     },

@@ -1,16 +1,27 @@
-<template id="screen-template">
+<template id="schedule-template">
     <form id="screenform" action="" method="POST" role="form" v-on:submit.prevent="send_post">
         {{ csrf_field () }}
 
-        <legend>
-            {{ trans('messages.tags') }}
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('messages.tag_tooltip') }}"></span>
-        </legend>
-        <div class="form-group">
-            <div class="">
-                <input type="text" v-model="selected_tags" v-bind:value="tagged" name="tags" id="inputTags" class="form-control" required="required" placeholder="tag tag">
+        <template v-if="model == 'screen'">
+            <legend>
+                {{ trans('messages.tags') }}
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('messages.tag_tooltip') }}"></span>
+            </legend>
+            <div class="form-group">
+                <div class="">
+                    <input type="text" v-model="selected_tags" v-bind:value="tagged" name="tags" id="inputTags" class="form-control" required="required" placeholder="tag tag">
+                </div>
             </div>
-        </div>
+        </template>
+        <template v-if="model == 'ticker'">
+        <legend>{{ trans('messages.ticker') }}</legend>
+            <div class="form-group">
+                <label for="inputText" class="col-sm-2 control-label">Text:</label>
+                <div class="col-sm-10">
+                    <input v-model="modelObject.text" type="text" name="text" id="inputText" class="form-control" required="required" title="">
+                </div>
+            </div>
+        </template>
 
         <legend>
             {{ trans('messages.screen_group') }}

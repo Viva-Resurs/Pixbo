@@ -47,11 +47,12 @@ Route::get('/api/screen/{id}', function ($id) {
     return $screen;
 });
 
-Route::post('/api/screen/{id}', 'Admin\ScreensController@update');
+Route::get('/api/ticker/{id}', function ($id) {
+    $ticker = App\Ticker::where('id', $id)->with(['event', 'screengroups'])->first();
+    return $ticker;
+});
 
-// Route::get('/event', function () {
-//     event('GenerateShadowEvents', EventMeta::first());
-// });
+Route::post('/api/screen/{id}', 'Admin\ScreensController@update');
 
 Route::group([
     'namespace' => 'Admin',

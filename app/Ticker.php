@@ -17,9 +17,9 @@ class Ticker extends Model
         'id',
     ];
 
-    public function screengroup()
+    public function screengroups()
     {
-        return $this->belongsTo(ScreenGroup::class, 'screen_group_ticker');
+        return $this->belongsToMany(ScreenGroup::class, 'screen_group_ticker')->withTimestamps();
     }
 
     public function event()

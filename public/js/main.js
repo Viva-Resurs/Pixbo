@@ -26027,7 +26027,7 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "C:\\pixbo_laravel\\resources\\assets\\js\\components\\Alert.vue"
+  var id = "C:\\Users\\Christoffer\\Documents\\Work\\pixbo_laravel\\resources\\assets\\js\\components\\Alert.vue"
   module.hot.dispose(function () {
     require("vueify-insert-css").cache["\n.fade-transition {\n  -webkit-transition: opacity .3s ease;\n  transition: opacity .3s ease;\n}\n.fade-enter,\n.fade-leave {\n  opacity: 0;\n}\n.alert.top {\n  position: fixed;\n  top: 30px;\n  margin: 0 auto;\n  left: 0;\n  right: 0;\n  z-index: 2;\n}\n.alert.top-right {\n  position: fixed;\n  top: 30px;\n  right: 50px;\n  z-index: 2;\n}\n"] = false
     document.head.removeChild(__vueify_style__)
@@ -26047,14 +26047,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = {
 
-    template: '#screen-template',
-    props: ['id'],
+    template: '#schedule-template',
+    props: ['id', 'model'],
 
     data: function data() {
         return {
             screengroups: [],
-            screen: '',
-            event: '',
+            modelObject: {},
+            event: {},
             selected_screengroups: [],
             selected_tags: '',
             tags: [],
@@ -26081,19 +26081,19 @@ exports.default = {
                     day_num = '';
                     break;
             }
-
             var payload = {
                 event: this.event,
                 selected_screengroups: this.selected_screengroups,
                 selected_tags: this.selected_tags,
-                day_num: day_num
+                day_num: day_num,
+                modelObject: this.modelObject
             };
             this.send_ajax(payload);
         },
 
         send_ajax: function send_ajax(payload) {
             var vm = this;
-            this.$http.put('/admin/screens/' + this.screen.id, payload).then(function (response) {
+            this.$http.put('/admin/' + vm.model + 's/' + vm.modelObject.id, payload).then(function (response) {
                 if (response) {
                     vm.$dispatch('add-alert', response.data);
                 }
@@ -26110,11 +26110,11 @@ exports.default = {
                 this.tags = tags;
             }).bind(this));
         },
-        get_screen: function get_screen() {
-            this.$http.get('/api/screen/' + this.id, (function (screen) {
-                this.screen = screen;
-                this.event = screen.event.pop();
-                this.tags = screen.tags;
+        get_model: function get_model() {
+            this.$http.get('/api/' + this.model + '/' + this.id, (function (modelObject) {
+                this.modelObject = modelObject;
+                this.event = modelObject.event.pop();
+                if (this.model == 'screen') this.tags = modelObject.tags;
                 this.parse_event();
                 this.set_selected_screengroups();
             }).bind(this));
@@ -26136,9 +26136,9 @@ exports.default = {
         },
 
         set_selected_screengroups: function set_selected_screengroups() {
-            var sgs = screen.screengroups != null ? screen.screengroups.length : 0;
+            var sgs = this.modelObject.screengroups != null ? this.modelObject.screengroups.length : 0;
             for (var i = 0; i < sgs; i++) {
-                this.selected_screengroups.push(screen.screengroups[i].id);
+                this.selected_screengroups.push(this.modelObject.screengroups[i].id);
             }
         }
     },
@@ -26158,8 +26158,8 @@ exports.default = {
     },
     ready: function ready() {
         this.get_all_screengroups();
-        this.get_all_tags();
-        this.get_screen();
+        if (this.model == 'screen') this.get_all_tags();
+        this.get_model();
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
@@ -26167,7 +26167,7 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "C:\\pixbo_laravel\\resources\\assets\\js\\components\\Screen.vue"
+  var id = "C:\\Users\\Christoffer\\Documents\\Work\\pixbo_laravel\\resources\\assets\\js\\components\\Schedule.vue"
   module.hot.dispose(function () {
     require("vueify-insert-css").cache["\n\n"] = false
     document.head.removeChild(__vueify_style__)
@@ -26213,7 +26213,7 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "C:\\pixbo_laravel\\resources\\assets\\js\\components\\ScreenGallery.vue"
+  var id = "C:\\Users\\Christoffer\\Documents\\Work\\pixbo_laravel\\resources\\assets\\js\\components\\ScreenGallery.vue"
   module.hot.dispose(function () {
     require("vueify-insert-css").cache["\n    .screen_gallery {\n\n    }\n    .screen_gallery__entity {\n\n    }\n"] = false
     document.head.removeChild(__vueify_style__)
@@ -26313,7 +26313,7 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "C:\\pixbo_laravel\\resources\\assets\\js\\components\\Ticker.vue"
+  var id = "C:\\Users\\Christoffer\\Documents\\Work\\pixbo_laravel\\resources\\assets\\js\\components\\Ticker.vue"
   module.hot.dispose(function () {
     require("vueify-insert-css").cache["\n    button {\n    margin: 0;\n    padding: 0;\n    border: 0;\n    background: none;\n    font-size: 100%;\n    vertical-align: baseline;\n    font-family: inherit;\n    font-weight: inherit;\n    color: inherit;\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    -webkit-font-smoothing: antialiased;\n    -moz-font-smoothing: antialiased;\n    font-smoothing: antialiased;\n}\n.destroy {\n    display: none;\n    position: absolute;\n    top: 0;\n    right: 10px;\n    bottom: 0;\n    width: 40px;\n    height: 40px;\n    margin: auto 0;\n    font-size: 30px;\n    color: #cc9a9a;\n    margin-bottom: 11px;\n    -webkit-transition: color 0.2s ease-out;\n    transition: color 0.2s ease-out;\n}\n\n.destroy:hover {\n    color: #af5b5e;\n}\n\n.destroy:after {\n    content: '×';\n}\n\nli:hover .destroy {\n    display: block;\n}\n.edit {\n    position: relative;\n    margin: 0;\n    width: 100%;\n    font-size: 24px;\n    font-family: inherit;\n    font-weight: inherit;\n    line-height: 1.4em;\n    border: 0;\n    outline: none;\n    color: inherit;\n    padding: 6px;\n    border: 1px solid #999;\n    box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);\n    box-sizing: border-box;\n    -webkit-font-smoothing: antialiased;\n    -moz-font-smoothing: antialiased;\n    font-smoothing: antialiased;\n}\nli .edit {\n    display: none;\n}\nli.editing {\n    border-bottom: none;\n    padding: 0;\n}\n\nli.editing .edit {\n    display: block;\n    width: 506px;\n    padding: 13px 17px 12px 17px;\n    margin: 0 0 0 43px;\n}\nli label {\n    white-space: pre;\n    word-break: break-word;\n    /*padding: 15px 60px 15px 15px; */\n    margin-right: 2em;\n    display: block;\n    line-height: 1.2;\n    -webkit-transition: color 0.4s;\n    transition: color 0.4s;\n}\n"] = false
     document.head.removeChild(__vueify_style__)
@@ -26339,9 +26339,9 @@ var _Ticker = require('./components/Ticker.vue');
 
 var _Ticker2 = _interopRequireDefault(_Ticker);
 
-var _Screen = require('./components/Screen.vue');
+var _Schedule = require('./components/Schedule.vue');
 
-var _Screen2 = _interopRequireDefault(_Screen);
+var _Schedule2 = _interopRequireDefault(_Schedule);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26365,7 +26365,7 @@ new Vue({
         //'Alert': Alert,
         'screengallery': _ScreenGallery2.default,
         'Tickers': _Ticker2.default,
-        'Screen': _Screen2.default,
+        'Schedule': _Schedule2.default,
         'Alert': vueboot.alert,
         'Toast': vueboot.toast
     },
@@ -26389,6 +26389,6 @@ new Vue({
     }
 });
 
-},{"./components/Alert.vue":15,"./components/Screen.vue":16,"./components/ScreenGallery.vue":17,"./components/Ticker.vue":18,"bootstrap-sass":1,"vue":12,"vue-resource":5,"vueboot":13}]},{},[19]);
+},{"./components/Alert.vue":15,"./components/Schedule.vue":16,"./components/ScreenGallery.vue":17,"./components/Ticker.vue":18,"bootstrap-sass":1,"vue":12,"vue-resource":5,"vueboot":13}]},{},[19]);
 
 //# sourceMappingURL=main.js.map

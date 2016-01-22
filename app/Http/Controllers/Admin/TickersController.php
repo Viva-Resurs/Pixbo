@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Event;
 use App\Http\Controllers\Controller;
 use App\Screengroup;
 use App\Ticker;
+use DB;
 use Illuminate\Http\Request;
 use Request as RF;
 
@@ -43,6 +45,9 @@ class TickersController extends Controller
     {
         if ($ticker = new Ticker($request->all())) {
             $ticker->save();
+            $event = new Event;
+            $event->fill(['start_date' => date('Y-m-d')]);
+            $ticker->event()->save($event);
 
             flash()->success(trans('messages.ticker_created_ok'));
 
@@ -56,7 +61,11 @@ class TickersController extends Controller
 
     public function show(Ticker $ticker)
     {
-        return $ticker;
+        if (RF::wantsJson()) {
+            return $screen;
+        } else {
+            return view('tickers.show', compact(['ticker']));
+        }
     }
 
     /**
@@ -66,17 +75,26 @@ class TickersController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Ticker $ticker, Request $request)
+    public function update(Request $request, Ticker $ticker)
     {
-        if ($ticker->update($request->all())) {
-            flash()->success(trans('messages.ticker_updated_ok'));
-            if (Request::wantsJson()) {
-                return $ticker;
-            } else {
-                return redirect()->back();
-            }
+        $event = $request->get('event');
+        $day_num = $request->get('day_num');
+        $event['recur_day_num'] = json_encode(($day_num));
+        $ticker_data = $request->get('modelObject');
+
+        $screengroups = $request->get('selected_screengroups');
+
+        $result = DB::transaction(function () use ($ticker, $ticker_data, $event, $screengroups) {
+            $e = Event::find($event['id']);
+            $e->update($event);
+            $ticker->update($ticker_data);
+            $ticker->screengroups()->sync($screengroups);
+        });
+
+        if (is_null($result)) {
+            return ['type' => 'success', 'dismissible' => true, 'content' => trans('messages.ticker_updated_ok'), 'timeout' => 3000];
         } else {
-            return abort(500, trans('messages.ticker_updated_failed'));
+            return ['type' => 'danger', 'dismissible' => true, 'content' => trans('messages.ticker_updated_fail'), 'timeout' => false];
         }
     }
 

@@ -1,14 +1,14 @@
 <script>
     export default {
 
-        template: '#screen-template',
-        props: ['id'],
+        template: '#schedule-template',
+        props: ['id', 'model'],
 
         data: function() {
             return {
                 screengroups: [],
-                screen: '',
-                event: '',
+                modelObject: {},
+                event: {},
                 selected_screengroups: [],
                 selected_tags: '',
                 tags: [],
@@ -37,12 +37,12 @@
                         day_num = '';
                         break;
                 }
-
                 var payload = {
                     event: this.event,
                     selected_screengroups: this.selected_screengroups,
                     selected_tags: this.selected_tags,
                     day_num: day_num,
+                    modelObject: this.modelObject,
                 };
                 this.send_ajax(payload);
 
@@ -50,7 +50,7 @@
 
             send_ajax: function(payload) {
                 var vm = this;
-                this.$http.put('/admin/screens/' + this.screen.id, payload).then(function (response) {
+                this.$http.put('/admin/' + vm.model + 's/' + vm.modelObject.id, payload).then(function (response) {
                     if(response) {
                         vm.$dispatch('add-alert', response.data);
                     }
@@ -67,11 +67,12 @@
                     this.tags = tags;
                 }.bind(this));
             },
-            get_screen: function() {
-                this.$http.get('/api/screen/' + this.id, function(screen) {
-                    this.screen = screen;
-                    this.event = screen.event.pop();
-                    this.tags = screen.tags;
+            get_model: function() {
+                this.$http.get('/api/' + this.model + '/' + this.id, function(modelObject) {
+                    this.modelObject = modelObject;
+                    this.event = modelObject.event.pop();
+                    if(this.model == 'screen')
+                        this.tags = modelObject.tags;
                     this.parse_event();
                     this.set_selected_screengroups();
                 }.bind(this));
@@ -100,9 +101,9 @@
             },
 
             set_selected_screengroups: function() {
-                var sgs = screen.screengroups != null ? screen.screengroups.length : 0;
+                var sgs = this.modelObject.screengroups != null ? this.modelObject.screengroups.length : 0;
                 for (var i =0;i<sgs;i++) {
-                    this.selected_screengroups.push(screen.screengroups[i].id);
+                    this.selected_screengroups.push(this.modelObject.screengroups[i].id);
                 }
             }
         },
@@ -123,8 +124,9 @@
         },
          ready: function () {
             this.get_all_screengroups();
-            this.get_all_tags();
-            this.get_screen();
+            if(this.model == 'screen')
+                this.get_all_tags();
+            this.get_model();
         },
     };
 </script>
