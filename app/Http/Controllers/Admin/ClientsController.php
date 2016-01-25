@@ -38,6 +38,8 @@ class ClientsController extends Controller
     {
         $client = new Client;
         $screenGroups = ScreenGroup::lists('name', 'id')->all();
+        //array_push($screenGroups, trans('messages.default'));
+        //dd($screenGroups);
 
         return view('clients.create', compact('client', 'screenGroups'));
     }
@@ -98,6 +100,7 @@ class ClientsController extends Controller
      */
     public function update(ClientRequest $request, Client $client)
     {
+        //dd($request);
         if ($client->update($request->all())) {
             flash()->success('Client updated successfully.');
         }

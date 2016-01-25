@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Online;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
@@ -15,5 +16,7 @@ abstract class Controller extends BaseController
     {
         view()->share('signedIn', Auth::check());
         view()->share('user', Auth::user());
+
+        Online::updateCurrent();
     }
 }

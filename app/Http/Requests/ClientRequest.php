@@ -38,8 +38,8 @@ class ClientRequest extends Request
         case 'PATCH':
             {
                 return [
-                    'name' => 'required|unique:clients,name' . Request::get('name'),
-                    'ip_address' => 'required|ip|unique:clients,ip_address' . Request::get('ip_address'),
+                    'name' => 'required|unique:clients,name,' . Request::get('client_id'),
+                    'ip_address' => 'required|ip|unique:clients,ip_address,' . Request::get('client_id'),
                 ];
             }
         default:break;

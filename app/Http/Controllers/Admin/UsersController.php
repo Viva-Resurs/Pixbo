@@ -14,4 +14,10 @@ class UsersController extends Controller
     public function profile()
     {
     }
+
+    public function show(User $user)
+    {
+        //$full = User::where('id', $user->id)->with('online')->first();
+        dd($user->last_activity);
+    }
 }

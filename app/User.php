@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -25,6 +26,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $fillable = ['name', 'email', 'password', 'client_id'];
+    protected $appends = ['last_activity'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -87,5 +89,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
 
         return $this->roles()->save($role);
+    }
+
+    public function online()
+    {
+        return $this->hasOne(Online::class);
+    }
+
+    public function getLastActivityAttribute()
+    {
+        return !is_null($this->online) ? Carbon::now()->timestamp($this->online->last_activity)->toDateTimeString() : 'Offline';
     }
 }

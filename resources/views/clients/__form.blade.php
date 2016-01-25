@@ -1,5 +1,7 @@
 @include('shared.alert')
 
+{!! Form::hidden('client_id', $client->id) !!}
+
 <div class="form-group">
     {!! Form::label('name', trans('messages.name')) !!}
     {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required']) !!}

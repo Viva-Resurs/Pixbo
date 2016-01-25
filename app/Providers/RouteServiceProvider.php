@@ -36,6 +36,7 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('events', 'App\Event');
         $router->model('eventmetas', 'App\EventMeta');
         $router->model('photos', 'App\Photo');
+        $router->model('users', 'App\User');
     }
 
     /**

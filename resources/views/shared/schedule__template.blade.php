@@ -169,7 +169,6 @@
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('messages.event_week_tooltip') }}"></span>
                     </label>
                         <select v-model="monthly_day_num" value="1" name="recur_day_num" id="inputRecur_day_num" class="form-control">
-                            <option value="">{{ trans('messages.undefined') }}</option>
                             <option value="1">{{ trans('messages.first') }}</option>
                             <option value="2">{{ trans('messages.second') }}</option>
                             <option value="3">{{ trans('messages.third') }}</option>
