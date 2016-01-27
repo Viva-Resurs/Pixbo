@@ -1,7 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use App\Traits\HasShadowEvents as HasShadowEvents;
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model

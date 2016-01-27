@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use App\Event;
+use App\Models\Event;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 

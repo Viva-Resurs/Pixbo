@@ -28,14 +28,13 @@ class RouteServiceProvider extends ServiceProvider
 
         parent::boot($router);
 
-        $router->model('clients', 'App\Client');
-        $router->model('screens', 'App\Screen');
-        $router->model('tickers', 'App\Ticker');
-        $router->model('screengroup', 'App\ScreenGroup');
-        $router->model('screengroups', 'App\ScreenGroup');
-        $router->model('events', 'App\Event');
-        $router->model('eventmetas', 'App\EventMeta');
-        $router->model('photos', 'App\Photo');
+        $router->model('clients', 'App\Models\Client');
+        $router->model('screens', 'App\Models\Screen');
+        $router->model('tickers', 'App\Models\Ticker');
+        $router->model('screengroup', 'App\Models\ScreenGroup');
+        $router->model('screengroups', 'App\Models\ScreenGroup');
+        $router->model('events', 'App\Models\Event');
+        $router->model('photos', 'App\Models\Photo');
         $router->model('users', 'App\User');
     }
 

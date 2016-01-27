@@ -1,12 +1,14 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Client;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ClientRequest;
-use App\ScreenGroup;
+use App\Models\Client;
+use App\Models\Role;
+use App\Models\ScreenGroup;
 use App\User;
 use DB;
+use Gate;
 use Hash;
 use Request;
 
@@ -19,13 +21,16 @@ class ClientsController extends Controller
      */
     public function index()
     {
+        if (Gate::denies('view_clients')) {
+            abort(403);
+        }
+
         $clients = Client::all();
 
         if (Request::wantsJson()) {
             return $clients;
         } else {
-            $data = Client::paginate(50);
-            return view('clients.index')->with('data', $data);
+            return view('clients.index')->with('clients', $clients);
         }
     }
 
@@ -36,6 +41,9 @@ class ClientsController extends Controller
      */
     public function create()
     {
+        if (Gate::denies('add_clients')) {
+            abort(403);
+        }
         $client = new Client;
         $screenGroups = ScreenGroup::lists('name', 'id')->all();
         //array_push($screenGroups, trans('messages.default'));
@@ -52,6 +60,9 @@ class ClientsController extends Controller
      */
     public function store(ClientRequest $request)
     {
+        if (Gate::denies('add_clients')) {
+            abort(403);
+        }
         if ($this->createClientUser($request)) {
             flash()->success('Client created successfully.');
         }
@@ -71,6 +82,9 @@ class ClientsController extends Controller
      */
     public function show(Client $client)
     {
+        if (Gate::denies('edit_clients')) {
+            abort(403);
+        }
         if (Request::wantsJson()) {
             return $client;
         } else {
@@ -86,6 +100,9 @@ class ClientsController extends Controller
      */
     public function edit(Client $client)
     {
+        if (Gate::denies('edit_clients')) {
+            abort(403);
+        }
         $screenGroups = ScreenGroup::lists('name', 'id')->all();
 
         return view('clients.edit', compact('client', 'screenGroups'));
@@ -100,7 +117,9 @@ class ClientsController extends Controller
      */
     public function update(ClientRequest $request, Client $client)
     {
-        //dd($request);
+        if (Gate::denies('edit_clients')) {
+            abort(403);
+        }
         if ($client->update($request->all())) {
             flash()->success('Client updated successfully.');
         }
@@ -120,6 +139,9 @@ class ClientsController extends Controller
      */
     public function destroy(Client $client)
     {
+        if (Gate::denies('remove_clients')) {
+            abort(403);
+        }
         $deleted = $client->delete();
 
         if ($deleted) {
@@ -143,6 +165,8 @@ class ClientsController extends Controller
                 'email' => $client->name . '@viva.se',
                 'password' => Hash::make($client->name),
             ])->save();
+            $role = Role::where('name', 'client')->first();
+            $user->assignRole($role);
             $user->client()->save($client);
         });
 

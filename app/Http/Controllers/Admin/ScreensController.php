@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Event;
 use App\Http\Controllers\Controller;
-use App\Photo;
-use App\Screen;
-use App\ScreenGroup;
-use App\Tag;
+use App\Models\Event;
+use App\Models\Photo;
+use App\Models\Screen;
+use App\Models\ScreenGroup;
+use App\Models\Tag;
 use Auth;
 use DB;
+use Gate;
 use Illuminate\Http\Request;
 use Request as Requests;
 
@@ -22,6 +23,9 @@ class ScreensController extends Controller
      */
     public function index()
     {
+        if (Gate::denies('view_screens')) {
+            abort(403, trans('auth.access_denied'));
+        }
         $screens = Screen::all();
 
         if (Requests::wantsJson()) {
@@ -38,6 +42,9 @@ class ScreensController extends Controller
      */
     public function create()
     {
+        if (Gate::denies('add_screens')) {
+            abort(403, trans('auth.access_denied'));
+        }
         $screens = new Screen;
         $screenGroups = ScreenGroup::lists('name', 'id')->all();
 
@@ -52,6 +59,9 @@ class ScreensController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::denies('add_screens')) {
+            abort(403, trans('auth.access_denied'));
+        }
         $screen = new Screen($request->all());
         flash()->success('Screen created successfully.');
         Auth::user()->screens()->save($screen);
@@ -74,6 +84,9 @@ class ScreensController extends Controller
      */
     public function show(Screen $screen)
     {
+        if (Gate::denies('edit_screens')) {
+            abort(403, trans('auth.access_denied'));
+        }
         $event = $screen->getEvent();
 
         if (Requests::wantsJson()) {
@@ -91,6 +104,9 @@ class ScreensController extends Controller
      */
     public function edit(Screen $screen)
     {
+        if (Gate::denies('edit_screens')) {
+            abort(403, trans('auth.access_denied'));
+        }
         $event = $screen->getEvent();
         $event_meta = $event->getEventMeta();
         $screengroups = Screengroup::all();
@@ -107,6 +123,9 @@ class ScreensController extends Controller
      */
     public function update(Request $request, $screen)
     {
+        if (Gate::denies('edit_screens')) {
+            abort(403, trans('auth.access_denied'));
+        }
         $event = $request->get('event');
         $day_num = $request->get('day_num');
         $event['recur_day_num'] = json_encode(($day_num));
@@ -151,6 +170,9 @@ class ScreensController extends Controller
      */
     public function destroy(Screen $screen)
     {
+        if (Gate::denies('remove_screens')) {
+            abort(403, trans('auth.access_denied'));
+        }
         $deleted = $screen->delete();
         if ($deleted) {
             flash()->success('Screen removed successfully.');
@@ -173,6 +195,9 @@ class ScreensController extends Controller
      */
     public function addScreenFromPhoto(Request $request)
     {
+        if (Gate::denies('add_screens')) {
+            abort(403, trans('auth.access_denied'));
+        }
         $this->validate($request, [
             'photo' => 'required|mimes:jpg,jpeg,png,bmp',
         ]);

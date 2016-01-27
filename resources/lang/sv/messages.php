@@ -3,12 +3,12 @@
 return [
 
     /*
-        |--------------------------------------------------------------------------
-        | Application Language Lines
-        |--------------------------------------------------------------------------
-        |
-        | The following language lines are used for general application messages.
-        |
+                        |--------------------------------------------------------------------------
+                        | Application Language Lines
+                        |--------------------------------------------------------------------------
+                        |
+                        | The following language lines are used for general application messages.
+                        |
     */
 
     /**
@@ -27,6 +27,8 @@ return [
     'ip_address' => 'IP adress',
     'summary' => 'Sammanfattning',
     'text' => 'Text',
+    'activity' => 'Aktivitet',
+    'action' => 'Åtgärd',
     //'schedule'                    => 'Planering',
 
     /**

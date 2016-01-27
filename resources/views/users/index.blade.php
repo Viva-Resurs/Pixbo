@@ -1,7 +1,7 @@
 @extends('admin')
 
 @section('title')
-    Client index
+    User index
 @stop
 
 @section('header')
@@ -12,7 +12,7 @@
 
 @section('content')
 
-@include('clients.table')
+@include('users.table')
 
 @stop
 
@@ -21,7 +21,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         var lang = $('html').attr('lang');
-        $('#client_table').DataTable({
+        $('#user_table').DataTable({
             "language": {
                 "url": "/js/vendor/dataTables/" + lang + ".json",
             }

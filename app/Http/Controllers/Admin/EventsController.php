@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Event;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EventRequest;
+use App\Models\Event;
 use Request;
 
 class EventsController extends Controller

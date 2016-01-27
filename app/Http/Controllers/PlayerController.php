@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Event;
 use App\Http\Controllers\Controller;
-use App\ShadowEvent;
+use App\Models\Event;
+use App\Models\ShadowEvent;
 use Auth;
 use Carbon\Carbon;
 use Request as R;

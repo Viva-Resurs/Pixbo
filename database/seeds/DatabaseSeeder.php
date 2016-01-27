@@ -255,13 +255,20 @@ class UserTableSeeder extends Seeder
     {
         DB::table('users')->delete();
 
-        $user = User::create([
+        $admin = User::create([
             'email' => 'admin@viva.se',
             'name' => 'admin',
             'password' => 'admin',
         ]);
 
-        $user->assignRole('admin');
+        $moderator = User::create([
+            'email' => 'moderator@viva.se',
+            'name' => 'moderator',
+            'password' => 'moderator',
+        ]);
+
+        $admin->assignRole('admin');
+        $moderator->assignRole('moderator');
 
         foreach (DB::table("users")->get() as $user) {
             DB::table("users")

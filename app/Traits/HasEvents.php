@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Traits;
 
-use App\Event;
+use App\Models\Event;
 use DB;
 
 trait HasEvents

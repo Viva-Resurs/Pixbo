@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Event;
 use App\Http\Controllers\Controller;
-use App\Screengroup;
-use App\Ticker;
+use App\Models\Event;
+use App\Models\Screengroup;
+use App\Models\Ticker;
 use DB;
+use Gate;
 use Illuminate\Http\Request;
 use Request as RF;
 
@@ -19,6 +20,10 @@ class TickersController extends Controller
      */
     public function index()
     {
+        if (Gate::denies('view_tickers')) {
+            abort(403, trans('auth.access_denied'));
+        }
+
         $tickers = Ticker::all();
 
         if (RF::wantsJson()) {
@@ -30,6 +35,9 @@ class TickersController extends Controller
 
     public function create()
     {
+        if (Gate::denies('add_tickers')) {
+            abort(403, trans('auth.access_denied'));
+        }
         $ticker = new Ticker;
 
         return view('tickers.create', compact('ticker'));
@@ -43,6 +51,9 @@ class TickersController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::denies('add_tickers')) {
+            abort(403, trans('auth.access_denied'));
+        }
         if ($ticker = new Ticker($request->all())) {
             $ticker->save();
             $event = new Event;
@@ -61,6 +72,9 @@ class TickersController extends Controller
 
     public function show(Ticker $ticker)
     {
+        if (Gate::denies('edit_tickers')) {
+            abort(403, trans('auth.access_denied'));
+        }
         if (RF::wantsJson()) {
             return $screen;
         } else {
@@ -77,6 +91,9 @@ class TickersController extends Controller
      */
     public function update(Request $request, Ticker $ticker)
     {
+        if (Gate::denies('edit_tickers')) {
+            abort(403, trans('auth.access_denied'));
+        }
         $event = $request->get('event');
         $day_num = $request->get('day_num');
         $event['recur_day_num'] = json_encode(($day_num));
@@ -106,6 +123,9 @@ class TickersController extends Controller
      */
     public function destroy(ScreenGroup $screengroup, Request $request)
     {
+        if (Gate::denies('remove_tickers')) {
+            abort(403, trans('auth.access_denied'));
+        }
         $ticker_request = $request->all();
         $ticker = Ticker::where(['id' => $ticker_request['id']])->first();
 

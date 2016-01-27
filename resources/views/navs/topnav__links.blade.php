@@ -10,8 +10,8 @@
 @can('view_clients')
   <li class="{{ set_active('admin/clients') }}"><a href="/admin/clients">{{ trans('messages.clients') }}</a></li>
 @endcan
-@can('view_roles')
-  <li class="{{ set_active('admin/roles') }}"><a href="/admin/roles">{{ trans('messages.roles') }}</a></li>
+@can('view_users')
+  <li class="{{ set_active('admin/users') }}"><a href="/admin/users">{{ trans('messages.users') }}</a></li>
 @endcan
 @if($signedIn)
 <li class="dropdown">
@@ -24,7 +24,7 @@
       <li>{!! link_to_action('Admin\TickersController@create', trans('messages.ticker')) !!}</li>
     @endcan
 
-    <li role="separator" class="divider"></li>
+
     @can('add_screengroups')
       <li>{!! link_to_action('Admin\ScreenGroupsController@create', trans('messages.screen_group')) !!}</li>
     @endcan
@@ -36,5 +36,5 @@
     @endcan
   </ul>
 </li>
-<li>{!! link_to_action('Admin\ClientsController@create', trans('messages.settings')) !!}</li>
+<li>{!! link_to_action('Admin\UsersController@getProfile', trans('messages.settings')) !!}</li>
 @endif

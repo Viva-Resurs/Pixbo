@@ -1,7 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use App\Traits\HasEvents as HasEvents;
 use Illuminate\Database\Eloquent\Model;
 
 class Screen extends Model

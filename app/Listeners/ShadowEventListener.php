@@ -2,9 +2,8 @@
 
 namespace App\Listeners;
 
-use App\Event;
-use App\EventMeta;
-use App\ShadowEvent;
+use App\Models\Event;
+use App\Models\ShadowEvent;
 use Carbon\Carbon;
 
 class ShadowEventListener

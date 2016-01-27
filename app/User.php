@@ -41,7 +41,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
  */
     public function client()
     {
-        return $this->hasOne(Client::class);
+        return $this->hasOne(\App\Models\Client::class);
     }
 
 /**
@@ -50,7 +50,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
  */
     public function screengroups()
     {
-        return $this->hasMany(ScreenGroup::class);
+        return $this->hasMany(\App\Models\ScreenGroup::class);
     }
 
 /**
@@ -59,17 +59,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
  */
     public function events()
     {
-        return $this->hasMany(Event::class);
+        return $this->hasMany(\App\Models\Event::class);
     }
 
     public function screens()
     {
-        return $this->hasMany(Screen::class);
+        return $this->hasMany(\App\Models\Screen::class);
     }
 
     public function roles()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(\App\Models\Role::class);
     }
 
     public function hasRole($role)
@@ -93,7 +93,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function online()
     {
-        return $this->hasOne(Online::class);
+        return $this->hasOne(\App\Models\Online::class);
     }
 
     public function getLastActivityAttribute()
