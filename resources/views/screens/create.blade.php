@@ -29,7 +29,12 @@
             paramName: 'photo',
             maxFileSize: 10,
             acceptedFiles: '.jpg,.jpeg,.png,.bmp',
-            dictDefaultMessage: 'Drop files here to be uploaded.'
+            dictDefaultMessage: '{{ trans("messages.upload_files") }}',
+            init: function() {
+                this.on('complete', function(response) {
+                    vue_instance.addAlert(JSON.parse(response.xhr.response));
+                });
+            }
         };
     </script>
 
