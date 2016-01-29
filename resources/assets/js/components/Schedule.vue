@@ -84,7 +84,7 @@
                     this.monthly_day_num = '1';
                 } else {
                     var parsed_week = JSON.parse(this.event.recur_day_num);
-                    if(typeof parsed_week == 'string')
+                    if(typeof parsed_week == 'string' || parsed_week == null)
                         this.weekly_day_num = [];
                     else
                         this.weekly_day_num = parsed_week;

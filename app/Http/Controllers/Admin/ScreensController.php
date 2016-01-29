@@ -8,211 +8,224 @@ use App\Models\Photo;
 use App\Models\Screen;
 use App\Models\ScreenGroup;
 use App\Models\Tag;
-use Auth;
 use DB;
 use Gate;
 use Illuminate\Http\Request;
 use Request as Requests;
 
-class ScreensController extends Controller {
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index() {
-		if (Gate::denies('view_screens')) {
-			abort(403, trans('auth.access_denied'));
-		}
-		$screens = Screen::all();
+class ScreensController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        if (Gate::denies('view_screens')) {
+            abort(403, trans('auth.access_denied'));
+        }
+        $screens = Screen::all();
 
-		if (Requests::wantsJson()) {
-			return $screens;
-		} else {
-			return view('screens.index', compact('screens'));
-		}
-	}
+        if (Requests::wantsJson()) {
+            return $screens;
+        } else {
+            return view('screens.index', compact('screens'));
+        }
+    }
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create() {
-		if (Gate::denies('add_screens')) {
-			abort(403, trans('auth.access_denied'));
-		}
-		$screens      = new Screen;
-		$screenGroups = ScreenGroup::lists('name', 'id')->all();
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        if (Gate::denies('add_screens')) {
+            abort(403, trans('auth.access_denied'));
+        }
+        $screens = new Screen;
+        $screenGroups = ScreenGroup::lists('name', 'id')->all();
 
-		return view('screens.create', compact(['screens', 'screenGroups']));
-	}
+        return view('screens.create', compact(['screens', 'screenGroups']));
+    }
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param  Request  $request
-	 * @return Response
-	 */
-	public function store(Request $request) {
-		if (Gate::denies('add_screens')) {
-			abort(403, trans('auth.access_denied'));
-		}
-		$screen = new Screen($request->all());
-		flash()->success('Screen created successfully.');
-		Auth::user()->screens()->save($screen);
-		$event = new Event;
-		$event->fill(['start_date' => date('Y-m-d')]);
-		$screen->event()->save($event);
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function store(Request $request)
+    {
+        if (Gate::denies('add_screens')) {
+            abort(403, trans('auth.access_denied'));
+        }
+        DB::transaction(function () use ($request) {
+            if ($screen = new Screen($request->all())) {
+                flash()->success(trans('messages.screen_created_ok'));
+            } else {
+                flash()->error(trans('messages.screen_created_fail'));
+            }
 
-		if (Request::wantsJson()) {
-			return $screen;
-		} else {
-			return redirect()->action('Admin\ScreensController@edit', compact(['screen', 'event']));
-		}
-	}
+            $event = new Event;
+            $event->fill(['start_date' => date('Y-m-d')]);
+            $screen->event()->save($event);
+        });
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  Screen  $screen
-	 * @return Response
-	 */
-	public function show(Screen $screen) {
-		if (Gate::denies('edit_screens')) {
-			abort(403, trans('auth.access_denied'));
-		}
-		$event = $screen->getEvent();
+        if (Request::wantsJson()) {
+            return $screen;
+        } else {
+            return redirect()->action('Admin\ScreensController@edit', compact(['screen', 'event']));
+        }
+    }
 
-		if (Requests::wantsJson()) {
-			return $screen;
-		} else {
-			return view('screens.show', compact(['screen', 'event']));
-		}
-	}
+    /**
+     * Display the specified resource.
+     *
+     * @param  Screen  $screen
+     * @return Response
+     */
+    public function show(Screen $screen)
+    {
+        if (Gate::denies('edit_screens')) {
+            abort(403, trans('auth.access_denied'));
+        }
+        $event = $screen->getEvent();
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  Screen  $screen
-	 * @return Response
-	 */
-	public function edit(Screen $screen) {
-		if (Gate::denies('edit_screens')) {
-			abort(403, trans('auth.access_denied'));
-		}
-		$event        = $screen->getEvent();
-		$event_meta   = $event->getEventMeta();
-		$screengroups = Screengroup::all();
+        if (Requests::wantsJson()) {
+            return $screen;
+        } else {
+            return view('screens.show', compact(['screen', 'event']));
+        }
+    }
 
-		return view('screens.edit', compact(['screen', 'event', 'event_meta', 'screengroups']));
-	}
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  Screen  $screen
+     * @return Response
+     */
+    public function edit(Screen $screen)
+    {
+        if (Gate::denies('edit_screens')) {
+            abort(403, trans('auth.access_denied'));
+        }
+        $event = $screen->getEvent();
+        $event_meta = $event->getEventMeta();
+        $screengroups = Screengroup::all();
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  Request  $request
-	 * @param  Screen  $screen
-	 * @return Response
-	 */
-	public function update(Request $request, $screen) {
-		if (Gate::denies('edit_screens')) {
-			abort(403, trans('auth.access_denied'));
-		}
-		$event                  = $request->get('event');
-		$day_num                = $request->get('day_num');
-		$event['recur_day_num'] = json_encode(($day_num));
-		$tags                   = $request->get('selected_tags');
-		$tags                   = explode(' ', $tags);
+        return view('screens.edit', compact(['screen', 'event', 'event_meta', 'screengroups']));
+    }
 
-		$screengroups = $request->get('selected_screengroups');
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  Request  $request
+     * @param  Screen  $screen
+     * @return Response
+     */
+    public function update(Request $request, $screen)
+    {
+        if (Gate::denies('edit_screens')) {
+            abort(403, trans('auth.access_denied'));
+        }
+        $event = $request->get('event');
+        $day_num = $request->get('day_num');
+        $event['recur_day_num'] = json_encode(($day_num));
+        $tags = $request->get('selected_tags');
+        $tags = explode(' ', $tags);
 
-		$result = DB::transaction(function () use ($screen, $event, $tags, $screengroups) {
-			$e = Event::find($event['id']);
-			$e->update($event);
+        $screengroups = $request->get('selected_screengroups');
 
-			$tagged = [];
+        $result = DB::transaction(function () use ($screen, $event, $tags, $screengroups) {
+            $e = Event::find($event['id']);
+            $e->update($event);
 
-			foreach ($tags as $tag) {
-				$t = Tag::where('name', $tag)->first();
-				if (!is_null($t)) {
-					array_push($tagged, $t->id);
-				} else {
-					$t = new Tag;
-					$t->fill([
-						'name' => $tag,
-					])->save();
-					array_push($tagged, $t->id);
-				}
-			}
-			$screen->tags()->sync($tagged);
-			$screen->screengroups()->sync($screengroups);
-		});
-		if (is_null($result)) {
-			return ['type' => 'success', 'dismissible' => true, 'content' => trans('messages.screen_updated_ok'), 'timeout' => false];
-		} else {
-			return ['type' => 'danger', 'dismissible' => true, 'content' => trans('messages.screen_updated_fail'), 'timeout' => false];
-		}
-	}
+            $tagged = [];
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  Screen  $screen
-	 * @return Response
-	 */
-	public function destroy(Screen $screen) {
-		if (Gate::denies('remove_screens')) {
-			abort(403, trans('auth.access_denied'));
-		}
-		$deleted = $screen->delete();
-		if ($deleted) {
-			flash()->success('Screen removed successfully.');
-		} else {
-			flash()->error(trans('messages.screen_delete_failed'));
-		}
+            foreach ($tags as $tag) {
+                $t = Tag::where('name', $tag)->first();
+                if (!is_null($t)) {
+                    array_push($tagged, $t->id);
+                } else {
+                    $t = new Tag;
+                    $t->fill([
+                        'name' => $tag,
+                    ])->save();
+                    array_push($tagged, $t->id);
+                }
+            }
+            $screen->tags()->sync($tagged);
+            $screen->screengroups()->sync($screengroups);
+        });
+        if (is_null($result)) {
+            return ['type' => 'success', 'dismissible' => true, 'content' => trans('messages.screen_updated_ok'), 'timeout' => false];
+        } else {
+            return ['type' => 'danger', 'dismissible' => true, 'content' => trans('messages.screen_updated_fail'), 'timeout' => false];
+        }
+    }
 
-		if (Request::wantsJson()) {
-			return (string) $deleted;
-		} else {
-			return redirect('screens');
-		}
-	}
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  Screen  $screen
+     * @return Response
+     */
+    public function destroy(Screen $screen)
+    {
+        if (Gate::denies('remove_screens')) {
+            abort(403, trans('auth.access_denied'));
+        }
+        $deleted = $screen->delete();
+        if ($deleted) {
+            flash()->success('Screen removed successfully.');
+        } else {
+            flash()->error(trans('messages.screen_delete_failed'));
+        }
 
-	/**
-	 * Add or find a screen from given file and attatch it to the screengroup.
-	 *
-	 * @param ScreenGroup $screengroup
-	 * @param Request $request
-	 */
-	public function addScreenFromPhoto(Request $request) {
-		if (Gate::denies('add_screens')) {
-			abort(403, trans('auth.access_denied'));
-		}
-		$this->validate($request, [
-			'photo' => 'required|mimes:jpg,jpeg,png,bmp',
-		]);
-		$result = DB::transaction(function () use ($request) {
-			$screen = null;
-			// find or create screen and add photo to it.
-			$photo = Photo::getOrCreate($request->file('photo'))->move($request->file('photo'));
-			if (!is_null($photo->screen)) {
-				$screen = $photo->screen;
-			} else {
-				$screen = new Screen;
-				$screen->save();
-			}
+        if (Request::wantsJson()) {
+            return (string) $deleted;
+        } else {
+            return redirect('screens');
+        }
+    }
 
-			$event = new Event;
-			$event->fill(['start_date' => date('Y-m-d')]);
+    /**
+     * Add or find a screen from given file and attatch it to the screengroup.
+     *
+     * @param ScreenGroup $screengroup
+     * @param Request $request
+     */
+    public function addScreenFromPhoto(Request $request)
+    {
+        if (Gate::denies('add_screens')) {
+            abort(403, trans('auth.access_denied'));
+        }
+        $this->validate($request, [
+            'photo' => 'required|mimes:jpg,jpeg,png,bmp',
+        ]);
+        $result = DB::transaction(function () use ($request) {
+            $screen = null;
+            // find or create screen and add photo to it.
+            $photo = Photo::getOrCreate($request->file('photo'))->move($request->file('photo'));
+            if (!is_null($photo->screen)) {
+                $screen = $photo->screen;
+            } else {
+                $screen = new Screen;
+                $screen->save();
+            }
 
-			$screen->photo()->save($photo);
-			$screen->event()->save($event);
-		});
-		if (is_null($result)) {
-			return ['type' => 'success', 'dismissible' => true, 'content' => trans('messages.screen_created_ok'), 'timeout' => false];
-		} else {
-			return ['type' => 'danger', 'dismissible' => true, 'content' => trans('messages.screen_created_fail'), 'timeout' => false];
-		}
-	}
+            $event = new Event;
+            $event->fill(['start_date' => date('Y-m-d')]);
+
+            $screen->photo()->save($photo);
+            $screen->event()->save($event);
+        });
+        if (is_null($result)) {
+            return ['type' => 'success', 'dismissible' => true, 'content' => trans('messages.screen_created_ok'), 'timeout' => false];
+        } else {
+            return ['type' => 'danger', 'dismissible' => true, 'content' => trans('messages.screen_created_fail'), 'timeout' => false];
+        }
+    }
 }

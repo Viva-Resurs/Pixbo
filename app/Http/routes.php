@@ -69,7 +69,6 @@ Route::group([
     Route::resource('admin/screens', 'ScreensController');
     Route::resource('admin/photos', 'PhotosController');
     Route::resource('admin/events', 'EventsController');
-    Route::resource('admin/eventmetas', 'EventMetasController');
     Route::get('admin/users/profile', 'UsersController@getProfile');
     Route::post('admin/users/profile', 'UsersController@postProfile');
     Route::resource('admin/users', 'UsersController');

@@ -71,6 +71,6 @@ class Event extends Model
 
     public function getRecurDayNumAttribute($value)
     {
-        return !is_null($value) ? $value : '1';
+        return !is_null($value) ? $value : json_encode("1");
     }
 }

@@ -3,6 +3,7 @@
         <th>{{ trans('messages.id') }}</th>
         <th>{{ trans('messages.name') }}</th>
         <th>{{ trans('messages.ip_address') }}</th>
+        <th>{{ trans('messages.screen_group') }}</th>
         <th>{{ trans('messages.activity') }}</th>
         <th>{{ trans('messages.action') }}</th>
     </thead>
@@ -10,6 +11,7 @@
         <th>{{ trans('messages.id') }}</th>
         <th>{{ trans('messages.name') }}</th>
         <th>{{ trans('messages.ip_address') }}</th>
+        <th>{{ trans('messages.screen_group') }}</th>
         <th>{{ trans('messages.activity') }}</th>
         <th>{{ trans('messages.action') }}</th>
     </tfoot>
@@ -19,6 +21,7 @@
                 <td>{{ $client->id }}</td>
                 <td>{{ $client->name }}</td>
                 <td>{{ $client->ip_address }}</td>
+                <td>{{ $client->group }}</td>
                 <td>{{ $client->activity }}</td>
                 <td>{{ 'actions' }}</td>
             </tr>

@@ -4,54 +4,91 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\User;
+use DB;
 use Gate;
+use Hash;
 use Illuminate\Http\Request;
 use Request as RF;
+use Validator;
 
-class UsersController extends Controller {
-	public function index() {
-		if (Gate::denies('view_users')) {
-			abort(403, trans('auth.access_denied'));
-		}
-		$users = User::whereHas('roles', function ($q) {
-			return $q->where('name', '<>', 'client');
-		})->get();
+class UsersController extends Controller
+{
+    public function index()
+    {
+        if (Gate::denies('view_users')) {
+            abort(403, trans('auth.access_denied'));
+        }
+        $users = User::whereHas('roles', function ($q) {
+            return $q->where('name', '<>', 'client');
+        })->get();
 
-		if (RF::wantsJson()) {
-			return $users;
-		} else {
-			return view('users.index')->with('users', $users);
-		}
-	}
+        if (RF::wantsJson()) {
+            return $users;
+        } else {
+            return view('users.index')->with('users', $users);
+        }
+    }
 
-	public function edit(User $user) {
-		if (Gate::denies('view_users')) {
-			abort(403, trans('auth.access_denied'));
-		}
-		return $user;
-	}
+    public function edit(User $user)
+    {
+        if (Gate::denies('view_users')) {
+            abort(403, trans('auth.access_denied'));
+        }
+        return $user;
+    }
 
-	public function update(User $user, Request $request) {
-	}
+    public function update(User $user, Request $request)
+    {
+    }
 
-	public function create() {
-		$roles = Role::where('name', '<>', 'client')->lists('name', 'id')->all();
+    public function create()
+    {
+        $roles = Role::where('name', '<>', 'client')->lists('name', 'id')->all();
 
-		return view('users.create', compact(['roles']));
-	}
+        return view('users.create', compact(['roles']));
+    }
 
-	public function store(User $user, Request $request) {
-	}
+    public function store(Request $request)
+    {
+        //dd($request);
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|confirmed|min:6',
+        ]);
+        $result = DB::transaction(function () use ($request) {
+            $user = new User;
+            $user->fill([
+                'name' => Request('name'),
+                'email' => Request('name') . '@viva.se',
+                'password' => Hash::make(Request('password')),
+            ])->save();
+            $role = Role::find(Request('role_id'))->first();
+            $user->roles()->save($role);
 
-	public function getProfile() {
-	}
+            $user->save();
+        });
+        if (is_null($result)) {
+            flash()->success(trans('messages.user_created_ok'));
+        } else {
+            flash()->success(trans('messages.user_created_fail'));
+        }
 
-	public function postProfile() {
-	}
+        return redirect()->action('Admin\UsersController@index');
+    }
 
-	public function show(User $user) {
-		if (Gate::denies('view_users')) {
-			abort(403, trans('auth.access_denied'));
-		}
-	}
+    public function getProfile()
+    {
+    }
+
+    public function postProfile()
+    {
+    }
+
+    public function show(User $user)
+    {
+        if (Gate::denies('view_users')) {
+            abort(403, trans('auth.access_denied'));
+        }
+    }
 }

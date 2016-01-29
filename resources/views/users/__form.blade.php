@@ -10,9 +10,9 @@
     <small class="text-danger">{{ $errors->first('password') }}</small>
 </div>
 <div class="form-group">
-    {!! Form::label('password2', trans('auth.repeat_password')) !!}
-    {!! Form::password('password2', ['class' => 'form-control', 'required' => 'required']) !!}
-    <small class="text-danger">{{ $errors->first('password') }}</small>
+    {!! Form::label('password_confirmation', trans('auth.repeat_password')) !!}
+    {!! Form::password('password_confirmation', ['class' => 'form-control', 'required' => 'required']) !!}
+    <small class="text-danger">{{ $errors->first('password_confirmation') }}</small>
 </div>
 
 <div class="form-group">

@@ -25,7 +25,7 @@ class Client extends Model
         'updated_at',
     ];
 
-    protected $appends = ['activity'];
+    protected $appends = ['activity', 'group'];
 
 /**
  * ScreenGroup association
@@ -50,5 +50,10 @@ class Client extends Model
     public function getActivityAttribute()
     {
         return $this->user->last_activity;
+    }
+
+    public function getGroupAttribute()
+    {
+        return $this->screengroup->name;
     }
 }
