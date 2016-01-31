@@ -18,15 +18,6 @@
 
 @section('footer')
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        var lang = $('html').attr('lang');
-        $('#client_table').DataTable({
-            "language": {
-                "url": "/js/vendor/dataTables/" + lang + ".json",
-            }
-        });
-} );
-</script>
+@include('shared.datagrid', ['table_id' => 'client_table'])
 
 @stop

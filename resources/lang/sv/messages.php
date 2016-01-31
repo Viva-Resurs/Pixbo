@@ -16,7 +16,7 @@ return [
 	 */
 	'name'                          => 'Namn',
 	'desc'                          => 'Beskrivning',
-	'id'                            => 'Id',
+	'id'                            => '#',
 	'created'                       => 'Skapad',
 	'modified'                      => 'Ändrad',
 	'updated'                       => 'Uppdaterad',
@@ -28,7 +28,7 @@ return [
 	'summary'                       => 'Sammanfattning',
 	'text'                          => 'Text',
 	'activity'                      => 'Aktivitet',
-	'action'                        => 'Åtgärd',
+	'action'                        => 'Åtgärd|Åtgärder',
 	'upload_files'                  => 'Klicka här eller dra en bild hit för att ladda upp den.',
 	//'schedule'                    => 'Planering',
 
@@ -42,28 +42,22 @@ return [
 	'no'                            => 'Nej',
 	'active'                        => 'Aktiv',
 	'settings'                      => 'Inställningar',
+	'edit'                          => 'Redigera',
+	'remove'                        => 'Ta bort',
 
 	/**
 	 * Models
 	 */
 
 	// MODEL
-	'screen_group'                  => 'Område',
-	'screen_groups'                 => 'Områden',
-	'client'                        => 'Bildskärm',
-	'clients'                       => 'Bildskärmar',
-	'screen'                        => 'Bild',
-	'screens'                       => 'Bilder',
-	'event'                         => 'Event',
-	'events'                        => 'Events',
-	'user'                          => 'Användare',
-	'users'                         => 'Användare',
-	'ticker'                        => 'Ticker',
-	'tickers'                       => 'Tickers',
-	'role'                          => 'Roll',
-	'roles'                         => 'Roller',
-	'tag'                           => 'Tag',
-	'tags'                          => 'Taggar',
+	'screen_group'                  => 'Område|Områden',
+	'client'                        => 'Bildskärm|Bildskärmar',
+	'screen'                        => 'Bild|Bilder',
+	'event'                         => 'Event|Events',
+	'user'                          => 'Användare|Användare',
+	'ticker'                        => 'Ticker|Tickers',
+	'role'                          => 'Roll|Roller',
+	'tag'                           => 'Tag|Taggar',
 
 	// ADD MODEL
 	'add_screen'                    => 'Lägg till bild',
@@ -158,14 +152,27 @@ return [
 	'screen_created_fail'           => 'Misslyckades att ladda upp bilden, försök igen.',
 	'screen_updated_ok'             => 'Bilden har uppdaterats.',
 	'screen_updated_fail'           => 'Bilden misslyckades att uppdateras.',
-	'screen_removed_ok'             => '',
-	'screen_removed_fail'           => '',
+	'screen_removed_ok'             => 'Bilden togs bort.',
+	'screen_removed_fail'           => 'Misslyckades att ta bort bilden.',
+
+	// Screengroup
+	'screen_group_created_ok'       => 'Område skapat.',
+	'screen_group_created_fail'     => 'Misslyckades att lägga till område.',
 
 	// Ticker
+	'ticker_created_ok'             => 'Tickern har lagt till.',
+	'ticker_created_fail'           => 'Misslyckades att lägga till tickern.',
+	'ticker_updated_ok'             => 'Tickern har uppdaterats.',
+	'ticker_updated_fail'           => 'Misslyckades att uppdatera tickern.',
 
+	// User
+	'user_created_ok'               => 'Användaren skapad.',
+	'user_created_fail'             => 'Misslyckades att skapa användaren.',
+
+	// Events
 	'repeat_success_updated'        => 'Schemaläggningen har uppdaterats.',
 	'unable_to_determ_recur_type'   => 'Unable to determine recurrence type.',
-	'screen_group_created_ok'       => 'Område skapat.',
+	'screen_association_removed'    => 'Bilden togs bort från :screengroup.',
 
 	'drop_files'                    => 'Dra bild hit för att lägga till.',
 
@@ -187,5 +194,8 @@ return [
 	'event_week_tooltip'            => 'Ange vecka.',
 	'event_day_tooltip'             => 'Ange dag.',
 	'event_days_ahead_tooltip'      => 'Om ___ skall visas ett viss antal dagar innan förekomst, ange då antal.',
+
+	'schedule_tooltip'              => 'Planera',
+	'remove_association_tooltip'    => 'Tag bort från :association',
 
 ];

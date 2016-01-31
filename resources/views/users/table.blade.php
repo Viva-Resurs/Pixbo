@@ -3,21 +3,25 @@
         <th>{{ trans('messages.id') }}</th>
         <th>{{ trans('messages.name') }}</th>
         <th>{{ trans('messages.activity') }}</th>
-        <th>{{ trans('messages.role') }}</th>
-        <th>{{ trans('messages.action') }}</th>
+        <th>{{ trans_choice('messages.role',1) }}</th>
+        <th>{{ trans_choice('messages.action',2) }}</th>
     </thead>
     <tfoot>
         <th>{{ trans('messages.id') }}</th>
         <th>{{ trans('messages.name') }}</th>
         <th>{{ trans('messages.activity') }}</th>
-        <th>{{ trans('messages.role') }}</th>
-        <th>{{ trans('messages.action') }}</th>
+        <th>{{ trans_choice('messages.role',1) }}</th>
+        <th>{{ trans_choice('messages.action',2) }}</th>
     </tfoot>
     <tbody>
         @foreach ($users as $user)
             <tr>
                 <td>{{ $user->id }}</td>
-                <td>{{ $user->name }}</td>
+                <td>
+                    <a href="{{ route('admin.users.edit', $user->id) }}">
+                        {{ $user->name }}
+                    </a>
+                </td>
                 <td>{{ $user->last_activity }}</td>
                 <td>
                 @foreach ($user->role as $role)
@@ -25,7 +29,9 @@
                 @endforeach
                 </td>
 
-                <td>{{ 'actions' }}</td>
+                <td>
+                    @include('shared.actions', ['model' => 'admin.users', 'item' => $user])
+                </td>
             </tr>
         @endforeach
     </tbody>

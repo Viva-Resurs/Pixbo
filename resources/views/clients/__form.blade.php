@@ -15,7 +15,7 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('screengroup_id', trans('messages.screen_group')) !!}
+    {!! Form::label('screengroup_id', trans_choice('messages.screen_group',1)) !!}
     {!! Form::select('screengroup_id', $screenGroups, $client->screengroup_id, ['class' => 'form-control', 'required' => 'required']) !!}
     <small class="text-danger">{{ $errors->first('screengroup_id') }}</small>
 </div>

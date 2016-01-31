@@ -81,7 +81,8 @@ class ScreenGroupsController extends Controller {
 		if (Request::wantsJson()) {
 			return $screengroup;
 		} else {
-			return view('screengroups.show', compact('screengroup'));
+			$clients = $screengroup->clients;
+			return view('screengroups.show', compact(['screengroup', 'clients']));
 		}
 	}
 
@@ -138,7 +139,7 @@ class ScreenGroupsController extends Controller {
 		if ($deleted) {
 			flash()->success(trans('messages.screen_group_removed_ok'));
 		} else {
-			flash()->error(trans('messages.screen_group_remobed_failed'));
+			flash()->error(trans('messages.screen_group_removed_failed'));
 		}
 
 		if (Request::wantsJson()) {
@@ -196,7 +197,7 @@ class ScreenGroupsController extends Controller {
 			->move($file);
 	}
 
-	public function remove_association(Requests $request, ScreenGroup $screengroup, Screen $screen) {
+	public function remove_screen_association(Requests $request, ScreenGroup $screengroup, Screen $screen) {
 		if (!is_null($screengroup) && !is_null($screen)) {
 			if ($screengroup->screens()->detach($screen->id)) {
 				flash()->success(trans('messages.screen_association_removed', ['screengroup' => $screengroup->name]));

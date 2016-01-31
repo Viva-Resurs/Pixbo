@@ -16,7 +16,7 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('role_id', trans('messages.role')) !!}
+    {!! Form::label('role_id', trans_choice('messages.role', 1)) !!}
     {!! Form::select('role_id', $roles, $user->role_id, ['class' => 'form-control', 'required' => 'required']) !!}
     <small class="text-danger">{{ $errors->first('role_id') }}</small>
 </div>

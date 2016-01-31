@@ -4,7 +4,7 @@
 
         <template v-if="model == 'screen'">
             <legend>
-                {{ trans('messages.tags') }}
+                {{ trans_choice('messages.tag',2) }}
                 <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('messages.tag_tooltip') }}"></span>
             </legend>
             <div class="form-group">
@@ -14,7 +14,7 @@
             </div>
         </template>
         <template v-if="model == 'ticker'">
-        <legend>{{ trans('messages.ticker') }}</legend>
+        <legend>{{ trans_choice('messages.ticker',1) }}</legend>
             <div class="form-group">
                 <label for="inputText" class="col-sm-2 control-label">Text:</label>
                 <div class="col-sm-10">
@@ -24,7 +24,7 @@
         </template>
 
         <legend>
-            {{ trans('messages.screen_group') }}
+            {{ trans_choice('messages.screen_group',2) }}
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('messages.screengroup_tooltip') }}"></span>
         </legend>
         <select class="form-control" multiple v-model="selected_screengroups" id="inputScreengroups">
