@@ -9,88 +9,92 @@ use Auth;
 use Carbon\Carbon;
 use Request as R;
 
-class PlayerController extends Controller {
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index() {
-		//dd(R::get('ip'));
-		//dd(Auth::user()->client);
-		if (Auth::check() && !is_null(Auth::user()->client)) {
-			$client               = Auth::user()->client->with(['screengroup.event', 'screengroup.screens.event'])->first();
-			$client_id            = $client->pluck('id');
-			$screengroup          = $client->screengroup;
-			$screengroup_event_id = $screengroup->event->pluck('id')[0];
-			$event_ids[]          = $client->screengroup->event->pluck('id')[0];
+class PlayerController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        //dd(R::get('ip'));
+        //dd(Auth::user()->client);
+        if (Auth::check() && !is_null(Auth::user()->client)) {
+            $client = Auth::user()->client->with(['screengroup.screens.event', 'screengroup.screens.photo', 'screengroup.tickers.event'])->first();
+            $client_id = $client->pluck('id');
+            $screengroup = $client->screengroup;
+            $screens = $screengroup->screens->keyBy('id');
+            $tickers = $screengroup->tickers->keyBy('id');
+            //dd($screens);
+            $event_ids = [];
 
-			// Get all events associated with the screengroup
-			foreach ($client->screengroup->screens as $screen) {
-				$event_ids[] = implode($screen->event->pluck('id')->toArray());
-			}
+            // Get all events associated with the screengroup
+            foreach ($client->screengroup->screens as $screen) {
+                $event_ids[] = implode($screen->event->pluck('id')->toArray());
+            }
+            foreach ($client->screengroup->tickers as $ticker) {
+                $event_ids[] = implode($ticker->event->pluck('id')->toArray());
+            }
+            //dd($event_ids);
 
-			// Get all shadow events associated with events given and are happening right now
-			$shadows = ShadowEvent::whereIn('event_id', $event_ids)
-				->with('event.eventable')
-				->where('start', '<=', Carbon::now())
-				->where('end', '>=', Carbon::now())
-				->get();
+// Get all shadow events associated with events given and are happening right now
+            $shadows = ShadowEvent::whereIn('event_id', $event_ids)
+                ->with('event')
+                ->where('start', '<=', Carbon::now())
+                ->where('end', '>=', Carbon::now())
+                ->get();
 
-			//dd($shadows);
+//            dd($shadows);
 
-			// Collect the type and ID of the scheduled events.
-			$shadow_event_id = collect([]);
-			foreach ($shadows as $shadow) {
-				$shadow_event_id->push([
-					'type' => $shadow->event->getAttribute('eventable_type'),
-					'id'   => $shadow->event->eventable->getAttribute('id'),
-				]);
-			}
-			//dd($shadow_event_id);
+            // Collect the type and ID of the scheduled events.
+            $shadow_event_id = collect([]);
+            foreach ($shadows as $shadow) {
+                //dd($shadow);
+                $shadow_event_id->push([
+                    'type' => $shadow->event->getAttribute('eventable_type'),
+                    'id' => $shadow->event->eventable->getAttribute('id'),
+                ]);
+            }
 
-			// Group the collection for easier handling.
-			$scheduled_screens      = $shadow_event_id->groupBy('type')->get('App\Screen');
-			$scheduled_screengroups = $shadow_event_id->groupBy('type')->get('App\ScreenGroup');
+            //dd($shadow_event_id);
 
-			//dd($scheduled_screens);
+            // Group the collection for easier handling.
+            $scheduled_screens = $shadow_event_id->groupBy('type')->get('App\Models\Screen')->keyBy('id');
+            $scheduled_tickers = $shadow_event_id->groupBy('type')->get('App\Models\Ticker');
 
-			if (is_null($scheduled_screengroups)) {
-				return abort(404, 'No screens available.');
-			}
+            //dd($scheduled_screens);
+            //dd($scheduled_tickers);
 
-			// Create the list of photos to show and send the list to the view.
-			foreach ($scheduled_screengroups as $scheduled_screengroup) {
-				if ($scheduled_screengroup['id'] == $screengroup->getAttribute('id')) {
-					$screens = $screengroup['screens'];
-					$list;
+            if (is_null($scheduled_screens)) {
+                return abort(404, 'No screens available.');
+            }
 
-					//dd($scheduled_screens);
+            $photo_list;
+            $ticker_list;
 
-					foreach ($screens as $screen) {
-						if ($screen['scheduled'] == 0) {
-							$list[] = $screen['photo'];
-						} else {
-							foreach ($scheduled_screens as $scheduled_screen) {
-								if ($scheduled_screen['id'] == $screen['id']) {
-									if ($scheduled_screen['id'] == 2) {
-										dd($scheduled_screen);
-									}
-									$list[] = $screen['photo'];
-								}
-							}
-						}
-					}
-					//dd($list);
+            foreach ($scheduled_screens as $screen) {
+                $screen_element = $screens->where('id', $screen['id'])->first();
+                $photo_list[] = $screen_element['photo'];
+            }
 
-					if (!empty($list)) {
-						return view('player.index')->with('list', $list);
-					} else {
-						return abort(404, 'No screens available.');
-					}
-				}
-			}
-		}
-		return abort(403, trans('auth.access_denied'));
-	}
+            foreach ($scheduled_tickers as $ticker) {
+                $ticker_element = $tickers->where('id', $ticker['id'])->first();
+                $ticker_list[] = $ticker_element;
+            }
+            //dd($ticker_list);
+            /*
+    foreach ($scheduled_tickers as $ticker) {
+    $tickers[] = $ticker->toArray();
+    }
+*/
+            if (!empty($screens)) {
+                //dd([$tickers, $screens]);
+                return view('player.index')->with(['list' => $photo_list, 'tickers' => $ticker_list]);
+            } else {
+                return abort(404, 'No screens available.');
+            }
+        }
+        return abort(403, trans('auth.access_denied'));
+    }
 }

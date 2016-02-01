@@ -7,6 +7,6 @@ trait HasShadowEvents
 {
     public function shadow_events()
     {
-        return $this->hasMany(ShadowEvent::class);
+        return $this->hasMany(ShadowEvent::class, 'event_id');
     }
 }

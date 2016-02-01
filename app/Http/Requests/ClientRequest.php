@@ -31,7 +31,7 @@ class ClientRequest extends Request
                 return [
                     'name' => 'required|unique:clients',
                     'ip_address' => 'required|ip|unique:clients',
-                    'screengroup_id' => 'required',
+                    'screen_group_id' => 'required',
                 ];
             }
         case 'PUT':

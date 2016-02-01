@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="css/vendor/supersized.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="css/vendor/supersized.shutter.css" type="text/css" media="screen" />
 
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+        <script type="text/javascript" src="js/vendor/jquery-1.12.0.min.js"></script>
         <script type="text/javascript" src="js/vendor/jquery.easing.min.js"></script>
 
         <script type="text/javascript" src="js/vendor/supersized.3.2.7.min.js"></script>
@@ -67,8 +67,6 @@
 
 <body>
     <div id="thumb-tray" class="load-item">
-        <div id="thumb-back"></div>
-        <div id="thumb-forward"></div>
     </div>
 </body>
 </html>

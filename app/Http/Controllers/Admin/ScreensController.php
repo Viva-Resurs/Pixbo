@@ -112,10 +112,9 @@ class ScreensController extends Controller
             abort(403, trans('auth.access_denied'));
         }
         $event = $screen->getEvent();
-        $event_meta = $event->getEventMeta();
         $screengroups = Screengroup::all();
 
-        return view('screens.edit', compact(['screen', 'event', 'event_meta', 'screengroups']));
+        return view('screens.edit', compact(['screen', 'event', 'screengroups']));
     }
 
     /**
