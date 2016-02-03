@@ -7,10 +7,13 @@
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
         <link rel="stylesheet" href="css/vendor/supersized.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="css/vendor/ticker-style.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="css/vendor/supersized.shutter.css" type="text/css" media="screen" />
 
-        <script type="text/javascript" src="js/vendor/jquery-1.12.0.min.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
         <script type="text/javascript" src="js/vendor/jquery.easing.min.js"></script>
+        <script type="text/javascript" src="/js/vendor/jquery.ticker.js"></script>
+
 
         <script type="text/javascript" src="js/vendor/supersized.3.2.7.min.js"></script>
         <script type="text/javascript" src="js/vendor/supersized.shutter.min.js"></script>
@@ -41,7 +44,7 @@
                     min_height              :   0,          // Min height allowed (in pixels)
                     vertical_center         :   1,          // Vertically center background
                     horizontal_center       :   1,          // Horizontally center background
-                    fit_always              :   0,          // Image will never exceed browser width or height (Ignores min. dimensions)
+                    fit_always              :   1,          // Image will never exceed browser width or height (Ignores min. dimensions)
                     fit_portrait            :   1,          // Portrait images will not exceed browser height
                     fit_landscape           :   0,          // Landscape images will not exceed browser width
 
@@ -62,11 +65,59 @@
             });
 
         </script>
+        <style type="text/css">
+            .ticker-contrainer {
+                position:fixed;bottom:0px;width:100%;
+                height: 100%
+                width: 100%;
+            }
+            .ticker-wrapperino {
+                height: 100%;
+                width: 100%;
+                margin-right:auto;margin-left:auto;
+            }
+        </style>
 
     </head>
 
-<body>
-    <div id="thumb-tray" class="load-item">
-    </div>
-</body>
+    <body>
+
+        <div class="ticker-container">
+            <div class="ticker-wrapperino">
+                <ul id="js-news" class="js-hidden">
+                    <li class="news-item"><a href="#">This is the 1st latest news item.</a></li>
+                    <li class="news-item"><a href="#">This is the 2nd latest news item.</a></li>
+                    <li class="news-item"><a href="#">This is the 3rd latest news item.</a></li>
+                    <li class="news-item"><a href="#">This is the 4th latest news item.</a></li>
+                </ul>
+            </div>
+        </div>
+
+
+
+        <script type="text/javascript">
+
+            $('#js-news').ticker({
+                speed: 0.10,           // The speed of the reveal
+                ajaxFeed: false,       // Populate jQuery News Ticker via a feed
+                feedUrl: false,        // The URL of the feed
+                                        // MUST BE ON THE SAME DOMAIN AS THE TICKER
+                feedType: 'xml',       // Currently only XML
+                htmlFeed: true,        // Populate jQuery News Ticker via HTML
+                debugMode: true,       // Show some helpful errors in the console or as alerts
+                                   // SHOULD BE SET TO FALSE FOR PRODUCTION SITES!
+                controls: false,        // Whether or not to show the jQuery News Ticker controls
+                titleText: 'Latest',   // To remove the title set this to an empty String
+                displayType: 'reveal', // Animation type - current options are 'reveal' or 'fade'
+                direction: 'ltr',       // Ticker direction - current options are 'ltr' or 'rtl'
+                pauseOnItems: 2000,    // The pause on a news item before being replaced
+                fadeInSpeed: 600,      // Speed of fade in animation
+                fadeOutSpeed: 300      // Speed of fade out animation
+            });
+
+        </script>
+
+
+    </body>
+
 </html>
