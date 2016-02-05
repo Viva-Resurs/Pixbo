@@ -98,7 +98,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function getLastActivityAttribute()
     {
-        return !is_null($this->online) ? Carbon::now()->timestamp($this->online->last_activity)->toDateTimeString() : 'Offline';
+        if (!is_null($this->online)) {
+            $time = Carbon::now()->timestamp($this->online->last_activity);
+            $time->setLocale('sv');
+            return $time->diffForHumans();
+        } else {
+            return trans('messages.offline');
+        }
     }
 
     public function getRoleAttribute()

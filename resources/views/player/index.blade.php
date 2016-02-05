@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="css/vendor/ticker-style.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="css/vendor/supersized.shutter.css" type="text/css" media="screen" />
 
-        <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" src="js/vendor/jquery-1.7.2.min.js"></script>
         <script type="text/javascript" src="js/vendor/jquery.easing.min.js"></script>
         <script type="text/javascript" src="/js/vendor/jquery.ticker.js"></script>
 
@@ -82,16 +82,17 @@
 
     <body>
 
+        @if( Count($tickers) > 0)
         <div class="ticker-container">
             <div class="ticker-wrapperino">
                 <ul id="js-news" class="js-hidden">
-                    <li class="news-item"><a href="#">This is the 1st latest news item.</a></li>
-                    <li class="news-item"><a href="#">This is the 2nd latest news item.</a></li>
-                    <li class="news-item"><a href="#">This is the 3rd latest news item.</a></li>
-                    <li class="news-item"><a href="#">This is the 4th latest news item.</a></li>
+                    @foreach ($tickers as $ticker)
+                        <li class="news-item">{{ $ticker->text }}</li>
+                    @endforeach
                 </ul>
             </div>
         </div>
+        @endif
 
 
 
@@ -107,10 +108,10 @@
                 debugMode: true,       // Show some helpful errors in the console or as alerts
                                    // SHOULD BE SET TO FALSE FOR PRODUCTION SITES!
                 controls: false,        // Whether or not to show the jQuery News Ticker controls
-                titleText: 'Latest',   // To remove the title set this to an empty String
-                displayType: 'reveal', // Animation type - current options are 'reveal' or 'fade'
+                titleText: '',   // To remove the title set this to an empty String
+                displayType: 'fade', // Animation type - current options are 'reveal' or 'fade'
                 direction: 'ltr',       // Ticker direction - current options are 'ltr' or 'rtl'
-                pauseOnItems: 2000,    // The pause on a news item before being replaced
+                pauseOnItems: 10000,    // The pause on a news item before being replaced
                 fadeInSpeed: 600,      // Speed of fade in animation
                 fadeOutSpeed: 300      // Speed of fade out animation
             });

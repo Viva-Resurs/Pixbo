@@ -1,4 +1,4 @@
-@foreach ($screens as $card)
+
     <div class="col-sm-6 col-md-4">
         <div class="thumbnail screens_card row" style="margin-right: 0em; padding-right: 0em;">
             <div class="col-sm-10 col-md-10 col-lg-10" style="margin: 0em;padding: 0em;">
@@ -8,21 +8,25 @@
             @if($from == 'screengroup')
                 <div class="row" style="padding-left: 1em;">
                         <a href="/admin/screengroups/{{ $screengroup->id }}/screens/{{ $card->id }}/remove_screen_association">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('messages.remove_association_tooltip', ['association' => $screengroup->name]) }}"></span>
+                            <button type="button" class="btn btn-info btn-lg">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('messages.remove_association_tooltip', ['association' => $screengroup->name]) }}"></span>
+                            </button>
                         </a>
                 </div>
             @else
                 <div class="row" style="padding-left: 1em;">
-                        <a href="#">
+                        <form action="/admin/screens/{{ $card->id }}" method="DELETE">
+                        <button type="button" class="btn btn-info btn-lg">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('messages.remove') }}"></span>
-                        </a>
+                        </button>
+
+                        </form>
                 </div>
             @endif
                 <div class="row" style="padding-left: 1em;">
-                    <a href="/admin/screens/{{ $card->id }}">
-                        <span class="glyphicon glyphicon-calendar" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('messages.schedule_tooltip') }}">
-                        </span>
-                    </a>
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#screen_modal_{{ $card->id }}">
+                    <span class="glyphicon glyphicon-calendar" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('messages.schedule_tooltip') }}"></span>
+                    </button>
                 </div>
             </div>
 
@@ -39,4 +43,5 @@
             </div>
         </div>
     </div>
-@endforeach
+
+    @include('screens.screen_modal', ['screen' => $card])

@@ -1,7 +1,7 @@
 @extends('admin')
 
 @section('title')
-    {{ trans('messages.screengroup_title') }}
+    {{ trans_choice('messages.screen_group', 1) }}
 @stop
 
 @section('header')
@@ -10,10 +10,13 @@
 @stop
 
 @section('content')
+<h1 class="page_header">{{ $screengroup->name }}</h1>
     <div class="row">
         <h2>{{ trans_choice('messages.screen', 2) }}</h2>
         <hr>
-        @include('screens.screens__card', ['screens' => $screengroup->screens, 'from' => 'screengroup'])
+            @foreach ($screengroup->screens as $card)
+                @include('screens.screen__card', ['card' => $card, 'from' => 'screengroup'])
+            @endforeach
     </div>
     <div class="row">
         <h2>{{ trans_choice('messages.ticker',2) }}</h2>
