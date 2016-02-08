@@ -21,6 +21,18 @@ class ShadowEvent extends Model implements \MaddHatter\LaravelFullcalendar\Event
         return $this->belongsTo(Event::class);
     }
 
+    public function screengroups()
+    {
+        return $this->belongsToMany(ScreenGroup::class, 'screen_group_shadow_event', 'shadow_event_id', 'screen_group_id');
+    }
+
+    public function scopeNow($query)
+    {
+        return $query
+            ->where('start', '<', Carbon::now())
+            ->where('end', '>', Carbon::now());
+    }
+
 /**
  * Generates a shadow event from the given date with the info from given Event.
  *
@@ -43,7 +55,12 @@ class ShadowEvent extends Model implements \MaddHatter\LaravelFullcalendar\Event
         $shadow->end = $end;
         $shadow->isAllDay = 1;
 
+        $s = $event->eventable->load('screengroups');
+        $sg = $s->screengroups;
+        //dd($sg);
+
         $event->shadow_events()->save($shadow);
+        $shadow->screengroups()->sync($sg);
     }
 
 /**

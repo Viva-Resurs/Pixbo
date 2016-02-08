@@ -20,6 +20,21 @@
 
         <script type="text/javascript">
 
+            var minutes = 1;
+            var ajax_call = function () {
+
+                var request = $.ajax({
+                    type: "get",
+                    url: "/play",
+                });
+                request.done(function() {
+                    console.log(request);
+                });
+            }
+
+            var interval = 1000; //* 60 * minutes;
+            setInterval(ajax_call, interval);
+
             jQuery(function($){
 
                 $.supersized({
@@ -65,25 +80,12 @@
             });
 
         </script>
-        <style type="text/css">
-            .ticker-contrainer {
-                position:fixed;bottom:0px;width:100%;
-                height: 100%
-                width: 100%;
-            }
-            .ticker-wrapperino {
-                height: 100%;
-                width: 100%;
-                margin-right:auto;margin-left:auto;
-            }
-        </style>
-
     </head>
 
     <body>
 
         @if( Count($tickers) > 0)
-        <div class="ticker-container">
+        <div id="controls-wrapper" style="display: block; margin-bottom: 1em; margin-left: 20%;margin-right: 20%;">
             <div class="ticker-wrapperino">
                 <ul id="js-news" class="js-hidden">
                     @foreach ($tickers as $ticker)

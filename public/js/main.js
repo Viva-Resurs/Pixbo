@@ -26095,7 +26095,7 @@ exports.default = {
             var vm = this;
             this.$http.put('/admin/' + vm.model + 's/' + vm.modelObject.id, payload).then(function (response) {
                 if (response.ok) {
-                    history.back();
+                    //history.back();
                     //window.location.href = '/admin/' + vm.model + 's';
                 }
                 if (response) {
