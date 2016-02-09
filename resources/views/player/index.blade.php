@@ -22,22 +22,26 @@
 
             var minutes = 1;
             var ajax_call = function () {
-
+                var client = $('#client_id').val();
                 var request = $.ajax({
                     type: "get",
-                    url: "/play",
+                    url: "/play/" + client,
                 });
                 request.done(function() {
-                    console.log(request);
+                    var data = JSON.parse(request.responseText);
+                    var tickers = data['tickers'];
+                    var screens = data['photo_list'];
+                    //console.log({screens: screens, tickers: tickers});
+                    $.supersized.vars.options.slides = screens;
                 });
             }
 
-            var interval = 1000; //* 60 * minutes;
+            var interval = 1000 * 10;
             setInterval(ajax_call, interval);
 
             jQuery(function($){
 
-                $.supersized({
+                $('#supersized').supersized({
 
                     // Functionality
                     slideshow               :   1,          // Slideshow on/off
@@ -69,7 +73,7 @@
                     thumbnail_navigation    :   0,          // Thumbnail navigation
                     slides                  :   [           // Slideshow Images
                                                         @foreach ($list as $element)
-                                                            {image : '{{ $element["path"] }}', title : '{$element->name}', thumb : '{$element->thumb_path}', url : ''},
+                                                            {image : '{{ $element["image"] }}', title : '{{$element["title"]}}', thumb : '{{ $element["thumb"] }}', url : '{{ $element["url"] }}'},
                                                         @endforeach
                                                 ],
 
@@ -83,6 +87,11 @@
     </head>
 
     <body>
+        <input type="hidden" name="client_id" id="client_id" class="form-control" value="{{ $client }}">
+
+        <div id="supersized">
+
+        </div>
 
         @if( Count($tickers) > 0)
         <div id="controls-wrapper" style="display: block; margin-bottom: 1em; margin-left: 20%;margin-right: 20%;">
