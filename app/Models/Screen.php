@@ -13,6 +13,7 @@ class Screen extends Model
      * @var string
      */
     protected $table = 'screens';
+    protected $touches = ['screengroups'];
 
 /**
  * The attributes that are mass assignable.

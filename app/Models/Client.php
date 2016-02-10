@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Config;
 use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
@@ -22,9 +24,10 @@ class Client extends Model
         'screen_group_id',
         'created_at',
         'updated_at',
+        'activity',
     ];
 
-    protected $appends = ['activity', 'group'];
+    protected $appends = ['group'];
 
 /**
  * ScreenGroup association
@@ -46,13 +49,24 @@ class Client extends Model
         return $this->belongsTo(\App\User::class);
     }
 
-    public function getActivityAttribute()
+    public function getActivityAttribute($value)
     {
-        return $this->user->last_activity;
+        if (!is_null($value)) {
+            $time = Carbon::now()->timestamp($value);
+            $time->setLocale(Config::get('app.locale'));
+            return $time->diffForHumans();
+        } else {
+            return trans('messages.unknown');
+        }
     }
 
     public function getGroupAttribute()
     {
         return $this->screengroup->name;
+    }
+
+    public function updateActivity()
+    {
+        $this->activity = time();
     }
 }

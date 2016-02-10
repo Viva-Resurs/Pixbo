@@ -3,6 +3,7 @@
 namespace App;
 
 use Carbon\Carbon;
+use Config;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -100,7 +101,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         if (!is_null($this->online)) {
             $time = Carbon::now()->timestamp($this->online->last_activity);
-            $time->setLocale('sv');
+            $time->setLocale(Config::get('app.locale'));
             return $time->diffForHumans();
         } else {
             return trans('messages.offline');

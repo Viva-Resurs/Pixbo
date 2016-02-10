@@ -14,7 +14,7 @@
 Route::resource('play', 'PlayerController');
 
 Route::get('admin/screengroups/{screengroup}/screens', 'Admin\ScreenGroupsController@screens');
-Route::get('admin/screengroups/{screengroup}/screens/{screens}/remove_association', 'Admin\ScreenGroupsController@remove_association');
+Route::get('admin/screengroups/{screengroup}/screens/{screens}/remove_screen_association', 'Admin\ScreenGroupsController@remove_screen_association');
 
 Route::get('/', 'PagesController@home');
 Route::get('admin/dashboard', 'PagesController@dashboard');
