@@ -6,32 +6,17 @@
         <title></title>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
-        <link rel="stylesheet" href="css/vendor/vegas.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="css/vendor/supersized.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="css/vendor/ticker-style.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="css/vendor/supersized.shutter.css" type="text/css" media="screen" />
 
         <script type="text/javascript" src="js/vendor/jquery-1.7.2.min.js"></script>
         <script type="text/javascript" src="js/vendor/jquery.easing.min.js"></script>
         <script type="text/javascript" src="/js/vendor/jquery.ticker.js"></script>
 
 
-        <script type="text/javascript" src="js/vendor/vegas.js"></script>
-
-        <style type="text/css">
-html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    position: relative;
-    background: #000;
-    color: #fff;
-    font: 1em Arial, sans-serif;
-}
-
-        </style>
+        <script type="text/javascript" src="js/vendor/supersized.3.2.7.min.js"></script>
+        <script type="text/javascript" src="js/vendor/supersized.shutter.min.js"></script>
 
         <script type="text/javascript">
 
@@ -67,8 +52,49 @@ body {
                 console.log('need to update player');
             };
 
+            jQuery(function($){
 
+                $('#supersized').supersized({
 
+                    // Functionality
+                    slideshow               :   1,          // Slideshow on/off
+                    autoplay                :   1,          // Slideshow starts playing automatically
+                    start_slide             :   1,          // Start slide (0 is random)
+                    stop_loop               :   0,          // Pauses slideshow on last slide
+                    random                  :   0,          // Randomize slide order (Ignores start slide)
+                    slide_interval          :   15000,       // Length between transitions
+                    transition              :   6,          // 0-None, 1-Fade, 2-Slide Top, 3-Slide Right, 4-Slide Bottom, 5-Slide Left, 6-Carousel Right, 7-Carousel Left
+                    transition_speed        :   1000,       // Speed of transition
+                    new_window              :   1,          // Image links open in new window/tab
+                    pause_hover             :   0,          // Pause slideshow on hover
+                    keyboard_nav            :   1,          // Keyboard navigation on/off
+                    performance             :   1,          // 0-Normal, 1-Hybrid speed/quality, 2-Optimizes image quality, 3-Optimizes transition speed // (Only works for Firefox/IE, not Webkit)
+                    image_protect           :   1,          // Disables image dragging and right click with Javascript
+
+                    // Size & Position
+                    min_width               :   0,          // Min width allowed (in pixels)
+                    min_height              :   0,          // Min height allowed (in pixels)
+                    vertical_center         :   1,          // Vertically center background
+                    horizontal_center       :   1,          // Horizontally center background
+                    fit_always              :   1,          // Image will never exceed browser width or height (Ignores min. dimensions)
+                    fit_portrait            :   1,          // Portrait images will not exceed browser height
+                    fit_landscape           :   0,          // Landscape images will not exceed browser width
+
+                    // Components
+                    slide_links             :   'false',    // Individual links for each slide (Options: false, 'num', 'name', 'blank')
+                    thumb_links             :   0,          // Individual thumb links for each slide
+                    thumbnail_navigation    :   0,          // Thumbnail navigation
+                    slides                  :   [           // Slideshow Images
+                                                        @foreach ($list as $element)
+                                                            {image : '{{ $element["image"] }}', title : '{{$element["title"]}}', thumb : '{{ $element["thumb"] }}', url : '{{ $element["url"] }}'},
+                                                        @endforeach
+                                                ],
+
+                    // Theme Options
+                    progress_bar            :   0,          // Timer for each slide
+                    mouse_scrub             :   0,
+                });
+            });
 
         </script>
     </head>
@@ -77,7 +103,7 @@ body {
         <input type="hidden" name="client_id" id="client_id" class="form-control" value="{{ $client }}">
         <input type="hidden" name="updated_at" id="updated_at" class="form-control" value="{{ $updated_at }}">
 
-        <div id="example">
+        <div id="supersized">
 
         </div>
 
@@ -114,26 +140,6 @@ body {
 
             </script>
         @endif
-
-
-        <script type="text/javascript">
-
-            var images = [
-                @foreach($list as $element)
-                    { src: "/{{ $element['image'] }}" },
-                @endforeach
-            ];
-            $('body').vegas({
-                preload: true,
-                transitionDuration: 4000,
-                delay: 10000,
-                timer: false,
-                slides: images,
-                init: function(globalSettings) {
-                    console.log("init...");
-                }
-            });
-        </script>
 
 
     </body>

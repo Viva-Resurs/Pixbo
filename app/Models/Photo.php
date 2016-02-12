@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Hash;
 use Illuminate\Database\Eloquent\Model;
 use Image;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -65,8 +66,9 @@ class Photo extends Model
 
     protected function saveAs($name)
     {
+        $ext = pathinfo($name, PATHINFO_EXTENSION);
         $this->archived = 0;
-        $this->name = sprintf("%s-%s", time(), $name);
+        $this->name = sprintf("%s.%s", Hash::make($name), $ext);
         $this->path = sprintf("%s/%s", $this->baseDir, $this->name);
 
         $this->thumb_path = sprintf("%s/tn-%s", $this->baseDir, $this->name);
