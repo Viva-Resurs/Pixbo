@@ -18,7 +18,7 @@ class PlayerController extends Controller {
 		$mac    = $request->input('mac');
 		$client = Client::where('ip_address', $mac)->first();
 		if (is_null($client)) {
-			return abort(404, trans('messages.client_not_found'));
+			return abort(404, trans('exceptions.no_screens_found'));
 		}
 
 		$clientData = $this->getDataFromClient($client);
@@ -39,10 +39,10 @@ class PlayerController extends Controller {
 					]);
 				}
 			} else {
-				return abort(404, trans('messages.no_screens_available'));
+				return abort(404, trans('exceptions.no_screens_found'));
 			}
 		} else {
-			return abort(404, trans('messages.no_screens_available'));
+			return abort(404, trans('exceptions.no_screens_found'));
 		}
 	}
 
@@ -76,11 +76,11 @@ class PlayerController extends Controller {
 			$scheduled_tickers = $shadow_event_id->groupBy('type')->get('App\Models\Ticker');
 
 			if (is_null($scheduled_screens)) {
-				return abort(404, 'No screens available.');
+				return abort(404, trans('exceptions.no_screens_found'));
 			}
 
-			$photo_list  = [];
-			$ticker_list = [];
+			$photo_list  = null;
+			$ticker_list = null;
 
 			if (!is_null($scheduled_screens)) {
 				foreach ($scheduled_screens as $screen) {
@@ -106,6 +106,7 @@ class PlayerController extends Controller {
 					];
 				}
 			}
+
 			return [
 				'photo_list' => $parsed_list,
 				'tickers'    => $ticker_list,

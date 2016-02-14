@@ -28,7 +28,7 @@
                 <td>{{ $client->group }}</td>
                 <td>{{ $client->activity }}</td>
                 <td>
-                    @include('shared.actions', ['model' => 'admin.clients', 'item' => $client])
+                    @include('shared.actions', ['model' => 'admin.clients', 'item' => $client, 'preview' => $client->ip_address])
                 </td>
             </tr>
         @endforeach
