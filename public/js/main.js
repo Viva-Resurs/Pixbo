@@ -26027,7 +26027,7 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "C:\\Users\\Christoffer\\Documents\\Work\\pixbo_laravel\\resources\\assets\\js\\components\\Alert.vue"
+  var id = "C:\\pixbo_laravel\\resources\\assets\\js\\components\\Alert.vue"
   module.hot.dispose(function () {
     require("vueify-insert-css").cache["\n.fade-transition {\n  -webkit-transition: opacity .3s ease;\n  transition: opacity .3s ease;\n}\n.fade-enter,\n.fade-leave {\n  opacity: 0;\n}\n.alert.top {\n  position: fixed;\n  top: 30px;\n  margin: 0 auto;\n  left: 0;\n  right: 0;\n  z-index: 2;\n}\n.alert.top-right {\n  position: fixed;\n  top: 30px;\n  right: 50px;\n  z-index: 2;\n}\n"] = false
     document.head.removeChild(__vueify_style__)
@@ -26171,7 +26171,7 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "C:\\Users\\Christoffer\\Documents\\Work\\pixbo_laravel\\resources\\assets\\js\\components\\Schedule.vue"
+  var id = "C:\\pixbo_laravel\\resources\\assets\\js\\components\\Schedule.vue"
   module.hot.dispose(function () {
     require("vueify-insert-css").cache["\n\n"] = false
     document.head.removeChild(__vueify_style__)
@@ -26217,7 +26217,7 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "C:\\Users\\Christoffer\\Documents\\Work\\pixbo_laravel\\resources\\assets\\js\\components\\ScreenGallery.vue"
+  var id = "C:\\pixbo_laravel\\resources\\assets\\js\\components\\ScreenGallery.vue"
   module.hot.dispose(function () {
     require("vueify-insert-css").cache["\n    .screen_gallery {\n\n    }\n    .screen_gallery__entity {\n\n    }\n"] = false
     document.head.removeChild(__vueify_style__)
@@ -26317,7 +26317,7 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "C:\\Users\\Christoffer\\Documents\\Work\\pixbo_laravel\\resources\\assets\\js\\components\\Ticker.vue"
+  var id = "C:\\pixbo_laravel\\resources\\assets\\js\\components\\Ticker.vue"
   module.hot.dispose(function () {
     require("vueify-insert-css").cache["\n    button {\n    margin: 0;\n    padding: 0;\n    border: 0;\n    background: none;\n    font-size: 100%;\n    vertical-align: baseline;\n    font-family: inherit;\n    font-weight: inherit;\n    color: inherit;\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    -webkit-font-smoothing: antialiased;\n    -moz-font-smoothing: antialiased;\n    font-smoothing: antialiased;\n}\n.destroy {\n    display: none;\n    position: absolute;\n    top: 0;\n    right: 10px;\n    bottom: 0;\n    width: 40px;\n    height: 40px;\n    margin: auto 0;\n    font-size: 30px;\n    color: #cc9a9a;\n    margin-bottom: 11px;\n    -webkit-transition: color 0.2s ease-out;\n    transition: color 0.2s ease-out;\n}\n\n.destroy:hover {\n    color: #af5b5e;\n}\n\n.destroy:after {\n    content: '×';\n}\n\nli:hover .destroy {\n    display: block;\n}\n.edit {\n    position: relative;\n    margin: 0;\n    width: 100%;\n    font-size: 24px;\n    font-family: inherit;\n    font-weight: inherit;\n    line-height: 1.4em;\n    border: 0;\n    outline: none;\n    color: inherit;\n    padding: 6px;\n    border: 1px solid #999;\n    box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);\n    box-sizing: border-box;\n    -webkit-font-smoothing: antialiased;\n    -moz-font-smoothing: antialiased;\n    font-smoothing: antialiased;\n}\nli .edit {\n    display: none;\n}\nli.editing {\n    border-bottom: none;\n    padding: 0;\n}\n\nli.editing .edit {\n    display: block;\n    width: 506px;\n    padding: 13px 17px 12px 17px;\n    margin: 0 0 0 43px;\n}\nli label {\n    white-space: pre;\n    word-break: break-word;\n    /*padding: 15px 60px 15px 15px; */\n    margin-right: 2em;\n    display: block;\n    line-height: 1.2;\n    -webkit-transition: color 0.4s;\n    transition: color 0.4s;\n}\n"] = false
     document.head.removeChild(__vueify_style__)
@@ -26354,17 +26354,94 @@ var Vue = require('vue');
 window.Vue = Vue;
 Vue.use(require('vue-resource'));
 var vueboot = require('vueboot');
-//Vue.use(require('vue-strap'));
 var bootstrap = require('bootstrap-sass');
-//var vue_strap = require('vue-strap');
 
 //import Alert from './components/Alert.vue';
 
 //var alert = require('vue-strap');//src/alert');
 
+Vue.directive('ajax', {
+    bind: function bind() {
+        this.el.addEventListener('submit', this.onSubmit.bind(this));
+    },
+    update: function update(value) {
+        console.log(value);
+    },
+
+    onSubmit: function onSubmit(e) {
+        e.preventDefault();
+
+        this.vm.$http[this.getRequestType()](this.el.action, this.getFormData()).then(this.onComplete.bind(this)).catch(this.onError.bind(this));
+    },
+
+    getFormData: function getFormData() {
+
+        var formData = new FormData();
+        formData.append('image', this.el.fileInput.files[0]);
+        console.log(formData);
+
+        var serializedData = $(this.el).serializeArray();
+        /*
+        if($('input[type=file]').val()){
+            var image = $('input[type=file]').val().split('\\').pop(); 
+            serializedData.push({
+                'name': 'file',
+                'value': image
+            })
+        }
+        */
+        console.log(serializedData);
+
+        //console.log(serializedData);
+        var objectData = {};
+        $.each(serializedData, function () {
+            if (objectData[this.name] !== undefined) {
+                if (!objectData[this.name].push) {
+                    objectData[this.name] = [objectData[this.name]];
+                }
+                objectData[this.name].push(this.value || '');
+            } else {
+                objectData[this.name] = this.value || '';
+            }
+        });
+        return objectData;
+    },
+
+    onComplete: function onComplete(response) {
+        this.el.querySelector('button[type="submit"]').disabled = true;
+        if (response.ok) {
+            vue_instance.addAlert({
+                'type': 'success',
+                'dismissible': true,
+                'content': response.data.message,
+                'timeout': 2000
+            });
+        }
+    },
+
+    onError: function onError(response) {
+        vue_instance.addAlert({
+            'type': 'danger',
+            'dismissible': true,
+            'content': response.data.message,
+            'timeout': false
+        });
+    },
+
+    getRequestType: function getRequestType() {
+        var method = this.el.querySelector('input[name="_method"]');
+
+        return (method ? method.value : this.el.method).toLowerCase();
+    }
+});
+
 window.vue_instance = new Vue({
     el: '#app',
-
+    /*
+        http: {
+            'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+        },
+    */
     components: {
         //'Alert': Alert,
         'screengallery': _ScreenGallery2.default,
