@@ -82,7 +82,7 @@ body {
         </div>
 
         @if( Count($tickers) > 0)
-            <div id="controls-wrapper" style="display: block; margin-bottom: 1em; margin-left: 20%;margin-right: 20%;">
+            <div id="controls-wrapper" style="position: absolute; top: 100%; margin-top: -10em;left:60%; margin-left: -44em;">
                 <div class="ticker-wrapperino">
                     <ul id="js-news" class="js-hidden">
                         @foreach ($tickers as $ticker)

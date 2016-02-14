@@ -33,6 +33,7 @@ return [
 	'preview'                       => 'Förhandsvisning',
 	'choose_file'                   => 'Välj fil',
 	'cancel'                        => 'Avbryt',
+	'tag_missing'                   => 'Något är galet, tag saknas.',
 	'upload_files'                  => 'Klicka här eller dra en bild hit för att ladda upp den.',
 	//'schedule'                    => 'Planering',
 
