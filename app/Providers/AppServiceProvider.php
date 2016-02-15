@@ -19,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
         Event::saved(function ($event) {
             event('GenerateFromEvent', $event);
         });
+        Event::updated(function ($event) {
+            event('GenerateFromEvent', $event);
+        });
 
         Event::deleted(function ($event) {
             event('RemoveFromEvent', $event);

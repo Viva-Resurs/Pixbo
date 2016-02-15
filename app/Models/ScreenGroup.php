@@ -26,6 +26,8 @@ class ScreenGroup extends Model
         'updated_at',
     ];
 
+    //protected $touches = ['screens'];
+
 /**
  * Screen association
  *

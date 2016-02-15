@@ -212,6 +212,7 @@ class ScreenGroupsController extends Controller
         if (!is_null($screengroup) && !is_null($screen)) {
             $screengroup->remove_screen($screen);
         }
+        $screengroup->touch();
         return redirect()->back();
     }
 }
