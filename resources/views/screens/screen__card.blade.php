@@ -12,11 +12,11 @@
                             </button>
                         </a>
                     @else
-                        <form action="/admin/screens/{{ $card->id }}" method="DELETE">
-                            <button type="button" class="btn btn-danger btn-lg" role="button">
+                        {!! Form::open(['route' => ['admin.screens.destroy', $card->id], 'method' => 'delete']) !!}
+                            <button type="submit" class="btn btn-danger btn-lg" role="button">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('messages.remove') }}"></span>
                             </button>
-                        </form>
+                        {!! Form::close() !!}
                     @endif
                     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#screen_modal_{{ $card->id }}" role="button">
                         <span class="glyphicon glyphicon-calendar" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('messages.schedule_tooltip') }}"></span>

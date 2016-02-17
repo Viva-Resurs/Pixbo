@@ -1,21 +1,14 @@
 @extends('admin')
 
 @section('title')
-    ScreenGroup index
+    Ticker index
 @stop
 
 
 @section('content')
 
-<div class="content">
-
-    <div class="row">
-        @include('tickers.ticker__card')
-    </div>
-
-    @can('view_dashboard')
-
-    @endcan
-</div>
+    @foreach ($tickers as $card)
+        @include('tickers.ticker__card', ['from' => 'ticker'])
+    @endforeach
 
 @stop

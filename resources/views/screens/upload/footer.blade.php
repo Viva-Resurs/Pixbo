@@ -52,8 +52,15 @@
   });
 
   myDropzone.on('complete', function(response) {
+    //console.log(response);
+    var screen = JSON.parse(response.xhr.response);
+    console.log(screen);
 
+    if(response.status == "success") {
+        window.location = "/admin/screens/" +  screen.id;
+    }
     vue_instance.addAlert(JSON.parse(response.xhr.response));
+
   });
 
   myDropzone.on('error', function(file) {

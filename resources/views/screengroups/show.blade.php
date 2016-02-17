@@ -21,7 +21,9 @@
     <div class="row">
         <h2>{{ trans_choice('messages.ticker',2) }}</h2>
         <hr>
-        @include('tickers.ticker__card', ['tickers' => $screengroup->tickers])
+            @foreach($screengroup->tickers as $card)
+                @include('tickers.ticker__card', ['card' => $card, 'from' => 'screengroup'])
+            @endforeach
     </div>
     @can('edit_clients')
         <div class="row">

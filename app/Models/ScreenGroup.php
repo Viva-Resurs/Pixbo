@@ -62,6 +62,15 @@ class ScreenGroup extends Model
         E::fire('GenerateFromEvent', $screen->event->first());
     }
 
+    public function remove_ticker(Ticker $ticker)
+    {
+        // Detach the screen from the screen group
+        $this->tickers()->detach($ticker);
+
+        // clear and generate new shadow events for the screen.
+        E::fire('GenerateFromEvent', $ticker->event->first());
+    }
+
 /**
  * Client association
  * @return [type] [description]

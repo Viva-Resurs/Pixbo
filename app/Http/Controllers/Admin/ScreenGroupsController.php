@@ -7,6 +7,7 @@ use App\Http\Requests\ScreenGroupRequest;
 use App\Models\Photo;
 use App\Models\Screen;
 use App\Models\ScreenGroup;
+use App\Models\Ticker;
 use Gate;
 use Illuminate\Http\Request as Requests;
 use Request;
@@ -211,6 +212,15 @@ class ScreenGroupsController extends Controller
     {
         if (!is_null($screengroup) && !is_null($screen)) {
             $screengroup->remove_screen($screen);
+        }
+        $screengroup->touch();
+        return redirect()->back();
+    }
+
+    public function remove_ticker_association(Requests $request, ScreenGroup $screengroup, Ticker $ticker)
+    {
+        if (!is_null($screengroup) && !is_null($ticker)) {
+            $screengroup->remove_ticker($ticker);
         }
         $screengroup->touch();
         return redirect()->back();

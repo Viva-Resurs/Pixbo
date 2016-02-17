@@ -7,7 +7,6 @@ use App\Models\Event;
 use App\Models\Photo;
 use App\Models\Screen;
 use App\Models\ScreenGroup;
-use App\Models\Tag;
 use DB;
 use Event as E;
 use Gate;
@@ -145,26 +144,28 @@ class ScreensController extends Controller
             $e->update($event);
 
             $tagged = [];
-
-            foreach ($tags as $tag) {
-                $t = Tag::where('name', $tag)->first();
-                if (!is_null($t)) {
-                    array_push($tagged, $t->id);
-                } else {
-                    $t = new Tag;
-                    $t->fill([
-                        'name' => $tag,
-                    ])->save();
-                    array_push($tagged, $t->id);
-                }
-            }
-            $screen->tags()->sync($tagged);
+/*
+foreach ($tags as $tag) {
+$t = Tag::where('name', $tag)->first();
+if (!is_null($t)) {
+array_push($tagged, $t->id);
+} else {
+$t = new Tag;
+$t->fill([
+'name' => $tag,
+])->save();
+array_push($tagged, $t->id);
+}
+}
+$screen->tags()->sync($tagged);
+ */
             $screen->screengroups()->sync($screengroups);
+            $screen->save();
 
         });
 
         if (is_null($result)) {
-            return ['type' => 'success', 'dismissible' => true, 'content' => trans('messages.screen_updated_ok'), 'timeout' => false];
+            return ['type' => 'success', 'dismissible' => true, 'content' => trans('messages.screen_updated_ok'), 'timeout' => true];
         } else {
             return ['type' => 'danger', 'dismissible' => true, 'content' => trans('messages.screen_updated_fail'), 'timeout' => false];
         }
@@ -181,17 +182,23 @@ class ScreensController extends Controller
         if (Gate::denies('remove_screens')) {
             abort(403, trans('auth.access_denied'));
         }
+        $sgs = $screen->screengroups;
+        $event = $screen->event;
         $deleted = $screen->delete();
         if ($deleted) {
-            flash()->success('Screen removed successfully.');
+            flash()->success(trans('messages.screen_delete_ok'));
+            foreach ($sg as $sgs) {
+                $sg->touch();
+            }
+            ShadowEvent::clearEvent($event->id);
         } else {
             flash()->error(trans('messages.screen_delete_failed'));
         }
 
-        if (Request::wantsJson()) {
+        if (Requests::wantsJson()) {
             return (string) $deleted;
         } else {
-            return redirect('screens');
+            return redirect()->back();
         }
     }
 
@@ -209,7 +216,8 @@ class ScreensController extends Controller
         $this->validate($request, [
             'photo' => 'required|mimes:jpg,jpeg,png,bmp',
         ]);
-        $result = DB::transaction(function () use ($request) {
+
+        $screen = DB::transaction(function () use ($request) {
             $screen = null;
             // find or create screen and add photo to it.
             $photo = Photo::getOrCreate($request->file('photo'))->move($request->file('photo'));
@@ -225,11 +233,8 @@ class ScreensController extends Controller
 
             $screen->photo()->save($photo);
             $screen->event()->save($event);
+            return $screen;
         });
-        if (is_null($result)) {
-            return ['type' => 'success', 'dismissible' => true, 'content' => trans('messages.screen_created_ok'), 'timeout' => false];
-        } else {
-            return ['type' => 'danger', 'dismissible' => true, 'content' => trans('messages.screen_created_fail'), 'timeout' => false];
-        }
+        return $screen;
     }
 }
