@@ -13,11 +13,7 @@ class Clients extends Migration {
 		Schema::create('clients', function (Blueprint $table) {
 			$table->increments('id');
 			$table->string('name');
-			$table->string('ip_address')->unique();;
-
-			$table->integer('user_id')->unsigned();
-			$table->foreign('user_id')
-				->references('id')->on('users')->onDelete('cascade');
+			$table->string('ip_address')->unique();
 
 			$table->integer('screen_group_id')->unsigned()->nullable();
 			$table->foreign('screen_group_id')

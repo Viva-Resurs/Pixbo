@@ -12,7 +12,7 @@
 
 @section('content')
 
-@include('clients.table')
+@include('clients.table', ['from' => 'clients'])
 
 @stop
 

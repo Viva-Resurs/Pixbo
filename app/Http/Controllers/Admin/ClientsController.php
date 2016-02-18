@@ -4,12 +4,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ClientRequest;
 use App\Models\Client;
-use App\Models\Role;
 use App\Models\ScreenGroup;
-use App\User;
-use DB;
 use Gate;
-use Hash;
 use Request;
 
 class ClientsController extends Controller {
@@ -40,7 +36,7 @@ class ClientsController extends Controller {
 		if (Gate::denies('add_clients')) {
 			abort(403);
 		}
-		$client = new Client;
+		$client       = new Client;
 		$screenGroups = ScreenGroup::lists('name', 'id')->all();
 
 		return view('clients.create', compact(['client', 'screenGroups']));
@@ -56,11 +52,11 @@ class ClientsController extends Controller {
 		if (Gate::denies('add_clients')) {
 			abort(403);
 		}
-		if (is_null($this->createClientUser($request))) {
-
+		if ($client = new Client($request->all())) {
 			flash()->success(trans('messages.client_created_ok'));
+			$client->save();
 		} else {
-			flash()->error(trans('messages.client_created_failed'));
+			flash()->error(trans('messages.client_created_fail'));
 		}
 
 		if (Request::wantsJson()) {
@@ -114,13 +110,13 @@ class ClientsController extends Controller {
 			abort(403);
 		}
 		if ($client->update($request->all())) {
-			flash()->success('Client updated successfully.');
+			flash()->success(trans('messages.client_updated_ok'));
 		}
 
 		if (Request::wantsJson()) {
 			return $client;
 		} else {
-			return redirect('admin/clients');
+			return redirect()->back();
 		}
 	}
 
@@ -145,24 +141,7 @@ class ClientsController extends Controller {
 		if (Request::wantsJson()) {
 			return (string) $deleted;
 		} else {
-			return redirect('clients');
+			return redirect()->back();
 		}
-	}
-
-	private function createClientUser(ClientRequest $request) {
-		$results = DB::transaction(function () use ($request) {
-			$client = new Client($request->all());
-			$user = new User;
-			$user->fill([
-				'name' => $client->name,
-				'email' => $client->name . '@viva.se',
-				'password' => Hash::make($client->name),
-			])->save();
-			$role = Role::where('name', 'client')->first();
-			$user->assignRole($role);
-			$user->client()->save($client);
-		});
-
-		return $results;
 	}
 }

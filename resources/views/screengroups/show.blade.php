@@ -29,7 +29,7 @@
         <div class="row">
             <h2>{{ trans_choice('messages.client', 2) }}</h2>
             <hr>
-            @include('clients.table', ['list' => $screengroup->clients])
+            @include('clients.table', ['list' => $screengroup->clients, 'from' => 'screengroup'])
         </div>
     @endcan
 @stop
