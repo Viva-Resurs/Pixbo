@@ -11,17 +11,25 @@
 |
  */
 
-Route::resource('play', 'PlayerController');
+$route_partials = [
+	'screengroups',
+];
 
-Route::get('admin/screengroups/{screengroup}/screens', 'Admin\ScreenGroupsController@screens');
-Route::get('admin/screengroups/{screengroup}/screens/{screens}/remove_screen_association', 'Admin\ScreenGroupsController@remove_screen_association');
-Route::get('admin/screengroups/{screengroup}/tickers/{tickers}/remove_ticker_association', 'Admin\ScreenGroupsController@remove_ticker_association');
-Route::get('admin/screengroups/{screengroup}/clients/{clients}/remove_client_association', 'Admin\ScreenGroupsController@remove_client_association');
+foreach ($route_partials as $partial) {
+	$file = __DIR__ . '/Routes/' . $partial . '.php';
+
+	if (!file_exists($file)) {
+		$msg = "Route partial [{$partial}] not found.";
+		throw new \Illuminate\Contracts\FileSystem\FileNotFoundException($msg);
+	}
+	require_once $file;
+}
+
+Route::resource('play', 'PlayerController');
 
 Route::get('/', 'PagesController@home');
 Route::get('admin/dashboard', 'PagesController@dashboard');
-//Route::get('admin/calendars', 'PagesController@calendars');
-Route::post('admin/screengroups/{screengroups}/addphoto', 'Admin\ScreenGroupsController@addScreenFromPhoto');
+
 Route::post('admin/screens/addphoto', 'Admin\ScreensController@addScreenFromPhoto');
 
 Route::get('/api/screengroups', function () {
@@ -65,7 +73,6 @@ Route::group([
 		return redirect('/admin/dashboard');
 	});
 	Route::resource('admin/clients', 'ClientsController');
-	//Route::resource('admin/screengroups/{screengroup_id}/tickers', 'TickersController');
 	Route::resource('admin/tickers', 'TickersController');
 	Route::resource('admin/screengroups', 'ScreenGroupsController');
 	Route::resource('admin/screens', 'ScreensController');
