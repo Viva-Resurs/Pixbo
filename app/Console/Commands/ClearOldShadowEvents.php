@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\ShadowEvent;
 use Illuminate\Console\Command;
 
 class ClearOldShadowEvents extends Command {
@@ -17,7 +18,7 @@ class ClearOldShadowEvents extends Command {
 	 *
 	 * @var string
 	 */
-	protected $description = 'Command description';
+	protected $description = 'Clear all old ShadowEvents';
 
 	/**
 	 * Create a new command instance.
@@ -34,6 +35,6 @@ class ClearOldShadowEvents extends Command {
 	 * @return mixed
 	 */
 	public function handle() {
-		//
+		ShadowEvent::clearAllOldEvents();
 	}
 }
