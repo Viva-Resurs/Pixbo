@@ -36,5 +36,5 @@
     @endcan
   </ul>
 </li>
-<li>{!! link_to_action('Admin\UsersController@getProfile', trans('messages.settings')) !!}</li>
+<li>{!! link_to_action('Admin\UsersController@getSettings', trans('messages.settings')) !!}</li>
 @endif

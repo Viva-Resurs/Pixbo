@@ -17,9 +17,9 @@ trait HasShadowEvents
      * @var array
      */
     protected $duration = [
-        'daily' => 90, // days
-        'weekly' => 12, // weeks
-        'monthly' => 3, // months
+        'daily' => 14, // days
+        'weekly' => 2, // weeks
+        'monthly' => 2, // months
         'yearly' => 2, // years
     ];
 

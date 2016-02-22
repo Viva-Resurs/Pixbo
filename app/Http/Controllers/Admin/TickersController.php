@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\ScreenGroup;
 use App\Models\ShadowEvent;
 use App\Models\Ticker;
 use DB;
@@ -87,6 +88,17 @@ class TickersController extends Controller
         } else {
             return view('tickers.show', compact(['ticker']));
         }
+    }
+
+    public function edit(Ticker $ticker)
+    {
+        if (Gate::denies('edit_tickers')) {
+            abort(403, trans('auth.access_denied'));
+        }
+        $event = $ticker->getEvent();
+        $screengroups = Screengroup::all();
+
+        return view('tickers.edit', compact(['ticker', 'event', 'screengroups']));
     }
 
     /**

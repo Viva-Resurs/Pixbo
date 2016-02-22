@@ -10,7 +10,6 @@ class PagesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('screen_client');
         parent::__construct();
     }
 

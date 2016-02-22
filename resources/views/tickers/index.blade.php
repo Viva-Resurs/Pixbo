@@ -4,11 +4,20 @@
     Ticker index
 @stop
 
+@section('header')
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css">
+@stop
+
 
 @section('content')
 
-    @foreach ($tickers as $card)
-        @include('tickers.ticker__card', ['from' => 'ticker'])
-    @endforeach
+    @include('tickers.table')
+
+@stop
+
+@section('footer')
+
+    @include('shared.datagrid', ['table_id' => 'ticker_table'])
 
 @stop
