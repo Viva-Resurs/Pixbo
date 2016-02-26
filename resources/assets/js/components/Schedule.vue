@@ -50,6 +50,7 @@
 
             send_ajax: function(payload) {
                 var vm = this;
+                console.log(vm.modelObject);
                 this.$http.put('/admin/' + vm.model + 's/' + vm.modelObject.id, payload).then(function (response) {
                     if(response.ok) {
                         //history.back();

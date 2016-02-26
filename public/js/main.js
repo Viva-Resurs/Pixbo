@@ -26093,6 +26093,7 @@ exports.default = {
 
         send_ajax: function send_ajax(payload) {
             var vm = this;
+            console.log(vm.modelObject);
             this.$http.put('/admin/' + vm.model + 's/' + vm.modelObject.id, payload).then(function (response) {
                 if (response.ok) {
                     //history.back();
@@ -26359,81 +26360,6 @@ var bootstrap = require('bootstrap-sass');
 //import Alert from './components/Alert.vue';
 
 //var alert = require('vue-strap');//src/alert');
-
-Vue.directive('ajax', {
-    bind: function bind() {
-        this.el.addEventListener('submit', this.onSubmit.bind(this));
-    },
-    update: function update(value) {
-        console.log(value);
-    },
-
-    onSubmit: function onSubmit(e) {
-        e.preventDefault();
-
-        this.vm.$http[this.getRequestType()](this.el.action, this.getFormData()).then(this.onComplete.bind(this)).catch(this.onError.bind(this));
-    },
-
-    getFormData: function getFormData() {
-
-        var formData = new FormData();
-        formData.append('image', this.el.fileInput.files[0]);
-        console.log(formData);
-
-        var serializedData = $(this.el).serializeArray();
-        /*
-        if($('input[type=file]').val()){
-            var image = $('input[type=file]').val().split('\\').pop(); 
-            serializedData.push({
-                'name': 'file',
-                'value': image
-            })
-        }
-        */
-        console.log(serializedData);
-
-        //console.log(serializedData);
-        var objectData = {};
-        $.each(serializedData, function () {
-            if (objectData[this.name] !== undefined) {
-                if (!objectData[this.name].push) {
-                    objectData[this.name] = [objectData[this.name]];
-                }
-                objectData[this.name].push(this.value || '');
-            } else {
-                objectData[this.name] = this.value || '';
-            }
-        });
-        return objectData;
-    },
-
-    onComplete: function onComplete(response) {
-        this.el.querySelector('button[type="submit"]').disabled = true;
-        if (response.ok) {
-            vue_instance.addAlert({
-                'type': 'success',
-                'dismissible': true,
-                'content': response.data.message,
-                'timeout': 2000
-            });
-        }
-    },
-
-    onError: function onError(response) {
-        vue_instance.addAlert({
-            'type': 'danger',
-            'dismissible': true,
-            'content': response.data.message,
-            'timeout': false
-        });
-    },
-
-    getRequestType: function getRequestType() {
-        var method = this.el.querySelector('input[name="_method"]');
-
-        return (method ? method.value : this.el.method).toLowerCase();
-    }
-});
 
 window.vue_instance = new Vue({
     el: '#app',

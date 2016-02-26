@@ -47,4 +47,8 @@
     </div>
 </div>
 
-@include('screens.screen_modal', ['screen' => $card])
+@if(isset($afk))
+    @include('screens.screen_modal', ['screen' => $card])
+@endif
+
+@include('shared.scheduled_modal', ['item' => $card, 'model' => 'screen'])
