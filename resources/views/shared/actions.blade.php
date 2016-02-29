@@ -1,8 +1,14 @@
 <div class="btn-group">
     <div class="btn-group">
+        @if(isset($modal))
+            <button type="button" class="btn btn-link" data-toggle="modal" data-target="{{ '#'.$modal.'_modal_'.$item->id }}" role="button">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('messages.edit') }}"></span>
+            </button>
+        @else
         <a href="{{ route($model.'.edit', array($item['id'])) }}" class="btn btn-link">
             <span class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('messages.edit') }}"></span>
         </a>
+        @endif
     </div>
     @if(isset($from) && $from=='screengroup')
     @else

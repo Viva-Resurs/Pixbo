@@ -21,9 +21,7 @@
     <div class="row">
         <h2>{{ trans_choice('messages.ticker',2) }}</h2>
         <hr>
-            @foreach($screengroup->tickers as $card)
-                @include('tickers.ticker__card', ['card' => $card, 'from' => 'screengroup'])
-            @endforeach
+        @include('tickers.table', ['list' => $screengroup->tickers, 'from' => 'screengroup'])
     </div>
     @can('edit_clients')
         <div class="row">
@@ -36,4 +34,5 @@
 
 @section('footer')
     @include('shared.datagrid', ['table_id' => 'client_table'])
+    @include('shared.datagrid', ['table_id' => 'ticker_table'])
 @stop

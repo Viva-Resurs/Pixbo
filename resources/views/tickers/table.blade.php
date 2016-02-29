@@ -14,7 +14,7 @@
         <th>{{ trans_choice('messages.action',2) }}</th>
     </tfoot>
     <tbody>
-        @foreach ($tickers as $ticker)
+        @foreach ($list as $ticker)
             <tr>
                 <td>{{ $ticker->id }}</td>
                 <td>{{ $ticker->text }}</td>
@@ -28,9 +28,10 @@
                 </td>
 
                 <td>
-                    @include('shared.actions', ['model' => 'admin.tickers', 'item' => $ticker])
+                    @include('shared.actions', ['model' => 'admin.tickers', 'item' => $ticker, 'modal' => 'ticker'])
                 </td>
             </tr>
+            @include('shared.scheduled_modal', ['item' => $ticker, 'model' => 'ticker'])
         @endforeach
     </tbody>
 </table>

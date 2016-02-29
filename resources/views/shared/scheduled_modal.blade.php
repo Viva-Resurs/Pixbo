@@ -10,7 +10,6 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
-
                         @include($model.'s.modal.head')
                     </div>
                 </div>
@@ -22,15 +21,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" form="schedule_form" class="btn btn-primary" onClick="submit_modal('{{ $model }}_modal_{{ $item->id }}', '#schedule_form_{{ $item->id }}')">{{ trans('messages.save') }}</button>
+        <label for="submitButton_{{ $item->id }}" class="btn btn-primary">{{ trans('messages.save') }}</label>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
-<script type="text/javascript">
-  function submit_modal(targetModal, targetForm) {
-    $(targetModal).modal('hide');
-    $(targetForm).submit();
-  }
-</script>
