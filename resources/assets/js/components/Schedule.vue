@@ -1,8 +1,17 @@
 <script>
+    import Tags from './Tags.vue';
+
     export default {
+
 
         template: '#schedule-template',
         props: ['id', 'model'],
+
+        components: {
+
+            'Tagger': Tags,
+
+        },
 
         data: function() {
             return {

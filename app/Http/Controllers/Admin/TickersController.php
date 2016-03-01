@@ -147,7 +147,7 @@ class TickersController extends Controller
             abort(403, trans('auth.access_denied'));
         }
         $sgs = $ticker->screengroups;
-        $event = $ticker->event;
+        $event = $ticker->event[0];
 
         if ($deleted = $ticker->delete()) {
             foreach ($sgs as $sg) {
@@ -158,5 +158,7 @@ class TickersController extends Controller
                 return (string) $deleted;
             }
         }
+
+        return redirect()->back();
     }
 }

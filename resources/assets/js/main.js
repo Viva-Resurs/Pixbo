@@ -1,5 +1,7 @@
 // browserify entrypoint
 var Vue = require('vue');
+//import Vue from 'vue';
+
 window.Vue = Vue;
 Vue.use(require('vue-resource'));
 var vueboot = require('vueboot');
@@ -8,11 +10,12 @@ var bootstrap = require('bootstrap-sass');
 
 
 //import Alert from './components/Alert.vue';
-import Alert from './components/Alert.vue';
+//import Alert from './components/Alert.vue';
 //var alert = require('vue-strap');//src/alert');
-import ScreenGallery from './components/ScreenGallery.vue';
-import Ticker from './components/Ticker.vue';
+//import ScreenGallery from './components/ScreenGallery.vue';
+//import Ticker from './components/Ticker.vue';
 import Schedule from './components/Schedule.vue';
+import Tags from './components/Tags.vue';
 
 
 
@@ -25,11 +28,12 @@ window.vue_instance = new Vue({
 */
     components: {
         //'Alert': Alert,
-        'screengallery': ScreenGallery,
-        'Tickers': Ticker,
+        //'screengallery': ScreenGallery,
+        //'Tickers': Ticker,
         'Schedule': Schedule,
         'Alert': vueboot.alert,
         'Toast': vueboot.toast,
+
     },
 
     data: function () {

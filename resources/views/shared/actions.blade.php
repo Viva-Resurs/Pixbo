@@ -13,7 +13,7 @@
     @if(isset($from) && $from=='screengroup')
     @else
         <div class="btn-group">
-            {!! Form::open(['route' => ['admin.clients.destroy', $item->id], 'method' => 'delete']) !!}
+            {!! Form::open(['route' => [$model.'.destroy', $item['id']], 'method' => 'delete']) !!}
                 <button type="submit" class="btn btn-link" role="button">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('messages.remove') }}"></span>
                 </button>

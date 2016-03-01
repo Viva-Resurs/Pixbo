@@ -5,9 +5,8 @@
         <div class="col-lg-6 col-md-6">
             @include('shared.schedule.screengroup')
 
-            <template v-if="model == 'screen'">
-                @include('shared.schedule.tags')
-            </template>
+
+            <Tagger></Tagger>
 
             <legend>{{ trans('messages.datetime') }}</legend>
             @include('shared.schedule.datetime')

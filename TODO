@@ -16,7 +16,7 @@ Features:
         * Generate shadow event on event changes. (Done)
 
     * Screen Group
-        * Add (x) button to remove screen association to the current screen group.
+        * Add (x) button to remove screen association to the current screen group. ( Done )
 
     * Screen
 
@@ -24,10 +24,11 @@ Features:
 
     * Tags
         * Let the user give a screen one or many tags associated with it.
-        * Ajax to give the user suggestion of already existing tags.
+        * Ajax to give the user suggestion of already existing tags. -> Datalist
+        * Push tags into an array, display properly.
 
     * Tickers
-        * Tabell
+        * Table ( Done )
 
     * Authorization
         * Roles:
