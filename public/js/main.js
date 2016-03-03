@@ -26069,7 +26069,7 @@ exports.default = {
             this.$http.get('/api/' + this.model + '/' + this.id, (function (modelObject) {
                 this.modelObject = modelObject;
                 this.event = modelObject.event.pop();
-                if (this.model == 'screen') this.tags = modelObject.tags;
+                if (this.model == 'screen') this.selected_tags = modelObject.tags;
                 this.parse_event();
                 this.set_selected_screengroups();
             }).bind(this));
@@ -26141,78 +26141,49 @@ if (module.hot) {(function () {  module.hot.accept()
 })()}
 },{"./Tags.vue":16,"vue":12,"vue-hot-reload-api":3,"vueify-insert-css":14}],16:[function(require,module,exports){
 var __vueify_style__ = require("vueify-insert-css").insert("\n\n")
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.default = {
 
+    props: ['list'],
+
     data: function data() {
         return {
-            tags: [],
-            tag_list: []
+            new_tag: []
         };
     },
 
     methods: {
         update_tags: function update_tags() {},
-        send_post: function send_post() {
 
-            var day_num = null;
-            var recur = this.event.recur_type;
+        add_tag: function add_tag(that) {
+            console.log(this.new_tag);
+            if (this.new_tag.length > 0) {
 
-            switch (recur) {
-                case "weekly":
-                    day_num = this.weekly_day_num;
-                    break;
-                case "monthly":
-                    day_num = this.monthly_day_num;
-                    break;
-                default:
-                    day_num = '';
-                    break;
+                this.list.push({ name: this.new_tag.trim(), new: true });
             }
-            var payload = {
-                selected_tags: this.selected_tags,
-                modelObject: this.modelObject
-            };
-            this.send_ajax(payload);
+            this.new_tag = '';
         },
-
-        send_ajax: function send_ajax(payload) {
-            var vm = this;
-            console.log(vm.modelObject);
-            this.$http.put('/admin/' + vm.model + 's/' + vm.modelObject.id, payload).then(function (response) {
-                if (response.ok) {
-                    vm.close_modal();
-                }
-                if (response) {
-                    vm.$dispatch('add-alert', response.data);
-                }
-            });
-        },
-
-        get_all_tags: function get_all_tags() {
-            this.$http.get('/api/tags', (function (tags) {
-                this.tags = tags;
-            }).bind(this));
-        },
-        get_model: function get_model() {
-
-            this.$http.get('/api/screen/' + this.$parent.$data.id, (function (modelObject) {
-                this.tag_list = modelObject.tags;
-            }).bind(this));
+        remove_tag: function remove_tag(index) {
+            this.list.splice(index, 1);
         }
     },
 
     ready: function ready() {
-        this.get_all_tags();
-        this.get_model();
+        this.list = this.list;
+    },
+
+    computed: {
+        tags: function tags() {
+            return this.$parent.$data.tags;
+        }
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <legend>\n        asdf\n    <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"asdfasdf\"></span>\n    </legend>\n    <div class=\"form-group\">\n        <div class=\"tag-group\">\n            <div class=\"tag\" v-for=\"tag in tag_list\">{{ tag.name }}</div>\n        </div>\n\n        <div class=\"input-group\">\n            <input type=\"text\" name=\"tags\" id=\"inputTags\" class=\"form-control\" list=\"tags\">\n            <span class=\"input-group-btn\">\n                <button class=\"btn btn-default\" type=\"button\">Go!</button>\n            </span>\n            <datalist id=\"tags\">\n                <option v-for=\"tag in tags\" value=\"{{ tag.name }}\">{{ tag.name }}</option>\n            </datalist>\n        </div>\n    </div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <legend>\n        Taggar\n    <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"asdfasdf\"></span>\n    </legend>\n    <div class=\"form-group\">\n        <div class=\"tag-group\">\n            <ul>\n                <li class=\"tag\" v-for=\"tag in list\">\n                    <span class=\"tag__name\">{{ tag.name }}</span>\n                    <button class=\"tag__remove\" @click=\"remove_tag($index)\">X</button>\n            </li></ul>\n\n        </div>\n\n        <div class=\"input-group\">\n            <input type=\"text\" name=\"tags\" id=\"inputTags\" class=\"form-control\" list=\"tags\" v-model=\"new_tag\" v-el=\"tagInput\" v-on:keyup.enter=\"add_tag\">\n            <span class=\"input-group-btn\">\n                <button class=\"btn btn-default\" type=\"button\" @click=\"add_tag\">Lägg till</button>\n            </span>\n            <datalist id=\"tags\">\n                <option v-for=\"tag in tags\" value=\"{{ tag.name }}\">{{ tag.name }}</option>\n            </datalist>\n        </div>\n    </div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)

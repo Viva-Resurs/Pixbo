@@ -86,7 +86,7 @@
                     this.modelObject = modelObject;
                     this.event = modelObject.event.pop();
                     if(this.model == 'screen')
-                        this.tags = modelObject.tags;
+                        this.selected_tags = modelObject.tags;
                     this.parse_event();
                     this.set_selected_screengroups();
                 }.bind(this));

@@ -78,9 +78,8 @@ Route::group([
     Route::resource('admin/screens', 'ScreensController');
     Route::resource('admin/photos', 'PhotosController');
     Route::resource('admin/events', 'EventsController');
-    Route::get('admin/users/settings', 'UsersController@getSettings');
-    Route::post('admin/users/settings', 'UsersController@saveSettings');
     Route::resource('admin/users', 'UsersController');
+    Route::resource('admin/settings', 'SettingsController');
 });
 
 Route::controllers([

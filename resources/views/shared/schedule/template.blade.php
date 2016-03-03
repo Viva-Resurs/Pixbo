@@ -6,7 +6,7 @@
             @include('shared.schedule.screengroup')
 
 
-            <Tagger></Tagger>
+            <Tagger :list.sync="selected_tags"></Tagger>
 
             <legend>{{ trans('messages.datetime') }}</legend>
             @include('shared.schedule.datetime')

@@ -64,14 +64,6 @@ class UsersController extends Controller
         return redirect()->action('Admin\UsersController@index');
     }
 
-    public function getSettings()
-    {
-    }
-
-    public function saveSettings()
-    {
-    }
-
     public function show(User $user)
     {
         if (Gate::denies('view_users')) {
