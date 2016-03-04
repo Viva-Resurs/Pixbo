@@ -26214,30 +26214,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // browserify entrypoint
 var Vue = require('vue');
-//import Vue from 'vue';
 
 window.Vue = Vue;
 Vue.use(require('vue-resource'));
 var vueboot = require('vueboot');
 var bootstrap = require('bootstrap-sass');
 
-//import Alert from './components/Alert.vue';
-//import Alert from './components/Alert.vue';
-//var alert = require('vue-strap');//src/alert');
-//import ScreenGallery from './components/ScreenGallery.vue';
-//import Ticker from './components/Ticker.vue';
-
 window.vue_instance = new Vue({
     el: '#app',
-    /*
-        http: {
-            'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
-        },
-    */
     components: {
-        //'Alert': Alert,
-        //'screengallery': ScreenGallery,
-        //'Tickers': Ticker,
         'Schedule': _Schedule2.default,
         'Alert': vueboot.alert,
         'Toast': vueboot.toast

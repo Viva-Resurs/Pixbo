@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <label for="submitButton_{{ $item->id }}" class="btn btn-primary">{{ trans('messages.save') }}</label>
+        @include('shared.schedule.submit_button')
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
