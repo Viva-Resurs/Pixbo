@@ -1,3 +1,5 @@
+<legend>{{ trans('messages.recurring') }}</legend>
+
 <label for="inputRecur_type" class="control-label">
     {{ trans('messages.repeat') }}
     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('messages.event_repeat_type_tooltip') }}"></span>

@@ -1,3 +1,4 @@
+<legend>{{ trans('messages.period') }}</legend>
 <div class="row">
     <div class="form-group">
         <div class="col-lg-6 col-md-6">

@@ -91,6 +91,8 @@ return [
 	'day'                           => 'Dag',
 	'week'                          => 'Vecka',
 
+	'period'                        => 'Period',
+
 	'recurring'                     => 'Återkommande',
 
 	'repeat'                        => 'Upprepa:',
