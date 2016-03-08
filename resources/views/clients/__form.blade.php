@@ -15,9 +15,9 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('screengroup_id', trans_choice('messages.screen_group',1)) !!}
-    {!! Form::select('screengroup_id', $screenGroups, $client->screengroup_id, ['class' => 'form-control', 'required' => 'required']) !!}
-    <small class="text-danger">{{ $errors->first('screengroup_id') }}</small>
+    {!! Form::label('screen_group_id', trans_choice('messages.screen_group',1)) !!}
+    {!! Form::select('screen_group_id', $screenGroups, $client->screen_group_id, ['class' => 'form-control', 'required' => 'required']) !!}
+    <small class="text-danger">{{ $errors->first('screen_group_id') }}</small>
 </div>
 <div class="btn-group pull-right">
     {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}

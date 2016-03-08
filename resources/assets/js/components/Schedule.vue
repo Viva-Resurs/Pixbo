@@ -1,8 +1,17 @@
 <script>
+    import Tags from './Tags.vue';
+
     export default {
+
 
         template: '#schedule-template',
         props: ['id', 'model'],
+
+        components: {
+
+            'Tagger': Tags,
+
+        },
 
         data: function() {
             return {
@@ -50,10 +59,10 @@
 
             send_ajax: function(payload) {
                 var vm = this;
+                console.log(vm.modelObject);
                 this.$http.put('/admin/' + vm.model + 's/' + vm.modelObject.id, payload).then(function (response) {
                     if(response.ok) {
-                        history.back();
-                        //window.location.href = '/admin/' + vm.model + 's';
+                        vm.close_modal();
                     }
                     if(response) {
                         vm.$dispatch('add-alert', response.data);
@@ -77,7 +86,7 @@
                     this.modelObject = modelObject;
                     this.event = modelObject.event.pop();
                     if(this.model == 'screen')
-                        this.tags = modelObject.tags;
+                        this.selected_tags = modelObject.tags;
                     this.parse_event();
                     this.set_selected_screengroups();
                 }.bind(this));
@@ -110,6 +119,12 @@
                 for (var i =0;i<sgs;i++) {
                     this.selected_screengroups.push(this.modelObject.screengroups[i].id);
                 }
+            },
+
+            close_modal: function() {
+                var modal = '#' + this.model + '_modal_' + this.modelObject.id;
+                console.log(modal);
+                $(modal).modal('hide');
             }
         },
 

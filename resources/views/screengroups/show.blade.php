@@ -1,7 +1,7 @@
 @extends('admin')
 
 @section('title')
-    {{ trans('messages.screengroup_title') }}
+    {{ trans_choice('messages.screen_group', 1) }}
 @stop
 
 @section('header')
@@ -10,25 +10,29 @@
 @stop
 
 @section('content')
+<h1 class="page_header">{{ $screengroup->name }}</h1>
     <div class="row">
         <h2>{{ trans_choice('messages.screen', 2) }}</h2>
         <hr>
-        @include('screens.screens__card', ['screens' => $screengroup->screens, 'from' => 'screengroup'])
+            @foreach ($screengroup->screens as $card)
+                @include('screens.screen__card', ['card' => $card, 'from' => 'screengroup'])
+            @endforeach
     </div>
     <div class="row">
         <h2>{{ trans_choice('messages.ticker',2) }}</h2>
         <hr>
-        @include('tickers.ticker__card', ['tickers' => $screengroup->tickers])
+        @include('tickers.table', ['list' => $screengroup->tickers, 'from' => 'screengroup'])
     </div>
     @can('edit_clients')
         <div class="row">
             <h2>{{ trans_choice('messages.client', 2) }}</h2>
             <hr>
-            @include('clients.table', ['list' => $screengroup->clients])
+            @include('clients.table', ['list' => $screengroup->clients, 'from' => 'screengroup'])
         </div>
     @endcan
 @stop
 
 @section('footer')
     @include('shared.datagrid', ['table_id' => 'client_table'])
+    @include('shared.datagrid', ['table_id' => 'ticker_table'])
 @stop

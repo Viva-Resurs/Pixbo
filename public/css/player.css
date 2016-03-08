@@ -1,32 +1,109 @@
-body {
-    background-color: black;
+
+.vegas-timer {
+    z-index: 500 !important;
 }
 
-.container{
-    width:100%;
-    height:100%;
-    /* padding:20px; */
-    /*border:1px solid gray; */
+.vegas-timer-progress {
+    background: #F24535;
+}
+
+.vegas-overlay {
+    opacity: .5;
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
     margin: 0;
-    -webkit-box-sizing:border-box;
-    -moz-box-sizing:border-box;
-    box-sizing:border-box;
-    background: black;
+    padding: 0;
 }
-.image-slider-wrapper{
-    overflow: hidden;
-}
-#image_slider{
+
+body {
     position: relative;
-    height: 280px;
-    padding:0;
+    background: #000;
+    color: #fff;
+    font: 1em Arial, sans-serif;
 }
-#image_slider li{
-    max-width: 100%;
-    float:left;
-    list-style: none;
+
+a {
+    text-decoration: none;
+    color: inherit;
 }
-img {
-    width: 1366px;
-    height: 720px;
+
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-width: 1280px;
+}
+
+
+.orientation {
+    background: rgba(0,0,0,.8);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 600;
+    pointer-events: none;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+    .orientation img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 400px;
+        height: 300px;
+        margin-left: -200px;
+        margin-top: -200px;
+        height: auto;
+        transform: rotate(45deg);
+        animation-fill-mode: both;
+        animation-iteration-count: 3;
+    }
+
+@media only screen and (orientation: portrait) and (max-device-width: 768px) {
+    .orientation {
+        animation: disapear 6s;
+    }
+    .orientation img {
+        animation: rotation ease-in-out 2s infinite;
+    }
+}
+
+@keyframes rotation {
+    0% {
+        opacity: 0;
+        transform: rotate(45deg)
+    }
+    95% {
+        opacity: 1;
+        transform: rotate(-45deg);
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(45deg)
+    }
+}
+
+@keyframes disapear {
+    0% {
+        opacity: 0;
+    }
+    5% {
+        opacity: 1;
+    }
+    95% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }

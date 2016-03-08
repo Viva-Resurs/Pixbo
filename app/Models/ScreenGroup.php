@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Client;
+use App\Models\Screen;
 use DB;
+use Event as E;
 use Illuminate\Database\Eloquent\Model;
 
 class ScreenGroup extends Model {
@@ -23,6 +26,8 @@ class ScreenGroup extends Model {
 		'updated_at',
 	];
 
+	//protected $touches = ['screens'];
+
 /**
  * Screen association
  *
@@ -34,6 +39,31 @@ class ScreenGroup extends Model {
 
 	public function tickers() {
 		return $this->belongsToMany(Ticker::class, 'screen_group_ticker')->withTimestamps();
+	}
+
+	public function shadow_events() {
+		return $this->belongsToMany(ShadowEvent::class, 'screen_group_shadow_event', 'screen_group_id', 'shadow_event_id');
+	}
+
+/**
+ * Remove a screen from the screengroup
+ * @param  Screen $screen [description]
+ * @return [type]         [description]
+ */
+	public function remove_screen(Screen $screen) {
+		// Detach the screen from the screen group
+		$this->screens()->detach($screen);
+
+		// clear and generate new shadow events for the screen.
+		E::fire('GenerateFromEvent', $screen->event->first());
+	}
+
+	public function remove_ticker(Ticker $ticker) {
+		// Detach the screen from the screen group
+		$this->tickers()->detach($ticker);
+
+		// clear and generate new shadow events for the screen.
+		E::fire('GenerateFromEvent', $ticker->event->first());
 	}
 
 /**
@@ -60,8 +90,6 @@ class ScreenGroup extends Model {
 					'name' => $photo->name,
 				]);
 				$screen->save();
-				//$event = $screen->createAndReturnEvent();
-				//$event->createAndReturnMeta();
 				$screen->photo()->save($photo);
 				$this->screens()->attach($screen);
 			});
@@ -70,5 +98,3 @@ class ScreenGroup extends Model {
 		}
 	}
 }
-
-//$screengroup = App\ScreenGroup::create(['name' => 'SG1', 'desc' => 'test1', 'rss_feed' => 'bla', 'event_id' => 0, 'created_by' => 0]);

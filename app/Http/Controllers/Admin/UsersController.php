@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\User;
-use DB;
 use Gate;
-use Hash;
 use Illuminate\Http\Request;
 use Request as RF;
 use Validator;
@@ -50,24 +48,13 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
-        //dd($request);
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255|unique:users',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
         ]);
-        $result = DB::transaction(function () use ($request) {
-            $user = new User;
-            $user->fill([
-                'name' => Request('name'),
-                'email' => Request('name') . '@viva.se',
-                'password' => Hash::make(Request('password')),
-            ])->save();
-            $role = Role::find(Request('role_id'))->first();
-            $user->roles()->save($role);
 
-            $user->save();
-        });
+        $result = User::createUserFromRequest($request);
         if (is_null($result)) {
             flash()->success(trans('messages.user_created_ok'));
         } else {
@@ -75,14 +62,6 @@ class UsersController extends Controller
         }
 
         return redirect()->action('Admin\UsersController@index');
-    }
-
-    public function getProfile()
-    {
-    }
-
-    public function postProfile()
-    {
     }
 
     public function show(User $user)

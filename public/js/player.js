@@ -1,73 +1,85 @@
-var ul;
-var li_items;
-var li_number;
-var image_number = 0;
-var slider_width = 0;
-var image_width;
-var current = 0;
-function init(){
-    ul = document.getElementById('image_slider');
-    li_items = ul.children;
-    li_number = li_items.length;
-    for (i = 0; i < li_number; i++){
-        // nodeType == 1 means the node is an element.
-        // in this way it's a cross-browser way.
-        //if (li_items[i].nodeType == 1){
-            //clietWidth and width???
-            image_width = li_items[i].childNodes[0].clientWidth;
-            //image_width = window.innerWidth;
-            slider_width += image_width;
-            image_number++;
-    }
 
-    ul.style.width = parseInt(slider_width) + 'px';
-    slider(ul);
-}
+var $body       = $('body');
+var $screens = $('#screens');
+var $updated_at = $('#updated_at').val();
+var $client_id = $('#client_id').val();
+var backgrounds = [];
+var newBackgrounds = [];
 
-function slider(){
-        animate({
-            delay:17,
-            duration: 3000,
-            delta:function(p){return Math.max(0, -1 + 2 * p)},
-            step:function(delta){
-                    ul.style.left = '-' + parseInt(current * image_width + delta * image_width) + 'px';
-                },
-            callback:function(){
-                current++;
-                if(current < li_number-1){
-                    slider();
-                }
-                else{
-                    var left = (li_number - 1) * image_width;
-                    setTimeout(function(){goBack(left)},2000);
-                    setTimeout(slider, 4000);
-                }
-            }
+$('html').addClass('animated');
+
+var displayBackdrops = false;
+
+
+$screens.each(function() {
+    $(this).find('li').each(function() {
+        var current = $(this);
+        bg = current.attr('src');
+        backgrounds.push({
+            src: '/' + bg
         });
-}
-function goBack(left_limits){
-    current = 0;
-    setInterval(function(){
-        if(left_limits >= 0){
-            ul.style.left = '-' + parseInt(left_limits) + 'px';
-            left_limits -= image_width / 10;
+    })
+
+});
+
+/*
+var backgrounds = [
+    { src: "/screens/images/$2y$10$HUabKjNqFsvOV3jsOp5ePuhUDIBag1zELC0BnMUx3OqwEgZ8SaZVa.png" },
+    { src: "/screens/images/image_0.83359500 1455543895.png" }
+];
+*/
+
+$body.vegas({
+    preload: true,
+    transitionDuration: 4000,
+    delay: 10000,
+    slides: backgrounds,
+});
+
+
+var minutes = 1;
+var ajax_call = function () {
+    $updated_at = $('#updated_at').val();
+    var client = $('#client_id').val();
+    var request = $.ajax({
+        type: "get",
+        url: "/play/" + client,
+    });
+    request.done(function() {
+        var data = JSON.parse(request.responseText);
+        var tickers = data['tickers'];
+        var screens = data['photo_list'];
+        var updated_at = data['updated_at'];
+        if(updated_at != $updated_at) {
+            console.log({site: $updated_at, db: updated_at});
+            console.log('fetching newer data');
+            update_player(screens, tickers, updated_at);
+
+
         }
-    }, 17);
+
+    });
 }
-function animate(opts){
-    var start = new Date;
-    var id = setInterval(function(){
-        var timePassed = new Date - start;
-        var progress = timePassed / opts.duration
-        if(progress > 1){
-            progress = 1;
-        }
-        var delta = opts.delta(progress);
-        opts.step(delta);
-        if (progress == 1){
-            clearInterval(id);
-            opts.callback();
-        }
-    }, opts.delay || 17);
-}
-window.onload = init;
+
+var interval = 1000 * 10;
+setInterval(ajax_call, interval);
+
+function update_player(screens, tickers, updated_at) {
+    newBackgrounds = [];
+    screens.forEach(function(entry) {
+        newBackgrounds.push({src: entry.image})
+    });
+
+    console.log(newBackgrounds);
+    $body.vegas('pause');
+    $body.vegas('destroy');
+    $('#updated_at').val(updated_at);
+
+    $body.vegas({
+        preload: true,
+        transitionDuration: 4000,
+        delay: 10000,
+        slides: newBackgrounds,
+    });
+    $body.vegas('play');
+};

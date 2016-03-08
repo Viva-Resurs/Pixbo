@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client;
 use App\Models\Event;
-use App\Models\ShadowEvent;
-use Auth;
-use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Request as R;
 
 class PlayerController extends Controller {
@@ -15,82 +14,109 @@ class PlayerController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index() {
-		//dd(R::get('ip'));
-		//dd(Auth::user()->client);
-		if (Auth::check() && !is_null(Auth::user()->client)) {
-			$client               = Auth::user()->client->with(['screengroup.event', 'screengroup.screens.event'])->first();
-			$client_id            = $client->pluck('id');
-			$screengroup          = $client->screengroup;
-			$screengroup_event_id = $screengroup->event->pluck('id')[0];
-			$event_ids[]          = $client->screengroup->event->pluck('id')[0];
+	public function index(Request $request) {
+		$mac     = $request->input('mac');
+		$preview = $request->input('preview');
 
-			// Get all events associated with the screengroup
-			foreach ($client->screengroup->screens as $screen) {
-				$event_ids[] = implode($screen->event->pluck('id')->toArray());
+		$client = Client::where('ip_address', $mac)->first();
+		if (is_null($client)) {
+			return abort(404, trans('exceptions.no_screens_found'));
+		}
+		$clientData = $this->getDataFromClient($client);
+
+		if (is_null($preview)) {
+			$client->updateActivity();
+			$client->save();
+		}
+
+		if (!is_null($clientData)) {
+			$tickers    = $clientData['tickers'];
+			$photo_list = $clientData['photo_list'];
+
+			if (!empty($photo_list)) {
+				if (R::wantsJson()) {
+					return ['list' => $photo_list, 'tickers' => $tickers];
+				} else {
+					return view('player.index')->with([
+						'screens'    => $photo_list,
+						'tickers'    => $tickers,
+						'client'     => $client->id,
+						'updated_at' => $clientData['updated_at'],
+					]);
+				}
+			} else {
+				return abort(404, trans('exceptions.no_screens_found'));
 			}
+		} else {
+			return abort(404, trans('exceptions.no_screens_found'));
+		}
+	}
 
-			// Get all shadow events associated with events given and are happening right now
-			$shadows = ShadowEvent::whereIn('event_id', $event_ids)
-				->with('event.eventable')
-				->where('start', '<=', Carbon::now())
-				->where('end', '>=', Carbon::now())
-				->get();
+	public function show(Request $request, $id) {
+		$client = Client::where('id', $id)->first();
+		$data   = $this->getDataFromClient($client);
+		return $data;
+	}
 
-			//dd($shadows);
+	private function getDataFromClient(Client $client) {
+
+		if (!is_null($client)) {
+			$screengroup = $client->screengroup;
+			$screens     = $screengroup->screens->keyBy('id');
+			$tickers     = $screengroup->tickers->keyBy('id');
+
+			$se = $screengroup->shadow_events()->now()->get();
 
 			// Collect the type and ID of the scheduled events.
 			$shadow_event_id = collect([]);
-			foreach ($shadows as $shadow) {
+			foreach ($se as $shadow) {
 				$shadow_event_id->push([
 					'type' => $shadow->event->getAttribute('eventable_type'),
 					'id'   => $shadow->event->eventable->getAttribute('id'),
 				]);
 			}
-			//dd($shadow_event_id);
 
 			// Group the collection for easier handling.
-			$scheduled_screens      = $shadow_event_id->groupBy('type')->get('App\Screen');
-			$scheduled_screengroups = $shadow_event_id->groupBy('type')->get('App\ScreenGroup');
+			$scheduled_screens = $shadow_event_id->groupBy('type')->get('App\Models\Screen');
+			$scheduled_tickers = $shadow_event_id->groupBy('type')->get('App\Models\Ticker');
 
-			//dd($scheduled_screens);
-
-			if (is_null($scheduled_screengroups)) {
-				return abort(404, 'No screens available.');
+			if (is_null($scheduled_screens)) {
+				return abort(404, trans('exceptions.no_screens_found'));
 			}
 
-			// Create the list of photos to show and send the list to the view.
-			foreach ($scheduled_screengroups as $scheduled_screengroup) {
-				if ($scheduled_screengroup['id'] == $screengroup->getAttribute('id')) {
-					$screens = $screengroup['screens'];
-					$list;
+			$photo_list  = null;
+			$ticker_list = null;
 
-					//dd($scheduled_screens);
-
-					foreach ($screens as $screen) {
-						if ($screen['scheduled'] == 0) {
-							$list[] = $screen['photo'];
-						} else {
-							foreach ($scheduled_screens as $scheduled_screen) {
-								if ($scheduled_screen['id'] == $screen['id']) {
-									if ($scheduled_screen['id'] == 2) {
-										dd($scheduled_screen);
-									}
-									$list[] = $screen['photo'];
-								}
-							}
-						}
-					}
-					//dd($list);
-
-					if (!empty($list)) {
-						return view('player.index')->with('list', $list);
-					} else {
-						return abort(404, 'No screens available.');
-					}
+			if (!is_null($scheduled_screens)) {
+				foreach ($scheduled_screens as $screen) {
+					$screen_element = $screens->where('id', $screen['id'])->first();
+					$photo_list[]   = $screen_element['photo'];
 				}
 			}
+			if (!is_null($scheduled_tickers)) {
+				foreach ($scheduled_tickers as $ticker) {
+					$ticker_element = $tickers->where('id', $ticker['id'])->first();
+					$ticker_list[]  = $ticker_element;
+				}
+			}
+
+			$parsed_list = [];
+			if (!is_null($photo_list)) {
+				foreach ($photo_list as $photo) {
+					$parsed_list[] = [
+						'image' => $photo->path,
+						'title' => $photo->name,
+						'thumb' => $photo->thumb_path,
+						'url'   => '',
+					];
+				}
+			}
+
+			return [
+				'photo_list' => $parsed_list,
+				'tickers'    => $ticker_list,
+				'updated_at' => $screengroup->updated_at->toDateTimeString(),
+			];
 		}
-		return abort(403, trans('auth.access_denied'));
 	}
 }

@@ -65,8 +65,9 @@ class Photo extends Model
 
     protected function saveAs($name)
     {
+        $ext = pathinfo($name, PATHINFO_EXTENSION);
         $this->archived = 0;
-        $this->name = sprintf("%s-%s", time(), $name);
+        $this->name = sprintf("image_%s.%s", md5(date('Y-m-d H:i:s:u')), $ext);
         $this->path = sprintf("%s/%s", $this->baseDir, $this->name);
 
         $this->thumb_path = sprintf("%s/tn-%s", $this->baseDir, $this->name);

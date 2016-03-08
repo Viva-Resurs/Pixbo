@@ -25977,78 +25977,29 @@ exports.insert = function (css) {
 }
 
 },{}],15:[function(require,module,exports){
-var __vueify_style__ = require("vueify-insert-css").insert("\n.fade-transition {\n  -webkit-transition: opacity .3s ease;\n  transition: opacity .3s ease;\n}\n.fade-enter,\n.fade-leave {\n  opacity: 0;\n}\n.alert.top {\n  position: fixed;\n  top: 30px;\n  margin: 0 auto;\n  left: 0;\n  right: 0;\n  z-index: 2;\n}\n.alert.top-right {\n  position: fixed;\n  top: 30px;\n  right: 50px;\n  z-index: 2;\n}\n")
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = {
-  props: {
-    type: {
-      type: String
-    },
-    dismissable: {
-      type: Boolean,
-      default: false
-    },
-    show: {
-      type: Boolean,
-      default: true,
-      twoWay: true
-    },
-    duration: {
-      type: Number,
-      default: 0
-    },
-    width: {
-      type: String
-    },
-    placement: {
-      type: String
-    }
-  },
-  watch: {
-    show: function show(val) {
-      var _this = this;
-
-      if (this._timeout) clearTimeout(this._timeout);
-      if (val && !!this.duration) {
-        this._timeout = setTimeout(function () {
-          return _this.show = false;
-        }, this.duration);
-      }
-    }
-  }
-};
-if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n  <div v-show=\"show\" v-bind:class=\"{\n      'alert':      true,\n      'alert-success':(type == 'success'),\n      'alert-warning':(type == 'warning'),\n      'alert-info': (type == 'info'),\n      'alert-danger':   (type == 'danger'),\n      'top':            (placement === 'top'),\n      'top-right':  (placement === 'top-right')\n    }\" transition=\"fade\" v-bind:style=\"{width:width}\" role=\"alert\">\n    <button v-show=\"dismissable\" type=\"button\" class=\"close\" @click=\"show = false\">\n      <span>×</span>\n    </button>\n    <slot></slot>\n  </div>\n"
-if (module.hot) {(function () {  module.hot.accept()
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), true)
-  if (!hotAPI.compatible) return
-  var id = "C:\\pixbo_laravel\\resources\\assets\\js\\components\\Alert.vue"
-  module.hot.dispose(function () {
-    require("vueify-insert-css").cache["\n.fade-transition {\n  -webkit-transition: opacity .3s ease;\n  transition: opacity .3s ease;\n}\n.fade-enter,\n.fade-leave {\n  opacity: 0;\n}\n.alert.top {\n  position: fixed;\n  top: 30px;\n  margin: 0 auto;\n  left: 0;\n  right: 0;\n  z-index: 2;\n}\n.alert.top-right {\n  position: fixed;\n  top: 30px;\n  right: 50px;\n  z-index: 2;\n}\n"] = false
-    document.head.removeChild(__vueify_style__)
-  })
-  if (!module.hot.data) {
-    hotAPI.createRecord(id, module.exports)
-  } else {
-    hotAPI.update(id, module.exports, module.exports.template)
-  }
-})()}
-},{"vue":12,"vue-hot-reload-api":3,"vueify-insert-css":14}],16:[function(require,module,exports){
 var __vueify_style__ = require("vueify-insert-css").insert("\n\n")
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _Tags = require('./Tags.vue');
+
+var _Tags2 = _interopRequireDefault(_Tags);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 exports.default = {
 
     template: '#schedule-template',
     props: ['id', 'model'],
+
+    components: {
+
+        'Tagger': _Tags2.default
+
+    },
 
     data: function data() {
         return {
@@ -26093,10 +26044,10 @@ exports.default = {
 
         send_ajax: function send_ajax(payload) {
             var vm = this;
+            console.log(vm.modelObject);
             this.$http.put('/admin/' + vm.model + 's/' + vm.modelObject.id, payload).then(function (response) {
                 if (response.ok) {
-                    history.back();
-                    //window.location.href = '/admin/' + vm.model + 's';
+                    vm.close_modal();
                 }
                 if (response) {
                     vm.$dispatch('add-alert', response.data);
@@ -26118,7 +26069,7 @@ exports.default = {
             this.$http.get('/api/' + this.model + '/' + this.id, (function (modelObject) {
                 this.modelObject = modelObject;
                 this.event = modelObject.event.pop();
-                if (this.model == 'screen') this.tags = modelObject.tags;
+                if (this.model == 'screen') this.selected_tags = modelObject.tags;
                 this.parse_event();
                 this.set_selected_screengroups();
             }).bind(this));
@@ -26144,6 +26095,12 @@ exports.default = {
             for (var i = 0; i < sgs; i++) {
                 this.selected_screengroups.push(this.modelObject.screengroups[i].id);
             }
+        },
+
+        close_modal: function close_modal() {
+            var modal = '#' + this.model + '_modal_' + this.modelObject.id;
+            console.log(modal);
+            $(modal).modal('hide');
         }
     },
 
@@ -26171,7 +26128,67 @@ if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "C:\\pixbo_laravel\\resources\\assets\\js\\components\\Schedule.vue"
+  var id = "C:\\Users\\Christoffer\\Documents\\Work\\pixbo_laravel\\resources\\assets\\js\\components\\Schedule.vue"
+  module.hot.dispose(function () {
+    require("vueify-insert-css").cache["\n\n"] = false
+    document.head.removeChild(__vueify_style__)
+  })
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, module.exports.template)
+  }
+})()}
+},{"./Tags.vue":16,"vue":12,"vue-hot-reload-api":3,"vueify-insert-css":14}],16:[function(require,module,exports){
+var __vueify_style__ = require("vueify-insert-css").insert("\n\n")
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+
+    props: ['list'],
+
+    data: function data() {
+        return {
+            new_tag: []
+        };
+    },
+
+    methods: {
+        update_tags: function update_tags() {},
+
+        add_tag: function add_tag(that) {
+            console.log(this.new_tag);
+            if (this.new_tag.length > 0) {
+
+                this.list.push({ name: this.new_tag.trim(), new: true });
+            }
+            this.new_tag = '';
+        },
+        remove_tag: function remove_tag(index) {
+            this.list.splice(index, 1);
+        }
+    },
+
+    ready: function ready() {
+        this.list = this.list;
+    },
+
+    computed: {
+        tags: function tags() {
+            return this.$parent.$data.tags;
+        }
+    }
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <legend>\n        Taggar\n    <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"asdfasdf\"></span>\n    </legend>\n    <div class=\"form-group\">\n        <div class=\"tag-group\">\n            <ul>\n                <li class=\"tag\" v-for=\"tag in list\">\n                    <span class=\"tag__name\">{{ tag.name }}</span>\n                    <button class=\"tag__remove\" @click=\"remove_tag($index)\">X</button>\n            </li></ul>\n\n        </div>\n\n        <div class=\"input-group\">\n            <input type=\"text\" name=\"tags\" id=\"inputTags\" class=\"form-control\" list=\"tags\" v-model=\"new_tag\" v-el=\"tagInput\" v-on:keyup.enter=\"add_tag\">\n            <span class=\"input-group-btn\">\n                <button class=\"btn btn-default\" type=\"button\" @click=\"add_tag\">Lägg till</button>\n            </span>\n            <datalist id=\"tags\">\n                <option v-for=\"tag in tags\" value=\"{{ tag.name }}\">{{ tag.name }}</option>\n            </datalist>\n        </div>\n    </div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "C:\\Users\\Christoffer\\Documents\\Work\\pixbo_laravel\\resources\\assets\\js\\components\\Tags.vue"
   module.hot.dispose(function () {
     require("vueify-insert-css").cache["\n\n"] = false
     document.head.removeChild(__vueify_style__)
@@ -26183,195 +26200,33 @@ if (module.hot) {(function () {  module.hot.accept()
   }
 })()}
 },{"vue":12,"vue-hot-reload-api":3,"vueify-insert-css":14}],17:[function(require,module,exports){
-var __vueify_style__ = require("vueify-insert-css").insert("\n    .screen_gallery {\n\n    }\n    .screen_gallery__entity {\n\n    }\n")
 'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = {
-
-    data: function data() {
-        return {
-            screens: []
-        };
-    },
-
-    ready: function ready() {
-        this.$http.get('screens', (function (screens) {
-            this.screens = screens;
-        }).bind(this));
-    },
-
-    methods: {
-        removeScreen: function removeScreen(screen) {
-            this.screens.$remove(screen);
-            this.$http.post('screens/' + screen.id + '/remove_association', screen);
-        },
-        editScreen: function editScreen(screen) {}
-    }
-};
-if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <ul class=\"screen_gallery\">\n        <li v-for=\"screen in screens\" class=\"screen_gallery__entity\">\n            <a href=\"/admin/screens/{{ screen.id }}/edit\">\n                <img v-bind:src=\"'/' + screen.photo.thumb_path\" alt=\"\">\n            </a><button @click=\"removeScreen(screen)\">x</button>\n        </li>\n    </ul>\n"
-if (module.hot) {(function () {  module.hot.accept()
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), true)
-  if (!hotAPI.compatible) return
-  var id = "C:\\pixbo_laravel\\resources\\assets\\js\\components\\ScreenGallery.vue"
-  module.hot.dispose(function () {
-    require("vueify-insert-css").cache["\n    .screen_gallery {\n\n    }\n    .screen_gallery__entity {\n\n    }\n"] = false
-    document.head.removeChild(__vueify_style__)
-  })
-  if (!module.hot.data) {
-    hotAPI.createRecord(id, module.exports)
-  } else {
-    hotAPI.update(id, module.exports, module.exports.template)
-  }
-})()}
-},{"vue":12,"vue-hot-reload-api":3,"vueify-insert-css":14}],18:[function(require,module,exports){
-var __vueify_style__ = require("vueify-insert-css").insert("\n    button {\n    margin: 0;\n    padding: 0;\n    border: 0;\n    background: none;\n    font-size: 100%;\n    vertical-align: baseline;\n    font-family: inherit;\n    font-weight: inherit;\n    color: inherit;\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    -webkit-font-smoothing: antialiased;\n    -moz-font-smoothing: antialiased;\n    font-smoothing: antialiased;\n}\n.destroy {\n    display: none;\n    position: absolute;\n    top: 0;\n    right: 10px;\n    bottom: 0;\n    width: 40px;\n    height: 40px;\n    margin: auto 0;\n    font-size: 30px;\n    color: #cc9a9a;\n    margin-bottom: 11px;\n    -webkit-transition: color 0.2s ease-out;\n    transition: color 0.2s ease-out;\n}\n\n.destroy:hover {\n    color: #af5b5e;\n}\n\n.destroy:after {\n    content: '×';\n}\n\nli:hover .destroy {\n    display: block;\n}\n.edit {\n    position: relative;\n    margin: 0;\n    width: 100%;\n    font-size: 24px;\n    font-family: inherit;\n    font-weight: inherit;\n    line-height: 1.4em;\n    border: 0;\n    outline: none;\n    color: inherit;\n    padding: 6px;\n    border: 1px solid #999;\n    box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);\n    box-sizing: border-box;\n    -webkit-font-smoothing: antialiased;\n    -moz-font-smoothing: antialiased;\n    font-smoothing: antialiased;\n}\nli .edit {\n    display: none;\n}\nli.editing {\n    border-bottom: none;\n    padding: 0;\n}\n\nli.editing .edit {\n    display: block;\n    width: 506px;\n    padding: 13px 17px 12px 17px;\n    margin: 0 0 0 43px;\n}\nli label {\n    white-space: pre;\n    word-break: break-word;\n    /*padding: 15px 60px 15px 15px; */\n    margin-right: 2em;\n    display: block;\n    line-height: 1.2;\n    -webkit-transition: color 0.4s;\n    transition: color 0.4s;\n}\n")
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = {
-    data: function data() {
-        return {
-            list: [],
-            newTicker: '',
-            editedTicker: null
-        };
-    },
-
-    created: function created() {
-        this.$http.get('tickers', (function (tickers) {
-            this.list = tickers;
-        }).bind(this));
-    },
-
-    computed: {
-        filtered: function filtered() {
-            return this.list;
-        }
-    },
-
-    methods: {
-
-        deleteTicker: function deleteTicker(ticker) {
-            this.list.$remove(ticker);
-            this.$http.delete('tickers/' + ticker.id, ticker);
-        },
-
-        addTicker: function addTicker() {
-            var value = this.newTicker && this.newTicker.trim();
-            if (!value) {
-                return;
-            }
-            this.list.push({ text: value });
-
-            this.$http.post('tickers', { text: value });
-            this.newTicker = '';
-        },
-
-        editTicker: function editTicker(ticker) {
-            this.beforeEditCache = ticker.text;
-            this.editedTicker = ticker;
-        },
-
-        doneEdit: function doneEdit(ticker) {
-            if (!this.editedTicker) {
-                return;
-            }
-            this.editedTicker = null;
-            ticker.text = ticker.text.trim();
-            if (!ticker.text) {
-                this.deleteTicker(ticker);
-            } else {
-                this.$http.patch('tickers/' + ticker.id, ticker);
-            }
-        },
-
-        cancelEdit: function cancelEdit(ticker) {
-            this.editedTicker = null;
-            ticker.text = this.beforeEditCache;
-        }
-
-    },
-
-    directives: {
-        'ticker-focus': function tickerFocus(value) {
-            if (!value) {
-                return;
-            }
-            var el = this.el;
-            parent.nextTick(function () {
-                el.focus();
-            });
-        }
-    }
-};
-if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <ul class=\"list-group\">\n        <li class=\"list-group-item\" style=\"padding:0px;height: 30px; line-height: 30px;\">\n            <input name=\"ticker\" class=\"\" placeholder=\"Ticker text\" v-model=\"newTicker\" @keyup.enter=\"addTicker\" style=\"border: none; background:none; outline: none;width: 100%; height:30px; padding-left:1em;\">\n        </li>\n        <li class=\"list-group-item\" v-for=\"ticker in filtered\" :class=\"{editing: ticker == editedTicker}\">\n            <div class=\"view\">\n                <label @dblclick=\"editTicker(ticker)\">{{ticker.text}}</label>\n                <button class=\"destroy\" @click=\"deleteTicker(ticker)\"></button>\n            </div>\n            <input class=\"edit\" type=\"text\" v-model=\"ticker.text\" v-ticker-focus=\"ticker == editedTicker\" @blur=\"doneEdit(ticker)\" @keyup.enter=\"doneEdit(ticker)\" @keyup.esc=\"cancelEdit(ticker)\">\n\n        </li>\n    </ul>\n"
-if (module.hot) {(function () {  module.hot.accept()
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), true)
-  if (!hotAPI.compatible) return
-  var id = "C:\\pixbo_laravel\\resources\\assets\\js\\components\\Ticker.vue"
-  module.hot.dispose(function () {
-    require("vueify-insert-css").cache["\n    button {\n    margin: 0;\n    padding: 0;\n    border: 0;\n    background: none;\n    font-size: 100%;\n    vertical-align: baseline;\n    font-family: inherit;\n    font-weight: inherit;\n    color: inherit;\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    -webkit-font-smoothing: antialiased;\n    -moz-font-smoothing: antialiased;\n    font-smoothing: antialiased;\n}\n.destroy {\n    display: none;\n    position: absolute;\n    top: 0;\n    right: 10px;\n    bottom: 0;\n    width: 40px;\n    height: 40px;\n    margin: auto 0;\n    font-size: 30px;\n    color: #cc9a9a;\n    margin-bottom: 11px;\n    -webkit-transition: color 0.2s ease-out;\n    transition: color 0.2s ease-out;\n}\n\n.destroy:hover {\n    color: #af5b5e;\n}\n\n.destroy:after {\n    content: '×';\n}\n\nli:hover .destroy {\n    display: block;\n}\n.edit {\n    position: relative;\n    margin: 0;\n    width: 100%;\n    font-size: 24px;\n    font-family: inherit;\n    font-weight: inherit;\n    line-height: 1.4em;\n    border: 0;\n    outline: none;\n    color: inherit;\n    padding: 6px;\n    border: 1px solid #999;\n    box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);\n    box-sizing: border-box;\n    -webkit-font-smoothing: antialiased;\n    -moz-font-smoothing: antialiased;\n    font-smoothing: antialiased;\n}\nli .edit {\n    display: none;\n}\nli.editing {\n    border-bottom: none;\n    padding: 0;\n}\n\nli.editing .edit {\n    display: block;\n    width: 506px;\n    padding: 13px 17px 12px 17px;\n    margin: 0 0 0 43px;\n}\nli label {\n    white-space: pre;\n    word-break: break-word;\n    /*padding: 15px 60px 15px 15px; */\n    margin-right: 2em;\n    display: block;\n    line-height: 1.2;\n    -webkit-transition: color 0.4s;\n    transition: color 0.4s;\n}\n"] = false
-    document.head.removeChild(__vueify_style__)
-  })
-  if (!module.hot.data) {
-    hotAPI.createRecord(id, module.exports)
-  } else {
-    hotAPI.update(id, module.exports, module.exports.template)
-  }
-})()}
-},{"vue":12,"vue-hot-reload-api":3,"vueify-insert-css":14}],19:[function(require,module,exports){
-'use strict';
-
-var _Alert = require('./components/Alert.vue');
-
-var _Alert2 = _interopRequireDefault(_Alert);
-
-var _ScreenGallery = require('./components/ScreenGallery.vue');
-
-var _ScreenGallery2 = _interopRequireDefault(_ScreenGallery);
-
-var _Ticker = require('./components/Ticker.vue');
-
-var _Ticker2 = _interopRequireDefault(_Ticker);
 
 var _Schedule = require('./components/Schedule.vue');
 
 var _Schedule2 = _interopRequireDefault(_Schedule);
 
+var _Tags = require('./components/Tags.vue');
+
+var _Tags2 = _interopRequireDefault(_Tags);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // browserify entrypoint
 var Vue = require('vue');
+
 window.Vue = Vue;
 Vue.use(require('vue-resource'));
 var vueboot = require('vueboot');
-//Vue.use(require('vue-strap'));
 var bootstrap = require('bootstrap-sass');
-//var vue_strap = require('vue-strap');
-
-//import Alert from './components/Alert.vue';
-
-//var alert = require('vue-strap');//src/alert');
 
 window.vue_instance = new Vue({
     el: '#app',
-
     components: {
-        //'Alert': Alert,
-        'screengallery': _ScreenGallery2.default,
-        'Tickers': _Ticker2.default,
         'Schedule': _Schedule2.default,
         'Alert': vueboot.alert,
         'Toast': vueboot.toast
+
     },
 
     data: function data() {
@@ -26396,6 +26251,6 @@ window.vue_instance = new Vue({
     }
 });
 
-},{"./components/Alert.vue":15,"./components/Schedule.vue":16,"./components/ScreenGallery.vue":17,"./components/Ticker.vue":18,"bootstrap-sass":1,"vue":12,"vue-resource":5,"vueboot":13}]},{},[19]);
+},{"./components/Schedule.vue":15,"./components/Tags.vue":16,"bootstrap-sass":1,"vue":12,"vue-resource":5,"vueboot":13}]},{},[17]);
 
 //# sourceMappingURL=main.js.map

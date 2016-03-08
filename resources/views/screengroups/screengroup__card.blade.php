@@ -7,7 +7,7 @@
                     <p>{{ Count($card->screens) }} {{ trans_choice('messages.screen', Count($card->screens)) }}</p>
                     <p>{{ Count($card->tickers) }} {{ trans_choice('messages.ticker', Count($card->tickers)) }}</p>
                     @can('view_clients')
-                        <p>{{ Count($card->clients) }} {{ trans_choice('messages.client', Count($card->tickers)) }}</p>
+                        <p>{{ Count($card->clients) }} {{ trans_choice('messages.client', Count($card->clients)) }}</p>
                     @endcan
                 </div>
             </div>

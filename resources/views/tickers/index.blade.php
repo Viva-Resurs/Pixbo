@@ -1,21 +1,23 @@
 @extends('admin')
 
 @section('title')
-    ScreenGroup index
+    Ticker index
+@stop
+
+@section('header')
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css">
 @stop
 
 
 @section('content')
 
-<div class="content">
+    @include('tickers.table')
 
-    <div class="row">
-        @include('tickers.ticker__card')
-    </div>
+@stop
 
-    @can('view_dashboard')
+@section('footer')
 
-    @endcan
-</div>
+    @include('shared.datagrid', ['table_id' => 'ticker_table'])
 
 @stop

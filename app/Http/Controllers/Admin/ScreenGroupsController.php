@@ -7,6 +7,7 @@ use App\Http\Requests\ScreenGroupRequest;
 use App\Models\Photo;
 use App\Models\Screen;
 use App\Models\ScreenGroup;
+use App\Models\Ticker;
 use Gate;
 use Illuminate\Http\Request as Requests;
 use Request;
@@ -177,7 +178,6 @@ class ScreenGroupsController extends Controller {
 		} else {
 			flash()->error(trans('messages.screen_created_failed'));
 		}
-
 	}
 
 	public function screens(Request $request, ScreenGroup $screengroup) {
@@ -197,15 +197,37 @@ class ScreenGroupsController extends Controller {
 			->move($file);
 	}
 
+/**
+ * Remove the association between a given screen and screengroup.
+ *
+ * @param  Requests    $request     [description]
+ * @param  ScreenGroup $screengroup [description]
+ * @param  Screen      $screen      [description]
+ * @return [type]                   [description]
+ */
 	public function remove_screen_association(Requests $request, ScreenGroup $screengroup, Screen $screen) {
 		if (!is_null($screengroup) && !is_null($screen)) {
-			if ($screengroup->screens()->detach($screen->id)) {
-				flash()->success(trans('messages.screen_association_removed', ['screengroup' => $screengroup->name]));
-			} else {
-				flash()->error(trans('messages.screen_association_removed_failed', ['screengroup' => $screengroup->name]));
-			}
-
+			$screengroup->remove_screen($screen);
+			flash()->success(trans('messages.screen_association_removed'));
 		}
+		$screengroup->touch();
+		return redirect()->back();
+	}
+
+/**
+ * Remove the association between a given ticker and screengroup.
+ *
+ * @param  Requests    $request     [description]
+ * @param  ScreenGroup $screengroup [description]
+ * @param  Ticker      $ticker      [description]
+ * @return [type]                   [description]
+ */
+	public function remove_ticker_association(Requests $request, ScreenGroup $screengroup, Ticker $ticker) {
+		if (!is_null($screengroup) && !is_null($ticker)) {
+			$screengroup->remove_ticker($ticker);
+			flash()->success(trans('messages.ticker_association_removed'));
+		}
+		$screengroup->touch();
 		return redirect()->back();
 	}
 }

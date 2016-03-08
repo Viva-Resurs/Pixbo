@@ -1,15 +1,14 @@
 Features:
 
-    * Client
-        * Creation
-            * Create user and associate it to the new client. (Done)
-        * Deletion
-            * Remove the user and flag the ScreenGroup as having no client to play it.
+    * Flödesschema
+
+    * Schemalägg uppdatering av shadowevents.
+        * veckovis sön  kl 24
+        * Loggar?
+
+    * API REST
 
     * Player
-        * Login client. (middleware) (Done)
-        * Load shadow events for current time. (Done)
-        * AJAX update every n minutes.
         * Add ticker feed to player.
 
     * Shadow Events
@@ -17,17 +16,19 @@ Features:
         * Generate shadow event on event changes. (Done)
 
     * Screen Group
-        * Add (x) button to remove screen association to the current screen group.
+        * Add (x) button to remove screen association to the current screen group. ( Done )
 
     * Screen
-        * Set and view scheduled variable to control screen viewing. (Done)
 
     * Event
-        * Let user set recurring and use it to generate shadow events. (Done)
 
     * Tags
         * Let the user give a screen one or many tags associated with it.
-        * Ajax to give the user suggestion of already existing tags.
+        * Ajax to give the user suggestion of already existing tags. -> Datalist
+        * Push tags into an array, display properly.
+
+    * Tickers
+        * Table ( Done )
 
     * Authorization
         * Roles:
@@ -38,8 +39,24 @@ Features:
                 * -View, Edit, Remove Users
                 * -Player
 
-            * Client
-                * Only View Player
+* Settings
+    * User
+        * Pwd (Reset)
+        * Role
+
+    * Dashboard (Admin)
+        * Log
+        * Player
+            * Tickers
+                * fade/print?
+            * Vegas
+                * Timer bar
+                * Delay
+                    * Per slide basis...
+
+    * User
+        * Language
+        * Password
 
 
 

@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Photo;
-use DB;
 use Gate;
 use Illuminate\Http\Request as Requests;
+use Input;
 use Request;
+use Validator;
 
 class PhotosController extends Controller {
 
@@ -19,21 +20,47 @@ class PhotosController extends Controller {
 	 */
 	public function store(Requests $request) {
 
+		$photo = $request->photo;
 		if (Gate::denies('add_screens')) {
 			abort(403);
 		}
-		$this->validate($request, [
-			'photo' => 'required|mimes:jpeg,jpg,png,bmp',
-		]);
-		$results = DB::transaction(function () use ($request) {
-			Photo::getOrCreate($request->file('photo'))->move($request->file('photo'))->save();
-		});
-		if (is_null($results)) {
-			flash()->success(trans('messages.photo_uploaded_ok'));
+
+		if (Input::hasFile('photo')) {
+			// validate
+			$rules = [
+				'photo' => 'required|mimes:jpeg,jpg,png,bmp',
+			];
+			$validator = Validator::make($request->all(), $rules);
+			$id        = null;
+
+			// move
+			// store
+			//
+			if ($validator->fails()) {
+				//flash()->error($validator->errors());
+				return redirect()->back()->withErrors($validator->errors());
+			} else {
+				return redirect()->action('Admin\ScreensController@create', ['photo' => $id]);
+			}
+
 		} else {
-			flash()->error(trans('messages.photo_uploaded_failed'));
+			flash()->error(trans('exceptions.file_not_found'));
+			return redirect()->back();
+			//abort(404, trans('exceptions.file_not_found'));
 		}
 
+		//dd($request);
+		/*
+	$results = DB::transaction(function () use ($request) {
+	Photo::getOrCreate($request->file('photo'))->move($request->file('photo'))->save();
+	});
+
+	if (is_null($results)) {
+	flash()->success(trans('messages.photo_uploaded_ok'));
+	} else {
+	flash()->error(trans('messages.photo_uploaded_failed'));
+	}
+	 */
 	}
 
 	/**

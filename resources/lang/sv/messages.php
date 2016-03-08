@@ -29,7 +29,13 @@ return [
 	'text'                          => 'Text',
 	'activity'                      => 'Aktivitet',
 	'action'                        => 'Åtgärd|Åtgärder',
-	'upload_files'                  => 'Klicka här eller dra en bild hit för att ladda upp den.',
+	'upload'                        => 'Ladda upp',
+	'preview'                       => 'Förhandsvisning',
+	'choose_file'                   => 'Välj fil',
+	'cancel'                        => 'Avbryt',
+	'tag_missing'                   => 'Något är galet, tag saknas.',
+	'unknown'                       => 'Okänt',
+	'offline'                       => 'Offline',
 	//'schedule'                    => 'Planering',
 
 	/**
@@ -84,6 +90,8 @@ return [
 	'end'                           => 'Slut',
 	'day'                           => 'Dag',
 	'week'                          => 'Vecka',
+
+	'period'                        => 'Period',
 
 	'recurring'                     => 'Återkommande',
 
@@ -146,6 +154,14 @@ return [
 	/**
 	 * Success / Error
 	 */
+
+	// Client
+	'client_created_ok'             => 'Bildskärmen har lagts till.',
+	'client_created_fail'           => 'Misslyckades att skapa skärmen, försök igen.',
+	'client_removed_ok'             => 'Bildskärmen togs bort.',
+	'client_removed_fail'           => 'Misslyckades att ta bort bildskärmen, försök igen.',
+	'client_updated_ok'             => 'Bildskärmen har sparats.',
+	'client_updated_fail'           => 'Misslyckades att spara ändringarna, försök igen.',
 
 	// Screen
 	'screen_created_ok'             => 'Bilden har laddats upp.',
