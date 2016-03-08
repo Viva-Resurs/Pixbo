@@ -3,18 +3,17 @@
         {{ csrf_field() }}
 
         <div class="col-lg-6 col-md-6">
+        
             @include('shared.schedule.screengroup')
 
+            @include('shared.schedule.tags')
 
-            <Tagger :list.sync="selected_tags"></Tagger>
-
-            <legend>{{ trans('messages.datetime') }}</legend>
             @include('shared.schedule.datetime')
+
         </div>
 
         <div class="col-lg-6 col-md-6">
 
-            <legend>{{ trans('messages.recurring') }}</legend>
             @include('shared.schedule.recurring.body')
 
         </div>
