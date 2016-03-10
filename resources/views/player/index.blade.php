@@ -25,6 +25,5 @@
     <script src="/js/vendor/jquery.ticker.js"></script>
     <script src="/js/vendor/vegas.min.js"></script>
     <script src="/js/player.js"></script>
-    <script src="/js/ticker.js"></script>
 </body>
 </html>
