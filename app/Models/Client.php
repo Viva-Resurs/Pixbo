@@ -53,7 +53,7 @@ class Client extends Model
     {
         if (!is_null($value)) {
             $time = Carbon::now()->timestamp($value);
-            $time->setLocale(Config::get('app.locale'));
+
             return $time->diffForHumans();
         } else {
             return trans('messages.unknown');

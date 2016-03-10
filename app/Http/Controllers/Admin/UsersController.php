@@ -32,7 +32,9 @@ class UsersController extends Controller
         if (Gate::denies('view_users')) {
             abort(403, trans('auth.access_denied'));
         }
-        return $user;
+
+        $roles = Role::where('name', '<>', 'client')->lists('name', 'id')->all();
+        return view('users.edit', compact(['user', 'roles']));
     }
 
     public function update(User $user, Request $request)
