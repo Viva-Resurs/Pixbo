@@ -4,6 +4,8 @@ namespace App\Jobs;
 
 use App\Jobs\Job;
 use Illuminate\Contracts\Bus\SelfHandling;
+use App;
+use Carbon\Carbon;
 
 class SetLocale extends Job implements SelfHandling
 {
@@ -30,6 +32,7 @@ class SetLocale extends Job implements SelfHandling
             session()->put('locale', \Request::getPreferredLanguage($this->languages));
         }
 
-        app()->setLocale(session('locale'));
+        App::setLocale(session('locale'));
+        Carbon::setLocale(session('locale'));
     }
 }
