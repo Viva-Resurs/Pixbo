@@ -15,8 +15,9 @@
 
 
                 @include('navs.topnav__links')
+                @include('navs.lang')
             </ul>
-            @include('navs.lang')
+
             @if($signedIn)
                 <p class="navbar-text navbar-right">{{ trans('auth.signed_in_as') }} <strong>{{ $user->name }}</strong>. <a href="/auth/logout" class="navbar-link">{{ trans('auth.logout') }}</a></p>
             @else
