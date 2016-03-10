@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\ChangeLocale;
 use Illuminate\Http\Request;
 
 class SettingsController extends Controller
@@ -81,5 +82,12 @@ class SettingsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function language(Request $request) {
+        $changeLocale = new ChangeLocale($request->input('lang'));
+        $this->dispatch($changeLocale);
+
+        return redirect()->back();
     }
 }

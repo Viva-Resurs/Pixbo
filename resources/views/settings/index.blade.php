@@ -3,11 +3,14 @@
 @section('content')
 
     @can('create_user')
-
-    @endcan
-    * User
+        * User
         * Pwd (Reset)
         * Role
+
+    @endcan
+
+
+
 
     * Dashboard (Admin)
         * Log
