@@ -1,4 +1,3 @@
-
 @if( count($tickers) > 0)
 	<div id="ticker-container">
 		<ul id="ticker">
