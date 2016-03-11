@@ -9,12 +9,19 @@
     <link rel="stylesheet" href="css/player.css">
 </head>
 <body>
-    <div class="container">
-        <input type="hidden" name="client_id" id="client_id" class="form-control" value="{{ $client }}">
-        <input type="hidden" name="updated_at" id="updated_at" class="form-control" value="{{ $updated_at }}">
-        @include('player.vegas')
-        @include('player.ticker')
-    </div>
+    
+    <input type="hidden" name="client_id" id="client_id" class="form-control" value="{{ $client }}">
+    <input type="hidden" name="updated_at" id="updated_at" class="form-control" value="{{ $updated_at }}">
+    
+    @if( count($screens) > 0)
+        <ul id="screens" style="display: none;">
+            @foreach ($screens as $element)
+                <li src="{{ $element['image'] }}"></li>
+            @endforeach
+        </ul>
+    @endif
+    
+    @include('player.ticker')
 
     <script src="/js/vendor/jquery-2.1.3.min.js"></script>
     <script src="/js/vendor/vegas.min.js"></script>

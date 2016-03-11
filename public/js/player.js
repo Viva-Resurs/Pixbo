@@ -49,7 +49,7 @@ $('#ticker').ticker({
 });
 
 /* Load Vegas into Body */
-$body.vegas({
+$('Body').vegas({
     preload: true,
     transitionDuration: 4000,
     delay: 10000,
@@ -67,6 +67,7 @@ var ajax_call = function () {
     });
     request.done(function() {
         var data = JSON.parse(request.responseText);
+        console.log(data);
         var tickers = data['tickers'];
         var screens = data['photo_list'];
         var updated_at = data['updated_at'];
