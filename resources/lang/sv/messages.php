@@ -37,6 +37,9 @@ return [
 	'unknown'                       => 'Okänt',
 	'offline'                       => 'Offline',
 	//'schedule'                    => 'Planering',
+	'language'                      => 'Välj språk',
+	'en'                            => 'Engelska',
+	'sv'                            => 'Svenska',
 
 	/**
 	 * Commonly used words.
@@ -80,6 +83,7 @@ return [
 	'edit_screen_group'             => 'Redigera område',
 	'edit_screen'                   => 'Redigera bild',
 	'edit_client'                   => 'Redigera bildskärm',
+    'edit_user'                     => 'Redigera användare',
 
 	/**
 	 * Time/Date
@@ -209,6 +213,8 @@ return [
 	'event_frequency_year_tooltip'  => 'Ange antal år mellan varje förekomst.',
 	'event_week_tooltip'            => 'Ange vecka.',
 	'event_day_tooltip'             => 'Ange dag.',
+
+    // TODO: fix the tooltip
 	'event_days_ahead_tooltip'      => 'Om ___ skall visas ett viss antal dagar innan förekomst, ange då antal.',
 
 	'schedule_tooltip'              => 'Planera',
