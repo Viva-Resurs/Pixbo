@@ -24,6 +24,29 @@ class Screen extends Model
         'updated_at',
     ];
 
+    public static function boot() {
+        parent::boot();
+
+        Screen::deleting(function ($screen) {
+            $event = $screen->event->first();
+            $sgs = $screen->screengroups();
+            if(!is_null($event))
+                $event->delete();
+
+            foreach($sgs as $sg) {
+                $sg->detach($screen);
+                $sg->touch();
+            }
+
+        });
+
+        Screen::updating(function($screen) {
+            foreach($screen->screengroups() as $sg) {
+                $sg->touch();
+            }
+        });
+}
+
 /**
  * [screengroups description]
  * @return [type] [description]

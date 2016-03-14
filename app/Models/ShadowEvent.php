@@ -16,6 +16,17 @@ class ShadowEvent extends Model
         'end',
     ];
 
+    public static function boot() {
+        parent::boot();
+
+        ShadowEvent::deleting(function ($shadowevent) {
+            foreach($shadowevent->screengroups() as $sg) {
+                $sg->detach($shadowevent);
+                $sg->touch();
+            }
+        });
+    }
+
     public function event()
     {
         return $this->belongsTo(Event::class);

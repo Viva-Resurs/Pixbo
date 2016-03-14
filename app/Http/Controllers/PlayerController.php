@@ -100,8 +100,10 @@ class PlayerController extends Controller {
 				}
 			}
 
+
 			$parsed_list = [];
 			if (!is_null($photo_list)) {
+				dd($photo_list);
 				foreach ($photo_list as $photo) {
 					$parsed_list[] = [
 						'image' => $photo->path,

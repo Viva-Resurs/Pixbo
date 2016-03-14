@@ -14,18 +14,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
-        // Fire event when Event changes.
-        Event::saved(function ($event) {
-            event('GenerateFromEvent', $event);
-        });
-        Event::updated(function ($event) {
-            event('GenerateFromEvent', $event);
-        });
-
-        Event::deleted(function ($event) {
-            event('RemoveFromEvent', $event);
-        });
     }
 
     /**

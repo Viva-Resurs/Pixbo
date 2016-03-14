@@ -34,6 +34,22 @@ class Event extends Model
 
     protected $touches = ['eventable'];
 
+    public static function boot() {
+        parent::boot();
+
+        Event::created(function($event) {
+            $event->generateShadowEvents($event);
+        });
+
+        Event::deleting(function($event) {
+           ShadowEvent::clearEvent($event->id);
+        });
+        Event::updated(function ($event) {
+            ShadowEvent::clearEvent($event->id);
+            $event->generateShadowEvents($event);
+        });
+    }
+
 /**
  * Morph relation
  *
