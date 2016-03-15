@@ -42,10 +42,10 @@ class Event extends Model
         });
 
         Event::deleting(function($event) {
-           ShadowEvent::clearEvent($event->id);
+            $event->shadow_events()->delete();
         });
         Event::updated(function ($event) {
-            ShadowEvent::clearEvent($event->id);
+            $event->shadow_events()->delete();
             $event->generateShadowEvents($event);
         });
     }

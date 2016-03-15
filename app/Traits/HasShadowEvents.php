@@ -1,12 +1,15 @@
 <?php
 namespace App\Traits;
 
+use App\Jobs\AddShadowEvent;
 use App\Models\Event;
 use App\Models\ShadowEvent;
 use Carbon\Carbon;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 trait HasShadowEvents
 {
+    use DispatchesJobs;
     public function shadow_events()
     {
         return $this->hasMany(ShadowEvent::class, 'event_id');
@@ -153,7 +156,9 @@ trait HasShadowEvents
         for ($initial = Carbon::parse($start);
             $initial->lte($end);
             $initial = $initial->addDays($frequency)) {
-            ShadowEvent::generateFromEvent(Carbon::parse($initial), $event);
+
+            $addShadowEvent = new AddShadowEvent(Carbon::parse($initial), $event);
+            $this->dispatch($addShadowEvent);
         }
     }
 
@@ -192,7 +197,7 @@ trait HasShadowEvents
         $start->hour = $timeArray[0];
         $start->minute = $timeArray[1];
 
-        ShadowEvent::clearEvent($id);
+        //ShadowEvent::clearEvent($id);
 
         for ($initial = Carbon::parse($start);
             $initial->lte($end);
@@ -207,7 +212,8 @@ trait HasShadowEvents
                     && $day->gte($start)) {
                     $day->hour = $timeArray[0];
                     $day->minute = $timeArray[1];
-                    ShadowEvent::generateFromEvent(Carbon::parse($day), $event);
+                    $addShadowEvent = new AddShadowEvent(Carbon::parse($day), $event);
+                    $this->dispatch($addShadowEvent);
                 }
             }
         }
@@ -269,10 +275,14 @@ trait HasShadowEvents
                 if (!is_null($days_ahead) && $days_ahead > 0) {
                     for ($i = $days_ahead; $i >= 0; $i--) {
                         $ahead_date = Carbon::parse($date)->subDays($i);
-                        ShadowEvent::generateFromEvent($ahead_date, $event);
+
+                        $addShadowEvent = new AddShadowEvent($ahead_date, $event);
+                        $this->dispatch($addShadowEvent);
+
                     }
                 } else {
-                    ShadowEvent::generateFromEvent(Carbon::parse($date), $event);
+                    $addShadowEvent = new AddShadowEvent(Carbon::parse($date), $event);
+                    $this->dispatch($addShadowEvent);
                 }
             }
         }
@@ -321,7 +331,8 @@ trait HasShadowEvents
             $initial->lte($end);
             $initial = $initial->addYears($frequency)) {
             if ($initial->gte($start) && $initial->lte($end)) {
-                ShadowEvent::generateFromEvent(Carbon::parse($initial), $event);
+                $addShadowEvent = new AddShadowEvent(Carbon::parse($initial), $event);
+                $this->dispatch($addShadowEvent);
             }
         }
     }

@@ -78,11 +78,8 @@ class ScreensController extends Controller
 
         });
 
-        if (Request::wantsJson()) {
-            return $screen;
-        } else {
-            return redirect()->action('Admin\ScreensController@edit', compact(['screen', 'event']));
-        }
+        return redirect()->action('Admin\ScreensController@edit', compact(['screen', 'event']));
+
     }
 
     /**

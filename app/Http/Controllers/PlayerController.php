@@ -23,6 +23,7 @@ class PlayerController extends Controller {
 			return abort(404, trans('exceptions.no_screens_found'));
 		}
 		$clientData = $this->getDataFromClient($client);
+		dd($clientData);
 
 		if (is_null($preview)) {
 			$client->updateActivity();
@@ -67,6 +68,7 @@ class PlayerController extends Controller {
 
 			$se = $screengroup->shadow_events()->now()->get();
 
+
 			// Collect the type and ID of the scheduled events.
 			$shadow_event_id = collect([]);
 			foreach ($se as $shadow) {
@@ -76,9 +78,11 @@ class PlayerController extends Controller {
 				]);
 			}
 
+
 			// Group the collection for easier handling.
 			$scheduled_screens = $shadow_event_id->groupBy('type')->get('App\Models\Screen');
 			$scheduled_tickers = $shadow_event_id->groupBy('type')->get('App\Models\Ticker');
+            dd($scheduled_screens);
 
 			if (is_null($scheduled_screens)) {
 				return abort(404, trans('exceptions.no_screens_found'));
@@ -87,12 +91,17 @@ class PlayerController extends Controller {
 			$photo_list  = null;
 			$ticker_list = null;
 
-			if (!is_null($scheduled_screens)) {
-				foreach ($scheduled_screens as $screen) {
-					$screen_element = $screens->where('id', $screen['id'])->first();
-					$photo_list[]   = $screen_element['photo'];
-				}
+
+			foreach ($scheduled_screens as $screen) {
+
+				$screen_element = $screens->first(function($key, $value) use($screen, $screens) {
+					dd($key, $value, $screen, $screens);
+					return $key=='id' && $value==$screen->id;
+				});
+				dd($screen_element);
+				$photo_list[]   = $screen_element['photo'];
 			}
+
 			if (!is_null($scheduled_tickers)) {
 				foreach ($scheduled_tickers as $ticker) {
 					$ticker_element = $tickers->where('id', $ticker['id'])->first();
@@ -102,17 +111,19 @@ class PlayerController extends Controller {
 
 
 			$parsed_list = [];
-			if (!is_null($photo_list)) {
-				dd($photo_list);
+			if (count($photo_list)>0) {
 				foreach ($photo_list as $photo) {
-					$parsed_list[] = [
-						'image' => $photo->path,
-						'title' => $photo->name,
-						'thumb' => $photo->thumb_path,
-						'url'   => '',
-					];
+					if(!is_null($photo))
+						$parsed_list[] = [
+							'image' => $photo->path,
+							'title' => $photo->name,
+							'thumb' => $photo->thumb_path,
+							'url'   => '',
+						];
 				}
 			}
+
+			dd($parsed_list);
 
 			return [
 				'photo_list' => $parsed_list,

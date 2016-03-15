@@ -34,7 +34,7 @@ class Screen extends Model
                 $event->delete();
 
             foreach($sgs as $sg) {
-                $sg->detach($screen);
+                $sg->screens()->detach($screen);
                 $sg->touch();
             }
 
