@@ -9,5 +9,4 @@
     @foreach ($screens as $card)
         @include('screens.screen__card', ['from' => 'screen'])
     @endforeach
-
 @stop

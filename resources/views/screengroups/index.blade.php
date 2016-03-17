@@ -6,16 +6,11 @@
 
 
 @section('content')
-
-<div class="content">
-
-    <div class="row">
-        @include('screengroups.screengroup__card')
-    </div>
+  	@foreach ($screengroups as $card)
+       	@include('screengroups.screengroup__card')
+    @endforeach
 
     @can('view_dashboard')
 
     @endcan
-</div>
-
 @stop

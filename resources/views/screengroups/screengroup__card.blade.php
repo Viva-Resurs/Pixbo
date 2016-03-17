@@ -1,4 +1,3 @@
-@foreach ($screengroups as $card)
     <div class="col-sm-6 col-md-4 screengroup_card">
         <div class="thumbnail">
             <div class="caption">
@@ -13,4 +12,3 @@
             </div>
         </div>
     </div>
-@endforeach

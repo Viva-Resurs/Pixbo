@@ -24,26 +24,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <span class="screens_card__text">
-                    <div class="well well-sm" style="margin-bottom: 0em;margin-top: 0.5em">
-                        @if(Count($card->tags))
-                            @foreach ($card->tags as $element)
-                                <div class="tag">
-                                    #{{ $element->name.' ' }}
-                                </div>
-                            @endforeach
-                        @else
-                            <div class="tag">
-                                {{ trans('messages.tag_missing') }}
-                            </div>
-                        @endif
-                    </div>
-                </span>
-            </div>
-        </div>
     </div>
 </div>
 
