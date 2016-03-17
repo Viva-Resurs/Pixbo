@@ -9,5 +9,5 @@ Homestead.yaml
 /storage/database.sqlite
 _ide_helper.php
 composer.lock
-.idea/*
-.idea/workspace.xml
+/.idea/*
+/.idea/workspace.xml
