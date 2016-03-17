@@ -16,6 +16,10 @@ class ShadowEvent extends Model
         'end',
     ];
 
+    public static function boot() {
+        parent::boot();
+    }
+
     public function event()
     {
         return $this->belongsTo(Event::class);
@@ -41,29 +45,8 @@ class ShadowEvent extends Model
  */
     public static function generateFromEvent($start, Event $event)
     {
-        if (is_null($event->eventable)) {
-            return;
-        }
 
-        $shadow = new static;
-        //$base_model = get_class($event->eventable()->getRelated());
-        //$model      = $base_model::find(['id' => $event->eventable_id])->first();
 
-        $shadow->title = $event->id; //$model['name'];
-        $shadow->start = $start;
-
-        $timeArray = !is_null($event['end_time']) ? extractTime($event['end_time']) : extractTime('23:59:59');
-        $end = Carbon::parse($start);
-        $end->hour = $timeArray[0];
-        $end->minute = $timeArray[1];
-        $shadow->end = $end;
-        $shadow->isAllDay = 1;
-
-        $s = $event->eventable->load('screengroups');
-        $sg = $s->screengroups;
-
-        $event->shadow_events()->save($shadow);
-        $shadow->screengroups()->sync($sg);
     }
 
 /**
@@ -74,6 +57,7 @@ class ShadowEvent extends Model
     public static function clearEvent($id)
     {
         $delete_rows = ShadowEvent::where('event_id', $id)->delete();
+
         return $delete_rows;
     }
 
@@ -86,7 +70,7 @@ class ShadowEvent extends Model
     public static function clearOldEvents($id)
     {
         $now = Carbon::now();
-        $delete_rows = ShadowEvent::where(function ($q) use ($now) {
+        $delete_rows = ShadowEvent::where(function ($q) use ($now, $id) {
             $q->where('event_id', $id);
             $q->where('end', '<', $now);
         })->delete();

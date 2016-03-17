@@ -65,45 +65,19 @@ class PlayerController extends Controller {
 			$screens     = $screengroup->screens->keyBy('id');
 			$tickers     = $screengroup->tickers->keyBy('id');
 
-			$se = $screengroup->shadow_events()->now()->get();
+			$screens = $screens->load(['event', 'event.shadow_events']);
+			$tickers = $tickers->load(['event', 'event.shadow_events']);
 
-			// Collect the type and ID of the scheduled events.
-			$shadow_event_id = collect([]);
-			foreach ($se as $shadow) {
-				$shadow_event_id->push([
-					'type' => $shadow->event->getAttribute('eventable_type'),
-					'id'   => $shadow->event->eventable->getAttribute('id'),
-				]);
-			}
+			//$se = $screengroup->shadow_events()->now()->get();
 
-			// Group the collection for easier handling.
-			$scheduled_screens = $shadow_event_id->groupBy('type')->get('App\Models\Screen');
-			$scheduled_tickers = $shadow_event_id->groupBy('type')->get('App\Models\Ticker');
-
-			if (is_null($scheduled_screens)) {
-				return abort(404, trans('exceptions.no_screens_found'));
-			}
-
-			$photo_list  = null;
-			$ticker_list = null;
-
-			if (!is_null($scheduled_screens)) {
-				foreach ($scheduled_screens as $screen) {
-					$screen_element = $screens->where('id', $screen['id'])->first();
-					$photo_list[]   = $screen_element['photo'];
-				}
-			}
-			if (!is_null($scheduled_tickers)) {
-				foreach ($scheduled_tickers as $ticker) {
-					$ticker_element = $tickers->where('id', $ticker['id'])->first();
-					$ticker_list[]  = $ticker_element;
-				}
-			}
-
-			$parsed_list = [];
-			if (!is_null($photo_list)) {
-				foreach ($photo_list as $photo) {
-					$parsed_list[] = [
+			// Get the images from the available screens
+			$photo_list = [];
+			foreach($screens as $screen) {
+				$event = $screen->event->first();
+				$se = $event->shadow_events()->now()->get();
+				if(!$se->isEmpty()) {
+					$photo = $screen->photo;
+					$photo_list[] = [
 						'image' => $photo->path,
 						'title' => $photo->name,
 						'thumb' => $photo->thumb_path,
@@ -112,8 +86,19 @@ class PlayerController extends Controller {
 				}
 			}
 
+			// Get the available tickers
+			$ticker_list = [];
+			foreach($tickers as $ticker) {
+				$event = $ticker->event->first();
+				$se = $event->shadow_events()->now()->get();
+				if(!$se->isEmpty()) {
+					$ticker_list[] = $ticker;
+				}
+			}
+
+
 			return [
-				'photo_list' => $parsed_list,
+				'photo_list' => $photo_list,
 				'tickers'    => $ticker_list,
 				'updated_at' => $screengroup->updated_at->toDateTimeString(),
 			];

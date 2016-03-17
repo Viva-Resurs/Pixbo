@@ -7,6 +7,7 @@ use App\Models\Event;
 use App\Models\Photo;
 use App\Models\Screen;
 use App\Models\ScreenGroup;
+use App\Models\ShadowEvent;
 use App\Models\Tag;
 use DB;
 use Event as E;
@@ -77,11 +78,8 @@ class ScreensController extends Controller
 
         });
 
-        if (Request::wantsJson()) {
-            return $screen;
-        } else {
-            return redirect()->action('Admin\ScreensController@edit', compact(['screen', 'event']));
-        }
+        return redirect()->action('Admin\ScreensController@edit', compact(['screen', 'event']));
+
     }
 
     /**
@@ -178,20 +176,17 @@ class ScreensController extends Controller
      * @param  Screen  $screen
      * @return Response
      */
+    // TODO: some issues with the removal of shadow events...
     public function destroy(Screen $screen)
     {
         if (Gate::denies('remove_screens')) {
             abort(403, trans('auth.access_denied'));
         }
-        $sgs = $screen->screengroups;
-        $event = $screen->event;
+
         $deleted = $screen->delete();
         if ($deleted) {
             flash()->success(trans('messages.screen_delete_ok'));
-            foreach ($sg as $sgs) {
-                $sg->touch();
-            }
-            ShadowEvent::clearEvent($event->id);
+
         } else {
             flash()->error(trans('messages.screen_delete_failed'));
         }
