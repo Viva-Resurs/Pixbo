@@ -7,10 +7,8 @@ use App\Models\Event;
 use App\Models\Photo;
 use App\Models\Screen;
 use App\Models\ScreenGroup;
-use App\Models\ShadowEvent;
 use App\Models\Tag;
 use DB;
-use Event as E;
 use Gate;
 use Illuminate\Http\Request;
 use Request as Requests;
@@ -176,7 +174,6 @@ class ScreensController extends Controller
      * @param  Screen  $screen
      * @return Response
      */
-    // TODO: some issues with the removal of shadow events...
     public function destroy(Screen $screen)
     {
         if (Gate::denies('remove_screens')) {

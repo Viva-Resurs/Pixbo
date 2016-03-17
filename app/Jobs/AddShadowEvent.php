@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Jobs\Job;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Carbon\Carbon;
 use App\Models\ShadowEvent;
@@ -40,7 +39,7 @@ class AddShadowEvent extends Job implements SelfHandling
 
         $shadow = new ShadowEvent;
 
-        $shadow->title = $this->event->id; //$model['name'];
+        $shadow->title = $this->event->id;
         $shadow->start = $this->start;
 
         $timeArray = !is_null($this->event['end_time']) ? extractTime($this->event['end_time']) : extractTime('23:59:59');
@@ -51,11 +50,6 @@ class AddShadowEvent extends Job implements SelfHandling
         $shadow->isAllDay = 1;
 
         $this->event->shadow_events()->save($shadow);
-
-
-        foreach($sg as $screengroup) {
-            $screengroup->shadow_events()->save($shadow);
-        }
 
     }
 }

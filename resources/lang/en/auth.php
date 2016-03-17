@@ -18,6 +18,7 @@ return [
     'username' => 'Username',
     'password' => 'Password',
     'remember_me' => 'Remember Me',
+    'signed_in_as'    => 'Signed in as ',
     'login' => 'Login',
     'logout' => 'Logout',
 
