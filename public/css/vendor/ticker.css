@@ -22,7 +22,7 @@ div.ticker-wrapper {
 	margin: 0px;
 	padding: 0px;
 	border: 1px #000000 solid;
-	background-color: rgba(77,77,7,0.3);
+	background-color: rgba(77,77,77,0.3);
 }
 p.ticker-content {
 	font-size: 4vh;
