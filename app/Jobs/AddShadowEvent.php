@@ -34,6 +34,10 @@ class AddShadowEvent extends Job implements SelfHandling
             return;
         }
 
+        $s = $this->event->eventable;
+        $s = $s->with('screengroups')->first();
+        $sg = $s->screengroups;
+
         $shadow = new ShadowEvent;
 
         $shadow->title = $this->event->id; //$model['name'];
@@ -46,10 +50,12 @@ class AddShadowEvent extends Job implements SelfHandling
         $shadow->end = $end;
         $shadow->isAllDay = 1;
 
-        $s = $this->event->eventable->load('screengroups');
-        $sg = $s->screengroups;
-
         $this->event->shadow_events()->save($shadow);
-        $shadow->screengroups()->sync($sg);
+
+
+        foreach($sg as $screengroup) {
+            $screengroup->shadow_events()->save($shadow);
+        }
+
     }
 }

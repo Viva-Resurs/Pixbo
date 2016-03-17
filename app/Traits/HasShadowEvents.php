@@ -104,7 +104,8 @@ trait HasShadowEvents
 
         ShadowEvent::clearEvent($event->id);
 
-        ShadowEvent::generateFromEvent($date, $event);
+        $addShadowEvent = new AddShadowEvent($date, $event);
+        $this->dispatch($addShadowEvent);
     }
 
     private function getDate(Event $event)

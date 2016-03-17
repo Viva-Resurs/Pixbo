@@ -41,10 +41,6 @@ class ScreenGroup extends Model {
 		return $this->belongsToMany(Ticker::class, 'screen_group_ticker')->withTimestamps();
 	}
 
-	public function shadow_events() {
-		return $this->belongsToMany(ShadowEvent::class, 'screen_group_shadow_event', 'screen_group_id', 'shadow_event_id');
-	}
-
 /**
  * Remove a screen from the screengroup
  * @param  Screen $screen [description]
