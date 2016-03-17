@@ -12,8 +12,6 @@
 
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
-
-
                 @include('navs.topnav__links')
                 @include('navs.lang')
             </ul>
