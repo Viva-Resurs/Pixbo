@@ -14,9 +14,13 @@
     <div class="row">
         <h2>{{ trans_choice('messages.screen', 2) }}</h2>
         <hr>
-            @foreach ($screengroup->screens as $card)
-                @include('screens.screen__card', ['card' => $card, 'from' => 'screengroup'])
-            @endforeach
+            @if( count($screengroup->screens) > 0)
+                @foreach ($screengroup->screens as $card)
+                    @include('screens.screen__card', ['card' => $card, 'from' => 'screengroup'])
+                @endforeach
+            @else
+                {{ trans('messages.no_images') }}
+            @endif
     </div>
     <div class="row">
         <h2>{{ trans_choice('messages.ticker',2) }}</h2>

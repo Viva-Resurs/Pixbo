@@ -40,6 +40,7 @@ return [
     'language'                      => 'Choose language',
     'en'                            => 'English',
     'sv'                            => 'Swedish',
+    'no_images'                     => 'No images',
 
     /**
      * Commonly used words.
