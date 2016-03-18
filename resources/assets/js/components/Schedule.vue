@@ -27,9 +27,6 @@
         },
 
         methods: {
-            update_tags: function() {
-
-            },
             send_post: function() {
 
                 var day_num = null;

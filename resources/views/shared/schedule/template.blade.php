@@ -2,11 +2,18 @@
     <form id="schedule_form_{{ $item->id }}" action="/admin/{{ $model }}s/{{ $item->id }}" method="PATCH" role="form" v-on:submit.prevent="send_post">
         {{ csrf_field() }}
 
+        <template v-if="model == 'ticker'">
+            @include('tickers.modal.head')
+        </template>
+
         <div class="col-lg-6 col-md-6">
         
             @include('shared.schedule.screengroup')
 
-            @include('shared.schedule.tags')
+            <template v-if="model == 'screen'">
+                @include('shared.schedule.tags')
+            </template>
+
 
             @include('shared.schedule.datetime')
 
