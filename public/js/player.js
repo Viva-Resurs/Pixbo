@@ -1,26 +1,40 @@
 
-var $body       = $('body');
-var $screens = $('#screens');
-var $updated_at = $('#updated_at').val();
-var $client_id = $('#client_id').val();
-var backgrounds = [];
-var newBackgrounds = [];
+/* Setup DOM-connections */
+var $vegas_target   = $('body');
+var $tickers_target = $('#ticker-container');
+var $screens        = $('#screens');
+var $updated_at     = $('#updated_at');
+var $client_id      = $('#client_id');
 
 $('html').addClass('animated');
 
 var displayBackdrops = false;
 
-
-$screens.each(function() {
-    $(this).find('li').each(function() {
-        var current = $(this);
-        bg = current.attr('src');
-        backgrounds.push({
-            src: '/' + bg
-        });
+/* Functions for access & changes in DOM */
+function get_screens_from(element){
+    var images = [];
+    element.find('li').each(function() {
+        images.push(
+            { src: '/' + $(this).attr('src') }
+        );
     })
-
-});
+    return images;
+};
+function put_screens_in(element,screens){
+    var new_content = '';
+    for (i=0 ; i<screens.length ; i++){
+        new_content += "<li src='"+screens[i].image+"'></li>";
+    }
+    element.html(new_content); // Replace content in element
+};
+function put_tickers_in(element,tickers){
+    var new_content = "<ul id='ticker'>";
+    for (i=0 ; i<tickers.length ; i++){
+        new_content += "<li>"+tickers[i].text+"</li>";
+    }
+    new_content += "</ul>";
+    element.html(new_content); // Replace content in element
+};
 
 /*
 var backgrounds = [
@@ -29,8 +43,9 @@ var backgrounds = [
 ];
 */
 
-/* Load Ticker into Div */
-$('#ticker').ticker({
+/* Start Ticker */
+function start_ticker(){
+  $tickers_target.find('#ticker').ticker({
     speed: 0.10,           // The speed of the reveal
     ajaxFeed: false,       // Populate jQuery News Ticker via a feed
     feedUrl: false,        // The URL of the feed
@@ -46,61 +61,63 @@ $('#ticker').ticker({
     pauseOnItems: 10000,   // The pause on a news item before being replaced
     fadeInSpeed: 600,      // Speed of fade in animation
     fadeOutSpeed: 300      // Speed of fade out animation
-});
+  });
+}
+start_ticker();
 
-/* Load Vegas into Body */
-$('Body').vegas({
+/* Start Vegas */
+$vegas_target.vegas({
     preload: true,
     transitionDuration: 4000,
     delay: 10000,
-    slides: backgrounds,
+    slides: get_screens_from( $('#screens') )
 });
 
-
-var minutes = 1;
+/* Update-check */
 var ajax_call = function () {
-    $updated_at = $('#updated_at').val();
-    var client = $('#client_id').val();
     var request = $.ajax({
         type: "get",
-        url: "/play/" + client,
+        url: "/play/" + $client_id.val(),
     });
     request.done(function() {
-        var data = JSON.parse(request.responseText);
-        console.log(data);
-        var tickers = data['tickers'];
-        var screens = data['photo_list'];
-        var updated_at = data['updated_at'];
-        if(updated_at != $updated_at) {
-            console.log({site: $updated_at, db: updated_at});
-            console.log('fetching newer data');
-            update_player(screens, tickers, updated_at);
-
-
+        var data = JSON.parse(request.responseText); // Fetch JSON-output
+        if($updated_at.val() != data['updated_at']) { // Newer data found, update player:
+            console.log('Client Updated, fetching newer data: (site: '+ $client_id.val() +', updated: '+ data['updated_at'] +')');
+            update_player(
+                data['photo_list'],
+                data['tickers'],
+                data['updated_at']
+            );
         }
-
     });
 }
 
-var interval = 1000 * 10;
-setInterval(ajax_call, interval);
+setInterval( ajax_call, 1000*10 ); // Check for newer data each 10 sec
 
-function update_player(screens, tickers, updated_at) {
-    newBackgrounds = [];
-    screens.forEach(function(entry) {
-        newBackgrounds.push({src: entry.image})
-    });
+/* Perform update */
+function update_player(new_screens, new_tickers, new_updated_at) {
+    
+    // Replace contents in DOM for screens-list
+    put_screens_in( $screens, new_screens );
 
-    console.log(newBackgrounds);
-    $body.vegas('pause');
-    $body.vegas('destroy');
-    $('#updated_at').val(updated_at);
-
-    $body.vegas({
+    // Restart Player Chain
+    $vegas_target
+      .vegas('pause')    // Pause
+      .vegas('destroy')  // Destroy
+      .vegas({           // Start New
         preload: true,
         transitionDuration: 4000,
         delay: 10000,
-        slides: newBackgrounds,
-    });
-    $body.vegas('play');
+        slides: get_screens_from( $screens )
+      })
+      .vegas('play');    // Play
+    
+    // Replace contents in DOM for tickers
+    put_tickers_in( $tickers_target, new_tickers );
+
+    // Restart Ticker
+    start_ticker();
+
+    // Replace value of updated_at
+    $updated_at.val(new_updated_at);
 };
