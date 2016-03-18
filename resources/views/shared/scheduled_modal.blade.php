@@ -7,13 +7,16 @@
       </div>
       <div class="modal-body">
         <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        @include($model.'s.modal.head')
+            @if($model == 'screen')
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+                            @include($model.'s.modal.head')
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
             <div class="col-lg-12">
                 <schedule id="{{ $item->id }}" model="{{ $model }}"></schedule>
                 @include('shared.schedule.body')
