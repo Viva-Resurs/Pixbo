@@ -6,7 +6,9 @@
         
             @include('shared.schedule.screengroup')
 
-            @include('shared.schedule.tags')
+            <template v-if="model == 'screen'">
+                @include('shared.schedule.tags')
+            </template>
 
             @include('shared.schedule.datetime')
 
