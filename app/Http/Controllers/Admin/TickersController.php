@@ -73,7 +73,7 @@ class TickersController extends Controller
             if (RF::wantsJson()) {
                 return $ticker;
             } else {
-                return redirect('/admin/dashboard/');
+                return redirect('/admin/tickers/');
             }
         }
     }
