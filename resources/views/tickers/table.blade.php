@@ -14,7 +14,7 @@
         <th>{{ trans_choice('messages.action',2) }}</th>
     </tfoot>
     <tbody>
-        @foreach ($list as $ticker)
+        @foreach ($tickers as $ticker)
             <tr>
                 <td>{{ $ticker->id }}</td>
                 <td>{{ $ticker->text }}</td>

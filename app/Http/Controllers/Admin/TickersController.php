@@ -25,12 +25,12 @@ class TickersController extends Controller
             abort(403, trans('auth.access_denied'));
         }
 
-        $list = Ticker::all();
+        $tickers = Ticker::all();
 
         if (RF::wantsJson()) {
-            return $list;
+            return $tickers;
         } else {
-            return view('tickers.index', compact('list'));
+            return view('tickers.index', compact('tickers'));
         }
     }
 
