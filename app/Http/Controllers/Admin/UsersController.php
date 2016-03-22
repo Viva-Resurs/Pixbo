@@ -39,6 +39,7 @@ class UsersController extends Controller
 
     public function update(User $user, Request $request)
     {
+        return redirect()->back();
     }
 
     public function create()

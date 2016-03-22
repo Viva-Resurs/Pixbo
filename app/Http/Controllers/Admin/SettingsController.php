@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Jobs\ChangeLocale;
 use Illuminate\Http\Request;
+use Config;
 
 class SettingsController extends Controller
 {
@@ -15,73 +16,24 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        return view('settings.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $vegas_delay = Config::get('app.player.vegas.delay');
+        $ticker_delay = Config::get('app.player.ticker.pauseOnItems');
+        return view('settings.index')->with(compact(['vegas_delay', 'ticker_delay']));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function save(Request $request)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $vegas_delay = $request->input('vegas_delay');
+        $ticker_delay = $request->input('ticker_delay');
+        config(['app.player.vegas.delay' => $vegas_delay]);
+        config(['app.player.ticker.pauseOnItems' => $ticker_delay]);
+        return redirect()->back();
     }
 
     public function language(Request $request) {

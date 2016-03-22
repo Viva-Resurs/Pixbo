@@ -25,6 +25,8 @@ foreach ($route_partials as $partial) {
     require_once $file;
 }
 
+Route::patch('admin/settings/save', 'Admin\SettingsController@save');
+
 Route::get('language', 'Admin\SettingsController@language');
 
 Route::resource('play', 'PlayerController');

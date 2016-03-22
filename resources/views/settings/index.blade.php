@@ -1,13 +1,44 @@
 @extends('admin')
 
+@section('title')
+    {{ trans('messages.settings') }}
+@stop
+
+
 @section('content')
+    <h1 class="page-header">{{ trans('messages.settings') }}</h1>
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-header">
+                    {{ trans_choice('messages.user', 1) }}
+                </div>
+                <div class="panel-body">
+                    {!! Form::open(['url' => '/admin/users/'.$user->id , 'method' => 'PATCH', 'class' => 'form-horizontal']) !!}
 
-    @can('create_user')
-        * User
-        * Pwd (Reset)
-        * Role
+                    @include('settings.__form', ['submitButtonText' => trans('messages.save')])
 
-    @endcan
+                    {!! Form::close() !!}
+                </div>
+            </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-header">
+                    {{ config('app.name') }}
+                </div>
+                <div class="panel-body">
+                    {!! Form::open(['url' => '/admin/settings/save', 'method' => 'PATCH', 'class' => 'form-horizontal']) !!}
+
+                        @include('settings.admin__form', ['submitButtonText' => trans('messages.save')])
+
+                    {!! Form::close() !!}
+                </div>
+            </div>
+
+
+
+
+
 
 
 
@@ -23,7 +54,7 @@
                     * Per slide basis...
 
     * User
-        * Language
         * Password
-@stop
+        </div>
+    @stop
 
