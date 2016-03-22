@@ -13,19 +13,23 @@
     <input type="hidden" name="client_id" id="client_id" class="form-control" value="{{ $client }}">
     <input type="hidden" name="updated_at" id="updated_at" class="form-control" value="{{ $updated_at }}">
     
-    @if( count($screens) > 0)
-        <ul id="screens" style="display: none;">
-            @foreach ($screens as $element)
-                <li src="{{ $element['image'] }}"></li>
-            @endforeach
-        </ul>
-    @endif
+    <ul id="screens" style="display: none;">
+        @foreach ($screens as $screen)
+            <li src="{{ $screen['image'] }}"></li>
+        @endforeach
+    </ul>
     
-    @include('player.ticker')
+    <div id="ticker-container">
+      <ul id="ticker">
+        @foreach ($tickers as $ticker)
+            <li>{{ $ticker['text'] }}</li>
+        @endforeach
+      </ul>
+    </div>
 
     <script src="/js/vendor/jquery-2.1.3.min.js"></script>
     <script src="/js/vendor/vegas.min.js"></script>
-    <script src="/js/vendor/ticker.js"></script>
+    <script src="/js/vendor/jquery.ticker.js"></script>
     <script src="/js/player.js"></script>
 </body>
 </html>

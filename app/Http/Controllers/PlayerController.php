@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Config;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\Event;
@@ -78,10 +79,7 @@ class PlayerController extends Controller {
 				if(!$se->isEmpty()) {
 					$photo = $screen->photo;
 					$photo_list[] = [
-						'image' => $photo->path,
-						'title' => $photo->name,
-						'thumb' => $photo->thumb_path,
-						'url'   => '',
+						'image' => $photo->path
 					];
 				}
 			}
@@ -92,15 +90,20 @@ class PlayerController extends Controller {
 				$event = $ticker->event->first();
 				$se = $event->shadow_events()->now()->get();
 				if(!$se->isEmpty()) {
-					$ticker_list[] = $ticker;
+					$ticker_list[] = [
+					  'text' => $ticker->text
+					];
 				}
 			}
 
+			// Get settings
+			$settings = Config::get('app.player');
 
 			return [
 				'photo_list' => $photo_list,
 				'tickers'    => $ticker_list,
 				'updated_at' => $screengroup->updated_at->toDateTimeString(),
+				'settings'   => $settings
 			];
 		}
 	}
