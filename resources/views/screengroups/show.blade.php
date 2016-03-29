@@ -2,6 +2,7 @@
 
 @section('title')
     {{ trans_choice('messages.screen_group', 1) }}
+
 @stop
 
 @section('header')
@@ -10,7 +11,10 @@
 @stop
 
 @section('content')
-<h1 class="page_header">{{ $screengroup->name }}</h1>
+    <h1 class="page_header">
+        {{ $screengroup->name }}
+        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+    </h1>
     <div class="row">
         <h2>{{ trans_choice('messages.screen', 2) }}</h2>
         <hr>
@@ -25,7 +29,7 @@
     <div class="row">
         <h2>{{ trans_choice('messages.ticker',2) }}</h2>
         <hr>
-        @include('tickers.table', ['list' => $screengroup->tickers, 'from' => 'screengroup'])
+        @include('tickers.table', ['tickers' => $screengroup->tickers, 'from' => 'screengroup'])
     </div>
     @can('edit_clients')
         <div class="row">
