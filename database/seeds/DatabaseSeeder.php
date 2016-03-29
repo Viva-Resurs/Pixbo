@@ -265,7 +265,7 @@ class UserTableSeeder extends Seeder {
 
 		$admin = User::create([
 			'email'    => config('pixbo.settings.administration.administrator.email'),
-			'name'     => config('pixbo.settings.administration.moderator.username'),
+			'name'     => config('pixbo.settings.administration.administrator.username'),
 			'password' => config('pixbo.settings.administration.administrator.password'),
 		]);
 
