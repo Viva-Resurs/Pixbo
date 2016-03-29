@@ -4,20 +4,29 @@
  * Pixbo default settings, only used when setting up the database.
  */
 
+$settings = [
+  'admin' => [
+      'username' => 'admin',
+    ],
+    'moderator' => [
+        'username' => 'moderator',
+    ]
+];
+
 return [
     'settings'=> [
         'administration' => [
             'administrator' => [
-                'username' => 'admin',
+                'username' => $settings['admin']['username'],
                 // Generated from the username, do not change.
-                'password' => env('PIXBO_ADMIN_PASSWORD', config('pixbo.settings.administration.administrator.username')),
-                'email' => config('pixbo.settings.administration.administrator.username').'@'.config('app.domain'),
+                'password' => env('PIXBO_ADMIN_PASSWORD', $settings['admin']['username']),
+                'email' => $settings['admin']['username'].'@'.config('app.domain')
             ],
             'moderator' => [
-                'username' => 'moderator',
+                'username' => $settings['moderator']['username'],
                 // Generated from the username, do not change.
-                'email' => config('pixbo.settings.administration.moderator.username').'@'.config('app.domain'),
-                'password' => env('PIXBO_MOD_PASSWORD', config('pixbo.settings.administration.administrator.username')),
+                'email' => $settings['moderator']['username'].'@'.config('app.domain'),
+                'password' => env('PIXBO_MOD_PASSWORD', $settings['moderator']['username']),
             ]
 
         ],

@@ -3,6 +3,7 @@
 use App\Models\Permission;
 use App\Models\Role;
 use App\User;
+use App\Settings;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 
@@ -29,8 +30,8 @@ class SettingsTableSeeder extends Seeder {
 		DB::table('settings')->delete();
 
 		$settings = Settings::create([
-			'vegas_delay' => config('app.player.vegas.delay'),
-			'ticker_pauseOnItems' => config('app.player.ticker.pauseOnItems')
+			'vegas_delay' => config('pixbo.settings.player.vegas.delay'),
+			'ticker_pauseOnItems' => config('pixbo.settings.player.ticker.pauseOnItems')
 		]);
 	}
 }
