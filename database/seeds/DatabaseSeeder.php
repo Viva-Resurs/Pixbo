@@ -17,8 +17,21 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call(RolesTablesSeeder::class);
 		$this->call(UserTableSeeder::class);
+		$this->call(SettingsTableSeeder::class);
 
 		Model::reguard();
+	}
+}
+
+class SettingsTableSeeder extends Seeder {
+	public function run()
+	{
+		DB::table('settings')->delete();
+
+		$settings = Settings::create([
+			'vegas_delay' => config('app.player.vegas.delay'),
+			'ticker_pauseOnItems' => config('app.player.ticker.pauseOnItems')
+		]);
 	}
 }
 
@@ -250,15 +263,15 @@ class UserTableSeeder extends Seeder {
 		DB::table('users')->delete();
 
 		$admin = User::create([
-			'email'    => 'admin@viva.se',
-			'name'     => 'admin',
-			'password' => 'admin',
+			'email'    => config('pixbo.settings.administration.administrator.email'),
+			'name'     => config('pixbo.settings.administration.moderator.username'),
+			'password' => config('pixbo.settings.administration.administrator.password'),
 		]);
 
 		$moderator = User::create([
-			'email'    => 'moderator@viva.se',
-			'name'     => 'moderator',
-			'password' => 'moderator',
+			'email'    => config('pixbo.settings.administration.moderator.email'),
+			'name'     => config('pixbo.settings.administration.moderator.username'),
+			'password' => config('pixbo.settings.administration.moderator.password'),
 		]);
 
 		$admin->assignRole('admin');

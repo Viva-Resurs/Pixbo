@@ -8,6 +8,7 @@ use App\Models\Client;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Request as R;
+use App\Settings;
 
 class PlayerController extends Controller {
 	/**
@@ -97,7 +98,8 @@ class PlayerController extends Controller {
 			}
 
 			// Get settings
-			$settings = Config::get('app.player');
+			//$settings = Config::get('app.player');
+			$settings = Settings::getSettings();
 
 			return [
 				'photo_list' => $photo_list,
