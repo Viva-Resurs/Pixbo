@@ -142,9 +142,17 @@ body {
         color: rgb(157, 157, 157);
     }
     .navbar-nav .open .dropdown-menu>li>a:hover {
-        
         color: #fff;
     }
+}
+
+/* Prevent Button-Groups from wrapping */
+.btn-group {
+  white-space: nowrap;
+}
+.btn-group .btn {
+  float: none;
+  display: inline-block;
 }
 
 /* Sidebar navigation */
