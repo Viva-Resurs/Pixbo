@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Jobs\ChangeLocale;
 use Illuminate\Http\Request;
-use Config;
+use App\Settings;
 
 class SettingsController extends Controller
 {
@@ -16,9 +16,8 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        $vegas_delay = Config::get('app.player.vegas.delay');
-        $ticker_delay = Config::get('app.player.ticker.pauseOnItems');
-        return view('settings.index')->with(compact(['vegas_delay', 'ticker_delay']));
+        $settings = Settings::first();
+        return view('settings.index')->with(compact(['settings']));
     }
 
     /**
@@ -27,12 +26,17 @@ class SettingsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function save(Request $request)
+    public function update(Request $request, Settings $settings)
     {
-        $vegas_delay = $request->input('vegas_delay');
-        $ticker_delay = $request->input('ticker_delay');
-        config(['app.player.vegas.delay' => $vegas_delay]);
-        config(['app.player.ticker.pauseOnItems' => $ticker_delay]);
+        if ($settings->update([
+            'vegas_delay' => $request->input('vegas_delay'),
+            'ticker_pauseOnItems' => $request->input('ticker_pauseOnItems'),
+        ])) {
+            flash()->success(trans('messages.settings_updated_ok'));
+        } else {
+            flash()->error(trans('messages.settings_updated_fail'));
+        }
+
         return redirect()->back();
     }
 

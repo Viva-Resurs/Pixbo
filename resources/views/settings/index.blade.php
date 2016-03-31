@@ -27,7 +27,8 @@
                     {{ config('app.name') }}
                 </div>
                 <div class="panel-body">
-                    {!! Form::open(['url' => '/admin/settings/save', 'method' => 'PATCH', 'class' => 'form-horizontal']) !!}
+
+                    {!! Form::model($settings, ['route' => ['admin.settings.update', $settings->id], 'method' => 'PATCH', 'class' => 'form-horizontal']) !!}
 
                         @include('settings.admin__form', ['submitButtonText' => trans('messages.save')])
 
