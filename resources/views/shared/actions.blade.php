@@ -13,10 +13,12 @@
               title="{{ trans('messages.edit') }}"></span>
         </a>
     @endif
+    @if($from!='screengroups')
         <label for="delete_button{{$item['id']}}" class="btn btn-link" role="button">
           <span class="glyphicon glyphicon-remove" aria-hidden="true" data-toggle="tooltip" data-placement="right"
             title="{{ trans('messages.remove') }}"></span>
         </label>
+    @endif
     @if(isset($preview))
         <a href="{{ route('play.index', ['mac' => $preview, 'preview' => true]) }}" target="_blank" class="btn btn-link">
             <span class="glyphicon glyphicon-fullscreen" aria-hidden="true" data-toggle="tooltip" data-placement="right"
