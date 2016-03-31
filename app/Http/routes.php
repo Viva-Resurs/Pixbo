@@ -36,6 +36,8 @@ Route::get('admin/dashboard', 'PagesController@dashboard');
 
 Route::post('admin/screens/addphoto', 'Admin\ScreensController@addScreenFromPhoto');
 
+/* Modals */
+
 Route::get('/api/screengroups', function () {
     $screengroups = App\Models\ScreenGroup::all(['id', 'name']);
     return $screengroups->map(function ($screengroups) {
@@ -56,17 +58,26 @@ Route::get('/api/tags', function () {
     })->toArray();
 });
 
-Route::get('/api/screen/{id}', function ($id) {
+Route::get('/api/screens/{id}', function ($id) {
     $screen = App\Models\Screen::where('id', $id)->with(['event', 'tags', 'screengroups'])->first();
     return $screen;
 });
 
-Route::get('/api/ticker/{id}', function ($id) {
+Route::get('/api/tickers/{id}', function ($id) {
     $ticker = App\Models\Ticker::where('id', $id)->with(['event', 'screengroups'])->first();
     return $ticker;
 });
 
-Route::post('/api/screen/{id}', 'Admin\ScreensController@update');
+Route::get('/api/clients/{id}', function ($id) {
+    $client = App\Models\Client::where('id', $id)->first();
+        return [
+            'name' => $client->name,
+            'ip_address' => $client->ip_address,
+            'screen_group_id' => $client->screen_group_id,
+        ];
+});
+
+Route::post('/api/screens/{id}', 'Admin\ScreensController@update');
 
 Route::group([
     'namespace' => 'Admin',

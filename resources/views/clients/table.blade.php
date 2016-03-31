@@ -1,4 +1,4 @@
-<table id="client_table" class="display" cellpadding="0" width="100%">
+<table id="clients_table" class="display" cellpadding="0" width="100%">
     <thead>
         <th>{{ trans('messages.id') }}</th>
         <th>{{ trans('messages.name') }}</th>
@@ -28,9 +28,10 @@
                 <td>{{ $client->group }}</td>
                 <td>{{ $client->activity }}</td>
                 <td>
-                    @include('shared.actions', ['model' => 'admin.clients', 'item' => $client, 'preview' => $client->ip_address, 'from' => $from])
+                    @include('shared.actions', ['model' => 'admin.clients', 'item' => $client, 'from' => $from, 'modal' => 'clients', 'preview' => $client->ip_address])
                 </td>
             </tr>
+            @include('shared.scheduled_modal', ['item' => $client, 'model' => 'clients'])
         @endforeach
     </tbody>
 </table>

@@ -1,4 +1,4 @@
-<table id="user_table" class="display" cellpadding="0" width="100%">
+<table id="users_table" class="display" cellpadding="0" width="100%">
     <thead>
         <th>{{ trans('messages.id') }}</th>
         <th>{{ trans('messages.name') }}</th>
@@ -28,9 +28,8 @@
                     {{ $role }}
                 @endforeach
                 </td>
-
                 <td>
-                    @include('shared.actions', ['model' => 'admin.users', 'item' => $user])
+                    @include('shared.actions', ['model' => 'admin.users', 'item' => $user, 'from' => $from])
                 </td>
             </tr>
         @endforeach

@@ -7,7 +7,7 @@ Client index
 
 @section('content')
 
-<h1 class="page-header">{{ "Client Show" }}</h1>
+<h1 class="page-header">{{ trans("messages.show_client") }}</h1>
 
 <div class="row">
     <div class="col-lg-6 col-md-6 col-xs-12">
@@ -20,7 +20,7 @@ Client index
             <div class="panel-body">
                 <table class="table">
                     <tbody>
-                        <tr>
+                        <tr> 
                             <td>{{ 'Id' }}</td>
                             <td>{{ $client->id }}</td>
                         </tr>
@@ -50,7 +50,7 @@ Client index
                         </tr>
                         <tr>
                             <td>{{ 'Created by' }}</td>
-                            <td>{{ $client->user->name }}</td>
+                            <td>@if(isset($client->user)) {{ $client->user->name }} @endif </td>
                         </tr>
                         <tr>
                             <td>{{ 'Is Active' }}</td>

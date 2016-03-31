@@ -12,12 +12,12 @@
 
 @section('content')
 
-    @include('tickers.table')
+    @include('tickers.table', ['from' => 'tickers'])
 
 @stop
 
 @section('footer')
 
-    @include('shared.datagrid', ['table_id' => 'ticker_table'])
+    @include('shared.datagrid', ['table_id' => 'tickers_table'])
 
 @stop

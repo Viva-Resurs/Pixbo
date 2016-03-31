@@ -5,7 +5,7 @@
                 <img class="screens_card__img" src="/{{ $card->photo->thumb_path }}" style="width:100%;height:auto;">
 
                 <div class="btn-group-vertical ScreenCard__buttons pull-right" role="group">
-                    @if($from == 'screengroup')
+                    @if($from == 'screengroups')
                         <a href="/admin/screengroups/{{ $screengroup->id }}/screens/{{ $card->id }}/remove_screen_association">
                             <button type="button" class="btn btn-danger btn-lg" role="button">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('messages.remove_association_tooltip', ['association' => $screengroup->name]) }}"></span>
@@ -18,7 +18,7 @@
                             </button>
                         {!! Form::close() !!}
                     @endif
-                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#screen_modal_{{ $card->id }}" role="button">
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#screens_modal_{{ $card->id }}" role="button">
                         <span class="glyphicon glyphicon-calendar" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('messages.schedule_tooltip') }}"></span>
                     </button>
                 </div>
@@ -26,5 +26,4 @@
         </div>
     </div>
 </div>
-
-@include('shared.scheduled_modal', ['item' => $card, 'model' => 'screen'])
+@include('shared.scheduled_modal', ['item' => $card, 'model' => 'screens'])
