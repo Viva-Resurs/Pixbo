@@ -29,7 +29,7 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
-        if (Gate::denies('view_users')) {
+        if (Gate::denies('edit_users')) {
             abort(403, trans('auth.access_denied'));
         }
 
@@ -37,8 +37,26 @@ class UsersController extends Controller
         return view('users.edit', compact(['user', 'roles']));
     }
 
+    /**
+     * Update the user
+     *
+     * TODO: need to hash password before it's stored in the DB.
+     * 
+     * @param User $user
+     * @param Request $request
+     * @return mixed
+     */
     public function update(User $user, Request $request)
     {
+        if (Gate::denies('edit_users') && !auth()->user()->id == $user->id) {
+            abort(403, trans('auth.access_denied'));
+        }
+
+        if($user->update($request->all())) {
+            flash()->success(trans('auth.success'));
+        } else {
+            flash()->error(trans('auth.failed'));
+        }
         return redirect()->back();
     }
 

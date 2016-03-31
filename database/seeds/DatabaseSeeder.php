@@ -182,6 +182,11 @@ class RolesTablesSeeder extends Seeder {
 			'name'  => 'remove_tickers',
 			'label' => 'auth.remove_tickers',
 		]);
+		
+		$edit_site_settings = Permission::create([
+			'name' => 'edit_site_settings',
+			'label' => 'auth.edit_site_settings'
+		]);
 
 		/**
 		 * Roles
@@ -230,6 +235,9 @@ class RolesTablesSeeder extends Seeder {
 		$admin->givePermissionTo($add_tickers);
 		$admin->givePermissionTo($edit_tickers);
 		$admin->givePermissionTo($remove_tickers);
+		
+		// Site Settings
+		$admin->givePermissionTo($edit_site_settings);
 
 		// Moderator
 		$moderator = Role::create([
