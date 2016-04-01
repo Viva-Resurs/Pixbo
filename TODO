@@ -8,40 +8,15 @@ Features:
 
     * API REST
 
-    * Player
-        * Add ticker feed to player.
-
     * Shadow Events
         * Make job to generate shadow events every n days.
         * Generate shadow event on event changes. (Done)
 
-    * Screen Group
-        * Add (x) button to remove screen association to the current screen group. ( Done )
-
-    * Screen
-
-    * Event
-
     * Tags
-        * Let the user give a screen one or many tags associated with it.
-        * Ajax to give the user suggestion of already existing tags. -> Datalist
         * Push tags into an array, display properly.
-
-    * Tickers
-        * Table ( Done )
-
-    * Authorization
-        * Roles:
-            * Admin
-                * Everything
-            * Moderator
-                * -Remove ScreenGroup
-                * -View, Edit, Remove Users
-                * -Player
 
 * Settings
     * User
-        * Pwd (Reset)
         * Role
 
     * Dashboard (Admin)
@@ -51,12 +26,6 @@ Features:
                 * fade/print?
             * Vegas
                 * Timer bar
-                * Delay
-                    * Per slide basis...
-
-    * User
-        * Language
-        * Password
 
 
 
