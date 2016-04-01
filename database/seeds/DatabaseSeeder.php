@@ -285,11 +285,5 @@ class UserTableSeeder extends Seeder {
 
 		$admin->assignRole('admin');
 		$moderator->assignRole('moderator');
-
-		foreach (DB::table("users")->get() as $user) {
-			DB::table("users")
-				->where("id", $user->id)
-				->update(array("password" => Hash::make($user->password)));
-		}
 	}
 }
