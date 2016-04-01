@@ -25,14 +25,12 @@ foreach ($route_partials as $partial) {
     require_once $file;
 }
 
-Route::patch('admin/settings/save', 'Admin\SettingsController@save');
 
 Route::get('language', 'Admin\SettingsController@language');
 
 Route::resource('play', 'PlayerController');
 
 Route::get('/', 'PagesController@home');
-Route::get('admin/dashboard', 'PagesController@dashboard');
 
 Route::post('admin/screens/addphoto', 'Admin\ScreensController@addScreenFromPhoto');
 

@@ -150,51 +150,16 @@ class ScreenGroupsController extends Controller {
 		}
 	}
 
-/**
- * Add or find a screen from given file and attach it to the screengroup.
- *
- * @param ScreenGroup $screengroup
- * @param Request $request
- */
-	public function addScreenFromPhoto(Requests $request, ScreenGroup $screengroup) {
-		if (Gate::denies('add_screengroups')) {
-			abort(403, trans('auth.access_denied'));
-		}
-		$this->validate($request, [
-			'photo' => 'required|mimes:jpg,jpeg,png,bmp',
-		]);
-
-		// find or create screen and add photo to it.
-		$results = DB::transaction(function () use ($request, $screengroup) {
-			$photo = Photo::getOrCreate($request->file('photo'))->move($request->file('photo'));
-			$photo->save();
-
-			// Get a the existing screen and attatch it to screengroup.
-			// Otherwise create a new screen with the photo and then attatch it to the screengroup.
-			$screengroup->assignOrCreateAndAssign($photo);
-		});
-		if (is_null($results)) {
-			flash()->success(trans('messages.screen_created_ok'));
-		} else {
-			flash()->error(trans('messages.screen_created_failed'));
-		}
-	}
-
+	/**
+	 * @param Request $request
+	 * @param ScreenGroup $screengroup
+	 * @return mixed
+	 */
 	public function screens(Request $request, ScreenGroup $screengroup) {
 		if (Gate::denies('view_screengroups')) {
 			abort(403, trans('auth.access_denied'));
 		}
 		return ScreenGroup::with('screens.photo')->where('id', $screengroup->id)->get()[0]['screens'];
-	}
-
-/**
- * Make the photo from the given file.
- * @param  UploadedFile $file
- * @return Photo
- */
-	public function makePhoto(UploadedFile $file) {
-		return Photo::named($file->getClientOriginalName())
-			->move($file);
 	}
 
 /**
