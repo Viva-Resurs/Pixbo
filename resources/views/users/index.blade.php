@@ -12,12 +12,12 @@
 
 @section('content')
 
-@include('users.table')
+	@include('users.table', ['from' => 'users'])
 
 @stop
 
 @section('footer')
 
-@include('shared.datagrid', ['table_id' => 'user_table'])
+	@include('shared.datagrid', ['table_id' => 'users_table'])
 
 @stop

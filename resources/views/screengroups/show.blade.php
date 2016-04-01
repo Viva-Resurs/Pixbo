@@ -20,7 +20,7 @@
         <hr>
             @if( count($screengroup->screens) > 0)
                 @foreach ($screengroup->screens as $card)
-                    @include('screens.screen__card', ['card' => $card, 'from' => 'screengroup'])
+                    @include('screens.screen__card', ['card' => $card, 'from' => 'screengroups'])
                 @endforeach
             @else
                 {{ trans('messages.no_images') }}
@@ -29,18 +29,18 @@
     <div class="row">
         <h2>{{ trans_choice('messages.ticker',2) }}</h2>
         <hr>
-        @include('tickers.table', ['tickers' => $screengroup->tickers, 'from' => 'screengroup'])
+        @include('tickers.table', ['tickers' => $screengroup->tickers, 'from' => 'screengroups'])
     </div>
     @can('edit_clients')
         <div class="row">
             <h2>{{ trans_choice('messages.client', 2) }}</h2>
             <hr>
-            @include('clients.table', ['list' => $screengroup->clients, 'from' => 'screengroup'])
+            @include('clients.table', ['list' => $screengroup->clients, 'from' => 'screengroups'])
         </div>
     @endcan
 @stop
 
 @section('footer')
-    @include('shared.datagrid', ['table_id' => 'client_table'])
-    @include('shared.datagrid', ['table_id' => 'ticker_table'])
+    @include('shared.datagrid', ['table_id' => 'clients_table'])
+    @include('shared.datagrid', ['table_id' => 'tickers_table'])
 @stop

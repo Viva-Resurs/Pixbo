@@ -7,12 +7,12 @@
       </div>
       <div class="modal-body">
         <div class="row">
-            @if($model == 'screen')
+            @if($model == 'screens')
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-body">
 
-                            @include($model.'s.modal.head')
+                            @include($model.'.modal.head')
                         </div>
                     </div>
                 </div>

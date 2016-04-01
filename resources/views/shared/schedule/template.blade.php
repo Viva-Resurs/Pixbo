@@ -1,8 +1,8 @@
 <template id="schedule-template">
-    <form id="schedule_form_{{ $item->id }}" action="/admin/{{ $model }}s/{{ $item->id }}" method="PATCH" role="form" v-on:submit.prevent="send_post">
+    <form id="schedule_form_{{ $item->id }}" action="/admin/{{ $model }}/{{ $item->id }}" method="PATCH" role="form" v-on:submit.prevent="send_post">
         {{ csrf_field() }}
 
-        <template v-if="model == 'ticker'">
+        <template v-if="model == 'tickers'">
             @include('tickers.modal.head')
         </template>
 
@@ -10,7 +10,7 @@
         
             @include('shared.schedule.screengroup')
 
-            <template v-if="model == 'screen'">
+            <template v-if="model == 'screens'">
                 @include('shared.schedule.tags')
             </template>
 

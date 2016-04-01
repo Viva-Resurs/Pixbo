@@ -1,4 +1,4 @@
-<table id="ticker_table" class="display" cellpadding="0" width="100%">
+<table id="tickers_table" class="display" cellpadding="0" width="100%">
     <thead>
         <th>{{ trans('messages.id') }}</th>
         <th>{{ trans('messages.text') }}</th>
@@ -28,10 +28,10 @@
                 </td>
 
                 <td>
-                    @include('shared.actions', ['model' => 'admin.tickers', 'item' => $ticker, 'modal' => 'ticker'])
+                    @include('shared.actions', ['model' => 'admin.tickers', 'item' => $ticker, 'from' => $from, 'modal' => 'tickers'])
                 </td>
             </tr>
-            @include('shared.scheduled_modal', ['item' => $ticker, 'model' => 'ticker'])
+            @include('shared.scheduled_modal', ['item' => $ticker, 'model' => 'tickers'])
         @endforeach
     </tbody>
 </table>

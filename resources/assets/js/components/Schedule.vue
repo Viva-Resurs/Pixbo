@@ -57,7 +57,7 @@
             send_ajax: function(payload) {
                 var vm = this;
                 console.log(vm.modelObject);
-                this.$http.put('/admin/' + vm.model + 's/' + vm.modelObject.id, payload).then(function (response) {
+                this.$http.put('/admin/' + vm.model + '/' + vm.modelObject.id, payload).then(function (response) {
                     if(response.ok) {
                         vm.close_modal();
                     }
@@ -81,8 +81,9 @@
             get_model: function() {
                 this.$http.get('/api/' + this.model + '/' + this.id, function(modelObject) {
                     this.modelObject = modelObject;
-                    this.event = modelObject.event.pop();
-                    if(this.model == 'screen')
+                    if (modelObject.event)
+                      this.event = modelObject.event.pop();
+                    if(this.model == 'screens')
                         this.selected_tags = modelObject.tags;
                     this.parse_event();
                     this.set_selected_screengroups();
@@ -141,7 +142,7 @@
         },
          ready: function () {
             this.get_all_screengroups();
-            if(this.model == 'screen')
+            if(this.model == 'screens')
                 this.get_all_tags();
             this.get_model();
         },
