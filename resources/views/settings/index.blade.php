@@ -21,20 +21,21 @@
                 </div>
             </div>
 
+            @can('edit_site_settings')
+                <div class="panel panel-default">
+                    <div class="panel-header">
+                        {{ config('app.name') }}
+                    </div>
+                    <div class="panel-body">
 
-            <div class="panel panel-default">
-                <div class="panel-header">
-                    {{ config('app.name') }}
+                        {!! Form::model($settings, ['route' => ['admin.settings.update', $settings->id], 'method' => 'PATCH', 'class' => 'form-horizontal']) !!}
+
+                            @include('settings.admin__form', ['submitButtonText' => trans('messages.save')])
+
+                        {!! Form::close() !!}
+                    </div>
                 </div>
-                <div class="panel-body">
-
-                    {!! Form::model($settings, ['route' => ['admin.settings.update', $settings->id], 'method' => 'PATCH', 'class' => 'form-horizontal']) !!}
-
-                        @include('settings.admin__form', ['submitButtonText' => trans('messages.save')])
-
-                    {!! Form::close() !!}
-                </div>
-            </div>
+            @endcan
 
 
 

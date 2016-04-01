@@ -39,8 +39,6 @@ class UsersController extends Controller
 
     /**
      * Update the user
-     *
-     * TODO: need to hash password before it's stored in the DB.
      * 
      * @param User $user
      * @param Request $request

@@ -151,7 +151,7 @@ class ScreenGroupsController extends Controller {
 	}
 
 /**
- * Add or find a screen from given file and attatch it to the screengroup.
+ * Add or find a screen from given file and attach it to the screengroup.
  *
  * @param ScreenGroup $screengroup
  * @param Request $request
@@ -165,7 +165,7 @@ class ScreenGroupsController extends Controller {
 		]);
 
 		// find or create screen and add photo to it.
-		$results = DB::transaction(function () use ($request) {
+		$results = DB::transaction(function () use ($request, $screengroup) {
 			$photo = Photo::getOrCreate($request->file('photo'))->move($request->file('photo'));
 			$photo->save();
 

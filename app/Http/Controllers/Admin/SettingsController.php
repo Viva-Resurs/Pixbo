@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Jobs\ChangeLocale;
 use App\Settings;
+use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {

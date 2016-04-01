@@ -46,21 +46,7 @@ class PhotosController extends Controller {
 		} else {
 			flash()->error(trans('exceptions.file_not_found'));
 			return redirect()->back();
-			//abort(404, trans('exceptions.file_not_found'));
 		}
-
-		//dd($request);
-		/*
-	$results = DB::transaction(function () use ($request) {
-	Photo::getOrCreate($request->file('photo'))->move($request->file('photo'))->save();
-	});
-
-	if (is_null($results)) {
-	flash()->success(trans('messages.photo_uploaded_ok'));
-	} else {
-	flash()->error(trans('messages.photo_uploaded_failed'));
-	}
-	 */
 	}
 
 	/**

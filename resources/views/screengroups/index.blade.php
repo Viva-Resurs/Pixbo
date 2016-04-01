@@ -9,8 +9,4 @@
   	@foreach ($screengroups as $card)
        	@include('screengroups.screengroup__card')
     @endforeach
-
-    @can('view_dashboard')
-
-    @endcan
 @stop
