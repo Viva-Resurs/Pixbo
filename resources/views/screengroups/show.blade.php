@@ -6,14 +6,13 @@
 @stop
 
 @section('header')
-    <script type="text/javascript" src="/js/vendor/dataTables/jquery.dataTables.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/vendor/jquery.dataTables.min.css">
+    @include('shared.datagrid', ['table_id_list_string' => 'clients_table,tickers_table'])
 @stop
 
 @section('content')
     <h1 class="page_header">
         {{ $screengroup->name }}
-        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+        @include('screengroups.actions', ['item' => $screengroup, 'from' => 'screengroups'])
     </h1>
     <div class="row">
         <h2>{{ trans_choice('messages.screen', 2) }}</h2>
@@ -38,9 +37,4 @@
             @include('clients.table', ['list' => $screengroup->clients, 'from' => 'screengroups'])
         </div>
     @endcan
-@stop
-
-@section('footer')
-    @include('shared.datagrid', ['table_id' => 'clients_table'])
-    @include('shared.datagrid', ['table_id' => 'tickers_table'])
 @stop
