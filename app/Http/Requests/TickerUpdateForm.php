@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Http\Requests\Request;
 use DB;
 use App\Models\Ticker;
+use App\Models\Event;
 
 class TickerUpdateForm extends Request
 {
@@ -26,7 +27,7 @@ class TickerUpdateForm extends Request
     public function rules()
     {
         return [
-            'text' => 'required'
+            //'text' => 'required'
         ];
     }
 
