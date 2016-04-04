@@ -6,22 +6,23 @@
     </legend>
     <div class="form-group">
         <div class="tag-group">
-            <ul>
-                <li class="tag" v-for="tag in list">
+
+                <div class="tag label label-default" v-for="tag in list">
                     <span class="tag__name">{{ tag.name }}</span>
-                    <button class="tag__remove" @click="remove_tag($index)">X</button>
-            </ul>
+                    <a class="tag__remove btn  btn-xs" @click="remove_tag($index)">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </div>
 
         </div>
-
         <div class="input-group">
             <input type="text" name="tags" id="inputTags" class="form-control" list="tags" v-model="new_tag" v-el="tagInput" v-on:keyup.enter="add_tag">
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="button" @click="add_tag">Lägg till</button>
-            </span>
             <datalist id="tags">
                 <option v-for="tag in tags" value="{{ tag.name }}">{{ tag.name }}</option>
             </datalist>
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" @click="add_tag">Lägg till</button>
+            </span>
         </div>
     </div>
 </template>
