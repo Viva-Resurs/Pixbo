@@ -1,5 +1,5 @@
 <template id="schedule-template">
-    <form id="schedule_form_{{ $item->id }}" action="/admin/{{ $model }}/{{ $item->id }}" method="PATCH" role="form" v-on:submit.prevent="send_post">
+    <form id="schedule_form_{{ $model }}_{{ $item->id }}" action="/admin/{{ $model }}/{{ $item->id }}" method="PATCH" role="form" v-on:submit.prevent="send_post">
         {{ csrf_field() }}
 
         <template v-if="model == 'tickers'">
