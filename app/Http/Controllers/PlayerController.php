@@ -44,6 +44,7 @@ class PlayerController extends Controller {
 						'tickers'    => $tickers,
 						'client'     => $client->id,
 						'updated_at' => $clientData['updated_at'],
+						'preview'    => $preview,
 					]);
 				}
 			} else {

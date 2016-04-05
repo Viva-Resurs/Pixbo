@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="css/player.css">
 </head>
 <body>
-    
+
+    @if(isset($preview))
+        <input type="hidden" name="preview" id="preview" class="form-control" value="yes">
+    @endif
     <input type="hidden" name="client_id" id="client_id" class="form-control" value="{{ $client }}">
     <input type="hidden" name="updated_at" id="updated_at" class="form-control" value="{{ $updated_at }}">
     
