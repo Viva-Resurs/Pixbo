@@ -83,7 +83,10 @@ function put_tickers_in(element,tickers){
 
 /* Start Ticker */
 function start_ticker(){
-  $ticker_target.find('#ticker').ticker(ticker_settings);
+  if ($ticker_target.find('ul#ticker').children().length>0)
+    $ticker_target.find('ul#ticker').ticker(ticker_settings);
+  else
+    console.log('No tickers...');
 }
 
 
