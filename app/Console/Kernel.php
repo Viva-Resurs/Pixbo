@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Log;
 
 class Kernel extends ConsoleKernel {
 	/**
@@ -25,7 +26,9 @@ class Kernel extends ConsoleKernel {
 	 * @return void
 	 */
 	protected function schedule(Schedule $schedule) {
-		$schedule->command('inspire')
-			->hourly();
+		$schedule->command('pixbo:generate-new-shadowevents')
+			->weekly()->sundays()->at('23:59')->after(function() {
+				Log::info('ShadowEvents has been regenerated.');
+			});
 	}
 }
