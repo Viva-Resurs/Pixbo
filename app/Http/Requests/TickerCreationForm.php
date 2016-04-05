@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Http\Requests\Request;
 use App\Models\Ticker;
 use DB;
+use App\Models\Event;
 
 class TickerCreationForm extends Request
 {
