@@ -146,11 +146,11 @@ body {
     }
 }
 
-/* Prevent Button-Groups from wrapping */
-.btn-group {
+/* Prevent Button-Groups from wrapping (in tables) */
+td div.btn-group {
   white-space: nowrap;
 }
-.btn-group .btn {
+td div.btn-group .btn {
   float: none;
   display: inline-block;
 }
