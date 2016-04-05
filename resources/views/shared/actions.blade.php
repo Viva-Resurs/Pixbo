@@ -1,10 +1,3 @@
-@can('remove_'.$from)
-    @if($from!='screengroups' || $model=='admin.screengroups')
-        {!! Form::open(['route' => [$model.'.destroy', $item['id']], 'method' => 'delete']) !!}
-            <button id="delete_button{{$item['id']}}" type="submit" class="btn btn-link" role="button" style="display:none;"></button>
-        {!! Form::close() !!}
-    @endif
-@endcan
 <div class="btn-group pull-right" role="group">
     @can('edit_'.$from)
         @if(isset($modal))
@@ -39,3 +32,10 @@
         </a>
     @endif
 </div>
+@can('remove_'.$from)
+    @if($from!='screengroups' || $model=='admin.screengroups')
+        {!! Form::open(['route' => [$model.'.destroy', $item['id']], 'method' => 'delete']) !!}
+            <button id="delete_button{{$item['id']}}" type="submit" class="btn btn-link" role="button" style="display:none;"></button>
+        {!! Form::close() !!}
+    @endif
+@endcan

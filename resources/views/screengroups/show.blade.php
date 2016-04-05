@@ -11,8 +11,11 @@
 
 @section('content')
     <div class="panel-header">
-        <h1>{{ $screengroup->name }}</h1>
+        <h1>{{ $screengroup->name }}
+
         @include('shared.actions', ['model' => 'admin.screengroups', 'item' => $screengroup, 'from' => 'screengroups'])
+
+        </h1>
     </div>
     <div class="panel-body">
         <h2>{{ trans_choice('messages.screen', 2) }}</h2>
