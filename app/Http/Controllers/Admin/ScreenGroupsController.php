@@ -146,7 +146,7 @@ class ScreenGroupsController extends Controller {
 		if (Request::wantsJson()) {
 			return (string) deleted;
 		} else {
-			return redirect('screengroups');
+			return redirect('admin/screengroups');
 		}
 	}
 
