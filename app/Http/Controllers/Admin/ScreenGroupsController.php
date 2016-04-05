@@ -94,13 +94,12 @@ class ScreenGroupsController extends Controller {
 	 * @return \Illuminate\View\View
 	 */
 	public function edit(ScreenGroup $screengroup) {
+
 		if (Gate::denies('edit_screengroups')) {
 			abort(403, trans('auth.access_denied'));
 		}
-		$event   = $screengroup->getEvent();
-		$tickers = $screengroup->tickers;
 
-		return view('screengroups.edit', compact(['screengroup', 'event', 'tickers']));
+		return view('screengroups.edit', compact('screengroup'));
 	}
 
 	/**
