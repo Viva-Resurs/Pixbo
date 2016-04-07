@@ -3,14 +3,9 @@ Features:
     * Flödesschema
 
     * Schemalägg uppdatering av shadowevents.
-        * veckovis sön  kl 24
         * Loggar?
 
     * API REST
-
-    * Shadow Events
-        * Make job to generate shadow events every n days.
-        * Generate shadow event on event changes. (Done)
 
     * Tags
         * Push tags into an array, display properly.

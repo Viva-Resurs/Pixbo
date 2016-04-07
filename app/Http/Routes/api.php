@@ -1,5 +1,6 @@
 <?php
 
+
 Route::get('/api/screengroups', function () {
     $screengroups = App\Models\ScreenGroup::all(['id', 'name']);
     return $screengroups->map(function ($screengroups) {
@@ -43,5 +44,24 @@ Route::get('/api/clients/{id}', function ($id) {
         'screen_group_id' => $client->screen_group_id,
     ];
 });
+
+/**
+ * Fetch language of a given scope.
+ *
+ * @return JSON
+ */
+Route::get('/api/locales', function() {
+
+    $language_files = [
+      'messages',
+        'auth'
+    ];
+    $locales = [];
+    foreach ($language_files as $key => $val) {
+        $locales[$language_files[$key]] =  Lang::get($val);
+    }
+
+    return $locales;
+}) ;
 
 Route::post('/api/screens/{id}', 'Admin\ScreensController@update');
