@@ -216,7 +216,7 @@ var vegas_control = {
         },
     },
     Enable : function(){
-      vegas_control.element.display='block'; // Show
+      vegas_control.element.style.display='block'; // Show
     },
     Toggle : function(e){
         // Show both buttons
@@ -267,6 +267,7 @@ vegas_control.init = function (){
 
     // CSS
       this.buttons.play.element.style.display = "none"; // Play-button hidden on start
+    this.element.style.display = "none"; // Hide Controls on start.
 
     // Append Elements
       this.element.appendChild(this.buttons.next.element);
