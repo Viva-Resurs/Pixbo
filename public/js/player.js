@@ -104,8 +104,6 @@ function put_tickers_in(element,tickers){
 
 /* Start Ticker */
 function start_ticker(){
-  if ($preview.val()=='yes')
-    ticker_settings.controls=true; // Add Control
   if ($ticker_target.find('ul#ticker').children().length>0)
     $ticker_target.find('ul#ticker').ticker(ticker_settings);
   else
@@ -173,11 +171,19 @@ function update_player(new_screens, new_tickers, new_updated_at, new_settings, m
     // Replace contents in DOM for screens-list
     put_screens_in( $screens, new_screens );
 
+    // Add Controls for Vegas
+    if ($preview.val()=='yes')
+      vegas_control.Enable();
+
     // Start/Restart Vegas
     start_vegas(mode);
     
     // Replace contents in DOM for tickers
     put_tickers_in( $ticker_target, new_tickers );
+
+    // Add Controls in Ticker
+    if ($preview.val()=='yes')
+      ticker_settings.controls=true;
 
     // Load/Reload Ticker
     start_ticker();
@@ -187,3 +193,87 @@ function update_player(new_screens, new_tickers, new_updated_at, new_settings, m
 
     // Done
 };
+
+/* Control */
+var vegas_control = {
+    element : false,
+    buttons : {
+        prev : {
+            element : false,
+            action  : this.Prev
+        },
+        next : {
+            element : false,
+            action  : this.Next
+        },
+        play : {
+            element : false,
+            action  : this.Toggle
+        },
+        pause : {
+            element : false,
+            action  : this.Toggle
+        },
+    },
+    Enable : function(){
+      vegas_control.element.style.display='block'; // Show
+    },
+    Toggle : function(e){
+        // Show both buttons
+        vegas_control.buttons.play.element.style.display = "block";
+        vegas_control.buttons.pause.element.style.display = "block";
+        // Hide the pressed button
+        e.target.style.display = "none";
+        // Toggle Play/Pause
+        $vegas_target.vegas('toggle');
+    },
+    Next : function(){
+        $vegas_target
+          .vegas('options', 'transitionDuration', '100') // Speed-up
+          .vegas('next') // Show next screen
+          .vegas('options', 'transitionDuration', vegas_settings.transitionDuration); // Restore speed
+    },
+    Prev : function(){
+        $vegas_target
+          .vegas('options', 'transitionDuration', '100') // Speed-up
+          .vegas('previous') // Show previous screen
+          .vegas('options', 'transitionDuration', vegas_settings.transitionDuration); // Restore speed
+    },
+};
+vegas_control.init = function (){
+    // Create Elements
+    this.element = document.createElement("div");
+      this.buttons.prev.element = document.createElement("button");
+      this.buttons.next.element = document.createElement("button");
+      this.buttons.play.element = document.createElement("button");
+      this.buttons.pause.element = document.createElement("button");
+
+    // Add Classes
+    this.element.classList.add('vegas_control');
+      this.buttons.prev.element.classList.add('glyphicon');
+      this.buttons.prev.element.classList.add('glyphicon-chevron-left');
+      this.buttons.next.element.classList.add('glyphicon');
+      this.buttons.next.element.classList.add('glyphicon-chevron-right');
+      this.buttons.play.element.classList.add('glyphicon');
+      this.buttons.play.element.classList.add('glyphicon-play');
+      this.buttons.pause.element.classList.add('glyphicon');
+      this.buttons.pause.element.classList.add('glyphicon-pause');
+    
+    // Attach event-listeners
+      this.buttons.prev.element.onclick = this.Prev;
+      this.buttons.next.element.onclick = this.Next;
+      this.buttons.play.element.onclick = this.Toggle;
+      this.buttons.pause.element.onclick = this.Toggle;
+
+    // CSS
+      this.buttons.play.element.style.display = "none"; // Play-button hidden on start
+    this.element.style.display = "none"; // Hide Controls on start.
+
+    // Append Elements
+      this.element.appendChild(this.buttons.next.element);
+      this.element.appendChild(this.buttons.play.element);
+      this.element.appendChild(this.buttons.pause.element);
+      this.element.appendChild(this.buttons.prev.element);
+    $vegas_target.append(this.element);
+};
+vegas_control.init();

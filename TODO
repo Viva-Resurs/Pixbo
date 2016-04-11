@@ -22,7 +22,21 @@ Features:
             * Vegas
                 * Timer bar
 
+    * Forms/Edits:
+        Validation warn if no tag
+        Update tags when creating new
+        Checkbox for Screengroup-association
+        Confirm Delete/Remove Association
+        Redirect to show post after edit
 
+    * Users:
+        Log edits
+
+    * Screens:
+        Smaller thumbs
+    
+    * Player:
+        Carusell
 
 Bugs:
 
