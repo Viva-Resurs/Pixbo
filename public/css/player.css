@@ -113,8 +113,9 @@ div.vegas_control {
     width: 100%;
     position: fixed;
     top:0px;
+    right: 10px;
 }
-.vegas_control button, .vegas_control button:focus, .vegas_control button:active {
+.vegas_control a, .vegas_control a:focus, .vegas_control a:active {
   background: rgba(0,0,0,0.5);
   color: #fff;
   border: 1px solid rgba(0,0,0,0.5);
@@ -125,12 +126,45 @@ div.vegas_control {
   width: 35px;
   height: 35px;
   margin: 5px 10px;
+  text-align: center;
+  vertical-align: center;
+  line-height: 35px;
 }
-.vegas_control button:hover {
+.vegas_control a:hover {
   background: rgba(0,0,0,0.5);
   color: #fff;
   border: 1px solid rgba(222,222,222,0.5);
   border-radius: 25px;
+  cursor: pointer;
+}
+
+.ticker_control {
+    position: fixed;
+    bottom: 0vh;
+    right: 10px;
+}
+.ticker_control li, .ticker_control li:focus, .ticker_control li:active {
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  border: 1px solid rgba(0,0,0,0.5);
+  border-radius: 25px;
+  box-shadow: 0px 0px 5px #000000;
+  outline:0;
+  float: left;
+  width: 35px;
+  height: 35px;
+  margin: 5px 10px;
+  text-align: center;
+  vertical-align: center;
+  line-height: 35px;
+}
+.ticker_control li a { display: none; }
+.ticker_control li:hover {
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  border: 1px solid rgba(222,222,222,0.5);
+  border-radius: 25px;
+  cursor: pointer;
 }
 
 /*!

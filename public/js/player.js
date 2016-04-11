@@ -104,8 +104,14 @@ function put_tickers_in(element,tickers){
 
 /* Start Ticker */
 function start_ticker(){
-  if ($ticker_target.find('ul#ticker').children().length>0)
+  // Add Controls in Ticker
+  if ($preview.val())
+    ticker_settings.controls=true;
+  if ($ticker_target.find('ul#ticker').children().length>0){
     $ticker_target.find('ul#ticker').ticker(ticker_settings);
+    if (ticker_settings.controls)
+      ticker_control.init();
+  }
   else
     console.log('No tickers...');
 }
@@ -113,6 +119,8 @@ function start_ticker(){
 
 /* Start Vegas */
 function start_vegas(mode){
+  if ($preview.val())
+    vegas_control.Enable(); // Add Controls for Vegas
   vegas_settings.slides = get_screens_from( $screens ); // Select current images
   if (mode=='restart')
     $vegas_target            // Restart Player Chain
@@ -159,8 +167,8 @@ var ajax_call = function (first_run) {
         }
     });
 }
-ajax_call(true); // Run once with flag set
 setInterval( ajax_call, 1000*10 ); // Check for newer data each 10 sec
+
 
 /* Perform update */
 function update_player(new_screens, new_tickers, new_updated_at, new_settings, mode) {
@@ -171,19 +179,11 @@ function update_player(new_screens, new_tickers, new_updated_at, new_settings, m
     // Replace contents in DOM for screens-list
     put_screens_in( $screens, new_screens );
 
-    // Add Controls for Vegas
-    if ($preview.val()=='yes')
-      vegas_control.Enable();
-
     // Start/Restart Vegas
     start_vegas(mode);
     
     // Replace contents in DOM for tickers
     put_tickers_in( $ticker_target, new_tickers );
-
-    // Add Controls in Ticker
-    if ($preview.val()=='yes')
-      ticker_settings.controls=true;
 
     // Load/Reload Ticker
     start_ticker();
@@ -193,8 +193,9 @@ function update_player(new_screens, new_tickers, new_updated_at, new_settings, m
 
     // Done
 };
+ajax_call(true); // Run once with flag set
 
-/* Control */
+/* Control for Preview */
 var vegas_control = {
     element : false,
     buttons : {
@@ -208,45 +209,48 @@ var vegas_control = {
         },
         play : {
             element : false,
-            action  : this.Toggle
+            action  : this.Play
         },
         pause : {
             element : false,
-            action  : this.Toggle
+            action  : this.Pause
         },
     },
     Enable : function(){
       vegas_control.element.style.display='block'; // Show
     },
-    Toggle : function(e){
-        // Show both buttons
-        vegas_control.buttons.play.element.style.display = "block";
+    Play : function(){
+        vegas_control.buttons.play.element.style.display = "none";
         vegas_control.buttons.pause.element.style.display = "block";
-        // Hide the pressed button
-        e.target.style.display = "none";
-        // Toggle Play/Pause
-        $vegas_target.vegas('toggle');
+        $vegas_target.vegas('play'); // Play
+    },
+    Pause : function(){
+        vegas_control.buttons.play.element.style.display = "block";
+        vegas_control.buttons.pause.element.style.display = "none";
+        $vegas_target.vegas('pause'); // Pause
     },
     Next : function(){
         $vegas_target
           .vegas('options', 'transitionDuration', '100') // Speed-up
           .vegas('next') // Show next screen
           .vegas('options', 'transitionDuration', vegas_settings.transitionDuration); // Restore speed
+        vegas_control.Pause(); // Pause
     },
     Prev : function(){
         $vegas_target
           .vegas('options', 'transitionDuration', '100') // Speed-up
           .vegas('previous') // Show previous screen
           .vegas('options', 'transitionDuration', vegas_settings.transitionDuration); // Restore speed
+        vegas_control.Pause(); // Pause
     },
 };
 vegas_control.init = function (){
     // Create Elements
     this.element = document.createElement("div");
-      this.buttons.prev.element = document.createElement("button");
-      this.buttons.next.element = document.createElement("button");
-      this.buttons.play.element = document.createElement("button");
-      this.buttons.pause.element = document.createElement("button");
+      this.buttons.prev.element = document.createElement("a");
+      this.buttons.next.element = document.createElement("a");
+      this.buttons.play.element = document.createElement("a");
+      this.buttons.pause.element = document.createElement("a");
 
     // Add Classes
     this.element.classList.add('vegas_control');
@@ -262,8 +266,8 @@ vegas_control.init = function (){
     // Attach event-listeners
       this.buttons.prev.element.onclick = this.Prev;
       this.buttons.next.element.onclick = this.Next;
-      this.buttons.play.element.onclick = this.Toggle;
-      this.buttons.pause.element.onclick = this.Toggle;
+      this.buttons.play.element.onclick = this.Play;
+      this.buttons.pause.element.onclick = this.Pause;
 
     // CSS
       this.buttons.play.element.style.display = "none"; // Play-button hidden on start
@@ -277,3 +281,59 @@ vegas_control.init = function (){
     $vegas_target.append(this.element);
 };
 vegas_control.init();
+
+var ticker_control = {
+    element : false,
+    buttons : {
+        prev : {
+            element : false,
+            action  : this.Prev
+        },
+        next : {
+            element : false,
+            action  : this.Next
+        },
+        play_pause : {
+            element : false,
+            action  : this.Toggle
+        },
+    },
+};
+ticker_control.init = function(){
+    // This will go through the plugins output and hook into things
+    $ticker_target.find('.ticker-controls').each(function(){
+        this.classList.add('ticker_control');
+        ticker_control.element = this;
+        // Get Buttons and Attach event-listener
+        $(this).find('li').each(function(){
+            if (this.classList.contains('jnt-prev'))
+                ticker_control.buttons.prev.element = this;
+            if (this.classList.contains('jnt-next'))
+                ticker_control.buttons.next.element = this;
+            if (this.classList.contains('jnt-play-pause'))
+                ticker_control.buttons.play_pause.element = this;
+            this.onclick=function (e){
+                // Timer (so that the plugin got some time to do its work before check)
+                setTimeout(function(){
+                    // Check status, toggle play/pause icon
+                    if (ticker_control.buttons.play_pause.element.classList.contains('paused')){
+                        ticker_control.buttons.play_pause.element.classList.remove('glyphicon-pause');
+                        ticker_control.buttons.play_pause.element.classList.add('glyphicon-play');
+                    } else {
+                        ticker_control.buttons.play_pause.element.classList.add('glyphicon-pause');
+                        ticker_control.buttons.play_pause.element.classList.remove('glyphicon-play');
+                    }
+                }, 100);
+            };
+        });
+        // Add Classes
+        ticker_control.buttons.prev.element.classList.add('glyphicon');
+        ticker_control.buttons.prev.element.classList.add('glyphicon-chevron-left');
+        ticker_control.buttons.next.element.classList.add('glyphicon');
+        ticker_control.buttons.next.element.classList.add('glyphicon-chevron-right');
+        ticker_control.buttons.play_pause.element.classList.add('glyphicon');
+        ticker_control.buttons.play_pause.element.classList.add('glyphicon-pause');
+        // Order Buttons
+        $(ticker_control.buttons.play_pause.element).insertBefore(ticker_control.buttons.next.element);
+    });
+};
