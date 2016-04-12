@@ -34,30 +34,22 @@ window.vue_instance = new Vue({
             vueboot.toastService.create(toast);
         },
         trans: function (string) {
-            var lan = JSON.parse(this.lang);
-
             var scope = string.split('.')[0];
             var word = string.split('.')[1];
 
-
-            return lan[scope][word];
+            if (this.lang && this.lang[scope] && this.lang[scope][word])
+                return this.lang[scope][word];
+            else
+                return string; // Fallback
         },
         trans_choice: function(string, num) {
-            var lan = JSON.parse(this.lang);
-
             var scope = string.split('.')[0];
             var word = string.split('.')[1];
-
-            var choice = lan[scope][word];
-
-            var value = '';
-
-            if(num > 1)
-                value = choice.split('|')[1];
+            
+            if (this.lang && this.lang[scope] && this.lang[scope][word])
+                return this.lang[scope][word].split('|')[num];
             else
-                value = choice.split('|')[0];
-
-            return value;
+                return string; // Fallback
         }
     },
 
@@ -73,9 +65,8 @@ window.vue_instance = new Vue({
         }
     },
     ready: function() {
-
         this.$http.get('/api/locales', function(locale) {
-            this.lang = JSON.stringify(locale);
+            this.lang = locale;
         }.bind(this));
     }
 });
