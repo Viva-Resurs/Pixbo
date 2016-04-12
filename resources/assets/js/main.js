@@ -34,21 +34,19 @@ window.vue_instance = new Vue({
             vueboot.toastService.create(toast);
         },
         trans: function (string) {
-            var lan = JSON.parse(this.lang);
 
             var scope = string.split('.')[0];
             var word = string.split('.')[1];
 
 
-            return lan[scope][word];
+            return lang[scope][word];
         },
         trans_choice: function(string, num) {
-            var lan = JSON.parse(this.lang);
 
             var scope = string.split('.')[0];
             var word = string.split('.')[1];
 
-            var choice = lan[scope][word];
+            var choice = lang[scope][word];
 
             var value = '';
 
@@ -75,7 +73,7 @@ window.vue_instance = new Vue({
     ready: function() {
 
         this.$http.get('/api/locales', function(locale) {
-            this.lang = JSON.stringify(locale);
+            this.lang = locale;
         }.bind(this));
     }
 });

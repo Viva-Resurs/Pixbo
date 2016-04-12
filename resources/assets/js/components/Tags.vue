@@ -1,19 +1,16 @@
-
 <template id="tag-template">
     <legend>
         Taggar
-    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="asdfasdf"></span>
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ 'messages.atleast_one_tag' }}" :style="error"></span>
     </legend>
     <div class="form-group">
         <div class="tag-group">
-
-                <div class="tag label label-default" v-for="tag in list">
-                    <span class="tag__name">{{ tag.name }}</span>
-                    <a class="tag__remove btn  btn-xs" @click="remove_tag($index)">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </a>
-                </div>
-
+            <div class="tag label label-default" v-for="tag in list">
+                <span class="tag__name">{{ tag.name }}</span>
+                <a class="tag__remove btn  btn-xs" @click="remove_tag($index)">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+            </div>
         </div>
         <div class="input-group">
             <input type="text" name="tags" id="inputTags" class="form-control" list="tags" v-model="new_tag" v-el="tagInput" v-on:keyup.enter="add_tag">
@@ -45,9 +42,7 @@
 
 
             add_tag: function(that) {
-                console.log(this.new_tag);
                 if(this.new_tag.length > 0) {
-
                     this.list.push({name: this.new_tag.trim(), new: true});
                 }
                 this.new_tag = '';
@@ -64,6 +59,9 @@
         computed: {
             tags: function() {
                 return this.$parent.$data.tags;
+            },
+            error: function () {
+                return this.list.length > 0 ? '' : 'color:red';
             }
         },
     };

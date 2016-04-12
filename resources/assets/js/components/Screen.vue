@@ -19,12 +19,18 @@
         </div>
     </div>
     <modal :model="data" title="Edit Screen" :id="'screens_modal_' + this.data.id ">
-        <p slot="body">{{data.id}}</p>
-        <p slot="footer">asdf</p>
+        <p slot="body">
+            <schedule model="screens" :id="data.id"></schedule>
+        </p>
+        <p slot="footer">
+            <submit-form :target="'submitButton_' + data.id"></submit-form>
+        </p>
     </modal>
 </template>
 <script>
     import Modal from './Modal.vue';
+    import SubmitForm from './SubmitForm.vue';
+    import Schedule from './Schedule2.vue';
 
     export default {
 
@@ -32,18 +38,12 @@
 
         components: {
             Modal,
+            SubmitForm,
+            Schedule,
         },
 
         data: function() {
-            return {
-                screen: null,
-            };
-        },
-
-        methods: {
-            trans: function(string) {
-                //return this.$dispatch('trans', string);
-            }
+            return {};
         },
     };
 </script>
