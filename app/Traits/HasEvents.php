@@ -20,7 +20,7 @@ trait HasEvents
 /**
  * [getEvent description]
  *
- * @return App\Event
+ * @return App\Models\Event
  */
     public function getEvent()
     {
@@ -33,7 +33,7 @@ trait HasEvents
 /**
  * [createAndReturnEvent description]
  *
- * @return App\Event [description]
+ * @return App\Models\Event [description]
  */
     public function createAndReturnEvent()
     {
