@@ -6,10 +6,11 @@ Vue.use(require('vue-resource'));
 var vueboot = require('vueboot');
 var bootstrap = require('bootstrap-sass');
 
+
 import Schedule from './components/Schedule.vue';
 import ScreenList from './components/ScreenList.vue';
 
-
+Vue.config.debug = true
 
 window.vue_instance = new Vue({
     el: '#app',
@@ -24,27 +25,57 @@ window.vue_instance = new Vue({
     data: function () {
         return {
             show: false,
-            lang: [],
+            lang: null,
         };
     },
 
     methods: {
         addAlert: function(toast) {
             vueboot.toastService.create(toast);
+        },
+        trans: function (string) {
+            var lan = JSON.parse(this.lang);
+
+            var scope = string.split('.')[0];
+            var word = string.split('.')[1];
+
+
+            return lan[scope][word];
+        },
+        trans_choice: function(string, num) {
+            var lan = JSON.parse(this.lang);
+
+            var scope = string.split('.')[0];
+            var word = string.split('.')[1];
+
+            var choice = lan[scope][word];
+
+            var value = '';
+
+            if(num > 1)
+                value = choice.split('|')[1];
+            else
+                value = choice.split('|')[0];
+
+            return value;
         }
     },
 
     events: {
         'add-alert': function(toast) {
             vueboot.toastService.create(toast);
+        },
+        'trans': function (string) {
+            return this.trans(string);
+        },
+        'trans_choice': function (string) {
+            return this.trans_choice(string);
         }
     },
     ready: function() {
-        var vm = this;
-        this.lang = new Object;
 
-            this.$http.get('/api/locales', function(locale) {
-                this.lang = locale;
-            }.bind(this));
+        this.$http.get('/api/locales', function(locale) {
+            this.lang = JSON.stringify(locale);
+        }.bind(this));
     }
 });

@@ -18,7 +18,7 @@
             </div>
         </div>
     </div>
-    <modal :model="data" title="Edit Screen">
+    <modal :model="data" title="Edit Screen" :id="'screens_modal_' + this.data.id ">
         <p slot="body">{{data.id}}</p>
         <p slot="footer">asdf</p>
     </modal>
@@ -40,8 +40,10 @@
             };
         },
 
-        ready: function() {
-
+        methods: {
+            trans: function(string) {
+                //return this.$dispatch('trans', string);
+            }
         },
     };
 </script>

@@ -31,7 +31,7 @@ class ScreensController extends Controller
         if (Requests::wantsJson()) {
             return $screens;
         } else {
-            return view('screens.index', compact('screens'));
+            return view('screens.index2', compact('screens'));
         }
     }
 

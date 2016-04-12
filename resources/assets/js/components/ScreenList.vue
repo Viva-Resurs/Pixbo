@@ -20,7 +20,7 @@
 
     components: {
         Screen,
-       Modal,
+        Modal,
     },
 
     data: function() {

@@ -1,5 +1,5 @@
 <template>
-    <div class="modal fade" tabindex="-1" role="dialog" :id="'screens_modal_' + model.id">
+    <div class="modal fade" tabindex="-1" role="dialog" :id="id">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -27,7 +27,7 @@
 
 <script>
     export default {
-        props: ['model', 'title'],
+        props: ['model', 'title', 'id'],
 
         data: function() {
             return {

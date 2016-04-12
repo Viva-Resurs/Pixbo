@@ -139,6 +139,14 @@
                 }
                 return tag_string;
             },
+            isValid: function() {
+                if(this.model == 'screens') {
+                    if (this.tags.length > 0)
+                        return true;
+                    else
+                        return false;
+                } else return true;
+            }
         },
          ready: function () {
             this.get_all_screengroups();

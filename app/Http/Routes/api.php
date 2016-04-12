@@ -57,11 +57,14 @@ Route::get('/api/locales', function() {
         'auth'
     ];
     $locales = [];
+
     foreach ($language_files as $key => $val) {
         $locales[$language_files[$key]] =  Lang::get($val);
+
     }
 
-    return $locales;
+    $collection = collect($locales);
+    return $collection->toJson();
 }) ;
 
 Route::post('/api/screens/{id}', 'Admin\ScreensController@update');
