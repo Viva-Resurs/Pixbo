@@ -33,9 +33,11 @@
         <hr>
         @include('tickers.table', ['tickers' => $screengroup->tickers, 'from' => 'screengroups'])
     </div>
+    @can('view_clients')
     <div class="panel-body">
         <h2>{{ trans_choice('messages.client', 2) }}</h2>
         <hr>
         @include('clients.table', ['list' => $screengroup->clients, 'from' => 'screengroups'])
     </div>
+    @endcan
 @stop
