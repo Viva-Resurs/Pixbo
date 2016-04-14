@@ -36,14 +36,14 @@
         },
 
         methods: {
-            update_tags: function() {
-
-            },
-
-
             add_tag: function(that) {
                 if(this.new_tag.length > 0) {
-                    this.list.push({name: this.new_tag.trim(), new: true});
+                    var exists = !(this.list.indexOf(this.new_tag.trim()) > -1);
+                    if (!exists) {
+                        this.list.push({name: this.new_tag.trim(), new: true});
+                    }
+
+
                 }
                 this.new_tag = '';
             },
