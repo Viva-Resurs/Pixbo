@@ -19,7 +19,7 @@
 @if(!(auth()->user()->id === $user->id))
     <div class="form-group">
         {!! Form::label('role_id', trans_choice('messages.role', 1)) !!}
-        {!! Form::select('role_id', $roles, $user->roles()->first()->id, ['class' => 'form-control', 'required' => 'required']) !!}
+        {!! Form::select('role_id', $roles, $user->roles->first()->id, ['class' => 'form-control', 'required' => 'required']) !!}
         <small class="text-danger">{{ $errors->first('role_id') }}</small>
     </div>
 @endif
