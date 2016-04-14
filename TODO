@@ -12,7 +12,7 @@ Features:
 
 * Settings
     * User
-        * Role
+        * Role -- Does not update the value of the model......
 
     * Dashboard (Admin)
         * Log
@@ -23,7 +23,6 @@ Features:
                 * Timer bar
 
     * Forms/Edits:
-        Validation warn if no tag
         Update tags when creating new
         Checkbox for Screengroup-association
         Confirm Delete/Remove Association
@@ -44,3 +43,6 @@ Bugs:
 Remember:
     * Set PHP memory size and upload file size properly.
     * Set environment variable for phpunit \vendor\bin
+
+Done:
+    Validation warn if no tag
