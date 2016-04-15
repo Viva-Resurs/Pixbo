@@ -50,10 +50,11 @@ class UsersController extends Controller
             abort(403, trans('auth.access_denied'));
         }
 
-        if($user->update($request->all())) {
-            flash()->success(trans('auth.success'));
+        $response = $user->updateUserFromRequest($request);
+        if(is_null($response)) {
+            flash()->success(trans('messages.user_updated_ok'));
         } else {
-            flash()->error(trans('auth.failed'));
+            flash()->error(trans('messages.user_updated_fail'));
         }
         return redirect()->back();
     }
@@ -74,7 +75,7 @@ class UsersController extends Controller
         ]);
 
         $result = User::createUserFromRequest($request);
-        if (is_null($result)) {
+        if (!is_null($result)) {
             flash()->success(trans('messages.user_created_ok'));
         } else {
             flash()->success(trans('messages.user_created_fail'));

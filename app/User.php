@@ -2,7 +2,10 @@
 
 namespace App;
 
+use App\Models\Client;
+use App\Models\Online;
 use App\Models\Role;
+use App\Models\ScreenGroup;
 use Carbon\Carbon;
 use Config;
 use DB;
@@ -43,7 +46,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
  * @return [type] [description]
  */
 	public function client() {
-		return $this->hasOne(\App\Models\Client::class);
+		return $this->hasOne(Client::class);
 	}
 
 /**
@@ -51,11 +54,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
  * @return [type] [description]
  */
 	public function screengroups() {
-		return $this->hasMany(\App\Models\ScreenGroup::class);
+		return $this->hasMany(ScreenGroup::class);
 	}
 
 	public function roles() {
-		return $this->belongsToMany(\App\Models\Role::class);
+		return $this->belongsToMany(Role::class);
 	}
 
 	public function hasRole($role) {
@@ -68,7 +71,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 	public function assignRole($role) {
 		if (is_string($role)) {
-			$role_model = \App\Models\Role::where('name', $role)->firstOrFail();
+			$role_model = Role::where('name', $role)->firstOrFail();
 			return $this->roles()->save($role_model);
 		}
 
@@ -76,7 +79,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	}
 
 	public function online() {
-		return $this->hasOne(\App\Models\Online::class);
+		return $this->hasOne(Online::class);
 	}
 
 	public function getLastActivityAttribute() {
@@ -114,7 +117,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return is_null($result) ? true : false;
 	}
 
+	public function updateUserFromRequest($request) {
+		$that = $this;
+		$result = DB::transaction(function() use ($request, $that) {
+			$that->update($request->all());
+			$that->roles()->sync([$request->input('role_id')]);
+			$that->save();
+		});
+		return $result;
+	}
+
 	public function setPasswordAttribute($value) {
-		$this->attributes['password'] = Hash::make($value);
+		// Don't update the password if it's blank!
+		if($value != "")
+			$this->attributes['password'] = Hash::make($value);
 	}
 }

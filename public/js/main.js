@@ -25977,6 +25977,34 @@ exports.insert = function (css) {
 }
 
 },{}],15:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    props: ['model', 'title', 'id'],
+
+    data: function data() {
+        return {
+            asdF: null
+        };
+    }
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" :id=\"id\">\n        <div class=\"modal-dialog modal-lg\">\n            <div class=\"modal-content\">\n                <div class=\"modal-header\">\n                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">×</span></button>\n                    <h4 class=\"modal-title\">{{ title }}</h4>\n                </div>\n                <div class=\"modal-body\">\n                    <div class=\"row\">\n                        <div class=\"col-lg-12\">\n                            <div class=\"panel panel-default\">\n                                <div class=\"panel-body\">\n                                    <slot name=\"body\"></slot>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"modal-footer\">\n                    <slot name=\"footer\"></slot>\n                </div>\n            </div><!-- /.modal-content -->\n        </div><!-- /.modal-dialog -->\n    </div><!-- /.modal -->\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "C:\\Users\\Christoffer\\Documents\\Work\\pixbo_laravel\\resources\\assets\\js\\components\\Modal.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, module.exports.template)
+  }
+})()}
+},{"vue":12,"vue-hot-reload-api":3}],16:[function(require,module,exports){
 var __vueify_style__ = require("vueify-insert-css").insert("\n\n")
 'use strict';
 
@@ -26015,7 +26043,6 @@ exports.default = {
     },
 
     methods: {
-        update_tags: function update_tags() {},
         send_post: function send_post() {
 
             var day_num = null;
@@ -26045,7 +26072,7 @@ exports.default = {
         send_ajax: function send_ajax(payload) {
             var vm = this;
             console.log(vm.modelObject);
-            this.$http.put('/admin/' + vm.model + 's/' + vm.modelObject.id, payload).then(function (response) {
+            this.$http.put('/admin/' + vm.model + '/' + vm.modelObject.id, payload).then(function (response) {
                 if (response.ok) {
                     vm.close_modal();
                 }
@@ -26068,8 +26095,8 @@ exports.default = {
         get_model: function get_model() {
             this.$http.get('/api/' + this.model + '/' + this.id, (function (modelObject) {
                 this.modelObject = modelObject;
-                this.event = modelObject.event.pop();
-                if (this.model == 'screen') this.selected_tags = modelObject.tags;
+                if (modelObject.event) this.event = modelObject.event.pop();
+                if (this.model == 'screens') this.selected_tags = modelObject.tags;
                 this.parse_event();
                 this.set_selected_screengroups();
             }).bind(this));
@@ -26115,11 +26142,16 @@ exports.default = {
                 if (i != this.tags.length - 1) tag_string += ' ';
             }
             return tag_string;
+        },
+        isValid: function isValid() {
+            if (this.model == 'screens') {
+                if (this.tags.length > 0) return true;else return false;
+            } else return true;
         }
     },
     ready: function ready() {
         this.get_all_screengroups();
-        if (this.model == 'screen') this.get_all_tags();
+        if (this.model == 'screens') this.get_all_tags();
         this.get_model();
     }
 };
@@ -26139,7 +26171,311 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, module.exports.template)
   }
 })()}
-},{"./Tags.vue":16,"vue":12,"vue-hot-reload-api":3,"vueify-insert-css":14}],16:[function(require,module,exports){
+},{"./Tags.vue":21,"vue":12,"vue-hot-reload-api":3,"vueify-insert-css":14}],17:[function(require,module,exports){
+var __vueify_style__ = require("vueify-insert-css").insert("\n\n")
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _Tags = require('./Tags.vue');
+
+var _Tags2 = _interopRequireDefault(_Tags);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+
+    props: ['id', 'model'],
+
+    components: {
+
+        'Tagger': _Tags2.default
+
+    },
+
+    data: function data() {
+        return {
+            screengroups: [],
+            modelObject: {},
+            event: {},
+            selected_screengroups: [],
+            selected_tags: '',
+            tags: [],
+            weekly_day_num: [],
+            monthly_day_num: '',
+            error: {
+                missing_tag: 'messages.tag_missing'
+            }
+        };
+    },
+
+    methods: {
+        send_post: function send_post() {
+
+            if (this.isValid) {
+
+                var day_num = null;
+                var recur = this.event.recur_type;
+
+                switch (recur) {
+                    case "weekly":
+                        day_num = this.weekly_day_num;
+                        break;
+                    case "monthly":
+                        day_num = this.monthly_day_num;
+                        break;
+                    default:
+                        day_num = '';
+                        break;
+                }
+                var payload = {
+                    event: this.event,
+                    selected_screengroups: this.selected_screengroups,
+                    selected_tags: this.selected_tags,
+                    day_num: day_num,
+                    modelObject: this.modelObject
+                };
+                this.send_ajax(payload);
+            } else {}
+        },
+
+        send_ajax: function send_ajax(payload) {
+            var vm = this;
+            console.log(vm.modelObject);
+            this.$http.put('/admin/' + vm.model + '/' + vm.modelObject.id, payload).then(function (response) {
+                if (response.ok) {
+                    vm.close_modal();
+                }
+                if (response) {
+                    vm.$dispatch('add-alert', response.data);
+                }
+            });
+        },
+
+        get_all_screengroups: function get_all_screengroups() {
+            this.$http.get('/api/screengroups', (function (screengroups) {
+                this.screengroups = screengroups;
+            }).bind(this));
+        },
+        get_all_tags: function get_all_tags() {
+            this.$http.get('/api/tags', (function (tags) {
+                this.tags = tags;
+            }).bind(this));
+        },
+        get_model: function get_model() {
+            this.$http.get('/api/' + this.model + '/' + this.id, (function (modelObject) {
+                this.modelObject = modelObject;
+                if (modelObject.event) this.event = modelObject.event.pop();
+                if (this.model == 'screens') this.selected_tags = modelObject.tags;
+                this.parse_event();
+                this.set_selected_screengroups();
+            }).bind(this));
+        },
+
+        parse_event: function parse_event() {
+            if (this.event.recur_day_num == null) {
+                this.weekly_day_num = [];
+                this.monthly_day_num = '1';
+            } else {
+                var parsed_week = JSON.parse(this.event.recur_day_num);
+                if (typeof parsed_week == 'string' || parsed_week == null) this.weekly_day_num = [];else this.weekly_day_num = parsed_week;
+                this.monthly_day_num = JSON.parse(this.event.recur_day_num);
+            }
+
+            if (this.event.recur_day == null) this.event.recur_day = '1';
+
+            if (this.monthly_day_num.length > 1 || this.monthly_day_num == "") this.monthly_day_num = '1';
+        },
+
+        set_selected_screengroups: function set_selected_screengroups() {
+            var sgs = this.modelObject.screengroups != null ? this.modelObject.screengroups.length : 0;
+            for (var i = 0; i < sgs; i++) {
+                this.selected_screengroups.push(this.modelObject.screengroups[i].id);
+            }
+        },
+
+        close_modal: function close_modal() {
+            var modal = '#' + this.model + '_modal_' + this.modelObject.id;
+            console.log(modal);
+            $(modal).modal('hide');
+        }
+    },
+
+    computed: {
+        summary: function summary() {
+            return 'summary_text';
+        },
+        trans_choice: function trans_choice(string, num) {
+            return string;
+        },
+        trans: function trans() {
+            return;
+        },
+        isValid: function isValid() {
+            if (this.model == 'screens') {
+                if (this.selected_tags.length > 0) {
+                    return true;
+                } else {
+                    $('#inputTags').focus();
+                    return false;
+                }
+            } else return true;
+        }
+    },
+    ready: function ready() {
+        this.get_all_screengroups();
+        if (this.model == 'screens') this.get_all_tags();
+        this.get_model();
+    }
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n        <form :id=\"'schedule_form_' + model + '_' + id\" :action=\"'/admin/' + model + '/' + id\" method=\"PATCH\" role=\"form\" v-on:submit.prevent=\"send_post\">\n\n            <template v-if=\"model == 'tickers'\">\n                <div class=\"col-lg-12\">\n                    <div class=\"panel panel-default\">\n                        <div class=\"panel-body\">\n                            <input type=\"text\" v-model=\"modelObject.text\" name=\"ticker_text\" id=\"inputTickerText\" class=\"form-control\" title=\"\" required=\"required\">\n                        </div>\n                    </div>\n                </div>\n            </template>\n\n            <div class=\"col-lg-6 col-md-6\">\n\n                <legend>\n                    {{ 'messages.screen_group' }}\n                    <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"{{ 'messages.screengroup_tooltip' }}\"></span>\n                </legend>\n                <select class=\"form-control\" multiple=\"\" v-model=\"selected_screengroups\" id=\"inputScreengroups\">\n                    <option v-for=\"screengroup in screengroups\" v-bind:value=\"screengroup.value\">{{screengroup.text}}</option>\n                </select>\n\n                <template v-if=\"model == 'screens'\">\n                    <tagger :list.sync=\"selected_tags\"></tagger>\n                </template>\n\n\n                <legend>{{ 'messages.period' }}</legend>\n                <div class=\"row\">\n                    <div class=\"form-group\">\n                        <div class=\"col-lg-6 col-md-6\">\n                            <label for=\"inputStart_date\" class=\"control-label\">\n                                {{ 'messages.start'}}\n                                <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"{{ 'messages.event_start_date_tooltip' }}\"></span>\n                            </label>\n                            <div class=\"\">\n                                <input v-model=\"event.start_date\" type=\"date\" name=\"start_date\" id=\"inputStart_date\" class=\"form-control\" v-bind:value=\"event.start_date\" required=\"required\" title=\"\">\n                            </div>\n                        </div>\n                        <div class=\"col-lg-6 col-md-6\">\n                            <label for=\"inputEnd_date\" class=\"control-label\">\n                                {{ 'messages.end' }}\n                                <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"{{ 'messages.event_end_date_tooltip' }}\"></span>\n                            </label>\n                            <div class=\"\">\n                                <input type=\"date\" v-model=\"event.end_date\" v-bind:value=\"event.end_date\" name=\"end_date\" id=\"inputEnd_date\" class=\"form-control\" value=\"\" title=\"\">\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"row\">\n                    <div class=\"form-group\">\n                        <div class=\"col-lg-6 col-md-6\">\n                            <label for=\"inputStart_time\" class=\"control-label\">\n                                {{ 'messages.start'}}\n                                <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"{{ 'messages.event_start_time_tooltip' }}\"></span>\n                            </label>\n                            <div class=\"\">\n                                <input type=\"time\" v-model=\"event.start_time\" name=\"start_time\" id=\"inputStart_time\" class=\"form-control\" value=\"\" title=\"\">\n                            </div>\n                        </div>\n                        <div class=\"col-lg-6 col-md-6\">\n                            <label for=\"inputEnd_time\" class=\"control-label\">\n                                {{ 'messages.end' }}\n                                <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"{{ 'messages.event_end_time_tooltip' }}\"></span>\n                            </label>\n                            <div class=\"\">\n                                <input type=\"time\" v-model=\"event.end_time\" name=\"end_time\" id=\"inputEnd_time\" class=\"form-control\" value=\"\" title=\"\">\n                            </div>\n                        </div>\n                    </div>\n                </div>\n\n            </div>\n\n            <div class=\"col-lg-6 col-md-6\">\n\n                <legend>{{ 'messages.recurring' }}</legend>\n\n                <label for=\"inputRecur_type\" class=\"control-label\">\n                    {{ 'messages.repeat' }}\n                    <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"{{ 'messages.event_repeat_type_tooltip' }}\"></span>\n                </label>\n                <select v-model=\"event.recur_type\" v-bind:value=\"event.recur_type\" name=\"recur_type\" id=\"inputRecur_type\" class=\"form-control\">\n                    <option value=\"\"> {{ 'messages.never' }}</option>\n                    <option value=\"daily\">{{ 'messages.daily' }}</option>\n                    <option value=\"weekly\">{{ 'messages.weekly' }}</option>\n                    <option value=\"monthly\">{{ 'messages.monthly' }}</option>\n                    <option value=\"yearly\">{{ 'messages.yearly' }}</option>\n                </select>\n\n                <!-- Daily -->\n                <template v-if=\"event.recur_type == 'daily'\">\n                    <div class=\"form-group\">\n                        <div class=\"form-group\">\n                            <label for=\"inputFrequency\" class=\"control-label\">\n                                {{ 'messages.frequency' }}\n                                <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"{{ 'messages.event_frequency_day_tooltip' }}\"></span>\n                            </label>\n                            <input v-model=\"event.frequency\" type=\"number\" name=\"frequency\" id=\"inputFrequency\" class=\"form-control\" v-bind:value=\"event.frequency\" min=\"1\" max=\"365\" step=\"1\" required=\"required\" title=\"\">\n                        </div>\n                    </div>\n                </template>\n\n                <!-- Weekly -->\n                <template v-if=\"event.recur_type == 'weekly'\">\n                    <div class=\"form-group\">\n                        <div class=\"form-group\">\n                            <label for=\"inputFrequency\" class=\"control-label\">\n                                {{ 'messages.frequency' }}\n                                <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"{{ 'messages.event_frequency_week_tooltip' }}\"></span>\n                            </label>\n                            <input v-model=\"event.frequency\" type=\"number\" name=\"frequency\" id=\"inputFrequency\" class=\"form-control\" v-bind:value=\"event.frequency\" min=\"1\" max=\"365\" step=\"1\" required=\"required\" title=\"\">\n                        </div>\n                    </div>\n\n                    <div class=\"form-group\">\n                        <div class=\"form-group\">\n                            <label class=\"control-label\">\n                                {{ 'messages.weekdays' }}\n                                <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"{{ 'messages.event_frequency_week_tooltip' }}\"></span>\n                            </label>\n\n                            <br>\n                            <label>\n                                {{ 'messages.monday_short' }}\n                                <input v-model=\"weekly_day_num\" type=\"checkbox\" value=\"1\">\n                            </label>\n                            <label>\n                                {{ 'messages.tuesday_short' }}\n                                <input v-model=\"weekly_day_num\" type=\"checkbox\" value=\"2\">\n                            </label>\n                            <label>\n                                {{ 'messages.wednesday_short' }}\n                                <input v-model=\"weekly_day_num\" type=\"checkbox\" value=\"3\">\n                            </label>\n                            <label>\n                                {{ 'messages.thursday_short' }}\n                                <input v-model=\"weekly_day_num\" type=\"checkbox\" value=\"4\">\n                            </label>\n                            <label>\n                                {{ 'messages.friday_short' }}\n                                <input v-model=\"weekly_day_num\" type=\"checkbox\" value=\"5\">\n                            </label>\n                            <label>\n                                {{ 'messages.saturday_short' }}\n                                <input v-model=\"weekly_day_num\" type=\"checkbox\" value=\"6\">\n                            </label>\n                            <label>\n                                {{ 'messages.sunday_short' }}\n                                <input v-model=\"weekly_day_num\" type=\"checkbox\" value=\"0\">\n                            </label>\n                        </div>\n                    </div>\n                </template>\n\n                <!-- Monthly -->\n                <template v-if=\"event.recur_type == 'monthly'\">\n                    <div class=\"form-group\">\n                        <div class=\"form-group\">\n                            <label for=\"inputFrequency\" class=\"control-label\">\n                                {{ 'messages.frequency' }}\n                                <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"{{ 'messages.event_frequency_month_tooltip' }}\"></span>\n                            </label>\n                            <input v-model=\"event.frequency\" type=\"number\" name=\"frequency\" id=\"inputFrequency\" class=\"form-control\" v-bind:value=\"event.frequency\" min=\"1\" max=\"365\" step=\"1\" required=\"required\" title=\"\">\n                        </div>\n                    </div>\n\n                    <div class=\"form-group\">\n                        <div class=\"form-group\">\n                            <label for=\"inputRecur_day_num\">\n                                {{ 'messages.week' }}\n                                <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"{{ 'messages.event_week_tooltip' }}\"></span>\n                            </label>\n                            <select v-model=\"monthly_day_num\" value=\"1\" name=\"recur_day_num\" id=\"inputRecur_day_num\" class=\"form-control\">\n                                <option value=\"1\">{{ 'messages.first' }}</option>\n                                <option value=\"2\">{{ 'messages.second' }}</option>\n                                <option value=\"3\">{{ 'messages.third' }}</option>\n                                <option value=\"4\">{{ 'messages.fourth' }}</option>\n                                <option value=\"5\">{{ 'messages.last' }}</option>\n                            </select>\n                        </div>\n                    </div>\n\n                    <div class=\"form-group\">\n                        <div class=\"form-group\">\n                            <label for=\"inputRecur_day\">\n                                {{ 'messages.day' }}\n                                <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"{{ 'messages.event_day_tooltip' }}\"></span>\n                            </label>\n                            <select v-model=\"event.recur_day\" name=\"recur_day\" id=\"inputRecur_day\" class=\"form-control\">\n                                <option value=\"1\">{{ 'messages.monday' }}</option>\n                                <option value=\"2\">{{ 'messages.tuesday' }}</option>\n                                <option value=\"3\">{{ 'messages.wednesday' }}</option>\n                                <option value=\"4\">{{ 'messages.thursday' }}</option>\n                                <option value=\"5\">{{ 'messages.friday' }}</option>\n                                <option value=\"6\">{{ 'messages.saturday' }}</option>\n                                <option value=\"0\">{{ 'messages.sunday' }}</option>\n                            </select>\n                        </div>\n                    </div>\n\n                    <div class=\"form-group\">\n                        <div class=\"form-group\">\n                            <label for=\"inputDays_before\" class=\"control-label\">\n                                {{ 'messages.days_before_event' }}\n                                <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"{{ 'messages.event_days_ahead_tooltip' }}\"></span>\n                            </label>\n                            <input v-model=\"event.days_before_event\" type=\"number\" name=\"days_before\" id=\"inputDays_before\" class=\"form-control\" v-bind:value=\"event.days_before_event\" min=\"0\" max=\"30\" step=\"1\" title=\"\">\n                        </div>\n                    </div>\n                </template>\n\n                <!-- Yearly -->\n                <template v-if=\"event.recur_type == 'yearly'\">\n                    <div class=\"form-group\">\n                        <div class=\"form-group\">\n                            <label for=\"inputFrequency\" class=\"control-label\">{{ 'messages.year_frequency' }}</label>\n                            <input v-model=\"event.frequency\" type=\"number\" name=\"frequency\" id=\"inputFrequency\" class=\"form-control\" v-bind:value=\"event.frequency\" min=\"1\" max=\"365\" step=\"1\" required=\"required\" title=\"\">\n                        </div>\n                    </div>\n                </template>\n\n                <!-- Summary -->\n                <div class=\"row\"></div>\n                <label>{{ 'messages.summary' }}</label> {{ summary }}\n\n            </div>\n\n            <button type=\"submit\" id=\"submitButton_{{ id }}\" class=\"\" style=\"display: none;\">{{ 'messages.save' }}</button>\n\n        </form>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "C:\\Users\\Christoffer\\Documents\\Work\\pixbo_laravel\\resources\\assets\\js\\components\\Schedule2.vue"
+  module.hot.dispose(function () {
+    require("vueify-insert-css").cache["\n\n"] = false
+    document.head.removeChild(__vueify_style__)
+  })
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, module.exports.template)
+  }
+})()}
+},{"./Tags.vue":21,"vue":12,"vue-hot-reload-api":3,"vueify-insert-css":14}],18:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _Modal = require('./Modal.vue');
+
+var _Modal2 = _interopRequireDefault(_Modal);
+
+var _SubmitForm = require('./SubmitForm.vue');
+
+var _SubmitForm2 = _interopRequireDefault(_SubmitForm);
+
+var _Schedule = require('./Schedule2.vue');
+
+var _Schedule2 = _interopRequireDefault(_Schedule);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+
+    props: ['data'],
+
+    components: {
+        Modal: _Modal2.default,
+        SubmitForm: _SubmitForm2.default,
+        Schedule: _Schedule2.default
+    },
+
+    data: function data() {
+        return {};
+    }
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <div class=\"thumbnail screens_card row\">\n        <div class=\"col-lg-12\">\n            <div class=\"row\">\n                <img class=\"screens_card__img\" :src=\"'/'+ data.photo.thumb_path\" style=\"width:100%;height:auto;\">\n\n                <div class=\"btn-group-vertical ScreenCard__buttons pull-right\" role=\"group\">\n                    <form method=\"delete\" action=\"/admin/screens/destroy/{{ data.id }}\">\n                    <button type=\"submit\" class=\"btn btn-danger btn-lg\" role=\"button\">\n                        <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"{{ 'messages.remove' }}\"></span>\n                    </button>\n                    </form>\n\n                    <button type=\"button\" class=\"btn btn-info btn-lg\" data-toggle=\"modal\" data-target=\"#screens_modal_{{ data.id }}\" role=\"button\">\n                        <span class=\"glyphicon glyphicon-calendar\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"{{ 'messages.schedule_tooltip' }}\"></span>\n                    </button>\n                </div>\n            </div>\n        </div>\n    </div>\n    <modal :model=\"data\" title=\"Edit Screen\" :id=\"'screens_modal_' + this.data.id \">\n        <p slot=\"body\">\n            <schedule model=\"screens\" :id=\"data.id\"></schedule>\n        </p>\n        <p slot=\"footer\">\n            <submit-form :target=\"'submitButton_' + data.id\"></submit-form>\n        </p>\n    </modal>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "C:\\Users\\Christoffer\\Documents\\Work\\pixbo_laravel\\resources\\assets\\js\\components\\Screen.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, module.exports.template)
+  }
+})()}
+},{"./Modal.vue":15,"./Schedule2.vue":17,"./SubmitForm.vue":20,"vue":12,"vue-hot-reload-api":3}],19:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _Screen = require('./Screen.vue');
+
+var _Screen2 = _interopRequireDefault(_Screen);
+
+var _Modal = require('./Modal.vue');
+
+var _Modal2 = _interopRequireDefault(_Modal);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+
+    //props: ['list'],
+
+    components: {
+        Screen: _Screen2.default,
+        Modal: _Modal2.default
+    },
+
+    data: function data() {
+        return {
+            list: []
+        };
+    },
+
+    methods: {
+        fetch_screens: function fetch_screens() {
+            this.$http.get('/api/screens', (function (screens) {
+                this.list = screens;
+            }).bind(this));
+        }
+    },
+    ready: function ready() {
+        this.fetch_screens();
+    },
+
+    computed: {}
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n    <div class=\"col-lg-12\">\n        <div class=\"row\">\n            <div class=\"col-sm-6 col-md-3\" v-for=\"screen in list\">\n                <screen v-bind:data=\"screen\"></screen>\n            </div>\n        </div>\n    </div>\n\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "C:\\Users\\Christoffer\\Documents\\Work\\pixbo_laravel\\resources\\assets\\js\\components\\ScreenList.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, module.exports.template)
+  }
+})()}
+},{"./Modal.vue":15,"./Screen.vue":18,"vue":12,"vue-hot-reload-api":3}],20:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+        value: true
+});
+exports.default = {
+        props: ['target']
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <label :for=\"target\" class=\"btn btn-primary\">{{ 'messages.save' }}</label>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "C:\\Users\\Christoffer\\Documents\\Work\\pixbo_laravel\\resources\\assets\\js\\components\\SubmitForm.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, module.exports.template)
+  }
+})()}
+},{"vue":12,"vue-hot-reload-api":3}],21:[function(require,module,exports){
 var __vueify_style__ = require("vueify-insert-css").insert("\n\n")
 'use strict';
 
@@ -26160,9 +26496,7 @@ exports.default = {
         update_tags: function update_tags() {},
 
         add_tag: function add_tag(that) {
-            console.log(this.new_tag);
             if (this.new_tag.length > 0) {
-
                 this.list.push({ name: this.new_tag.trim(), new: true });
             }
             this.new_tag = '';
@@ -26179,11 +26513,14 @@ exports.default = {
     computed: {
         tags: function tags() {
             return this.$parent.$data.tags;
+        },
+        error: function error() {
+            return this.list.length > 0 ? '' : 'color:red';
         }
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <legend>\n        Taggar\n    <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"asdfasdf\"></span>\n    </legend>\n    <div class=\"form-group\">\n        <div class=\"tag-group\">\n            <ul>\n                <li class=\"tag\" v-for=\"tag in list\">\n                    <span class=\"tag__name\">{{ tag.name }}</span>\n                    <button class=\"tag__remove\" @click=\"remove_tag($index)\">X</button>\n            </li></ul>\n\n        </div>\n\n        <div class=\"input-group\">\n            <input type=\"text\" name=\"tags\" id=\"inputTags\" class=\"form-control\" list=\"tags\" v-model=\"new_tag\" v-el=\"tagInput\" v-on:keyup.enter=\"add_tag\">\n            <span class=\"input-group-btn\">\n                <button class=\"btn btn-default\" type=\"button\" @click=\"add_tag\">Lägg till</button>\n            </span>\n            <datalist id=\"tags\">\n                <option v-for=\"tag in tags\" value=\"{{ tag.name }}\">{{ tag.name }}</option>\n            </datalist>\n        </div>\n    </div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <legend>\n        Taggar\n    <span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"{{ 'messages.atleast_one_tag' }}\" :style=\"error\"></span>\n    </legend>\n    <div class=\"form-group\">\n        <div class=\"tag-group\">\n            <div class=\"tag label label-default\" v-for=\"tag in list\">\n                <span class=\"tag__name\">{{ tag.name }}</span>\n                <a class=\"tag__remove btn  btn-xs\" @click=\"remove_tag($index)\">\n                    <span class=\"glyphicon glyphicon-remove\"></span>\n                </a>\n            </div>\n        </div>\n        <div class=\"input-group\">\n            <input type=\"text\" name=\"tags\" id=\"inputTags\" class=\"form-control\" list=\"tags\" v-model=\"new_tag\" v-el=\"tagInput\" v-on:keyup.enter=\"add_tag\">\n            <datalist id=\"tags\">\n                <option v-for=\"tag in tags\" value=\"{{ tag.name }}\">{{ tag.name }}</option>\n            </datalist>\n            <span class=\"input-group-btn\">\n                <button class=\"btn btn-default\" type=\"button\" @click=\"add_tag\">Lägg till</button>\n            </span>\n        </div>\n    </div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -26199,16 +26536,16 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, module.exports.template)
   }
 })()}
-},{"vue":12,"vue-hot-reload-api":3,"vueify-insert-css":14}],17:[function(require,module,exports){
+},{"vue":12,"vue-hot-reload-api":3,"vueify-insert-css":14}],22:[function(require,module,exports){
 'use strict';
 
 var _Schedule = require('./components/Schedule.vue');
 
 var _Schedule2 = _interopRequireDefault(_Schedule);
 
-var _Tags = require('./components/Tags.vue');
+var _ScreenList = require('./components/ScreenList.vue');
 
-var _Tags2 = _interopRequireDefault(_Tags);
+var _ScreenList2 = _interopRequireDefault(_ScreenList);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26220,37 +26557,61 @@ Vue.use(require('vue-resource'));
 var vueboot = require('vueboot');
 var bootstrap = require('bootstrap-sass');
 
+Vue.config.debug = true;
+
 window.vue_instance = new Vue({
     el: '#app',
     components: {
-        'Schedule': _Schedule2.default,
         'Alert': vueboot.alert,
-        'Toast': vueboot.toast
+        'Toast': vueboot.toast,
+        Schedule: _Schedule2.default,
+        ScreenList: _ScreenList2.default
 
     },
 
     data: function data() {
         return {
-            show: false
+            show: false,
+            lang: null
         };
     },
 
     methods: {
         addAlert: function addAlert(toast) {
             vueboot.toastService.create(toast);
+        },
+        trans: function trans(string) {
+            var scope = string.split('.')[0];
+            var word = string.split('.')[1];
+
+            if (this.lang && this.lang[scope] && this.lang[scope][word]) return this.lang[scope][word];else return string; // Fallback
+        },
+        trans_choice: function trans_choice(string, num) {
+            var scope = string.split('.')[0];
+            var word = string.split('.')[1];
+
+            if (this.lang && this.lang[scope] && this.lang[scope][word]) return this.lang[scope][word].split('|')[num];else return string; // Fallback
         }
     },
 
     events: {
         'add-alert': function addAlert(toast) {
             vueboot.toastService.create(toast);
+        },
+        'trans': function trans(string) {
+            return this.trans(string);
+        },
+        'trans_choice': function trans_choice(string) {
+            return this.trans_choice(string);
         }
     },
     ready: function ready() {
-        var vm = this;
+        this.$http.get('/api/locales', (function (locale) {
+            this.lang = locale;
+        }).bind(this));
     }
 });
 
-},{"./components/Schedule.vue":15,"./components/Tags.vue":16,"bootstrap-sass":1,"vue":12,"vue-resource":5,"vueboot":13}]},{},[17]);
+},{"./components/Schedule.vue":16,"./components/ScreenList.vue":19,"bootstrap-sass":1,"vue":12,"vue-resource":5,"vueboot":13}]},{},[22]);
 
 //# sourceMappingURL=main.js.map

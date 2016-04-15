@@ -162,6 +162,7 @@ return [
         'Lavary\Menu\ServiceProvider',
         'Laracasts\Flash\FlashServiceProvider',
         Intervention\Image\ImageServiceProvider::class,
+        //Dingo\Api\Provider\LaravelServiceProvider::class,
 
     ],
 
@@ -217,6 +218,8 @@ return [
         'Menu' => 'Lavary\Menu\Facade',
         'Flash' => 'Laracasts\Flash\Flash',
         'Image' => Intervention\Image\Facades\Image::class,
+        //'API' => Dingo\Api\Facade\API::class,
+        //'Api_route' => Dingo\Api\Facade\Route::class,
 
     ],
 
