@@ -17,24 +17,26 @@ Vue.mixin(require('./components/Cache.vue'));
 Vue.mixin(require('./components/Translation.vue'));
 
 window.Vue = new Vue({
+    
     el: '#app',
+
     components: {
         'Alert': vueboot.alert,
         'Toast': vueboot.toast,
         Schedule,
         ScreenList,
-
     },
+
     data: function () {
         return {
             show: false,
         };
     },
+
     methods: {
         addAlert: function(toast) {
             vueboot.toastService.create(toast);
         },
-
     },
 
     events: {
@@ -48,14 +50,12 @@ window.Vue = new Vue({
             return this.trans_choice(string);
         }
     },
-    created: function(){
-        this.Load();
-    },
+
     ready: function() {
-            //this.Load(); // Get currently stored Data
-            this.$http.get('/api/locales', function(locale) {
-                this.Set('lang',locale); // Update Lang-Data
-                this.Save();             // Save Data
-            });
-    }
+        this.Load(); // Get currently stored Data
+        this.$http.get('/api/locales', function(locale) {
+            this.Set('lang',locale); // Update Lang-Data
+        });
+    },
+
 });
