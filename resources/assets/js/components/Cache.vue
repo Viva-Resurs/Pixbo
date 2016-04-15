@@ -48,19 +48,5 @@
                 this.Save();
             },
         },
-        init: function(){
-            if (sessionStorage)
-                try {
-                    this.CacheData = JSON.parse(sessionStorage.PixboData);
-                } catch (err) {
-                    console.log('init : Problem with JSON.parse : '+err);
-                    console.log('init : Trying to reset sessionStorage...');
-                    sessionStorage.PixboData = '{}';
-                }
-            else
-                console.log('init : No sessionStorage present.');
-        }
     };
 </script>
-
-

@@ -12,6 +12,19 @@ import ScreenList from './components/ScreenList.vue';
 
 Vue.config.debug = true
 
+// Collect sessionStorage before Vue so that data is ready.
+var _data = {};
+try {
+    _data = JSON.parse(sessionStorage.PixboData);
+} catch (err) {
+    console.log('Problem with JSON.parse : '+err);
+    console.log('Trying to reset sessionStorage...');
+    sessionStorage.PixboData = _data = '{}';
+}
+window._lang = (_data.lang) ? _data.lang : {} ;
+
+
+
 // Import as global-mixin
 Vue.mixin(require('./components/Cache.vue'));
 Vue.mixin(require('./components/Translation.vue'));

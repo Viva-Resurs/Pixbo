@@ -2,7 +2,7 @@
     export default {
         data: function () {
             return {
-                lang: this.Get('lang'),
+                lang: window._lang, //this.Get('lang'),
             };
         },
         methods: {
