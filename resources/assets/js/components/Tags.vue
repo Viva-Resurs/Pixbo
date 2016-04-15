@@ -18,7 +18,7 @@
                 <option v-for="tag in tags" value="{{ tag.name }}">{{ tag.name }}</option>
             </datalist>
             <span class="input-group-btn">
-                <button class="btn btn-default" type="button" @click="add_tag">Lägg till</button>
+                <button class="btn btn-default {{ asdfasdf }}" type="button" @click="add_tag">Lägg till</button>
             </span>
         </div>
     </div>
@@ -36,20 +36,21 @@
         },
 
         methods: {
+
             add_tag: function(that) {
-                if(this.new_tag.length > 0) {
-                    // TODO: Need to fix JS to check of the objects name in the list equals this.new_tag
-                    var exists = (this.list.indexOf(this.new_tag.trim()));
-                    if (!exists) {
-                        this.list.push({name: this.new_tag.trim(), new: true});
-                    }
-
-
+                if(this.new_tag.length > 0 && this.isValid()) {
+                    this.list.push({name: this.new_tag.trim(), new: true});
                 }
                 this.new_tag = '';
             },
             remove_tag: function(index) {
                 this.list.splice(index, 1);
+            },
+            isValid: function() {
+                for (var i=0 ; i<this.list.length ; i++)
+                    if ( this.list[i].name == this.new_tag.trim() )
+                        return false;
+                return true;
             },
         },
 
@@ -59,6 +60,10 @@
             },
             error: function () {
                 return this.list.length > 0 ? '' : 'color:red';
+            },
+
+            asdfasdf: function() {
+                return (this.isValid) ? '' : 'btn-danger';
             }
         },
     };
