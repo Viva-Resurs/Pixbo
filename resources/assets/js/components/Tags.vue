@@ -38,7 +38,8 @@
         methods: {
             add_tag: function(that) {
                 if(this.new_tag.length > 0) {
-                    var exists = !(this.list.indexOf(this.new_tag.trim()) > -1);
+                    // TODO: Need to fix JS to check of the objects name in the list equals this.new_tag
+                    var exists = (this.list.indexOf(this.new_tag.trim()));
                     if (!exists) {
                         this.list.push({name: this.new_tag.trim(), new: true});
                     }
@@ -50,10 +51,6 @@
             remove_tag: function(index) {
                 this.list.splice(index, 1);
             },
-        },
-
-        ready: function() {
-            this.list = this.list;
         },
 
         computed: {
