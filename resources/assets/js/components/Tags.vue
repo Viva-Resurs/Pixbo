@@ -1,7 +1,7 @@
 <template id="tag-template">
     <legend>
         Taggar
-    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ 'messages.atleast_one_tag' }}" :style="error"></span>
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('messages.atleast_one_tag') }}" :style="error"></span>
     </legend>
     <div class="form-group">
         <div class="tag-group">
