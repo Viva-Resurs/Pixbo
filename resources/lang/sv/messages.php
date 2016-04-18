@@ -74,6 +74,7 @@ return [
 	'add_ticker'                    => 'Ticker text',
 	'add_screen_group'              => 'Lägg till område',
 	'add_user'                      => 'Lägg till användare',
+	'add_client'                    => 'Lägg till bildskärm',
 
 	// SHOW MODEL
 	'show_screen_group'             => 'Visa område',

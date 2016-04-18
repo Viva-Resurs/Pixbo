@@ -10,11 +10,9 @@
                 @include ('flash::message')
                 <toast></toast>
             </div>
-            
-            <div class="panel">
+            <div class="container">
                 @yield('content')
             </div>
-
         </div>
     </div>
 </div>

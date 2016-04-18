@@ -72,8 +72,9 @@ return [
     // ADD MODEL
     'add_screen'                    => 'Add screen',
     'add_ticker'                    => 'Add ticker',
-    'add_screen_group'              => 'Add screemgroup',
+    'add_screen_group'              => 'Add screengroup',
     'add_user'                      => 'Add user',
+    'add_client'                    => 'Add client',
 
     // SHOW MODEL
     'show_screen_group'             => 'Show screengroup',

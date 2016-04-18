@@ -10,8 +10,8 @@
 
 @section('content')
 
-    <div class="row" id="actions">
-        <div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="panel-title">
