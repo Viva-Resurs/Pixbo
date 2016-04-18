@@ -2,7 +2,7 @@
     export default {
         data: function () {
             return {
-                lang: window._lang, //this.Get('lang'),
+                lang: window.PixboStorage.Get('lang'), // Get data from here
             };
         },
         methods: {
