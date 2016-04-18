@@ -38,6 +38,7 @@ Features:
         Carusell
 
 Bugs:
+    * When a user changes language the vue-translate doesn't update it's lang files unless the user manually refreshes the site.
 
 
 Remember:

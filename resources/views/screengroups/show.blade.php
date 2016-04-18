@@ -10,10 +10,11 @@
 @stop
 
 @section('content')
-    <div class="panel-header">
+    <div class="panel panel-default">
+    <div class="panel-heading">
         <h1>{{ $screengroup->name }}
 
-        @include('shared.actions', ['model' => 'admin.screengroups', 'item' => $screengroup, 'from' => 'screengroups'])
+            @include('shared.actions', ['model' => 'admin.screengroups', 'item' => $screengroup, 'from' => 'screengroups'])
 
         </h1>
     </div>
@@ -21,9 +22,7 @@
         <h2>{{ trans_choice('messages.screen', 2) }}</h2>
         <hr>
             @if( count($screengroup->screens) > 0)
-                @foreach ($screengroup->screens as $card)
-                    @include('screens.screen__card', ['card' => $card, 'from' => 'screengroups'])
-                @endforeach
+                <screen-list url="/api/screengroup/{{$screengroup->id}}/screens"></screen-list>
             @else
                 {{ trans('messages.no_images') }}
             @endif
@@ -40,4 +39,5 @@
         @include('clients.table', ['list' => $screengroup->clients, 'from' => 'screengroups'])
     </div>
     @endcan
+    </div>
 @stop

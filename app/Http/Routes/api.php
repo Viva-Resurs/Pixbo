@@ -11,6 +11,11 @@ Route::get('/api/screengroups', function () {
     })->toArray();
 });
 
+Route::get('/api/screengroup/{id}/screens', function($id) {
+    $screengroup = App\Models\ScreenGroup::with('screens.photo')->findOrFail($id);
+    return $screengroup->screens;
+});
+
 Route::get('/api/tags', function () {
     $tags = App\Models\Tag::all(['id', 'name']);
     return $tags->map(function ($tags) {
