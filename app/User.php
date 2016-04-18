@@ -41,26 +41,32 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
-/**
- * Client association
- * @return [type] [description]
- */
+	/*********************
+	 * User associations *
+	 ********************/
+	
 	public function client() {
 		return $this->hasOne(Client::class);
 	}
-
-/**
- * ScreenGroup association
- * @return [type] [description]
- */
+	
 	public function screengroups() {
 		return $this->hasMany(ScreenGroup::class);
 	}
-
+	
 	public function roles() {
 		return $this->belongsToMany(Role::class);
 	}
+	
+	public function online() {
+		return $this->hasOne(Online::class);
+	}
 
+	/**
+	 * Checks if the user has the given role.
+	 * 
+	 * @param $role
+	 * @return bool
+	 */
 	public function hasRole($role) {
 		if (is_string($role)) {
 			return $this->roles->contains('name', $role);
@@ -69,6 +75,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return !!$role->intersect($this->roles)->count();
 	}
 
+	/**
+	 * Assigns a role to the user.
+	 * 
+	 * @param $role
+	 * @return Model
+	 */
 	public function assignRole($role) {
 		if (is_string($role)) {
 			$role_model = Role::where('name', $role)->firstOrFail();
@@ -78,10 +90,25 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $this->roles()->save($role);
 	}
 
-	public function online() {
-		return $this->hasOne(Online::class);
-	}
+    /**
+     * Get an array of the users roles
+     *
+     * @return array
+     */
+    public function getRoleAttribute() {
+        $roles       = $this->roles;
+        $roles_array = [];
+        foreach ($roles as $role) {
+            array_push($roles_array, $role->name);
+        }
+        return $roles_array;
+    }
 
+	/**
+	 * Gets the last activity of the user
+	 * 
+	 * @return string
+	 */
 	public function getLastActivityAttribute() {
 		if (!is_null($this->online)) {
 			$time = Carbon::now()->timestamp($this->online->last_activity);
@@ -92,15 +119,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		}
 	}
 
-	public function getRoleAttribute() {
-		$roles       = $this->roles;
-		$roles_array = [];
-		foreach ($roles as $role) {
-			array_push($roles_array, $role->name);
-		}
-		return $roles_array;
-	}
-
+	/**
+	 * Creates a user from the given request
+	 * TODO: Move to a UserRequest object.
+	 * 
+	 * @param $request
+	 * @return bool
+	 */
 	public static function createUserFromRequest($request) {
 		$result = DB::transaction(function () use ($request) {
 			$user = new User;
@@ -117,6 +142,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return is_null($result) ? true : false;
 	}
 
+	/**
+	 * Update a user from a given request
+	 * 
+	 * @param $request
+	 * @return mixed
+	 */
 	public function updateUserFromRequest($request) {
 		$that = $this;
 		$result = DB::transaction(function() use ($request, $that) {
@@ -127,6 +158,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $result;
 	}
 
+	/**
+	 * Password attribute mutator. 
+	 * Hashes the password before writing it to the database.
+	 * 
+	 * @param $value
+	 */
 	public function setPasswordAttribute($value) {
 		// Don't update the password if it's blank!
 		if($value != "")
