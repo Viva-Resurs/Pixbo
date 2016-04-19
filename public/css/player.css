@@ -1,27 +1,13 @@
-
-.vegas-timer {
-    z-index: 500 !important;
-}
-
-.vegas-timer-progress {
-    background: #F24535;
-}
-
-.vegas-overlay {
-    opacity: .5;
-}
-
+/* General */
 *, *:before, *:after {
     box-sizing: border-box;
 }
-
 html, body {
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
 }
-
 body {
     position: relative;
     background: #000;
@@ -29,121 +15,50 @@ body {
     font: 1em Arial, sans-serif;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
+/* Vegas Customizing */
+.vegas-timer {
+    z-index: 500 !important;
+}
+.vegas-timer-progress {
+    background: #F24535;
+}
+.vegas-overlay {
+    opacity: .5;
 }
 
-
-.container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    min-width: 1280px;
+/* Ticker Customizing */
+.ticker-wrapper {
+  position: fixed;
+  bottom: 2px;
+  left: 0px;
+  width: 100%;
+  height: 7.7%;
+  margin: 0px;
+  padding: 0px;
+  border: 1px #000000 solid;
+  background-color: rgba(77,77,77,0.3);
+}
+.ticker-content {
+  font-size: 4vh;
+  margin: 1.7vh 1.7vw 2vh 1.7vw;
+  font-family: 'courier new';
+  color: #feff80;
 }
 
-
-.orientation {
-    background: rgba(0,0,0,.8);
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 600;
-    pointer-events: none;
-    opacity: 0;
-    animation-fill-mode: forwards;
-}
-    .orientation img {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 400px;
-        height: 300px;
-        margin-left: -200px;
-        margin-top: -200px;
-        height: auto;
-        transform: rotate(45deg);
-        animation-fill-mode: both;
-        animation-iteration-count: 3;
-    }
-
-@media only screen and (orientation: portrait) and (max-device-width: 768px) {
-    .orientation {
-        animation: disapear 6s;
-    }
-    .orientation img {
-        animation: rotation ease-in-out 2s infinite;
-    }
-}
-
-@keyframes rotation {
-    0% {
-        opacity: 0;
-        transform: rotate(45deg)
-    }
-    95% {
-        opacity: 1;
-        transform: rotate(-45deg);
-    }
-    100% {
-        opacity: 0;
-        transform: rotate(45deg)
-    }
-}
-
-@keyframes disapear {
-    0% {
-        opacity: 0;
-    }
-    5% {
-        opacity: 1;
-    }
-    95% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-}
-
-/* CSS for vegas_control */
-div.vegas_control {
-    width: 100%;
+/* Control */
+.vegas_control {
     position: fixed;
     top:0px;
     right: 10px;
 }
-.vegas_control a, .vegas_control a:focus, .vegas_control a:active {
-  background: rgba(0,0,0,0.5);
-  color: #fff;
-  border: 1px solid rgba(0,0,0,0.5);
-  border-radius: 25px;
-  box-shadow: 0px 0px 5px #000000;
-  outline:0;
-  float: right;
-  width: 35px;
-  height: 35px;
-  margin: 5px 10px;
-  text-align: center;
-  vertical-align: center;
-  line-height: 35px;
-}
-.vegas_control a:hover {
-  background: rgba(0,0,0,0.5);
-  color: #fff;
-  border: 1px solid rgba(222,222,222,0.5);
-  border-radius: 25px;
-  cursor: pointer;
-}
-
 .ticker_control {
     position: fixed;
     bottom: 0vh;
     right: 10px;
 }
-.ticker_control li, .ticker_control li:focus, .ticker_control li:active {
+.vegas_control a,   .vegas_control a:focus,   .vegas_control a:active,
+.ticker_control li, .ticker_control li:focus, .ticker_control li:active
+{
   background: rgba(0,0,0,0.5);
   color: #fff;
   border: 1px solid rgba(0,0,0,0.5);
@@ -158,8 +73,9 @@ div.vegas_control {
   vertical-align: center;
   line-height: 35px;
 }
-.ticker_control li a { display: none; }
-.ticker_control li:hover {
+.vegas_control a:hover,
+.ticker_control li:hover
+{
   background: rgba(0,0,0,0.5);
   color: #fff;
   border: 1px solid rgba(222,222,222,0.5);
@@ -168,15 +84,13 @@ div.vegas_control {
 }
 
 /*!
+ * Glyphicons for Controls (prev,next,play,pause)
+ */
+/*!
  * Bootstrap v3.3.5 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-
-/*!
- * Glyphicons for Player-Controls
- */
-
 @font-face {
   font-family: 'Glyphicons Halflings';
   src: url('../fonts/bootstrap/glyphicons-halflings-regular.eot');
@@ -198,7 +112,6 @@ div.vegas_control {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 .glyphicon-play:before {
   content: "\e072";
 }

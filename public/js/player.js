@@ -274,10 +274,10 @@ vegas_control.init = function (){
     this.element.style.display = "none"; // Hide Controls on start.
 
     // Append Elements
-      this.element.appendChild(this.buttons.next.element);
+      this.element.appendChild(this.buttons.prev.element);
       this.element.appendChild(this.buttons.play.element);
       this.element.appendChild(this.buttons.pause.element);
-      this.element.appendChild(this.buttons.prev.element);
+      this.element.appendChild(this.buttons.next.element);
     $vegas_target.append(this.element);
 };
 vegas_control.init();
