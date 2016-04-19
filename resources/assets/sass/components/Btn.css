@@ -3,6 +3,15 @@
   cursor: help;
 }
 
+/* Fix Input-CSS on Warning-state */
+.has-warning .form-control {
+  border-color: #F00; color:#330000; background-color:#FFEFEF;
+}
+.has-warning .form-control:active, .has-warning .form-control:focus {
+  border-color: #F00; color:#330000; background-color:#FFEFEF;
+    box-shadow: 0px 0px 5px #ff0000;
+}
+
 /* Prevent Button-Groups from wrapping (in tables) */
 td div.btn-group {
   white-space: nowrap;
