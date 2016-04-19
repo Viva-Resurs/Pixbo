@@ -34,6 +34,10 @@ body {
   width: auto;
 }
 
+.main {
+   @extend .col-sm-12, .col-sm-offset-0, .col-md-10, .col-md-offset-1, .col-lg-10, .col-lg-offset-1;
+}
+
 /*
  * Base structure
  */
