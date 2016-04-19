@@ -1,0 +1,11 @@
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+}
+.main {
+   @extend .col-sm-12, .col-sm-offset-0, .col-md-10, .col-md-offset-1, .col-lg-10, .col-lg-offset-1;
+   padding: 20px;
+}
+.main .page-header {
+  margin-top: 0;
+}

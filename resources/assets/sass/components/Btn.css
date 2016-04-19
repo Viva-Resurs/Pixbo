@@ -1,0 +1,26 @@
+/* Tooltip cursor-change */
+.glyphicon-exclamation-sign {
+  cursor: help;
+}
+
+/* Prevent Button-Groups from wrapping (in tables) */
+td div.btn-group {
+  white-space: nowrap;
+}
+td div.btn-group .btn {
+  float: none;
+  display: inline-block;
+}
+
+.delete-button {
+    display: block;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.42857;
+    color: #333333;
+    white-space: nowrap;
+}
