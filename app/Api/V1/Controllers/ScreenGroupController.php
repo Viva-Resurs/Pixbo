@@ -45,8 +45,9 @@ class ScreenGroupController extends BaseController
             ]);
             return $this->response->created();
         }
-        else
+        else {
             return $this->response->error('could_not_create_screengroup', 500);
+        }
     }
 
     public function show($id) {
@@ -54,8 +55,9 @@ class ScreenGroupController extends BaseController
             $this->response->error('permission_denied', 401);
         }
         $screengroup = ScreenGroup::find($id);
-        if(!$screengroup)
+        if(!$screengroup) {
             throw new NotFoundHttpException;
+        }
 
         return $screengroup;
     }
@@ -66,10 +68,11 @@ class ScreenGroupController extends BaseController
         }
         $screengroup = ScreenGroup::find($id);
 
-        if(!$screengroup)
+        if(!$screengroup) {
             throw new NotFoundHttpException;
+        }
 
-        if($screengroup->update($request->all())) {
+        if($screengroup->update($request->only(['name', 'desc']))) {
             Activity::log([
                 'contentId' => $screengroup->id,
                 'contentType' => 'Screengroup',
@@ -78,10 +81,9 @@ class ScreenGroupController extends BaseController
                 'details' => 'ScreenGroup: '.$screengroup->name,
             ]);
             return $this->response->noContent();
-        }
-
-        else
+        } else {
             return $this->response->error('could_not_update_screengroup', 500);
+        }
     }
 
     public function destroy($id) {
@@ -90,8 +92,9 @@ class ScreenGroupController extends BaseController
         }
         $screengroup = ScreenGroup::find($id);
 
-        if(!$screengroup)
+        if(!$screengroup) {
             throw new NotFoundHttpException;
+        }
 
         if($screengroup->delete()) {
             Activity::log([
@@ -102,8 +105,8 @@ class ScreenGroupController extends BaseController
                 'details' => 'ScreenGroup: '.$screengroup->name,
             ]);
             return $this->response->noContent();
-        }
-        else
+        } else {
             return $this->response->error('could_not_delete_screengroup', 500);
+        }
     }
 }
