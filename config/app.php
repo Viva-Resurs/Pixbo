@@ -149,7 +149,8 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Regulus\ActivityLog\ActivityLogServiceProvider::class,
     ],
 
     /*
@@ -204,6 +205,7 @@ return [
          */
         'JWTAuth'       => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory'    => Tymon\JWTAuth\Facades\JWTFactory::class,
+        'Activity' => Regulus\ActivityLog\Models\Activity::class,
     ],
 
 ];

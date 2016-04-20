@@ -10,3 +10,4 @@ _ide_helper.php
 public/css/
 public/js/
 storage/database.sqlite
+storage/database.sqlite-journal
