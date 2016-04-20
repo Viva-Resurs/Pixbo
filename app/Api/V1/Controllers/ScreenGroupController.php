@@ -2,28 +2,31 @@
 
 namespace App\Api\V1\Controllers;
 
+use App\Api\V1\Transformers\ScreenGroup\ScreenGroupListTransformer;
 use App\Models\ScreenGroup;
-
+use App\Api\V1\Transformers\ScreenGroup\ScreenGroupTransformer;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Activity;
+use Input;
 
 class ScreenGroupController extends BaseController
 {
     public function index() {
         
         // TODO: Add Authorization;
-        return ScreenGroup::all();
+        if(Input::get('list')) {
+            return $this->collection(ScreenGroup::all(), new ScreenGroupListTransformer());
+        }
+
+        return $this->collection(ScreenGroup::all(), new ScreenGroupTransformer());
     }
 
     public function store(Request $request) {
         $screengroup = new ScreenGroup;
 
-        $screengroup->fill([
-            'name' => $request->get('name'),
-            'desc' => $request->get('desc')
-        ]);
+        $screengroup->fill($request->only(['name', 'desc']));
         
         if($this->user->screengroups()->save($screengroup)) {
             Activity::log([
