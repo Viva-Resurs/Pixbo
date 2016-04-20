@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "pixbo/pixbo",
+    "description": "Pixbo the digital signage",
+    "keywords": ["pixbo", "laravel", "digitalsignage"],
     "license": "MIT",
     "type": "project",
     "require": {
@@ -11,7 +11,9 @@
         "dingo/api": "1.0.*@dev",
         "barryvdh/laravel-cors": "^0.7.1",
         "doctrine/dbal": "^2.5",
-        "regulus/activity-log": "^0.5.5"
+        "regulus/activity-log": "^0.5.5",
+        "enyo/dropzone": "^4.3",
+        "intervention/image": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -51,7 +53,8 @@
             "php artisan clear-compiled"
         ],
         "post-update-cmd": [
-            "php artisan optimize"
+            "php artisan optimize",
+            "php artisan ide-helper:generate"
         ]
     },
     "config": {
