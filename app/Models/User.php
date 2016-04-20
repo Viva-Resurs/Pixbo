@@ -10,6 +10,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
+
 /**
  * App\Models\User
  *
@@ -57,6 +58,8 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $hidden = ['password', 'remember_token'];
 
+    protected $appends = ['role'];
+
     /**
      * This mutator automatically hashes the password.
      *
@@ -64,10 +67,86 @@ class User extends Model implements AuthenticatableContract,
      */
     public function setPasswordAttribute($value)
     {
-        $this->attributes['password'] = \Hash::make($value);
+        if($value != "" || $value != null)
+            $this->attributes['password'] = \Hash::make($value);
     }
 
+
+    /***********************************************************************************
+     *                      Associations                                               *
+     **********************************************************************************/
+
+    /**
+     * Screengroup association
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function screengroups() {
         return $this->hasMany(ScreenGroup::class);
+    }
+
+    /**
+     * Client association
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function clients() {
+        return $this->hasMany(Client::class);
+    }
+
+    /**
+     * Role association
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function roles() {
+        return $this->belongsToMany(Role::class);
+    }
+
+    /***********************************************************************************
+     *                      ACL                                                        *
+     **********************************************************************************/
+
+    /**
+     * Check if the User have a given role
+     *
+     * @param $role
+     * @return bool
+     */
+    public function hasRole($role) {
+        if (is_string($role)) {
+            return $this->roles->contains('name', $role);
+        }
+
+        return !!$role->intersect($this->roles)->count();
+    }
+
+    /**
+     * Assign a given role to the User
+     *
+     * @param $role
+     * @return Model
+     */
+    public function assignRole($role) {
+        if (is_string($role)) {
+            $role_model = Role::where('name', $role)->firstOrFail();
+            return $this->roles()->save($role_model);
+        }
+
+        return $this->roles()->save($role);
+    }
+
+    /**
+     * Get an array of the Users roles
+     *
+     * @return array
+     */
+    public function getRoleAttribute() {
+        $roles       = $this->roles;
+        $roles_array = [];
+        foreach ($roles as $role) {
+            array_push($roles_array, $role->name);
+        }
+        return $roles_array;
     }
 }
