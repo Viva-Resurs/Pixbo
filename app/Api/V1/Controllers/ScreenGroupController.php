@@ -5,6 +5,7 @@ namespace App\Api\V1\Controllers;
 use App\Api\V1\Transformers\ScreenGroup\ScreenGroupListTransformer;
 use App\Models\ScreenGroup;
 use App\Api\V1\Transformers\ScreenGroup\ScreenGroupTransformer;
+use Gate;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -14,8 +15,11 @@ use Input;
 class ScreenGroupController extends BaseController
 {
     public function index() {
-        
-        // TODO: Add Authorization;
+
+        if (Gate::denies('view_screengroups')) {
+            $this->response->error('permission_denied', 401);
+        }
+
         if(Input::get('list')) {
             return $this->collection(ScreenGroup::all(), new ScreenGroupListTransformer());
         }
@@ -24,8 +28,11 @@ class ScreenGroupController extends BaseController
     }
 
     public function store(Request $request) {
-        $screengroup = new ScreenGroup;
+        if (Gate::denies('add_screengroups')) {
+            $this->response->error('permission_denied', 401);
+        }
 
+        $screengroup = new ScreenGroup;
         $screengroup->fill($request->only(['name', 'desc']));
         
         if($this->user->screengroups()->save($screengroup)) {
@@ -43,6 +50,9 @@ class ScreenGroupController extends BaseController
     }
 
     public function show($id) {
+        if (Gate::denies('view_screengroups')) {
+            $this->response->error('permission_denied', 401);
+        }
         $screengroup = ScreenGroup::find($id);
         if(!$screengroup)
             throw new NotFoundHttpException;
@@ -51,6 +61,9 @@ class ScreenGroupController extends BaseController
     }
 
     public function update(Request $request, $id) {
+        if (Gate::denies('edit_screengroups')) {
+            $this->response->error('permission_denied', 401);
+        }
         $screengroup = ScreenGroup::find($id);
 
         if(!$screengroup)
@@ -72,6 +85,9 @@ class ScreenGroupController extends BaseController
     }
 
     public function destroy($id) {
+        if (Gate::denies('remove_screengroups')) {
+            $this->response->error('permission_denied', 401);
+        }
         $screengroup = ScreenGroup::find($id);
 
         if(!$screengroup)
