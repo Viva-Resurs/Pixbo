@@ -5,7 +5,7 @@ namespace App\Api\V1\Controllers;
 use JWTAuth;
 use Validator;
 use Config;
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Message;
 use Dingo\Api\Routing\Helpers;
