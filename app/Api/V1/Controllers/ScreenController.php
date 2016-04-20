@@ -50,7 +50,7 @@ class ScreenController extends BaseController
             ]);
             return $this->response->created();
         } else {
-            return $this->response->error('could_not_create_screengroup', 500);
+            return $this->response->error('could_not_create_screen', 500);
         }
     }
 

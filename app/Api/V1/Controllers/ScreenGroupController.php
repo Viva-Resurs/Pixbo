@@ -41,7 +41,7 @@ class ScreenGroupController extends BaseController
                 'contentType' => 'Screengroup',
                 'action' => 'Create',
                 'description' => 'Created a ScreenGroup',
-                'details' => 'ScreenGroup: '.$screengroup->name,
+                'details' => $screengroup->toJson(),
             ]);
             return $this->response->created();
         }
@@ -78,7 +78,7 @@ class ScreenGroupController extends BaseController
                 'contentType' => 'Screengroup',
                 'action' => 'Update',
                 'description' => 'Updated a ScreenGroup',
-                'details' => 'ScreenGroup: '.$screengroup->name,
+                'details' => $screengroup->toJson(),
             ]);
             return $this->response->noContent();
         } else {
@@ -102,7 +102,7 @@ class ScreenGroupController extends BaseController
                 'contentType' => 'Screengroup',
                 'action' => 'Delete',
                 'description' => 'Deleted a ScreenGroup',
-                'details' => 'ScreenGroup: '.$screengroup->name,
+                'details' => $screengroup->toJson(),
             ]);
             return $this->response->noContent();
         } else {
