@@ -7,6 +7,7 @@ use App\Models\ScreenGroup;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Activity;
 
 class ScreenGroupController extends BaseController
 {
@@ -24,8 +25,16 @@ class ScreenGroupController extends BaseController
             'desc' => $request->get('desc')
         ]);
         
-        if($this->user->screengroups()->save($screengroup))
+        if($this->user->screengroups()->save($screengroup)) {
+            Activity::log([
+                'contentId' => $screengroup->id,
+                'contentType' => 'Screengroup',
+                'action' => 'Create',
+                'description' => 'Created a ScreenGroup',
+                'details' => 'ScreenGroup: '.$screengroup->name,
+            ]);
             return $this->response->created();
+        }
         else
             return $this->response->error('could_not_create_screengroup', 500);
     }
@@ -45,6 +54,13 @@ class ScreenGroupController extends BaseController
             throw new NotFoundHttpException;
 
         if($screengroup->update($request->all())) {
+            Activity::log([
+                'contentId' => $screengroup->id,
+                'contentType' => 'Screengroup',
+                'action' => 'Update',
+                'description' => 'Updated a ScreenGroup',
+                'details' => 'ScreenGroup: '.$screengroup->name,
+            ]);
             return $this->response->noContent();
         }
 
@@ -58,8 +74,16 @@ class ScreenGroupController extends BaseController
         if(!$screengroup)
             throw new NotFoundHttpException;
 
-        if($screengroup->delete())
+        if($screengroup->delete()) {
+            Activity::log([
+               'contentId' => $screengroup->id,
+                'contentType' => 'Screengroup',
+                'action' => 'Delete',
+                'description' => 'Deleted a ScreenGroup',
+                'details' => 'ScreenGroup: '.$screengroup->name,
+            ]);
             return $this->response->noContent();
+        }
         else
             return $this->response->error('could_not_delete_screengroup', 500);
     }
