@@ -43,8 +43,6 @@ class Client extends Model
         'name',
         'ip_address',
         'screen_group_id',
-        'created_at',
-        'updated_at',
         'activity',
     ];
     protected $appends = ['group'];

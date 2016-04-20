@@ -19,7 +19,7 @@ $api->version('v1', function ($api) {
 		return \App\Models\User::all();
 	});
 	$api->group(['middleware' => 'api.auth'], function ($api) {
-		$api->get('client', 'App\Api\V1\Controllers\ClientController@index');
+		$api->resource('client', 'App\Api\V1\Controllers\ClientController');
 		$api->resource('screengroup', 'App\Api\V1\Controllers\ScreenGroupController');
 	});
 
