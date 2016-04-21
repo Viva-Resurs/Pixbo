@@ -1,5 +1,5 @@
 <?php
-namespace App\Api\V1\Transformers\Client;
+namespace App\Api\V1\Transformers\Activity;
 use App\Models\Activity;
 use League\Fractal\TransformerAbstract;
 class ActivityTransformer extends TransformerAbstract
