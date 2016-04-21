@@ -2,36 +2,40 @@ window.Vue = require('vue')
 window.VueRouter = require('vue-router')
 Vue.use(VueRouter)
 
-Vue.use(require('vue-resource'))
+var bootstrap = require('bootstrap-sass');
 
-var router = new VueRouter()
+// Import the actual routes, aliases, ...
+import { configRouter } from './routes'
 
-import App from './components/App.vue'
-import Home from './components/Home.vue'
-import Login from './components/auth/Login.vue'
+// Create our router object and set options on it
+const router = new VueRouter()
 
+// Inject the routes into the VueRouter object
+configRouter(router)
 
-router.map({
-    '/home': {
-        component: Home
-    },
-     //    'secretquote': {
-     //    component: SecretQuote
-     //    },
-         '/login': {
-         component: Login
-         },
-     //    '/signup': {
-     //    component: Signup
-     //    } */
+// Configure the application
+window.config = require('./config')
+Vue.config.debug = true
 
-
-})
-
-router.redirect({
-    '*': '/home'
-})
+// Configure our HTTP client
+var rest = require('rest')
+var pathPrefix = require('rest/interceptor/pathPrefix')
+var mime = require('rest/interceptor/mime')
+var defaultRequest = require('rest/interceptor/defaultRequest')
+var errorCode = require('rest/interceptor/errorCode')
+var interceptor = require('rest/interceptor')
+var jwtAuth = require('./interceptors/jwAuth.js')
 
 
+window.client = rest.wrap(pathPrefix, { prefix: config.api.base_url })
+    .wrap(mime)
+    .wrap(defaultRequest, config.api.defaultRequest)
+    .wrap(errorCode, { code: 400 })
+    .wrap(jwtAuth);
 
+// Bootstrap the app
+Vue.component('nav-component', require('./components/Nav.vue'))
+Vue.component('footer-component', require('./components/Footer.vue'))
+const App = Vue.extend(require('./App.vue'))
 router.start(App, '#app')
+window.router = router
