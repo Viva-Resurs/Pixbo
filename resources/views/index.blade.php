@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Laravel</title>
+    <title>Pixbo</title>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
