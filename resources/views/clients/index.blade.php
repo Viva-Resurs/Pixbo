@@ -5,7 +5,7 @@
 @stop
 
 @section('header')
-    @include('shared.datagrid', ['table_id_list_string' => 'clients_table'])
+    @include('shared.datatables', ['table_id_list_string' => 'clients_table'])
 @stop
 
 @section('content')

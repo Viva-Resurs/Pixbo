@@ -1,3 +1,4 @@
+<!-- DataTables -->
 <script type="text/javascript" src="/js/vendor/dataTables/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/vendor/jquery.dataTables.min.css">
 <script>
