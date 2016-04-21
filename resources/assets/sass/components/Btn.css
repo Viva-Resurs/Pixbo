@@ -20,6 +20,10 @@ td div.btn-group .btn {
   float: none;
   display: inline-block;
 }
+/* Prevent Tooltip from wrapping (in tables) */
+td div.btn-group .tooltip-inner {
+	white-space: nowrap;
+}
 
 .delete-button {
     display: block;
