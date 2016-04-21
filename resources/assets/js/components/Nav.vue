@@ -18,7 +18,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a v-link="{ path: '/home' }">Home</a></li>
-                    <li><a v-link="{ path: '/dogs' }" v-if="$root.authenticated">Dogs</a></li>
+                    <li><a v-link="{ path: '/screengroups' }" v-if="$root.authenticated">Screengroups</a></li>
                 </ul>
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">

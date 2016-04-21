@@ -38,22 +38,22 @@ module.exports = {
                     }
                 }
             },
-            /*
-            '/dogs': {
-                component: require('./compiled/pages/dogs.vue'),
+            
+            '/screengroups': {
+                component: require('./pages/ScreenGroup.vue'),
                 auth: true,
                 subRoutes: {
                     '/': {
-                        component: require('./compiled/pages/dogs/index.vue')
+                        component: require('./pages/screengroups/index.vue')
                     },
                     '/:id': {
-                        component: require('./compiled/pages/dogs/show.vue')
+                        component: require('./pages/screengroups/show.vue')
                     },
                     '/create': {
-                        component: require('./compiled/pages/dogs/create.vue')
+                        component: require('./pages/screengroups/create.vue')
                     }
                 }
-            },*/
+            },
             '/terms': {
                 component: require('./pages/Terms.vue')
             },

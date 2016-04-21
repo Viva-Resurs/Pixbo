@@ -20,7 +20,7 @@ $api->version('v1', function ($api) {
 	});
 	$api->group(['middleware' => 'api.auth'], function ($api) {
 		$api->resource('client', 		'App\Api\V1\Controllers\ClientController');
-		$api->resource('screengroup', 	'App\Api\V1\Controllers\ScreenGroupController');
+		$api->resource('screengroups', 	'App\Api\V1\Controllers\ScreenGroupController');
 		$api->resource('screen', 		'App\Api\V1\Controllers\ScreenController');
 		$api->resource('ticker', 		'App\Api\V1\Controllers\TickerController');
 
