@@ -1,9 +1,11 @@
-    @extends('app')
+@extends('app')
 
-    @section('title')
+@section('title')
     Pixbo
-    @stop
-    @section('content')
-        <div class="content">
-        </div>
-    @stop
+@stop
+
+@section('content')
+    <div class="content">
+    
+    </div>
+@stop
