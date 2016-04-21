@@ -190,6 +190,11 @@ class RolesTablesSeeder extends Seeder {
             'label' => 'auth.edit_site_settings'
         ]);
 
+        $view_activity = Permission::create([
+            'name' => 'view_activity',
+            'label' => 'auth.view_activity'
+        ]);
+
         /**
          * Roles
          */
@@ -240,6 +245,7 @@ class RolesTablesSeeder extends Seeder {
 
         // Site Settings
         $admin->givePermissionTo($edit_site_settings);
+        $admin->givePermissionTo($view_activity);
 
         // Moderator
         $moderator = Role::create([
