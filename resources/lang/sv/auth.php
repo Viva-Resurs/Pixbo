@@ -15,7 +15,7 @@ return [
 
 	'failed'          => 'Ogiltiga uppgifter, försök igen.',
 	'throttle'        => 'För många login försök. Försök igen om :seconds sekunder.',
-	'forgot'	      => 'Glömt lösenordet?',
+	'forgot'          => 'Glömt lösenordet?',
 	'username'        => 'Användarnamn',
 	'password'        => 'Lösenord',
 	'repeat_password' => 'Ange lösenordet igen',

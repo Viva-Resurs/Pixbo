@@ -20,6 +20,6 @@ return [
     'token'    => 'Lösenordets token är ogiltig.',
     'user'     => "Ingen användare med den e-mail finns ej.",
     'email'    => 'E-post',
-    'send'     => "Skicka länk för återstänning",
+    'send'     => "Skicka länk för återställning",
 
 ];
