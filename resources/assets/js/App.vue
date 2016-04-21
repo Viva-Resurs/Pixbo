@@ -19,9 +19,20 @@
             })
 
             var token = localStorage.getItem('jwt-token')
-            if(token != null && token != 'undefined') {
-                // get 'myself' from server, login
-
+            if (token !== null && token !== 'undefined') {
+                var that = this
+                client({path: '/users/me'}).then(
+                        function (response) {
+                            // User has successfully logged in using the token from storage
+                            that.setLogin(response.entity.user)
+                            // broadcast an event telling our children that the data is ready and views can be rendered
+                            that.$broadcast('data-loaded')
+                        },
+                        function (response) {
+                            // Login with our token failed, do some cleanup and redirect if we're on an authenticated route
+                            that.destroyLogin()
+                        }
+                )
             }
         },
 

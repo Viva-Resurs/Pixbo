@@ -18,15 +18,17 @@ $api->version('v1', function ($api) {
 	$api->get('free', function() {
 		return \App\Models\User::all();
 	});
+	$api->get('users/me', function() {
+		return JWTAuth::parseToken()->authenticate();
+	});
+	
 	$api->group(['middleware' => 'api.auth'], function ($api) {
 		$api->resource('client', 		'App\Api\V1\Controllers\ClientController');
 		$api->resource('screengroups', 	'App\Api\V1\Controllers\ScreenGroupController');
 		$api->resource('screen', 		'App\Api\V1\Controllers\ScreenController');
 		$api->resource('ticker', 		'App\Api\V1\Controllers\TickerController');
 
-		$api->get('users/me', function() {
-			return JWTAuth::parseToken()->authenticate();
-		});
+
 	});
 
 });
