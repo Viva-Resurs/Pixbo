@@ -30,7 +30,7 @@ class Photo extends Model
         'sha1',
     ];
 
-    protected $baseDir = 'screens/images';
+    protected $baseDir = 'images/screens';
 
     /**
      * Get the screens associated with the given image.

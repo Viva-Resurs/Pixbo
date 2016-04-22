@@ -15,10 +15,10 @@ $api->version('v1', function ($api) {
 	});
 
 	$api->group(['middleware' => 'api.auth'], function ($api) {
-		$api->resource('client', 		'App\Api\V1\Controllers\ClientController');
+		$api->resource('clients', 		'App\Api\V1\Controllers\ClientController');
 		$api->resource('screengroups', 	'App\Api\V1\Controllers\ScreenGroupController');
-		$api->resource('screen', 		'App\Api\V1\Controllers\ScreenController');
-		$api->resource('ticker', 		'App\Api\V1\Controllers\TickerController');
+		$api->resource('screens', 		'App\Api\V1\Controllers\ScreenController');
+		$api->resource('tickers', 		'App\Api\V1\Controllers\TickerController');
 
 
 	});

@@ -2,8 +2,8 @@
 
 namespace App\Api\V1\Controllers;
 
-use App\Http\Requests\TickerCreationForm;
-use App\Http\Requests\TickerUpdateForm;
+use App\Api\V1\Requests\TickerCreationForm;
+use App\Api\V1\Requests\TickerUpdateForm;
 use App\Models\Ticker;
 use App\Api\V1\Transformers\Ticker\TickerTransformer;
 use Gate;
@@ -11,7 +11,7 @@ use App\Http\Requests;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Activity;
 
-class TickerController extends Controller
+class TickerController extends BaseController
 {
     /**
      * View all the Tickers

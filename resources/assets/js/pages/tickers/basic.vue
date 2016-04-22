@@ -1,6 +1,6 @@
 <template>
     <div class="panel-heading">
-        Redigera område
+        Edit Ticker
     </div>
     <div class="panel-body">
         <div id="alerts" v-if="messages.length > 0">
@@ -11,27 +11,21 @@
         <form class="form-horizontal" role="form" v-on:submit="updateScreengroup">
             <fieldset disabled>
                 <div class="form-group">
-                    <label for="name" class="col-sm-2 col-sm-offset-1 control-label">ID</label>
+                    <label for="name" class="col-sm-2 col-sm-offset-1 control-label">Ticker ID</label>
                     <div class="col-sm-5">
-                        <input class="form-control" required="required" name="name" type="text" v-model="screengroup.id">
+                        <input class="form-control" required="required" name="name" type="text" v-model="ticker.id">
                     </div>
                 </div>
             </fieldset>
             <div class="form-group">
-                <label for="name" class="col-sm-2 col-sm-offset-1 control-label">Namn</label>
+                <label for="name" class="col-sm-2 col-sm-offset-1 control-label">Ticker text</label>
                 <div class="col-sm-5">
-                    <input class="form-control" required="required" name="name" type="text" v-model="screengroup.name">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="age" class="col-sm-2 col-sm-offset-1 control-label">Beskrivning</label>
-                <div class="col-sm-5">
-                    <input class="form-control" required="required" name="age" type="text" v-model="screengroup.desc">
+                    <input class="form-control" required="required" name="name" type="text" v-model="ticker.text">
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-4 col-sm-offset-3">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-btn fa-save"></i>Spara</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-btn fa-save"></i>Update the ticker!</button>
                 </div>
             </div>
         </form>
@@ -43,10 +37,9 @@
 
         data: function () {
             return {
-                screengroup: {
+                ticker: {
                     id: null,
-                    name: null,
-                    age: null
+                    text: null,
                 },
                 messages: []
             }
@@ -56,10 +49,10 @@
             // Let's fetch the screengroup
             fetch: function (id, successHandler) {
                 var that = this
-                client({ path: '/screengroups/' + id }).then(
+                client({ path: '/tickers/' + id }).then(
                         function (response) {
-                            that.$set('screengroup', response.entity.screengroup)
-                           successHandler(response.entity.screengroup)
+                            that.$set('ticker', response.entity.ticker)
+                            successHandler(response.entity.ticker)
                         },
                         function (response, status, request) {
                             // Go tell your parents that you've messed up somehow
@@ -75,10 +68,10 @@
             updateScreengroup: function (e) {
                 e.preventDefault()
                 var self = this
-                client({ path: '/screengroups/' + this.screengroup.id, entity: this.screengroup, method: 'PUT'}).then(
+                client({ path: '/tickers/' + this.ticker.id, entity: this.ticker, method: 'PUT'}).then(
                         function (response) {
                             self.messages = []
-                            self.messages.push({type: 'success', message: 'Woof woof! Your screengroup was updated'})
+                            self.messages.push({type: 'success', message: 'Your ticker was updated'})
                         },
                         function (response) {
                             self.messages = []
@@ -95,7 +88,7 @@
             // Ooh, ooh, are there any new puppies yet?
             data: function (transition) {
                 this.fetch(this.$route.params.id, function (data) {
-                    transition.next({screengroup: data})
+                    transition.next({ticker: data})
                 })
             }
         }

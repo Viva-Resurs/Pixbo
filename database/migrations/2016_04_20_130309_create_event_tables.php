@@ -31,10 +31,6 @@ class CreateEventTables extends Migration
             $table->integer('eventable_id');
             $table->string('eventable_type');
 
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')
-                ->references('id')->on('users')->onDelete('cascade');
-
             $table->timestamps();
         });
 

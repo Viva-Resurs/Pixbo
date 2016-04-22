@@ -1,9 +1,9 @@
 <template>
     <div class="panel-heading">
-        Områdes arkiv
+        List of screengroups
     </div>
     <div class="panel-body" v-if="$loadingRouteData">
-        Laddar data {{ loadingRouteData }}
+        Loading data {{ loadingRouteData }}
     </div>
     <div class="panel-body" v-if="messages.length > 0">
         <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
@@ -12,26 +12,26 @@
     </div>
 
     <div class="panel-body" v-if="screengroups.length == 0">
-        Det finns inga områden.
+        You have no screengroups!
     </div>
 
     <table class="table" v-if=" ! $loadingRouteData && screengroups.length > 0">
         <thead>
         <tr>
             <th>ID</th>
-            <th>Namn</th>
-            <th>Beskrivning</th>
-            <th width="120px">Aktion</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th width="120px">Actions</th>
         </tr>
         </thead>
         <tbody>
         <tr v-for="screengroup in screengroups">
             <td>{{ screengroup.id }}</td>
             <td>{{ screengroup.name }}</td>
-            <td>{{ screengroup.desc }}</td>
+            <td>{{ screengroup.age }}</td>
             <td>
-                <a class="btn btn-primary btn-xs" v-link="{ path: '/screengroups/'+screengroup.id }">Ändra</a>
-                <a class="btn btn-primary btn-xs" v-on:click="deleteScreengroup($index)">Ta bort</a>
+                <a class="btn btn-primary btn-xs" v-link="{ path: '/screengroups/'+screengroup.id }">Edit</a>
+                <a class="btn btn-primary btn-xs" v-on:click="deleteScreengroup($index)">Delete</a>
             </td>
         </tr>
         </tbody>
@@ -70,10 +70,10 @@
                 client({ path: '/screengroups/' + this.screengroups[index].id, method: 'DELETE' }).then(
                         function (response) {
                             that.screengroups.splice(index, 1)
-                            that.messages = [{type: 'success', message: 'Området har tagits bort'}]
+                            that.messages = [{type: 'success', message: 'Great, screengroup purged.'}]
                         },
                         function (response) {
-                            that.messages.push({type: 'danger', message: 'Gick inte att ta bort området, försök igen'})
+                            that.messages.push({type: 'danger', message: 'There was a problem removing the screengroup'})
                         }
                 )
             }

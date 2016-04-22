@@ -1,6 +1,6 @@
 <template>
     <div class="panel-heading">
-        Områdes arkiv
+        Ticker arkiv
     </div>
     <div class="panel-body" v-if="$loadingRouteData">
         Laddar data {{ loadingRouteData }}
@@ -11,27 +11,26 @@
         </div>
     </div>
 
-    <div class="panel-body" v-if="screengroups.length == 0">
-        Det finns inga områden.
+    <div class="panel-body" v-if="tickers.length == 0">
+        Det finns inga tickers
     </div>
 
-    <table class="table" v-if=" ! $loadingRouteData && screengroups.length > 0">
+    <table class="table" v-if=" ! $loadingRouteData && tickers.length > 0">
         <thead>
         <tr>
             <th>ID</th>
-            <th>Namn</th>
-            <th>Beskrivning</th>
+            <th>Text</th>
+
             <th width="120px">Aktion</th>
         </tr>
         </thead>
         <tbody>
-        <tr v-for="screengroup in screengroups">
-            <td>{{ screengroup.id }}</td>
-            <td>{{ screengroup.name }}</td>
-            <td>{{ screengroup.desc }}</td>
+        <tr v-for="ticker in tickers">
+            <td>{{ ticker.id }}</td>
+            <td>{{ ticker.text }}</td>
             <td>
-                <a class="btn btn-primary btn-xs" v-link="{ path: '/screengroups/'+screengroup.id }">Ändra</a>
-                <a class="btn btn-primary btn-xs" v-on:click="deleteScreengroup($index)">Ta bort</a>
+                <a class="btn btn-primary btn-xs" v-link="{ path: '/tickers/'+ticker.id }">Ändra</a>
+                <a class="btn btn-primary btn-xs" v-on:click="deleteTicker($index)">Ta bort</a>
             </td>
         </tr>
         </tbody>
@@ -42,7 +41,7 @@
 
         data: function () {
             return {
-                screengroups: [],
+                tickers: [],
                 messages: []
             }
         },
@@ -51,10 +50,10 @@
             // Let's fetch some dogs
             fetch: function (successHandler) {
                 var that = this
-                client({ path: '/screengroups' }).then(
+                client({ path: '/tickers' }).then(
                         function (response) {
                             // Look ma! Puppies!
-                            that.$set('screengroups', response.entity.data)
+                            that.$set('tickers', response.entity.data)
                             successHandler(response.entity.data)
                         },
                         function (response, status) {
@@ -65,15 +64,15 @@
                 )
             },
 
-            deleteScreengroup: function (index) {
+            deleteTicker: function (index) {
                 var that = this
-                client({ path: '/screengroups/' + this.screengroups[index].id, method: 'DELETE' }).then(
+                client({ path: '/ticker/' + this.tickers[index].id, method: 'DELETE' }).then(
                         function (response) {
-                            that.screengroups.splice(index, 1)
-                            that.messages = [{type: 'success', message: 'Området har tagits bort'}]
+                            that.tickers.splice(index, 1)
+                            that.messages = [{type: 'success', message: 'Great, ticker purged.'}]
                         },
                         function (response) {
-                            that.messages.push({type: 'danger', message: 'Gick inte att ta bort området, försök igen'})
+                            that.messages.push({type: 'danger', message: 'There was a problem removing the ticker'})
                         }
                 )
             }
@@ -84,7 +83,7 @@
             // Ooh, ooh, are there any new puppies yet?
             data: function (transition) {
                 this.fetch(function (data) {
-                    transition.next({screengroups: data})
+                    transition.next({tickers: data})
                 })
             }
         }

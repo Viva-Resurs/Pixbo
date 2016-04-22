@@ -1,6 +1,6 @@
 <template>
     <div class="panel-heading">
-        Redigera område
+        Edit screengroup
     </div>
     <div class="panel-body">
         <div id="alerts" v-if="messages.length > 0">
@@ -11,27 +11,27 @@
         <form class="form-horizontal" role="form" v-on:submit="updateScreengroup">
             <fieldset disabled>
                 <div class="form-group">
-                    <label for="name" class="col-sm-2 col-sm-offset-1 control-label">ID</label>
+                    <label for="name" class="col-sm-2 col-sm-offset-1 control-label">Screengroup ID</label>
                     <div class="col-sm-5">
                         <input class="form-control" required="required" name="name" type="text" v-model="screengroup.id">
                     </div>
                 </div>
             </fieldset>
             <div class="form-group">
-                <label for="name" class="col-sm-2 col-sm-offset-1 control-label">Namn</label>
+                <label for="name" class="col-sm-2 col-sm-offset-1 control-label">Name your screengroup</label>
                 <div class="col-sm-5">
                     <input class="form-control" required="required" name="name" type="text" v-model="screengroup.name">
                 </div>
             </div>
             <div class="form-group">
-                <label for="age" class="col-sm-2 col-sm-offset-1 control-label">Beskrivning</label>
+                <label for="age" class="col-sm-2 col-sm-offset-1 control-label">What's the age?</label>
                 <div class="col-sm-5">
                     <input class="form-control" required="required" name="age" type="text" v-model="screengroup.desc">
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-4 col-sm-offset-3">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-btn fa-save"></i>Spara</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-btn fa-save"></i>Update the screengroup!</button>
                 </div>
             </div>
         </form>
