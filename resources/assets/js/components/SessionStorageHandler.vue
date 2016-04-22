@@ -32,10 +32,17 @@
             this.Save();
         },
         Get : function(target){
-            if (this.Data && this.Data[target])
-                return this.Data[target];
-            else
-                console.log('.Get() : Could not find target : '+target);
+            if (target) {
+                if (this.Data && this.Data[target])
+                    return this.Data[target];
+                else
+                    console.log('.Get() : Could not find target : '+target);
+            } else {
+                if (this.Data)
+                    return this.Data;
+                else
+                    console.log('.Get() : No Data is loaded');
+            }
         },
         Clear : function(target){
             if (target)
