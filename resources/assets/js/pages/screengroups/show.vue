@@ -1,4 +1,5 @@
 <template>
+    <div>
     <div class="panel-heading">
         Edit screengroup
     </div>
@@ -26,7 +27,7 @@
             <div class="form-group">
                 <label for="age" class="col-sm-2 col-sm-offset-1 control-label">What's the age?</label>
                 <div class="col-sm-5">
-                    <input class="form-control" required="required" name="age" type="text" v-model="screengroup.age">
+                    <input class="form-control" required="required" name="age" type="text" v-model="screengroup.desc">
                 </div>
             </div>
             <div class="form-group">
@@ -35,6 +36,7 @@
                 </div>
             </div>
         </form>
+    </div>
     </div>
 </template>
 
@@ -55,14 +57,22 @@
         methods: {
             // Let's fetch the screengroup
             fetch: function (id, successHandler) {
-                var that = this
+                var that = this;
                 client({ path: '/screengroups/' + id }).then(
                         function (response) {
+                            console.log('response: ')
                             console.log(response)
-                            that = response.entity
+                            console.log(response.raw.responseText)
+                            try {
+                                that.screengroup = JSON.parse(response.raw.responseText).screengroup;
+                            } catch(e) {
+                                console.log(e)
+                            }
+
                             //that.$set('screengroup', response.entity.screengroup)
+                            console.log('Screengroup: ')
                             console.log(that.screengroup)
-                            successHandler(response.entity)
+                            //successHandler(response.entity)
                         },
                         function (response, status, request) {
                             // Go tell your parents that you've messed up somehow
