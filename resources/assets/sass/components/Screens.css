@@ -1,0 +1,15 @@
+.Screens {
+	
+}
+.Screens_Card {
+	@extend .col-sm-6, .col-md-3;
+}
+.Screens_Card_Buttons {
+    position: absolute;
+    top: 0%;
+    right: 0%;
+
+}
+.Screens_Card_Img {
+
+}

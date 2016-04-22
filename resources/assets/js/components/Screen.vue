@@ -1,12 +1,14 @@
 <template>
-    <div class="thumbnail screens_card row">
-        <div class="col-lg-12">
-            <div class="row">
-                <img class="screens_card__img" :src="'/'+ data.photo.thumb_path" style="width:100%;height:auto;">
+    <div class="Screens_Card">
+        <div class="thumbnail">
+                <img class="Screens_Card_Img" :src="'/'+ data.photo.thumb_path" style="width:100%;height:auto;">
 
-                <div class="btn-group-vertical ScreenCard__buttons pull-right" role="group">
+                <div class="btn-group-vertical Screens_Card_Buttons pull-right" role="group">
 
                     <!-- Show different depending if it's suppose to remove association or remove the image all together.-->
+                    <template v-if="is_associated == false">
+                        <form method="delete" action="/admin/screens/destroy/{{ data.id }}">
+                    </template>
                     <template v-if="is_associated == true">
                         <a href="/admin/screengroups/{{association_id}}/screens/{{ data.id }}/remove_screens_association">
                             <button type="button" class="btn btn-danger btn-lg" role="button">
@@ -15,7 +17,7 @@
                         </a>
                     </template>
                     <template v-if="is_associated == false">
-                        <form method="delete" action="/admin/screens/destroy/{{ data.id }}">
+                        
                             <button type="submit" class="btn btn-danger btn-lg" role="button">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('messages.remove') }}"></span>
                             </button>
@@ -25,8 +27,11 @@
                     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#screens_modal_{{ data.id }}" role="button">
                         <span class="glyphicon glyphicon-calendar" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('messages.schedule_tooltip') }}"></span>
                     </button>
+
+                    <template v-if="is_associated == false">
+                        </form>
+                    </template>
                 </div>
-            </div>
         </div>
     </div>
     <modal :model="data" title="messages.edit_screen" :id="'screens_modal_' + this.data.id ">

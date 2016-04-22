@@ -1,13 +1,7 @@
 <template>
-
-    <div class="col-lg-12">
-        <div class="row">
-            <div class="col-sm-6 col-md-3" v-for="screen in list">
-                <screen v-bind:data="screen" v-bind:association="url"></screen>
-            </div>
-        </div>
+    <div class="Screens" v-for="screen in list">
+        <screen v-bind:data="screen" v-bind:association="url"></screen>
     </div>
-
 </template>
 
 <script>

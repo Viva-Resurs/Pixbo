@@ -180,6 +180,8 @@ return [
 	// Screengroup
 	'screen_group_created_ok'       => 'Område skapat.',
 	'screen_group_created_fail'     => 'Misslyckades att lägga till område.',
+	'screen_group_updated_ok'		=> 'Området har uppdaterats.',
+	'screen_group_updated_fail'		=> 'Misslyckades att uppdatera området.',
 
 	// Ticker
 	'ticker_created_ok'             => 'Tickern har lagt till.',

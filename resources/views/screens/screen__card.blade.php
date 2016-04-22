@@ -1,10 +1,8 @@
-<div class="col-sm-6 col-md-3">
-    <div class="thumbnail screens_card row">
-        <div class="col-lg-12">
-            <div class="row">
-                <img class="screens_card__img" src="/{{ $card->photo->thumb_path }}" style="width:100%;height:auto;">
+    <div class="Screens_Card">
+        <div class="thumbnail">
+                <img class="ScreenCard__img" src="/{{ $card->photo->thumb_path }}" style="width:100%;height:auto;">
 
-                <div class="btn-group-vertical ScreenCard__buttons pull-right" role="group">
+                <div class="btn-group-vertical Screens_Card_Buttons pull-right" role="group">
                     @can('remove_screens')
                         @if($from == 'screengroups')
                             <a href="/admin/screengroups/{{ $screengroup->id }}/screens/{{ $card->id }}/remove_screens_association">
@@ -25,9 +23,7 @@
                             <span class="glyphicon glyphicon-calendar" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('messages.schedule_tooltip') }}"></span>
                         </button>
                     @endcan
-                </div>
             </div>
         </div>
     </div>
-</div>
 @include('shared.scheduled_modal', ['item' => $card, 'model' => 'screens'])
