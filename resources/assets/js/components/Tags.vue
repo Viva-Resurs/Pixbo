@@ -8,7 +8,7 @@
         <div class="tag-group">
             <div class="tag label label-default" v-for="tag in list">
                 <span class="tag__name">{{ tag.name }}</span>
-                <a class="tag__remove btn btn-xs" @click="remove_tag($index)">
+                <a class="tag__remove btn btn-xs" @click="remove_tag($index),update_status">
                     <span class="glyphicon glyphicon-remove"></span>
                 </a>
             </div>
@@ -38,26 +38,27 @@
         },
 
         methods: {
-            update_status: function(e){
+            update_status: function(){
                 if(this.isValid()){
-                  $(e.target).parent().removeClass('has-warning');
-                  $(e.target).parent().find('.btn').removeClass('disabled');
+                  $('#inputTags').parent().removeClass('has-warning');
+                  $('#inputTags').parent().find('.btn').removeClass('disabled');
                 }
                 else{
-                  var conflict=this.new_tag;
-                  $(e.target).parent().addClass('has-warning');
-                  $(e.target).parent().find('.btn').addClass('disabled');
+                  $('#inputTags').parent().addClass('has-warning');
+                  $('#inputTags').parent().find('.btn').addClass('disabled');
                 }
             },
-            add_tag: function(that) {
+            add_tag: function(e) {
                 // If there is a new tag, validate before adding
                 if(this.new_tag && this.new_tag.length>0 && this.isValid()) {
                     this.list.push({name: this.new_tag.trim(), new: true});
                     this.new_tag = '';
+                    this.update_status();
                 }
             },
             remove_tag: function(index) {
                 this.list.splice(index, 1);
+                this.update_status();
             },
             isValid: function() {
                 // Check if input is in conflict with existing tag
