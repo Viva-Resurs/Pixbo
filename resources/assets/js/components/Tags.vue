@@ -1,9 +1,9 @@
 <template id="tag-template">
-    <legend>
-        Taggar
-    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right"
-      title="{{ trans('messages.atleast_one_tag') }}" :style="error"></span>
-    </legend>
+    <label>
+        {{ trans_choice('messages.tag',1) }}
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" :style="error"
+      title="{{ trans('messages.atleast_one_tag') }}" :data-original-title="valid_info"></span>
+    </label>
     <div class="form-group">
         <div class="tag-group">
             <div class="tag label label-default" v-for="tag in list">
@@ -13,7 +13,7 @@
                 </a>
             </div>
         </div>
-        <div class="input-group" :style="update">
+        <div class="input-group">
             <input type="text" name="tags" id="inputTags" class="form-control" list="tags" v-model="new_tag" v-el="tagInput"
               v-on:keyup.enter="add_tag" v-on:keyup="update_status">
             <datalist id="tags">
@@ -70,6 +70,10 @@
             },
         },
 
+        ready: function() {
+            update_tooltip();
+        },
+
         computed: {
             tags: function() {
                 return this.$parent.$data.tags;
@@ -77,6 +81,13 @@
             error: function () {
                 return (this.list.length < 1 || !this.isValid()) ? 'color:red' : '';
             },
+            valid_info: function () {
+                if (this.list.length < 1)
+                    return this.trans('messages.atleast_one_tag');
+                if (!this.isValid())
+                    return this.trans('messages.tag_exists');
+                return this.trans('messages.atleast_one_tag');
+            }
         },
     };
 </script>

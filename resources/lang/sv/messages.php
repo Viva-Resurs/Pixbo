@@ -224,4 +224,7 @@ return [
 	'schedule_tooltip'              => 'Planera',
 	'remove_association_tooltip'    => 'Tag bort från :association',
 
+	'atleast_one_tag'               => 'Minst en tagg',
+	'tag_exists'                    => 'Taggen finns redan',
+
 ];
