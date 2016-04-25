@@ -5,20 +5,20 @@
         <div class="col-md-3">
             <div class="panel panel-default panel-flush">
                 <div class="panel-heading">
-                    Områden
+                    Screengroups
                 </div>
                 <div class="panel-body">
                     <div class="app-tabs">
                         <ul class="nav app-tabs-stacked">
                             <li>
                                 <a v-link="{ path: '/screengroups' }">
-                                    <i class="fa fa-btn fa-fw fa-list"></i>&nbsp;Arkiv</span>
+                                    <i class="fa fa-btn fa-fw fa-list"></i>&nbsp;Screengroup list</span>
                                 </a>
                             </li>
                             </li>
                             <li>
                                 <a v-link="{ path: '/screengroups/create' }">
-                                    <i class="fa fa-btn fa-fw fa-plus"></i>&nbsp;Ny</span>
+                                    <i class="fa fa-btn fa-fw fa-heart"></i>&nbsp;Create one</span>
                                 </a>
                             </li>
                         </ul>

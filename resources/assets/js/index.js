@@ -36,6 +36,11 @@ window.client = rest.wrap(pathPrefix, { prefix: config.api.base_url })
 // Bootstrap the app
 Vue.component('nav-component', require('./components/Nav.vue'))
 Vue.component('footer-component', require('./components/Footer.vue'))
+Vue.directive("dropzone",{
+    bind: function(){
+        this.vm.initDropzone();
+    }
+})
 const App = Vue.extend(require('./App.vue'))
 router.start(App, '#app')
 window.router = router

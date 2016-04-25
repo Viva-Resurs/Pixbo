@@ -1,6 +1,6 @@
 <template>
     <div class="panel-heading">
-        Skapa nytt område
+        Skapa ny ticker
     </div>
     <div class="panel-body">
         <div id="alerts" v-if="messages.length > 0">
@@ -8,17 +8,11 @@
                 {{ message.message }}
             </div>
         </div>
-        <form class="form-horizontal" role="form" v-on:submit="createScreengroup">
+        <form class="form-horizontal" role="form" v-on:submit="createTicker">
             <div class="form-group">
-                <label for="name" class="col-sm-2 col-sm-offset-1 control-label">Namn</label>
+                <label for="text" class="col-sm-2 col-sm-offset-1 control-label">Ticker text</label>
                 <div class="col-sm-5">
-                    <input class="form-control" required="required" name="name" type="text" v-model="screengroup.name" id="nameInput">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="age" class="col-sm-2 col-sm-offset-1 control-label">Beskrivning</label>
-                <div class="col-sm-5">
-                    <input class="form-control" required="required" name="age" type="text" v-model="screengroup.desc">
+                    <input class="form-control" required="required" name="text" type="text" v-model="ticker.text" id="nameInput">
                 </div>
             </div>
             <div class="form-group">
@@ -35,9 +29,8 @@
     module.exports = {
         data: function () {
             return {
-                screengroup: {
-                    name: '',
-                    desc: ''
+                ticker: {
+                    text: '',
                 },
                 messages: [],
                 creating: false
@@ -45,15 +38,14 @@
         },
 
         methods: {
-            createScreengroup: function (e) {
+            createTicker: function (e) {
                 e.preventDefault()
                 var that = this
                 that.creating = true
-                client({path: 'screengroups', entity: this.screengroup}).then(
+                client({path: 'tickers', entity: this.ticker}).then(
                         function (response, status) {
-                            that.screengroup.name = ''
-                            that.screengroup.desc = ''
-                            that.messages = [ {type: 'success', message: 'Området har skapats'} ]
+                            that.ticker.text = ''
+                            that.messages = [{type: 'success', message: 'Your ticker was created'}]
                             Vue.nextTick(function () {
                                 document.getElementById('nameInput').focus()
                             })

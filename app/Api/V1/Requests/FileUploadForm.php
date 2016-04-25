@@ -6,8 +6,9 @@
  * Date: 20-Apr-16
  * Time: 5:16 PM
  */
-namespace App\Http\Requests;
+namespace App\Api\V1\Requests;
 
+use App\Http\Requests\Request;
 use App\Models\Event;
 use App\Models\Photo;
 use App\Models\Screen;
@@ -33,17 +34,18 @@ class FileUploadForm extends Request
     public function rules()
     {
         return [
-            'photo' => 'required|mimes:jpg,jpeg,png,bmp'
+            //'photo' => 'required|mimes:jpg,jpeg,png,bmp'
         ];
     }
 
     public function persist() {
 
+        //dd($this->all());
         $vm = $this;
         $result = DB::transaction(function () use ($vm) {
             $screen = null;
             // find or create screen and add photo to it.
-            $photo = Photo::getOrCreate($vm->file('photo'))->move($vm->file('photo'));
+            $photo = Photo::getOrCreate($vm->file('file'))->move($vm->file('file'));
             if (!is_null($photo->screen)) {
                 $screen = $photo->screen;
             } else {
@@ -59,5 +61,6 @@ class FileUploadForm extends Request
             return $screen;
         });
         return $result;
+
     }
 }

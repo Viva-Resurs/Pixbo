@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Api\V1\Requests;
 
 use App\Http\Requests\Request;
 use DB;
 use App\Models\Ticker;
 use App\Models\Event;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TickerUpdateForm extends Request
 {
@@ -32,17 +33,24 @@ class TickerUpdateForm extends Request
     }
 
     public function persist(Ticker $ticker) {
+
+        /*
+         * TODO: Fix this asap!
+         */
+        $ticker->update($this->only(['text']));
+        return $ticker;
+        /*
         $vm = $this;
-        $event = $vm->get('event');
+        $event = $ticker->event;
         $day_num = $vm->get('day_num');
-        $event['recur_day_num'] = json_encode(($day_num));
+        $e['recur_day_num'] = json_encode(($day_num));
         $ticker_data = $vm->get('modelObject');
 
         $screengroups = $vm->get('selected_screengroups');
 
+
         $result = DB::transaction(function () use ($ticker, $ticker_data, $event, $screengroups) {
-            $e = Event::find($event['id']);
-            $e->update($event);
+            $event->update($event);
             $ticker->update($ticker_data);
             $ticker->screengroups()->sync($screengroups);
             $ticker->save();
@@ -50,5 +58,6 @@ class TickerUpdateForm extends Request
         });
 
         return $result;
+        */
     }
 }

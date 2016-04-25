@@ -9,5 +9,6 @@ composer.lock
 _ide_helper.php
 public/css/
 public/js/
+public/images/
 storage/database.sqlite
 storage/database.sqlite-journal

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Api\V1\Requests;
 
 use App\Http\Requests\Request;
 use App\Models\Ticker;
@@ -37,8 +37,7 @@ class TickerCreationForm extends Request
         $results = DB::transaction(function () use ($vm) {
             $ticker = new Ticker($vm->all());
             $ticker->save();
-            $event = new Event;
-            $event->fill(['start_date' => date('Y-m-d')]);
+            $event = new Event(['start_date' => date('Y-m-d')]);
             $ticker->event()->save($event);
             $ticker->save();
             return $ticker;

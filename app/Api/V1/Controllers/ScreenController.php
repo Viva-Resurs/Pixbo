@@ -2,12 +2,13 @@
 
 namespace App\Api\V1\Controllers;
 
+use App\Api\V1\Requests\FileUploadForm;
 use App\Api\V1\Transformers\Screen\ScreenTransformer;
-use App\Http\Requests\FileUploadForm;
 use App\Http\Requests\ScreenUpdateForm;
 use App\Models\Screen;
 use Gate;
 use App\Http\Requests;
+use Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Activity;
 
@@ -33,9 +34,11 @@ class ScreenController extends BaseController
      * @return \Dingo\Api\Http\Response|void
      */
     public function store(FileUploadForm $form) {
+        /*
         if (Gate::denies('add_screens')) {
             $this->response->error('permission_denied', 401);
         }
+        */
 
         $screen = $form->persist();
 

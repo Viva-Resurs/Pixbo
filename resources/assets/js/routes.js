@@ -54,6 +54,45 @@ module.exports = {
                     }
                 }
             },
+            '/screens': {
+                component: require('./pages/Screen.vue'),
+                auth: true,
+                subRoutes: {
+                    '/': {
+                        component: require('./pages/screens/index.vue')
+                    },
+                    '/:id': {
+                        component: require('./pages/screens/show.vue')
+                    },
+                    '/create': {
+                        component: require('./pages/screens/create.vue')
+                    }
+                }
+            },
+            '/tickers': {
+                component: require('./pages/Ticker.vue'),
+                auth: true,
+                subRoutes: {
+                    '/': {
+                        component: require('./pages/tickers/index.vue')
+                    },
+                    '/:id': {
+                        component: require('./pages/tickers/show.vue'),
+
+                        subRoutes: {
+                            '/': {
+                                component: require('./pages/tickers/basic.vue')
+                            },
+                            '/advanced': {
+                                component: require('./pages/tickers/advanced.vue')
+                            }
+                        }
+                    },
+                    '/create': {
+                        component: require('./pages/tickers/create.vue')
+                    }
+                }
+            },
             '/terms': {
                 component: require('./pages/Terms.vue')
             },

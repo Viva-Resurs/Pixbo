@@ -5,19 +5,19 @@
         <div class="col-md-3">
             <div class="panel panel-default panel-flush">
                 <div class="panel-heading">
-                    Områden
+                    Bilder
                 </div>
                 <div class="panel-body">
                     <div class="app-tabs">
                         <ul class="nav app-tabs-stacked">
                             <li>
-                                <a v-link="{ path: '/screengroups' }">
+                                <a v-link="{ path: '/screens' }">
                                     <i class="fa fa-btn fa-fw fa-list"></i>&nbsp;Arkiv</span>
                                 </a>
                             </li>
                             </li>
                             <li>
-                                <a v-link="{ path: '/screengroups/create' }">
+                                <a v-link="{ path: '/screens/create' }">
                                     <i class="fa fa-btn fa-fw fa-plus"></i>&nbsp;Ny</span>
                                 </a>
                             </li>
