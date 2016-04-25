@@ -16,10 +16,10 @@
     </div>
 
     <div  v-if=" ! $loadingRouteData && screens.length > 0">
-        <div v-for="screen in screens">
+        <div class="row">
             <ul>
-                <li>
-                    <img :src="screen.photo.thumb_path">
+                <li  v-for="screen in screens">
+                    <screen-card :screen="screen"></screen-card>
                 </li>
             </ul>
         </div>
@@ -28,6 +28,10 @@
 
 <script>
     module.exports = {
+
+        components: {
+            ScreenCard: require('../../components/ScreenCard.vue')
+        },
 
         data: function () {
             return {

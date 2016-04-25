@@ -8,30 +8,18 @@
                 {{ message.message }}
             </div>
         </div>
-        <form class="form-horizontal" role="form" v-on:submit="updateScreengroup">
+        <form class="form-horizontal" role="form" v-on:submit="updateScreen">
             <fieldset disabled>
                 <div class="form-group">
-                    <label for="name" class="col-sm-2 col-sm-offset-1 control-label">Screengroup ID</label>
+                    <label for="name" class="col-sm-2 col-sm-offset-1 control-label">Screen ID</label>
                     <div class="col-sm-5">
-                        <input class="form-control" required="required" name="name" type="text" v-model="screengroup.id">
+                        <input class="form-control" required="required" name="name" type="text" v-model="screen.id">
                     </div>
                 </div>
             </fieldset>
             <div class="form-group">
-                <label for="name" class="col-sm-2 col-sm-offset-1 control-label">Name your screengroup</label>
-                <div class="col-sm-5">
-                    <input class="form-control" required="required" name="name" type="text" v-model="screengroup.name">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="age" class="col-sm-2 col-sm-offset-1 control-label">What's the age?</label>
-                <div class="col-sm-5">
-                    <input class="form-control" required="required" name="age" type="text" v-model="screengroup.desc">
-                </div>
-            </div>
-            <div class="form-group">
                 <div class="col-sm-4 col-sm-offset-3">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-btn fa-save"></i>Update the screengroup!</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-btn fa-save"></i>Update the screen!</button>
                 </div>
             </div>
         </form>
@@ -43,23 +31,20 @@
 
         data: function () {
             return {
-                screengroup: {
-                    id: null,
-                    name: null,
-                    age: null
+                screen: {
                 },
                 messages: []
             }
         },
 
         methods: {
-            // Let's fetch the screengroup
+            // Let's fetch the screen
             fetch: function (id, successHandler) {
                 var that = this
-                client({ path: '/screengroups/' + id }).then(
+                client({ path: '/screens/' + id }).then(
                         function (response) {
-                            that.$set('screengroup', response.entity.screengroup)
-                           successHandler(response.entity.screengroup)
+                            that.$set('screen', response.entity.screen)
+                           successHandler(response.entity.screen)
                         },
                         function (response, status, request) {
                             // Go tell your parents that you've messed up somehow
@@ -75,10 +60,10 @@
             updateScreengroup: function (e) {
                 e.preventDefault()
                 var self = this
-                client({ path: '/screengroups/' + this.screengroup.id, entity: this.screengroup, method: 'PUT'}).then(
+                client({ path: '/screens/' + this.screen.id, entity: this.screen, method: 'PUT'}).then(
                         function (response) {
                             self.messages = []
-                            self.messages.push({type: 'success', message: 'Woof woof! Your screengroup was updated'})
+                            self.messages.push({type: 'success', message: 'Your screen was updated'})
                         },
                         function (response) {
                             self.messages = []
@@ -95,7 +80,7 @@
             // Ooh, ooh, are there any new puppies yet?
             data: function (transition) {
                 this.fetch(this.$route.params.id, function (data) {
-                    transition.next({screengroup: data})
+                    transition.next({screen: data})
                 })
             }
         }
