@@ -41,6 +41,7 @@ Vue.directive("dropzone",{
         this.vm.initDropzone();
     }
 })
-const App = Vue.extend(require('./App.vue'))
+const App = Vue.extend(require('./App.vue'));
+
 router.start(App, '#app')
 window.router = router

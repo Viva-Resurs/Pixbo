@@ -8,26 +8,16 @@
                 {{ message.message }}
             </div>
         </div>
-        <form class="form-horizontal" role="form" v-on:submit="updateScreen">
-            <fieldset disabled>
-                <div class="form-group">
-                    <label for="name" class="col-sm-2 col-sm-offset-1 control-label">Screen ID</label>
-                    <div class="col-sm-5">
-                        <input class="form-control" required="required" name="name" type="text" v-model="screen.id">
-                    </div>
-                </div>
-            </fieldset>
-            <div class="form-group">
-                <div class="col-sm-4 col-sm-offset-3">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-btn fa-save"></i>Update the screen!</button>
-                </div>
-            </div>
-        </form>
+       <schedule :model="screen"></schedule>
     </div>
 </template>
 
 <script>
     module.exports = {
+
+        components: {
+            Schedule: require('./../../components/Schedule.vue')
+        },
 
         data: function () {
             return {
@@ -43,8 +33,8 @@
                 var that = this
                 client({ path: '/screens/' + id }).then(
                         function (response) {
-                            that.$set('screen', response.entity.screen)
-                           successHandler(response.entity.screen)
+                            that.$set('screen', response.entity.data)
+                           successHandler(response.entity.data)
                         },
                         function (response, status, request) {
                             // Go tell your parents that you've messed up somehow
@@ -57,7 +47,7 @@
                 )
             },
 
-            updateScreengroup: function (e) {
+            updateScreen: function (e) {
                 e.preventDefault()
                 var self = this
                 client({ path: '/screens/' + this.screen.id, entity: this.screen, method: 'PUT'}).then(
@@ -77,7 +67,6 @@
         },
 
         route: {
-            // Ooh, ooh, are there any new puppies yet?
             data: function (transition) {
                 this.fetch(this.$route.params.id, function (data) {
                     transition.next({screen: data})

@@ -17,10 +17,9 @@
 
     <div  v-if=" ! $loadingRouteData && screens.length > 0">
         <div class="row">
-            <ul>
-                <li  v-for="screen in screens">
-                    <screen-card :screen="screen"></screen-card>
-                </li>
+            <div  v-for="screen in screens">
+                <screen-card :screen="screen"></screen-card>
+            </div>
             </ul>
         </div>
     </div>
@@ -73,7 +72,6 @@
         },
 
         route: {
-            // Ooh, ooh, are there any new puppies yet?
             data: function (transition) {
                 this.fetch(function (data) {
                     transition.next({screens: data})

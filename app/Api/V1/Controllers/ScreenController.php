@@ -67,12 +67,12 @@ class ScreenController extends BaseController
         if (Gate::denies('view_screens')) {
             $this->response->error('permission_denied', 401);
         }
-        $screen = Screen::find($id);
+        $screen = Screen::with('screengroups')->find($id);
         if(!$screen) {
             throw new NotFoundHttpException;
         }
-
-        return $screen;
+        return $this->item($screen, new ScreenTransformer(), ['key' => 'screen']);
+        //return $screen;
     }
 
     /**
