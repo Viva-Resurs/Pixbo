@@ -36,8 +36,11 @@
                                 {{ trans('messages.start') }}
                                 <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('messages.event_start_date_tooltip') }}"></span>
                             </label>
-                            <div class="">
-                                <input v-model="event.start_date" type="date" name="start_date" id="inputStart_date" class="form-control" v-bind:value="event.start_date" required="required" title="">
+                            <div class="input-group date">
+                                <input v-model="event.start_date" type="text" name="start_date" id="inputStart_date" class="form-control" v-bind:value="event.start_date" required="required" title="">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6">
@@ -45,8 +48,11 @@
                                 {{ trans('messages.end') }}
                                 <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('messages.event_end_date_tooltip') }}"></span>
                             </label>
-                            <div class="">
+                            <div class="input-group date">
                                 <input type="date" v-model="event.end_date" v-bind:value="event.end_date" name="end_date" id="inputEnd_date" class="form-control" value="" title="">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -232,20 +238,24 @@
 
             <button type="submit" id="submitButton_{{ id }}" class="" style="display: none;">{{ trans('messages.save') }}</button>
 
+            <Datetimepicker></Datetimepicker>
+            <Tooltips></Tooltips>
         </form>
 </template>
 
 <script>
     import Tags from './Tags.vue';
+    import DateTimePicker from './DateTimePicker.vue';
+    import Tooltips from './Tooltip.vue';
 
     export default {
 
         props: ['id', 'model'],
 
         components: {
-
             'Tagger': Tags,
-
+            'Datetimepicker' : DateTimePicker,
+            'Tooltips' : Tooltips,
         },
 
         data: function() {
@@ -385,7 +395,8 @@
                 } else return true;
             }
         },
-         ready: function () {
+
+        ready: function () {
             this.get_all_screengroups();
             if(this.model == 'screens')
                 this.get_all_tags();
@@ -393,7 +404,3 @@
         },
     };
 </script>
-
-<style>
-
-</style>

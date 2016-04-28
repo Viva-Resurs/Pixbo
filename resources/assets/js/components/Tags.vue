@@ -70,10 +70,6 @@
             },
         },
 
-        ready: function() {
-            update_tooltip();
-        },
-
         computed: {
             tags: function() {
                 return this.$parent.$data.tags;
