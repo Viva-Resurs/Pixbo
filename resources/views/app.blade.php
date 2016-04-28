@@ -9,6 +9,7 @@
     <script type="text/javascript" src="/js/vendor/jquery-2.1.3.min.js"></script>
     
     @include('shared.tooltip')
+    @include('shared.datetimepicker')
     {{--
         @if ( Config::get('app.debug') )
             <script type="text/javascript">
