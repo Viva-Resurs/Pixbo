@@ -1,14 +1,20 @@
 <template>
-    <div class="panel-heading">
-        Edit screengroup
+    <div class="panel-body" v-if="$loadingRouteData">
+        Laddar data {{ loadingRouteData }}
     </div>
-    <div class="panel-body">
-        <div id="alerts" v-if="messages.length > 0">
-            <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
-                {{ message.message }}
-            </div>
+
+    <div  v-if=" ! $loadingRouteData">
+        <div class="panel-heading">
+            Edit screengroup
         </div>
-       <schedule :model="screen"></schedule>
+        <div class="panel-body">
+            <div id="alerts" v-if="messages.length > 0">
+                <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
+                    {{ message.message }}
+                </div>
+            </div>
+           <schedule :model.sync="screen"></schedule>
+        </div>
     </div>
 </template>
 
@@ -41,7 +47,7 @@
                             if (status === 401) {
                                 self.$dispatch('userHasLoggedOut')
                             } else {
-                                console.log(response)
+                                //console.log(response)
                             }
                         }
                 )

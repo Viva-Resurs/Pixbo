@@ -255,15 +255,13 @@
                         return false;
                     }
                 } else return true;
+            },
+            get_start_time() {
+                return this.model.event.start_time;
             }
         },
-        ready: function () {
-            /*
-            this.get_all_screengroups();
-            if(this.model == 'screens')
-                this.get_all_tags();
-            this.get_model();
-            */
+        created: function () {
+            console.log(this.model)
         },
     };
 </script>
