@@ -38,7 +38,6 @@
                 if (response.entity && response.entity.token && response.entity.token.length > 10) {
                     localStorage.setItem('jwt-token', 'Bearer ' + response.entity.token);
                 }
-                console.log(response);
                 return response;
             }
         });
