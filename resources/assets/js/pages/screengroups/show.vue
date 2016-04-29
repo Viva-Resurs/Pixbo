@@ -1,42 +1,45 @@
 <template>
-    <div>
     <div class="panel-heading">
-        Edit screengroup
+        {{ trans('screengroup.edit') }}
     </div>
-    <div class="panel-body">
-        <div id="alerts" v-if="messages.length > 0">
-            <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
-                {{ message.message }}
+    <div class="panel-body" v-if="$loadingRouteData">
+        <loading></loading>
+    </div>
+    <div  v-if=" ! $loadingRouteData">
+        <div class="panel-body">
+            <div id="alerts" v-if="messages.length > 0">
+                <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
+                    {{ message.message }}
+                </div>
             </div>
-        </div>
-        <form class="form-horizontal" role="form" v-on:submit="updateScreengroup">
-            <fieldset disabled>
+            <form class="form-horizontal" role="form" v-on:submit="updateScreengroup">
+                <fieldset disabled>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('screengroup.model') }} ID</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" required="required" name="name" type="text" v-model="screengroup.id">
+                        </div>
+                    </div>
+                </fieldset>
                 <div class="form-group">
-                    <label for="name" class="col-sm-2 col-sm-offset-1 control-label">Screengroup ID</label>
+                    <label for="name" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.name') }}</label>
                     <div class="col-sm-5">
-                        <input class="form-control" required="required" name="name" type="text" v-model="screengroup.id">
+                        <input class="form-control" required="required" name="name" type="text" v-model="screengroup.name">
                     </div>
                 </div>
-            </fieldset>
-            <div class="form-group">
-                <label for="name" class="col-sm-2 col-sm-offset-1 control-label">Name your screengroup</label>
-                <div class="col-sm-5">
-                    <input class="form-control" required="required" name="name" type="text" v-model="screengroup.name">
+                <div class="form-group">
+                    <label for="desc" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.desc') }}</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" required="required" name="desc" type="text" v-model="screengroup.desc">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="age" class="col-sm-2 col-sm-offset-1 control-label">What's the age?</label>
-                <div class="col-sm-5">
-                    <input class="form-control" required="required" name="age" type="text" v-model="screengroup.desc">
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-3">
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}</button>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-4 col-sm-offset-3">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-btn fa-save"></i>Update the screengroup!</button>
-                </div>
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
     </div>
 </template>
 
@@ -46,9 +49,6 @@
         data: function () {
             return {
                 screengroup: {
-                    id: null,
-                    name: null,
-                    age: null
                 },
                 messages: []
             }
@@ -60,22 +60,10 @@
                 var that = this;
                 client({ path: '/screengroups/' + id }).then(
                         function (response) {
-                            console.log('response: ')
-                            console.log(response)
-                            console.log(response.raw.responseText)
-                            try {
-                                that.screengroup = JSON.parse(response.raw.responseText).screengroup;
-                            } catch(e) {
-                                console.log(e)
-                            }
-
-                            //that.$set('screengroup', response.entity.screengroup)
-                            console.log('Screengroup: ')
-                            console.log(that.screengroup)
-                            //successHandler(response.entity)
+                            that.$set('screengroup', response.entity.data)
+                            successHandler(response.entity.data)
                         },
                         function (response, status, request) {
-                            // Go tell your parents that you've messed up somehow
                             if (status === 401) {
                                 self.$dispatch('userHasLoggedOut')
                             } else {
@@ -91,7 +79,7 @@
                 client({ path: '/screengroups/' + this.screengroup.id, entity: this.screengroup, method: 'PUT'}).then(
                         function (response) {
                             self.messages = []
-                            self.messages.push({type: 'success', message: 'Woof woof! Your screengroup was updated'})
+                            self.messages.push({type: 'success', message: trans('screengroup.updated')})
                         },
                         function (response) {
                             self.messages = []
@@ -105,7 +93,6 @@
         },
 
         route: {
-            // Ooh, ooh, are there any new puppies yet?
             data: function (transition) {
                 this.fetch(this.$route.params.id, function (data) {
                     transition.next({screengroup: data})

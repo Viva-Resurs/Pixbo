@@ -1,9 +1,9 @@
 <template>
     <div class="panel-heading">
-        Områdes arkiv
+        {{ trans('screengroup.archive') }}
     </div>
     <div class="panel-body" v-if="$loadingRouteData">
-        Laddar data {{ loadingRouteData }}
+        <loading></loading>
     </div>
     <div class="panel-body" v-if="messages.length > 0">
         <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
@@ -12,16 +12,16 @@
     </div>
 
     <div class="panel-body" v-if="screengroups.length == 0">
-        Det finns inga områden.
+        {{ trans('screengroup.empty') }}
     </div>
 
     <table class="table" v-if=" ! $loadingRouteData && screengroups.length > 0">
         <thead>
         <tr>
             <th>ID</th>
-            <th>Namn</th>
-            <th>Beskrivning</th>
-            <th width="120px">Aktion</th>
+            <th>{{ trans('general.name') }}</th>
+            <th>{{ trans('general.desc') }}</th>
+            <th width="120px">{{ trans('general.action') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -30,8 +30,8 @@
             <td>{{ screengroup.name }}</td>
             <td>{{ screengroup.desc }}</td>
             <td>
-                <a class="btn btn-primary btn-xs" v-link="{ path: '/screengroups/'+screengroup.id }">Ändra</a>
-                <a class="btn btn-primary btn-xs" v-on:click="deleteScreengroup($index)">Ta bort</a>
+                <a class="btn btn-primary btn-xs" v-link="{ path: '/screengroups/'+screengroup.id }">{{ trans('general.edit') }}</a>
+                <a class="btn btn-primary btn-xs" v-on:click="deleteScreengroup($index)">{{ trans('general.delete') }}</a>
             </td>
         </tr>
         </tbody>
@@ -48,12 +48,10 @@
         },
 
         methods: {
-            // Let's fetch some dogs
             fetch: function (successHandler) {
                 var that = this
                 client({ path: '/screengroups' }).then(
                         function (response) {
-                            // Look ma! Puppies!
                             that.$set('screengroups', response.entity.data)
                             successHandler(response.entity.data)
                         },
@@ -70,10 +68,10 @@
                 client({ path: '/screengroups/' + this.screengroups[index].id, method: 'DELETE' }).then(
                         function (response) {
                             that.screengroups.splice(index, 1)
-                            that.messages = [{type: 'success', message: 'Området har tagits bort'}]
+                            that.messages = [{type: 'success', message: trans('screengroup.deleted')}]
                         },
                         function (response) {
-                            that.messages.push({type: 'danger', message: 'Gick inte att ta bort området, försök igen'})
+                            that.messages.push({type: 'danger', message: trans('screengroup.deleted_fail') })
                         }
                 )
             }
@@ -81,7 +79,6 @@
         },
 
         route: {
-            // Ooh, ooh, are there any new puppies yet?
             data: function (transition) {
                 this.fetch(function (data) {
                     transition.next({screengroups: data})
