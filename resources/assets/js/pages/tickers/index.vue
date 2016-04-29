@@ -1,9 +1,9 @@
 <template>
     <div class="panel-heading">
-        Ticker arkiv
+        {{ trans('ticker.archive') }}
     </div>
     <div class="panel-body" v-if="$loadingRouteData">
-        Laddar data {{ loadingRouteData }}
+        <loading></loading>
     </div>
     <div class="panel-body" v-if="messages.length > 0">
         <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
@@ -12,16 +12,16 @@
     </div>
 
     <div class="panel-body" v-if="tickers.length == 0">
-        Det finns inga tickers
+        {{ trans('ticker.empty') }}
     </div>
 
     <table class="table" v-if=" ! $loadingRouteData && tickers.length > 0">
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Text</th>
+            <th>{{ trans('general.id') }}</th>
+            <th>{{ trans('general.text') }}</th>
 
-            <th width="120px">Aktion</th>
+            <th width="120px">{{ trans('general.action') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -29,8 +29,8 @@
             <td>{{ ticker.id }}</td>
             <td>{{ ticker.text }}</td>
             <td>
-                <a class="btn btn-primary btn-xs" v-link="{ path: '/tickers/'+ticker.id }">Ändra</a>
-                <a class="btn btn-primary btn-xs" v-on:click="deleteTicker($index)">Ta bort</a>
+                <a class="btn btn-primary btn-xs" v-link="{ path: '/tickers/'+ticker.id }">{{ trans('general.edit') }}</a>
+                <a class="btn btn-primary btn-xs" v-on:click="deleteTicker($index)"> {{ trans('general.delete') }}</a>
             </td>
         </tr>
         </tbody>
@@ -52,7 +52,6 @@
                 var that = this
                 client({ path: '/tickers' }).then(
                         function (response) {
-                            // Look ma! Puppies!
                             that.$set('tickers', response.entity.data)
                             successHandler(response.entity.data)
                         },
@@ -66,13 +65,13 @@
 
             deleteTicker: function (index) {
                 var that = this
-                client({ path: '/ticker/' + this.tickers[index].id, method: 'DELETE' }).then(
+                client({ path: '/tickers/' + this.tickers[index].id, method: 'DELETE' }).then(
                         function (response) {
                             that.tickers.splice(index, 1)
-                            that.messages = [{type: 'success', message: 'Great, ticker purged.'}]
+                            that.messages = [{type: 'success', message: that.trans('ticker.deleted') }]
                         },
                         function (response) {
-                            that.messages.push({type: 'danger', message: 'There was a problem removing the ticker'})
+                            that.messages.push({type: 'danger', message: that.trans('ticker.delete_fail') })
                         }
                 )
             }
@@ -80,7 +79,6 @@
         },
 
         route: {
-            // Ooh, ooh, are there any new puppies yet?
             data: function (transition) {
                 this.fetch(function (data) {
                     transition.next({tickers: data})

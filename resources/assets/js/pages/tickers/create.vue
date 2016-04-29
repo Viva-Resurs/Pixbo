@@ -1,6 +1,6 @@
 <template>
     <div class="panel-heading">
-        Skapa ny ticker
+        {{ trans('ticker.create') }}
     </div>
     <div class="panel-body">
         <div id="alerts" v-if="messages.length > 0">
@@ -18,7 +18,7 @@
             <div class="form-group">
                 <div class="col-sm-4 col-sm-offset-3">
                     <button type="submit" class="btn btn-primary" :disabled="creating">
-                        <i class="fa fa-btn fa-save"></i>Spara
+                        <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                     </button>
                 </div>
             </div>
