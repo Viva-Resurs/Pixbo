@@ -12,3 +12,4 @@ public/js/
 public/images/
 storage/database.sqlite
 storage/database.sqlite-journal
+config/jwt.php
