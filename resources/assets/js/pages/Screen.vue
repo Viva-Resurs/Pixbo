@@ -5,20 +5,20 @@
         <div class="col-md-3">
             <div class="panel panel-default panel-flush">
                 <div class="panel-heading">
-                    Bilder
+                    {{ trans_choice('screen.model', 2) }}
                 </div>
                 <div class="panel-body">
                     <div class="app-tabs">
                         <ul class="nav app-tabs-stacked">
                             <li>
                                 <a v-link="{ path: '/screens' }">
-                                    <i class="fa fa-btn fa-fw fa-list"></i>&nbsp;Arkiv</span>
+                                    <i class="fa fa-btn fa-fw fa-list"></i>&nbsp;{{ trans('general.archive') }}</span>
                                 </a>
                             </li>
                             </li>
                             <li>
                                 <a v-link="{ path: '/screens/create' }">
-                                    <i class="fa fa-btn fa-fw fa-plus"></i>&nbsp;Ny</span>
+                                    <i class="fa fa-btn fa-fw fa-plus"></i>&nbsp;{{ trans('general.new') }}</span>
                                 </a>
                             </li>
                         </ul>
