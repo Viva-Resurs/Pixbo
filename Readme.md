@@ -9,7 +9,7 @@
 
 	If using sqlite (developing)
 	Create empty file:
-		storage/database.sqlite
+		``storage/database.sqlite``
 		
         php artisan migrate
         php artisan db:seed
