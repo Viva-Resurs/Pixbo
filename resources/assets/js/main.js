@@ -7,9 +7,8 @@ var bootstrap = require('bootstrap-sass');
 
 Vue.config.debug = true
 
-// Init sessionStorage-handler & collect current data before Vue is created.
+// Init sessionStorage-handler
 window.PixboStorage = require('./components/SessionStorageHandler.vue');
-window.PixboStorage.Load();
 
 // Import global-mixins
 Vue.mixin(require('./components/Translation.vue'));
@@ -49,10 +48,11 @@ window.Vue = new Vue({
         }
     },
 
-    ready: function() {
-        this.$http.get('/api/locales', function(locale) {
-            window.PixboStorage.Set('lang',locale); // Update Lang-Data
-        });
+    created: function() {
+        window.PixboStorage.Load();
+            this.$http.get('/api/locales', function(locale) {
+                window.PixboStorage.Set('lang',locale); // Update Lang-Data
+            });
     },
 
 });
