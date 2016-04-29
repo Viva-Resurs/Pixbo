@@ -7,6 +7,9 @@ var bootstrap = require('bootstrap-sass');
 // Import the actual routes, aliases, ...
 import { configRouter } from './routes'
 
+// declare global mixins
+Vue.mixin(require('./mixins/Translation.vue'))
+
 // Create our router object and set options on it
 const router = new VueRouter()
 
@@ -36,6 +39,7 @@ window.client = rest.wrap(pathPrefix, { prefix: config.api.base_url })
 // Bootstrap the app
 Vue.component('nav-component', require('./components/Nav.vue'))
 Vue.component('footer-component', require('./components/Footer.vue'))
+Vue.component('loading', require('./components/Loading.vue'))
 Vue.directive("dropzone",{
     bind: function(){
         this.vm.initDropzone();
