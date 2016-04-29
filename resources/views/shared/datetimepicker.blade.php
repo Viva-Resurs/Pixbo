@@ -1,4 +1,5 @@
 <!-- DateTimePicker -->
+<!-- docs: https://github.com/Eonasdan/bootstrap-datetimepicker -->
 <script type="text/javascript" src="/js/vendor/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="/js/vendor/datetimepicker/bootstrap-datetimepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/vendor/bootstrap-datetimepicker.min.css">
