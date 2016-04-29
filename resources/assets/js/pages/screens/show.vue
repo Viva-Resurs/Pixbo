@@ -1,16 +1,16 @@
 <template>
+    <div class="panel-heading">
+        {{ trans('messages.edit_screen') }}
+    </div>
     <div class="panel-body" v-if="$loadingRouteData">
-        Laddar data {{ loadingRouteData }}
+        <loading></loading>
     </div>
 
     <div  v-if=" ! $loadingRouteData">
-        <div class="panel-heading">
-            Edit screengroup
-        </div>
         <div class="panel-body">
             <div id="alerts" v-if="messages.length > 0">
                 <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
-                    {{ message.message }}
+                    {{ trans('message.message') }}
                 </div>
             </div>
            <schedule :model.sync="screen"></schedule>

@@ -1,9 +1,9 @@
 <template>
     <div class="panel-heading">
-        Bild arkiv
+        {{ trans('screen.archive') }}
     </div>
     <div class="panel-body" v-if="$loadingRouteData">
-        Laddar data {{ loadingRouteData }}
+        <loading></loading>
     </div>
     <div class="panel-body" v-if="messages.length > 0">
         <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
@@ -12,7 +12,7 @@
     </div>
 
     <div class="panel-body" v-if="screens.length == 0">
-        Det finns inga bilder
+        {{ trans('screen.empty') }}
     </div>
 
     <div  v-if=" ! $loadingRouteData && screens.length > 0">

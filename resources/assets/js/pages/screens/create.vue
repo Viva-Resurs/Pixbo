@@ -1,6 +1,6 @@
 <template>
     <div class="panel-heading">
-        Ladda upp bild
+        {{ trans('screen.upload') }}
     </div>
     <div class="panel-body">
         <div id="alerts" v-if="messages.length > 0">
@@ -25,6 +25,9 @@
             }
         },
         methods: {
+            trans_helper(text) {
+                return this.trans(text)
+            },
             initDropzone: function () {
                 self = this
                 var vm = this
@@ -32,7 +35,7 @@
                     new Dropzone("#my-dropzone", {
                         maxFileSize: 10,
                         acceptedFiles: '.jpg,.jpeg,.png,.bmp',
-                        dictDefaultMessage: 'Bläddra efter bild, eller släpp bild här.',
+                        dictDefaultMessage: vm.trans_helper('screen.upload_message'),
                         init: function () {
                             var self = this;
                             // config
@@ -54,7 +57,7 @@
                             });
 
                             self.on("success", function () {
-                                vm.messages = [ {type: 'success', message: 'Bilden har laddats upp'} ]
+                                vm.messages = [ {type: 'success', message: vm.trans_helper('screen.uploaded') } ]
                             });
                         }
                     })
