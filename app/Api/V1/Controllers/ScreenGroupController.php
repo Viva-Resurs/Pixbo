@@ -59,7 +59,7 @@ class ScreenGroupController extends BaseController
             throw new NotFoundHttpException;
         }
 
-        return $screengroup;
+        return $this->item($screengroup, new ScreenGroupTransformer());
     }
 
     public function update(Request $request, $id) {
