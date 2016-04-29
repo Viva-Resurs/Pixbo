@@ -72,7 +72,6 @@ class ScreenController extends BaseController
             throw new NotFoundHttpException;
         }
         return $this->item($screen, new ScreenTransformer(), ['key' => 'screen']);
-        //return $screen;
     }
 
     /**
