@@ -14,8 +14,8 @@
         <div class="col-lg-6 col-md-6">
 
             <legend>
-                {{ 'messages.screen_group' }}
-                <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ 'messages.screengroup_tooltip' }}"></span>
+                {{ trans_choice('screengroup.model', 1) }}
+                <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('screengroup.tooltip') }}"></span>
             </legend>
             <div class="form-group">
                 <select class="form-control" multiple v-model="selected_screengroups" id="inputScreengroups">
@@ -28,13 +28,13 @@
             </template>
 
 
-            <legend>{{ 'messages.period' }}</legend>
+            <legend>{{ trans('schedule.period') }}</legend>
             <div class="row">
                 <div class="form-group">
                     <div class="col-lg-6 col-md-6">
                         <label for="inputStart_date" class="control-label">
-                            {{ 'messages.start' }}
-                            <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ 'messages.event_start_date_tooltip' }}"></span>
+                            {{ trans('schedule.start') }}
+                            <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('schedule.start_date_tooltip') }}"></span>
                         </label>
                         <div class="">
                             <input v-model="model.event.start_date" type="date" name="start_date" id="inputStart_date" class="form-control" required="required" title="">
@@ -42,8 +42,8 @@
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label for="inputEnd_date" class="control-label">
-                            {{ 'messages.end' }}
-                            <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ 'messages.event_end_date_tooltip' }}"></span>
+                            {{ trans('schedule.end') }}
+                            <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('schedule.end_date_tooltip') }}"></span>
                         </label>
                         <div class="">
                             <input type="date" v-model="model.event.end_date" name="end_date" id="inputEnd_date" class="form-control">
@@ -55,8 +55,8 @@
                 <div class="form-group">
                     <div class="col-lg-6 col-md-6">
                         <label for="inputStart_time" class="control-label">
-                            {{ 'messages.start' }}
-                            <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ 'messages.event_start_time_tooltip' }}"></span>
+                            {{ trans('schedule.start') }}
+                            <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('schedule.start_time_tooltip') }}"></span>
                         </label>
                         <div class="">
                             <input type="time" v-model="model.event.start_time" name="start_time" id="inputStart_time" class="form-control">
@@ -85,31 +85,28 @@
                 <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ 'messages.event_repeat_type_tooltip' }}"></span>
             </label>
             <select v-model="event.recur_type" v-bind:value="event.recur_type" name="recur_type" id="inputRecur_type" class="form-control">
-                <option value="">       {{ 'messages.never'  }}</option>
-                <option value="daily">  {{ 'messages.daily'   }}</option>
-                <option value="weekly"> {{ 'messages.weekly'  }}</option>
-                <option value="monthly">{{ 'messages.monthly' }}</option>
-                <option value="yearly"> {{ 'messages.yearly'  }}</option>
+                <option v-for="option in recur_options" :value="option.key">{{ trans(option.value) }}</option>
+
             </select>
 
             <!-- Daily -->
             <template v-if="event.recur_type == 'daily'">
-                <schedule-daily></schedule-daily>
+                <schedule-daily :event.sync="event"></schedule-daily>
             </template>
 
             <!-- Weekly -->
             <template v-if="event.recur_type == 'weekly'">
-                <schedule-weekly></schedule-weekly>
+                <schedule-weekly :event.sync="event"></schedule-weekly>
             </template>
 
             <!-- Monthly -->
             <template v-if="event.recur_type == 'monthly'">
-                <schedule-monthly></schedule-monthly>
+                <schedule-monthly :event.sync="event"></schedule-monthly>
             </template>
 
             <!-- Yearly -->
             <template v-if="event.recur_type == 'yearly'">
-                <schedule-yearly></schedule-yearly>
+                <schedule-yearly :event.sync="event"></schedule-yearly>
             </template>
 
             <!-- Summary -->
@@ -149,7 +146,14 @@
                 monthly_day_num: '',
                 error: {
                     missing_tag: 'messages.tag_missing'
-                }
+                },
+                recur_options: [
+                    {key: '', value: 'schedule.never'},
+                    {key: 'daily', value: 'schedule.daily'},
+                    {key: 'weekly', value: 'schedule.weekly'},
+                    {key: 'monthly', value: 'schedule.monthly'},
+                    {key: 'yearly', value: 'schedule.yearly'}
+                ]
             };
         },
 
@@ -261,7 +265,7 @@
             }
         },
         created: function () {
-            console.log(this.model)
+            this.event = this.model.event;
         },
     };
 </script>
