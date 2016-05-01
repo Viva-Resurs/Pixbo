@@ -61,10 +61,10 @@
                 client({ path: '/screens/' + this.screens[index].id, method: 'DELETE' }).then(
                         function (response) {
                             that.screens.splice(index, 1)
-                            that.messages = [{type: 'success', message: 'Bilden har tagits bort'}]
+                            that.messages = [{type: 'success', message: that.trans('screen.deleted')}]
                         },
                         function (response) {
-                            that.messages.push({type: 'danger', message: 'Kunde inte ta bort bild, försök igen'})
+                            that.messages.push({type: 'danger', message: that.trans('screen.deleted_fail')})
                         }
                 )
             }

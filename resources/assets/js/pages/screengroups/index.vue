@@ -17,23 +17,23 @@
 
     <table class="table" v-if=" ! $loadingRouteData && screengroups.length > 0">
         <thead>
-        <tr>
-            <th>ID</th>
-            <th>{{ trans('general.name') }}</th>
-            <th>{{ trans('general.desc') }}</th>
-            <th width="120px">{{ trans('general.action') }}</th>
-        </tr>
+            <tr>
+                <th>{{ trans('general.id') }}</th>
+                <th>{{ trans('general.name') }}</th>
+                <th>{{ trans('general.desc') }}</th>
+                <th width="120px">{{ trans('general.action') }}</th>
+            </tr>
         </thead>
         <tbody>
-        <tr v-for="screengroup in screengroups">
-            <td>{{ screengroup.id }}</td>
-            <td>{{ screengroup.name }}</td>
-            <td>{{ screengroup.desc }}</td>
-            <td>
-                <a class="btn btn-primary btn-xs" v-link="{ path: '/screengroups/'+screengroup.id }">{{ trans('general.edit') }}</a>
-                <a class="btn btn-primary btn-xs" v-on:click="deleteScreengroup($index)">{{ trans('general.delete') }}</a>
-            </td>
-        </tr>
+            <tr v-for="screengroup in screengroups">
+                <td>{{ screengroup.id }}</td>
+                <td>{{ screengroup.name }}</td>
+                <td>{{ screengroup.desc }}</td>
+                <td>
+                    <a class="btn btn-primary btn-xs" v-link="{ path: '/screengroups/'+screengroup.id }">{{ trans('general.edit') }}</a>
+                    <a class="btn btn-primary btn-xs" v-on:click="deleteScreengroup($index)">{{ trans('general.delete') }}</a>
+                </td>
+            </tr>
         </tbody>
     </table></template>
 

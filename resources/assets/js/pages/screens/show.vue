@@ -1,6 +1,6 @@
 <template>
     <div class="panel-heading">
-        {{ trans('messages.edit_screen') }}
+        {{ trans('screen.edit') }}
     </div>
     <div class="panel-body" v-if="$loadingRouteData">
         <loading></loading>
@@ -59,7 +59,7 @@
                 client({ path: '/screens/' + this.screen.id, entity: this.screen, method: 'PUT'}).then(
                         function (response) {
                             self.messages = []
-                            self.messages.push({type: 'success', message: 'Your screen was updated'})
+                            self.messages.push({type: 'success', message: self.trans('screen.updated')})
                         },
                         function (response) {
                             self.messages = []
