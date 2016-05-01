@@ -14,6 +14,7 @@ require('laravel-elixir-vueify');
 
 elixir(function(mix) {
     mix
+        .copy('resources/assets/json/lang', 'public/lang')
         .sass('app.scss')
         .browserify('index.js');
 });
