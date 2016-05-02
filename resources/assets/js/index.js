@@ -8,7 +8,7 @@ var bootstrap = require('bootstrap-sass');
 import { configRouter } from './routes'
 
 // declare global mixins
-Vue.mixin(require('./mixins/Translation.vue'))
+Vue.mixin(require('./mixins/Translation.vue'));
 
 // Create our router object and set options on it
 const router = new VueRouter()
@@ -40,11 +40,8 @@ window.client = rest.wrap(pathPrefix, { prefix: config.api.base_url })
 Vue.component('nav-component', require('./components/Nav.vue'))
 Vue.component('footer-component', require('./components/Footer.vue'))
 Vue.component('loading', require('./components/Loading.vue'))
-Vue.directive("dropzone",{
-    bind: function(){
-        this.vm.initDropzone();
-    }
-})
+Vue.directive("dropzone",require('./directives/Dropzone.vue'));
+Vue.directive("tooltip",require('./directives/Tooltip.vue'));
 const App = Vue.extend(require('./App.vue'));
 
 router.start(App, '#app')
