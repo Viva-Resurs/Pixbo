@@ -1,0 +1,8 @@
+{
+  "model": "Ticker|Tickers",
+  "empty": "Det finns inga tickers än.",
+  "deleted": "Tickern har tagits bort.",
+  "deleted_fail": "Misslyckades att ta bort tickern, försök igen.",
+  "edit": "Redigera ticker",
+  "updated": "Tickern har uppdaterats."
+}
