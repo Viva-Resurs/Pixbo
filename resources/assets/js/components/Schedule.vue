@@ -132,7 +132,8 @@
             ScheduleWeekly: require('./schedule/Weekly.vue'),
             ScheduleMonthly: require('./schedule/Monthly.vue'),
             ScheduleYearly: require('./schedule/Yearly.vue'),
-            Tagger: require('./Tag.vue')
+            Tagger: require('./Tag.vue'),
+            DateTimePicker: require('./DateTimePicker.vue')
         },
 
         data: function() {
@@ -140,7 +141,7 @@
                 screengroups: [],
                 event: {},
                 selected_screengroups: [],
-                selected_tags: '',
+                selected_tags: [],
                 tags: [],
                 weekly_day_num: [],
                 monthly_day_num: '',
@@ -148,7 +149,7 @@
                     missing_tag: 'messages.tag_missing'
                 },
                 recur_options: [
-                    {key: '', value: 'schedule.never'},
+                    {key: null, value: 'schedule.never'},
                     {key: 'daily', value: 'schedule.daily'},
                     {key: 'weekly', value: 'schedule.weekly'},
                     {key: 'monthly', value: 'schedule.monthly'},
@@ -266,6 +267,8 @@
         },
         created: function () {
             this.event = this.model.event;
+            this.selected_tags = this.model.tags;
+            this.selected_screengroups = this.model.screengroups;
         },
     };
 </script>
