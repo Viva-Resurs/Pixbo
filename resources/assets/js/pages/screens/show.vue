@@ -13,7 +13,7 @@
                     {{ trans('message.message') }}
                 </div>
             </div>
-           <schedule :model.sync="screen"></schedule>
+           <schedule :model.sync="screen" :tags="tags" :screengroups="screengroups"></schedule>
         </div>
     </div>
 </template>
@@ -29,6 +29,8 @@
             return {
                 screen: {
                 },
+                screengroups: [],
+                tags: [],
                 messages: []
             }
         },
@@ -40,17 +42,28 @@
                 client({ path: '/screens/' + id }).then(
                         function (response) {
                             that.$set('screen', response.entity.data)
-                           successHandler(response.entity.data)
+                            successHandler(response.entity.data)
                         },
                         function (response, status, request) {
-                            console.log("STATUS")
-                            console.log(status)
-                            console.log("STATUS")
                             // Go tell your parents that you've messed up somehow
                             if (status === 401) {
                                 self.$dispatch('userHasLoggedOut')
                             } else {
                                 //console.log(response)
+                            }
+                        }
+                )
+            },
+            fetchScreengroups: function (successHandler) {
+                var that = this
+                client({ path: '/screengroups' }).then(
+                        function (response) {
+                            that.$set('screengroups', response.entity.data)
+                            //successHandler(response.entity.data)
+                        },
+                        function (response, status) {
+                            if (_.contains([401, 500], status)) {
+                                that.$dispatch('userHasLoggedOut')
                             }
                         }
                 )
@@ -79,6 +92,9 @@
             data: function (transition) {
                 this.fetch(this.$route.params.id, function (data) {
                     transition.next({screen: data})
+                })
+                this.fetchScreengroups(this.$route.params.id, function (data) {
+                    transition.next({screengroups: data})
                 })
             }
         }
