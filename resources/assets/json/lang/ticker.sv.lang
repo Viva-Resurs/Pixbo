@@ -1,5 +1,6 @@
 {
   "model": "Ticker|Tickers",
+  "archive": "Arkiv",
   "empty": "Det finns inga tickers än.",
   "deleted": "Tickern har tagits bort.",
   "deleted_fail": "Misslyckades att ta bort tickern, försök igen.",

@@ -3,6 +3,9 @@
   "new":      "Ny",
   "name":     "Namn",
   "desc":     "Beskrivning",
+  "text":     "Text",
   "action":   "Handling",
-  "id":       "#"
+  "id":       "#",
+  "edit":     "Redigera",
+  "delete":   "Ta bort"
 }
