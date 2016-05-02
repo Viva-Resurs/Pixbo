@@ -53,7 +53,7 @@
                         function (response, status) {
                             that.screengroup.name = ''
                             that.screengroup.desc = ''
-                            that.messages = [ {type: 'success', message: trans('screengroup.created') } ]
+                            that.messages = [ {type: 'success', message: that.trans('screengroup.created') } ]
                             Vue.nextTick(function () {
                                 document.getElementById('nameInput').focus()
                             })

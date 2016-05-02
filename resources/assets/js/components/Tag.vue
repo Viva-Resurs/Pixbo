@@ -9,7 +9,7 @@
             <div class="tag label label-default" v-for="tag in list">
                 <span class="tag__name">{{ tag.name }}</span>
                 <a class="tag__remove btn btn-xs" @click="remove_tag($index),update_status">
-                    <span class="glyphicon glyphicon-remove"></span>
+                    <span class="fa-times"></span>
                 </a>
             </div>
         </div>

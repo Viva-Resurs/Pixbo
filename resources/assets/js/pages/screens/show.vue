@@ -43,6 +43,9 @@
                            successHandler(response.entity.data)
                         },
                         function (response, status, request) {
+                            console.log("STATUS")
+                            console.log(status)
+                            console.log("STATUS")
                             // Go tell your parents that you've messed up somehow
                             if (status === 401) {
                                 self.$dispatch('userHasLoggedOut')
