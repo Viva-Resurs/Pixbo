@@ -1,6 +1,6 @@
 <template>
-    <div class="panel-heading">
-        {{ trans('ticker.archive') }}
+    <div class="panel-heading" v-if=" ! $loadingRouteData">
+        {{ trans('general.archive') }}
     </div>
     <div class="panel-body" v-if="$loadingRouteData">
         <loading></loading>
@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <div class="panel-body" v-if="tickers.length == 0">
+    <div class="panel-body" v-if=" ! $loadingRouteData && tickers.length == 0">
         {{ trans('ticker.empty') }}
     </div>
 
@@ -29,12 +29,15 @@
             <td>{{ ticker.id }}</td>
             <td>{{ ticker.text }}</td>
             <td>
-                <a class="btn btn-primary btn-xs" v-link="{ path: '/tickers/'+ticker.id }">{{ trans('general.edit') }}</a>
-                <a class="btn btn-primary btn-xs" v-on:click="deleteTicker($index)"> {{ trans('general.delete') }}</a>
+                <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/tickers/'+ticker.id }"
+                  v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
+                <a class="btn btn-primary btn-xs fa fa-times" v-on:click="deleteTicker($index)"
+                  v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
             </td>
         </tr>
         </tbody>
-    </table></template>
+    </table>
+</template>
 
 <script>
     module.exports = {
@@ -84,7 +87,7 @@
                     transition.next({tickers: data})
                 })
             }
-        }
+        },
 
     }
 </script>
