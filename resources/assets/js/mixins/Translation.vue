@@ -8,6 +8,7 @@
                     'general',
                     'ticker',
                     'screen',
+                    'screengroup',
                     'datetimepicker_tooltip',
                 ],
             }
@@ -45,7 +46,7 @@
                 var word = string.split('.')[1];
                 
                 if (this.lang && this.lang[scope] && this.lang[scope][word])
-                    return this.lang[scope][word].split('|')[num];
+                    return this.lang[scope][word].split('|')[num-1];
                 else
                     return string; // Fallback
             },
