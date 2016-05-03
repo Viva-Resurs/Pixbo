@@ -30,13 +30,13 @@
         data() {
             return {
                 weekdays: [
-                    {text: 'messages.monday_short', value: 1},
-                    {text: 'messages.tuesday_short', value: 2},
-                    {text: 'messages.wednesday_short', value: 3},
-                    {text: 'messages.thursday_short', value: 4},
-                    {text: 'messages.friday_short', value: 5},
-                    {text: 'messages.saturday_short', value: 6},
-                    {text: 'messages.sunday_short', value: 0},
+                    {text: 'schedule.monday_short', value: 1},
+                    {text: 'schedule.tuesday_short', value: 2},
+                    {text: 'schedule.wednesday_short', value: 3},
+                    {text: 'schedule.thursday_short', value: 4},
+                    {text: 'schedule.friday_short', value: 5},
+                    {text: 'schedule.saturday_short', value: 6},
+                    {text: 'schedule.sunday_short', value: 0},
                 ],
             }
         },

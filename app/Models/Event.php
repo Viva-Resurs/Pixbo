@@ -56,6 +56,7 @@ class Event extends Model
         return $this->morphTo();
     }
 
+
     public function getFrequencyAttribute($value)
     {
         return !is_null($value) ? $value : '1';
@@ -76,6 +77,7 @@ class Event extends Model
         return !is_null($value) ? $value : '0';
     }
 
+    /*
     public function getRecurDayAttribute($value)
     {
         return !is_null($value) ? $value : '1';
@@ -85,4 +87,5 @@ class Event extends Model
     {
         return !is_null($value) ? $value : json_encode("1");
     }
+    */
 }

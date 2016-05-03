@@ -1,5 +1,5 @@
 <template>
-    <form>
+    <form v-on:submit.prevent="send_post">
         <template v-if="model.type == 'ticker'">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -63,7 +63,7 @@
                     <div class="col-lg-6 col-md-6">
                         <label for="inputEnd_time" class="control-label">
                             {{ trans('schedule.end') }}
-                            <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ 'messages.event_end_time_tooltip' }}"></span>
+                            <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('schedule.event_end_time_tooltip') }}"></span>
                         </label>
                         <div class="">
                             <input type="time" v-model="model.event.end_time" name="end_time" id="inputEnd_time" class="form-control">
@@ -80,7 +80,7 @@
 
             <label for="inputRecur_type" class="control-label">
                 {{ trans('schedule.repeat') }}
-                <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ 'messages.event_repeat_type_tooltip' }}"></span>
+                <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('schedule.event_repeat_type_tooltip') }}"></span>
             </label>
             <select v-model="event.recur_type" v-bind:value="event.recur_type" name="recur_type" id="inputRecur_type" class="form-control">
                 <option v-for="option in recur_options" :value="option.key">{{ trans(option.value) }}</option>
@@ -89,7 +89,7 @@
 
             <!-- Daily -->
             <template v-if="event.recur_type == 'daily'">
-                <schedule-daily :event.sync="event"></schedule-daily>
+                <schedule-daily :frequency.sync="event.frequency"></schedule-daily>
             </template>
 
             <!-- Weekly -->
@@ -99,12 +99,17 @@
 
             <!-- Monthly -->
             <template v-if="event.recur_type == 'monthly'">
-                <schedule-monthly :event.sync="event"></schedule-monthly>
+                <schedule-monthly
+                        :monthly_day_num.sync="monthly_day_num"
+                        :frequency.sync="event.frequency"
+                        :days_before_event.sync="event.days_before_event"
+                        :recur_day.sync="event.recur_day"
+                ></schedule-monthly>
             </template>
 
             <!-- Yearly -->
             <template v-if="event.recur_type == 'yearly'">
-                <schedule-yearly :event.sync="event"></schedule-yearly>
+                <schedule-yearly :frequency.sync="event.frequency"></schedule-yearly>
             </template>
 
             <!-- Summary -->
@@ -113,7 +118,7 @@
 
         </div>
 
-        <button type="submit"  v-on:submit.prevent id="submitButton_{{ id }}" class="btn btn-default">{{ trans('general.save') }}</button>
+        <button type="submit" id="submitButton_{{ id }}" class="btn btn-default">{{ trans('general.save') }}</button>
 
     </form>
 </template>
@@ -136,8 +141,6 @@
 
         data: function() {
             return {
-                selected_screengroups: [],
-                selected_tags: [],
                 weekly_day_num: [],
                 monthly_day_num: '',
                 error: {
@@ -230,6 +233,12 @@
             event() {
                 return this.model.event;
             },
+            selected_tags() {
+                return this.model.tags;
+            },
+            selected_screengroups() {
+                return this.model.screengroups;
+            },
 
             isValid: function() {
                 if(this.model.type == 'screens') {
@@ -246,10 +255,6 @@
             }
         },
         created: function () {
-            //this.event = this.model.event;
-            this.parse_event();
-            this.selected_tags = this.model.tags;
-            this.selected_screengroups = this.model.screengroups;
         },
     };
 </script>
