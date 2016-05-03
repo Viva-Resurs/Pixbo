@@ -5,19 +5,19 @@
         <div class="col-md-3">
             <div class="panel panel-default panel-flush">
                 <div class="panel-heading">
-                    Home
+                    {{ trans('general.home') }}
                 </div>
                 <div class="panel-body">
                     <div class="app-tabs">
                         <ul class="nav app-tabs-stacked">
                             <li >
                                 <a v-link="{ path: '/home/welcome' }">
-                                    <i class="fa fa-btn fa-fw fa-list"></i>&nbsp;Welcome</span>
+                                    <i class="fa fa-btn fa-fw fa-list"></i>&nbsp;{{ trans('general.welcome') }}</span>
                                 </a>
                             </li>
                             <li >
                                 <a v-link="{ path: '/home/about' }">
-                                    <i class="fa fa-btn fa-fw fa-lightbulb-o"></i>&nbsp;About us</span>
+                                    <i class="fa fa-btn fa-fw fa-lightbulb-o"></i>&nbsp;{{ trans('general.about') }}</span>
                                 </a>
                             </li>
                         </ul>
