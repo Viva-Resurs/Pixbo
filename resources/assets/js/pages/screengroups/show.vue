@@ -15,7 +15,7 @@
             <form class="form-horizontal" role="form" v-on:submit="updateScreengroup">
                 <fieldset disabled>
                     <div class="form-group">
-                        <label for="name" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('screengroup.model') }} ID</label>
+                        <label for="name" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.id') }}</label>
                         <div class="col-sm-5">
                             <input class="form-control" required="required" name="name" type="text" v-model="screengroup.id">
                         </div>
@@ -79,7 +79,7 @@
                 client({ path: '/screengroups/' + this.screengroup.id, entity: this.screengroup, method: 'PUT'}).then(
                         function (response) {
                             self.messages = []
-                            self.messages.push({type: 'success', message: trans('screengroup.updated')})
+                            self.messages.push({type: 'success', message: self.trans('screengroup.updated')})
                         },
                         function (response) {
                             self.messages = []
