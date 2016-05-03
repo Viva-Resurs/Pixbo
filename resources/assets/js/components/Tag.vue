@@ -1,15 +1,15 @@
 <template id="tag-template">
-    <label>
-        {{ 'messages.tag' }}
-    <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" :style="error"
+    <legend>{{ trans('tag.model') }}
+        <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" :style="error"
           title="{{ 'messages.atleast_one_tag' }}" :data-original-title="valid_info"></span>
-    </label>
+    </legend>
+    
     <div class="form-group">
         <div class="tag-group">
             <div class="tag label label-default" v-for="tag in list">
                 <span class="tag__name">{{ tag.name }}</span>
                 <a class="tag__remove btn btn-xs" @click="remove_tag($index),update_status">
-                    <span class="fa-times"></span>
+                    <span class="fa fa-times"></span>
                 </a>
             </div>
         </div>
@@ -20,7 +20,7 @@
                 <option v-for="tag in tags" value="{{ tag.name }}">{{ tag.name }}</option>
             </datalist>
             <span class="input-group-btn">
-                <button class="btn btn-default" type="button" @click="add_tag">Lägg till</button>
+                <button class="btn btn-default" type="button" @click="add_tag">{{ trans('general.new') }}</button>
             </span>
         </div>
     </div>
@@ -51,9 +51,19 @@
             add_tag: function(e) {
                 // If there is a new tag, validate before adding
                 if(this.new_tag && this.new_tag.length>0 && this.isValid()) {
-                    this.list.push({name: this.new_tag.trim(), new: true});
-                    this.new_tag = '';
-                    this.update_status();
+                    var exists = false;
+                    for (var i=0 ; i<this.tags.length ; i++)
+                        if ( this.tags[i].name == this.new_tag.trim() )
+                            exists = true;
+                    if(exists) {
+                        this.list.push({name: this.new_tag.trim()});
+                        this.new_tag = '';
+                        this.update_status();
+                    }
+
+                    else {
+                        console.log("Need to add the tag, get the response and add it to tags and list")
+                    }
                 }
             },
             remove_tag: function(index) {
@@ -80,7 +90,7 @@
             },
             valid_info: function () {
                 if (this.list.length < 1)
-                    return 'messages.atleast_one_tag';
+                    return this.trans('tag.tooltip_atleast_one_tag');
                 if (!this.isValid())
                     return 'messages.tag_exists';
                 return 'messages.atleast_one_tag';
