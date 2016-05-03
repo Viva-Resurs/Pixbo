@@ -1,5 +1,5 @@
 <template>
-    <form v-on:submit.prevent="send_post">
+    <form v-on:submit.prevent="updateSchedule">
         <template v-if="model.type == 'ticker'">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -94,7 +94,10 @@
 
             <!-- Weekly -->
             <template v-if="event.recur_type == 'weekly'">
-                <schedule-weekly :weekly_day_num.sync="weekly_day_num" :frequency.sync="event.frequency"></schedule-weekly>
+                <schedule-weekly
+                        :day_num.sync="weekly_day_num"
+                        :frequency.sync="event.frequency"
+                ></schedule-weekly>
             </template>
 
             <!-- Monthly -->
@@ -128,7 +131,7 @@
 
     export default {
 
-        props: ['model', 'redirect', 'tags', 'screengroups'],
+        props: ['model', 'redirect', 'tags', 'screengroups', 'messages'],
 
         components: {
             ScheduleDaily: require('./schedule/Daily.vue'),
@@ -141,6 +144,8 @@
 
         data: function() {
             return {
+
+                selected_screengroups: [],
                 weekly_day_num: [],
                 monthly_day_num: '',
                 error: {
@@ -157,73 +162,68 @@
         },
 
         methods: {
-            send_post: function() {
+
+            updateSchedule: function (e) {
+                e.preventDefault()
+
 
                 if(this.isValid) {
+                    // Update model stuff
+                    this.encodeModel();
 
-                    var day_num = null;
-                    var recur = this.event.recur_type;
-
-                    switch (recur) {
+                    var self = this
+                    client({ path: `/${self.model.type}s/${self.model.id}`, entity: self.model, method: 'PUT'}).then(
+                            function (response) {
+                                console.log("updated!")
+                                self.messages = []
+                                self.messages.push({type: 'success', message: self.trans(`${self.model.type}.updated`)})
+                            },
+                            function (response) {
+                                self.messages = []
+                                for (var key in response.entity) {
+                                    self.messages.push({type: 'danger', message: response.entity[key].message})
+                                }
+                            }
+                    )
+                }
+            },
+            encodeModel() {
+                switch (this.event.recur_type) {
+                    case "weekly":
+                        this.event.recur_day_num = JSON.stringify(this.weekly_day_num);
+                            console.log("WEEKLY: " + this.event.day_num)
+                        break;
+                    case "monthly":
+                        this.event.recur_day_num = JSON.stringify(this.monthly_day_num);
+                            console.log("MONTHLY")
+                        break;
+                }
+                this.model.screengroups = this.selected_screengroups;
+            },
+            decodeModel() {
+                if(this.model.screengroups != null || this.model.screengroups != [] || this.model.screengroups != "") {
+                    var that = this;
+                    this.model.screengroups.forEach(function(entry) {
+                        that.selected_screengroups.push(entry.id)
+                    })
+                }
+                if(this.model.event.recur_day_num != null) {
+                    var days = JSON.parse(this.event.recur_day_num)
+                    switch (this.event.recur_type) {
                         case "weekly":
-                            day_num = this.weekly_day_num;
+                            this.monthly_day_num = "1"
+                            this.weekly_day_num = days;
                             break;
                         case "monthly":
-                            day_num = this.monthly_day_num;
-                            break;
-                        default:
-                            day_num = '';
+                            this.monthly_day_num = days;
+                            this.weekly_day_num = [];
                             break;
                     }
-                    var payload = {
-                        event: this.event,
-                        selected_screengroups: this.selected_screengroups,
-                        selected_tags: this.selected_tags,
-                        day_num: day_num,
-                        modelObject: this.modelObject,
-                    };
-                    this.send_ajax(payload);
                 } else {
-
-                }
-
-            },
-
-            send_ajax: function(payload) {
-                var vm = this;
-                console.log(vm.modelObject);
-                this.$http.put('/admin/' + vm.model + '/' + vm.modelObject.id, payload).then(function (response) {
-                    if(response.ok) {
-                        vm.close_modal();
-                    }
-                    if(response) {
-                        vm.$dispatch('add-alert', response.data);
-                    }
-
-                });
-            },
-
-            parse_event: function() {
-                if(this.event.recur_day_num == null) {
+                    this.monthly_day_num = "1";
                     this.weekly_day_num = [];
-                    this.monthly_day_num = '1';
-                } else {
-                    var parsed_week = JSON.parse(this.event.recur_day_num);
-                    if(typeof parsed_week == 'string' || parsed_week == null)
-                        this.weekly_day_num = [];
-                    else
-                        this.weekly_day_num = parsed_week;
-                    this.monthly_day_num = JSON.parse(this.event.recur_day_num);
                 }
-
-                if(this.event.recur_day == null)
-                    this.event.recur_day = '1';
-
-                if(this.monthly_day_num.length > 1 || this.monthly_day_num == "")
-                    this.monthly_day_num = '1';
-
-
-            },
+            }
         },
 
         computed: {
@@ -236,25 +236,27 @@
             selected_tags() {
                 return this.model.tags;
             },
-            selected_screengroups() {
-                return this.model.screengroups;
-            },
 
             isValid: function() {
-                if(this.model.type == 'screens') {
+                if(this.model.type == 'screen') {
                     if (this.selected_tags.length > 0) {
                         return true;
                     } else {
                         $('#inputTags').focus();
                         return false;
                     }
-                } else return true;
+                } else {
+                    if(this.model.type == 'ticker')
+                        return true;
+                    else return false
+                }
             },
             get_start_time() {
                 return this.model.event.start_time;
             }
         },
-        created: function () {
+        ready: function () {
+            this.decodeModel();
         },
     };
 </script>

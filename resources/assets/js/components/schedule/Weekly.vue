@@ -19,14 +19,14 @@
             <br>
             <label v-for="day in weekdays">
                 {{ trans(day.text) }}
-                <input v-model="weekly_day_num" type="checkbox" :value="day.value">
+                <input v-model="day_num" type="checkbox" :value="day.value" :id="$index">
             </label>
         </div>
     </div>
 </template>
 <script>
     export default {
-        props: ['weekly_day_num', 'frequency'],
+        props: ['day_num', 'frequency'],
         data() {
             return {
                 weekdays: [
@@ -40,7 +40,5 @@
                 ],
             }
         },
-        created() {
-        }
     }
 </script>
