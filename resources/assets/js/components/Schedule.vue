@@ -1,6 +1,5 @@
 <template>
     <form>
-
         <template v-if="model.type == 'ticker'">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -12,14 +11,13 @@
         </template>
 
         <div class="col-lg-6 col-md-6">
-
             <legend>
                 {{ trans_choice('screengroup.model', 1) }}
                 <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('screengroup.tooltip') }}"></span>
             </legend>
             <div class="form-group">
                 <select class="form-control" multiple v-model="selected_screengroups" id="inputScreengroups">
-                    <option v-for="screengroup in screengroups" v-bind:value="screengroup.value">{{screengroup.text}}</option>
+                    <option v-for="screengroup in screengroups" v-bind:value="screengroup.id">{{screengroup.name}}</option>
                 </select>
             </div>
 
@@ -96,7 +94,7 @@
 
             <!-- Weekly -->
             <template v-if="event.recur_type == 'weekly'">
-                <schedule-weekly :event.sync="event"></schedule-weekly>
+                <schedule-weekly :weekly_day_num.sync="weekly_day_num" :frequency.sync="event.frequency"></schedule-weekly>
             </template>
 
             <!-- Monthly -->
@@ -115,7 +113,7 @@
 
         </div>
 
-        <button type="submit" id="submitButton_{{ id }}" class="" style="display: none;">{{ 'messages.save' }}</button>
+        <button type="submit"  v-on:submit.prevent id="submitButton_{{ id }}" class="btn btn-default">{{ 'messages.save' }}</button>
 
     </form>
 </template>
@@ -125,7 +123,7 @@
 
     export default {
 
-        props: ['model', 'redirect'],
+        props: ['model', 'redirect', 'tags', 'screengroups'],
 
         components: {
             ScheduleDaily: require('./schedule/Daily.vue'),
@@ -138,11 +136,8 @@
 
         data: function() {
             return {
-                screengroups: [],
-                event: {},
                 selected_screengroups: [],
                 selected_tags: [],
-                tags: [],
                 weekly_day_num: [],
                 monthly_day_num: '',
                 error: {
@@ -205,17 +200,6 @@
                 });
             },
 
-            get_all_screengroups: function() {
-                this.$http.get('/api/screengroups', function(screengroups) {
-                    this.screengroups = screengroups;
-                }.bind(this));
-            },
-            get_all_tags: function() {
-                this.$http.get('/api/tags', function(tags) {
-                    this.tags = tags;
-                }.bind(this));
-            },
-
             parse_event: function() {
                 if(this.event.recur_day_num == null) {
                     this.weekly_day_num = [];
@@ -237,18 +221,14 @@
 
 
             },
-
-            set_selected_screengroups: function() {
-                var sgs = this.modelObject.screengroups != null ? this.modelObject.screengroups.length : 0;
-                for (var i =0;i<sgs;i++) {
-                    this.selected_screengroups.push(this.modelObject.screengroups[i].id);
-                }
-            },
         },
 
         computed: {
             summary: function() {
                 return 'summary_text';
+            },
+            event() {
+                return this.model.event;
             },
 
             isValid: function() {
@@ -266,7 +246,8 @@
             }
         },
         created: function () {
-            this.event = this.model.event;
+            //this.event = this.model.event;
+            this.parse_event();
             this.selected_tags = this.model.tags;
             this.selected_screengroups = this.model.screengroups;
         },
