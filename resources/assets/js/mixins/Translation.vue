@@ -1,4 +1,5 @@
 <script>
+
     export default {
         data: function(){
             return {
@@ -12,8 +13,11 @@
 
                 if (this.lang && this.lang[scope] && this.lang[scope][word])
                     return this.lang[scope][word];
-                else
+                else {
+                    console.log('MISSING LANG for: ' + string)
                     return string; // Fallback
+                }
+
             },
             trans_choice: function(string, num) {
                 var scope = string.split('.')[0];
@@ -24,6 +28,10 @@
                 else
                     return string; // Fallback
             },
+        },
+        created() {
+            if(localStorage.lang)
+                this.lang = JSON.parse(localStorage.getItem('lang'));
         }
     };
 </script>
