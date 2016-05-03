@@ -54,7 +54,7 @@
                 this.token = null;
                 this.authenticated = false;
                 localStorage.removeItem('jwt-token');
-                localStorage.removeItem('lang');
+                //localStorage.removeItem('lang');
                 if(this.$route.auth) this.$route.router.go('/auth/login')
             }
         }
