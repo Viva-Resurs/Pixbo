@@ -15,6 +15,7 @@
                     return this.lang[scope][word];
                 else {
                     console.log('MISSING LANG for: ' + string)
+                    console.log(scope)
                     return string; // Fallback
                 }
 
@@ -25,8 +26,12 @@
                 
                 if (this.lang && this.lang[scope] && this.lang[scope][word])
                     return this.lang[scope][word].split('|')[num-1];
-                else
+                else {
+                    console.log("MISSING LANG for: " + string);
+                    console.log(scope)
                     return string; // Fallback
+                }
+
             },
         },
         created() {
