@@ -4,11 +4,10 @@ namespace App\Api\V1\Controllers;
 
 use App\Api\V1\Requests\FileUploadForm;
 use App\Api\V1\Transformers\Screen\ScreenTransformer;
-use App\Http\Requests\ScreenUpdateForm;
+use App\Api\V1\Requests\ScreenUpdateForm;
 use App\Models\Screen;
 use Gate;
 use App\Http\Requests;
-use Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Activity;
 
@@ -93,7 +92,7 @@ class ScreenController extends BaseController
 
         $result = $form->persist($screen);
 
-        if(!is_null($result)) {
+        if($result) {
             Activity::log([
                 'contentId' => $screen->id,
                 'contentType' => 'Screen',

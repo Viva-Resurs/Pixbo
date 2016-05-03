@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Api\V1\Requests;
 
 use DB;
 use App\Models\Event;
 use App\Models\Tag;
+use App\Models\Screen;
+use App\Http\Requests\Request;
 
 class ScreenUpdateForm extends Request
 {
@@ -27,11 +29,27 @@ class ScreenUpdateForm extends Request
     {
         // TODO: Add validation to the screen updates.
         return [
-            'selected_tags' => 'required'
+            //'selected_tags' => 'required'
         ];
     }
 
-    public function persist($screen) {
+    public function persist() {
+        $newScreen = $this->all(); //dd($this->all());
+        $newEvent = $newScreen['event'];
+        $newScreengroups = $newScreen['screengroups'];
+
+        $screen = Screen::with(['screengroups', 'event'])->findOrFail($newScreen['id']);
+        $event = $screen->event->first();
+        $event->update($newEvent);
+        $screen->screengroups()->sync($newScreengroups);
+
+        if($screen->update($newScreen)) {
+         return true;
+        } else {
+            return false;
+        }
+        /*
+        dd($screen);
         $vm = $this;
 
         $event = $vm->get('event');
@@ -42,7 +60,7 @@ class ScreenUpdateForm extends Request
         $screengroups = $vm->get('selected_screengroups');
 
         $result = DB::transaction(function () use ($screen, $event, $tags, $screengroups) {
-            $e = Event::find($event['id']);
+            $e = Event::findOrFail($event['id']);
             $e->update($event);
 
             $tagged = [];
@@ -66,5 +84,6 @@ class ScreenUpdateForm extends Request
         });
 
         return $result;
+        */
     }
 }
