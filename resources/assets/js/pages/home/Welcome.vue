@@ -1,9 +1,9 @@
 <template>
     <div class="panel-heading">
-        Welcome
+        {{ trans('general.welcome') }}
     </div>
     <div class="panel-body">
-        Here goes the welcome page
+        {{ trans('general.welcome_content') }}
     </div>
 </template>
 

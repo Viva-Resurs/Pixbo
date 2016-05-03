@@ -1,11 +1,19 @@
 {
+  "home":     "Hem",
+  "welcome":  "Välkommen",
+  "about":    "Om oss",
+  "settings": "Inställningar",
   "archive":  "Arkiv",
-  "new":      "Ny",
+  "new":      "Lägg till",
   "name":     "Namn",
   "desc":     "Beskrivning",
   "text":     "Text",
   "action":   "Handling",
   "id":       "#",
   "edit":     "Redigera",
-  "delete":   "Ta bort"
+  "delete":   "Ta bort",
+  "welcome_content" :
+    "Välkommen!",
+  "about_content" :
+    "Pixbo är ett verktyg för att hantera hur innehåll visas på anslutna paneler."
 }
