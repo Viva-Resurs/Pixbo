@@ -10,10 +10,10 @@
         <div class="panel-body">
             <div id="alerts" v-if="messages.length > 0">
                 <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
-                    {{ trans('message.message') }}
+                    {{ message.message }}
                 </div>
             </div>
-           <schedule :model.sync="screen" :tags.sync="tags" :screengroups="screengroups"></schedule>
+           <schedule :model.sync="screen" :tags.sync="tags" :screengroups="screengroups" :messages.sync="messages"></schedule>
         </div>
     </div>
 </template>
