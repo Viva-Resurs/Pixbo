@@ -30,8 +30,10 @@
                 <td>{{ screengroup.name }}</td>
                 <td>{{ screengroup.desc }}</td>
                 <td>
-                    <a class="btn btn-primary btn-xs" v-link="{ path: '/screengroups/'+screengroup.id }">{{ trans('general.edit') }}</a>
-                    <a class="btn btn-primary btn-xs" v-on:click="deleteScreengroup($index)">{{ trans('general.delete') }}</a>
+                    <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/screengroups/'+screengroup.id }"
+                       v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
+                    <a class="btn btn-primary btn-xs fa fa-times" v-on:click="deleteScreengroup($index)"
+                       v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
                 </td>
             </tr>
         </tbody>
@@ -68,10 +70,10 @@
                 client({ path: '/screengroups/' + this.screengroups[index].id, method: 'DELETE' }).then(
                         function (response) {
                             that.screengroups.splice(index, 1)
-                            that.messages = [{type: 'success', message: trans('screengroup.deleted')}]
+                            that.messages = [{type: 'success', message: that.trans('screengroup.deleted')}]
                         },
                         function (response) {
-                            that.messages.push({type: 'danger', message: trans('screengroup.deleted_fail') })
+                            that.messages.push({type: 'danger', message: that.trans('screengroup.deleted_fail') })
                         }
                 )
             }
