@@ -13,7 +13,7 @@
                     {{ trans('message.message') }}
                 </div>
             </div>
-           <schedule :model.sync="screen" :tags="tags" :screengroups="screengroups"></schedule>
+           <schedule :model.sync="screen" :tags.sync="tags" :screengroups="screengroups"></schedule>
         </div>
     </div>
 </template>
@@ -68,6 +68,20 @@
                         }
                 )
             },
+            fetchTags: function (successHandler) {
+                var that = this
+                client({ path: '/tags' }).then(
+                        function (response) {
+                            that.$set('tags', response.entity.data)
+                            //successHandler(response.entity.data)
+                        },
+                        function (response, status) {
+                            if (_.contains([401, 500], status)) {
+                                that.$dispatch('userHasLoggedOut')
+                            }
+                        }
+                )
+            },
 
             updateScreen: function (e) {
                 e.preventDefault()
@@ -95,6 +109,9 @@
                 })
                 this.fetchScreengroups(this.$route.params.id, function (data) {
                     transition.next({screengroups: data})
+                })
+                this.fetchTags(this.$route.params.id, function (data) {
+                    transition.next({tags: data})
                 })
             }
         }

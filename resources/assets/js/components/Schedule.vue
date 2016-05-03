@@ -22,7 +22,7 @@
             </div>
 
             <template v-if="model.type == 'screen'">
-                <Tagger :list.sync="selected_tags"></Tagger>
+                <Tagger :list.sync="selected_tags" :tags.sync="tags"></Tagger>
             </template>
 
 
@@ -62,7 +62,7 @@
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label for="inputEnd_time" class="control-label">
-                            {{ 'messages.end' }}
+                            {{ trans('schedule.end') }}
                             <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ 'messages.event_end_time_tooltip' }}"></span>
                         </label>
                         <div class="">
@@ -76,10 +76,10 @@
 
         <div class="col-lg-6 col-md-6">
 
-            <legend>{{ 'messages.recurring' }}</legend>
+            <legend>{{ trans('schedule.recurring') }}</legend>
 
             <label for="inputRecur_type" class="control-label">
-                {{ 'messages.repeat' }}
+                {{ trans('schedule.repeat') }}
                 <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ 'messages.event_repeat_type_tooltip' }}"></span>
             </label>
             <select v-model="event.recur_type" v-bind:value="event.recur_type" name="recur_type" id="inputRecur_type" class="form-control">
@@ -109,11 +109,11 @@
 
             <!-- Summary -->
             <div class="row"></div>
-            <label>{{ 'messages.summary' }}</label> {{ summary }}
+            <label>{{ trans('general.summary') }}</label> {{ summary }}
 
         </div>
 
-        <button type="submit"  v-on:submit.prevent id="submitButton_{{ id }}" class="btn btn-default">{{ 'messages.save' }}</button>
+        <button type="submit"  v-on:submit.prevent id="submitButton_{{ id }}" class="btn btn-default">{{ trans('general.save') }}</button>
 
     </form>
 </template>

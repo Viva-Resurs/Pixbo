@@ -29,7 +29,7 @@
 <script>
     export default {
 
-        props: ['list'],
+        props: ['list', 'tags'],
 
         data: function() {
             return {
@@ -75,9 +75,6 @@
         },
 
         computed: {
-            tags: function() {
-                return this.$parent.$data.tags;
-            },
             error: function () {
                 return (this.list.length < 1 || !this.isValid()) ? 'color:red' : '';
             },

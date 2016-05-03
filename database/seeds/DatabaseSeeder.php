@@ -185,6 +185,28 @@ class RolesTablesSeeder extends Seeder {
             'label' => 'auth.remove_tickers',
         ]);
 
+        // Tags
+        $view_tags = Permission::create([
+            'name'  => 'view_tags',
+            'label' => 'auth.view_tags',
+        ]);
+
+        $add_tags = Permission::create([
+            'name'  => 'add_tags',
+            'label' => 'auth.add_tags',
+        ]);
+
+        $edit_tags = Permission::create([
+            'name'  => 'edit_tags',
+            'label' => 'auth.edit_tags',
+        ]);
+
+        $remove_tags = Permission::create([
+            'name'  => 'remove_tags',
+            'label' => 'auth.remove_tags',
+        ]);
+
+        // Global site permissions
         $edit_site_settings = Permission::create([
             'name' => 'edit_site_settings',
             'label' => 'auth.edit_site_settings'
@@ -243,6 +265,12 @@ class RolesTablesSeeder extends Seeder {
         $admin->givePermissionTo($edit_tickers);
         $admin->givePermissionTo($remove_tickers);
 
+        // Tag
+        $admin->givePermissionTo($view_tags);
+        $admin->givePermissionTo($add_tags);
+        $admin->givePermissionTo($edit_tags);
+        $admin->givePermissionTo($remove_tags);
+
         // Site Settings
         $admin->givePermissionTo($edit_site_settings);
         $admin->givePermissionTo($view_activity);
@@ -265,6 +293,10 @@ class RolesTablesSeeder extends Seeder {
         $moderator->givePermissionTo($add_tickers);
         $moderator->givePermissionTo($edit_tickers);
         $moderator->givePermissionTo($remove_tickers);
+
+        // Tags
+        $moderator->givePermissionTo($view_tags);
+        $moderator->givePermissionTo($add_tags);
 
         // Client
         $client = Role::create([
