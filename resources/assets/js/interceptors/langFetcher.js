@@ -35,11 +35,13 @@
                         var file_list = [
                             'general',
                             'ticker',
+                            'tag',
                             'screen',
                             'screengroup',
                             'datetimepicker_tooltip',
                             'auth',
-                            'client'
+                            'client',
+                            'schedule'
                         ];
                         localStorage.removeItem('lang');
                         for (var i=0 ; i<file_list.length ; i++){
