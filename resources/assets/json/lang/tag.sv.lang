@@ -1,0 +1,4 @@
+{
+  "model": "Tag",
+  "tooltip_atleast_one_tag": "Det krävs minst en tag"
+}

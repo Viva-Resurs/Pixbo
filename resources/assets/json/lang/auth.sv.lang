@@ -1,5 +1,6 @@
 {
     "login":   "Logga in",
     "logout":  "Logga ut",
-    "profile": "Profil"
+    "profile": "Profil",
+    "register": "Registrera"
 }

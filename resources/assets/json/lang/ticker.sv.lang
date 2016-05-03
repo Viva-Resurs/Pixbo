@@ -1,5 +1,6 @@
 {
   "model": "Ticker|Tickers",
+  "create": "Skapa ny ticker",
   "archive": "Arkiv",
   "empty": "Det finns inga tickers än.",
   "deleted": "Tickern har tagits bort.",

@@ -10,10 +10,12 @@
   "text":     "Text",
   "action":   "Handling",
   "id":       "#",
+  "summary": "Summering",
   "edit":     "Redigera",
   "delete":   "Ta bort",
   "welcome_content" :
     "Välkommen!",
   "about_content" :
-    "Pixbo är ett verktyg för att hantera hur innehåll visas på anslutna paneler."
+    "Pixbo är ett verktyg för att hantera hur innehåll visas på anslutna paneler.",
+  "save": "Spara"
 }
