@@ -11,7 +11,7 @@
                     'screengroup',
                     'datetimepicker_tooltip',
                     'auth',
-                    'klient'
+                    'client'
                 ],
             }
         },
