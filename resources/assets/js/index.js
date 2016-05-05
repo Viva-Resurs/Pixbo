@@ -29,14 +29,14 @@ var defaultRequest = require('rest/interceptor/defaultRequest')
 var errorCode = require('rest/interceptor/errorCode')
 var interceptor = require('rest/interceptor')
 var jwtAuth = require('./interceptors/jwAuth.js')
-var langFetcher = require('./interceptors/langFetcher.js')
+//var langFetcher = require('./interceptors/langFetcher.js')
 
 window.client = rest.wrap(pathPrefix, { prefix: config.api.base_url })
     .wrap(mime)
     .wrap(defaultRequest, config.api.defaultRequest)
     .wrap(errorCode, { code: 400 })
-    .wrap(jwtAuth)
-    .wrap(langFetcher);
+    .wrap(jwtAuth);
+  //  .wrap(langFetcher);
 
 // Bootstrap the app
 Vue.component('nav-component', require('./components/Nav.vue'))
