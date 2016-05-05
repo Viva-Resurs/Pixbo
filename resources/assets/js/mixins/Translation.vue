@@ -1,9 +1,9 @@
 <script>
-
+    import lang from '../lang/sv'
     export default {
         data: function(){
             return {
-                lang: window.lang
+                lang: lang
             }
         },
         methods: {
@@ -35,8 +35,8 @@
             },
         },
         created() {
-            if(localStorage.lang)
-                this.lang = JSON.parse(localStorage.getItem('lang'));
+            //if(localStorage.lang)
+            //    this.lang = JSON.parse(localStorage.getItem('lang'));
         }
     };
 </script>
