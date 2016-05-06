@@ -1,7 +1,9 @@
+
 window.Vue = require('vue')
 window.VueRouter = require('vue-router')
 Vue.use(VueRouter)
-var moment = require('moment');
+
+//var moment = require('moment');
 
 var bootstrap = require('bootstrap-sass');
 

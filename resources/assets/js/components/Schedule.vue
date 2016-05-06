@@ -21,10 +21,11 @@
                 </select>
             </div>
 
+            <!--
             <template v-if="model.type == 'screen'">
                 <Tagger :list.sync="selected_tags" :tags.sync="tags"></Tagger>
             </template>
-
+            -->
 
             <legend>{{ trans('schedule.period') }}</legend>
             <div class="row">
@@ -138,7 +139,7 @@
             ScheduleWeekly: require('./schedule/Weekly.vue'),
             ScheduleMonthly: require('./schedule/Monthly.vue'),
             ScheduleYearly: require('./schedule/Yearly.vue'),
-            Tagger: require('./Tag.vue'),
+            //Tagger: require('./Tag.vue'),
             DateTimePicker: require('./DateTimePicker.vue')
         },
 
@@ -152,7 +153,7 @@
                     missing_tag: 'messages.tag_missing'
                 },
                 recur_options: [
-                    {key: null, value: 'schedule.never'},
+                    {key: 'none', value: 'schedule.never'},
                     {key: 'daily', value: 'schedule.daily'},
                     {key: 'weekly', value: 'schedule.weekly'},
                     {key: 'monthly', value: 'schedule.monthly'},
@@ -167,7 +168,7 @@
                 e.preventDefault()
 
 
-                if(this.isValid) {
+                //if(this.isValid) {
                     // Update model stuff
                     this.encodeModel();
 
@@ -185,7 +186,7 @@
                                 }
                             }
                     )
-                }
+                //}
             },
             encodeModel() {
                 switch (this.event.recur_type) {
