@@ -16,7 +16,7 @@
         
 * Finish installation
 
-	composer install
+	``composer install``
 
 * Gulp
 
