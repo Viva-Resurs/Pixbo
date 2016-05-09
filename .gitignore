@@ -14,3 +14,4 @@ storage/database.sqlite
 storage/database.sqlite-journal
 config/jwt.php
 public/lang/
+/Vue-template
