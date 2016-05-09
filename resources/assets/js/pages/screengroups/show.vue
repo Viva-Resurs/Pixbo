@@ -35,7 +35,12 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-3">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}</button>
+                        <button type="" class="btn" v-link="{ path: '/screengroups/index' }">
+                          <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
+                        </button>
+                        <button type="submit" class="btn btn-primary" :disabled="emptyfields">
+                          <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
+                        </button>
                     </div>
                 </div>
             </form>
@@ -52,6 +57,12 @@
                 },
                 messages: []
             }
+        },
+
+        computed: {
+             emptyfields: function(){
+                return (this.screengroup.name=='' || this.screengroup.desc=='') ? true : false;
+             }
         },
 
         methods: {

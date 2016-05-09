@@ -15,6 +15,11 @@
                                     <i class="fa fa-btn fa-fw fa-list"></i>&nbsp;{{ trans('general.archive') }}</span>
                                 </a>
                             </li>
+                            <li v-if=" $route.params.id>0 ">
+                                <a v-link="{ path: '/screengroups/'+1 }">
+                                    <i class="fa fa-btn fa-fw fa-pencil"></i>&nbsp;{{ trans('general.edit') }}</span>
+                                </a>
+                            </li>
                             </li>
                             <li>
                                 <a v-link="{ path: '/screengroups/create' }">
