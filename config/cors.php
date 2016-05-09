@@ -10,8 +10,8 @@ return [
     | to accept any value, the allowed methods however have to be explicitly listed.
     |
     */
-    'supportsCredentials' => false,
-    'allowedOrigins' => ['*'],
+    'supportsCredentials' => true,
+    'allowedOrigins' => ['http://localhost:8080'],
     'allowedHeaders' => ['*'],
     'allowedMethods' => ['GET', 'POST', 'PUT',  'DELETE'],
     'exposedHeaders' => [],
