@@ -5,20 +5,20 @@
         <div class="col-md-3">
             <div class="panel panel-default panel-flush">
                 <div class="panel-heading">
-                    Screengroups
+                    {{ trans_choice('client.model',2) }}
                 </div>
                 <div class="panel-body">
                     <div class="app-tabs">
                         <ul class="nav app-tabs-stacked">
                             <li>
-                                <a v-link="{ path: '/screengroups' }">
-                                    <i class="fa fa-btn fa-fw fa-list"></i>&nbsp;Screengroup list</span>
+                                <a v-link="{ path: '/clients/index' }">
+                                    <i class="fa fa-btn fa-fw fa-list"></i>&nbsp;{{ trans('general.archive') }}</span>
                                 </a>
                             </li>
                             </li>
                             <li>
-                                <a v-link="{ path: '/screengroups/create' }">
-                                    <i class="fa fa-btn fa-fw fa-heart"></i>&nbsp;Create one</span>
+                                <a v-link="{ path: '/clients/create' }">
+                                    <i class="fa fa-btn fa-fw fa-plus"></i>&nbsp;{{ trans('general.new') }}</span>
                                 </a>
                             </li>
                         </ul>
