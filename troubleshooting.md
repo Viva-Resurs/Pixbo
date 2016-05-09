@@ -10,4 +10,4 @@ Response:
 	... set 'always_populate_raw_post_data' to '-1' in php.ini ...
 Solution:
 	uncomment this line in php.ini
-	``;always_populate_raw_post_data = -1``
+	;always_populate_raw_post_data = -1
