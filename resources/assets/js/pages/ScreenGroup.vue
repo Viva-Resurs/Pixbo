@@ -16,7 +16,7 @@
                                 </a>
                             </li>
                             <li v-if=" $route.params.id>0 ">
-                                <a v-link="{ path: '/screengroups/'+1 }">
+                                <a v-link="{ path: '/screengroups/'+$route.params.id }">
                                     <i class="fa fa-btn fa-fw fa-pencil"></i>&nbsp;{{ trans('general.edit') }}</span>
                                 </a>
                             </li>
