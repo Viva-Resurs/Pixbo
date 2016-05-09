@@ -9,7 +9,7 @@
         "laravel/framework": "5.2.*",
 	    "tymon/jwt-auth": "0.5.*",
         "dingo/api": "1.0.*@dev",
-        "barryvdh/laravel-cors": "^0.7.1",
+        "barryvdh/laravel-cors": "^0.8.0",
         "doctrine/dbal": "^2.5",
         "regulus/activity-log": "^0.5.5",
         "enyo/dropzone": "^4.3",
