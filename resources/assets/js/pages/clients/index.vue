@@ -1,6 +1,6 @@
 <template>
     <div class="panel-heading">
-        List of screengroups
+        {{ trans('general.archive') }}
     </div>
     <div class="panel-body" v-if="$loadingRouteData">
         <loading></loading>

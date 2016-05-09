@@ -14,7 +14,8 @@
 	.navbar-nav {
 		padding-top: 0px;
 		li a.v-link-active {
-			text-decoration: underline;
+			text-decoration: none;
+			border-bottom: 1px solid $brand-primary;
 		}
 	}
 
