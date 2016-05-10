@@ -54,19 +54,14 @@
                 </ul>
             </div>
         </div>
-    </nav></template>
+    </nav>
+</template>
 
 <script>
     module.exports = {
         data: function () {
             return {
                 navTitle: 'Pixbo'
-            }
-        },
-        methods:{
-            hasRoute: function (partial) {
-                console.log(this.$route.path)
-                return (this.$route.path.indexOf(partial) > -1)
             }
         }
     }
