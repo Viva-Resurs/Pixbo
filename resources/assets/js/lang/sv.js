@@ -34,6 +34,7 @@ const lang = {
         welcome_content :           "Välkommen!",
         about_content :             "Pixbo är ett verktyg för att hantera hur innehåll visas på anslutna paneler.",
         cancel:                     "Avbryt",
+        back:                       "Tillbaka",
         save:                       "Spara"
     },
     /* ----------------------------- SCHEDULE ----------------------------- */

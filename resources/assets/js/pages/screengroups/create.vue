@@ -23,8 +23,11 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-4 col-sm-offset-3">
-                    <button type="" class="btn" v-link="{ path: '/screengroups/' }">
-                        <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
+                    <button type="" class="btn" v-link="{ path: '/screengroups/' }" v-if="emptyfields">
+                      <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
+                    </button>
+                    <button type="" class="btn" v-link="{ path: '/screengroups/' }" v-if="!emptyfields">
+                      <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                     </button>
                     <button type="submit" class="btn btn-primary" :disabled="emptyfields">
                         <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
@@ -32,7 +35,8 @@
                 </div>
             </div>
         </form>
-    </div></template>
+    </div>
+</template>
 
 <script>
     module.exports = {
@@ -54,24 +58,24 @@
 
         methods: {
             createScreengroup: function (e) {
-                e.preventDefault()
-                var that = this
+                e.preventDefault();
+                var self = this;
                 client({path: 'screengroups', entity: this.screengroup}).then(
                         function (response, status) {
-                            that.screengroup.name = ''
-                            that.screengroup.desc = ''
-                            that.messages = [ {type: 'success', message: that.trans('screengroup.created') } ]
+                            self.screengroup.name = '';
+                            self.screengroup.desc = '';
+                            self.messages.push({ type:'success', message:self.trans('screengroup.created') });
                             Vue.nextTick(function () {
-                                document.getElementById('nameInput').focus()
+                                document.getElementById('nameInput').focus();
                             })
                         },
                         function (response, status) {
-                            that.messages = []
+                            self.messages = [];
                             for (var key in response.entity) {
-                                that.messages.push({type: 'danger', message: response.entity[key]})
+                                self.messages.push({ type:'danger', message:response.entity[key] });
                             }
                         }
-                )
+                );
             }
         }
     }

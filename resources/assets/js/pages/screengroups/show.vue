@@ -5,7 +5,7 @@
     <div class="panel-body" v-if="$loadingRouteData">
         <loading></loading>
     </div>
-    <div  v-if=" ! $loadingRouteData">
+    <div v-if=" ! $loadingRouteData">
         <div class="panel-body">
             <div id="alerts" v-if="messages.length > 0">
                 <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
@@ -35,7 +35,10 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-3">
-                        <button type="" class="btn" v-link="{ path: '/screengroups/' }">
+                        <button type="" class="btn" v-link="{ path: '/screengroups/' }" v-if="emptyfields">
+                          <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
+                        </button>
+                        <button type="" class="btn" v-link="{ path: '/screengroups/' }" v-if="!emptyfields">
                           <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                         </button>
                         <button type="submit" class="btn btn-primary" :disabled="emptyfields">
@@ -71,34 +74,34 @@
                 var that = this;
                 client({ path: '/screengroups/' + id }).then(
                         function (response) {
-                            that.$set('screengroup', response.entity.data)
-                            successHandler(response.entity.data)
+                            that.$set('screengroup', response.entity.data);
+                            successHandler(response.entity.data);
                         },
                         function (response, status, request) {
                             if (status === 401) {
-                                self.$dispatch('userHasLoggedOut')
+                                self.$dispatch('userHasLoggedOut');
                             } else {
-                                console.log(response)
+                                console.log(response);
                             }
                         }
-                )
+                );
             },
 
             updateScreengroup: function (e) {
-                e.preventDefault()
-                var self = this
+                e.preventDefault();
+                var self = this;
                 client({ path: '/screengroups/' + this.screengroup.id, entity: this.screengroup, method: 'PUT'}).then(
                         function (response) {
-                            self.messages = []
-                            self.messages.push({type: 'success', message: self.trans('screengroup.updated')})
+                            self.messages = [];
+                            self.messages.push({type: 'success', message: self.trans('screengroup.updated')});
                         },
                         function (response) {
-                            self.messages = []
+                            self.messages = [];
                             for (var key in response.entity) {
-                                self.messages.push({type: 'danger', message: response.entity[key]})
+                                self.messages.push({type: 'danger', message: response.entity[key]});
                             }
                         }
-                )
+                );
             }
 
         },
@@ -106,8 +109,8 @@
         route: {
             data: function (transition) {
                 this.fetch(this.$route.params.id, function (data) {
-                    transition.next({screengroup: data})
-                })
+                    transition.next({screengroup: data});
+                });
             }
         }
     }

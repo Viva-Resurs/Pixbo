@@ -37,7 +37,8 @@
                 </td>
             </tr>
         </tbody>
-    </table></template>
+    </table>
+</template>
 
 <script>
     module.exports = {
@@ -51,31 +52,31 @@
 
         methods: {
             fetch: function (successHandler) {
-                var that = this
+                var self = this;
                 client({ path: '/screengroups' }).then(
                         function (response) {
-                            that.$set('screengroups', response.entity.data)
-                            successHandler(response.entity.data)
+                            self.$set('screengroups', response.entity.data);
+                            successHandler(response.entity.data);
                         },
                         function (response, status) {
                             if (_.contains([401, 500], status)) {
-                                that.$dispatch('userHasLoggedOut')
+                                self.$dispatch('userHasLoggedOut');
                             }
                         }
-                )
+                );
             },
 
             deleteScreengroup: function (index) {
-                var that = this
+                var self = this;
                 client({ path: '/screengroups/' + this.screengroups[index].id, method: 'DELETE' }).then(
                         function (response) {
-                            that.screengroups.splice(index, 1)
-                            that.messages = [{type: 'success', message: that.trans('screengroup.deleted')}]
+                            self.screengroups.splice(index, 1);
+                            self.messages.push({ type:'success', message:self.trans('screengroup.deleted') });
                         },
                         function (response) {
-                            that.messages.push({type: 'danger', message: that.trans('screengroup.deleted_fail') })
+                            self.messages.push({ type:'danger', message:self.trans('screengroup.deleted_fail') });
                         }
-                )
+                );
             }
 
         },
@@ -83,7 +84,7 @@
         route: {
             data: function (transition) {
                 this.fetch(function (data) {
-                    transition.next({screengroups: data})
+                    transition.next({screengroups: data});
                 })
             }
         }
