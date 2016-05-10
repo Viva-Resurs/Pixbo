@@ -99,8 +99,8 @@ module.exports = {
         })
 
         router.alias({
-            '': '/home/welcome',
-            '/': '/home/welcome',
+            '': '/home/',
+            '/': '/home/',
             '/auth': '/auth/login'
         })
 
