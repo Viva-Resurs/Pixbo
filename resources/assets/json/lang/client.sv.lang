@@ -1,8 +1,0 @@
-{
-  "model": "Klient|Klienter",
-  "empty": "Det finns inga klienter än.",
-  "deleted": "Klienten har tagits bort.",
-  "deleted_fail": "Misslyckades att ta bort klienten, försök igen.",
-  "edit": "Redigera klient",
-  "updated": "Klienten har uppdaterats."
-}
