@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <div class="panel-body" v-if="screengroups.length == 0">
+    <div class="panel-body" v-if=" ! $loadingRouteData && screengroups.length == 0">
         {{ trans('screengroup.empty') }}
     </div>
 
