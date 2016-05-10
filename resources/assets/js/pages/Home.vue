@@ -10,12 +10,12 @@
                 <div class="panel-body">
                     <div class="app-tabs">
                         <ul class="nav app-tabs-stacked">
-                            <li >
-                                <a v-link="{ path: '/home/welcome' }">
+                            <li>
+                                <a v-link="{ path: '/home/', exact: true }">
                                     <i class="fa fa-btn fa-fw fa-list"></i>&nbsp;{{ trans('general.welcome') }}</span>
                                 </a>
                             </li>
-                            <li >
+                            <li>
                                 <a v-link="{ path: '/home/about' }">
                                     <i class="fa fa-btn fa-fw fa-lightbulb-o"></i>&nbsp;{{ trans('general.about') }}</span>
                                 </a>

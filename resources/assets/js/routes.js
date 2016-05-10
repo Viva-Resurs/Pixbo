@@ -27,7 +27,7 @@ module.exports = {
             '/home': {
                 component: require('./pages/Home.vue'),
                 subRoutes: {
-                    '/welcome': {
+                    '/': {
                         component: require('./pages/home/Welcome.vue')
                     },
                     '/about': {
@@ -40,7 +40,7 @@ module.exports = {
                 component: require('./pages/ScreenGroup.vue'),
                 auth: true,
                 subRoutes: {
-                    '/index': {
+                    '/': {
                         component: require('./pages/screengroups/index.vue')
                     },
                     '/:id': {
@@ -55,7 +55,7 @@ module.exports = {
                 component: require('./pages/Screen.vue'),
                 auth: true,
                 subRoutes: {
-                    '/index': {
+                    '/': {
                         component: require('./pages/screens/index.vue')
                     },
                     '/:id': {
@@ -70,7 +70,7 @@ module.exports = {
                 component: require('./pages/Ticker.vue'),
                 auth: true,
                 subRoutes: {
-                    '/index': {
+                    '/': {
                         component: require('./pages/tickers/index.vue')
                     },
                     '/:id': {

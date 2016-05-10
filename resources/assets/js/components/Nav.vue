@@ -17,10 +17,10 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a v-link="{ path: '/home/welcome' }">{{ trans('general.home') }}</a></li>
-                    <li><a v-link="{ path: '/screengroups/index' }" v-if="$root.authenticated">{{ trans_choice('screengroup.model', 2) }}</a></li>
-                    <li><a v-link="{ path: '/screens/index' }" v-if="$root.authenticated">{{ trans_choice('screen.model', 2) }}</a></li>
-                    <li><a v-link="{ path: '/tickers/index' }" v-if="$root.authenticated">{{ trans_choice('ticker.model', 2) }}</a></li>
+                    <li><a v-link="{ path: '/home/' }">{{ trans('general.home') }}</a></li>
+                    <li><a v-link="{ path: '/screengroups/' }" v-if="$root.authenticated">{{ trans_choice('screengroup.model', 2) }}</a></li>
+                    <li><a v-link="{ path: '/screens/' }" v-if="$root.authenticated">{{ trans_choice('screen.model', 2) }}</a></li>
+                    <li><a v-link="{ path: '/tickers/' }" v-if="$root.authenticated">{{ trans_choice('ticker.model', 2) }}</a></li>
                 </ul>
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
@@ -61,6 +61,12 @@
         data: function () {
             return {
                 navTitle: 'Pixbo'
+            }
+        },
+        methods:{
+            hasRoute: function (partial) {
+                console.log(this.$route.path)
+                return (this.$route.path.indexOf(partial) > -1)
             }
         }
     }

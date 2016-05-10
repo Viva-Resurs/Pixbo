@@ -11,7 +11,7 @@
                     <div class="app-tabs">
                         <ul class="nav app-tabs-stacked">
                             <li>
-                                <a v-link="{ path: '/clients/index' }">
+                                <a v-link="{ path: '/clients/', exact: true }">
                                     <i class="fa fa-btn fa-fw fa-list"></i>&nbsp;{{ trans('general.archive') }}</span>
                                 </a>
                             </li>
