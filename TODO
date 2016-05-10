@@ -1,1 +1,20 @@
-# Test.
+# TODO:
+
+- Screengroups:
+	- Check if screengroup.name exists before adding (back-end + form-validation)
+
+- Alerts:
+	- Create a component and pass alerts to it instead of having alerts in each route?
+
+- Screens:
+	- Fix datetimepicker-tooltip-lang src/mapping
+	- CSS
+	- Side-Nav editmode
+	- 'No images' only when loaded/ready
+	- Delete screens
+
+- Tags:
+	- Problem, gets unauthorized
+
+- Tickers:
+	- Lang-mapping on alerts: update & created
