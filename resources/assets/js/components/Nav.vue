@@ -18,19 +18,30 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a v-link="{ path: '/home/' }">{{ trans('general.home') }}</a></li>
-                    <li><a v-link="{ path: '/screengroups/' }" v-if="$root.authenticated">{{ trans_choice('screengroup.model', 2) }}</a></li>
-                    <li><a v-link="{ path: '/screens/' }" v-if="$root.authenticated">{{ trans_choice('screen.model', 2) }}</a></li>
-                    <li><a v-link="{ path: '/tickers/' }" v-if="$root.authenticated">{{ trans_choice('ticker.model', 2) }}</a></li>
+
+                    <!-- Moderator/Admin area-->
+                    <template v-if="isAuthenticated">
+                        <li><a v-link="{ path: '/screengroups/' }">{{ trans_choice('screengroup.model', 2) }}</a></li>
+                        <li><a v-link="{ path: '/screens/' }">{{ trans_choice('screen.model', 2) }}</a></li>
+                        <li><a v-link="{ path: '/tickers/' }">{{ trans_choice('ticker.model', 2) }}</a></li>
+                    </template>
+
+                    <!-- Only admin area -->
+                    <template v-if="isAdmin">
+                        <li><a v-link="{ path: '/users/' }">{{ trans_choice('users.model', 2) }}</a></li>
+                        <li><a v-link="{ path: '/clients/' }">{{ trans_choice('clients.model', 2) }}</a></li>
+                    </template>
+
                 </ul>
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Login / Registration Links for unauthenticated users -->
-                    <li v-if=" ! $root.authenticated"><a v-link="{ path: '/auth/login' }">{{ trans('auth.login') }}</a></li>
-                    <li v-if=" ! $root.authenticated"><a v-link="{ path: '/auth/register' }">{{ trans('auth.register') }}</a></li>
+                    <li v-if=" ! isAuthenticated"><a v-link="{ path: '/auth/login' }">{{ trans('auth.login') }}</a></li>
+                    <li v-if=" ! isAuthenticated"><a v-link="{ path: '/auth/register' }">{{ trans('auth.register') }}</a></li>
                     <!-- Authenticated Right Dropdown -->
-                    <li class="dropdown" v-if="$root.authenticated">
+                    <li class="dropdown" v-if="isAuthenticated">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ $root.user.name }} <span class="caret"></span>
+                            {{ username }} <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
@@ -58,10 +69,27 @@
 </template>
 
 <script>
+    // helper to set first character to be capitalized in a given string.
+    String.prototype.capitalize = function() {
+        return this.charAt(0).toUpperCase() + this.slice(1);
+    }
+
     module.exports = {
         data: function () {
             return {
                 navTitle: 'Pixbo'
+            }
+        },
+        computed: {
+            username() {
+                return (this.$root.user.name).capitalize()
+            },
+            isAuthenticated() {
+                return this.$root.authenticated
+            },
+            isAdmin() {
+                // TODO: only return true if isAdmin, otherwise return false.
+                return true
             }
         }
     }
