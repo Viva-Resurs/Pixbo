@@ -110,9 +110,6 @@
                 this.fetchScreengroups(this.$route.params.id, function (data) {
                     transition.next({screengroups: data})
                 })
-                this.fetchTags(this.$route.params.id, function (data) {
-                    transition.next({tags: data})
-                })
             }
         }
     }

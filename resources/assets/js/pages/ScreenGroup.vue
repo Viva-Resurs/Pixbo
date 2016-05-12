@@ -20,7 +20,6 @@
                                     <i class="fa fa-btn fa-fw fa-pencil"></i>&nbsp;{{ trans('general.edit') }}</span>
                                 </a>
                             </li>
-                            </li>
                             <li>
                                 <a v-link="{ path: '/screengroups/create' }">
                                     <i class="fa fa-btn fa-fw fa-plus"></i>&nbsp;{{ trans('general.new') }}</span>
