@@ -7,15 +7,16 @@ use Gate;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Api\V1\Transformers\UserTransformer;
-use Input;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class UserController extends BaseController
 {
     public function index() {
 
         if (Gate::denies('view_clients')) {
-            $this->response->error('permission_denied', 401);
+            return new UnauthorizedHttpException('permission_denied');
+            //$this->response->error('permission_denied', 401);
         }
         
         return $this->collection(User::all(), new UserTransformer());
@@ -23,87 +24,76 @@ class UserController extends BaseController
     }
 
     public function store(Request $request) {
-        if (Gate::denies('add_clients')) {
-            $this->response->error('permission_denied', 401);
+        if (Gate::denies('add_users')) {
+            return new UnauthorizedHttpException('permission_denied');
         }
-        $client = new Client;
-        $client->fill($request->only(['name', 'ip_address', 'screen_group_id']));
+        $user = new User;
+        $user->fill($request->only(['name', 'email', 'password', 'roles']));
 
-        if($this->user->clients()->save($client)) {
+        if($user->save($user)) {
             Activity::log([
-                'contentId' => $client->id,
-                'contentType' => 'Client',
+                'contentId' => $user->id,
+                'contentType' => 'User',
                 'action' => 'Create',
-                'description' => 'Created a Client',
-                'details' => 'Client: '.$client->toJson(),
+                'description' => 'Created the user '.$user->name,
+                'details' => $user->toJson(),
             ]);
             return $this->response->created();
         }
         else {
-            return $this->response->error('could_not_create_client', 500);
+            return $this->response->error('could_not_create_user', 500);
         }
     }
+
     public function me() {
         return $this->item($this->getAuthenticatedUser(), new UserTransformer() );
     }
 
-    public function show($id) {
-        if (Gate::denies('view_clients')) {
-            $this->response->error('permission_denied', 401);
-        }
-        $client = Client::find($id);
-        if(!$client) {
-            throw new NotFoundHttpException;
-        }
-
-        return $client;
-    }
-
     public function update(Request $request, $id) {
-        if (Gate::denies('edit_clients')) {
+        if (Gate::denies('edit_users')) {
             $this->response->error('permission_denied', 401);
         }
-        $client = Client::find($id);
+        $user = User::find($id);
 
-        if(!$client) {
+        if(!$user) {
             throw new NotFoundHttpException;
         }
 
-        if($client->update($request->only(['name', 'ip_address', 'screen_group_id']))) {
+        if($user->update($request->only(['name', 'email', 'password', 'roles']))) {
             Activity::log([
-                'contentId' => $client->id,
-                'contentType' => 'Client',
+                'contentId' => $user->id,
+                'contentType' => 'User',
                 'action' => 'Update',
-                'description' => 'Updated a Client',
-                'details' => 'Client: '.$client->toJson(),
+                'description' => 'Updated the user '.$user->name,
+                'details' => $user->toJson(),
             ]);
             return $this->response->noContent();
         } else {
-            return $this->response->error('could_not_update_client', 500);
+            return $this->response->error('could_not_update_user', 500);
         }
     }
 
     public function destroy($id) {
-        if (Gate::denies('remove_clients')) {
+        if (Gate::denies('remove_users')) {
             $this->response->error('permission_denied', 401);
         }
-        $client = Client::find($id);
+        $user = User::find($id);
 
-        if(!$client) {
+        if(!$user) {
             throw new NotFoundHttpException;
         }
 
-        if($client->delete()) {
+        if($user->delete()) {
             Activity::log([
-                'contentId' => $client->id,
-                'contentType' => 'Client',
+                'contentId' => $user->id,
+                'contentType' => 'User',
                 'action' => 'Delete',
-                'description' => 'Deleted a Client',
-                'details' => 'Client: '.$client->toJson(),
+                'description' => 'Deleted the user '.$user->name,
+                'details' => $user->toJson(),
             ]);
             return $this->response->noContent();
         } else {
-            return $this->response->error('could_not_delete_client', 500);
+            return $this->response->error('could_not_delete_user', 500);
         }
     }
 }
