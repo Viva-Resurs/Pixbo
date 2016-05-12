@@ -14,12 +14,13 @@ $api->version('v1', function ($api) {
         return JWTAuth::parseToken()->authenticate();
     });
 
-    $api->group(['middleware' => 'api.auth'], function ($api) {
+    $api->group(['middleware' => ['api.auth']], function ($api) {
         $api->resource('clients', 'App\Api\V1\Controllers\ClientController');
         $api->resource('tags', 'App\Api\V1\Controllers\TagController');
         $api->resource('screengroups', 'App\Api\V1\Controllers\ScreenGroupController');
         $api->resource('screens', 'App\Api\V1\Controllers\ScreenController');
         $api->resource('tickers', 'App\Api\V1\Controllers\TickerController');
+        $api->resource('users', 'App\Api\V1\Controllers\UserController');
 
 
     });

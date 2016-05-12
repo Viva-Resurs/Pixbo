@@ -28,15 +28,15 @@ class BaseController extends Controller
 
         } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
 
-            return response()->json(['token_expired'], $e->getStatusCode());
+            return response()->json(['token_expired'], 401);
 
         } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
 
-            return response()->json(['token_invalid'], $e->getStatusCode());
+            return response()->json(['token_invalid'], 401);
 
         } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
 
-            return response()->json(['token_absent'], $e->getStatusCode());
+            return response()->json(['token_absent'], 401);
 
         }
 
