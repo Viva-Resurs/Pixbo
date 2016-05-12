@@ -112,7 +112,8 @@ const lang = {
         deleted:                    "Tickern har tagits bort.",
         deleted_fail:               "Misslyckades att ta bort tickern, försök igen.",
         edit:                       "Redigera ticker",
-        updated:                    "Tickern har uppdaterats."
+        updated:                    "Tickern har uppdaterats.",
+        created:                    "Tickern har skapats"
     },
     /* ----------------------------- PICKER ----------------------------- */
     dateTimePicker: {

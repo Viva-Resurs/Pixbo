@@ -2,33 +2,46 @@
     <div class="panel-heading">
         {{ trans('ticker.edit') }}
     </div>
-    <div class="panel-body">
-        <div id="alerts" v-if="messages.length > 0">
-            <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
-                {{ message.message }}
+    <div class="panel-body" v-if="$loadingRouteData">
+        <loading></loading>
+    </div>
+    <div v-if=" ! $loadingRouteData">
+        <div class="panel-body">
+            <div id="alerts" v-if="messages.length > 0">
+                <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
+                    {{ message.message }}
+                </div>
             </div>
-        </div>
-        <form class="form-horizontal" role="form" v-on:submit="updateScreengroup">
-            <fieldset disabled>
+            <form class="form-horizontal" role="form" v-on:submit="updateTicker">
+                <fieldset disabled>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.id') }}</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" required="required" name="name" type="text" v-model="ticker.id">
+                        </div>
+                    </div>
+                </fieldset>
                 <div class="form-group">
-                    <label for="name" class="col-sm-2 col-sm-offset-1 control-label">ID</label>
+                    <label for="name" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.text') }}</label>
                     <div class="col-sm-5">
-                        <input class="form-control" required="required" name="name" type="text" v-model="ticker.id">
+                        <input class="form-control" required="required" name="name" type="text" v-model="ticker.text">
                     </div>
                 </div>
-            </fieldset>
-            <div class="form-group">
-                <label for="name" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.text') }}</label>
-                <div class="col-sm-5">
-                    <input class="form-control" required="required" name="name" type="text" v-model="ticker.text">
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-3">
+                        <button type="" class="btn" v-link="{ path: '/tickers/' }" v-if="emptyfields">
+                          <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
+                        </button>
+                        <button type="" class="btn" v-link="{ path: '/tickers/' }" v-if="!emptyfields">
+                          <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
+                        </button>
+                        <button type="submit" class="btn btn-primary" :disabled="emptyfields">
+                          <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-4 col-sm-offset-3">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}</button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </template>
 
@@ -43,6 +56,12 @@
                 },
                 messages: []
             }
+        },
+
+        computed: {
+             emptyfields: function(){
+                return (this.ticker.text=='') ? true : false;
+             }
         },
 
         methods: {
@@ -65,18 +84,18 @@
                 )
             },
 
-            updateScreengroup: function (e) {
-                e.preventDefault()
-                var self = this
+            updateTicker: function (e) {
+                e.preventDefault();
+                var self = this;
                 client({ path: '/tickers/' + this.ticker.id, entity: this.ticker, method: 'PUT'}).then(
                         function (response) {
-                            self.messages = []
-                            self.messages.push({type: 'success', message: 'Your ticker was updated'})
+                            self.messages = [];
+                            self.messages.push({ type: 'success', message: self.trans('ticker.updated') });
                         },
                         function (response) {
-                            self.messages = []
+                            self.messages = [];
                             for (var key in response.entity) {
-                                self.messages.push({type: 'danger', message: response.entity[key]})
+                                self.messages.push({ type: 'danger', message: response.entity[key] });
                             }
                         }
                 )

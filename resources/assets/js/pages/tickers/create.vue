@@ -17,8 +17,14 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-4 col-sm-offset-3">
-                    <button type="submit" class="btn btn-primary" :disabled="creating">
-                        <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
+                    <button type="" class="btn" v-link="{ path: '/tickers/' }" v-if="emptyfields">
+                      <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
+                    </button>
+                    <button type="" class="btn" v-link="{ path: '/tickers/' }" v-if="!emptyfields">
+                      <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
+                    </button>
+                    <button type="submit" class="btn btn-primary" :disabled="emptyfields">
+                      <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                     </button>
                 </div>
             </div>
@@ -32,30 +38,32 @@
                 ticker: {
                     text: '',
                 },
-                messages: [],
-                creating: false
+                messages: []
             }
+        },
+
+        computed: {
+             emptyfields: function(){
+                return (this.ticker.text=='') ? true : false;
+             }
         },
 
         methods: {
             createTicker: function (e) {
                 e.preventDefault()
-                var that = this
-                that.creating = true
+                var self = this;
                 client({path: 'tickers', entity: this.ticker}).then(
                         function (response, status) {
-                            that.ticker.text = ''
-                            that.messages = [{type: 'success', message: 'Your ticker was created'}]
+                            self.ticker.text = '';
+                            self.messages = [{ type: 'success', message: self.trans('ticker.created') }];
                             Vue.nextTick(function () {
                                 document.getElementById('nameInput').focus()
                             })
-                            that.creating = false
                         },
                         function (response, status) {
-                            that.messages = []
+                            self.messages = []
                             for (var key in response.entity) {
-                                that.messages.push({type: 'danger', message: response.entity[key]})
-                                that.creating = false
+                                self.messages.push({ type: 'danger', message: response.entity[key] });
                             }
                         }
                 )
