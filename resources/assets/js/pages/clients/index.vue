@@ -11,27 +11,29 @@
         </div>
     </div>
 
-    <div class="panel-body" v-if="screengroups.length == 0">
-        You have no screengroups!
+    <div class="panel-body" v-if="clients.length == 0">
+        You have no clients!
     </div>
 
-    <table class="table" v-if=" ! $loadingRouteData && screengroups.length > 0">
+    <table class="table" v-if=" ! $loadingRouteData && clients.length > 0">
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Age</th>
-            <th width="120px">Actions</th>
+            <th>{{ trans('general.id') }}</th>
+            <th>{{ trans('general.name') }}</th>
+            <th>{{ trans('general.ip_address') }}</th>
+            <th>{{ trans_choice('screengroup.model', 1) }}</th>
+            <th width="120px">{{ trans('general.action') }}</th>
         </tr>
         </thead>
         <tbody>
-        <tr v-for="screengroup in screengroups">
-            <td>{{ screengroup.id }}</td>
-            <td>{{ screengroup.name }}</td>
-            <td>{{ screengroup.age }}</td>
+        <tr v-for="client in clients">
+            <td>{{ client.id }}</td>
+            <td>{{ client.name }}</td>
+            <td>{{ client.ip_address }}</td>
+            <td>{{ client.screengroup.name }}</td> <!-- TODO: need to fix transformer, so we can send screengroup(ID,NAME) -->
             <td>
-                <a class="btn btn-primary btn-xs" v-link="{ path: '/screengroups/'+screengroup.id }">Edit</a>
-                <a class="btn btn-primary btn-xs" v-on:click="deleteScreengroup($index)">Delete</a>
+                <a class="btn btn-primary btn-xs" v-link="{ path: '/clients/'+client.id }">Edit</a>
+                <a class="btn btn-primary btn-xs" v-on:click="deleteClient($index)">Delete</a>
             </td>
         </tr>
         </tbody>
@@ -42,7 +44,7 @@
 
         data: function () {
             return {
-                screengroups: [],
+                clients: [],
                 messages: []
             }
         },
@@ -51,10 +53,10 @@
             // Let's fetch some dogs
             fetch: function (successHandler) {
                 var that = this
-                client({ path: '/screengroups' }).then(
+                client({ path: '/clients' }).then(
                         function (response) {
                             // Look ma! Puppies!
-                            that.$set('screengroups', response.entity.data)
+                            that.$set('clients', response.entity.data)
                             successHandler(response.entity.data)
                         },
                         function (response, status) {
@@ -65,15 +67,15 @@
                 )
             },
 
-            deleteScreengroup: function (index) {
+            deleteClient: function (index) {
                 var that = this
-                client({ path: '/screengroups/' + this.screengroups[index].id, method: 'DELETE' }).then(
+                client({ path: '/clients/' + this.clients[index].id, method: 'DELETE' }).then(
                         function (response) {
-                            that.screengroups.splice(index, 1)
-                            that.messages = [{type: 'success', message: 'Great, screengroup purged.'}]
+                            that.clients.splice(index, 1)
+                            that.messages = [{type: 'success', message: 'Great, client purged.'}]
                         },
                         function (response) {
-                            that.messages.push({type: 'danger', message: 'There was a problem removing the screengroup'})
+                            that.messages.push({type: 'danger', message: 'There was a problem removing the client'})
                         }
                 )
             }
@@ -84,7 +86,7 @@
             // Ooh, ooh, are there any new puppies yet?
             data: function (transition) {
                 this.fetch(function (data) {
-                    transition.next({screengroups: data})
+                    transition.next({clients: data})
                 })
             }
         }

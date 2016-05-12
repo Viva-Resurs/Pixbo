@@ -66,6 +66,37 @@ module.exports = {
                     }
                 }
             },
+            '/clients': {
+                component: require('./pages/Client.vue'),
+                auth: true,
+                subRoutes: {
+                    '/': {
+                        component: require('./pages/clients/index.vue')
+                    },
+                    '/:id': {
+                        component: require('./pages/clients/show.vue')
+                    },
+                    '/create': {
+                        component: require('./pages/clients/create.vue')
+                    }
+                }
+            },
+            '/users': {
+                component: require('./pages/User.vue'),
+                auth: true,
+                subRoutes: {
+                    '/': {
+                        component: require('./pages/users/index.vue')
+                    },
+                    '/:id': {
+                        component: require('./pages/users/show.vue')
+                    },
+                    '/create': {
+                        component: require('./pages/users/create.vue')
+                    }
+                }
+            },
+
             '/tickers': {
                 component: require('./pages/Ticker.vue'),
                 auth: true,
