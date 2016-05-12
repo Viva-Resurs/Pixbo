@@ -31,6 +31,7 @@ const lang = {
         summary:                    "Summering",
         edit:                       "Redigera",
         delete:                     "Ta bort",
+        ip_address:                 "IP Adress",
         welcome_content :           "Välkommen!",
         about_content :             "Pixbo är ett verktyg för att hantera hur innehåll visas på anslutna paneler.",
         cancel:                     "Avbryt",

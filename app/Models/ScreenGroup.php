@@ -47,16 +47,16 @@ class ScreenGroup extends Model
      *
      * @return [type] [description]
      */
-    /*
+
     public function screens() {
         return $this->belongsToMany(Screen::class, 'screen_screen_group')->withTimestamps();
     }
-    */
-    /*
+
+
     public function tickers() {
         return $this->belongsToMany(Ticker::class, 'screen_group_ticker')->withTimestamps();
     }
-    */
+
     /**
      * Remove a screen from the screengroup
      * @param  Screen $screen [description]
