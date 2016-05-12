@@ -7,11 +7,10 @@ Homestead.json
 composer.lock
 .phpstorm.meta.php
 _ide_helper.php
-public/css/
-public/js/
+public/css/app.css*
+public/js/index.js*
 public/images/
 storage/database.sqlite
 storage/database.sqlite-journal
 config/jwt.php
-public/lang/
 /Vue-template
