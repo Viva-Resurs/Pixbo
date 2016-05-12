@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <div class="panel-body" v-if="screens.length == 0">
+    <div class="panel-body" v-if=" ! $loadingRouteData && screens.length == 0">
         {{ trans('screen.empty') }}
     </div>
 
