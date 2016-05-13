@@ -44,7 +44,7 @@
             transform: translateZ(0);
 }
 
-body .vegas-container {
+body.vegas-container {
     overflow: hidden !important;
     position: relative;
 }
