@@ -6,7 +6,7 @@ use Activity;
 use Gate;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Api\V1\Transformers\UserTransformer;
+use App\Api\V1\Transformers\User\UserTransformer;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
