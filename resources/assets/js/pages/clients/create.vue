@@ -8,7 +8,7 @@
                 {{ message.message }}
             </div>
         </div>
-        <form class="form-horizontal" role="form" v-on:submit="createScreengroup">
+        <form class="form-horizontal" role="form" v-on:submit="createClient">
             <div class="form-group">
                 <label for="name" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.name') }}</label>
                 <div class="col-sm-5">
@@ -57,10 +57,7 @@
                     screen_group_id: null
                 },
                 // TODO: Need to grab and load the screengroups
-                screengroups: [
-                    {name: 'Fiket', id:1},
-                    {name: 'Snickeriet', id:2}
-                ],
+                screengroups: [],
                 messages: [],
                 creating: false
             }
@@ -69,14 +66,28 @@
         computed: {
           isValid() {
               //TODO: create client validation
-              // Check if name is valid
-              // Check if ip address is valid
+              // Check if name is valid and unique
+              // Check if ip address is valid and unique
               // Check that a screengroup is selected
           }
         },
 
         methods: {
-            createScreengroup: function (e) {
+            fetchScreengroups(successHandler) {
+                var self = this;
+                client({ path: '/screengroups' }).then(
+                        function (response) {
+                            self.$set('screengroups', response.entity.data);
+                            successHandler(response.entity.data);
+                        },
+                        function (response, status) {
+                            if (_.contains([401, 500], status)) {
+                                self.$dispatch('userHasLoggedOut');
+                            }
+                        }
+                );
+            },
+            createClient: function (e) {
                 e.preventDefault()
                 var that = this
                 that.creating = true
@@ -96,6 +107,13 @@
                             }
                         }
                 )
+            }
+        },
+        route: {
+            data(transition) {
+                this.fetchScreengroups(function (data) {
+                    transition.next({screengroups: data})
+                })
             }
         }
     }
