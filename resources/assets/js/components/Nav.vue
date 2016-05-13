@@ -28,8 +28,8 @@
 
                     <!-- Only admin area -->
                     <template v-if="isAdmin">
-                        <li><a v-link="{ path: '/users/' }">{{ trans_choice('users.model', 2) }}</a></li>
-                        <li><a v-link="{ path: '/clients/' }">{{ trans_choice('clients.model', 2) }}</a></li>
+                        <li><a v-link="{ path: '/users/' }">{{ trans_choice('user.model', 2) }}</a></li>
+                        <li><a v-link="{ path: '/clients/' }">{{ trans_choice('client.model', 2) }}</a></li>
                     </template>
 
                 </ul>
