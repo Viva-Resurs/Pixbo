@@ -21,15 +21,8 @@
                     <input class="form-control" required="required" id="ip_address" name="ip_address" type="text" v-model="client.ip_address">
                 </div>
             </div>
-            <div class="form-group">
-                <label for="screengroup" class="col-sm-2 col-sm-offset-1 control-label">{{ trans_choice('screengroup.model', 1) }}</label>
-                <div class="col-sm-5">
-                    <select name="screengroup" id="screengroup" class="form-control" v-model="client.screen_group_id">
-                        <option :value="null">{{ trans('screengroup.select') }}</option>
-                        <option v-for="screengroup in screengroups" v-bind:value="screengroup.id">{{ screengroup.name }}</option>
-                    </select>
-                </div>
-            </div>
+
+            <screengroup-selector :selected.sync="client.screen_group_id"></screengroup-selector>
 
             <div class="form-group">
                 <div class="col-sm-4 col-sm-offset-3">
@@ -48,6 +41,8 @@
     </div></template>
 
 <script>
+    import ScreengroupSelector from '../../components/ScreengroupSelector.vue'
+
     module.exports = {
         data: function () {
             return {
@@ -56,11 +51,13 @@
                     ip_address: '',
                     screen_group_id: null
                 },
-                // TODO: Need to grab and load the screengroups
-                screengroups: [],
                 messages: [],
                 creating: false
             }
+        },
+
+        components: {
+          ScreengroupSelector
         },
 
         computed: {
@@ -73,20 +70,7 @@
         },
 
         methods: {
-            fetchScreengroups(successHandler) {
-                var self = this;
-                client({ path: '/screengroups' }).then(
-                        function (response) {
-                            self.$set('screengroups', response.entity.data);
-                            successHandler(response.entity.data);
-                        },
-                        function (response, status) {
-                            if (_.contains([401, 500], status)) {
-                                self.$dispatch('userHasLoggedOut');
-                            }
-                        }
-                );
-            },
+
             createClient: function (e) {
                 e.preventDefault()
                 var that = this
@@ -107,13 +91,6 @@
                             }
                         }
                 )
-            }
-        },
-        route: {
-            data(transition) {
-                this.fetchScreengroups(function (data) {
-                    transition.next({screengroups: data})
-                })
             }
         }
     }

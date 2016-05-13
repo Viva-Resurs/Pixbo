@@ -14,8 +14,6 @@
         </div>
 
         <div v-else>
-
-
             <form class="form-horizontal" role="form" v-on:submit="updateClient">
                 <fieldset disabled>
                     <div class="form-group">
@@ -37,14 +35,7 @@
                         <input class="form-control" required="required" id="ip_address" name="ip_address" type="text" v-model="client.ip_address">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="screengroup" class="col-sm-2 col-sm-offset-1 control-label">{{ trans_choice('screengroup.model', 1) }}</label>
-                    <div class="col-sm-5">
-                        <select name="screengroup" id="screengroup" class="form-control" v-model="client.screen_group_id" v-bind:value="client.screen_group_id">
-                            <option v-for="screengroup in screengroups" v-bind:value="screengroup.id">{{ screengroup.name }}</option>
-                        </select>
-                    </div>
-                </div>
+                <screengroup-selector :selected.sync="client.screen_group_id"></screengroup-selector>
 
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-3">
@@ -65,6 +56,8 @@
 </template>
 
 <script>
+    import ScreengroupSelector from '../../components/ScreengroupSelector.vue'
+
     module.exports = {
 
         data: function () {
@@ -75,23 +68,23 @@
                     ip_address: null,
                     screen_group_id: null
                 },
-                // TODO: Need to grab and load the screengroups
-                screengroups: [],
                 messages: []
             }
         },
 
+        components: {
+            ScreengroupSelector
+        },
+
         methods: {
-            // Let's fetch the screengroup
-            fetch: function (id) {
+            fetch: function (id, successHandler) {
                 var that = this
-                let clientCallback
                 client({ path: '/clients/' + id }).then(
                         function (response) {
-                            clientCallback =  response.entity.client
+                            that.$set('client', response.entity.client);
+                            successHandler(response.entity.client);
                         },
                         function (response, status, request) {
-                            // Go tell your parents that you've messed up somehow
                             if (status === 401) {
                                 self.$dispatch('userHasLoggedOut')
                             } else {
@@ -99,22 +92,6 @@
                             }
                         }
                 )
-                return clientCallback;
-            },
-            fetchScreengroups() {
-                var self = this;
-                let screengroupCallback
-                client({ path: '/screengroups' }).then(
-                        function (response) {
-                            screengroupCallback = response.entity.data
-                        },
-                        function (response, status) {
-                            if (_.contains([401, 500], status)) {
-                                self.$dispatch('userHasLoggedOut');
-                            }
-                        }
-                );
-                return screengroupCallback;
             },
 
             updateClient: function (e) {
@@ -138,17 +115,8 @@
 
         route: {
             data: function (transition) {
-                let clientId = this.$route.params.id
-                var that = this
-                return Promise.all([
-                    that.fetch(clientId),
-                    that.fetchScreengroups()
-                ]).then(function (data) {
-                    console.log(data)
-                    return {
-                        client: data[0],
-                        screengroups: data[1]
-                    }
+                this.fetch(this.$route.params.id, function(data) {
+                    transition.next({client: data})
                 })
             }
         }
