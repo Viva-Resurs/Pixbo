@@ -1,42 +1,49 @@
 <template>
-    <div class="panel-heading" v-if=" ! $loadingRouteData">
+
+    <div class="panel-heading">
         {{ trans('general.archive') }}
     </div>
-    <div class="panel-body" v-if="$loadingRouteData">
+
+    <div class="panel-body" v-if=" $loadingRouteData ">
         <loading></loading>
     </div>
-    <div class="panel-body" v-if="messages.length > 0">
-        <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
-            {{ message.message }}
+
+    <div v-else>
+
+        <div class="panel-body" v-if=" messages.length > 0 ">
+            <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
+                {{ message.message }}
+            </div>
         </div>
+
+        <div class="panel-body" v-if=" tickers.length == 0 ">
+            {{ trans('ticker.empty') }}
+        </div>
+
+        <table class="table" v-if=" tickers.length > 0 ">
+            <thead>
+                <tr>
+                    <th>{{ trans('general.id') }}</th>
+                    <th>{{ trans('general.text') }}</th>
+                    <th width="120px">{{ trans('general.action') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="ticker in tickers">
+                    <td>{{ ticker.id }}</td>
+                    <td>{{ ticker.text }}</td>
+                    <td>
+                        <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/tickers/'+ticker.id }"
+                          v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
+                        <a class="btn btn-primary btn-xs fa fa-times" v-on:click="deleteTicker($index)"
+                          v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
 
-    <div class="panel-body" v-if=" ! $loadingRouteData && tickers.length == 0">
-        {{ trans('ticker.empty') }}
-    </div>
-
-    <table class="table" v-if=" ! $loadingRouteData && tickers.length > 0">
-        <thead>
-        <tr>
-            <th>{{ trans('general.id') }}</th>
-            <th>{{ trans('general.text') }}</th>
-
-            <th width="120px">{{ trans('general.action') }}</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="ticker in tickers">
-            <td>{{ ticker.id }}</td>
-            <td>{{ ticker.text }}</td>
-            <td>
-                <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/tickers/'+ticker.id }"
-                  v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
-                <a class="btn btn-primary btn-xs fa fa-times" v-on:click="deleteTicker($index)"
-                  v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
 </template>
 
 <script>

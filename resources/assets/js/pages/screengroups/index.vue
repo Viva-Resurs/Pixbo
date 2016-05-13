@@ -1,43 +1,51 @@
 <template>
+
     <div class="panel-heading">
         {{ trans('general.archive') }}
     </div>
-    <div class="panel-body" v-if="$loadingRouteData">
+
+    <div class="panel-body" v-if=" $loadingRouteData ">
         <loading></loading>
     </div>
-    <div class="panel-body" v-if="messages.length > 0">
-        <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
-            {{ message.message }}
+
+    <div v-else>
+
+        <div class="panel-body" v-if=" messages.length > 0 ">
+            <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
+                {{ message.message }}
+            </div>
         </div>
+
+        <div class="panel-body" v-if=" screengroups.length == 0 ">
+            {{ trans('screengroup.empty') }}
+        </div>
+
+        <table class="table" v-if=" screengroups.length > 0 ">
+            <thead>
+                <tr>
+                    <th>{{ trans('general.id') }}</th>
+                    <th>{{ trans('general.name') }}</th>
+                    <th>{{ trans('general.desc') }}</th>
+                    <th width="120px">{{ trans('general.action') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="screengroup in screengroups">
+                    <td>{{ screengroup.id }}</td>
+                    <td>{{ screengroup.name }}</td>
+                    <td>{{ screengroup.desc }}</td>
+                    <td>
+                        <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/screengroups/'+screengroup.id }"
+                           v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
+                        <a class="btn btn-primary btn-xs fa fa-times" v-on:click="deleteScreengroup($index)"
+                           v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
 
-    <div class="panel-body" v-if=" ! $loadingRouteData && screengroups.length == 0">
-        {{ trans('screengroup.empty') }}
-    </div>
-
-    <table class="table" v-if=" ! $loadingRouteData && screengroups.length > 0">
-        <thead>
-            <tr>
-                <th>{{ trans('general.id') }}</th>
-                <th>{{ trans('general.name') }}</th>
-                <th>{{ trans('general.desc') }}</th>
-                <th width="120px">{{ trans('general.action') }}</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="screengroup in screengroups">
-                <td>{{ screengroup.id }}</td>
-                <td>{{ screengroup.name }}</td>
-                <td>{{ screengroup.desc }}</td>
-                <td>
-                    <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/screengroups/'+screengroup.id }"
-                       v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
-                    <a class="btn btn-primary btn-xs fa fa-times" v-on:click="deleteScreengroup($index)"
-                       v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
 </template>
 
 <script>

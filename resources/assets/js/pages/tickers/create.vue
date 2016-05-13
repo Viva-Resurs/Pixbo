@@ -10,7 +10,7 @@
         </div>
         <form class="form-horizontal" role="form" v-on:submit="createTicker">
             <div class="form-group">
-                <label for="text" class="col-sm-2 col-sm-offset-1 control-label">Ticker text</label>
+                <label for="text" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.text') }}</label>
                 <div class="col-sm-5">
                     <input class="form-control" required="required" name="text" type="text" v-model="ticker.text" id="nameInput">
                 </div>

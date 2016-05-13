@@ -15,6 +15,15 @@ const lang = {
         edit:                       "Redigera klient",
         updated:                    "Klienten har uppdaterats."
     },
+    /* ----------------------------- USER ----------------------------- */
+    user: {
+        model:                      "Användare|Användare",
+        empty:                      "Det finns inga användare än.",
+        deleted:                    "Användaren har tagits bort.",
+        deleted_fail:               "Misslyckades att ta bort användaren, försök igen.",
+        edit:                       "Redigera användare",
+        updated:                    "Användaren har uppdaterats."
+    },
     /* ----------------------------- GENERAL ----------------------------- */
     general: {
         home:                       "Hem",

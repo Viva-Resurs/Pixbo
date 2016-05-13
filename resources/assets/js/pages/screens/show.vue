@@ -6,7 +6,7 @@
         <loading></loading>
     </div>
 
-    <div  v-if=" ! $loadingRouteData">
+    <div v-if=" ! $loadingRouteData">
         <div class="panel-body">
             <div id="alerts" v-if="messages.length > 0">
                 <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
