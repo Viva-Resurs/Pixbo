@@ -1,41 +1,47 @@
 <template>
+
     <div class="panel-heading">
         {{ trans('screengroup.create') }}
     </div>
-    <div class="panel-body">
-        <div id="alerts" v-if="messages.length > 0">
+
+    <div>
+
+        <div class="panel-body" v-if=" messages.length > 0 ">
             <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
                 {{ message.message }}
             </div>
         </div>
+
         <form class="form-horizontal" role="form" v-on:submit="createScreengroup">
-            <div class="form-group">
-                <label for="name" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.name') }}</label>
-                <div class="col-sm-5">
-                    <input class="form-control" required="required" name="name" type="text" v-model="screengroup.name" id="nameInput">
+
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="name" class="control-label">{{ trans('general.name') }}</label>
+                    <div>
+                        <input class="form-control" required="required" name="name" type="text" v-model="screengroup.name" id="nameInput">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="desc" class="control-label">{{ trans('general.desc') }}</label>
+                    <div>
+                        <input class="form-control" required="required" name="desc" type="text" v-model="screengroup.desc">
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="desc" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.desc') }}</label>
-                <div class="col-sm-5">
-                    <input class="form-control" required="required" name="desc" type="text" v-model="screengroup.desc">
-                </div>
+
+            <div class="panel-footer text-right">
+                <button type="" class="btn" v-link="{ path: '/screengroups/' }">
+                  <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
+                </button>
+                <button type="submit" class="btn btn-primary" :disabled="emptyfields">
+                  <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
+                </button>
             </div>
-            <div class="form-group">
-                <div class="col-sm-4 col-sm-offset-3">
-                    <button type="" class="btn" v-link="{ path: '/screengroups/' }" v-if="emptyfields">
-                      <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
-                    </button>
-                    <button type="" class="btn" v-link="{ path: '/screengroups/' }" v-if="!emptyfields">
-                      <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
-                    </button>
-                    <button type="submit" class="btn btn-primary" :disabled="emptyfields">
-                        <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
-                    </button>
-                </div>
-            </div>
+
         </form>
+
     </div>
+
 </template>
 
 <script>

@@ -2,4 +2,10 @@
 	label {
     	font-weight: 300;
     }
+    form > div > div > label {
+    	@extend .col-sm-2, .col-sm-offset-2;
+    }
+    form > div > div > div {
+    	@extend .col-sm-6;
+    }
 }
