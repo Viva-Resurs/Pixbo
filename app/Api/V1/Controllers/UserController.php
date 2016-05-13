@@ -23,6 +23,18 @@ class UserController extends BaseController
         
     }
 
+    public function show($id) {
+        if (Gate::denies('view_users')) {
+            $this->response->error('permission_denied', 401);
+        }
+        $user = User::find($id);
+        if(!$user) {
+            throw new NotFoundHttpException;
+        }
+
+        return $this->item($user, new UserTransformer());
+    }
+
     public function store(Request $request) {
         if (Gate::denies('add_users')) {
             return new UnauthorizedHttpException('permission_denied');
