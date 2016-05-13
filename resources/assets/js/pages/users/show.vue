@@ -1,6 +1,6 @@
 <template>
     <div class="panel-heading">
-        Edit screengroup
+        {{ trans('user.edit') }}
     </div>
     <div class="panel-body">
         <div id="alerts" v-if="messages.length > 0">
@@ -8,94 +8,123 @@
                 {{ message.message }}
             </div>
         </div>
-        <form class="form-horizontal" role="form" v-on:submit="updateScreengroup">
-            <fieldset disabled>
+        <div class="panel-body" v-if=" $loadingRouteData ">
+            <loading></loading>
+        </div>
+
+        <div v-else>
+            <form class="form-horizontal" role="form" v-on:submit="updateUser">
                 <div class="form-group">
-                    <label for="name" class="col-sm-2 col-sm-offset-1 control-label">Screengroup ID</label>
+                    <label for="nameInput" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.name') }}</label>
                     <div class="col-sm-5">
-                        <input class="form-control" required="required" name="name" type="text" v-model="screengroup.id">
+                        <input class="form-control" required="required" name="name" type="text" v-model="user.name" id="nameInput">
                     </div>
                 </div>
-            </fieldset>
-            <div class="form-group">
-                <label for="name" class="col-sm-2 col-sm-offset-1 control-label">Name your screengroup</label>
-                <div class="col-sm-5">
-                    <input class="form-control" required="required" name="name" type="text" v-model="screengroup.name">
+
+                <div class="form-group">
+                    <label for="emailInput" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.email') }}</label>
+                    <div class="col-sm-5">
+                        <input type="email" class="form-control" required="required" id="emailInput" name="email" v-model="user.email">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="age" class="col-sm-2 col-sm-offset-1 control-label">What's the age?</label>
-                <div class="col-sm-5">
-                    <input class="form-control" required="required" name="age" type="text" v-model="screengroup.desc">
+
+                <div class="form-group">
+                    <label for="passwordInput" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('auth.password') }}</label>
+                    <div class="col-sm-5">
+                        <input type="password" class="form-control" required="required" id="passwordInput" name="password" v-model="user.password">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-4 col-sm-offset-3">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-btn fa-save"></i>Update the screengroup!</button>
+
+                <model-selector :selected.sync="user.roles" model="role"></model-selector>
+
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-3">
+                        <button type="" class="btn" v-link="{ path: '/clients/' }" v-if="emptyfields">
+                            <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
+                        </button>
+                        <button type="" class="btn" v-link="{ path: '/clients/' }" v-if="!emptyfields">
+                            <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
+                        </button>
+                        <button type="submit" class="btn btn-primary" :disabled="emptyfields">
+                            <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </template>
 
 <script>
+    import ModelSelector from '../../components/ModelSelector.vue'
+
     module.exports = {
 
         data: function () {
             return {
-                screengroup: {
+                user: {
                     id: null,
                     name: null,
-                    age: null
+                    email: null,
+                    password: null,
+                    roles: null
                 },
                 messages: []
             }
         },
 
+        components: {
+            ModelSelector
+        },
+
+        computed: {
+          isValid() {
+              // TODO: Add validation for user update
+          }
+        },
+
         methods: {
-            // Let's fetch the screengroup
             fetch: function (id, successHandler) {
                 var that = this
-                client({ path: '/screengroups/' + id }).then(
-                        function (response) {
-                            that.$set('screengroup', response.entity.screengroup)
-                           successHandler(response.entity.screengroup)
-                        },
-                        function (response, status, request) {
-                            // Go tell your parents that you've messed up somehow
-                            if (status === 401) {
-                                self.$dispatch('userHasLoggedOut')
-                            } else {
-                                console.log(response)
-                            }
+                client({ path: '/users/' + id }).then(
+                    function (response) {
+                        console.log(response)
+                        that.$set('user', response.entity.data)
+                        successHandler(response.entity.data)
+                    },
+                    function (response, status, request) {
+                        if (status === 401) {
+                            self.$dispatch('userHasLoggedOut')
+                        } else {
+                            console.log(response)
                         }
+                    }
                 )
             },
 
-            updateScreengroup: function (e) {
+            updateUser: function (e) {
                 e.preventDefault()
                 var self = this
-                client({ path: '/screengroups/' + this.screengroup.id, entity: this.screengroup, method: 'PUT'}).then(
-                        function (response) {
-                            self.messages = []
-                            self.messages.push({type: 'success', message: 'Woof woof! Your screengroup was updated'})
-                        },
-                        function (response) {
-                            self.messages = []
-                            for (var key in response.entity) {
-                                self.messages.push({type: 'danger', message: response.entity[key]})
-                            }
+                client({ path: '/users/' + this.user.id, entity: this.user, method: 'PUT'}).then(
+                    function (response) {
+                        self.messages = []
+                        self.messages.push({type: 'success', message: self.trans('user.updated')})
+                    },
+                    function (response) {
+                        self.messages = []
+                        for (var key in response.entity) {
+                            self.messages.push({type: 'danger', message: response.entity[key]})
                         }
+                    }
                 )
             }
 
         },
 
         route: {
-            // Ooh, ooh, are there any new puppies yet?
             data: function (transition) {
                 this.fetch(this.$route.params.id, function (data) {
-                    transition.next({screengroup: data})
+                    transition.next({user: data})
                 })
             }
         }
