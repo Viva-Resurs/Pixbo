@@ -9,7 +9,6 @@
 - Screens:
 	- Fix datetimepicker-tooltip-lang src/mapping
 	- CSS
-	- Side-Nav editmode
 	- Delete screens
 	- Update Editing
 
@@ -17,3 +16,9 @@
 
 - Player:
     - The player gets a nasty scrollbar, need to fix asap!
+
+- Users:
+	- API would be nice
+
+- Clients:
+	- API would be nice
