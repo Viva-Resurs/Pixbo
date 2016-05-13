@@ -4,7 +4,12 @@ const lang = {
         login:                      "Logga in",
         logout:                     "Logga ut",
         profile:                    "Profil",
-        register:                   "Registrera"
+        register:                   "Registrera",
+        password:                   "Lösenord"
+    },
+    role: {
+        model:                      "Användargrupp",
+        select:                     "Välj användargrupp"
     },
     /* ----------------------------- CLIENT ----------------------------- */
     client: {
@@ -21,6 +26,7 @@ const lang = {
     user: {
         model:                      "Användare|Användare",
         empty:                      "Det finns inga användare än.",
+        create:                     "Skapa ny användare",
         deleted:                    "Användaren har tagits bort.",
         deleted_fail:               "Misslyckades att ta bort användaren, försök igen.",
         edit:                       "Redigera användare",
@@ -43,6 +49,7 @@ const lang = {
         edit:                       "Redigera",
         delete:                     "Ta bort",
         ip_address:                 "IP Adress",
+        email:                      "Email",
         welcome_content :           "Välkommen!",
         about_content :             "Pixbo är ett verktyg för att hantera hur innehåll visas på anslutna paneler.",
         cancel:                     "Avbryt",
