@@ -49,6 +49,12 @@ const lang = {
     },
     /* ----------------------------- SCHEDULE ----------------------------- */
     schedule: {
+        tooltip_screengroup:        "Välj Område/Områden",
+        tooltip_event_repeat_type:  "Välj hur upprepningen ska ske",
+        tooltip_event_start_date:   "Välj start-datum",
+        tooltip_event_start_time:   "Välj start-tid",
+        tooltip_event_end_date:     "Välj slut-datum",
+        tooltip_event_end_time:     "Välj slut-tid",
         never:                      "Aldrig",
         daily:                      "Dagligen",
         weekly:                     "Veckovis",
@@ -64,7 +70,6 @@ const lang = {
         start:                      "Start",
         repeat:                     "Upprepa",
         recurring:                  "Upprepning",
-        event_repeat_type_tooltip:  "",
         first:                      "Första",
         second:                     "Andra",
         third:                      "Tredje",

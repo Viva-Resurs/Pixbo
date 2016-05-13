@@ -13,7 +13,7 @@
         <div class="col-lg-6 col-md-6">
             <legend>
                 {{ trans_choice('screengroup.model', 1) }}
-                <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('screengroup.tooltip') }}"></span>
+                <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_screengroup') }}"></span>
             </legend>
             <div class="form-group">
                 <select class="form-control" multiple v-model="selected_screengroups" id="inputScreengroups">
@@ -33,7 +33,7 @@
                     <div class="col-lg-6 col-md-6">
                         <label for="inputStart_date" class="control-label">
                             {{ trans('schedule.start') }}
-                            <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('schedule.start_date_tooltip') }}"></span>
+                            <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_start_date') }}"></span>
                         </label>
                         <div class="">
                             <input v-model="model.event.start_date" type="date" name="start_date" id="inputStart_date" class="form-control" required="required" title="">
@@ -42,7 +42,7 @@
                     <div class="col-lg-6 col-md-6">
                         <label for="inputEnd_date" class="control-label">
                             {{ trans('schedule.end') }}
-                            <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('schedule.end_date_tooltip') }}"></span>
+                            <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_end_date') }}"></span>
                         </label>
                         <div class="">
                             <input type="date" v-model="model.event.end_date" name="end_date" id="inputEnd_date" class="form-control">
@@ -55,7 +55,7 @@
                     <div class="col-lg-6 col-md-6">
                         <label for="inputStart_time" class="control-label">
                             {{ trans('schedule.start') }}
-                            <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('schedule.start_time_tooltip') }}"></span>
+                            <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_start_time') }}"></span>
                         </label>
                         <div class="">
                             <input type="time" v-model="model.event.start_time" name="start_time" id="inputStart_time" class="form-control">
@@ -64,7 +64,7 @@
                     <div class="col-lg-6 col-md-6">
                         <label for="inputEnd_time" class="control-label">
                             {{ trans('schedule.end') }}
-                            <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('schedule.event_end_time_tooltip') }}"></span>
+                            <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_end_time') }}"></span>
                         </label>
                         <div class="">
                             <input type="time" v-model="model.event.end_time" name="end_time" id="inputEnd_time" class="form-control">
@@ -81,7 +81,7 @@
 
             <label for="inputRecur_type" class="control-label">
                 {{ trans('schedule.repeat') }}
-                <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('schedule.event_repeat_type_tooltip') }}"></span>
+                <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_repeat_type') }}"></span>
             </label>
             <select v-model="event.recur_type" v-bind:value="event.recur_type" name="recur_type" id="inputRecur_type" class="form-control">
                 <option v-for="option in recur_options" :value="option.key">{{ trans(option.value) }}</option>
@@ -122,7 +122,12 @@
 
         </div>
 
-        <button type="submit" id="submitButton_{{ id }}" class="btn btn-default">{{ trans('general.save') }}</button>
+                    <button type="" class="btn" v-link="{ path: '/screens/' }">
+                      <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
+                    </button>
+                    <button type="submit" class="btn btn-primary" :disabled="isValid" id="submitButton_{{ id }}">
+                        <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
+                    </button>
 
     </form>
 </template>
