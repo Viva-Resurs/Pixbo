@@ -21,6 +21,7 @@ $api->version('v1', function ($api) {
         $api->resource('screens', 'App\Api\V1\Controllers\ScreenController');
         $api->resource('tickers', 'App\Api\V1\Controllers\TickerController');
         $api->resource('users', 'App\Api\V1\Controllers\UserController');
+        $api->get('roles', 'App\Api\V1\Controllers\RoleController@index');
 
 
     });
