@@ -1,6 +1,6 @@
 <template>
     <div class="panel-heading">
-        Edit screengroup
+        {{ trans('client.edit') }}
     </div>
     <div class="panel-body">
         <div id="alerts" v-if="messages.length > 0">

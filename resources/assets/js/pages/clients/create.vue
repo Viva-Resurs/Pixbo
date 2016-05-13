@@ -1,6 +1,6 @@
 <template>
     <div class="panel-heading">
-        Make a dog!
+        {{ trans('client.create') }}
     </div>
     <div class="panel-body">
         <div id="alerts" v-if="messages.length > 0">
@@ -80,7 +80,7 @@
                             that.client.name = ''
                             that.client.ip_address = ''
                             that.client.screengroup_id = ''
-                            that.messages = [ {type: 'success', message: 'Woof woof! Your screengroup was created'} ]
+                            that.messages = [ {type: 'success', message: trans('client.created')} ]
                             that.creating = false
                         },
                         function (response, status) {

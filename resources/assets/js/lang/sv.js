@@ -8,12 +8,14 @@ const lang = {
     },
     /* ----------------------------- CLIENT ----------------------------- */
     client: {
-        model:                      "Klient|Klienter",
-        empty:                      "Det finns inga klienter än.",
-        deleted:                    "Klienten har tagits bort.",
-        deleted_fail:               "Misslyckades att ta bort klienten, försök igen.",
-        edit:                       "Redigera klient",
-        updated:                    "Klienten har uppdaterats."
+        model:                      "Skärm|Skärmar",
+        empty:                      "Det finns inga skärmar än.",
+        deleted:                    "Skärmen har tagits bort.",
+        deleted_fail:               "Misslyckades att ta bort skärmen, försök igen.",
+        edit:                       "Redigera skärm",
+        updated:                    "Skärmen har uppdaterats.",
+        create:                     "Skapa ny Skärm",
+        created:                    "Skärmen har skapats"
     },
     /* ----------------------------- USER ----------------------------- */
     user: {
@@ -111,7 +113,8 @@ const lang = {
         edit:                       "Redigera område",
         updated:                    "Området har uppdaterats.",
         create:                     "Skapa nytt område",
-        created:                    "Området har skapats"
+        created:                    "Området har skapats",
+        select:                     "Välj område"
     },
     /* ----------------------------- TAG ----------------------------- */
     tag: {

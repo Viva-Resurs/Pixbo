@@ -61,7 +61,6 @@
         },
 
         methods: {
-            // Let's fetch some dogs
             fetch: function (successHandler) {
                 var that = this
                 client({ path: '/clients' }).then(
@@ -94,13 +93,11 @@
         },
 
         route: {
-            // Ooh, ooh, are there any new puppies yet?
             data: function (transition) {
                 this.fetch(function (data) {
                     transition.next({clients: data})
                 })
             }
         }
-
     }
 </script>
