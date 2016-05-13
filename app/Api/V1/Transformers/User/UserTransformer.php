@@ -7,7 +7,7 @@
  * Time: 7:24 PM
  */
 
-namespace App\Api\V1\Transformers;
+namespace App\Api\V1\Transformers\User;
 
 use App\Models\User;
 use App\Api\V1\Transformers\RoleTransformer;
