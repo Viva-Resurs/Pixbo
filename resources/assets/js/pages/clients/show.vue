@@ -35,7 +35,8 @@
                         <input class="form-control" required="required" id="ip_address" name="ip_address" type="text" v-model="client.ip_address">
                     </div>
                 </div>
-                <screengroup-selector :selected.sync="client.screen_group_id"></screengroup-selector>
+
+                <model-selector :selected.sync="client.screen_group_id" model="screengroup"></model-selector>
 
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-3">
@@ -56,7 +57,7 @@
 </template>
 
 <script>
-    import ScreengroupSelector from '../../components/ScreengroupSelector.vue'
+    import ModelSelector from '../../components/ModelSelector.vue'
 
     module.exports = {
 
@@ -73,24 +74,24 @@
         },
 
         components: {
-            ScreengroupSelector
+            ModelSelector
         },
 
         methods: {
             fetch: function (id, successHandler) {
                 var that = this
                 client({ path: '/clients/' + id }).then(
-                        function (response) {
-                            that.$set('client', response.entity.client);
-                            successHandler(response.entity.client);
-                        },
-                        function (response, status, request) {
-                            if (status === 401) {
-                                self.$dispatch('userHasLoggedOut')
-                            } else {
-                                console.log(response)
-                            }
+                    function (response) {
+                        that.$set('client', response.entity.client);
+                        successHandler(response.entity.client);
+                    },
+                    function (response, status, request) {
+                        if (status === 401) {
+                            self.$dispatch('userHasLoggedOut')
+                        } else {
+                            console.log(response)
                         }
+                    }
                 )
             },
 
@@ -98,19 +99,18 @@
                 e.preventDefault()
                 var self = this
                 client({ path: '/clients/' + this.client.id, entity: this.client, method: 'PUT'}).then(
-                        function (response) {
-                            self.messages = []
-                            self.messages.push({type: 'success', message: 'Woof woof! Your clients was updated'})
-                        },
-                        function (response) {
-                            self.messages = []
-                            for (var key in response.entity) {
-                                self.messages.push({type: 'danger', message: response.entity[key]})
-                            }
+                    function (response) {
+                        self.messages = []
+                        self.messages.push({type: 'success', message: self.trans('client.updated')})
+                    },
+                    function (response) {
+                        self.messages = []
+                        for (var key in response.entity) {
+                            self.messages.push({type: 'danger', message: response.entity[key]})
                         }
+                    }
                 )
             }
-
         },
 
         route: {

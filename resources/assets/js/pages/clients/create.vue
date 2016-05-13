@@ -22,7 +22,7 @@
                 </div>
             </div>
 
-            <screengroup-selector :selected.sync="client.screen_group_id"></screengroup-selector>
+            <model-selector :selected.sync="client.screen_group_id" model="screengroup"></model-selector>
 
             <div class="form-group">
                 <div class="col-sm-4 col-sm-offset-3">
@@ -41,7 +41,7 @@
     </div></template>
 
 <script>
-    import ScreengroupSelector from '../../components/ScreengroupSelector.vue'
+    import ModelSelector from '../../components/ModelSelector.vue'
 
     module.exports = {
         data: function () {
@@ -57,7 +57,7 @@
         },
 
         components: {
-          ScreengroupSelector
+            ModelSelector
         },
 
         computed: {
