@@ -6,8 +6,7 @@
         <div class="container" style="color: #777;">
             <!-- Company Information -->
             <div class="pull-left" style="padding-top: 28px;">
-                <!-- TODO: Fix name -->
-                Copyright &copy; Yourname - <a v-link="{ path: '/terms'}">Terms Of Service</a>
+                Copyright &copy; <span>Christoffer Isenberg</span> &amp; <span>Jonathan Timmerlid</span> - <a v-link="{ path: '/terms'}">Terms Of Service</a>
             </div>
             <!-- Social Icons
             <div class="pull-right footer-social-icons">
