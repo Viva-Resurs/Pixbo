@@ -5,7 +5,9 @@ const lang = {
         logout:                     "Logga ut",
         profile:                    "Profil",
         register:                   "Registrera",
-        password:                   "Lösenord"
+        password:                   "Lösenord",
+        invalid_credentials:        "Ogiltiga uppgifter, försök igen",
+        forgot_password:            "Glömt lösenord?"
     },
     role: {
         model:                      "Användargrupp",
