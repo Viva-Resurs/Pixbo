@@ -35,7 +35,7 @@
                     <td>{{ client.id }}</td>
                     <td>{{ client.name }}</td>
                     <td>{{ client.ip_address }}</td>
-                    <td>{{ client.screengroup.name }}</td> <!-- TODO: need to fix transformer, so we can send screengroup(ID,NAME) -->
+                    <td>{{ client.screengroup.data.name }}</td>
                     <td>
                         <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/clients/'+client.id }"
                           v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
@@ -64,32 +64,30 @@
             fetch: function (successHandler) {
                 var that = this
                 client({ path: '/clients' }).then(
-                        function (response) {
-                            // Look ma! Puppies!
-                            that.$set('clients', response.entity.data)
-                            successHandler(response.entity.data)
-                        },
-                        function (response, status) {
-                            if (_.contains([401, 500], status)) {
-                                that.$dispatch('userHasLoggedOut')
-                            }
+                    function (response) {
+                        that.$set('clients', response.entity.data)
+                        successHandler(response.entity.data)
+                    },
+                    function (response, status) {
+                        if (_.contains([401, 500], status)) {
+                            that.$dispatch('userHasLoggedOut')
                         }
+                    }
                 )
             },
 
             deleteClient: function (index) {
                 var that = this
                 client({ path: '/clients/' + this.clients[index].id, method: 'DELETE' }).then(
-                        function (response) {
-                            that.clients.splice(index, 1)
-                            that.messages = [{type: 'success', message: 'Great, client purged.'}]
-                        },
-                        function (response) {
-                            that.messages.push({type: 'danger', message: 'There was a problem removing the client'})
-                        }
+                    function (response) {
+                        that.clients.splice(index, 1)
+                        that.messages = [{type: 'success', message: that.trans('client.deleted')}]
+                    },
+                    function (response) {
+                        that.messages.push({type: 'danger', message: that.trans('client.deleted_fail')})
+                    }
                 )
             }
-
         },
 
         route: {
