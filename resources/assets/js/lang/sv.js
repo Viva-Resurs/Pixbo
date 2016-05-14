@@ -6,6 +6,7 @@ const lang = {
         profile:                    "Profil",
         register:                   "Registrera",
         password:                   "Lösenord",
+        password_repeat:            "Bekräfta lösenord",
         invalid_credentials:        "Ogiltiga uppgifter, försök igen",
         forgot_password:            "Glömt lösenord?"
     },
