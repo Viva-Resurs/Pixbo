@@ -10,12 +10,6 @@
 
     <div v-else>
 
-        <div class="panel-body" v-if=" messages.length > 0 ">
-            <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
-                {{ message.message }}
-            </div>
-        </div>
-
         <div class="panel-body" v-if=" tickers.length == 0 ">
             {{ trans('ticker.empty') }}
         </div>
@@ -51,38 +45,42 @@
 
         data: function () {
             return {
-                tickers: [],
-                messages: []
+                tickers: []
             }
         },
 
         methods: {
-            // Let's fetch some dogs
             fetch: function (successHandler) {
                 var that = this
                 client({ path: '/tickers' }).then(
-                        function (response) {
-                            that.$set('tickers', response.entity.data)
-                            successHandler(response.entity.data)
-                        },
-                        function (response, status) {
-                            if (_.contains([401, 500], status)) {
-                                that.$dispatch('userHasLoggedOut')
-                            }
+                    function (response) {
+                        that.$set('tickers', response.entity.data)
+                        successHandler(response.entity.data)
+                    },
+                    function (response, status) {
+                        if (_.contains([401, 500], status)) {
+                            that.$dispatch('userHasLoggedOut')
                         }
+                    }
                 )
             },
 
             deleteTicker: function (index) {
                 var that = this
                 client({ path: '/tickers/' + this.tickers[index].id, method: 'DELETE' }).then(
-                        function (response) {
-                            that.tickers.splice(index, 1)
-                            that.messages = [{type: 'success', message: that.trans('ticker.deleted') }]
-                        },
-                        function (response) {
-                            that.messages.push({type: 'danger', message: that.trans('ticker.delete_fail') })
-                        }
+                    function (response) {
+                        that.tickers.splice(index, 1)
+                        that.$dispatch('alert', {
+                            message: that.trans('ticker.deleted'),
+                            options: {theme: 'success'}
+                        })
+                    },
+                    function (response) {
+                        that.$dispatch('alert', {
+                            message: that.trans('ticker.delete_fail'),
+                            options: {theme: 'error'}
+                        })
+                    }
                 )
             }
 

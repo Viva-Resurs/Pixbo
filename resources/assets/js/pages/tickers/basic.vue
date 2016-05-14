@@ -7,11 +7,6 @@
     </div>
     <div v-if=" ! $loadingRouteData">
         <div class="panel-body">
-            <div id="alerts" v-if="messages.length > 0">
-                <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
-                    {{ message.message }}
-                </div>
-            </div>
             <form class="form-horizontal" role="form" v-on:submit="updateTicker">
                 <fieldset disabled>
                     <div class="form-group">
@@ -53,34 +48,34 @@
                 ticker: {
                     id: null,
                     text: null,
-                },
-                messages: []
+                }
             }
         },
 
         computed: {
              emptyfields: function(){
                 return (this.ticker.text=='') ? true : false;
-             }
+             },
+            isValid() {
+                // TODO: Add validation
+            }
         },
 
         methods: {
-            // Let's fetch the screengroup
             fetch: function (id, successHandler) {
                 var that = this
                 client({ path: '/tickers/' + id }).then(
-                        function (response) {
-                            that.$set('ticker', response.entity.ticker)
-                            successHandler(response.entity.ticker)
-                        },
-                        function (response, status, request) {
-                            // Go tell your parents that you've messed up somehow
-                            if (status === 401) {
-                                self.$dispatch('userHasLoggedOut')
-                            } else {
-                                console.log(response)
-                            }
+                    function (response) {
+                        that.$set('ticker', response.entity.ticker)
+                        successHandler(response.entity.ticker)
+                    },
+                    function (response, status, request) {
+                        if (status === 401) {
+                            self.$dispatch('userHasLoggedOut')
+                        } else {
+                            console.log(response)
                         }
+                    }
                 )
             },
 
@@ -88,16 +83,23 @@
                 e.preventDefault();
                 var self = this;
                 client({ path: '/tickers/' + this.ticker.id, entity: this.ticker, method: 'PUT'}).then(
-                        function (response) {
-                            self.messages = [];
-                            self.messages.push({ type: 'success', message: self.trans('ticker.updated') });
-                        },
-                        function (response) {
-                            self.messages = [];
-                            for (var key in response.entity) {
-                                self.messages.push({ type: 'danger', message: response.entity[key] });
-                            }
+                    function (response) {
+                        self.$dispatch('alert', {
+                            message: self.trans('ticker.created'),
+                            options: {theme: 'success'}
+                        })
+                    },
+                    function (response) {
+                        self.$dispatch('alert', {
+                            message: self.trans('ticker.created_fail'),
+                            options: {theme: 'error'}
+                        })
+                        /* self.messages = [];
+                        for (var key in response.entity) {
+                            self.messages.push({ type: 'danger', message: response.entity[key] });
                         }
+                        */
+                    }
                 )
             }
 
