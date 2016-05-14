@@ -9,12 +9,6 @@
     </div>
 
     <div v-else>
-
-        <div class="panel-body" v-if=" messages.length > 0 ">
-            <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
-                {{ message.message }}
-            </div>
-        </div>
         
         <form class="form-horizontal" role="form" v-on:submit="updateScreengroup">
         
@@ -68,7 +62,10 @@
         computed: {
              emptyfields: function(){
                 return (this.screengroup.name=='' || this.screengroup.desc=='') ? true : false;
-             }
+             },
+            isValid() {
+                // TODO: Add validation
+            }
         },
 
         methods: {
@@ -76,17 +73,17 @@
             fetch: function (id, successHandler) {
                 var that = this;
                 client({ path: '/screengroups/' + id }).then(
-                        function (response) {
-                            that.$set('screengroup', response.entity.data);
-                            successHandler(response.entity.data);
-                        },
-                        function (response, status, request) {
-                            if (status === 401) {
-                                self.$dispatch('userHasLoggedOut');
-                            } else {
-                                console.log(response);
-                            }
+                    function (response) {
+                        that.$set('screengroup', response.entity.data);
+                        successHandler(response.entity.data);
+                    },
+                    function (response, status, request) {
+                        if (status === 401) {
+                            self.$dispatch('userHasLoggedOut');
+                        } else {
+                            console.log(response);
                         }
+                    }
                 );
             },
 
@@ -94,16 +91,24 @@
                 e.preventDefault();
                 var self = this;
                 client({ path: '/screengroups/' + this.screengroup.id, entity: this.screengroup, method: 'PUT'}).then(
-                        function (response) {
-                            self.messages = [];
-                            self.messages.push({type: 'success', message: self.trans('screengroup.updated')});
-                        },
-                        function (response) {
-                            self.messages = [];
-                            for (var key in response.entity) {
-                                self.messages.push({type: 'danger', message: response.entity[key]});
-                            }
+                    function (response) {
+                        self.$dispatch('alert', {
+                            message: self.trans('screengroup.updated'),
+                            options: {theme: 'success'}
+                        })
+                    },
+                    function (response) {
+                        self.$dispatch('alert', {
+                            message: self.trans('screengroup.updated_fail'),
+                            options: {theme: 'error'}
+                        })
+                        /*
+                        self.messages = [];
+                        for (var key in response.entity) {
+                            self.messages.push({type: 'danger', message: response.entity[key]});
                         }
+                        */
+                    }
                 );
             }
 

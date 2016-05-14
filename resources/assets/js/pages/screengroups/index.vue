@@ -10,12 +10,6 @@
 
     <div v-else>
 
-        <div class="panel-body" v-if=" messages.length > 0 ">
-            <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
-                {{ message.message }}
-            </div>
-        </div>
-
         <div class="panel-body" v-if=" screengroups.length == 0 ">
             {{ trans('screengroup.empty') }}
         </div>
@@ -53,8 +47,7 @@
 
         data: function () {
             return {
-                screengroups: [],
-                messages: []
+                screengroups: []
             }
         },
 
@@ -77,13 +70,19 @@
             deleteScreengroup: function (index) {
                 var self = this;
                 client({ path: '/screengroups/' + this.screengroups[index].id, method: 'DELETE' }).then(
-                        function (response) {
-                            self.screengroups.splice(index, 1);
-                            self.messages.push({ type:'success', message:self.trans('screengroup.deleted') });
-                        },
-                        function (response) {
-                            self.messages.push({ type:'danger', message:self.trans('screengroup.deleted_fail') });
-                        }
+                    function (response) {
+                        self.screengroups.splice(index, 1);
+                        self.$dispatch('alert', {
+                            message: self.trans('screengroup.deleted'),
+                            options: {theme: 'success'}
+                        })
+                    },
+                    function (response) {
+                        self.$dispatch('alert', {
+                            message: self.trans('screengroup.deleted_fail'),
+                            options: {theme: 'error'}
+                        })
+                    }
                 );
             }
 

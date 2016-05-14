@@ -5,13 +5,6 @@
     </div>
 
     <div>
-
-        <div class="panel-body" v-if=" messages.length > 0 ">
-            <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
-                {{ message.message }}
-            </div>
-        </div>
-
         <form class="form-horizontal" role="form" v-on:submit="createScreengroup">
 
             <div class="panel-body">
@@ -51,15 +44,17 @@
                 screengroup: {
                     name: '',
                     desc: ''
-                },
-                messages: []
+                }
             }
         },
 
         computed: {
              emptyfields: function(){
                 return (this.screengroup.name=='' || this.screengroup.desc=='') ? true : false;
-             }
+             },
+            isValid() {
+                // TODO: Add validation
+            }
         },
 
         methods: {
@@ -70,20 +65,27 @@
                         function (response, status) {
                             self.screengroup.name = '';
                             self.screengroup.desc = '';
-                            self.messages.push({ type:'success', message:self.trans('screengroup.created') });
+                            self.$dispatch('alert', {
+                                message: self.trans('screengroup.created'),
+                                options: {theme: 'success'}
+                            })
                             Vue.nextTick(function () {
                                 document.getElementById('nameInput').focus();
                             })
                         },
                         function (response, status) {
-                            self.messages = [];
+                            /*
                             for (var key in response.entity) {
                                 self.messages.push({ type:'danger', message:response.entity[key] });
                             }
+                            */
+                            self.$dispatch('alert', {
+                                message: self.trans('screengroup.created_fail'),
+                                options: {theme: 'error'}
+                            })
                         }
                 );
             }
         }
     }
 </script>
-
