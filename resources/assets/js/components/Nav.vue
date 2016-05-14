@@ -27,7 +27,7 @@
                     </template>
 
                     <!-- Only admin area -->
-                    <template v-if="isAdmin">
+                    <template v-if="isAdmin && isAuthenticated">
                         <li><a v-link="{ path: '/users/' }">{{ trans_choice('user.model', 2) }}</a></li>
                         <li><a v-link="{ path: '/clients/' }">{{ trans_choice('client.model', 2) }}</a></li>
                     </template>
