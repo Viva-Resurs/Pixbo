@@ -3,11 +3,6 @@
         {{ trans('client.edit') }}
     </div>
     <div class="panel-body">
-        <div id="alerts" v-if="messages.length > 0">
-            <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
-                {{ message.message }}
-            </div>
-        </div>
 
         <div class="panel-body" v-if=" $loadingRouteData ">
             <loading></loading>
@@ -68,13 +63,18 @@
                     name: null,
                     ip_address: null,
                     screen_group_id: null
-                },
-                messages: []
+                }
             }
         },
 
         components: {
             ModelSelector
+        },
+
+        computed: {
+          isValid() {
+              // TODO: Add validation
+          }
         },
 
         methods: {
@@ -97,17 +97,25 @@
 
             updateClient: function (e) {
                 e.preventDefault()
-                var self = this
+                var that = this
                 client({ path: '/clients/' + this.client.id, entity: this.client, method: 'PUT'}).then(
                     function (response) {
-                        self.messages = []
-                        self.messages.push({type: 'success', message: self.trans('client.updated')})
+                        that.$dispatch('alert', {
+                            message: that.trans('client.updated'),
+                            options: {theme: 'success'}
+                        })
                     },
                     function (response) {
+                        /*
                         self.messages = []
                         for (var key in response.entity) {
                             self.messages.push({type: 'danger', message: response.entity[key]})
                         }
+                        */
+                        that.$dispatch('alert', {
+                            message: that.trans('client.updated_fail'),
+                            options: {theme: 'error'}
+                        })
                     }
                 )
             }

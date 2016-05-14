@@ -10,12 +10,6 @@
 
     <div v-else>
 
-        <div class="panel-body" v-if=" messages.length > 0 ">
-            <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
-                {{ message.message }}
-            </div>
-        </div>
-
         <div class="panel-body" v-if=" clients.length == 0 ">
             {{ trans('client.empty') }}
         </div>
@@ -55,8 +49,7 @@
 
         data: function () {
             return {
-                clients: [],
-                messages: []
+                clients: []
             }
         },
 
@@ -81,10 +74,16 @@
                 client({ path: '/clients/' + this.clients[index].id, method: 'DELETE' }).then(
                     function (response) {
                         that.clients.splice(index, 1)
-                        that.messages = [{type: 'success', message: that.trans('client.deleted')}]
+                        that.$dispatch('alert', {
+                            message: that.trans('client.deleted'),
+                            options: {theme: 'success'}
+                        })
                     },
                     function (response) {
-                        that.messages.push({type: 'danger', message: that.trans('client.deleted_fail')})
+                        that.$dispatch('alert', {
+                            message: that.trans('client.deleted_fail'),
+                            options: {theme: 'error'}
+                        })
                     }
                 )
             }

@@ -3,11 +3,6 @@
         {{ trans('client.create') }}
     </div>
     <div class="panel-body">
-        <div id="alerts" v-if="messages.length > 0">
-            <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
-                {{ message.message }}
-            </div>
-        </div>
         <form class="form-horizontal" role="form" v-on:submit="createClient">
             <div class="form-group">
                 <label for="name" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.name') }}</label>
@@ -80,15 +75,23 @@
                             that.client.name = ''
                             that.client.ip_address = ''
                             that.client.screengroup_id = ''
-                            that.messages = [ {type: 'success', message: trans('client.created')} ]
+                            that.$dispatch('alert', {
+                                message: that.trans('client.created'),
+                                options: {theme: 'success'}
+                            })
                             that.creating = false
                         },
                         function (response, status) {
-                            that.messages = []
-                            for (var key in response.entity) {
-                                that.messages.push({type: 'danger', message: response.entity[key]})
+                            /*
+                            for (var key in response.entity.error.errors) {
+                                that.$dispatch('alert', {message: response.entity.error.errors[key][0]})
                                 that.creating = false
                             }
+                            */
+                            that.$dispatch('alert', {
+                                message: that.trans('client.created_fail'),
+                                options: {theme: 'error'}
+                            })
                         }
                 )
             }
