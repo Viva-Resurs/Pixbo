@@ -3,14 +3,8 @@
         {{ trans('screen.upload') }}
     </div>
     <div class="panel-body">
-        <div id="alerts" v-if="messages.length > 0">
-            <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
-                {{ message.message }}
-            </div>
-        </div>
         <div id="dropzone">
-        <form class="dropzone" action="/api/screens" id="my-dropzone" v-dropzone>
-        </form>
+            <form class="dropzone" action="/api/screens" id="my-dropzone" v-dropzone></form>
         </div>
     </div>
 </template>
@@ -39,8 +33,8 @@
                         init: function () {
                             var self = this;
                             // config
-                            self.options.addRemoveLinks = true;
-                            self.options.dictRemoveFile = "Delete";
+                            //self.options.addRemoveLinks = true;
+                            //self.options.dictRemoveFile = "Delete";
 
 
                             // bind events
@@ -57,7 +51,10 @@
                             });
 
                             self.on("success", function () {
-                                vm.messages = [ {type: 'success', message: vm.trans_helper('screen.uploaded') } ]
+                                vm.$dispatch('alert', {
+                                    message: vm.trans('screen.uploaded'),
+                                    options: {theme: 'success'}
+                                })
                             });
                         }
                     })

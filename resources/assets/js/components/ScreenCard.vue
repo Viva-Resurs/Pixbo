@@ -23,6 +23,8 @@
     export default {
         props: ['screen', 'parent'],
 
+        // TODO: Add actual remove calls!
+
         methods: {
             deleteScreen(screen) {
                 if(!typeof(this.parent) == 'undefined') {
@@ -33,6 +35,27 @@
             },
         }
     }
+    /*
+     deleteScreen: function (index) {
+     var that = this
+     client({ path: '/screens/' + this.screens[index].id, method: 'DELETE' }).then(
+     function (response) {
+     that.screens.splice(index, 1)
+     that.$dispatch('alert', {
+     message: that.trans('screen.deleted'),
+     options: {theme: 'success'}
+     })
+     },
+     function (response) {
+     that.$dispatch('alert', {
+     message: that.trans('screen.deleted_fail'),
+     options: {theme: 'error'}
+     })
+     }
+     )
+     }
+
+     */
 </script>
 
 <style>
