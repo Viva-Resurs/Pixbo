@@ -71,28 +71,28 @@
                 var that = this
                 that.creating = true
                 client({path: 'clients', entity: this.client}).then(
-                        function (response, status) {
-                            that.client.name = ''
-                            that.client.ip_address = ''
-                            that.client.screengroup_id = ''
-                            that.$dispatch('alert', {
-                                message: that.trans('client.created'),
-                                options: {theme: 'success'}
-                            })
+                    function (response, status) {
+                        that.client.name = ''
+                        that.client.ip_address = ''
+                        that.client.screengroup_id = ''
+                        that.$dispatch('alert', {
+                            message: that.trans('client.created'),
+                            options: {theme: 'success'}
+                        })
+                        that.creating = false
+                    },
+                    function (response, status) {
+                        /*
+                        for (var key in response.entity.error.errors) {
+                            that.$dispatch('alert', {message: response.entity.error.errors[key][0]})
                             that.creating = false
-                        },
-                        function (response, status) {
-                            /*
-                            for (var key in response.entity.error.errors) {
-                                that.$dispatch('alert', {message: response.entity.error.errors[key][0]})
-                                that.creating = false
-                            }
-                            */
-                            that.$dispatch('alert', {
-                                message: that.trans('client.created_fail'),
-                                options: {theme: 'error'}
-                            })
                         }
+                        */
+                        that.$dispatch('alert', {
+                            message: that.trans('client.created_fail'),
+                            options: {theme: 'error'}
+                        })
+                    }
                 )
             }
         }
