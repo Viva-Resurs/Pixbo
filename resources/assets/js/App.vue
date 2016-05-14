@@ -1,14 +1,27 @@
 <template>
     <div>
+        <nav-component></nav-component>
+        <toaster></toaster>
         <router-view></router-view>
+        <footer-component></footer-component>
     </div>
 </template>
 
 <script>
+    import Toaster from './components/Toaster.vue'
+
     export default {
 
+        components: {
+          Toaster
+        },
         // Auth stuff
         ready() {
+
+            this.$on('alert', function (args) {
+                this.$broadcast('alert', args);
+            })
+
             this.$on('userHasLoggedOut', function () {
                 this.destroyLogin()
             })
@@ -54,7 +67,6 @@
                 this.token = null;
                 this.authenticated = false;
                 localStorage.removeItem('jwt-token');
-                //localStorage.removeItem('lang');
                 if(this.$route.auth) this.$route.router.go('/auth/login')
             }
         }

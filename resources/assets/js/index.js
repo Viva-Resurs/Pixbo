@@ -3,7 +3,9 @@ window.Vue = require('vue')
 window.VueRouter = require('vue-router')
 Vue.use(VueRouter)
 
+// Import 3rd party libraries
 //var moment = require('moment');
+import vueToast from 'vue-toast'
 
 var bootstrap = require('bootstrap-sass');
 
