@@ -38,10 +38,13 @@ class UserController extends BaseController
         if (Gate::denies('add_users')) {
             return new UnauthorizedHttpException('permission_denied');
         }
-        $user = new User;
-        $user->fill($request->only(['name', 'email', 'password', 'roles']));
 
-        if($user->save($user)) {
+        $user = new User;
+        $user->fill($request->only(['name', 'email', 'password']));
+
+        if($user->save()) {
+            $user->roles()->sync($request->only('roles'));
+            
             Activity::log([
                 'contentId' => $user->id,
                 'contentType' => 'User',
