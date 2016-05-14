@@ -34,7 +34,7 @@
                     <td>{{ user.id }}</td>
                     <td>{{ user.name }}</td>
                     <td>{{ user.email }}</td>
-                    <td><span v-for="role in user.roles">{{ role.name }}</span></td>
+                    <td><span v-for="role in user.roles.data">{{ role.name }}</span></td>
                     <td>
                         <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/users/'+user.id }"
                           v-tooltip data-original-title="{{ trans('general.edit') }}"></a>

@@ -18,8 +18,7 @@ class UserController extends BaseController
             return new UnauthorizedHttpException('permission_denied');
             //$this->response->error('permission_denied', 401);
         }
-        
-        return $this->collection(User::all(), new UserTransformer());
+        return $this->collection(User::with('roles')->get(), new UserTransformer());
         
     }
 
