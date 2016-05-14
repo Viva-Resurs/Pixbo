@@ -3,11 +3,6 @@
         {{ trans('user.create') }}
     </div>
     <div class="panel-body">
-        <div id="alerts" v-if="messages.length > 0">
-            <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
-                {{ message.message }}
-            </div>
-        </div>
         <form class="form-horizontal" role="form" v-on:submit="createUser">
             <div class="form-group">
                 <label for="nameInput" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.name') }}</label>
@@ -62,7 +57,6 @@
                     roles: null
                 },
                 model: 'role',
-                messages: [],
                 creating: false
             }
         },
@@ -82,22 +76,33 @@
                 e.preventDefault()
                 var that = this
                 that.creating = true
-                client({path: 'screengroups', entity: this.screengroup}).then(
+                client({path: 'users', entity: that.user}).then(
                     function (response, status) {
-                        that.screengroup.name = ''
-                        that.screengroup.age = ''
-                        that.messages = [ {type: 'success', message: 'Woof woof! Your screengroup was created'} ]
+                        that.user.name = ''
+                        that.user.email = ''
+                        that.user.password = ''
+                        that.user.roles = null
+                        that.$dispatch('alert', {
+                            message: that.trans('user.created'),
+                            options: {theme: 'success'}
+                        })
                         Vue.nextTick(function () {
                             document.getElementById('nameInput').focus()
                         })
                         that.creating = false
                     },
                     function (response, status) {
+                        that.$dispatch('alert', {
+                            message: that.trans('user.created_fail'),
+                            options: {theme: 'error'}
+                        })
+                        /*
                         that.messages = []
                         for (var key in response.entity) {
                             that.messages.push({type: 'danger', message: response.entity[key]})
                             that.creating = false
                         }
+                        */
                     }
                 )
             }

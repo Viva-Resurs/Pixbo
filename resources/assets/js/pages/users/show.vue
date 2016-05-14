@@ -3,11 +3,6 @@
         {{ trans('user.edit') }}
     </div>
     <div class="panel-body">
-        <div id="alerts" v-if="messages.length > 0">
-            <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
-                {{ message.message }}
-            </div>
-        </div>
         <div class="panel-body" v-if=" $loadingRouteData ">
             <loading></loading>
         </div>
@@ -68,8 +63,7 @@
                     email: null,
                     password: null,
                     roles: null
-                },
-                messages: []
+                }
             }
         },
 
@@ -105,16 +99,23 @@
             updateUser: function (e) {
                 e.preventDefault()
                 var self = this
-                client({ path: '/users/' + this.user.id, entity: this.user, method: 'PUT'}).then(
+                client({ path: '/users/' + self.user.id, entity: self.user, method: 'PUT'}).then(
                     function (response) {
-                        self.messages = []
-                        self.messages.push({type: 'success', message: self.trans('user.updated')})
+                        self.$dispatch('alert', {
+                            message: self.trans('user.updated'),
+                            options: {theme: 'success'}
+                        })
                     },
                     function (response) {
-                        self.messages = []
+                        self.$dispatch('alert', {
+                            message: self.trans('user.updated_fail'),
+                            options: {theme: 'error'}
+                        })
+                        /*self.messages = []
                         for (var key in response.entity) {
                             self.messages.push({type: 'danger', message: response.entity[key]})
                         }
+                        */
                     }
                 )
             }
