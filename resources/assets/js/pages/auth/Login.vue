@@ -1,25 +1,19 @@
 <template>
     <div class="panel-heading">
-        Sign in to your account
+        {{ trans('auth.login') }}
     </div>
     <div class="panel-body">
         <form class="form-horizontal" role="form" v-on:submit="attempt">
 
-            <div id="alerts" v-if="messages.length > 0">
-                <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
-                    {{ message.message }}
-                </div>
-            </div>
-
             <div class="form-group">
-                <label class="col-md-4 control-label">E-Mail Address</label>
+                <label class="col-md-4 control-label">{{ trans('general.email') }}</label>
                 <div class="col-md-6">
                     <input type="email" class="form-control" v-model="user.email">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-4 control-label">Password</label>
+                <label class="col-md-4 control-label">{{ trans('auth.password') }}</label>
                 <div class="col-md-6">
                     <input type="password" class="form-control" v-model="user.password">
                 </div>
@@ -28,10 +22,10 @@
             <div class="form-group">
                 <div class="col-md-6 col-md-offset-4">
                     <button type="submit" class="btn btn-primary" :disabled="loggingIn">
-                        <i class="fa fa-btn fa-sign-in"></i>Login
+                        <i class="fa fa-btn fa-sign-in"></i>{{ trans('auth.login') }}
                     </button>
 
-                    <a class="btn btn-link" v-link="{ path: '/auth/forgot' }">Forgot Your Password?</a>
+                    <a class="btn btn-link" v-link="{ path: '/auth/forgot' }">{{ trans('auth.forgot_password') }}</a>
                 </div>
             </div>
         </form>
@@ -64,7 +58,9 @@
                         },
                         function (response) {
                             that.messages = []
-                            if (response.status && response.status.code === 401) that.messages.push({type: 'danger', message: 'Sorry, you provided invalid credentials'})
+                            if (response.status && response.status.code === 401) {
+                                that.$dispatch('alert', {message: that.trans('auth.invalid_credentials')})
+                            }
                             that.loggingIn = false
                         }
                 )

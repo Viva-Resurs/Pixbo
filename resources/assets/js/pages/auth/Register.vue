@@ -1,39 +1,33 @@
 <template>
     <div class="panel-heading">
-        Register for an account
+        {{ trans('auth.register') }}
     </div>
     <div class="panel-body">
         <form class="form-horizontal" role="form" v-on:submit="registerUser">
 
-            <div id="alerts" v-if="messages.length > 0">
-                <div v-for="message in messages" class="alert alert-{{ message.type }} alert-dismissible" role="alert">
-                    {{ message.message }}
-                </div>
-            </div>
-
             <div class="form-group">
-                <label class="col-md-4 control-label">Your name</label>
+                <label class="col-md-4 control-label">{{ trans('general.name') }}</label>
                 <div class="col-md-6">
                     <input type="name" class="form-control" v-model="user.name">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-4 control-label">E-Mail Address</label>
+                <label class="col-md-4 control-label">{{ trans('general.email') }}</label>
                 <div class="col-md-6">
                     <input type="email" class="form-control" v-model="user.email">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-4 control-label">Password</label>
+                <label class="col-md-4 control-label">{{ trans('auth.password') }}</label>
                 <div class="col-md-6">
                     <input type="password" class="form-control" v-model="user.password">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-4 control-label">Confirm password</label>
+                <label class="col-md-4 control-label">{{ trans('auth.password_repeat') }}</label>
                 <div class="col-md-6">
                     <input type="password" class="form-control" v-model="user.password_confirmation">
                 </div>
@@ -42,7 +36,7 @@
             <div class="form-group">
                 <div class="col-md-6 col-md-offset-4">
                     <button type="submit" class="btn btn-primary" :disabled="registering">
-                        <i class="fa fa-btn fa-sign-in"></i> Register
+                        <i class="fa fa-btn fa-sign-in"></i> {{ trans('auth.register') }}
                     </button>
                 </div>
             </div>
@@ -51,6 +45,8 @@
 
 <script>
     module.exports = {
+
+        // TODO: Add client validation
 
         data: function () {
             return {
@@ -78,8 +74,8 @@
                             that.messages = []
                             if (response.status && response.status.code === 422) {
                                 that.messages = []
-                                for (var key in response.entity) {
-                                    that.messages.push({type: 'danger', message: response.entity[key]})
+                                for (var key in response.entity.error.errors) {
+                                    that.$dispatch('alert', {message: response.entity.error.errors[key][0]})
                                     that.registering = false
                                 }
                             }

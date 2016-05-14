@@ -1,14 +1,13 @@
 <template>
     <div class="panel-heading">
-        Your profile
+        {{ trans('auth.profile') }}
     </div>
     <div class="panel-body">
-        <!-- <button class="btn btn-primary" v-on="click: fetch">Fetch</button> -->
         <table class="table table-bordered" v-if="$root.user">
             <tr>
-                <th>User ID</th>
-                <th>Name</th>
-                <th>Email</th>
+                <th>{{ trans('general.id') }}</th>
+                <th>{{ trans('general.name') }}</th>
+                <th>{{ trans('general.email') }}</th>
             </tr>
             <tr>
                 <td>{{ $root.user.id }}</td>
