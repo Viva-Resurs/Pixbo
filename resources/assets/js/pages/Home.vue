@@ -1,5 +1,4 @@
 <template>
-    <nav-component></nav-component>
     <div class="container app-screen">
         <!-- Tabs -->
         <div class="col-md-3">
@@ -36,5 +35,4 @@
             </div><!-- End tab content -->
         </div><!-- End tab panes col-md-9 -->
     </div><!-- End container -->
-    <footer-component></footer-component>
 </template>
