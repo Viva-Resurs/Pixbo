@@ -4,7 +4,7 @@
 	- Check if screengroup.name exists before adding (back-end + form-validation)
 
 - Alerts:
-	- Create a component and pass alerts to it instead of having alerts in each route?
+	- Fix default modes, like duration on errors/success etc
 
 - Screens:
 	- Fix datetimepicker-tooltip-lang src/mapping
@@ -16,8 +16,9 @@
 
 - Player:
 
-
 - Users:
 
-
 - Clients:
+    - Unique validation
+    - Error styling
+    - Validation language
