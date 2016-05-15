@@ -9,39 +9,56 @@
         </div>
 
         <div v-else>
-            <form class="form-horizontal" role="form" v-on:submit="updateClient">
-                <fieldset disabled>
-                    <div class="form-group">
-                        <label for="id" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.id') }}</label>
-                        <div class="col-sm-5">
-                            <input class="form-control" id="id" required="required" name="id" type="text" v-model="client.id">
-                        </div>
-                    </div>
-                </fieldset>
+
+            <form class="form-horizontal" role="form" v-on:submit="updateClient" v-form name="myform">
+
+                <!-- TODO: Need to fix some styling and translation -->
+                <div class="errors" v-if="myform.$submitted">
+                    <p v-if="myform.name.$error.required">Name is required.</p>
+                    <p v-if="myform.ip_address.$error.required">IP Address is required.</p>
+                    <p v-if="myform.ip_address.$error.customValidator">IP Address is not valid.</p>
+                    <p v-if="myform.screengroup.$error.required">Screengroup is required.</p>
+                </div>
+
                 <div class="form-group">
                     <label for="name" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.name') }}</label>
                     <div class="col-sm-5">
-                        <input class="form-control" required="required" id="name" name="name" type="text" v-model="client.name">
+                        <input class="form-control"
+                               id="name" name="name"
+                               type="text"
+                               v-model="client.name"
+                               v-form-ctrl
+                               required
+                        >
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="ip_address" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.ip_address') }}</label>
                     <div class="col-sm-5">
-                        <input class="form-control" required="required" id="ip_address" name="ip_address" type="text" v-model="client.ip_address">
+                        <input class="form-control"
+                               id="ip_address" name="ip_address"
+                               type="text"
+                               v-model="client.ip_address"
+                               v-form-ctrl
+                               required
+                               custom-validator="isIPAddress"
+                        >
                     </div>
                 </div>
 
-                <model-selector :selected.sync="client.screen_group_id" model="screengroup"></model-selector>
+                <span v-form-ctrl="client.screen_group_id" name="screengroup" required>
+                    <model-selector :selected.sync="client.screen_group_id" model="screengroup"></model-selector>
+                </span>
 
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-3">
-                        <button type="" class="btn" v-link="{ path: '/clients/' }" v-if="emptyfields">
+                        <button type="" class="btn" v-link="{ path: '/clients/' }" v-if="myform.$pristine">
                             <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                         </button>
-                        <button type="" class="btn" v-link="{ path: '/clients/' }" v-if="!emptyfields">
+                        <button type="" class="btn" v-link="{ path: '/clients/' }" v-if="!myform.$pristine">
                             <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                         </button>
-                        <button type="submit" class="btn btn-primary" :disabled="emptyfields">
+                        <button type="submit" class="btn btn-primary" :disabled="myform.$invalid">
                             <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                         </button>
                     </div>
@@ -53,8 +70,13 @@
 
 <script>
     import ModelSelector from '../../components/ModelSelector.vue'
+    import Validators from '../../mixins/Validators.vue'
+
+    // TODO: Need to add unique validation
 
     module.exports = {
+        mixins: [Validators],
+        components: { ModelSelector },
 
         data: function () {
             return {
@@ -63,18 +85,9 @@
                     name: null,
                     ip_address: null,
                     screen_group_id: null
-                }
+                },
+                myform: []
             }
-        },
-
-        components: {
-            ModelSelector
-        },
-
-        computed: {
-          isValid() {
-              // TODO: Add validation
-          }
         },
 
         methods: {

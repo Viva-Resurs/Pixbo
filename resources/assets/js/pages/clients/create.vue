@@ -52,7 +52,7 @@
                     <button type="" class="btn" v-link="{ path: '/clients/' }" v-if="!myform.$pristine">
                         <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                     </button>
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary" :disabled="myform.$invalid">
                         <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                     </button>
                 </div>
@@ -63,10 +63,14 @@
 
 <script type="text/ecmascript-6">
     import ModelSelector from '../../components/ModelSelector.vue'
+    import Validators from '../../mixins/Validators.vue'
 
     // TODO: Need to add unique validation
 
     module.exports = {
+        mixins: [Validators],
+        components: { ModelSelector },
+
         data: function () {
             return {
                 client: {
@@ -79,14 +83,7 @@
             }
         },
 
-        components: {
-            ModelSelector
-        },
-
         methods: {
-
-            isIPAddress: val => /^(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}$/.test(val),
-
             attemptCreate() {
                 if(this.myform.$valid) {
                     this.createClient();
@@ -108,7 +105,6 @@
                         })
                         that.creating = false
                         that.$route.router.go('/clients')
-
                     },
                     function (response, status) {
                         /*
