@@ -8,39 +8,68 @@
         </div>
 
         <div v-else>
-            <form class="form-horizontal" role="form" v-on:submit="updateUser">
+            <form class="form-horizontal" role="form" v-on:submit.prevent="attemptUpdateUser" name="myform" v-form>
+
+                <!-- TODO: Need to fix some styling and translation -->
+                <div class="errors" v-if="myform.$submitted">
+                    <p v-if="myform.name.$error.required">Name is required.</p>
+                    <p v-if="myform.email.$error.required">E-mail is required.</p>
+                    <p v-if="myform.email.$error.email">E-mail is not valid.</p>
+                    <p v-if="myform.password.$error.required">Password is required.</p>
+                    <p v-if="myform.password.$error.minlength">Password is too short.</p>
+                </div>
+
                 <div class="form-group">
-                    <label for="nameInput" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.name') }}</label>
+                    <label for="name" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.name') }}</label>
                     <div class="col-sm-5">
-                        <input class="form-control" required="required" name="name" type="text" v-model="user.name" id="nameInput">
+                        <input class="form-control"
+                               name="name" id="name"
+                               type="text"
+                               v-model="user.name"
+                               v-form-ctrl
+                               required
+                        >
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="emailInput" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.email') }}</label>
+                    <label for="email" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.email') }}</label>
                     <div class="col-sm-5">
-                        <input type="email" class="form-control" required="required" id="emailInput" name="email" v-model="user.email">
+                        <input class="form-control"
+                               name="email" id="email"
+                               type="email"
+                               v-model="user.email"
+                               v-form-ctrl
+                               required
+                        >
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="passwordInput" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('auth.password') }}</label>
+                    <label for="password" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('auth.password') }}</label>
                     <div class="col-sm-5">
-                        <input type="password" class="form-control" required="required" id="passwordInput" name="password" v-model="user.password">
+                        <input class="form-control"
+                               name="password" id="password"
+                               type="password"
+                               v-model="user.password"
+                               v-form-ctrl
+                        >
                     </div>
                 </div>
-
-                <model-selector :selected.sync="user.roles" model="role"></model-selector>
+                <!-- TODO: This validation doesn't work -->
+                <span name="roles" v-form-ctrl="user.roles.data[0].id" required>
+                    <model-selector :selected.sync="user.roles.data[0].id" model="role"></model-selector>
+                </span>
 
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-3">
-                        <button type="" class="btn" v-link="{ path: '/clients/' }" v-if="emptyfields">
+                        <button type="" class="btn" v-link="{ path: '/clients/' }" v-if="myform.$pristine">
                             <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                         </button>
-                        <button type="" class="btn" v-link="{ path: '/clients/' }" v-if="!emptyfields">
+                        <button type="" class="btn" v-link="{ path: '/clients/' }" v-if="!myform.$pristine">
                             <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                         </button>
-                        <button type="submit" class="btn btn-primary" :disabled="emptyfields">
+                        <button type="submit" class="btn btn-primary" :disabled="myform.$invalid">
                             <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                         </button>
                     </div>
@@ -54,6 +83,7 @@
     import ModelSelector from '../../components/ModelSelector.vue'
 
     module.exports = {
+        components: { ModelSelector },
 
         data: function () {
             return {
@@ -63,18 +93,9 @@
                     email: null,
                     password: null,
                     roles: null
-                }
+                },
+                myform: []
             }
-        },
-
-        components: {
-            ModelSelector
-        },
-
-        computed: {
-          isValid() {
-              // TODO: Add validation for user update
-          }
         },
 
         methods: {
@@ -96,8 +117,13 @@
                 )
             },
 
-            updateUser: function (e) {
-                e.preventDefault()
+            attemptUpdateUser() {
+                if(this.myform.$valid) {
+                    this.updateUser()
+                }
+            },
+
+            updateUser() {
                 var self = this
                 client({ path: '/users/' + self.user.id, entity: self.user, method: 'PUT'}).then(
                     function (response) {
@@ -105,6 +131,7 @@
                             message: self.trans('user.updated'),
                             options: {theme: 'success'}
                         })
+                        self.$route.router.go('/users')
                     },
                     function (response) {
                         self.$dispatch('alert', {

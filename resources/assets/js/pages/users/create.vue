@@ -3,39 +3,74 @@
         {{ trans('user.create') }}
     </div>
     <div class="panel-body">
-        <form class="form-horizontal" role="form" v-on:submit="createUser">
+        <form class="form-horizontal" role="form" v-on:submit.prevent="attemptCreateUser" name="myform" v-form>
+
+            <!-- TODO: Need to fix some styling and translation -->
+            <div class="errors" v-if="myform.$submitted">
+                <p v-if="myform.name.$error.required">Name is required.</p>
+                <p v-if="myform.email.$error.required">E-mail is required.</p>
+                <p v-if="myform.email.$error.email">E-mail is not valid.</p>
+                <p v-if="myform.password.$error.required">Password is required.</p>
+                <p v-if="myform.password.$error.minlength">Password is too short.</p>
+            </div>
+
             <div class="form-group">
-                <label for="nameInput" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.name') }}</label>
+                <label for="name" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.name') }}</label>
                 <div class="col-sm-5">
-                    <input class="form-control" required="required" name="name" type="text" v-model="user.name" id="nameInput">
+                    <input class="form-control"
+                           name="name" id="name"
+                           type="text"
+                           v-model="user.name"
+                           v-form-ctrl
+                           required
+                           minlength="4"
+                           maxlength="30"
+                    >
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="emailInput" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.email') }}</label>
+                <label for="email" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.email') }}</label>
                 <div class="col-sm-5">
-                    <input type="email" class="form-control" required="required" id="emailInput" name="email" v-model="user.email">
+                    <input class="form-control"
+                           name="email" id="email"
+                           type="email"
+                           v-model="user.email"
+                           v-form-ctrl
+                           required
+                    >
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="passwordInput" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('auth.password') }}</label>
+                <label for="password" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('auth.password') }}</label>
                 <div class="col-sm-5">
-                    <input type="password" class="form-control" required="required" id="passwordInput" name="password" v-model="user.password">
+                    <input class="form-control"
+                           name="password" id="password"
+                           type="password"
+                           v-model="user.password"
+                           v-form-ctrl
+                           required
+                           minlength="8"
+                           maxlength="30"
+                    >
                 </div>
             </div>
 
-            <model-selector :selected.sync="user.roles" :model="model"></model-selector>
+            <!-- TODO: Role validation doesn't work -->
+            <span v-form-ctrl="user.roles.data" required name="roles">
+                <model-selector :selected.sync="user.roles.data" :model="model"></model-selector>
+            </span>
 
             <div class="form-group">
                 <div class="col-sm-4 col-sm-offset-3">
-                    <button type="" class="btn" v-link="{ path: '/clients/' }" v-if="emptyfields">
+                    <button type="" class="btn" v-link="{ path: '/clients/' }" v-if="myform.$pristine">
                         <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                     </button>
-                    <button type="" class="btn" v-link="{ path: '/clients/' }" v-if="!emptyfields">
+                    <button type="" class="btn" v-link="{ path: '/clients/' }" v-if="!myform.$pristine">
                         <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                     </button>
-                    <button type="submit" class="btn btn-primary" :disabled="emptyfields">
+                    <button type="submit" class="btn btn-primary" :disabled="myform.$invalid">
                         <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                     </button>
                 </div>
@@ -47,6 +82,8 @@
 <script>
     import ModelSelector from '../../components/ModelSelector.vue'
 
+    // TODO: Need to fix unique validation
+
     module.exports = {
         data: function () {
             return {
@@ -56,6 +93,7 @@
                     password: '',
                     roles: null
                 },
+                myform: [],
                 model: 'role',
                 creating: false
             }
@@ -64,16 +102,13 @@
           ModelSelector
         },
 
-        computed: {
-          isValid() {
-              // TODO: Add validation!
-              return true
-          }
-        },
-
         methods: {
-            createUser: function (e) {
-                e.preventDefault()
+            attemptCreateUser() {
+              if(this.myform.$valid) {
+                  this.createUser()
+              }
+            },
+            createUser() {
                 var that = this
                 that.creating = true
                 client({path: 'users', entity: that.user}).then(
