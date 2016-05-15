@@ -11,7 +11,15 @@
                 <div class="form-group">
                     <label for="name" class="control-label">{{ trans('general.name') }}</label>
                     <div>
-                        <input class="form-control" required="required" name="name" type="text" v-model="screengroup.name" id="nameInput">
+                        <input class="form-control"
+                               name="name" id="name"
+                               type="text"
+                               v-model="screengroup.name"
+                               v-form-ctrl
+                               required
+                               minlength="4"
+                               maxlength="30"
+                        >
                     </div>
                 </div>
                 <div class="form-group">
