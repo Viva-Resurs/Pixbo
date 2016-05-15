@@ -34,6 +34,7 @@ class UserController extends BaseController
         return $this->item($user, new UserTransformer());
     }
 
+    // TODO: Need to fix the storing of roles
     public function store(Request $request) {
         if (Gate::denies('add_users')) {
             return new UnauthorizedHttpException('permission_denied');
@@ -63,6 +64,7 @@ class UserController extends BaseController
         return $this->item($this->getAuthenticatedUser(), new UserTransformer() );
     }
 
+    // TODO: Need to fix the update of roles
     public function update(Request $request, $id) {
         if (Gate::denies('edit_users')) {
             $this->response->error('permission_denied', 401);

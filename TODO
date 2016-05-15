@@ -17,6 +17,10 @@
 - Player:
 
 - Users:
+    - Unique validation
+    - Error styling
+    - Validation language
+    - Roles validation not working
 
 - Clients:
     - Unique validation
