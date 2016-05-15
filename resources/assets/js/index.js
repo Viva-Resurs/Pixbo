@@ -5,9 +5,8 @@ Vue.use(VueRouter)
 
 // Import 3rd party libraries
 //var moment = require('moment');
-import vueToast from 'vue-toast'
-
 var bootstrap = require('bootstrap-sass');
+import * as vueForm from 'vue-form'
 
 // Import the actual routes, aliases, ...
 import { configRouter } from './routes'
@@ -43,6 +42,7 @@ window.client = rest.wrap(pathPrefix, { prefix: config.api.base_url })
   //  .wrap(langFetcher);
 
 // Bootstrap the app
+Vue.use(vueForm)
 Vue.component('nav-component', require('./components/Nav.vue'))
 Vue.component('footer-component', require('./components/Footer.vue'))
 Vue.component('loading', require('./components/Loading.vue'))
