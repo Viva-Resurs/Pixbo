@@ -52,6 +52,7 @@ const lang = {
         edit:                       "Redigera",
         delete:                     "Ta bort",
         ip_address:                 "IP Adress",
+        age:                        "Ålder",
         email:                      "Email",
         welcome_content :           "Välkommen!",
         about_content :             "Pixbo är ett verktyg för att hantera hur innehåll visas på anslutna paneler.",
