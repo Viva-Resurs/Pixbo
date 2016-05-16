@@ -24,7 +24,7 @@ class ScreenGroupController extends BaseController
             return $this->collection(ScreenGroup::all(), new ScreenGroupListTransformer());
         }
 
-        return $this->collection(ScreenGroup::all(), new ScreenGroupTransformer());
+        return $this->collection(ScreenGroup::all(), new ScreenGroupListTransformer());
     }
 
     public function store(Request $request) {
