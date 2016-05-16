@@ -3,6 +3,8 @@
 	font-weight: 300;
 	margin-bottom: 40px;
 
+    background: $navbar-background;
+
 	.navbar-brand {
 		font-size: 28px;
 
@@ -13,11 +15,19 @@
 
 	.navbar-nav {
 		padding-top: 0px;
-		li a.v-link-active {
-			text-decoration: none;
-			border-bottom: 1px solid $brand-primary;
-		}
 	}
+
+@media screen and (min-width: 768px) {
+	ul.navbar-nav > li > a.v-link-active {
+		text-decoration: none;
+		border-bottom: 1px solid $brand-primary;
+	}
+}
+@media screen and (max-width: 768px) {
+	ul.navbar-nav > li > a.v-link-active {
+		background-color: darken($navbar-background, 10%);
+	}
+}
 
 	.dropdown-menu {
 		li {

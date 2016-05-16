@@ -1,19 +1,15 @@
 <template>
-    <div class="col-sm-6 col-md-3">
-        <div class="thumbnail screens_card row">
-            <div class="col-lg-12">
-                <div class="row">
-                    <img class="screens_card__img" :src="'/' + screen.photo.thumb_path" style="width:100%;height:auto;">
+    <div class="screencard">
+        <div class="screencard_content">
+            <img class="screencard_img" :src="'/' + screen.photo.thumb_path">
 
-                    <div class="btn-group-vertical ScreenCard__buttons pull-right" role="group">
-                        <a class="btn btn-info btn-lg" v-link="{ path: '/screens/'+screen.id }">
-                            <span class="fa fa-calendar" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="Planera"></span>
-                        </a>
-                        <a class="btn btn-danger btn-lg" v-on:click="deleteScreen($index)">
-                            <span class="fa fa-times" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="Ta bort"></span>
-                        </a>
-                    </div>
-                </div>
+            <div class="screencard_tools" role="group">
+                <a class="btn btn-info btn-lg" v-link="{ path: '/screens/'+screen.id }">
+                    <span class="fa fa-calendar" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="Planera"></span>
+                </a>
+                <a class="btn btn-danger btn-lg" v-on:click="deleteScreen($index)">
+                    <span class="fa fa-times" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="Ta bort"></span>
+                </a>
             </div>
         </div>
     </div>
