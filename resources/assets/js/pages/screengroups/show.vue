@@ -61,21 +61,31 @@
 
         </form>
 
+        <screens :screens.sync="screengroup.screens.data"></screens>
+        <tickers :tickers.sync="screengroup.tickers.data"></tickers>
+
     </div>
 
 </template>
 
 <script>
+    import screens from './screens.vue'
+    import tickers from './tickers.vue'
+
     module.exports = {
+
+        components: {
+            screens,
+            tickers
+        },
 
         data: function () {
             return {
                 screengroup: {
                 },
-                messages: []
+                myform: []
             }
         },
-
 
         methods: {
             fetch: function (id, successHandler) {
