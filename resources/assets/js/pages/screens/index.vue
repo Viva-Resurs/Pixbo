@@ -14,7 +14,7 @@
             {{ trans('screen.empty') }}
         </div>
 
-        <div v-if=" screens.length > 0 ">
+        <div class="panel-body" v-if=" screens.length > 0 ">
             <div class="row">
                 <div v-for="screen in screens">
                     <screen-card :screen="screen"></screen-card>

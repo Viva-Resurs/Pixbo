@@ -10,12 +10,13 @@ $btn-font-weight: 300;
 $font-family-sans-serif: "Lato", Helvetica, Arial, sans-serif !default;
 $font-size-base: 14px;
 $navbar-height: 65px;
+$navbar-background: #f8f8f8;
 
 /*
  * Bootstrap CSS...
  */
 
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 /**
  * Elements
@@ -35,6 +36,8 @@ $navbar-height: 65px;
 
 @import "components/tabs";
 @import "components/vue-toast.scss";
+@import "components/screencards.scss";
+
 /*
  * Misc.
  */

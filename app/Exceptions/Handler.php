@@ -42,7 +42,17 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        
+        if ($e instanceof NotFoundHttpException) {
+            $message = $e->getMessage();
+
+            // Send Custom 'not found' for screens
+            if ($message == trans('exceptions.no_screens_found'))
+              return view('errors.ScreenNotFound')->with([ 'error' => $message ]);
+
+            // Default 404
+            $e = new NotFoundHttpException($e->getMessage(), $e);
+        }
+
         if ($e instanceof ModelNotFoundException) {
             $e = new NotFoundHttpException($e->getMessage(), $e);
         }
