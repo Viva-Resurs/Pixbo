@@ -15,7 +15,35 @@
         components: {
           Toaster
         },
+
+        data() {
+            return {
+                user: null,
+                token: null,
+                authenticated: false,
+                history: {
+                    previous: null,
+                    params: null
+                }
+            }
+        },
+
         // Auth stuff
+        methods: {
+            setLogin(user) {
+                this.user = user;
+                this.authenticated = true;
+                this.token = localStorage.getItem('jwt-token')
+            },
+            destroyLogin(user) {
+                this.user = null;
+                this.token = null;
+                this.authenticated = false;
+                localStorage.removeItem('jwt-token');
+                if(this.$route.auth) this.$route.router.go('/auth/login')
+            }
+        },
+
         ready() {
 
             this.$on('alert', function (args) {
@@ -46,28 +74,6 @@
                             that.destroyLogin()
                         }
                 )
-            }
-        },
-
-        data() {
-            return {
-                user: null,
-                token: null,
-                authenticated: false
-            }
-        },
-        methods: {
-            setLogin(user) {
-                this.user = user;
-                this.authenticated = true;
-                this.token = localStorage.getItem('jwt-token')
-            },
-            destroyLogin(user) {
-                this.user = null;
-                this.token = null;
-                this.authenticated = false;
-                localStorage.removeItem('jwt-token');
-                if(this.$route.auth) this.$route.router.go('/auth/login')
             }
         }
     }

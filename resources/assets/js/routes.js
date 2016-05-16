@@ -7,18 +7,22 @@ module.exports = {
                 component: require('./pages/Auth.vue'),
                 subRoutes: {
                     '/login': {
+                        name: 'auth.login',
                         component: require('./pages/auth/Login.vue'),
                         guest: true
                     },
                     '/register': {
+                        name: 'auth.register',
                         component: require('./pages/auth/Register.vue'),
                         guest: true
                     },
                     '/profile': {
+                        name: 'auth.profile',
                         component: require('./pages/auth/Profile.vue'),
                         auth: true
                     },
                     '/logout': {
+                        name: 'auth.logout',
                         component: require('./pages/auth/Logout.vue'),
                         auth: true
                     }
@@ -28,9 +32,11 @@ module.exports = {
                 component: require('./pages/Home.vue'),
                 subRoutes: {
                     '/': {
+                        name: 'home.welcome',
                         component: require('./pages/home/Welcome.vue')
                     },
                     '/about': {
+                        name: 'home.about',
                         component: require('./pages/home/About.vue')
                     }
                 }
@@ -41,12 +47,15 @@ module.exports = {
                 auth: true,
                 subRoutes: {
                     '/': {
+                        name: 'screengroups.index',
                         component: require('./pages/screengroups/index.vue')
                     },
                     '/:id': {
+                        name: 'screengroups.show',
                         component: require('./pages/screengroups/show.vue')
                     },
                     '/create': {
+                        name: 'screengroups.create',
                         component: require('./pages/screengroups/create.vue')
                     }
                 }
@@ -56,12 +65,15 @@ module.exports = {
                 auth: true,
                 subRoutes: {
                     '/': {
+                        name: 'screens.index',
                         component: require('./pages/screens/index.vue')
                     },
                     '/:id': {
+                        name: 'screens.show',
                         component: require('./pages/screens/show.vue')
                     },
                     '/create': {
+                        name: 'screens.create',
                         component: require('./pages/screens/create.vue')
                     }
                 }
@@ -71,12 +83,15 @@ module.exports = {
                 auth: true,
                 subRoutes: {
                     '/': {
+                        name: 'clients.index',
                         component: require('./pages/clients/index.vue')
                     },
                     '/:id': {
+                        name: 'clients.show',
                         component: require('./pages/clients/show.vue')
                     },
                     '/create': {
+                        name: 'clients.create',
                         component: require('./pages/clients/create.vue')
                     }
                 }
@@ -86,12 +101,15 @@ module.exports = {
                 auth: true,
                 subRoutes: {
                     '/': {
+                        name: 'users.index',
                         component: require('./pages/users/index.vue')
                     },
                     '/:id': {
+                        name: 'users.show',
                         component: require('./pages/users/show.vue')
                     },
                     '/create': {
+                        name: 'users.create',
                         component: require('./pages/users/create.vue')
                     }
                 }
@@ -102,9 +120,11 @@ module.exports = {
                 auth: true,
                 subRoutes: {
                     '/': {
+                        name: 'tickers.index',
                         component: require('./pages/tickers/index.vue')
                     },
                     '/:id': {
+                        name: 'tickers.show',
                         component: require('./pages/tickers/show.vue'),
 
                         subRoutes: {
@@ -117,11 +137,13 @@ module.exports = {
                         }
                     },
                     '/create': {
+                        name: 'tickers.create',
                         component: require('./pages/tickers/create.vue')
                     }
                 }
             },
             '/terms': {
+                name: 'terms',
                 component: require('./pages/Terms.vue')
             },
             '*': {
@@ -138,6 +160,8 @@ module.exports = {
         router.beforeEach(function (transition) {
 
             var token = localStorage.getItem('jwt-token')
+            router.app.history.previous = transition.from.name
+            router.app.history.params = transition.from.params
 
             if (transition.to.auth) {
                 if (!token || token === null) {
