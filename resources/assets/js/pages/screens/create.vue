@@ -4,13 +4,14 @@
     </div>
     <div class="panel-body">
         <div id="dropzone">
-            <form class="dropzone" action="/api/screens" id="my-dropzone" v-dropzone></form>
+            <form class="dropzone" :action="action" id="my-dropzone" v-dropzone></form>
         </div>
     </div>
 </template>
 
 <script>
     module.exports = {
+        props: ['options'],
 
         data() {
             return {
@@ -18,10 +19,23 @@
                 durpzone: null,
             }
         },
-        methods: {
-            trans_helper(text) {
-                return this.trans(text)
+
+        computed: {
+            action() {
+                if(this.options !== undefined) {
+                    return this.options.action !== undefined ? this.options.action : '/api/screens'
+                }
+                return '/api/screens'
             },
+            redirect() {
+                if(this.options !== undefined) {
+                    return this.options.redirect !== undefined ? this.options.redirect : '/screens'
+                }
+                return '/screens'
+            }
+        },
+
+        methods: {
             initDropzone: function () {
                 self = this
                 var vm = this
@@ -29,15 +43,11 @@
                     new Dropzone("#my-dropzone", {
                         maxFileSize: 10,
                         acceptedFiles: '.jpg,.jpeg,.png,.bmp',
-                        dictDefaultMessage: vm.trans_helper('screen.upload_message'),
+                        dictDefaultMessage: vm.trans('screen.upload_message'),
                         init: function () {
                             var self = this;
-                            // config
-                            //self.options.addRemoveLinks = true;
-                            //self.options.dictRemoveFile = "Delete";
 
-
-                            // bind events
+                            // -------- bind events -------- //
 
                             //New file added
                             self.on("addedfile", function (file) {
@@ -55,9 +65,9 @@
                                     message: vm.trans('screen.uploaded'),
                                     options: {theme: 'success'}
                                 })
-                                // TODO: This one should redirect to the newly created screen,
+                                // TODO: Might want to route to the newly created screen instead of it's 'parent'
                                 // the API needs to send back the ID of the new screen.
-                                vm.$route.router.go('/screens')
+                                vm.$route.router.go(vm.redirect)
                             });
                         }
                     })
