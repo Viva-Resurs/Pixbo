@@ -1,29 +1,29 @@
-.vue-toast-manager_container {
+div.vue-toast-manager_container {
   position: fixed;
   width: 100%;
+  height: 0px;
+  z-index: 1000 !important;
 }
-
 .vue-toast-manager_container.\--top {
-  top: 10px;
+  top: 0px;
 }
-
 .vue-toast-manager_container.\--bottom {
-  bottom: 10px;
+  bottom: 0px;
 }
-
 .vue-toast-manager_container.\--left {
-  left: 10px;
+  left: 0px;
 }
-
 .vue-toast-manager_container.\--right {
-  right: 10px;
+  right: 0px;
 }
 
 .vue-toast-manager_toasts {
-  position: relative;
+ 
 }
+
 .vue-toast_container {
   position: absolute;
+  width: 100%;
   padding-bottom: 10px;
   -webkit-transform: translateY(0);
   -ms-transform: translateY(0);
@@ -34,61 +34,61 @@
   transition: transform .2s ease-out, opacity .3s ease-out, -webkit-transform .2s ease-out;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+}
+
+@media screen and (min-width: 768px) {
+  .vue-toast_container {
+    left: 25%;
+    width: 50%;
+  }
+}
+
+.vue-toast_message{
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid rgba(255,255,255,0.7);
+  text-shadow: 0px 0px 2px #000;
+  padding: 5px;
 
 }
 
-
+.vue-toast_container .vue-toast_message {
+  background-color: rgba(0,0,0, .9);
+  box-shadow: 0px 0px 2px rgba(0,0,0, .7);
+}
 .vue-toast_container._default .vue-toast_message {
   background-color: rgba(0,0,0, .9);
-
+  box-shadow: 0px 0px 2px rgba(0,0,0, .7);
 }
-
-
 .vue-toast_container._info .vue-toast_message {
   background-color: rgba(49,112,143, .9);
-
+  box-shadow: 0px 0px 2px rgba(49,112,143, .7);
 }
-
-
 .vue-toast_container._success .vue-toast_message {
   background-color: rgba(60,118,61, .9);
-
+  box-shadow: 0px 0px 2px rgba(60,118,61, .7);
 }
-
-
 .vue-toast_container._warning .vue-toast_message {
   background-color: rgba(138,109,59, .9);
-
+  box-shadow: 0px 0px 2px rgba(138,109,59, .7);
 }
-
-
 .vue-toast_container._error .vue-toast_message {
   background-color: rgba(169,68,66, .9);
-
+  box-shadow: 0px 0px 2px rgba(169,68,66, .7);
 }
 
 
 .vue-toast-manager_container.\--top .vue-toast_container {
   top: 0;
-
 }
-
-
 .vue-toast-manager_container.\--bottom .vue-toast_container {
   bottom: 0;
-
 }
-
-
 .vue-toast-manager_container.\--left .vue-toast_container {
   left: 0;
-
 }
-
-
 .vue-toast-manager_container.\--right .vue-toast_container {
   right: 0;
-
 }
 
 .vue-toast_container.v-enter,
@@ -101,6 +101,7 @@
   color: white;
   font-family: arial, sans-serif;
 }
+
 
 .vue-toast_close-btn {
   cursor: pointer;
@@ -115,12 +116,9 @@
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
-
 .vue-toast_close-btn:hover {
   opacity: .9;
-
 }
-
 .vue-toast_close-btn::before,
 .vue-toast_close-btn::after {
   content: '';
@@ -129,19 +127,15 @@
   width: 14px;
   height: 2px;
   background-color: white;
-
+  box-shadow: 0px 0px 2px rgba(255,255,255, .9);
 }
-
 .vue-toast_close-btn::before {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
-
 }
-
 .vue-toast_close-btn::after {
   -webkit-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
   transform: rotate(-45deg);
-
 }
