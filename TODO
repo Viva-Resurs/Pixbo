@@ -21,8 +21,12 @@
     - Error styling
     - Validation language
     - Roles validation not working
+        ( May be able to make the validation inside the component and send back the $myform and manually add it to the validation )
 
 - Clients:
     - Unique validation
     - Error styling
     - Validation language
+
+- Unique validation
+    - Need to figure out the endpoints for the API, need to figure out where and how to do it from client.
