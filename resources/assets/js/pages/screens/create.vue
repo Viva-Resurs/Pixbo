@@ -55,6 +55,9 @@
                                     message: vm.trans('screen.uploaded'),
                                     options: {theme: 'success'}
                                 })
+                                // TODO: This one should redirect to the newly created screen,
+                                // the API needs to send back the ID of the new screen.
+                                vm.$route.router.go('/screens')
                             });
                         }
                     })

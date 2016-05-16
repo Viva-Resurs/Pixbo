@@ -62,20 +62,6 @@
                     }
                 )
             },
-            fetchTags: function (successHandler) {
-                var that = this
-                client({ path: '/tags' }).then(
-                    function (response) {
-                        that.$set('tags', response.entity.data)
-                        //successHandler(response.entity.data)
-                    },
-                    function (response, status) {
-                        if (_.contains([401, 500], status)) {
-                            that.$dispatch('userHasLoggedOut')
-                        }
-                    }
-                )
-            },
 
             updateScreen: function (e) {
                 e.preventDefault()
