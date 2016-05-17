@@ -1,0 +1,49 @@
+#!/bin/sh
+
+# Fix proxy etc settings
+
+
+# update apt
+sudo apt-get update
+
+# Install python tools, like curl
+sudo apt-get install python-software-properties
+
+# Add node PPA
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+
+# Start to install packages
+sudo apt-get install apache2
+sudo apt-get install php5
+sudo apt-get isntall libapache2-mod-php5
+sudo apt-get install php5-gd php5-sqlite
+sudo apt-get install php5-mysql pdo-mysql
+sudo apt-get install git
+sudo apt-get install nodejs
+sudo apt-get install build-essential
+
+# PHP Settings:
+sudo echo "always_populate_raw_post_data = -1" >> /etc/php5/cli/php.ini
+
+# Get the git repo
+git clone https://github.com/Viva-Resurs/Pixbo-revision.git
+
+# Setup apache
+sudo rm -rf /var/www/html
+sudo ln -s ~/Pixbo-revision/public /var/www/html
+
+
+# Install globally needed npm packages
+sudo npm install gulp -g
+sudo npm install node-gyp@3.3.1 -g
+
+# Install composer
+curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+composer self-update
+
+# Start Installing the repo
+(cd ~/Pixbo-revision && npm install)
+(cd ~/Pixbo-revision && composer update --no-scripts)
+touch ~/Pixbo-revision/storage/database.sqlite
+(cd ~/Pixbo-revision && composer install)
+(cd ~/Pixbo-revision && gulp)
