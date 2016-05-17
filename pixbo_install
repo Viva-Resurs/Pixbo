@@ -47,6 +47,10 @@ touch ~/Pixbo-revision/storage/database.sqlite
 (cd ~/Pixbo-revision && gulp)
 (cd ~/Pixbo-revision && php artisan migrate --seed)
 
+# Set App URL
+IP=$(hostname -I | awk '{print $1}')
+echo "APP_URL=$IP" >> ~/Pixbo-revision/.env
+
 # Set permissions
 sudo chmod 777 -R ~/Pixbo-revision/storage
 
