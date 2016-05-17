@@ -53,6 +53,8 @@ echo "APP_URL=$IP" >> ~/Pixbo-revision/.env
 
 # Set permissions
 sudo chmod 777 -R ~/Pixbo-revision/storage
+mkdir -p ~/Pixbo-revision/public/images/screens
+sudo chmod 777 ~/Pixbo-revision/public/images/screens
 
 # setup apache
 sudo cp ~/Pixbo-revision/pixbo.conf /etc/apache2/sites-available/pixbo.conf
