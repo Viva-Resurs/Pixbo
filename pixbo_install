@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# Fix proxy etc settings
-
-
 # update apt
 sudo apt-get update
 
@@ -17,13 +14,14 @@ sudo apt-get install apache2
 sudo apt-get install php5
 sudo apt-get isntall libapache2-mod-php5
 sudo apt-get install php5-gd php5-sqlite
-sudo apt-get install php5-mysql pdo-mysql # pdo-mysql not found?
 sudo apt-get install git
 sudo apt-get install nodejs
 sudo apt-get install build-essential
+sudo apt-get install libnotify-bin
 
 # PHP Settings:
-sudo echo "always_populate_raw_post_data = -1" >> /etc/php5/cli/php.ini # Getting a permission denied error
+sudo chown $USER:$USER /etc/php5/cli/php.ini
+sudo echo "always_populate_raw_post_data = -1" >> /etc/php5/cli/php.ini
 
 # Get the git repo
 git clone https://github.com/Viva-Resurs/Pixbo-revision.git
@@ -47,3 +45,15 @@ composer self-update
 touch ~/Pixbo-revision/storage/database.sqlite
 (cd ~/Pixbo-revision && composer install)
 (cd ~/Pixbo-revision && gulp)
+(cd ~/Pixbo-revision && php artisan migrate --seed)
+
+# Set permissions
+sudo chmod 777 -R ~/Pixbo-revision/storage
+
+# setup apache
+sudo cp ~/Pixbo-revision/pixbo.conf /etc/apache2/sites-available/pixbo.conf
+sudo a2dissite 000-default
+sudo a2ensite pixbo
+sudo a2enmod rewrite
+sudo service apache2 reload
+sudo service apache2 restart
