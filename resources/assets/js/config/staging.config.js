@@ -1,7 +1,7 @@
 var config = {
     env: 'staging',
     api: {
-        base_url: 'http://'+location.host+'/api',
+        base_url: 'http://'+location.host+':'+location.port+'/api',
         defaultRequest: {
             headers: {
                 'X-Requested-With': 'rest.js',
