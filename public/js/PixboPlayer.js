@@ -14,28 +14,27 @@ var PixboPlayer = {
   // Internal
   EnableControls : false,
 
-  // DOM-connections
-  DOM : {
-    VegasTarget  : false,
-    TickerTarget : false,
-    ScreenBox    : false,
-    $updated_at    : false,
-    $client_id     : false,
-    $preview       : false,
-  },
+  // DOM-connections holder
+  DOM : {},
 
   // Start PixboPlayer
   Start : function(){
+
+    // Setup Dom-connections
     this.DOM.VegasTarget  = $('body');
     this.DOM.TickerTarget = $('#ticker-container');
     this.DOM.ScreenBox    = $('#screens');
     this.DOM.UpdatedAt    = $('#updated_at');
     this.DOM.ClientID     = $('#client_id');
     this.DOM.Preview      = $('#preview');
-
+    
     this.Controls.Vegas.Init();
-    setInterval( this.Sync, 1000*10 ); // Check for newer data each 10 sec
-    this.Sync(true); // Run once with flag set
+
+    // Check for updates every 10s
+    setInterval( this.Sync, 1000*10 );
+
+    // Run once with 'first start' set
+    this.Sync(true);
   },
 
   // DOM-Access
@@ -103,14 +102,16 @@ var PixboPlayer = {
       this.EnableControls = true;
     
     // Apply Vegas-settings
-    //for (var property in this.Settings.Vegas)
-    //    if (this.Settings.Vegas.hasOwnProperty(property))
-    //      this.Settings.Vegas[property] = new_settings['vegas'][property];
+    if (new_settings.vegas)
+      for (var property in this.Settings.Vegas)
+        if (this.Settings.Vegas.hasOwnProperty(property))
+          this.Settings.Vegas[property] = new_settings.vegas[property];
     
     // Apply Ticker-settings
-    //for (var property in this.Settings.Ticker)
-    //    if (this.Settings.Ticker.hasOwnProperty(property))
-    //      this.Settings.Ticker[property] = new_settings['ticker'][property];
+    if (new_settings.ticker)
+      for (var property in this.Settings.Ticker)
+        if (this.Settings.Ticker.hasOwnProperty(property))
+          this.Settings.Ticker[property] = new_settings.ticker[property];
 
     // Add Controls in Settings for Ticker
     if (this.EnableControls)
@@ -145,6 +146,10 @@ var PixboPlayer = {
   Start_Vegas : function(mode){
     // Get current Screens
     this.Settings.Vegas.slides = this.Get_Screens();
+
+    // Check if there is any screens
+    if (this.Settings.Vegas.slides)
+      return console.error('No Screens...');
 
     // Restart
     if (mode=='restart')
