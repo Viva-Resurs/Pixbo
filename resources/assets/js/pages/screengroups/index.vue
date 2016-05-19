@@ -29,6 +29,8 @@
                     <td>{{ screengroup.name }}</td>
                     <td>{{ screengroup.desc }}</td>
                     <td>
+                        <a class="btn btn-primary btn-xs fa fa-eye" href="/play?mac={{screengroup.preview}}" target="_blank"
+                           v-tooltip data-original-title="{{ trans('general.preview') }}"></a>
                         <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/screengroups/'+screengroup.id }"
                            v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
                         <a class="btn btn-primary btn-xs fa fa-times" v-on:click="deleteScreengroup($index)"
