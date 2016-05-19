@@ -45,9 +45,9 @@ class Handler extends ExceptionHandler
         if ($e instanceof NotFoundHttpException) {
             $message = $e->getMessage();
 
-            // Send Custom 'not found' for screens
-            if ($message == strpos($e,trans('exceptions.no_screens_found'))>0)
-              return view('errors.ScreenNotFound')->with([ 'error' => $message ]);
+            // Return a dedicated error-view for players
+            if ($message == strpos($e,'Client')>0)
+              return view('errors.Player_Error')->with([ 'error' => $message ]);
 
             // Default 404
             $e = new NotFoundHttpException($e->getMessage(), $e);
