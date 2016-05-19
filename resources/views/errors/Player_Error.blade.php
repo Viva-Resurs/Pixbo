@@ -36,9 +36,7 @@
                 margin-bottom: 40px;
             }
         </style>
-        <script>
-            
-        </script>
+    <script src="/js/PixboPlayer.js"></script>
     </head>
     <body>
         <div class="container">
