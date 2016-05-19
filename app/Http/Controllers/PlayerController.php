@@ -24,7 +24,7 @@ class PlayerController extends Controller {
         // Fetch the correct client.
         $client = Client::where('ip_address', $mac)->first();
         if (is_null($client)) {
-            return abort(404, trans('exceptions.no_screens_found'));
+            return abort(404, trans('exceptions.no_screens_found').": IP");
         }
 
         // Fetch all needed data from the client.
@@ -53,10 +53,10 @@ class PlayerController extends Controller {
                     ]);
                 }
             } else {
-                return abort(404, trans('exceptions.no_screens_found'));
+                return abort(404, trans('exceptions.no_screens_found').": PHOTOLIST");
             }
         } else {
-            return abort(404, trans('exceptions.no_screens_found'));
+            return abort(404, trans('exceptions.no_screens_found').": CLIENTDATA");
         }
     }
 

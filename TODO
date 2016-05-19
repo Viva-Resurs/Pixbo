@@ -35,6 +35,8 @@
 - General
     - Update back/cancel buttons to use the new mixin (goBack), '@click="goBack"'  instead of v-link
 
+- Shadowevent
+	- Need to be fixed (old-dates won´t work, no repeat = no screens)
 
 # Features:
 
