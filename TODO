@@ -30,3 +30,6 @@
 
 - Unique validation
     - Need to figure out the endpoints for the API, need to figure out where and how to do it from client.
+
+# Add cron entry to install script
+    * * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
