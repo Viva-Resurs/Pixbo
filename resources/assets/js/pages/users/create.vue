@@ -91,7 +91,9 @@
                     name: '',
                     email: '',
                     password: '',
-                    roles: null
+                    roles: {
+                        data: null
+                    }
                 },
                 myform: [],
                 model: 'role',
