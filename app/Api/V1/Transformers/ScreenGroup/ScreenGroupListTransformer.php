@@ -7,11 +7,16 @@ class ScreenGroupListTransformer extends TransformerAbstract
     public function transform(ScreenGroup $screengroup)
     {
         $client = $screengroup->clients->first();
+        if(!is_null($client)) {
+            $client = $client->ip_address;
+        } else {
+            $client = '';
+        }
         return [
             'id' 	=> (int) $screengroup->id,
             'name'  => $screengroup->name,
             'desc'	=> $screengroup->desc,
-            'preview' => $client->ip_address
+            'preview' => $client
         ];
     }
 }
