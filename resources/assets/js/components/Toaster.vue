@@ -36,10 +36,18 @@
                 })
             },
             showTime(message, options) {
+                let theme =     typeof options.theme !== 'undefined' ? options.theme : this.theme
+                let closeBtn =  typeof options.closeBtn !== 'undefined' ? options.closeBtn : this.closeBtn
+                let timeLife =  typeof options.timeLife !== 'undefined' ? options.timeLife : this.timeLife
+                if(theme === 'success') {
+                    closeBtn = false;
+                    timeLife = 3000
+                }
+
                 this.$refs.toast.showToast(message, {
-                    theme: typeof options.theme !== 'undefined' ? options.theme : this.theme,
-                    timeLife: typeof options.timeLife !== 'undefined' ? options.timeLife : this.timeLife,
-                    closeBtn: typeof options.closeBtn !== 'undefined' ? options.closeBtn : this.closeBtn
+                    theme: theme,
+                    timeLife: timeLife,
+                    closeBtn: closeBtn
                 })
             }
         },
