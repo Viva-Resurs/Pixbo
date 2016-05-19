@@ -122,12 +122,12 @@
 
         </div>
 
-                    <button type="" class="btn" v-link="{ path: '/screens/' }">
-                      <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
-                    </button>
-                    <button type="submit" class="btn btn-primary" :disabled="isValid" id="submitButton_{{ id }}">
-                        <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
-                    </button>
+            <button type="" class="btn" @click="goBack">
+              <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
+            </button>
+            <button type="submit" class="btn btn-primary" :disabled="isValid" id="submitButton_{{ id }}">
+                <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
+            </button>
 
     </form>
 </template>

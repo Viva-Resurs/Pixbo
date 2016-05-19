@@ -10,29 +10,18 @@
 
     <div v-else>
 
-        <div class="panel-body" v-if=" screens.length == 0 ">
-            {{ trans('screen.empty') }}
-        </div>
-
-        <div class="panel-body" v-if=" screens.length > 0 ">
-            <div class="row">
-                <div v-for="screen in screens">
-                    <screen-card :screen="screen"></screen-card>
-                </div>
-                </ul>
-            </div>
-        </div>
+        <screen-list :screens="screens"></screen-list>
 
     </div>
 
 </template>
 
 <script>
+    import ScreenList from '../../components/ScreenList.vue'
+
     module.exports = {
 
-        components: {
-            ScreenCard: require('../../components/ScreenCard.vue')
-        },
+        components: { ScreenList },
 
         data: function () {
             return {
@@ -54,6 +43,24 @@
                         }
                     }
                 )
+            },
+            deleteScreen: function (index) {
+                var self = this;
+                client({ path: '/screens/' + this.screens[index].id, method: 'DELETE' }).then(
+                    function (response) {
+                        self.screens.splice(index, 1);
+                        self.$dispatch('alert', {
+                            message: self.trans('screen.deleted'),
+                            options: {theme: 'success'}
+                        })
+                    },
+                    function (response) {
+                        self.$dispatch('alert', {
+                            message: self.trans('screen.deleted_fail'),
+                            options: {theme: 'error'}
+                        })
+                    }
+                );
             }
         },
 
@@ -63,7 +70,12 @@
                     transition.next({screens: data})
                 })
             }
-        }
+        },
 
+        ready() {
+            this.$on('remove-screen', function (index) {
+                this.deleteScreen(index)
+            })
+        }
     }
 </script>

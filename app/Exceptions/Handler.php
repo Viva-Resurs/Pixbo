@@ -46,7 +46,7 @@ class Handler extends ExceptionHandler
             $message = $e->getMessage();
 
             // Send Custom 'not found' for screens
-            if ($message == trans('exceptions.no_screens_found'))
+            if ($message == strpos($e,trans('exceptions.no_screens_found'))>0)
               return view('errors.ScreenNotFound')->with([ 'error' => $message ]);
 
             // Default 404

@@ -5,7 +5,7 @@
     </div>
 </template>
 <script>
-    import moment from 'Moment'
+    //import moment from 'Moment'
 
     export default {
         props: ['time', 'date'],

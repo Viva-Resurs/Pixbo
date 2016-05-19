@@ -10,7 +10,8 @@ $settings = [
     ],
     'moderator' => [
         'username' => 'moderator',
-    ]
+    ],
+    'domain' => "viva.se" // config('app.domain') Server can´t get this?
 ];
 
 return [
@@ -20,13 +21,13 @@ return [
                 'username' => $settings['admin']['username'],
                 // Generated from the username, do not change.
                 'password' => env('PIXBO_ADMIN_PASSWORD', $settings['admin']['username']),
-                'email' => $settings['admin']['username'].'@'.config('app.domain')
+                'email' => $settings['admin']['username'].'@'.$settings['domain']
             ],
             'moderator' => [
                 'username' => $settings['moderator']['username'],
                 // Generated from the username, do not change.
-                'email' => $settings['moderator']['username'].'@'.config('app.domain'),
                 'password' => env('PIXBO_MOD_PASSWORD', $settings['moderator']['username']),
+                'email' => $settings['moderator']['username'].'@'.$settings['domain']
             ]
 
         ],

@@ -1,7 +1,7 @@
 var config = {
     env: 'development',
     api: {
-        base_url: 'http://localhost:'+location.port+'/api',
+        base_url: 'http://'+location.host+':'+location.port+'/api',
         defaultRequest: {
             headers: {
                 'X-Requested-With': 'rest.js',

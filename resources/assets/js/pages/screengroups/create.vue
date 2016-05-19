@@ -23,6 +23,8 @@
                                v-model="screengroup.name"
                                v-form-ctrl
                                required
+                               minlength="4"
+                               maxlength="30"
                         >
                     </div>
                 </div>
@@ -53,9 +55,7 @@
                     </button>
                 </div>
             </div>
-
         </form>
-
     </div>
 
 </template>
@@ -73,7 +73,6 @@
         },
 
         methods: {
-
             attemptCreateScreengroup() {
                 if(this.myform.$valid) {
                     this.createScreengroup();
@@ -90,10 +89,9 @@
                             message: self.trans('screengroup.created'),
                             options: {theme: 'success'}
                         })
-                        /*Vue.nextTick(function () {
+                        Vue.nextTick(function () {
                             document.getElementById('nameInput').focus();
-                        })*/
-                        self.$route.router.go('/screengroups')
+                        })
                     },
                     function (response, status) {
                         /*

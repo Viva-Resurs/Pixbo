@@ -2,6 +2,8 @@
 
 - Screengroups:
 	- Check if screengroup.name exists before adding (back-end + form-validation)
+	- Add remove association method / API call
+	- Fix the styling of the displaying of Screens and Tickers
 
 - Alerts:
 	- Fix default modes, like duration on errors/success etc
@@ -9,7 +11,6 @@
 - Screens:
 	- Fix datetimepicker-tooltip-lang src/mapping
 	- CSS
-	- Delete screens
 	- Update Editing
 
 - Tickers:
@@ -30,6 +31,16 @@
 
 - Unique validation
     - Need to figure out the endpoints for the API, need to figure out where and how to do it from client.
+
+- General
+    - Update back/cancel buttons to use the new mixin (goBack), '@click="goBack"'  instead of v-link
+
+- Shadowevent
+	- Need to be fixed (old-dates won´t work, no repeat = no screens)
+
+# Features:
+
+- Added a routerHelper mixin, you can now use the method goBack to go back to your previous page, instead of a prechosen one.
 
 # Add cron entry to install script
     * * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1

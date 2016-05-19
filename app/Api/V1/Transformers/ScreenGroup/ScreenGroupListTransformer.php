@@ -7,8 +7,9 @@ class ScreenGroupListTransformer extends TransformerAbstract
     public function transform(ScreenGroup $screengroup)
     {
         return [
-            'id' 	    => (int) $screengroup->id,
-            'name'      => $screengroup->name,
+            'id' 	=> (int) $screengroup->id,
+            'name'  => $screengroup->name,
+            'desc'	=> $screengroup->desc
         ];
     }
 }

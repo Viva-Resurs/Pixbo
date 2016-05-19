@@ -52,10 +52,10 @@
 
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-3">
-                        <button type="" class="btn" v-link="{ path: '/clients/' }" v-if="myform.$pristine">
+                        <button type="" class="btn" @click="goBack" v-if="myform.$pristine">
                             <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                         </button>
-                        <button type="" class="btn" v-link="{ path: '/clients/' }" v-if="!myform.$pristine">
+                        <button type="" class="btn" @click="goBack" v-if="!myform.$pristine">
                             <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                         </button>
                         <button type="submit" class="btn btn-primary" :disabled="myform.$invalid">
@@ -89,8 +89,9 @@
                 myform: []
             }
         },
-
         methods: {
+
+
             fetch: function (id, successHandler) {
                 var that = this
                 client({ path: '/clients/' + id }).then(
@@ -140,6 +141,11 @@
                     transition.next({client: data})
                 })
             }
+        },
+
+        ready() {
+            console.log(this.$root.previousRoute)
         }
+
     }
 </script>

@@ -1,11 +1,11 @@
 div.vue-toast-manager_container {
-  position: fixed;
+  position: relative;
   width: 100%;
   height: 0px;
   z-index: 1000 !important;
 }
 .vue-toast-manager_container.\--top {
-  top: 0px;
+  top: -40px;
 }
 .vue-toast-manager_container.\--bottom {
   bottom: 0px;
@@ -23,7 +23,6 @@ div.vue-toast-manager_container {
 
 .vue-toast_container {
   position: absolute;
-  width: 100%;
   padding-bottom: 10px;
   -webkit-transform: translateY(0);
   -ms-transform: translateY(0);
@@ -36,10 +35,9 @@ div.vue-toast-manager_container {
   backface-visibility: hidden;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 768px) {
   .vue-toast_container {
-    left: 25%;
-    width: 50%;
+    width: 100%;
   }
 }
 
