@@ -1,7 +1,7 @@
 var config = {
     env: 'production',
     api: {
-        base_url: 'http://'+location.host+':'+location.port+'/api',
+        base_url: 'http://'+location.host+'/api',
         defaultRequest: {
             headers: {
                 'X-Requested-With': 'rest.js',

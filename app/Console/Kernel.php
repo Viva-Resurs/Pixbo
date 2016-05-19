@@ -4,6 +4,9 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Console\Commands\GenerateAllEventShadows;
+use App\Console\Commands\ClearOldEventShadows;
+use App\Console\Commands\ClearAllEventShadows;
 
 class Kernel extends ConsoleKernel
 {
@@ -13,9 +16,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \App\Console\Commands\ClearOldShadowEvents::class,
-        \App\Console\Commands\ClearAllShadowEvents::class,
-        \App\Console\Commands\GenerateNewShadowEvents::class,
+        GenerateAllEventShadows::class,
+        ClearOldEventShadows::class,
+        ClearAllEventShadows::class
     ];
 
     /**
@@ -26,9 +29,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        /*
         $schedule->command('pixbo:generate-new-shadowevents')
             ->weekly()->sundays()->at('23:59')->after(function() {
                 Log::info('ShadowEvents has been regenerated.');
             });
+        */
     }
 }

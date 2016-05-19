@@ -60,6 +60,7 @@
                         Vue.nextTick(function () {
                             document.getElementById('nameInput').focus()
                         })
+                        that.$route.router.go('/tickers')
                     },
                     function (response, status) {
                         self.$dispatch('alert', {

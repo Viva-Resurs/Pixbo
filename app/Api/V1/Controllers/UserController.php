@@ -43,8 +43,15 @@ class UserController extends BaseController
         $user = new User;
         $user->fill($request->only(['name', 'email', 'password']));
 
+        // So ugly, TODO make pretty
+        $roles = $request->only('roles');
+        $role_id = [];
+        foreach( $roles as $role)
+            $role_id[] = $role["data"];
+
+
         if($user->save()) {
-            $user->roles()->sync($request->only('roles'));
+            $user->roles()->sync($role_id);
             
             Activity::log([
                 'contentId' => $user->id,
@@ -59,6 +66,8 @@ class UserController extends BaseController
             return $this->response->error('could_not_create_user', 500);
         }
     }
+
+
 
     public function me() {
         return $this->item($this->getAuthenticatedUser(), new UserTransformer() );

@@ -5,9 +5,6 @@
 	- Add remove association method / API call
 	- Fix the styling of the displaying of Screens and Tickers
 
-- Alerts:
-	- Fix default modes, like duration on errors/success etc
-
 - Screens:
 	- Fix datetimepicker-tooltip-lang src/mapping
 	- CSS
@@ -44,3 +41,5 @@
 
 # Add cron entry to install script
     * * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
+
+# Add preview for screengroup/client
