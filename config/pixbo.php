@@ -11,7 +11,7 @@ $settings = [
     'moderator' => [
         'username' => 'moderator',
     ],
-    'domain' => "viva.se"
+    'domain' => "viva.se" // config('app.domain') Server can´t get this?
 ];
 
 return [
