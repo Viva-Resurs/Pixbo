@@ -2,30 +2,32 @@
 
 namespace App\Console\Commands;
 
-use App\Models\ShadowEvent;
 use Illuminate\Console\Command;
+use App\Models\ShadowEvent;
 
-class ClearOldShadowEvents extends Command {
+class GenerateAllEventShadows extends Command
+{
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'pixbo:clear-old-shadowevents';
+    protected $signature = 'pixbo:generate-shadows';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Clear all old ShadowEvents';
+    protected $description = 'Clear all old shadows and recreate them';
 
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
@@ -34,7 +36,9 @@ class ClearOldShadowEvents extends Command {
      *
      * @return mixed
      */
-    public function handle() {
-        ShadowEvent::clearAllOldEvents();
+    public function handle()
+    {
+        ShadowEvent::clearAllShadowEvents();
+        ShadowEvent::generateAllEvents();
     }
 }
