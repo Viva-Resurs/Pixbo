@@ -11,7 +11,7 @@ $settings = [
     'moderator' => [
         'username' => 'moderator',
     ],
-    'domain' => config('app.domain')
+    'domain' => "viva.se"
 ];
 
 return [
