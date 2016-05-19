@@ -41,3 +41,6 @@
 # Features:
 
 - Added a routerHelper mixin, you can now use the method goBack to go back to your previous page, instead of a prechosen one.
+
+# Add cron entry to install script
+    * * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1

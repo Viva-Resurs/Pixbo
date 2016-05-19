@@ -13,7 +13,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \App\Console\Commands\Inspire::class,
+        \App\Console\Commands\ClearOldShadowEvents::class,
+        \App\Console\Commands\ClearAllShadowEvents::class,
+        \App\Console\Commands\GenerateNewShadowEvents::class,
     ];
 
     /**
@@ -24,7 +26,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('inspire')
-                 ->hourly();
+        $schedule->command('pixbo:generate-new-shadowevents')
+            ->weekly()->sundays()->at('23:59')->after(function() {
+                Log::info('ShadowEvents has been regenerated.');
+            });
     }
 }
