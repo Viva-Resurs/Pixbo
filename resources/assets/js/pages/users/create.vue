@@ -127,6 +127,7 @@
                             document.getElementById('nameInput').focus()
                         })
                         that.creating = false
+                        that.$route.router.go('/users')
                     },
                     function (response, status) {
                         that.$dispatch('alert', {
