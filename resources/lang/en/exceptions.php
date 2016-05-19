@@ -11,6 +11,8 @@ return [
     |
     */
     
-    'no_screens_found' => 'Screen doesn´t exist'
+    'client_not_found'     => 'Client not found',
+    'screens_not_found'    => 'Client has no screens',
+    'clientdata_not_found' => 'Client has no data',
 
 ];
