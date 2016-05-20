@@ -28,7 +28,7 @@
                 <tr v-for="user in users">
                     <!-- TODO: Hide yourself -->
                     <td>{{ user.id }}</td>
-                    <td>{{ user.name }}</td>
+                    <td><a v-link="{ path: '/users/'+user.id }">{{ user.name }}</a></td>
                     <td>{{ user.email }}</td>
                     <td><span v-for="role in user.roles.data">{{ role.name }}</span></td>
                     <td>

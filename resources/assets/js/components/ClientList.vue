@@ -20,7 +20,7 @@
         <tbody>
         <tr v-for="client in clients">
             <td>{{ client.id }}</td>
-            <td>{{ client.name }}</td>
+            <td><a  v-link="{ path: '/clients/'+client.id }">{{ client.name }}</a></td>
             <td>{{ client.ip_address }}</td>
             <td>{{ client.screengroup.data.name }}</td>
             <td>

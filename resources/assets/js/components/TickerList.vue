@@ -18,7 +18,7 @@
         <tbody>
         <tr v-for="ticker in tickers">
             <td>{{ ticker.id }}</td>
-            <td>{{ ticker.text }}</td>
+            <td><a v-link="{ path: '/tickers/'+ticker.id }">{{ ticker.text }}</a></td>
             <td>
                 <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/tickers/'+ticker.id }"
                    v-tooltip data-original-title="{{ trans('general.edit') }}"></a>

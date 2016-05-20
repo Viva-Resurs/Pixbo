@@ -26,7 +26,7 @@
             <tbody>
                 <tr v-for="screengroup in screengroups">
                     <td>{{ screengroup.id }}</td>
-                    <td>{{ screengroup.name }}</td>
+                    <td><a v-link="{ path: '/screengroups/'+screengroup.id }">{{ screengroup.name }}</a></td>
                     <td>{{ screengroup.desc }}</td>
                     <td>
                         <a class="btn btn-primary btn-xs fa fa-eye" href="/play?mac={{screengroup.preview}}" target="_blank"

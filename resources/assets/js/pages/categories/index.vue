@@ -26,7 +26,7 @@
             <tbody>
                 <tr v-for="category in categories">
                     <td>{{ category.id }}</td>
-                    <td>{{ category.name }}</td>
+                    <td><a v-link="{ path: '/categories/'+category.id }">{{ category.name }}</a></td>
                     <td>{{ category.numberOfScreens }}</td>
                     <td>
                         <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/categories/'+category.id }"
@@ -38,6 +38,8 @@
             </tbody>
         </table>
     </div>
+
+
 
 </template>
 
