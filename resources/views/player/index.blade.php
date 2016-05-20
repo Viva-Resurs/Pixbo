@@ -35,5 +35,6 @@
 <script src="/js/vendor/vegas.min.js"></script>
 <script src="/js/vendor/jquery.ticker.js"></script>
 <script src="/js/PixboPlayer.js"></script>
+<script> PixboPlayer.Start(); </script>
 </body>
 </html>

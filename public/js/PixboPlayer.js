@@ -148,7 +148,7 @@ var PixboPlayer = {
     this.Settings.Vegas.slides = this.Get_Screens();
 
     // Check if there is any screens
-    if (this.Settings.Vegas.slides)
+    if (this.Settings.Vegas.slides.length<1)
       return console.error('No Screens...');
 
     // Restart
@@ -313,7 +313,7 @@ var PixboPlayer = {
 
       Init : function(){
         // This will go through the plugins output and hook into things
-        DOM.TickerTarget.find('.ticker-controls').each(function(){
+        this.DOM.TickerTarget.find('.ticker-controls').each(function(){
           // Got ticker-controls element
           PixboPlayer.Controls.Ticker.Element = this;
           this.classList.add('ticker_control');
@@ -379,5 +379,3 @@ if (typeof jQuery.fn.live == 'undefined' || !(jQuery.isFunction(jQuery.fn.live))
   });
 }
 
-// Start Player!
-PixboPlayer.Start();
