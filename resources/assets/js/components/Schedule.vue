@@ -27,51 +27,7 @@
             </template>
             -->
 
-            <legend>{{ trans('schedule.period') }}</legend>
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-lg-6 col-md-6">
-                        <label for="inputStart_date" class="control-label">
-                            {{ trans('schedule.start') }}
-                            <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_start_date') }}"></span>
-                        </label>
-                        <div class="">
-                            <input v-model="model.event.start_date" type="date" name="start_date" id="inputStart_date" class="form-control" required="required" title="">
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <label for="inputEnd_date" class="control-label">
-                            {{ trans('schedule.end') }}
-                            <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_end_date') }}"></span>
-                        </label>
-                        <div class="">
-                            <input type="date" v-model="model.event.end_date" name="end_date" id="inputEnd_date" class="form-control">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-lg-6 col-md-6">
-                        <label for="inputStart_time" class="control-label">
-                            {{ trans('schedule.start') }}
-                            <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_start_time') }}"></span>
-                        </label>
-                        <div class="">
-                            <input type="time" v-model="model.event.start_time" name="start_time" id="inputStart_time" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <label for="inputEnd_time" class="control-label">
-                            {{ trans('schedule.end') }}
-                            <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_end_time') }}"></span>
-                        </label>
-                        <div class="">
-                            <input type="time" v-model="model.event.end_time" name="end_time" id="inputEnd_time" class="form-control">
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <period :event.sync="model.event"></period>
 
         </div>
 
@@ -134,6 +90,7 @@
 
 <script>
     import Tag from './../components/Tag.vue';
+    import Period from './schedule/Period.vue';
 
     export default {
 
@@ -145,7 +102,8 @@
             ScheduleMonthly: require('./schedule/Monthly.vue'),
             ScheduleYearly: require('./schedule/Yearly.vue'),
             //Tagger: require('./Tag.vue'),
-            DateTimePicker: require('./DateTimePicker.vue')
+            DateTimePicker: require('./DateTimePicker.vue'),
+            Period
         },
 
         data: function() {
@@ -154,9 +112,6 @@
                 selected_screengroups: [],
                 weekly_day_num: [],
                 monthly_day_num: '',
-                error: {
-                    missing_tag: 'messages.tag_missing'
-                },
                 recur_options: [
                     {key: 'none', value: 'schedule.never'},
                     {key: 'daily', value: 'schedule.daily'},
@@ -169,29 +124,20 @@
 
         methods: {
 
-            updateSchedule: function (e) {
-                e.preventDefault()
+            updateSchedule: function () {
+                // Update model stuff
+                this.encodeModel();
 
-
-                //if(this.isValid) {
-                    // Update model stuff
-                    this.encodeModel();
-
-                    var self = this
-                    client({ path: `/${self.model.type}s/${self.model.id}`, entity: self.model, method: 'PUT'}).then(
-                            function (response) {
-                                console.log("updated!")
-                                self.messages = []
-                                self.messages.push({type: 'success', message: self.trans(`${self.model.type}.updated`)})
-                            },
-                            function (response) {
-                                self.messages = []
-                                for (var key in response.entity) {
-                                    self.messages.push({type: 'danger', message: response.entity[key].message})
-                                }
-                            }
-                    )
-                //}
+                var self = this
+                client({ path: `/${self.model.type}s/${self.model.id}`, entity: self.model, method: 'PUT'}).then(
+                        function (response) {
+                            console.log("updated!")
+                            // Show alert success
+                        },
+                        function (response) {
+                            // Show alert error
+                        }
+                )
             },
             encodeModel() {
                 switch (this.event.recur_type) {
