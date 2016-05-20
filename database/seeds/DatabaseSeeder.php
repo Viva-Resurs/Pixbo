@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
@@ -21,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesTablesSeeder::class);
         $this->call(UserTableSeeder::class);
         $this->call(SettingsTableSeeder::class);
+        $this->call(CategoryTableSeeder::class);
 
         Model::reguard();
     }
@@ -185,25 +187,25 @@ class RolesTablesSeeder extends Seeder {
             'label' => 'auth.remove_tickers',
         ]);
 
-        // Tags
-        $view_tags = Permission::create([
-            'name'  => 'view_tags',
-            'label' => 'auth.view_tags',
+        // Categories
+        $view_category = Permission::create([
+            'name'  => 'view_category',
+            'label' => 'auth.view_category',
         ]);
 
-        $add_tags = Permission::create([
-            'name'  => 'add_tags',
-            'label' => 'auth.add_tags',
+        $add_category = Permission::create([
+            'name'  => 'add_category',
+            'label' => 'auth.add_category',
         ]);
 
-        $edit_tags = Permission::create([
-            'name'  => 'edit_tags',
-            'label' => 'auth.edit_tags',
+        $edit_category = Permission::create([
+            'name'  => 'edit_category',
+            'label' => 'auth.edit_category',
         ]);
 
-        $remove_tags = Permission::create([
-            'name'  => 'remove_tags',
-            'label' => 'auth.remove_tags',
+        $remove_category = Permission::create([
+            'name'  => 'remove_category',
+            'label' => 'auth.remove_category',
         ]);
 
         // Global site permissions
@@ -265,11 +267,11 @@ class RolesTablesSeeder extends Seeder {
         $admin->givePermissionTo($edit_tickers);
         $admin->givePermissionTo($remove_tickers);
 
-        // Tag
-        $admin->givePermissionTo($view_tags);
-        $admin->givePermissionTo($add_tags);
-        $admin->givePermissionTo($edit_tags);
-        $admin->givePermissionTo($remove_tags);
+        // Categories
+        $admin->givePermissionTo($view_category);
+        $admin->givePermissionTo($add_category);
+        $admin->givePermissionTo($edit_category);
+        $admin->givePermissionTo($remove_category);
 
         // Site Settings
         $admin->givePermissionTo($edit_site_settings);
@@ -294,9 +296,9 @@ class RolesTablesSeeder extends Seeder {
         $moderator->givePermissionTo($edit_tickers);
         $moderator->givePermissionTo($remove_tickers);
 
-        // Tags
-        $moderator->givePermissionTo($view_tags);
-        $moderator->givePermissionTo($add_tags);
+        // Categories
+        $moderator->givePermissionTo($view_category);
+        $moderator->givePermissionTo($add_category);
 
         // Client
         $client = Role::create([
@@ -325,6 +327,17 @@ class UserTableSeeder extends Seeder {
 
         $admin->assignRole('admin');
         $moderator->assignRole('moderator');
+    }
+}
+
+class CategoryTableSeeder extends Seeder {
+    public function run() {
+        DB::table('categories')->delete();
+
+        $category = Category::create([
+            'name' => config('pixbo.settings.category.default_name'),
+            'user_id' => 1
+        ]);
     }
 }
 
