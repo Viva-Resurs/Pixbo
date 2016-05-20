@@ -127,10 +127,11 @@ const lang = {
         created:                    "Området har skapats",
         select:                     "Välj område"
     },
-    /* ----------------------------- TAG ----------------------------- */
-    tag: {
-        model:                      "Tag",
-        tooltip_atleast_one_tag:    "Det krävs minst en tag"
+    /* ----------------------------- CATEGORY ----------------------------- */
+    category: {
+        model:                      "Kategori|Kategorier",
+        create:                     "Skapa ny kategori",
+        edit:                       "Redigera kategori"
     },
     /* ----------------------------- TICKER ----------------------------- */
     ticker: {
