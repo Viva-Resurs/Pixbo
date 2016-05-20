@@ -16,7 +16,7 @@ $api->version('v1', function ($api) {
 
     $api->group(['middleware' => ['api.auth']], function ($api) {
         $api->resource('clients', 'App\Api\V1\Controllers\ClientController');
-        $api->resource('tags', 'App\Api\V1\Controllers\TagController');
+        $api->resource('categories', 'App\Api\V1\Controllers\CategoryController');
         $api->resource('screengroups', 'App\Api\V1\Controllers\ScreenGroupController');
         $api->resource('screens', 'App\Api\V1\Controllers\ScreenController');
         $api->resource('tickers', 'App\Api\V1\Controllers\TickerController');

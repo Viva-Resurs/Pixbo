@@ -24,6 +24,7 @@
                         <li><a v-link="{ path: '/screengroups/' }">{{ trans_choice('screengroup.model', 2) }}</a></li>
                         <li><a v-link="{ path: '/screens/' }">{{ trans_choice('screen.model', 2) }}</a></li>
                         <li><a v-link="{ path: '/tickers/' }">{{ trans_choice('ticker.model', 2) }}</a></li>
+                        <li><a v-link="{ path: '/categories/' }">{{ trans_choice('category.model', 2) }}</a></li>
                     </template>
 
                     <!-- Only admin area -->

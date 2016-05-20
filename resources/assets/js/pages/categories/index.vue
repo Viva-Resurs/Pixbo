@@ -10,37 +10,33 @@
 
     <div v-else>
 
-        <div class="panel-body" v-if=" users.length == 0 ">
-            {{ trans('user.empty') }}
+        <div class="panel-body" v-if=" categories.length == 0 ">
+            {{ trans('category.empty') }}
         </div>
 
-        <table class="table" v-if=" users.length > 0 ">
+        <table class="table" v-if=" categories.length > 0 ">
             <thead>
                 <tr>
                     <th>{{ trans('general.id') }}</th>
                     <th>{{ trans('general.name') }}</th>
-                    <th>{{ trans('general.email') }}</th>
-                    <th>{{ trans('role.model') }}</th>
+                    <th>{{ trans_choice('screen.model', 2) }}</th>
                     <th width="120px">{{ trans('general.action') }}</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="user in users">
-                    <!-- TODO: Hide yourself -->
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.name }}</td>
-                    <td>{{ user.email }}</td>
-                    <td><span v-for="role in user.roles.data">{{ role.name }}</span></td>
+                <tr v-for="category in categories">
+                    <td>{{ category.id }}</td>
+                    <td>{{ category.name }}</td>
+                    <td>{{ category.numberOfScreens }}</td>
                     <td>
-                        <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/users/'+user.id }"
+                        <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/categories/'+category.id }"
                           v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
-                        <a class="btn btn-primary btn-xs fa fa-times" v-on:click="attemptDeleteUser($index)"
+                        <a class="btn btn-primary btn-xs fa fa-times" v-if="category.id !== 1" v-on:click="attemptDeleteCategory($index)"
                           v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
                     </td>
                 </tr>
             </tbody>
         </table>
-
     </div>
 
 </template>
@@ -50,16 +46,20 @@
 
         data: function () {
             return {
-                users: []
+                categories: {
+                    id: null,
+                    name: null,
+                    screens: null
+                }
             }
         },
 
         methods: {
             fetch: function (successHandler) {
                 var that = this
-                client({ path: '/users' }).then(
+                client({ path: '/categories' }).then(
                     function (response) {
-                        that.$set('users', response.entity.data)
+                        that.$set('categories', response.entity.data)
                         successHandler(response.entity.data)
                     },
                     function (response, status) {
@@ -70,24 +70,24 @@
                 )
             },
 
-            attemptDeleteUser(index) {
+            attemptDeleteCategory(index) {
                 // TODO: Add some kind of confirmation
-                this.deleteUser(index)
+                this.deleteCategory(index)
             },
 
-            deleteUser: function (index) {
+            deleteCategory: function (index) {
                 var that = this
-                client({ path: '/users/' + this.users[index].id, method: 'DELETE' }).then(
+                client({ path: '/categories/' + this.categories[index].id, method: 'DELETE' }).then(
                     function (response) {
-                        that.users.splice(index, 1)
+                        that.categories.splice(index, 1)
                         that.$dispatch('alert', {
-                            message: that.trans('user.deleted'),
+                            message: that.trans('category.deleted'),
                             options: {theme: 'success'}
                         })
                     },
                     function (response) {
                         that.$dispatch('alert', {
-                            message: that.trans('user.deleted_fail'),
+                            message: that.trans('category.deleted_fail'),
                             options: {theme: 'error'}
                         })
                     }
@@ -99,7 +99,7 @@
         route: {
             data: function (transition) {
                 this.fetch(function (data) {
-                    transition.next({users: data})
+                    transition.next({categories: data})
                 })
             }
         }

@@ -45,6 +45,11 @@
                 )
             },
 
+            attemptDeleteTicker(index) {
+                // TODO: Add some kind of confirmation
+                this.deleteTicker(index)
+            },
+
             deleteTicker: function (index) {
                 var that = this
                 client({ path: '/tickers/' + this.tickers[index].id, method: 'DELETE' }).then(
@@ -76,7 +81,7 @@
 
         ready() {
             this.$on('remove-ticker', function (index) {
-                this.deleteTicker(index)
+                this.attemptDeleteTicker(index)
             })
         }
 

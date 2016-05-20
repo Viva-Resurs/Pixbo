@@ -33,7 +33,7 @@
                            v-tooltip data-original-title="{{ trans('general.preview') }}" :disabled="hasPreview($index)"></a>
                         <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/screengroups/'+screengroup.id }"
                            v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
-                        <a class="btn btn-primary btn-xs fa fa-times" v-on:click="deleteScreengroup($index)"
+                        <a class="btn btn-primary btn-xs fa fa-times" v-on:click="attemptDeleteScreengroup($index)"
                            v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
                     </td>
                 </tr>
@@ -70,6 +70,11 @@
                             }
                         }
                 );
+            },
+
+            attemptDeleteScreengroup(index) {
+                // TODO: Add some kind of confirmation
+                this.deleteScreengroup(index)
             },
 
             deleteScreengroup: function (index) {
