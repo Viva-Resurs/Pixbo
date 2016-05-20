@@ -15,7 +15,8 @@ class CreateClientsTable extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('ip_address')->unique();;
+            $table->string('ip_address')->unique();
+            $table->integer('activity')->nullable();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')
                 ->references('id')->on('users')->onDelete('cascade');
