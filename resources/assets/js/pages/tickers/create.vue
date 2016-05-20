@@ -56,23 +56,13 @@
                             message: self.trans('ticker.created'),
                             options: {theme: 'success'}
                         })
-
-                        Vue.nextTick(function () {
-                            document.getElementById('nameInput').focus()
-                        })
-                        that.$route.router.go('/tickers')
+                        self.$route.router.go('/tickers')
                     },
                     function (response, status) {
                         self.$dispatch('alert', {
                             message: self.trans('ticker.created_fail'),
                             options: {theme: 'error'}
                         })
-                        /*
-                        self.messages = []
-                        for (var key in response.entity) {
-                            self.messages.push({ type: 'danger', message: response.entity[key] });
-                        }
-                        */
                     }
                 )
             }
