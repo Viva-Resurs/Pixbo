@@ -116,7 +116,8 @@ class Client extends Model
             'photo_list' => $photo_list,
             'tickers'    => $ticker_list,
             'updated_at' => $screengroup->updated_at->toDateTimeString(),
-            'settings'   => $settings
+            'settings'   => $settings,
+            'reboot'     => true
         ];
     }
 }
