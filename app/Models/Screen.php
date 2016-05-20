@@ -68,8 +68,8 @@ class Screen extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function tags()
+    public function categories()
     {
-        return $this->belongsToMany(Tag::class, 'screen_tag')->withTimestamps();
+        return $this->belongsToMany(Category::class, 'category_screen')->withTimestamps();
     }
 }

@@ -142,6 +142,24 @@ module.exports = {
                     }
                 }
             },
+            '/categories': {
+                component: require('./pages/Category.vue'),
+                auth: true,
+                subRoutes: {
+                    '/': {
+                        name: 'categories.index',
+                        component: require('./pages/categories/index.vue')
+                    },
+                    '/:id': {
+                        name: 'categories.show',
+                        component: require('./pages/categories/show.vue')
+                    },
+                    '/create': {
+                        name: 'categories.create',
+                        component: require('./pages/categories/create.vue')
+                    }
+                }
+            },
             '/terms': {
                 name: 'terms',
                 component: require('./pages/Terms.vue')

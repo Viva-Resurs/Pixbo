@@ -11,7 +11,8 @@ $settings = [
     'moderator' => [
         'username' => 'moderator',
     ],
-    'domain' => "viva.se" // config('app.domain') Server can´t get this?
+    'domain' => "viva.se", // config('app.domain') Server can´t get this?
+    'default_category_name' => "Ej schemalagda"
 ];
 
 return [
@@ -30,6 +31,10 @@ return [
                 'email' => $settings['moderator']['username'].'@'.$settings['domain']
             ]
 
+        ],
+
+        'category' => [
+            'default_name' => $settings['default_category_name']
         ],
 
         'player' => [
