@@ -21,13 +21,8 @@ class PlayerController extends Controller {
         $mac     = $request->input('mac');
         $preview = $request->input('preview');
 
-        // Fetch the correct client.
-        $client = Client::where('ip_address', $mac)->first();
-        if (is_null($client)) {
-            return abort(404, trans('exceptions.client_not_found'));
-        }
         return view('player.index')->with([
-            'client'     => $client->id,
+            'client'     => $mac,
             'preview'    => $preview,
         ]);
     }
