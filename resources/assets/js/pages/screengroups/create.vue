@@ -89,16 +89,9 @@
                             message: self.trans('screengroup.created'),
                             options: {theme: 'success'}
                         })
-                        Vue.nextTick(function () {
-                            document.getElementById('nameInput').focus();
-                        })
+                        self.$route.router.go('/screengroups')
                     },
                     function (response, status) {
-                        /*
-                        for (var key in response.entity) {
-                            self.messages.push({ type:'danger', message:response.entity[key] });
-                        }
-                        */
                         self.$dispatch('alert', {
                             message: self.trans('screengroup.created_fail'),
                             options: {theme: 'error'}

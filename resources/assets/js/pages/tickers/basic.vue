@@ -88,17 +88,13 @@
                             message: self.trans('ticker.created'),
                             options: {theme: 'success'}
                         })
+                        self.$route.router.go('/tickers')
                     },
                     function (response) {
                         self.$dispatch('alert', {
                             message: self.trans('ticker.created_fail'),
                             options: {theme: 'error'}
                         })
-                        /* self.messages = [];
-                        for (var key in response.entity) {
-                            self.messages.push({ type: 'danger', message: response.entity[key] });
-                        }
-                        */
                     }
                 )
             }
