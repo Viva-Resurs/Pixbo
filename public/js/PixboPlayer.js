@@ -12,26 +12,31 @@
 var PixboPlayer = {
 
   // Internal
+  Client_ID : false,
+  UpdatedAt : false,
   EnableControls : false,
+  Screens : [],
 
   // DOM-connections holder
   DOM : {},
 
   // Start PixboPlayer
-  Start : function(){
+  Start : function(options){
+
+    // Set Internal Values
+    this.Client_ID      = (options && options.Client_ID) ? options.Client_ID : '';
+    this.UpdatedAt      = (options && options.UpdatedAt) ? options.UpdatedAt : '';
+    this.EnableControls = (options && options.EnableControls) ? options.EnableControls : false;
+    this.Screens        = (options && options.Screens) ? options.Screens : [];
 
     // Setup Dom-connections
     this.DOM.VegasTarget  = $('body');
     this.DOM.TickerTarget = $('#ticker-container');
-    this.DOM.ScreenBox    = $('#screens');
-    this.DOM.UpdatedAt    = $('#updated_at');
-    this.DOM.ClientID     = $('#client_id');
-    this.DOM.Preview      = $('#preview');
     
     this.Controls.Vegas.Init();
 
     // Check for updates every 10s
-    setInterval( this.Sync, 1000*10 );
+    setInterval( PixboPlayer.Sync, 1000*10 );
 
     // Run once with 'first start' set
     this.Sync(true);
@@ -50,6 +55,14 @@ var PixboPlayer = {
 
   // DOM-Replacement
   Put_Screens : function(screens){
+    this.Screens = [];
+    for (i=0 ; i<screens.length ; i++){
+      this.Screens.push( { src: '/' + screens[i].image } );
+    }
+
+
+
+    return;
     var new_content = '';
     for (i=0 ; i<screens.length ; i++){
         new_content += "<li src='"+screens[i].image+"'></li>";
@@ -97,10 +110,6 @@ var PixboPlayer = {
     },
   },
   Apply_Settings : function(new_settings){
-    // Enable Controls
-    if (this.DOM.Preview.val())
-      this.EnableControls = true;
-    
     // Apply Vegas-settings
     if (new_settings.vegas)
       for (var property in this.Settings.Vegas)
@@ -144,12 +153,15 @@ var PixboPlayer = {
 
   /* Start Vegas */
   Start_Vegas : function(mode){
-    // Get current Screens
-    this.Settings.Vegas.slides = this.Get_Screens();
-
     // Check if there is any screens
-    if (this.Settings.Vegas.slides.length<1)
+    if (!this.Screens || this.Screens.length<1)
       return console.error('No Screens...');
+
+    // Get current Screens
+    //this.Settings.Vegas.slides = this.Get_Screens();
+    this.Settings.Vegas.slides = this.Screens;
+
+
 
     // Restart
     if (mode=='restart')
@@ -169,14 +181,14 @@ var PixboPlayer = {
   Sync : function (first_run) {
       var _request = $.ajax({
           type: "get",
-          url: "/play/" + PixboPlayer.DOM.ClientID.val(),
+          url: "/play/" + PixboPlayer.Client_ID,
       });
       _request.done(function() {
           var _data = JSON.parse(_request.responseText); // Fetch JSON-output
-          if(first_run || PixboPlayer.DOM.UpdatedAt.val() != _data['updated_at']) { // First run / Newer data found, update player:
+          if(first_run || PixboPlayer.UpdatedAt != _data['updated_at']) { // First run / Newer data found, update player:
               var _mode = first_run ? false : 'restart'; // Tell Update() if it´s a first run or restart (Vegas needs to know)
               if (!first_run) {
-                console.log('Client Updated, fetching newer data: (site: '+ PixboPlayer.DOM.ClientID.val() +', updated: '+ _data['updated_at'] +')');
+                console.log('Client Updated, fetching newer data: (site: '+ PixboPlayer.Client_ID +', updated: '+ _data['updated_at'] +')');
               }
               PixboPlayer.Update(
                   _data['photo_list'],
@@ -185,6 +197,10 @@ var PixboPlayer = {
                   _data['settings'],
                   _mode
               );
+              if (!first_run && _data['reboot']){
+                console.log("Reloading Page");
+                location.reload();
+              }
               /*
               JSON-object structure: {
                 "photo_list":[ {"image":" "}, ... ],
@@ -206,7 +222,7 @@ var PixboPlayer = {
       // Apply settings
       this.Apply_Settings(new_settings);
 
-      // Replace contents in DOM for screens-list
+      // Replace screens-list
       this.Put_Screens( new_screens );
 
       // Start/Restart Vegas
@@ -218,13 +234,13 @@ var PixboPlayer = {
       // Load/Reload Ticker
       this.Start_Ticker();
 
-      // Replace value of updated_at
-      this.DOM.UpdatedAt.val(new_updated_at);
+      // Replace UpdatedAt
+      this.UpdatedAt = new_updated_at;
 
       // Done
   },
 
-  // Controls in Preview-mode
+  // Controls
   Controls : {
     Vegas : {
       Element : false,
