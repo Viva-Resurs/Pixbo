@@ -13,9 +13,10 @@ var PixboPlayer = {
 
   // Internal
   Client_ID : false,
-  UpdatedAt : false,
   EnableControls : false,
+  UpdatedAt : false,
   Screens : [],
+  Vegas_Started : false,
 
   // DOM-connections holder
   DOM : {},
@@ -25,9 +26,7 @@ var PixboPlayer = {
 
     // Set Internal Values
     this.Client_ID      = (options && options.Client_ID) ? options.Client_ID : '';
-    this.UpdatedAt      = (options && options.UpdatedAt) ? options.UpdatedAt : '';
     this.EnableControls = (options && options.EnableControls) ? options.EnableControls : false;
-    this.Screens        = (options && options.Screens) ? options.Screens : [];
 
     // Setup Dom-connections
     this.DOM.VegasTarget  = $('body');
@@ -42,32 +41,12 @@ var PixboPlayer = {
     this.Sync(true);
   },
 
-  // DOM-Access
-  Get_Screens : function(){
-    var images = [];
-    this.DOM.ScreenBox.find('li').each(function() {
-        images.push(
-            { src: '/' + $(this).attr('src') }
-        );
-    });
-    return images;
-  },
-
-  // DOM-Replacement
-  Put_Screens : function(screens){
+  // Replace Contents
+  Set_Screens : function(new_screens){
     this.Screens = [];
-    for (i=0 ; i<screens.length ; i++){
-      this.Screens.push( { src: '/' + screens[i].image } );
+    for (i=0 ; i<new_screens.length ; i++){
+      this.Screens.push( { src: '/' + new_screens[i].image } );
     }
-
-
-
-    return;
-    var new_content = '';
-    for (i=0 ; i<screens.length ; i++){
-        new_content += "<li src='"+screens[i].image+"'></li>";
-    }
-    this.DOM.ScreenBox.html(new_content); // Replace content in ScreenBox Element
   },
   Put_Tickers : function(tickers){
     var new_content = "<ul id='ticker'>";
@@ -135,36 +114,30 @@ var PixboPlayer = {
   Start_Ticker : function(){
     // Get Target
     var _target = this.DOM.TickerTarget.find('ul#ticker');
+    
+    // Check if there is any tickers
+    if (!_target || _target.children().length<1)
+      return console.log('No tickers...');
+    
+    // Run .ticker() Plugin
+    target.ticker(this.Settings.Ticker);
 
-    // Check for tickers
-    if (_target.children().length>0){
-      // Run .ticker() Plugin
-      _target.ticker(this.Settings.Ticker);
-
-      // Start Controls
-      if (this.EnableControls)
-        this.Controls.Ticker.Init();
-    }
-    else{
-      // No Tickers
-      console.log('No tickers...');
-    }
+    // Start Controls
+    if (this.EnableControls)
+      this.Controls.Ticker.Init();
   },
 
   /* Start Vegas */
-  Start_Vegas : function(mode){
+  Start_Vegas : function(){
     // Check if there is any screens
     if (!this.Screens || this.Screens.length<1)
-      return console.error('No Screens...');
+      return console.log('No Screens...');
 
-    // Get current Screens
-    //this.Settings.Vegas.slides = this.Get_Screens();
+    // Set current Screens
     this.Settings.Vegas.slides = this.Screens;
 
-
-
     // Restart
-    if (mode=='restart')
+    if (this.Vegas_Started)
       this.DOM.VegasTarget          // Restart Player Chain
         .vegas('pause')             // Pause
         .vegas('destroy')           // Destroy
@@ -175,6 +148,8 @@ var PixboPlayer = {
     else
       this.DOM.VegasTarget
         .vegas(this.Settings.Vegas);
+    
+    this.Vegas_Started = true;
   },
 
   /* Update-check */
@@ -217,16 +192,16 @@ var PixboPlayer = {
   },
 
   /* Perform update */
-  Update : function(new_screens, new_tickers, new_updated_at, new_settings, mode) {
+  Update : function(new_screens, new_tickers, new_updated_at, new_settings) {
       
       // Apply settings
       this.Apply_Settings(new_settings);
 
       // Replace screens-list
-      this.Put_Screens( new_screens );
+      this.Set_Screens( new_screens );
 
       // Start/Restart Vegas
-      this.Start_Vegas(mode);
+      this.Start_Vegas();
       
       // Replace contents in DOM for tickers
       this.Put_Tickers( new_tickers );
