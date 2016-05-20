@@ -24,7 +24,6 @@ class PlayerController extends Controller {
         $client = Client::where('ip_address', $mac)->first();
         
         return view('player.index')->with([
-            'Client_ID'   => $client->id,
             'Client_ADDR' => $mac,
             'preview'     => $preview,
         ]);
@@ -34,11 +33,12 @@ class PlayerController extends Controller {
      * The ajax hook to get fresh data.
      *
      * @param Request $request
-     * @param $id
+     * @param $ADDR
      * @return array
      */
-    public function show(Request $request, $id) {
-        $client = Client::where('id', $id)->first();
+    public function show(Request $request, $ADDR) {
+        $client = Client::where('ip_address', $ADDR)->first();
+        //$client = Client::where('id', $id)->first();
         //$data   = $this->getDataFromClient($client);
         //return $data;
         return $client->getData();
