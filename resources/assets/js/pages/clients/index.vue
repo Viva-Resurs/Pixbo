@@ -44,6 +44,12 @@
                     }
                 )
             },
+
+            attemptDeleteClient(index) {
+                // TODO: Add some kind of confirmation
+                this.deleteClient(index)
+            },
+
             deleteClient: function (index) {
                 var that = this
                 client({ path: '/clients/' + this.clients[index].id, method: 'DELETE' }).then(
@@ -66,7 +72,7 @@
 
         ready() {
           this.$on('remove-client', function (index) {
-              this.deleteClient(index)
+              this.attemptDeleteClient(index)
           })
         },
 

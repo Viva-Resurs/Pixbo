@@ -44,6 +44,12 @@
                     }
                 )
             },
+
+            attemptDeleteScreen(index) {
+                // TODO: Add some kind of confirmation
+                this.deleteScreen(index)
+            },
+
             deleteScreen: function (index) {
                 var self = this;
                 client({ path: '/screens/' + this.screens[index].id, method: 'DELETE' }).then(
@@ -74,7 +80,7 @@
 
         ready() {
             this.$on('remove-screen', function (index) {
-                this.deleteScreen(index)
+                this.attemptDeleteScreen(index)
             })
         }
     }

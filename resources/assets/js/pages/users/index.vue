@@ -26,6 +26,7 @@
             </thead>
             <tbody>
                 <tr v-for="user in users">
+                    <!-- TODO: Hide yourself -->
                     <td>{{ user.id }}</td>
                     <td>{{ user.name }}</td>
                     <td>{{ user.email }}</td>
@@ -33,7 +34,7 @@
                     <td>
                         <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/users/'+user.id }"
                           v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
-                        <a class="btn btn-primary btn-xs fa fa-times" v-on:click="deleteUser($index)"
+                        <a class="btn btn-primary btn-xs fa fa-times" v-on:click="attemptDeleteUser($index)"
                           v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
                     </td>
                 </tr>
@@ -67,6 +68,11 @@
                         }
                     }
                 )
+            },
+
+            attemptDeleteUser(index) {
+                // TODO: Add some kind of confirmation
+                this.deleteUser(index)
             },
 
             deleteUser: function (index) {
