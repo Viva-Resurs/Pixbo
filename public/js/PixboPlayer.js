@@ -12,7 +12,6 @@
 var PixboPlayer = {
 
   // Internal
-  Client_ID : false,
   Client_ADDR : false,
   EnableControls : false,
   UpdatedAt : false,
@@ -26,7 +25,6 @@ var PixboPlayer = {
   Start : function(options){
 
     // Set Internal Values
-    this.Client_ID      = (options && options.Client_ID) ? options.Client_ID : '';
     this.Client_ADDR    = (options && options.Client_ADDR) ? options.Client_ADDR : '';
     this.EnableControls = (options && options.EnableControls) ? options.EnableControls : false;
 
@@ -158,14 +156,14 @@ var PixboPlayer = {
   Sync : function (first_run) {
       var _request = $.ajax({
           type: "get",
-          url: "/play/" + PixboPlayer.Client_ID,
+          url: "/play/" + PixboPlayer.Client_ADDR,
       });
       _request.done(function() {
           var _data = JSON.parse(_request.responseText); // Fetch JSON-output
           if(first_run || PixboPlayer.UpdatedAt != _data['updated_at']) { // First run / Newer data found, update player:
               var _mode = first_run ? false : 'restart'; // Tell Update() if it´s a first run or restart (Vegas needs to know)
               if (!first_run) {
-                console.log('Client Updated, fetching newer data: (site: '+ PixboPlayer.Client_ID +', updated: '+ _data['updated_at'] +')');
+                console.log('Client Updated, fetching newer data: (site: '+ PixboPlayer.Client_ADDR +', updated: '+ _data['updated_at'] +')');
               }
               PixboPlayer.Update(
                   _data['photo_list'],
