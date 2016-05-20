@@ -7,18 +7,16 @@ use Gate;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Api\V1\Transformers\User\UserTransformer;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class UserController extends BaseController
 {
     public function index() {
 
-        if (Gate::denies('view_clients')) {
-            return new UnauthorizedHttpException('permission_denied');
-            //$this->response->error('permission_denied', 401);
+        if (Gate::denies('view_users')) {
+            $this->response->error('permission_denied', 401);
         }
-        return $this->collection(User::with('roles')->get(), new UserTransformer());
+        $users = User::with('roles')->where('id', '<>', $this->getAuthenticatedUser()->id)->get();
+        return $this->collection($users, new UserTransformer());
         
     }
 
@@ -26,10 +24,7 @@ class UserController extends BaseController
         if (Gate::denies('view_users')) {
             $this->response->error('permission_denied', 401);
         }
-        $user = User::find($id);
-        if(!$user) {
-            throw new NotFoundHttpException;
-        }
+        $user = User::findOrFail($id);
 
         return $this->item($user, new UserTransformer());
     }
@@ -37,7 +32,7 @@ class UserController extends BaseController
     // TODO: Need to fix the storing of roles
     public function store(Request $request) {
         if (Gate::denies('add_users')) {
-            return new UnauthorizedHttpException('permission_denied');
+            $this->response->error('permission_denied', 401);
         }
 
         $user = new User;
@@ -67,8 +62,6 @@ class UserController extends BaseController
         }
     }
 
-
-
     public function me() {
         return $this->item($this->getAuthenticatedUser(), new UserTransformer() );
     }
@@ -78,11 +71,7 @@ class UserController extends BaseController
         if (Gate::denies('edit_users')) {
             $this->response->error('permission_denied', 401);
         }
-        $user = User::find($id);
-
-        if(!$user) {
-            throw new NotFoundHttpException;
-        }
+        $user = User::findOrFail($id);
 
         if($user->update($request->only(['name', 'email', 'password', 'roles']))) {
             Activity::log([
@@ -102,11 +91,7 @@ class UserController extends BaseController
         if (Gate::denies('remove_users')) {
             $this->response->error('permission_denied', 401);
         }
-        $user = User::find($id);
-
-        if(!$user) {
-            throw new NotFoundHttpException;
-        }
+        $user = User::findOrFail($id);
 
         if($user->delete()) {
             Activity::log([
