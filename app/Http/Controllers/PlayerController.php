@@ -38,6 +38,9 @@ class PlayerController extends Controller {
      */
     public function show(Request $request, $ADDR) {
         $client = Client::where('ip_address', $ADDR)->first();
+        if (is_null($client)) {
+            return abort(404, trans('exceptions.client_not_found'));
+        }
         //$client = Client::where('id', $id)->first();
         //$data   = $this->getDataFromClient($client);
         //return $data;
