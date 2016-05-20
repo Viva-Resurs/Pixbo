@@ -17,6 +17,7 @@ var PixboPlayer = {
   UpdatedAt : false,
   Screens : [],
   Vegas_Started : false,
+  Backdrop : false,
 
   // DOM-connections holder
   DOM : {},
@@ -31,7 +32,10 @@ var PixboPlayer = {
     // Setup Dom-connections
     this.DOM.VegasTarget  = $('body');
     this.DOM.TickerTarget = $('#ticker-container');
-    
+
+    // Start Standby-page
+    this.Standby('Loading');
+
     this.Controls.Vegas.Init();
 
     // Check for updates every 10s
@@ -39,6 +43,78 @@ var PixboPlayer = {
 
     // Run once with 'first start' set
     this.Sync(true);
+  },
+
+  // Standby-mode
+  Standby : function(info){
+    if (!this.Backdrop){
+      this.Backdrop = document.createElement("canvas");
+      this.Backdrop.style.position = "fixed";
+      this.Backdrop.style.top = "0px";
+      this.Backdrop.width = window.innerWidth;
+      this.Backdrop.height = window.innerHeight;
+      this.Backdrop.style.width = "100%";
+      this.Backdrop.style.height = "100%";
+      this.Backdrop.style.zIndex = "1000";
+      this.Backdrop.ctx = this.Backdrop.getContext("2d");
+      this.DOM.VegasTarget.append(this.Backdrop);
+    }
+    this.Backdrop.style.display = "block";
+    
+      this.Backdrop.ctx.textAlign = 'center';
+      this.Backdrop.ctx.lineWidth = '10px';
+      this.Backdrop.ctx.grd = this.Backdrop.ctx.createRadialGradient(0,0,50,0,0,this.Backdrop.width/2);
+      this.Backdrop.ctx.grd.addColorStop(0,"#333");
+      this.Backdrop.ctx.grd.addColorStop(1,"#000");
+
+      this.Backdrop.ctx.info = info;
+
+      PixboPlayer.Standby_Counter = 0;
+      
+    this.Standby_Animation = function(){
+      PixboPlayer.requestFrame = requestAnimationFrame(PixboPlayer.Standby_Animation, PixboPlayer.Backdrop);
+    //this.Standby_Animation = setInterval( function(){
+      PixboPlayer.Backdrop.ctx.clearRect( 0, 0, PixboPlayer.Backdrop.width, PixboPlayer.Backdrop.height );
+      PixboPlayer.Backdrop.ctx.save();
+
+      PixboPlayer.Backdrop.ctx.translate( PixboPlayer.Backdrop.width/2, PixboPlayer.Backdrop.height/2 );
+
+      PixboPlayer.Backdrop.ctx.fillStyle = PixboPlayer.Backdrop.ctx.grd;
+      PixboPlayer.Backdrop.ctx.fillRect(
+        -PixboPlayer.Backdrop.width/2,
+        -PixboPlayer.Backdrop.height/2,
+        PixboPlayer.Backdrop.width,
+        PixboPlayer.Backdrop.height
+      );
+
+      PixboPlayer.Backdrop.ctx.strokeStyle = '#333';
+      PixboPlayer.Backdrop.ctx.beginPath();
+      PixboPlayer.Backdrop.ctx.arc(0,0,PixboPlayer.Backdrop.width/4,PixboPlayer.Standby_Counter/Math.PI,(PixboPlayer.Standby_Counter+15)/Math.PI);
+      PixboPlayer.Backdrop.ctx.stroke();
+      PixboPlayer.Standby_Counter+=0.02;
+      if (PixboPlayer.Standby_Counter>=360)
+        PixboPlayer.Standby_Counter = 0;
+
+      PixboPlayer.Backdrop.ctx.font      = '96px Verdana';
+      PixboPlayer.Backdrop.ctx.fillStyle = '#999';
+      if (PixboPlayer.Backdrop.ctx.info=="404"){
+        PixboPlayer.Backdrop.ctx.fillText( "Standby", 0, 0 );
+        PixboPlayer.Backdrop.ctx.font      = '40px Verdana';
+        PixboPlayer.Backdrop.ctx.fillText( PixboPlayer.Client_ADDR, 0, 70 );
+      }
+      else
+        PixboPlayer.Backdrop.ctx.fillText( PixboPlayer.Backdrop.ctx.info, 0, 0 );
+
+      PixboPlayer.Backdrop.ctx.restore();
+    };
+    //}, 1000/4 );
+    this.Standby_Animation();
+
+  },
+  Ready : function(){
+    PixboPlayer.requestFrame = false;
+    //clearTimeout(this.Standby_Animation);
+    this.Backdrop.style.display = "none";
   },
 
   // Replace Contents
@@ -170,7 +246,7 @@ var PixboPlayer = {
                   _data['tickers'],
                   _data['updated_at'],
                   _data['settings'],
-                  _mode
+                  false
               );
               if (!first_run && _data['reboot']){
                 console.log("Reloading Page");
@@ -189,11 +265,26 @@ var PixboPlayer = {
               */
           }
       });
+      _request.error(function(xhr) {
+        PixboPlayer.Update(
+            false,
+            false,
+            false,
+            false,
+            xhr.status
+        );
+      });
   },
 
   /* Perform update */
-  Update : function(new_screens, new_tickers, new_updated_at, new_settings) {
+  Update : function(new_screens, new_tickers, new_updated_at, new_settings, info) {
       
+      // Info & Errors
+      if (info)
+        this.Standby(info);
+      else
+        this.Ready();
+
       // Apply settings
       this.Apply_Settings(new_settings);
 
