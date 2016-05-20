@@ -20,9 +20,13 @@ class PlayerController extends Controller {
         $mac     = $request->input('mac');
         $preview = $request->input('preview');
 
+        // Fetch the correct client.
+        $client = Client::where('ip_address', $mac)->first();
+        
         return view('player.index')->with([
-            'client'     => $mac,
-            'preview'    => $preview,
+            'Client_ID'   => $client->id,
+            'Client_ADDR' => $mac,
+            'preview'     => $preview,
         ]);
     }
 
