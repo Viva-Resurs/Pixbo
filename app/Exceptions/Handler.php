@@ -42,16 +42,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        if ($e instanceof NotFoundHttpException) {
-            $message = $e->getMessage();
-
-            // Return a dedicated error-view for players
-            if ($message == strpos($e,'Client')>0)
-              return view('errors.Player_Error')->with([ 'error' => $message ]);
-
-            // Default 404
-            $e = new NotFoundHttpException($e->getMessage(), $e);
-        }
 
         if ($e instanceof ModelNotFoundException) {
             $e = new NotFoundHttpException($e->getMessage(), $e);
