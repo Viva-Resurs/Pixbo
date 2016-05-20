@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1280, user-scalable=no">
-
+    
+    <title>Pixbo::Player</title>
+    
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'> <!-- TODO: Needs to be Downloaded Later -->
     <link rel="stylesheet" href="css/vendor/vegas.css">
     <link rel="stylesheet" href="css/vendor/ticker.css">
