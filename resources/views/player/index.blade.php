@@ -20,7 +20,8 @@
 
 <script>
   PixboPlayer.Start({
-    Client_ID : "{{ $client }}",
+    Client_ID   : {{ $Client_ID }},
+    Client_ADDR : "{{ $Client_ADDR }}",
     @if(isset($preview))
       EnableControls : true,
     @endif

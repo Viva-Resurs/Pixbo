@@ -13,6 +13,7 @@ var PixboPlayer = {
 
   // Internal
   Client_ID : false,
+  Client_ADDR : false,
   EnableControls : false,
   UpdatedAt : false,
   Screens : [],
@@ -26,6 +27,7 @@ var PixboPlayer = {
 
     // Set Internal Values
     this.Client_ID      = (options && options.Client_ID) ? options.Client_ID : '';
+    this.Client_ADDR    = (options && options.Client_ADDR) ? options.Client_ADDR : '';
     this.EnableControls = (options && options.EnableControls) ? options.EnableControls : false;
 
     // Setup Dom-connections
