@@ -28,7 +28,8 @@ class PlayerController extends Controller {
         }
 
         // Fetch all needed data from the client.
-        $clientData = $this->getDataFromClient($client);
+        //$clientData = $this->getDataFromClient($client);
+        $clientData = $client->getData();
 
         // If just previewing the client, don't update it's activity.
         if (is_null($preview)) {
@@ -69,8 +70,9 @@ class PlayerController extends Controller {
      */
     public function show(Request $request, $id) {
         $client = Client::where('id', $id)->first();
-        $data   = $this->getDataFromClient($client);
-        return $data;
+        //$data   = $this->getDataFromClient($client);
+        //return $data;
+        return $client->getData();
     }
 
     /**
@@ -91,6 +93,15 @@ class PlayerController extends Controller {
 
             //$se = $screengroup->shadow_events()->now()->get();
 
+            /*
+            $photos = $screens->map(function ($screen) {
+                $event = $screen->event->first()->shadow_events()->now()->get();
+                if(!$event->isEmpty()) {
+                    $photo = $screen->photo;
+                    return collect(['image' => $photo->pluck('path')]);
+                }
+            });
+*/
             // Get the images from the available screens
             $photo_list = [];
             foreach($screens as $screen) {
