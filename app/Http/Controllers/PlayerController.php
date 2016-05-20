@@ -11,11 +11,10 @@ use App\Models\Settings;
 class PlayerController extends Controller {
 
     /**
-     * Get the Client from given parameter 'mac',
-     * fetch all it's association and return the player view
+     * Return the player view with given parameters 'mac' & 'preview'
      *
      * @param Request $request
-     * @return array|NotFoundException
+     * @return array
      */
     public function index(Request $request) {
         $mac     = $request->input('mac');
