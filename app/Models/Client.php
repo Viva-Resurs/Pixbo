@@ -64,59 +64,29 @@ class Client extends Model
     }
 
     public function getData() {
+        // Get photos
+        $photos = $this->screengroup->screens->load(['event', 'event.shadow_events'])
+            ->flatMap(function ($screen) {
+                $event = $screen->getActiveEvents();
+                if(!$event->isEmpty()) {
+                    return $screen->photo->pluck('path');
+                }
+            });
 
-        $screengroup = $this->screengroup;
-        $screens     = $screengroup->screens->keyBy('id');
-        $tickers     = $screengroup->tickers->keyBy('id');
-
-        $screens = $screens->load(['event', 'event.shadow_events']);
-        $tickers = $tickers->load(['event', 'event.shadow_events']);
-
-        //$se = $screengroup->shadow_events()->now()->get();
-
-        /*
-        $photos = $screens->map(function ($screen) {
-            $event = $screen->event->first()->shadow_events()->now()->get();
-            if(!$event->isEmpty()) {
-                $photo = $screen->photo;
-                return collect(['image' => $photo->pluck('path')]);
-            }
-        });
-*/
-        // Get the images from the available screens
-        $photo_list = [];
-        foreach($screens as $screen) {
-            $event = $screen->event->first();
-            $se = $event->shadow_events()->now()->get();
-            if(!$se->isEmpty()) {
-                $photo = $screen->photo;
-                $photo_list[] = [
-                    'image' => $photo->path
-                ];
-            }
-        }
-
-        // Get the available tickers
-        $ticker_list = [];
-        foreach($tickers as $ticker) {
-            $event = $ticker->event->first();
-            $se = $event->shadow_events()->now()->get();
-            if(!$se->isEmpty()) {
-                $ticker_list[] = [
-                    'text' => $ticker->text
-                ];
-            }
-        }
-
-        // Get settings
-        //$settings = Config::get('app.player');
-        $settings = Settings::getSettings();
+        // Get Tickers
+        $tickers = $this->screengroup->tickers->load(['event', 'event.shadow_events'])
+            ->flatMap(function ($ticker) {
+                $event = $ticker->getActiveEvents();
+                if(!$event->isEmpty()) {
+                    return $ticker->pluck('text');
+                }
+            });
 
         return [
-            'photo_list' => $photo_list,
-            'tickers'    => $ticker_list,
-            'updated_at' => $screengroup->updated_at->toDateTimeString(),
-            'settings'   => $settings,
+            'photo_list' => $photos,
+            'tickers'    => $tickers,
+            'updated_at' => $this->screengroup->updated_at->toDateTimeString(),
+            'settings'   => Settings::getSettings(),
             'reboot'     => true
         ];
     }

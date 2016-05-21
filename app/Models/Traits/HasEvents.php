@@ -25,10 +25,11 @@ trait HasEvents
      */
     public function getEvent()
     {
-        return Event::where([
-            'eventable_type' => get_class($this),
-            'eventable_id' => $this->getAttribute('id'),
-        ])->get()->first();
+        return $this->event()->first();
+    }
+
+    public function getActiveEvents() {
+        return $this->getEvent()->getActiveShadowEvents();
     }
 
     /**

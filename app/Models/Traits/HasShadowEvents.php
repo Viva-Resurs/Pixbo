@@ -15,6 +15,10 @@ trait HasShadowEvents
         return $this->hasMany(ShadowEvent::class, 'event_id');
     }
 
+    public function getActiveShadowEvents() {
+        return $this->shadow_events()->now()->get();
+    }
+
     /**
      * Config on how far into the future the reccuring events should be generated.
      * @var array
