@@ -9,6 +9,7 @@
 namespace App\Api\V1\Requests;
 
 use App\Http\Requests\Request;
+use App\Models\Category;
 use App\Models\Event;
 use App\Models\Photo;
 use App\Models\Screen;
@@ -51,6 +52,9 @@ class FileUploadForm extends Request
             } else {
                 $screen = new Screen;
                 $screen->save();
+                $defaultCategory = Category::first();
+                $defaultCategory->addScreen($screen);
+
             }
 
             $event = new Event;
