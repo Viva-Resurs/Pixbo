@@ -89,7 +89,6 @@
 </template>
 
 <script>
-    import Tag from './../components/Tag.vue';
     import Period from './schedule/Period.vue';
 
     export default {
@@ -101,7 +100,6 @@
             ScheduleWeekly: require('./schedule/Weekly.vue'),
             ScheduleMonthly: require('./schedule/Monthly.vue'),
             ScheduleYearly: require('./schedule/Yearly.vue'),
-            //Tagger: require('./Tag.vue'),
             DateTimePicker: require('./DateTimePicker.vue'),
             Period
         },

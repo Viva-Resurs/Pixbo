@@ -126,12 +126,6 @@
                             message: self.trans('screengroup.updated_fail'),
                             options: {theme: 'error'}
                         })
-                        /*
-                        self.messages = [];
-                        for (var key in response.entity) {
-                            self.messages.push({type: 'danger', message: response.entity[key]});
-                        }
-                        */
                     }
                 );
             }
