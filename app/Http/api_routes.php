@@ -8,12 +8,9 @@ $api->version('v1', function ($api) {
     $api->post('auth/signup', 'App\Api\V1\Controllers\AuthController@signup');
     $api->post('auth/recovery', 'App\Api\V1\Controllers\AuthController@recovery');
     $api->post('auth/reset', 'App\Api\V1\Controllers\AuthController@reset');
+    $api->get('users/me', 'App\Api\V1\Controllers\UserController@me');
 
-
-    $api->get('users/me', function () {
-        return JWTAuth::parseToken()->authenticate();
-    });
-
+    
     $api->group(['middleware' => ['api.auth']], function ($api) {
         $api->resource('clients', 'App\Api\V1\Controllers\ClientController');
         $api->resource('categories', 'App\Api\V1\Controllers\CategoryController');
