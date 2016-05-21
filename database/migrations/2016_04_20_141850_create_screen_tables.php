@@ -34,9 +34,9 @@ class CreateScreenTables extends Migration
                 ->references('id')->on('screens');
 
             $table->string('name');
+            $table->string('originalName');
             $table->string('path');
             $table->string('thumb_path');
-            $table->boolean('archived');
             $table->string('sha1');
 
             $table->timestamps();

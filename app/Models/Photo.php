@@ -67,7 +67,7 @@ class Photo extends Model
     protected function saveAs($name)
     {
         $ext = pathinfo($name, PATHINFO_EXTENSION);
-        $this->archived = 0;
+        $this->originalName = $name;
         $this->name = sprintf("image_%s.%s", md5(date('Y-m-d H:i:s:u')), $ext);
         $this->path = sprintf("%s/%s", $this->baseDir, $this->name);
 
@@ -89,7 +89,6 @@ class Photo extends Model
 
     public static function getOrCreate(UploadedFile $file)
     {
-        $photo = new static;
         $photo = Photo::where(['sha1' => sha1_file($file)])->first();
         if (!is_null($photo)) {
             return $photo;
@@ -97,26 +96,4 @@ class Photo extends Model
             return Photo::named($file->getClientOriginalName());
         }
     }
-/*
-    public function getScreen($screengroup)
-    {
-        $screen = $this->screen;
-
-        if (!is_null($screen)) {
-            if (!$screen->screengroups->contains($screengroup->id)) {
-                $screengroup->screens()->save($screen);
-            }
-        } else {
-            $screen = new Screen;
-            $screen->fill([
-                'name' => $photo->name,
-                'screen_group_id' => $screengroup->id,
-                'event_id' => null,
-                'user_id' => Auth::user()->id,
-            ]);
-            $this->photo()->save($photo);
-            $screengroup->screens()->attach($screen);
-        }
-    }
-*/
 }
