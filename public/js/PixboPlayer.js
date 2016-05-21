@@ -121,13 +121,13 @@ var PixboPlayer = {
   Set_Screens : function(new_screens){
     this.Screens = [];
     for (i=0 ; i<new_screens.length ; i++){
-      this.Screens.push( { src: '/' + new_screens[i].image } );
+      this.Screens.push( { src: '/' + new_screens[i] } );
     }
   },
   Put_Tickers : function(tickers){
     var new_content = "<ul id='ticker'>";
     for (i=0 ; i<tickers.length ; i++){
-        new_content += "<li>"+tickers[i].text+"</li>";
+        new_content += "<li>"+tickers[i]+"</li>";
     }
     new_content += "</ul>";
     this.DOM.TickerTarget.html(new_content); // Replace content in Ticker Element
