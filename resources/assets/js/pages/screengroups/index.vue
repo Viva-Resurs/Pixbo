@@ -29,7 +29,7 @@
                     <td><a v-link="{ path: '/screengroups/'+screengroup.id }">{{ screengroup.name }}</a></td>
                     <td>{{ screengroup.desc }}</td>
                     <td>
-                        <a class="btn btn-primary btn-xs fa fa-eye" href="/play?mac={{screengroup.preview}}" target="_blank"
+                        <a class="btn btn-primary btn-xs fa fa-eye" href="/play?mac={{screengroup.preview}}&preview=yes" target="_blank"
                            v-tooltip data-original-title="{{ trans('general.preview') }}" :disabled="hasPreview($index)"></a>
                         <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/screengroups/'+screengroup.id }"
                            v-tooltip data-original-title="{{ trans('general.edit') }}"></a>

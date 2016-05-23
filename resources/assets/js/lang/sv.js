@@ -58,7 +58,8 @@ const lang = {
         about_content :             "Pixbo är ett verktyg för att hantera hur innehåll visas på anslutna paneler.",
         cancel:                     "Avbryt",
         back:                       "Tillbaka",
-        save:                       "Spara"
+        save:                       "Spara",
+        preview:                    "Förhandsvisa"
     },
     /* ----------------------------- SCHEDULE ----------------------------- */
     schedule: {
