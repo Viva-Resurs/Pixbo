@@ -43,19 +43,19 @@
                         >
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-sm-4 col-sm-offset-3">
-                    <button type="" class="btn" v-link="{ path: '/screengroups/' }" v-if="myform.$pristine">
-                        <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
-                    </button>
-                    <button type="" class="btn" v-link="{ path: '/screengroups/' }" v-if="!myform.$pristine">
-                        <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
-                    </button>
-                    <button type="submit" class="btn btn-primary" :disabled="myform.$invalid">
-                        <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
-                    </button>
+                <div class="form-group">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <button type="" class="btn" v-link="{ path: '/screengroups/' }" v-if="myform.$pristine">
+                            <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
+                        </button>
+                        <button type="" class="btn" v-link="{ path: '/screengroups/' }" v-if="!myform.$pristine">
+                            <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
+                        </button>
+                        <button type="submit" class="btn btn-primary" :disabled="myform.$invalid">
+                            <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
+                        </button>
+                    </div>
                 </div>
             </div>
 

@@ -18,6 +18,7 @@ $navbar-background: #f8f8f8;
 
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+
 /**
  * Elements
  */
@@ -37,6 +38,7 @@ $navbar-background: #f8f8f8;
 @import "components/tabs";
 @import "components/vue-toast.scss";
 @import "components/screencards.scss";
+@import "components/sweetalert.scss";
 
 /*
  * Misc.

@@ -2,6 +2,7 @@
     <div class="container app-screen">
         <!-- Tabs -->
         <div class="col-md-3">
+
             <div class="panel panel-default panel-flush">
                 <div class="panel-heading">
                     {{ trans_choice('screengroup.model', 2) }}
@@ -14,11 +15,6 @@
                                     <i class="fa fa-btn fa-fw fa-list"></i>&nbsp;{{ trans('general.archive') }}</span>
                                 </a>
                             </li>
-                            <li v-if=" $route.params.id>0 ">
-                                <a v-link="{ path: '/screengroups/'+$route.params.id }">
-                                    <i class="fa fa-btn fa-fw fa-pencil"></i>&nbsp;{{ trans('general.edit') }}</span>
-                                </a>
-                            </li>
                             <li>
                                 <a v-link="{ path: '/screengroups/create' }">
                                     <i class="fa fa-btn fa-fw fa-plus"></i>&nbsp;{{ trans('general.new') }}</span>
@@ -28,6 +24,35 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Editing -->
+            <div class="panel panel-default panel-flush"  v-if=" $route.params.id>0 ">
+                <div class="panel-heading">
+                    {{ trans('screengroup.edit') }}
+                </div>
+                <div class="panel-body">
+                    <div class="app-tabs">
+                        <ul class="nav app-tabs-stacked">
+                            <li>
+                                <a v-link="{ path: '/screengroups/screens/create' }">
+                                    <i class="fa fa-btn fa-fw fa-plus"></i>&nbsp;{{ trans('screen.add') }}</span>
+                                </a>
+                            </li>
+                            <li v-if=" $route.params.id>0 ">
+                                <a v-link="{ path: '/screengroups/tickers/create' }">
+                                    <i class="fa fa-btn fa-fw fa-plus"></i>&nbsp;{{ trans('ticker.add') }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a v-link="{ path: '/screengroups/clients/create' }">
+                                    <i class="fa fa-btn fa-fw fa-plus"></i>&nbsp;{{ trans('client.add') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <!-- Tab Panes -->
         <div class="col-md-9">

@@ -16,12 +16,12 @@
 
 <script>
     import TickerList from '../../components/TickerList.vue'
+    import SweetAlert from '../../mixins/SweetAlert.vue'
 
     module.exports = {
 
-        components: {
-          TickerList
-        },
+        components: { TickerList },
+        mixins:[SweetAlert],
 
         data: function () {
             return {
@@ -46,8 +46,7 @@
             },
 
             attemptDeleteTicker(index) {
-                // TODO: Add some kind of confirmation
-                this.deleteTicker(index)
+                this.confirm({callback:this.deleteTicker, arg:index})
             },
 
             deleteTicker: function (index) {

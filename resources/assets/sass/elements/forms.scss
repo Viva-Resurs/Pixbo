@@ -3,9 +3,9 @@
     	font-weight: 300;
     }
     form > div.panel-body > div.form-group > label {
-    	@extend .col-sm-2, .col-sm-offset-2;
+    	@extend .col-sm-2, .col-sm-offset-1;
     }
     form > div.panel-body > div.form-group > div {
-    	@extend .col-sm-6;
+    	@extend .col-sm-7;
     }
 }

@@ -46,7 +46,11 @@
 </template>
 
 <script>
+    import SweetAlert from '../../mixins/SweetAlert.vue'
+
     module.exports = {
+
+        mixins:[SweetAlert],
 
         data: function () {
             return {
@@ -71,8 +75,7 @@
             },
 
             attemptDeleteUser(index) {
-                // TODO: Add some kind of confirmation
-                this.deleteUser(index)
+                this.confirm({callback:this.deleteUser, arg:index})
             },
 
             deleteUser: function (index) {

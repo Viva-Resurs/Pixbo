@@ -18,10 +18,12 @@
 
 <script>
     import ScreenList from '../../components/ScreenList.vue'
+    import SweetAlert from '../../mixins/SweetAlert.vue'
 
     module.exports = {
 
         components: { ScreenList },
+        mixins:[SweetAlert],
 
         data: function () {
             return {
@@ -46,8 +48,7 @@
             },
 
             attemptDeleteScreen(index) {
-                // TODO: Add some kind of confirmation
-                this.deleteScreen(index)
+                this.confirm({callback:this.deleteScreen, arg:index})
             },
 
             deleteScreen: function (index) {

@@ -44,7 +44,11 @@
 </template>
 
 <script>
+    import SweetAlert from '../../mixins/SweetAlert.vue'
+
     module.exports = {
+
+        mixins:[SweetAlert],
 
         data: function () {
             return {
@@ -73,8 +77,7 @@
             },
 
             attemptDeleteCategory(index) {
-                // TODO: Add some kind of confirmation
-                this.deleteCategory(index)
+                this.confirm({callback:this.deleteCategory, arg:index})
             },
 
             deleteCategory: function (index) {
