@@ -87,7 +87,7 @@ class Client extends Model
             'tickers'    => $tickers,
             'updated_at' => $this->screengroup->updated_at->toDateTimeString(),
             'settings'   => Settings::getSettings(),
-            'reboot'     => true
+            'reboot'     => false
         ];
     }
 }
