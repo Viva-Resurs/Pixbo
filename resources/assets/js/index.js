@@ -4,7 +4,6 @@ window.VueRouter = require('vue-router')
 Vue.use(VueRouter)
 
 // Import 3rd party libraries
-//var moment = require('moment');
 var bootstrap = require('bootstrap-sass');
 import * as vueForm from 'vue-form'
 
@@ -33,14 +32,12 @@ var defaultRequest = require('rest/interceptor/defaultRequest')
 var errorCode = require('rest/interceptor/errorCode')
 var interceptor = require('rest/interceptor')
 var jwtAuth = require('./interceptors/jwAuth.js')
-//var langFetcher = require('./interceptors/langFetcher.js')
 
 window.client = rest.wrap(pathPrefix, { prefix: config.api.base_url })
     .wrap(mime)
     .wrap(defaultRequest, config.api.defaultRequest)
     .wrap(errorCode, { code: 400 })
     .wrap(jwtAuth);
-  //  .wrap(langFetcher);
 
 // Bootstrap the app
 Vue.use(vueForm)
