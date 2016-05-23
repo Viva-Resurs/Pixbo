@@ -29,7 +29,7 @@
                     <td><a v-link="{ path: '/screengroups/'+screengroup.id }">{{ screengroup.name }}</a></td>
                     <td>{{ screengroup.desc }}</td>
                     <td>
-                        <a class="btn btn-primary btn-xs fa fa-eye" href="/play?mac={{screengroup.preview}}" target="_blank"
+                        <a class="btn btn-primary btn-xs fa fa-eye " href="/play?mac={{screengroup.preview}}&preview=yes" target="_blank"
                            v-tooltip data-original-title="{{ trans('general.preview') }}" :disabled="hasPreview($index)"></a>
                         <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/screengroups/'+screengroup.id }"
                            v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
@@ -45,7 +45,11 @@
 </template>
 
 <script>
+    import SweetAlert from '../../mixins/SweetAlert.vue'
+
     module.exports = {
+
+        mixins:[SweetAlert],
 
         data: function () {
             return {
@@ -73,8 +77,7 @@
             },
 
             attemptDeleteScreengroup(index) {
-                // TODO: Add some kind of confirmation
-                this.deleteScreengroup(index)
+                this.confirm({callback:this.deleteScreengroup, arg:index})
             },
 
             deleteScreengroup: function (index) {

@@ -14,9 +14,17 @@ const lang = {
         model:                      "Användargrupp",
         select:                     "Välj användargrupp"
     },
+    /* ----------------------------- CONFIRM ----------------------------- */
+    confirm: {
+        title:                     "Är du säker?",
+        text:                      "Valet går inte att ångra",
+        confirmButtonText:         "Ta bort",
+        cancelButtonText:          "Avbryt"
+    },
     /* ----------------------------- CLIENT ----------------------------- */
     client: {
         model:                      "Skärm|Skärmar",
+        add:                        "Lägg till skärm",
         empty:                      "Det finns inga skärmar än.",
         deleted:                    "Skärmen har tagits bort.",
         deleted_fail:               "Misslyckades att ta bort skärmen, försök igen.",
@@ -58,7 +66,8 @@ const lang = {
         about_content :             "Pixbo är ett verktyg för att hantera hur innehåll visas på anslutna paneler.",
         cancel:                     "Avbryt",
         back:                       "Tillbaka",
-        save:                       "Spara"
+        save:                       "Spara",
+        preview:                    "Förhandsvisa"
     },
     /* ----------------------------- SCHEDULE ----------------------------- */
     schedule: {
@@ -106,6 +115,7 @@ const lang = {
     /* ----------------------------- SCREEN ----------------------------- */
     screen: {
         model:                      "Bild|Bilder",
+        add:                        "Lägg till bild",
         upload:                     "Ladda upp",
         upload_message:             "Dra bilder hit, eller klicka för att bläddra.",
         uploaded:                   "Bilden har laddats upp.",
@@ -118,6 +128,7 @@ const lang = {
     /* ----------------------------- SCREENGROUP ----------------------------- */
     screengroup: {
         model:                      "Område|Områden",
+        add:                        "Lägg till område",
         empty:                      "Det finns inga områden än.",
         deleted:                    "Området har tagits bort.",
         deleted_fail:               "Misslyckades att ta bort området, försök igen.",
@@ -130,12 +141,14 @@ const lang = {
     /* ----------------------------- CATEGORY ----------------------------- */
     category: {
         model:                      "Kategori|Kategorier",
+        add:                        "Lägg till kategori",
         create:                     "Skapa ny kategori",
         edit:                       "Redigera kategori"
     },
     /* ----------------------------- TICKER ----------------------------- */
     ticker: {
         model:                      "Ticker|Tickers",
+        add:                        "Lägg till ticker",
         create:                     "Skapa ny ticker",
         archive:                    "Arkiv",
         empty:                      "Det finns inga tickers än.",

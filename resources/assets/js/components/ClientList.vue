@@ -24,7 +24,7 @@
             <td>{{ client.ip_address }}</td>
             <td>{{ client.screengroup.data.name }}</td>
             <td>
-                <a class="btn btn-primary btn-xs fa fa-eye" href="/play?mac={{client.ip_address}}" target="_blank"
+                <a class="btn btn-primary btn-xs fa fa-eye" href="/play?mac={{client.ip_address}}&preview=yes" target="_blank"
                    v-tooltip data-original-title="{{ trans('general.preview') }}"></a>
                 <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/clients/'+client.id }"
                    v-tooltip data-original-title="{{ trans('general.edit') }}"></a>

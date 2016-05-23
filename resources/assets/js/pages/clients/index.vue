@@ -16,12 +16,12 @@
 
 <script>
     import ClientList from '../../components/ClientList.vue'
+    import SweetAlert from '../../mixins/SweetAlert.vue'
 
     module.exports = {
 
-        components: {
-          ClientList
-        },
+        components: { ClientList },
+        mixins:[SweetAlert],
 
         data: function () {
             return {
@@ -46,8 +46,7 @@
             },
 
             attemptDeleteClient(index) {
-                // TODO: Add some kind of confirmation
-                this.deleteClient(index)
+                this.confirm({callback:this.deleteClient, arg:index})
             },
 
             deleteClient: function (index) {
