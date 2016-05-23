@@ -42,7 +42,7 @@
                     <!-- Authenticated Right Dropdown -->
                     <li class="dropdown" v-if="isAuthenticated">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ username }} <span class="caret"></span>
+                            {{* username }} <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">

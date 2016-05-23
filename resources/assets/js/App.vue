@@ -41,6 +41,26 @@
                 this.authenticated = false;
                 localStorage.removeItem('jwt-token');
                 if(this.$route.auth) this.$route.router.go('/auth/login')
+            },
+            getUser() {
+                var token = localStorage.getItem('jwt-token')
+
+                if (token !== null && token !== 'undefined') {
+                    console.log("fetching user")
+                    var that = this
+                    client({path: '/users/me'}).then(
+                            function (response) {
+                                // User has successfully logged in using the token from storage
+                                that.setLogin(response.entity.data)
+                                // broadcast an event telling our children that the data is ready and views can be rendered
+                                that.$broadcast('data-loaded')
+                            },
+                            function (response) {
+                                // Login with our token failed, do some cleanup and redirect if we're on an authenticated route
+                                that.destroyLogin()
+                            }
+                    )
+                }
             }
         },
 
@@ -59,22 +79,7 @@
                 this.setLogin(user)
             })
 
-            var token = localStorage.getItem('jwt-token')
-            if (token !== null && token !== 'undefined') {
-                var that = this
-                client({path: '/users/me'}).then(
-                        function (response) {
-                            // User has successfully logged in using the token from storage
-                            that.setLogin(response.entity.user)
-                            // broadcast an event telling our children that the data is ready and views can be rendered
-                            that.$broadcast('data-loaded')
-                        },
-                        function (response) {
-                            // Login with our token failed, do some cleanup and redirect if we're on an authenticated route
-                            that.destroyLogin()
-                        }
-                )
-            }
+            this.getUser();
         }
     }
 </script>
