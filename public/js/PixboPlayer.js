@@ -97,13 +97,22 @@ var PixboPlayer = {
 
       PixboPlayer.Backdrop.ctx.font      = '96px Verdana';
       PixboPlayer.Backdrop.ctx.fillStyle = '#999';
-      if (PixboPlayer.Backdrop.ctx.info=="404"){
-        PixboPlayer.Backdrop.ctx.fillText( "Standby", 0, 0 );
-        PixboPlayer.Backdrop.ctx.font      = '40px Verdana';
-        PixboPlayer.Backdrop.ctx.fillText( PixboPlayer.Client_ADDR, 0, 70 );
+      switch (PixboPlayer.Backdrop.ctx.info){
+        case "404": {
+          PixboPlayer.Backdrop.ctx.fillText( "Standby", 0, 0 );
+          PixboPlayer.Backdrop.ctx.font      = '40px Verdana';
+          PixboPlayer.Backdrop.ctx.fillText( PixboPlayer.Client_ADDR, 0, 70 );
+          break;
+        }
+        case "NOSCREEN": {
+          PixboPlayer.Backdrop.ctx.fillText( "Standby", 0, 0 );
+          PixboPlayer.Backdrop.ctx.font      = '40px Verdana';
+          PixboPlayer.Backdrop.ctx.fillText( 'Inga bilder...', 0, 70 );
+          break;
+        }
+        default:
+         PixboPlayer.Backdrop.ctx.fillText( PixboPlayer.Backdrop.ctx.info, 0, 0 );
       }
-      else
-        PixboPlayer.Backdrop.ctx.fillText( PixboPlayer.Backdrop.ctx.info, 0, 0 );
 
       PixboPlayer.Backdrop.ctx.restore();
     };
@@ -165,17 +174,20 @@ var PixboPlayer = {
     },
   },
   Apply_Settings : function(new_settings){
-    // Apply Vegas-settings
-    if (new_settings.vegas)
-      for (var property in this.Settings.Vegas)
-        if (this.Settings.Vegas.hasOwnProperty(property))
-          this.Settings.Vegas[property] = new_settings.vegas[property];
-    
-    // Apply Ticker-settings
-    if (new_settings.ticker)
-      for (var property in this.Settings.Ticker)
-        if (this.Settings.Ticker.hasOwnProperty(property))
-          this.Settings.Ticker[property] = new_settings.ticker[property];
+    for (var i=0 ; i<new_settings.length ; i++){
+
+      // Apply Vegas-settings
+      if (new_settings[i].vegas)
+        for (var property in new_settings[i].vegas)
+          if (this.Settings.Vegas.hasOwnProperty(property))
+            this.Settings.Vegas[property] = new_settings[i].vegas[property];
+      
+      // Apply Ticker-settings
+      if (new_settings[i].ticker)
+        for (var property in new_settings[i].ticker)
+          if (this.Settings.Ticker.hasOwnProperty(property))
+            this.Settings.Ticker[property] = new_settings[i].ticker[property];
+    }
 
     // Add Controls in Settings for Ticker
     if (this.EnableControls)
@@ -236,11 +248,18 @@ var PixboPlayer = {
       });
       _request.done(function() {
           var _data = JSON.parse(_request.responseText); // Fetch JSON-output
+
+          if (!first_run && _data['reboot']){
+            console.log("Reloading Page");
+            location.reload();
+          }
+
           if(first_run || PixboPlayer.UpdatedAt != _data['updated_at']) { // First run / Newer data found, update player:
-              var _mode = first_run ? false : 'restart'; // Tell Update() if it´s a first run or restart (Vegas needs to know)
+              
               if (!first_run) {
                 console.log('Client Updated, fetching newer data: (site: '+ PixboPlayer.Client_ADDR +', updated: '+ _data['updated_at'] +')');
               }
+
               PixboPlayer.Update(
                   _data['photo_list'],
                   _data['tickers'],
@@ -248,10 +267,11 @@ var PixboPlayer = {
                   _data['settings'],
                   false
               );
-              if (!first_run && _data['reboot']){
-                console.log("Reloading Page");
-                location.reload();
-              }
+
+              if (!_data['photo_list'] || _data['photo_list'].length<1)
+                PixboPlayer.Update( false, false, false, false, "NOSCREEN" );
+
+
               /*
               JSON-object structure: {
                 "photo_list":[ {"image":" "}, ... ],
@@ -281,7 +301,7 @@ var PixboPlayer = {
       
       // Info & Errors
       if (info)
-        this.Standby(info);
+        return this.Standby(info);
       else
         this.Ready();
 
