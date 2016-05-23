@@ -28,7 +28,7 @@
                     </template>
 
                     <!-- Only admin area -->
-                    <template v-if="isAdmin && isAuthenticated">
+                    <template v-if="isAuthenticated && isAdmin">
                         <li><a v-link="{ path: '/users/' }">{{ trans_choice('user.model', 2) }}</a></li>
                         <li><a v-link="{ path: '/clients/' }">{{ trans_choice('client.model', 2) }}</a></li>
                     </template>
@@ -70,27 +70,12 @@
 </template>
 
 <script>
-    // helper to set first character to be capitalized in a given string.
-    String.prototype.capitalize = function() {
-        return this.charAt(0).toUpperCase() + this.slice(1);
-    }
-
+    import Auth from '../mixins/Auth.vue'
     module.exports = {
+        mixins: [Auth],
         data: function () {
             return {
                 navTitle: 'Pixbo'
-            }
-        },
-        computed: {
-            username() {
-                return (this.$root.user.name).capitalize()
-            },
-            isAuthenticated() {
-                return this.$root.authenticated
-            },
-            isAdmin() {
-                // TODO: only return true if isAdmin, otherwise return false.
-                return true
             }
         }
     }

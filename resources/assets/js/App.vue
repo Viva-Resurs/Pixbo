@@ -64,7 +64,7 @@
             }
         },
 
-        ready() {
+        created() {
 
             this.$on('alert', function (args) {
                 this.$broadcast('alert', args);
