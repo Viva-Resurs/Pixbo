@@ -4,50 +4,58 @@
         <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_screengroup') }}"></span>
     </legend>
     <div class="form-group">
-        <select class="form-control selectpicker show-tick" multiple v-model="selected" id="inputScreengroups" data-selected-text-format="count > 3">
-            <option v-for="screengroup in screengroups" v-bind:value="screengroup.id">{{screengroup.name}}</option>
+        <select class="form-control selectpicker show-tick" v-model="selected" id="inputModels" >
+            <option v-for="model in models" v-bind:value="model.id">{{model.name}}</option>
         </select>
     </div>
 </template>
-<script>
+<script type="text/ecmascript-6">
     export default {
 
-        props: ['selected'],
+        props: ['selected','model','options','mode'],
 
         data: function () {
             return {
-                screengroups: []
+                models: [] /*screengroups*/
             }
         },
 
         methods : {
 
-            fetchScreengroups: function () {
-                var that = this;
-                client({ path: '/screengroups' }).then(
-                    function (response) {
-                        that.$set('screengroups', response.entity.data);
-                        that.$nextTick(function() {
-                            $('.selectpicker').selectpicker({
-                              size: 4,
-                              iconBase: 'fa',
-                              tickIcon: 'fa-check',
-                              noneSelectedText: that.trans('general.nothing_selected'),
+            isMulti(){
+                if (this.mode=="multi")
+                    return true;
+            },
+            getModels() {
+                var self = this;
+                client({ path: `/${self.model}s` }).then(
+                        function (response) {
+                            self.$set('models', response.entity.data);
+                            self.$nextTick(function() {
+                                $('.selectpicker').selectpicker({
+                                  size: 4,
+                                  iconBase: 'fa',
+                                  tickIcon: 'fa-check',
+                                  noneSelectedText: self.trans('general.nothing_selected'),
+                                });
                             });
-                        });
-                    },
-                    function (response, status) {
-                        if (_.contains([401, 500], status)) {
-                            that.$dispatch('userHasLoggedOut');
+                        },
+                        function (response, status) {
+                            if (_.contains([401, 500], status)) {
+                                self.$dispatch('userHasLoggedOut');
+                            }
                         }
-                    }
                 );
-            }
+            },
 
         },
 
         created: function(){
-            this.fetchScreengroups();
+            $(this.el).attr(this.mode); // TODO: FIX attr, < insert here ...... >
+            if (this.model)
+                this.getModels();
+            if (this.options)
+                this.models = this.options;
         },
 
     }

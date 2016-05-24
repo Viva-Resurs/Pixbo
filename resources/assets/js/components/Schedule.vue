@@ -12,7 +12,10 @@
 
         <div class="col-lg-6 col-md-6">
 
-            <screengroup-selector :selected.sync="selected_screengroups"></screengroup-selector>
+            <screengroup-selector   :selected.sync="selected_screengroups" 
+                                    model="screengroup" 
+                                    mode="multiple data-selected-text-format='count > 3"
+            ></screengroup-selector>
 
             <period :event.sync="model.event"></period>
 
@@ -26,10 +29,8 @@
                 {{ trans('schedule.repeat') }}
                 <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_repeat_type') }}"></span>
             </label>
-            <select v-model="event.recur_type" v-bind:value="event.recur_type" name="recur_type" id="inputRecur_type" class="form-control">
-                <option v-for="option in recur_options" :value="option.key">{{ trans(option.value) }}</option>
 
-            </select>
+
 
             <!-- Daily -->
             <template v-if="event.recur_type == 'daily'">
