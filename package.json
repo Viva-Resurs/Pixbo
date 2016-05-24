@@ -2,6 +2,7 @@
   "private": true,
   "devDependencies": {
     "babel-runtime": "^6.2.0",
+    "bootstrap-select": "^1.10.0",
     "gulp": "^3.8.8",
     "gulp-install": "^0.5.0",
     "gulp-sass": "^2.1.0",

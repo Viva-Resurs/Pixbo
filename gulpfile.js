@@ -14,6 +14,8 @@ require('laravel-elixir-vueify');
 
 elixir(function(mix) {
     mix
+    	.copy('node_modules/bootstrap-select/dist/js/bootstrap-select.js','public/js/vendor/bootstrap-select.js')
+    	.copy('node_modules/bootstrap-select/dist/css/bootstrap-select.css','public/css/vendor/bootstrap-select.css')
         .sass('app.scss')
         .browserify('index.js');
 });
