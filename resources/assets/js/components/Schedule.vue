@@ -11,21 +11,8 @@
         </template>
 
         <div class="col-lg-6 col-md-6">
-            <legend>
-                {{ trans_choice('screengroup.model', 1) }}
-                <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_screengroup') }}"></span>
-            </legend>
-            <div class="form-group">
-                <select class="form-control" multiple v-model="selected_screengroups" id="inputScreengroups">
-                    <option v-for="screengroup in screengroups" v-bind:value="screengroup.id">{{screengroup.name}}</option>
-                </select>
-            </div>
 
-            <!--
-            <template v-if="model.type == 'screen'">
-                <Tagger :list.sync="selected_tags" :tags.sync="tags"></Tagger>
-            </template>
-            -->
+            <screengroup-selector :selected.sync="selected_screengroups"></screengroup-selector>
 
             <period :event.sync="model.event"></period>
 
@@ -93,7 +80,7 @@
 
     export default {
 
-        props: ['model', 'redirect', 'tags', 'screengroups', 'messages'],
+        props: ['model'],
 
         components: {
             ScheduleDaily: require('./schedule/Daily.vue'),
@@ -101,6 +88,7 @@
             ScheduleMonthly: require('./schedule/Monthly.vue'),
             ScheduleYearly: require('./schedule/Yearly.vue'),
             DateTimePicker: require('./DateTimePicker.vue'),
+            ScreengroupSelector : require('./ScreengroupSelector.vue'),
             Period
         },
 
@@ -183,23 +171,12 @@
             event() {
                 return this.model.event;
             },
-            selected_tags() {
-                return this.model.tags;
-            },
 
             isValid: function() {
-                if(this.model.type == 'screen') {
-                    if (this.selected_tags.length > 0) {
-                        return true;
-                    } else {
-                        $('#inputTags').focus();
-                        return false;
-                    }
-                } else {
-                    if(this.model.type == 'ticker')
-                        return true;
-                    else return false
-                }
+                // TODO: Fix Validation.
+                // 
+                // Return true if disabled should be set to button
+                return false;
             },
             get_start_time() {
                 return this.model.event.start_time;

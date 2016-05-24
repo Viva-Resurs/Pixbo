@@ -8,7 +8,7 @@
 
     <div v-if=" ! $loadingRouteData">
         <div class="panel-body">
-           <schedule :model.sync="screen" :tags.sync="tags" :screengroups="screengroups" :messages.sync="messages"></schedule>
+           <schedule :model.sync="screen"></schedule>
         </div>
     </div>
 </template>
@@ -24,10 +24,8 @@
 
         data: function () {
             return {
-                screen: {
-                },
-                screengroups: [],
-                tags: []
+                screen: {},
+                screengroups: []
             }
         },
 
@@ -48,20 +46,7 @@
                         }
                 )
             },
-            fetchScreengroups: function (successHandler) {
-                var that = this
-                client({ path: '/screengroups' }).then(
-                    function (response) {
-                        that.$set('screengroups', response.entity.data)
-                        //successHandler(response.entity.data)
-                    },
-                    function (response, status) {
-                        if (_.contains([401, 500], status)) {
-                            that.$dispatch('userHasLoggedOut')
-                        }
-                    }
-                )
-            },
+
 
             updateScreen: function (e) {
                 e.preventDefault()
@@ -80,12 +65,6 @@
                             message: self.trans('screen.updated_fail'),
                             options: {theme: 'error'}
                         })
-                        /*
-                        self.messages = []
-                        for (var key in response.entity) {
-                            self.messages.push({type: 'danger', message: response.entity[key]})
-                        }
-                        */
                     }
                 )
             }
@@ -96,9 +75,6 @@
             data: function (transition) {
                 this.fetch(this.$route.params.id, function (data) {
                     transition.next({screen: data})
-                })
-                this.fetchScreengroups(this.$route.params.id, function (data) {
-                    transition.next({screengroups: data})
                 })
             }
         }

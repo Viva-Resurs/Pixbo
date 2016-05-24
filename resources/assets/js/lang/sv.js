@@ -67,7 +67,8 @@ const lang = {
         cancel:                     "Avbryt",
         back:                       "Tillbaka",
         save:                       "Spara",
-        preview:                    "Förhandsvisa"
+        preview:                    "Förhandsvisa",
+        nothing_selected:           "Ingenting markerat"
     },
     /* ----------------------------- SCHEDULE ----------------------------- */
     schedule: {
