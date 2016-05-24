@@ -14,11 +14,6 @@
                                     <i class="fa fa-btn fa-fw fa-sign-in"></i>&nbsp;{{ trans('auth.login') }}</span>
                                 </a>
                             </li>
-                            <li v-if="! $root.authenticated">
-                                <a v-link="{ path: '/auth/register' }">
-                                    <i class="fa fa-btn fa-fw fa-chevron-circle-up"></i>&nbsp;{{ trans('auth.register') }}</span>
-                                </a>
-                            </li>
                             <li v-if="$root.authenticated">
                                 <a v-link="{ path: '/auth/profile' }">
                                     <i class="fa fa-btn fa-fw fa-user"></i>&nbsp;{{ trans('auth.profile') }}</span>

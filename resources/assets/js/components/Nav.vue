@@ -38,11 +38,10 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Login / Registration Links for unauthenticated users -->
                     <li v-if=" ! isAuthenticated"><a v-link="{ path: '/auth/login' }">{{ trans('auth.login') }}</a></li>
-                    <li v-if=" ! isAuthenticated"><a v-link="{ path: '/auth/register' }">{{ trans('auth.register') }}</a></li>
                     <!-- Authenticated Right Dropdown -->
                     <li class="dropdown" v-if="isAuthenticated">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{* username }} <span class="caret"></span>
+                            {{* username }} <span class="fa fa-caret-down"></span><span class="fa fa-caret-up"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">

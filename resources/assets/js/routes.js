@@ -11,11 +11,6 @@ module.exports = {
                         component: require('./pages/auth/Login.vue'),
                         guest: true
                     },
-                    '/register': {
-                        name: 'auth.register',
-                        component: require('./pages/auth/Register.vue'),
-                        guest: true
-                    },
                     '/profile': {
                         name: 'auth.profile',
                         component: require('./pages/auth/Profile.vue'),
