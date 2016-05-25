@@ -1,21 +1,21 @@
 <template>
-    <form v-on:submit.prevent="updateSchedule">
-        <template v-if="model.type == 'ticker'">
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <input type="text" v-model="model.text" name="ticker_text" id="inputTickerText" class="form-control" title="" required="required">
-                    </div>
-                </div>
-            </div>
-        </template>
+    <form v-on:submit.prevent="attemptUpdateSchedule">
+        <slot name="model_specific_setting">
+
+        </slot>
 
         <div class="col-lg-6 col-md-6">
 
-            <screengroup-selector   :selected.sync="selected_screengroups" 
-                                    model="screengroup" 
-                                    mode="multiple data-selected-text-format='count > 3"
-            ></screengroup-selector>
+            <model-selector :selected.sync="selected_screengroups"
+                                  model="screengroup"
+                                  multiple="true"
+                                  mode="count > 3"
+            >
+                <div slot="label">
+                    {{ trans_choice('screengroup.model', 1) }}
+                    <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_screengroup') }}"></span>
+                </div>
+            </model-selector>
 
             <period :event.sync="model.event"></period>
 
@@ -23,93 +23,105 @@
 
         <div class="col-lg-6 col-md-6">
 
-            <legend>{{ trans('schedule.recurring') }}</legend>
-
-            <label for="inputRecur_type" class="control-label">
-                {{ trans('schedule.repeat') }}
-                <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_repeat_type') }}"></span>
-            </label>
-
-
+            <model-selector :selected.sync="model.event.recur_type"
+                                  :options="recur_options"
+            >
+                <div slot="label">
+                    {{ trans('schedule.repeat') }}
+                    <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_repeat_type') }}"></span>
+                </div>
+            </model-selector>
 
             <!-- Daily -->
             <template v-if="event.recur_type == 'daily'">
-                <schedule-daily :frequency.sync="event.frequency"></schedule-daily>
+                <daily :frequency.sync="event.frequency"></daily>
             </template>
 
             <!-- Weekly -->
             <template v-if="event.recur_type == 'weekly'">
-                <schedule-weekly
+                <weekly
                         :day_num.sync="weekly_day_num"
                         :frequency.sync="event.frequency"
-                ></schedule-weekly>
+                ></weekly>
             </template>
 
             <!-- Monthly -->
             <template v-if="event.recur_type == 'monthly'">
-                <schedule-monthly
+                <monthly
                         :monthly_day_num.sync="monthly_day_num"
                         :frequency.sync="event.frequency"
                         :days_before_event.sync="event.days_before_event"
                         :recur_day.sync="event.recur_day"
-                ></schedule-monthly>
+                ></monthly>
             </template>
 
             <!-- Yearly -->
             <template v-if="event.recur_type == 'yearly'">
-                <schedule-yearly :frequency.sync="event.frequency"></schedule-yearly>
+                <yearly :frequency.sync="event.frequency"></yearly>
             </template>
 
             <!-- Summary -->
             <div class="row"></div>
             <label>{{ trans('general.summary') }}</label> {{ summary }}
 
+            <div class="form-group">
+                <div class="col-sm-4 col-sm-offset-3">
+                    <button type="" class="btn" @click="goBack()" v-if="emptyfields">
+                        <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
+                    </button>
+                    <button type="" class="btn" @click="goBack()" v-if="!emptyfields">
+                        <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
+                    </button>
+                    <button type="submit" class="btn btn-primary" :disabled="emptyfields">
+                        <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
+                    </button>
+                </div>
+            </div>
+
         </div>
-
-            <button type="" class="btn" @click="goBack">
-              <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
-            </button>
-            <button type="submit" class="btn btn-primary" :disabled="isValid" id="submitButton_{{ id }}">
-                <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
-            </button>
-
     </form>
 </template>
 
 <script>
+    import RouterHelpers from '../mixins/RouterHelpers.vue'
+    import { recur_options } from '../option_arrays'
+    import ModelSelector from './ModelSelector.vue'
+
     import Period from './schedule/Period.vue';
+    import Daily from './schedule/Daily.vue'
+    import Weekly from './schedule/Weekly.vue'
+    import Monthly from './schedule/Monthly.vue'
+    import Yearly from './schedule/Yearly.vue'
 
     export default {
 
         props: ['model'],
 
+        mixins: ['RouterHelpers'],
         components: {
-            ScheduleDaily: require('./schedule/Daily.vue'),
-            ScheduleWeekly: require('./schedule/Weekly.vue'),
-            ScheduleMonthly: require('./schedule/Monthly.vue'),
-            ScheduleYearly: require('./schedule/Yearly.vue'),
-            DateTimePicker: require('./DateTimePicker.vue'),
-            ScreengroupSelector : require('./ScreengroupSelector.vue'),
-            Period
+            Period,
+            Daily,
+            Weekly,
+            Monthly,
+            Yearly,
+            ModelSelector
         },
 
         data: function() {
             return {
-
+                recur_options: recur_options,
                 selected_screengroups: [],
                 weekly_day_num: [],
                 monthly_day_num: '',
-                recur_options: [
-                    {key: 'none', value: 'schedule.never'},
-                    {key: 'daily', value: 'schedule.daily'},
-                    {key: 'weekly', value: 'schedule.weekly'},
-                    {key: 'monthly', value: 'schedule.monthly'},
-                    {key: 'yearly', value: 'schedule.yearly'}
-                ]
+
             };
         },
 
         methods: {
+
+            attemptUpdateSchedule() {
+              this.updateSchedule();
+            },
 
             updateSchedule: function () {
                 // Update model stuff
@@ -117,13 +129,20 @@
 
                 var self = this
                 client({ path: `/${self.model.type}s/${self.model.id}`, entity: self.model, method: 'PUT'}).then(
-                        function (response) {
-                            console.log("updated!")
-                            // Show alert success
-                        },
-                        function (response) {
-                            // Show alert error
-                        }
+                    function (response) {
+
+                        self.$dispatch('alert', {
+                            message: self.trans('screen.updated'),
+                            options: {theme: 'success'}
+                        })
+                        self.goBack()
+                    },
+                    function (response) {
+                        self.$dispatch('alert', {
+                            message: self.trans('screen.updated_fail'),
+                            options: {theme: 'error'}
+                        })
+                    }
                 )
             },
             encodeModel() {
