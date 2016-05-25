@@ -1,21 +1,11 @@
 <template>
-    <div class="form-group">
-        <div class="form-group">
-            <label for="inputFrequency" class="control-label">
-                {{ trans('schedule.frequency') }}
-                <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('schedule.event_frequency_day_tooltip') }}"></span>
-            </label>
-            <input v-model="frequency" type="number" name="frequency" id="inputFrequency" class="form-control" v-bind:value="frequency" min='1' max='365' step='1' required="required" title="">
-        </div>
-    </div>
+    <frequency :frequency.sync="frequency"></frequency>
 </template>
 <script>
+    import Frequency from './Frequency.vue'
+
     export default {
         props: ['frequency'],
-        data() {
-            return {
-
-            }
-        }
+        components: { Frequency },
     }
 </script>

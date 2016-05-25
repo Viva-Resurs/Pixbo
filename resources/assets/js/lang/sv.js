@@ -112,7 +112,12 @@ const lang = {
         thursday:                   "Torsdag",
         friday:                     "Fredag",
         saturday:                   "Lördag",
-        sunday:                     "Söndag"
+        sunday:                     "Söndag",
+        every:                      "Varje",
+        every_two:                  "Varannan",
+        every_three:                "Var tredje",
+        every_four:                 "Var fjärde",
+        every_five:                 "Var femte"
     },
     /* ----------------------------- SCREEN ----------------------------- */
     screen: {

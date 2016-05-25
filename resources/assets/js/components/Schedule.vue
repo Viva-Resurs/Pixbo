@@ -6,15 +6,15 @@
 
         <div class="col-lg-6 col-md-6">
 
+            <legend>
+                {{ trans_choice('screengroup.model', 1) }}
+                <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_screengroup') }}"></span>
+            </legend>
             <model-selector :selected.sync="selected_screengroups"
-                                  model="screengroup"
-                                  multiple="true"
-                                  mode="count > 3"
+                            model="screengroup"
+                            multiple="true"
+                            mode="count > 3"
             >
-                <div slot="label">
-                    {{ trans_choice('screengroup.model', 1) }}
-                    <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_screengroup') }}"></span>
-                </div>
             </model-selector>
 
             <period :event.sync="model.event"></period>
@@ -23,42 +23,21 @@
 
         <div class="col-lg-6 col-md-6">
 
+            <legend>
+                {{ trans('schedule.repeat') }}
+                <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_repeat_type') }}"></span>
+            </legend>
             <model-selector :selected.sync="model.event.recur_type"
-                                  :options="recur_options"
-            >
-                <div slot="label">
-                    {{ trans('schedule.repeat') }}
-                    <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_repeat_type') }}"></span>
-                </div>
-            </model-selector>
+                            :options="recur_options"
+            ></model-selector>
 
-            <!-- Daily -->
-            <template v-if="event.recur_type == 'daily'">
-                <daily :frequency.sync="event.frequency"></daily>
-            </template>
-
-            <!-- Weekly -->
-            <template v-if="event.recur_type == 'weekly'">
-                <weekly
-                        :day_num.sync="weekly_day_num"
-                        :frequency.sync="event.frequency"
-                ></weekly>
-            </template>
-
-            <!-- Monthly -->
-            <template v-if="event.recur_type == 'monthly'">
-                <monthly
-                        :monthly_day_num.sync="monthly_day_num"
-                        :frequency.sync="event.frequency"
-                        :days_before_event.sync="event.days_before_event"
-                        :recur_day.sync="event.recur_day"
-                ></monthly>
-            </template>
-
-            <!-- Yearly -->
-            <template v-if="event.recur_type == 'yearly'">
-                <yearly :frequency.sync="event.frequency"></yearly>
-            </template>
+            <component :is="model.event.recur_type"
+                       :frequency.sync="event.frequency"
+                       :monthly_day_num.sync="monthly_day_num"
+                       :day_num.sync="weekly_day_num"
+                       :days_before_event.sync="event.days_before_event"
+                       :recur_day.sync="event.recur_day"
+            ></component>
 
             <!-- Summary -->
             <div class="row"></div>
@@ -88,10 +67,11 @@
     import ModelSelector from './ModelSelector.vue'
 
     import Period from './schedule/Period.vue';
-    import Daily from './schedule/Daily.vue'
-    import Weekly from './schedule/Weekly.vue'
-    import Monthly from './schedule/Monthly.vue'
-    import Yearly from './schedule/Yearly.vue'
+    import none from './schedule/None.vue'
+    import daily from './schedule/Daily.vue'
+    import weekly from './schedule/Weekly.vue'
+    import monthly from './schedule/Monthly.vue'
+    import yearly from './schedule/Yearly.vue'
 
     export default {
 
@@ -100,10 +80,11 @@
         mixins: ['RouterHelpers'],
         components: {
             Period,
-            Daily,
-            Weekly,
-            Monthly,
-            Yearly,
+            none,
+            daily,
+            weekly,
+            monthly,
+            yearly,
             ModelSelector
         },
 

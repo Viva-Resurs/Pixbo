@@ -1,9 +1,8 @@
 <template>
-    <legend>
-        <slot name="label">
+    <slot name="label">
 
-        </slot>
-    </legend>
+    </slot>
+
     <div class="form-group">
         <select class="form-control selectpicker show-tick"
                 v-model="selected"
@@ -23,7 +22,10 @@
             model: {
                 type: String
             },
-            options: Array,
+            options: {
+                type: Array,
+                default: val => []
+            },
             mode: {
                 type: String,
                 default: ''
@@ -31,24 +33,12 @@
             multiple: {
                 type: String,
                 default: false
-            },
-            title: String
+            }
         },
 
         data: function () {
             return {
                 models: [] /*screengroups*/
-            }
-        },
-
-        computed: {
-            getTitle() {
-                if(this.model) {
-                    console.log(`${this.model}.model`)
-                    return `${this.model}.model`
-                } else {
-                    return this.title
-                }
             }
         },
 
@@ -58,14 +48,7 @@
                 client({ path: `/${self.model}s` }).then(
                     function (response) {
                         self.$set('models', response.entity.data);
-                        self.$nextTick(function() {
-                            $('.selectpicker').selectpicker({
-                              size: 4,
-                              iconBase: 'fa',
-                              tickIcon: 'fa-check',
-                              noneSelectedText: self.trans('general.nothing_selected'),
-                            });
-                        });
+                        self.setSelectPicker();
                     },
                     function (response, status) {
                         if (_.contains([401, 500], status)) {
@@ -75,14 +58,30 @@
                 );
             },
 
+            setSelectPicker() {
+                this.$nextTick(function() {
+                    $(this.$el.nextElementSibling.children.inputModels).selectpicker({
+                        size: 4,
+                        iconBase: 'fa',
+                        tickIcon: 'fa-check',
+                        noneSelectedText: this.trans('general.nothing_selected'),
+                    });
+                });
+            }
         },
+
 
         created: function(){
             if (this.model)
                 this.getModels();
-            if (this.options)
+            if (this.options.length > 0) {
                 this.models = this.options;
+            }
         },
-
+        ready() {
+            if (this.options.length > 0) {
+                this.setSelectPicker();
+            }
+        }
     }
 </script>

@@ -1,13 +1,10 @@
 <template>
-    <div class="form-group">
-        <div class="form-group">
-            <label for="inputFrequency" class="control-label">{{ trans('schedule.frequency') }}</label>
-            <input v-model="frequency" type="number" name="frequency" id="inputFrequency" class="form-control" v-bind:value="frequency" min='1' max='365' step='1' required="required" title="">
-        </div>
-    </div>
+    <frequency :frequency.sync="frequency"></frequency>
 </template>
 <script>
+    import Frequency from './Frequency.vue'
     export default {
-        props: ['frequency']
+        props: ['frequency'],
+        components: { Frequency }
     }
 </script>
