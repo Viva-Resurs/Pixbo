@@ -37,6 +37,7 @@
 </template>
 <script>
     import Frequency from './Frequency.vue'
+    import {ordering, weekdays } from '../../option_arrays'
     export default {
         props: [
             'monthly_day_num',
@@ -49,22 +50,8 @@
 
         data() {
             return {
-                ordering: [
-                        'schedule.first',
-                        'schedule.second',
-                        'schedule.third',
-                        'schedule.fourth',
-                        'schedule.last'
-                ],
-                weekday: [
-                        'schedule.monday',
-                        'schedule.tuesday',
-                        'schedule.wednesday',
-                        'schedule.thursday',
-                        'schedule.friday',
-                        'schedule.saturday',
-                        'schedule.sunday'
-                ]
+                ordering: ordering,
+                weekday: weekdays
             }
         }
     }
