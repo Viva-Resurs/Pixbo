@@ -1,43 +1,88 @@
 <template>
+    <legend>
+        <slot name="label">
+
+        </slot>
+    </legend>
     <div class="form-group">
-        <label for="model" class="col-sm-2 col-sm-offset-1 control-label">{{ trans_choice(model + '.model', 1) }}</label>
-        <div class="col-sm-5">
-            <select name="model" id="model" class="form-control" v-model="selected">
-                <option :value="null">{{ trans(model + '.select') }}</option>
-                <option v-for="element in models" v-bind:value="element.id">{{ element.name }}</option>
-            </select>
-        </div>
+        <select class="form-control selectpicker show-tick"
+                v-model="selected"
+                id="inputModels"
+                :multiple="multiple"
+                :data-selected-text-format="mode"
+        >
+            <option v-for="model in models" v-bind:value="model.id">{{trans(model.name)}}</option>
+        </select>
     </div>
 </template>
-
-
 <script type="text/ecmascript-6">
     export default {
-        props: ['selected', 'model'],
 
-        data() {
+        props: {
+            selected: [Number, Object],
+            model: {
+                type: String
+            },
+            options: Array,
+            mode: {
+                type: String,
+                default: ''
+            },
+            multiple: {
+                type: String,
+                default: false
+            },
+            title: String
+        },
+
+        data: function () {
             return {
-                models: null
+                models: [] /*screengroups*/
             }
         },
 
-        methods: {
+        computed: {
+            getTitle() {
+                if(this.model) {
+                    console.log(`${this.model}.model`)
+                    return `${this.model}.model`
+                } else {
+                    return this.title
+                }
+            }
+        },
+
+        methods : {
             getModels() {
                 var self = this;
                 client({ path: `/${self.model}s` }).then(
-                        function (response) {
-                            self.$set('models', response.entity.data);
-                        },
-                        function (response, status) {
-                            if (_.contains([401, 500], status)) {
-                                self.$dispatch('userHasLoggedOut');
-                            }
+                    function (response) {
+                        self.$set('models', response.entity.data);
+                        self.$nextTick(function() {
+                            $('.selectpicker').selectpicker({
+                              size: 4,
+                              iconBase: 'fa',
+                              tickIcon: 'fa-check',
+                              noneSelectedText: self.trans('general.nothing_selected'),
+                            });
+                        });
+                    },
+                    function (response, status) {
+                        if (_.contains([401, 500], status)) {
+                            self.$dispatch('userHasLoggedOut');
                         }
-                )
-            }
+                    }
+                );
+            },
+
         },
-        created() {
-            this.getModels();
-        }
+
+        created: function(){
+            if (this.model)
+                this.getModels();
+            if (this.options)
+                this.models = this.options;
+        },
+
     }
 </script>
