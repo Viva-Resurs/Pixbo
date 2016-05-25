@@ -10,6 +10,7 @@ const lang = {
         invalid_credentials:        "Ogiltiga uppgifter, försök igen",
         forgot_password:            "Glömt lösenord?"
     },
+    /* ----------------------------- ROLE ----------------------------- */
     role: {
         model:                      "Användargrupp",
         select:                     "Välj användargrupp"
@@ -68,7 +69,7 @@ const lang = {
         back:                       "Tillbaka",
         save:                       "Spara",
         preview:                    "Förhandsvisa",
-        nothing_selected:           "Ingenting markerat"
+        nothing_selected:           "Inget markerat"
     },
     /* ----------------------------- SCHEDULE ----------------------------- */
     schedule: {
