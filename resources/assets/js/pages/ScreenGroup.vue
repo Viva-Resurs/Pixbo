@@ -5,7 +5,7 @@
 
             <div class="panel panel-default panel-flush">
                 <div class="panel-heading">
-                    {{ trans_choice('screengroup.model', 2) }}
+                    {{ trans('screengroup.model', 2) }}
                 </div>
                 <div class="panel-body">
                     <div class="app-tabs">

@@ -7,7 +7,7 @@
         <div class="col-lg-6 col-md-6">
 
             <legend>
-                {{ trans_choice('screengroup.model', 1) }}
+                {{ trans('screengroup.model', 1) }}
                 <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_screengroup') }}"></span>
             </legend>
             <model-selector :selected.sync="selected_screengroups"

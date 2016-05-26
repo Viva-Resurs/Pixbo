@@ -13,7 +13,7 @@
             <th>{{ trans('general.id') }}</th>
             <th>{{ trans('general.name') }}</th>
             <th>{{ trans('general.ip_address') }}</th>
-            <th>{{ trans_choice('screengroup.model', 1) }}</th>
+            <th>{{ trans('screengroup.model', 1) }}</th>
             <th width="120px">{{ trans('general.action') }}</th>
         </tr>
         </thead>

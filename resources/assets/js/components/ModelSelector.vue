@@ -11,7 +11,10 @@
                 :data-selected-text-format="mode"
         >
             <option v-for="model in models" v-bind:value="model.id">{{model.name}}</option>
-            <option v-for="option in options" v-bind:value="option.id">{{trans(option.name)}}</option>
+            <option v-for="option in options" v-bind:value="option.id">
+                <template v-if="hasType"> {{trans(option.name) + " " + trans('schedule.'+this.type,1).toLowerCase()}} </template>
+                <template v-else> {{trans(option.name)}} </template>
+            </option>
         </select>
     </div>
 </template>
@@ -34,12 +37,22 @@
             multiple: {
                 type: String,
                 default: false
+            },
+            type: {
+                type: String,
+                default: ''
             }
         },
 
         data: function () {
             return {
                 models: [] /*screengroups*/
+            }
+        },
+
+        computed: {
+            hasType(){
+                return (this.type!=='')
             }
         },
 

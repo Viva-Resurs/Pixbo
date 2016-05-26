@@ -41,3 +41,12 @@ export const weekday_abbr = [
     {name: 'schedule.saturday_short', id: 6},
     {name: 'schedule.sunday_short', id: 0},
 ]
+
+export const days_before = [
+    {id: 0, name: 'schedule.zero'},
+    {id: 1, name: 'schedule.one'},
+    {id: 2, name: 'schedule.two'},
+    {id: 3, name: 'schedule.three'},
+    {id: 4, name: 'schedule.four'},
+    {id: 5, name: 'schedule.five'},
+]
