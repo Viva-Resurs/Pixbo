@@ -127,16 +127,7 @@
                 )
             },
             encodeModel() {
-                switch (this.event.recur_type) {
-                    case "weekly":
-                        this.event.recur_day_num = JSON.stringify(this.weekly_day_num);
-                            console.log("WEEKLY: " + this.event.day_num)
-                        break;
-                    case "monthly":
-                        this.event.recur_day_num = JSON.stringify(this.monthly_day_num);
-                            console.log("MONTHLY")
-                        break;
-                }
+                this.event.weekly_day_num = JSON.stringify(this.weekly_day_num);
                 this.model.screengroups = this.selected_screengroups;
             },
             decodeModel() {
@@ -146,22 +137,7 @@
                         that.selected_screengroups.push(entry.id)
                     })
                 }
-                if(this.model.event.recur_day_num != null) {
-                    var days = JSON.parse(this.event.recur_day_num)
-                    switch (this.event.recur_type) {
-                        case "weekly":
-                            this.monthly_day_num = "1"
-                            this.weekly_day_num = days;
-                            break;
-                        case "monthly":
-                            this.monthly_day_num = days;
-                            this.weekly_day_num = [];
-                            break;
-                    }
-                } else {
-                    this.monthly_day_num = "1";
-                    this.weekly_day_num = [];
-                }
+                this.weekly_day_num = JSON.parse(this.event.weekly_day_num)
             }
         },
 

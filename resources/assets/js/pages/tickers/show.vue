@@ -7,6 +7,19 @@
     </div>
     <div v-if=" ! $loadingRouteData">
         <div class="panel-body">
+
+            <template v-if="model.type == 'ticker'">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <input type="text" v-model="model.text" name="ticker_text" id="inputTickerText" class="form-control" title="" required="required">
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+
+
             <form class="form-horizontal" role="form" v-on:submit="updateTicker">
                 <fieldset disabled>
                     <div class="form-group">

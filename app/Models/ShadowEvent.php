@@ -10,7 +10,6 @@ class ShadowEvent extends Model
 
     protected $fillable = [
         'title',
-        'isAllDay',
         'start',
         'end',
     ];

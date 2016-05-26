@@ -9,9 +9,10 @@
                 id="inputModels"
                 :multiple="multiple"
                 :data-selected-text-format="mode"
+                v-el:select-input
         >
-            <option v-for="model in models" v-bind:value="model.id">{{model.name}}</option>
-            <option v-for="option in options" v-bind:value="option.id">
+            <option v-for="element in models" :value="element.id">{{element.name}}</option>
+            <option v-for="option in options" :value="option.id">
                 <template v-if="hasType"> {{trans(option.name) + " " + trans('schedule.'+this.type,1).toLowerCase()}} </template>
                 <template v-else> {{trans(option.name)}} </template>
             </option>
@@ -53,6 +54,9 @@
         computed: {
             hasType(){
                 return (this.type!=='')
+            },
+            isModel() {
+                return (this.model!=='')
             }
         },
 
@@ -74,7 +78,7 @@
 
             setSelectPicker() {
                 this.$nextTick(function() {
-                    $(this.$el.nextElementSibling.children.inputModels).selectpicker({
+                    $(this.$els.selectInput).selectpicker({
                         size: 4,
                         iconBase: 'fa',
                         tickIcon: 'fa-check',
