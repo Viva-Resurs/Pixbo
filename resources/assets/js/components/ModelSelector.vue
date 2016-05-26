@@ -10,7 +10,8 @@
                 :multiple="multiple"
                 :data-selected-text-format="mode"
         >
-            <option v-for="model in models" v-bind:value="model.id">{{trans(model.name)}}</option>
+            <option v-for="model in models" v-bind:value="model.id">{{model.name}}</option>
+            <option v-for="option in options" v-bind:value="option.id">{{trans(option.name)}}</option>
         </select>
     </div>
 </template>
@@ -70,18 +71,11 @@
             }
         },
 
-
-        created: function(){
+        created(){
             if (this.model)
                 this.getModels();
-            if (this.options.length > 0) {
-                this.models = this.options;
-            }
-        },
-        ready() {
-            if (this.options.length > 0) {
+            if (this.options.length > 0)
                 this.setSelectPicker();
-            }
-        }
+        },
     }
 </script>
