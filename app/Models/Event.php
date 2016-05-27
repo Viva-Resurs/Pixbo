@@ -33,15 +33,15 @@ class Event extends Model
         parent::boot();
 
         Event::created(function($event) {
-            //$event->generateShadowEvents($event);
+            $event->generateShadowEvents($event);
         });
 
         Event::deleting(function($event) {
-            //$event->shadow_events()->delete();
+            $event->shadow_events()->delete();
         });
         Event::updated(function ($event) {
-            //$event->shadow_events()->delete();
-            //$event->generateShadowEvents($event);
+            $event->shadow_events()->delete();
+            $event->generateShadowEvents($event);
         });
     }
 

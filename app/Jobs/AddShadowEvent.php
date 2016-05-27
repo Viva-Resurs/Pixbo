@@ -30,6 +30,8 @@ class AddShadowEvent extends Job implements SelfHandling
     public function handle()
     {
         if (is_null($this->event->eventable)) {
+            // TODO: There is a nasty bug somewhere that messes up the data, so when it gets here it blows up
+            dd($this->event);
             return;
         }
 
@@ -42,12 +44,11 @@ class AddShadowEvent extends Job implements SelfHandling
         $shadow->title = $this->event->id;
         $shadow->start = $this->start;
 
-        $timeArray = !is_null($this->event['end_time']) ? extractTime($this->event['end_time']) : extractTime('23:59:59');
+        $timeArray = !is_null($this->event['end_time']) ? extractTime($this->event['end_time']) : extractTime('17:30:00');
         $end = Carbon::parse($this->start);
         $end->hour = $timeArray[0];
         $end->minute = $timeArray[1];
         $shadow->end = $end;
-        $shadow->isAllDay = 1;
 
         $this->event->shadow_events()->save($shadow);
 
