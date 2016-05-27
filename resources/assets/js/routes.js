@@ -121,15 +121,6 @@ module.exports = {
                     '/:id': {
                         name: 'tickers.show',
                         component: require('./pages/tickers/show.vue'),
-
-                        subRoutes: {
-                            '/': {
-                                component: require('./pages/tickers/basic.vue')
-                            },
-                            '/advanced': {
-                                component: require('./pages/tickers/advanced.vue')
-                            }
-                        }
                     },
                     '/create': {
                         name: 'tickers.create',
