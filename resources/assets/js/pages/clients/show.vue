@@ -45,10 +45,18 @@
                         >
                     </div>
                 </div>
-
-                <span v-form-ctrl="client.screen_group_id" name="screengroup" required>
-                    <model-selector :selected.sync="client.screen_group_id" model="screengroup"></model-selector>
-                </span>
+                    
+                <div class="form-group">
+                    <span v-form-ctrl="client.screen_group_id" name="screengroup" required>
+                        <model-selector :selected.sync="client.screen_group_id" model="screengroup" classes="col-sm-5">
+                        <div slot="label">
+                            <label for="inputModels" class="col-sm-2 col-sm-offset-1 control-label">
+                                {{ trans('screengroup.model',1) }}
+                            </label>
+                        </div>
+                    </model-selector>
+                    </span>
+                </div>
 
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-3">

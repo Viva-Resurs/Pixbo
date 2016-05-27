@@ -3,12 +3,13 @@
 
     </slot>
 
-    <div class="form-group">
+    <div :class="classes">
         <select class="form-control selectpicker show-tick"
                 v-model="selected"
                 id="inputModels"
                 :multiple="multiple"
                 :data-selected-text-format="mode"
+                v-el:select-input
         >
             <option v-for="model in models" v-bind:value="model.id">{{model.name}}</option>
             <option v-for="option in options" v-bind:value="option.id">
@@ -41,6 +42,10 @@
             type: {
                 type: String,
                 default: ''
+            },
+            classes: {
+                type: String,
+                default: 'form-group'
             }
         },
 
@@ -74,7 +79,7 @@
 
             setSelectPicker() {
                 this.$nextTick(function() {
-                    $(this.$el.nextElementSibling.children.inputModels).selectpicker({
+                    $(this.$els.selectInput).selectpicker({
                         size: 4,
                         iconBase: 'fa',
                         tickIcon: 'fa-check',
