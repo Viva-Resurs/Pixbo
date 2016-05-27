@@ -4,7 +4,7 @@
         <div class="col-md-3">
             <div class="panel panel-default panel-flush">
                 <div class="panel-heading">
-                    {{ trans_choice('category.model',2) }}
+                    {{ trans('category.model',2) }}
                 </div>
                 <div class="panel-body">
                     <div class="app-tabs">

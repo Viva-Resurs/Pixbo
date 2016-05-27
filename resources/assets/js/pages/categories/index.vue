@@ -19,7 +19,7 @@
                 <tr>
                     <th>{{ trans('general.id') }}</th>
                     <th>{{ trans('general.name') }}</th>
-                    <th>{{ trans_choice('screen.model', 2) }}</th>
+                    <th>{{ trans('screen.model', 2) }}</th>
                     <th width="120px">{{ trans('general.action') }}</th>
                 </tr>
             </thead>

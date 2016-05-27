@@ -40,8 +40,15 @@
                     >
                 </div>
             </div>
+
             <span v-form-ctrl="client.screen_group_id" name="screengroup" required>
-                <model-selector :selected.sync="client.screen_group_id" model="screengroup"></model-selector>
+                <model-selector :selected.sync="client.screen_group_id"
+                                model="screengroup"
+                >
+                    <div slot="label">
+                        {{ trans('screengroup.model') }}
+                    </div>
+                </model-selector>
             </span>
 
             <div class="form-group">
@@ -107,12 +114,6 @@
                         that.$route.router.go('/clients')
                     },
                     function (response, status) {
-                        /*
-                         for (var key in response.entity.error.errors) {
-                         that.$dispatch('alert', {message: response.entity.error.errors[key][0]})
-                         that.creating = false
-                         }
-                         */
                         that.$dispatch('alert', {
                             message: that.trans('client.created_fail'),
                             options: {theme: 'error'}

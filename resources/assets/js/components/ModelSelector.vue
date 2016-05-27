@@ -1,43 +1,98 @@
 <template>
+    <slot name="label">
+
+    </slot>
+
     <div class="form-group">
-        <label for="model" class="col-sm-2 col-sm-offset-1 control-label">{{ trans_choice(model + '.model', 1) }}</label>
-        <div class="col-sm-5">
-            <select name="model" id="model" class="form-control" v-model="selected">
-                <option :value="null">{{ trans(model + '.select') }}</option>
-                <option v-for="element in models" v-bind:value="element.id">{{ element.name }}</option>
-            </select>
-        </div>
+        <select class="form-control selectpicker show-tick"
+                v-model="selected"
+                id="inputModels"
+                :multiple="multiple"
+                :data-selected-text-format="mode"
+                v-el:select-input
+        >
+            <option v-for="element in models" :value="element.id">{{element.name}}</option>
+            <option v-for="option in options" :value="option.id">
+                <template v-if="hasType"> {{trans(option.name) + " " + trans('schedule.'+this.type,1).toLowerCase()}} </template>
+                <template v-else> {{trans(option.name)}} </template>
+            </option>
+        </select>
     </div>
 </template>
-
-
 <script type="text/ecmascript-6">
     export default {
-        props: ['selected', 'model'],
 
-        data() {
-            return {
-                models: null
+        props: {
+            selected: [Number, Object],
+            model: {
+                type: String
+            },
+            options: {
+                type: Array,
+                default: val => []
+            },
+            mode: {
+                type: String,
+                default: ''
+            },
+            multiple: {
+                type: String,
+                default: false
+            },
+            type: {
+                type: String,
+                default: ''
             }
         },
 
-        methods: {
+        data: function () {
+            return {
+                models: [] /*screengroups*/
+            }
+        },
+
+        computed: {
+            hasType(){
+                return (this.type!=='')
+            },
+            isModel() {
+                return (this.model!=='')
+            }
+        },
+
+        methods : {
             getModels() {
                 var self = this;
                 client({ path: `/${self.model}s` }).then(
-                        function (response) {
-                            self.$set('models', response.entity.data);
-                        },
-                        function (response, status) {
-                            if (_.contains([401, 500], status)) {
-                                self.$dispatch('userHasLoggedOut');
-                            }
+                    function (response) {
+                        self.$set('models', response.entity.data);
+                        self.setSelectPicker();
+                    },
+                    function (response, status) {
+                        if (_.contains([401, 500], status)) {
+                            self.$dispatch('userHasLoggedOut');
                         }
-                )
+                    }
+                );
+            },
+
+            setSelectPicker() {
+                this.$nextTick(function() {
+                    $(this.$els.selectInput).selectpicker({
+                        size: 4,
+                        iconBase: 'fa',
+                        tickIcon: 'fa-check',
+                        noneSelectedText: this.trans('general.nothing_selected'),
+                    });
+                });
             }
         },
-        created() {
-            this.getModels();
-        }
+
+        created(){
+            if (this.model)
+                this.getModels();
+            if (this.options.length > 0)
+                this.setSelectPicker();
+        },
     }
 </script>

@@ -21,11 +21,10 @@ class Event extends Model
         'end_time',
         'frequency',
         'recur_type',
-        'recur_day_num',
+        'weekly_day_num',
+        'monthly_day_num',
         'recur_day',
-        'days_before_event',
-        'eventable_id',
-        'eventable_type',
+        'days_before_event'
     ];
 
     protected $touches = ['eventable'];
@@ -34,15 +33,15 @@ class Event extends Model
         parent::boot();
 
         Event::created(function($event) {
-            $event->generateShadowEvents($event);
+            //$event->generateShadowEvents($event);
         });
 
         Event::deleting(function($event) {
-            $event->shadow_events()->delete();
+            //$event->shadow_events()->delete();
         });
         Event::updated(function ($event) {
-            $event->shadow_events()->delete();
-            $event->generateShadowEvents($event);
+            //$event->shadow_events()->delete();
+            //$event->generateShadowEvents($event);
         });
     }
 
@@ -55,37 +54,4 @@ class Event extends Model
     {
         return $this->morphTo();
     }
-
-
-    public function getFrequencyAttribute($value)
-    {
-        return !is_null($value) ? $value : '1';
-    }
-
-    public function getStartTimeAttribute($value)
-    {
-        return !is_null($value) ? $value : '00:00';
-    }
-
-    public function getEndTimeAttribute($value)
-    {
-        return !is_null($value) ? $value : '23:59';
-    }
-
-    public function getDaysBeforeEventAttribute($value)
-    {
-        return !is_null($value) ? $value : '0';
-    }
-
-    /*
-    public function getRecurDayAttribute($value)
-    {
-        return !is_null($value) ? $value : '1';
-    }
-
-    public function getRecurDayNumAttribute($value)
-    {
-        return !is_null($value) ? $value : json_encode("1");
-    }
-    */
 }

@@ -1,43 +1,36 @@
 <template>
-    <div class="form-group">
-        <div class="form-group">
-            <label for="inputFrequency" class="control-label">
-                {{ trans('schedule.frequency') }}
-                <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('schedule.event_frequency_week_tooltip') }}"></span>
-            </label>
-            <input v-model="frequency" type="number" name="frequency" id="inputFrequency" class="form-control" v-bind:value="frequency" min='1' max='365' step='1' required="required" title="">
-        </div>
-    </div>
+    <frequency :frequency.sync="frequency" type="week"></frequency>
 
     <div class="form-group">
         <div class="form-group">
             <label class="control-label">
                 {{ trans('schedule.weekdays') }}
-                <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('schedule.event_frequency_week_tooltip') }}"></span>
+                <span class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="{{ trans('schedule.tooltip_event_week_days') }}"></span>
             </label>
 
             <br>
             <label v-for="day in weekdays">
-                {{ trans(day.text) }}
-                <input v-model="day_num" type="checkbox" :value="day.value" :id="$index">
+                {{ trans(day.name) }}
+                <input v-model="day_num" type="checkbox" :value="day.id" :id="$index">
             </label>
         </div>
     </div>
 </template>
 <script>
+    import Frequency from './Frequency.vue'
+    import { weekday_abbr } from '../../option_arrays'
     export default {
-        props: ['day_num', 'frequency'],
+        props: [
+            'frequency',
+            'monthly_day_num',
+            'day_num',
+            'days_before_event',
+            'recur_day'
+        ],
+        components: { Frequency },
         data() {
             return {
-                weekdays: [
-                    {text: 'schedule.monday_short', value: 1},
-                    {text: 'schedule.tuesday_short', value: 2},
-                    {text: 'schedule.wednesday_short', value: 3},
-                    {text: 'schedule.thursday_short', value: 4},
-                    {text: 'schedule.friday_short', value: 5},
-                    {text: 'schedule.saturday_short', value: 6},
-                    {text: 'schedule.sunday_short', value: 0},
-                ],
+                weekdays:weekday_abbr
             }
         },
     }
