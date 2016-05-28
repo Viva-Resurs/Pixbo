@@ -42,13 +42,12 @@
             </div>
 
             <span v-form-ctrl="client.screen_group_id" name="screengroup" required>
-                <model-selector :selected.sync="client.screen_group_id"
-                                model="screengroup"
-                >
-                    <div slot="label">
-                        {{ trans('screengroup.model') }}
-                    </div>
-                </model-selector>
+                <model-selector :selected.sync="client.screen_group_id" model="screengroup" classes="col-sm-5">
+                        <div slot="label">
+                            <label for="inputModels" class="col-sm-2 col-sm-offset-1 control-label">
+                                {{ trans('screengroup.model',1) }}
+                            </label>
+                        </div>
             </span>
 
             <div class="form-group">
@@ -83,7 +82,7 @@
                 client: {
                     name: '',
                     ip_address: '',
-                    screen_group_id: null
+                    screen_group_id: 1
                 },
                 myform: [],
                 creating: false,
