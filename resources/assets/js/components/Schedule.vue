@@ -32,11 +32,8 @@
             ></model-selector>
 
             <component :is="model.event.recur_type"
-                       :frequency.sync="event.frequency"
-                       :monthly_day_num.sync="monthly_day_num"
-                       :day_num.sync="weekly_day_num"
-                       :days_before_event.sync="event.days_before_event"
-                       :recur_day.sync="event.recur_day"
+                       :event.sync="event"
+                       :weekly_day_num.sync="weekly_day_num"
             ></component>
 
             <!-- Summary -->
@@ -92,9 +89,7 @@
             return {
                 recur_options: recur_options,
                 selected_screengroups: [],
-                weekly_day_num: [],
-                monthly_day_num: '',
-
+                weekly_day_num: []
             };
         },
 
@@ -118,11 +113,15 @@
                         })
                         self.goBack()
                     },
-                    function (response) {
-                        self.$dispatch('alert', {
-                            message: self.trans('screen.updated_fail'),
-                            options: {theme: 'error'}
-                        })
+                    function (response, status, request) {
+                        if (status === 401) {
+                            self.$dispatch('userHasLoggedOut')
+                        } else {
+                            self.$dispatch('alert', {
+                                message: self.trans('screen.updated_fail'),
+                                options: {theme: 'error'}
+                            })
+                        }
                     }
                 )
             },
@@ -148,7 +147,6 @@
             event() {
                 return this.model.event;
             },
-
             isValid: function() {
                 // TODO: Fix Validation.
                 // 
