@@ -97,26 +97,11 @@ trait HasShadowEvents
      */
     public function generateShadowEvents(Event $event)
     {
-        switch ($event->recur_type) {
-
-            case 'daily':
-                $this->generateDaily($event);
-                break;
-            case 'weekly':
-                $this->generateWeekly($event);
-                break;
-            case 'monthly':
-                $this->generateMonthly($event);
-                break;
-            case 'yearly':
-                $this->generateYearly($event);
-                break;
-            case '':
-                $this->generateOnce($event);
-        }
+        $type = 'generate'.ucfirst($event->recur_type);
+        $this->$type($event);
     }
 
-    private function generateOnce(Event $event)
+    private function generateNone(Event $event)
     {
         $date = $this->getDate($event);
 
