@@ -40,7 +40,7 @@ trait HasShadowEvents
     protected $duration = [
         'daily' => 14, // days
         'weekly' => 2, // weeks
-        'monthly' => 2, // months
+        'monthly' => 6, // months
         'yearly' => 2, // years
     ];
 
@@ -222,17 +222,15 @@ trait HasShadowEvents
              $initial->lte($end);
              $initial = $initial->addMonths($frequency)) {
                 $date_string = $this->order[$week_in_month] . ' ' .
-                $this->days[$weekDay] . ' ' .
-                $this->months[$initial->month] . ' ' .
-                $initial->year;
+                    $this->days[$weekDay] . ' ' .
+                    $this->months[$initial->month] . ' ' .
+                    $initial->year;
             $date = Carbon::parse($date_string);
-            if ($week_in_month == 1 && $date->day >= 7) {
-                $date->subDays(7);
-            }
 
             if ($date->gte($start) && $date->lte($end)) {
                 $date->hour = $start_date->hour;
                 $date->minute = $start_date->minute;
+
                 if (!is_null($days_ahead) && $days_ahead > 0) {
                     for ($i = $days_ahead; $i >= 0; $i--) {
                         $ahead_date = Carbon::parse($date)->subDays($i);
