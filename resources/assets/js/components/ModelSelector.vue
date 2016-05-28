@@ -3,7 +3,7 @@
 
     </slot>
 
-    <div class="form-group">
+    <div :class="classes">
         <select class="form-control selectpicker show-tick"
                 v-model="selected"
                 id="inputModels"
@@ -42,6 +42,10 @@
             type: {
                 type: String,
                 default: ''
+            },
+            classes: {
+                type: String,
+                default: 'form-group'
             }
         },
 
