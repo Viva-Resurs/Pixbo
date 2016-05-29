@@ -29,24 +29,23 @@ class ScreenUpdateForm extends Request
     {
         // TODO: Add validation to the screen updates.
         return [
-            //'selected_tags' => 'required'
         ];
     }
 
-    public function persist() {
+    public function persist(Screen $screen) {
         $newScreen = $this->all();
         $newEvent = $newScreen['event'];
         $newScreengroups = $newScreen['screengroups'];
 
-        $screen = Screen::with(['screengroups', 'event'])->findOrFail($newScreen['id']);
+        
         $event = $screen->event->first();
         $event->update($newEvent);
         $screen->screengroups()->sync($newScreengroups);
 
         if($screen->update($newScreen)) {
-         return true;
-        } else {
-            return false;
+            return true;
         }
+
+        return false;
     }
 }
