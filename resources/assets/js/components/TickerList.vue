@@ -12,6 +12,7 @@
         <tr>
             <th>{{ trans('general.id') }}</th>
             <th>{{ trans('general.text') }}</th>
+            <th>{{ trans('screengroup.model') }}</th>
             <th width="120px">{{ trans('general.action') }}</th>
         </tr>
         </thead>
@@ -19,6 +20,8 @@
         <tr v-for="ticker in tickers">
             <td>{{ ticker.id }}</td>
             <td><a v-link="{ path: '/tickers/'+ticker.id }">{{ ticker.text }}</a></td>
+            <!-- TODO: Minify name and link? -->
+            <td><span v-for="sg in getScreengroup(ticker)">{{ sg.name }} </span></td>
             <td>
                 <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/tickers/'+ticker.id }"
                    v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
@@ -37,6 +40,9 @@
         methods: {
             removeTicker(index) {
                 this.$dispatch('remove-ticker', index)
+            },
+            getScreengroup(ticker) {
+                return ticker.screengroups;
             }
         }
     }
