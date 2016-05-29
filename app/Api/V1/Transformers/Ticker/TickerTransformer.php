@@ -18,8 +18,9 @@ class TickerTransformer extends TransformerAbstract
     {
         return [
             'id' 	            => (int) $ticker->id,
+            'type'              => 'ticker',
             'text'              => $ticker->text,
-            'event'	            => $ticker->event,
+            'event'	            => $ticker->event->first(),
             'screengroups'      => $ticker->screengroups,
         ];
     }

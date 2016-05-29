@@ -1,63 +1,37 @@
 <template>
     <div class="panel-heading">
-        {{ trans('ticker.edit') }}
+        {{ trans('screen.edit') }}
     </div>
     <div class="panel-body" v-if="$loadingRouteData">
         <loading></loading>
     </div>
+
     <div v-if=" ! $loadingRouteData">
         <div class="panel-body">
-
-            <template v-if="model.type == 'ticker'">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <input type="text" v-model="model.text" name="ticker_text" id="inputTickerText" class="form-control" title="" required="required">
+            <schedule :model.sync="ticker">
+                <div slot="model_specific_setting">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <input type="text" v-model="ticker.text" name="ticker_text" id="inputTickerText" class="form-control" title="" required="required">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </template>
-
-
-            <schedule :model.sync="ticker" :screengroups="screengroups"></schedule>
-
-            <div class="form-group">
-                <div class="col-sm-4 col-sm-offset-3">
-                    <button type="" class="btn" v-link="{ path: '/tickers/' }" v-if="emptyfields">
-                        <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
-                    </button>
-                    <button type="" class="btn" v-link="{ path: '/tickers/' }" v-if="!emptyfields">
-                        <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
-                    </button>
-                    <button type="submit" class="btn btn-primary" :disabled="emptyfields">
-                        <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
-                    </button>
-                </div>
-            </div>
+            </schedule>
         </div>
     </div>
 </template>
 
 <script>
     import Schedule from '../../components/Schedule.vue'
+    export default {
 
-    module.exports = {
+        components: { Schedule },
 
         data: function () {
             return {
-                ticker: {
-                    id: null,
-                    text: null,
-                }
-            }
-        },
-
-        computed: {
-            emptyfields: function(){
-                return (this.ticker.text=='') ? true : false;
-            },
-            isValid() {
-                // TODO: Add validation
+                ticker: {}
             }
         },
 
@@ -65,40 +39,17 @@
             fetch: function (id, successHandler) {
                 var that = this
                 client({ path: '/tickers/' + id }).then(
-                    function (response) {
-                        that.$set('ticker', response.entity.ticker)
-                        successHandler(response.entity.ticker)
-                    },
-                    function (response, status, request) {
-                        if (status === 401) {
-                            self.$dispatch('userHasLoggedOut')
-                        } else {
-                            console.log(response)
+                        function (response) {
+                            that.$set('ticker', response.entity.data)
+                            successHandler(response.entity.data)
+                        },
+                        function (response, status, request) {
+                            if (status === 401) {
+                                self.$dispatch('userHasLoggedOut')
+                            }
                         }
-                    }
-                )
-            },
-
-            updateTicker: function (e) {
-                e.preventDefault();
-                var self = this;
-                client({ path: '/tickers/' + this.ticker.id, entity: this.ticker, method: 'PUT'}).then(
-                    function (response) {
-                        self.$dispatch('alert', {
-                            message: self.trans('ticker.created'),
-                            options: {theme: 'success'}
-                        })
-                        self.$route.router.go('/tickers')
-                    },
-                    function (response) {
-                        self.$dispatch('alert', {
-                            message: self.trans('ticker.created_fail'),
-                            options: {theme: 'error'}
-                        })
-                    }
                 )
             }
-
         },
 
         route: {

@@ -64,12 +64,9 @@ class TickerController extends BaseController
         if (Gate::denies('view_tickers')) {
             $this->response->error('permission_denied', 401);
         }
-        $ticker = Ticker::find($id);
-        if(!$ticker) {
-            throw new NotFoundHttpException;
-        }
+        $ticker = Ticker::findOrFail($id);
 
-        return $ticker;
+        return $this->item($ticker, new TickerTransformer());
     }
 
     /**
@@ -83,11 +80,7 @@ class TickerController extends BaseController
         if (Gate::denies('edit_tickers')) {
             $this->response->error('permission_denied', 401);
         }
-        $ticker = Ticker::find($id);
-
-        if(!$ticker) {
-            throw new NotFoundHttpException;
-        }
+        $ticker = Ticker::findOrFail($id);
 
         $result = $form->persist($ticker);
 
