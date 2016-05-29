@@ -32,10 +32,11 @@ class Event extends Model
     public static function boot() {
         parent::boot();
 
+        /*
         Event::created(function($event) {
             $event->generateShadowEvents($event);
         });
-
+*/
         Event::deleting(function($event) {
             $event->shadow_events()->delete();
         });
