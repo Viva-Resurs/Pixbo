@@ -108,7 +108,7 @@
                     function (response) {
 
                         self.$dispatch('alert', {
-                            message: self.trans('screen.updated'),
+                            message: self.trans(self.model.type + '.updated'),
                             options: {theme: 'success'}
                         })
                         self.goBack()
