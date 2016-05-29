@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Settings;
 use Illuminate\Http\Request;
 
 class PlayerController extends Controller {
@@ -35,7 +36,13 @@ class PlayerController extends Controller {
             return abort(404, trans('exceptions.client_not_found'));
         }
 
-        return $client->getData();
+        return [
+            'photo_list' => $client->getPhotos(),
+            'tickers'    => $client->getTickers(),
+            'updated_at' => $client->getLastUpdated(),
+            'settings'   => Settings::getSettings(),
+            'reboot'     => false
+        ];
     }
 
 }

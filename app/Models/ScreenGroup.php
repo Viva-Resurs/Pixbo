@@ -3,29 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Client;
-//use App\Models\Screen;
-//use DB;
-//use Event as E;
 
-/**
- * App\Models\ScreenGroup
- *
- * @property integer $id
- * @property string $name
- * @property string $desc
- * @property integer $user_id
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Client[] $clients
- * @method static \Illuminate\Database\Query\Builder|\App\Models\ScreenGroup whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\ScreenGroup whereName($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\ScreenGroup whereDesc($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\ScreenGroup whereUserId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\ScreenGroup whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\ScreenGroup whereUpdatedAt($value)
- * @mixin \Eloquent
- */
 class ScreenGroup extends Model
 {
     /**
@@ -58,51 +36,40 @@ class ScreenGroup extends Model
     }
 
     /**
-     * Remove a screen from the screengroup
-     * @param  Screen $screen [description]
-     * @return [type]         [description]
-     */
-    /*
-    public function remove_screen(Screen $screen) {
-        // Detach the screen from the screen group
-        $this->screens()->detach($screen);
-        // clear and generate new shadow events for the screen.
-        E::fire('GenerateFromEvent', $screen->event->first());
-    }
-    public function remove_ticker(Ticker $ticker) {
-        // Detach the screen from the screen group
-        $this->tickers()->detach($ticker);
-        // clear and generate new shadow events for the screen.
-        E::fire('GenerateFromEvent', $ticker->event->first());
-    }
-    */
-    /**
      * Client association
      * @return [type] [description]
      */
     public function clients() {
         return $this->hasMany(Client::class);
     }
-    /*
-    public function assignOrCreateAndAssign($photo) {
-        $screen = $photo->screen;
-        if (!is_null($screen)) {
-            if (!$screen->screengroups->contains($this->getAttribute('id'))) {
-                $this->screens()->save($screen);
-                return true;
-            }
-        } else {
-            $result = DB::transaction(function () use ($photo) {
-                $screen = new Screen;
-                $screen->fill([
-                    'name' => $photo->name,
-                ]);
-                $screen->save();
-                $screen->photo()->save($photo);
-                $this->screens()->attach($screen);
+
+    /**
+     * Returns an array of all active photos.
+     *
+     * @return array
+     */
+    public function getActivePhotos() {
+        return $this->screens->load(['event', 'event.shadow_events'])
+            ->flatMap(function ($screen) {
+                $event = $screen->getActiveEvents();
+                if(!$event->isEmpty()) {
+                    return $screen->photo->pluck('path');
+                }
             });
-            return $result;
-        }
     }
-    */
+
+    /**
+     * Returns an array of all active tickers.
+     *
+     * @return array
+     */
+    public function getActiveTickers() {
+        return $this->tickers->load(['event', 'event.shadow_events'])
+            ->flatMap(function ($ticker) {
+                $event = $ticker->getActiveEvents();
+                if(!$event->isEmpty()) {
+                    return $ticker->pluck('text');
+                }
+            });
+    }
 }
