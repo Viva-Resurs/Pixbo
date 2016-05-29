@@ -8,16 +8,23 @@
 
     <div v-if=" ! $loadingRouteData">
         <div class="panel-body">
-            <schedule :model.sync="screen"></schedule>
+            <schedule :model.sync="screen">
+                <div slot="model_specific_setting">
+                    <model-selector :selected.sync="screen.category"
+                                    model="category"
+                    ></model-selector>
+                </div>
+            </schedule>
         </div>
     </div>
 </template>
 
 <script>
     import Schedule from '../../components/Schedule.vue'
+    import ModelSelector from '../../components/ModelSelector.vue'
     export default {
 
-        components: { Schedule },
+        components: { Schedule, ModelSelector },
 
         data: function () {
             return {
