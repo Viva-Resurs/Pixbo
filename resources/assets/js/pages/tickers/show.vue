@@ -10,13 +10,8 @@
         <div class="panel-body">
             <schedule :model.sync="ticker">
                 <div slot="model_specific_setting">
-                    <div class="col-lg-12">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <input type="text" v-model="ticker.text" name="ticker_text" id="inputTickerText" class="form-control" title="" required="required">
-                            </div>
-                        </div>
-                    </div>
+                    <!-- TODO: Add markup -->
+                    <input type="text" v-model="ticker.text" name="ticker_text" id="inputTickerText" class="form-control" title="" required="required">
                 </div>
             </schedule>
         </div>

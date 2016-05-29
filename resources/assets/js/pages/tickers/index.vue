@@ -37,9 +37,9 @@
                         that.$set('tickers', response.entity.data)
                         successHandler(response.entity.data)
                     },
-                    function (response, status) {
-                        if (_.contains([401, 500], status)) {
-                            that.$dispatch('userHasLoggedOut')
+                    function (response, status, request) {
+                        if (status === 401) {
+                            self.$dispatch('userHasLoggedOut')
                         }
                     }
                 )
