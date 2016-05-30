@@ -1,47 +1,58 @@
 <template>
-    <form v-on:submit.prevent="attemptUpdateSchedule">
+
+    <form class="form-horizontal" v-on:submit.prevent="attemptUpdateSchedule">
+
         <slot name="model_specific_setting">
 
         </slot>
 
         <div class="col-lg-6 col-md-6">
 
-            <legend>
-                {{ trans('screengroup.model', 1) }}
-                <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_screengroup') }}"></span>
-            </legend>
-            <model-selector :selected.sync="selected_screengroups"
-                            model="screengroup"
-                            multiple="true"
-                            mode="count > 3"
-            >
-            </model-selector>
+            <div>
+                <label for="text" class="schedule_label">
+                    {{ trans('screengroup.model', 1) }}
+                    <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_screengroup') }}"></span>
+                </label>
+                <model-selector :selected.sync="selected_screengroups"
+                                model="screengroup"
+                                multiple="true"
+                                mode="count > 3"
+                                classes="schedule_input"
+                >
+                </model-selector>
+            </div>
 
             <period :event.sync="model.event"></period>
+
 
         </div>
 
         <div class="col-lg-6 col-md-6">
 
-            <legend>
-                {{ trans('schedule.repeat') }}
-                <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_repeat_type') }}"></span>
-            </legend>
-            <model-selector :selected.sync="model.event.recur_type"
-                            :options="recur_options"
-            ></model-selector>
+            <div>
+                <label for="text" class="schedule_label">
+                    {{ trans('schedule.repeat') }}
+                    <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_repeat_type') }}"></span>
+                </label>
+                <model-selector :selected.sync="model.event.recur_type"
+                                :options="recur_options"
+                                classes="schedule_input"
+                >
+                </model-selector>
+            </div>
 
-            <component :is="model.event.recur_type"
-                       :event.sync="event"
-                       :weekly_day_num.sync="weekly_day_num"
-            ></component>
+                <component :is="model.event.recur_type"
+                           :event.sync="event"
+                           :weekly_day_num.sync="weekly_day_num"
+                ></component>
+
 
             <!-- Summary -->
-            <div class="row"></div>
-            <label>{{ trans('general.summary') }}</label> {{ summary }}
 
-            <div class="form-group">
-                <div class="col-sm-4 col-sm-offset-3">
+                <label>{{ trans('general.summary') }}</label> {{ summary }}
+
+
+            <div>
                     <button type="" class="btn" @click="goBack()" v-if="emptyfields">
                         <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                     </button>
@@ -51,11 +62,12 @@
                     <button type="submit" class="btn btn-primary" :disabled="emptyfields">
                         <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                     </button>
-                </div>
             </div>
 
         </div>
+
     </form>
+
 </template>
 
 <script>

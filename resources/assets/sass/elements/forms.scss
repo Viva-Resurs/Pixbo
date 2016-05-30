@@ -2,13 +2,40 @@
 	label {
     	font-weight: 300;
     }
+
+    .model_label {
+        @extend .col-sm-2, .col-sm-offset-1, .control-label;
+    }
+    
+    .model_input {
+        @extend .col-sm-7;
+    }
+
+    .model_action {
+        @extend .col-sm-6, .col-sm-offset-3;
+    }
+    
+    .schedule_label {
+        @extend .control-label;
+    }
+    
+    .schedule_input {
+
+    }
+
+    .schedule_action {
+
+    }
+
+
+    /*
     form > div.panel-body > div.form-group > label {
-    	@extend .col-sm-2, .col-sm-offset-1;
+        @extend .col-sm-2, .col-sm-offset-1;
     }
     form > div.panel-body > div.form-group > div {
-    	@extend .col-sm-7;
+        @extend .col-sm-7;
     }
-    /*
+
     option[selected]:before {
     	
     }

@@ -9,19 +9,20 @@
     </div>
 
     <div v-else>
-        
-        <form v-form name="myform" class="form-horizontal" role="form" v-on:submit.prevent="attemptUpdateScreengroup">
+     
+        <div class="panel-body">
 
-            <!-- TODO: Need to fix some styling and translation -->
-            <div class="errors" v-if="myform.$submitted">
-                <p v-if="myform.name.$error.required">Name is required.</p>
-                <p v-if="myform.desc.$error.required">Description is required.</p>
-            </div>
-        
-            <div class="panel-body">
+            <form v-form name="myform" class="form-horizontal" role="form" v-on:submit.prevent="attemptUpdateScreengroup">
+
+                <!-- TODO: Need to fix some styling and translation -->
+                <div class="errors" v-if="myform.$submitted">
+                    <p v-if="myform.name.$error.required">Name is required.</p>
+                    <p v-if="myform.desc.$error.required">Description is required.</p>
+                </div>
+            
                 <div class="form-group">
-                    <label for="name" class="control-label">{{ trans('general.name') }}</label>
-                    <div>
+                    <label for="name" class="model_label">{{ trans('general.name') }}</label>
+                    <div class="model_input">
                         <input class="form-control"
                                name="name" id="name"
                                type="text"
@@ -32,8 +33,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="desc" class=" control-label">{{ trans('general.desc') }}</label>
-                    <div>
+                    <label for="desc" class="model_label">{{ trans('general.desc') }}</label>
+                    <div class="model_input">
                         <input class="form-control"
                                name="desc" id="desc"
                                type="text"
@@ -45,7 +46,7 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-sm-6 col-sm-offset-3">
+                    <div class="model_action">
                         <button type="" class="btn" v-link="{ path: '/screengroups/' }" v-if="myform.$pristine">
                             <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                         </button>
@@ -57,12 +58,13 @@
                         </button>
                     </div>
                 </div>
-            </div>
 
-        </form>
+            </form>
 
-        <screens :screens.sync="screengroup.screens.data"></screens>
-        <tickers :tickers.sync="screengroup.tickers.data"></tickers>
+            <screens :screens.sync="screengroup.screens.data"></screens>
+            <tickers :tickers.sync="screengroup.tickers.data"></tickers>
+
+        </div>
 
     </div>
 

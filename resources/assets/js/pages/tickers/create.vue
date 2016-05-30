@@ -1,17 +1,22 @@
 <template>
+
     <div class="panel-heading">
         {{ trans('ticker.create') }}
     </div>
+
     <div class="panel-body">
+
         <form class="form-horizontal" role="form" v-on:submit="createTicker">
+
             <div class="form-group">
-                <label for="text" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.text') }}</label>
-                <div class="col-sm-5">
+                <label for="text" class="model_label">{{ trans('general.text') }}</label>
+                <div class="model_input">
                     <input class="form-control" required="required" name="text" type="text" v-model="ticker.text" id="nameInput">
                 </div>
             </div>
+
             <div class="form-group">
-                <div class="col-sm-4 col-sm-offset-3">
+                <div class="model_action">
                     <button type="" class="btn" v-link="{ path: '/tickers/' }" v-if="emptyfields">
                       <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                     </button>
@@ -23,8 +28,12 @@
                     </button>
                 </div>
             </div>
+
         </form>
-    </div></template>
+
+    </div>
+
+</template>
 
 <script>
     module.exports = {

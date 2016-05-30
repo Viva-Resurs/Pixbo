@@ -9,7 +9,9 @@
     </div>
 
     <div v-else>
+
         <client-list :clients="clients"></client-list>
+        
     </div>
 
 </template>

@@ -1,13 +1,17 @@
 <template>
+
     <div class="panel-heading">
         {{ trans('user.edit') }}
     </div>
-    <div class="panel-body">
-        <div class="panel-body" v-if=" $loadingRouteData ">
-            <loading></loading>
-        </div>
 
-        <div v-else>
+    <div class="panel-body" v-if=" $loadingRouteData ">
+        <loading></loading>
+    </div>
+
+    <div v-else>
+
+        <div class="panel-body">
+
             <form class="form-horizontal" role="form" v-on:submit.prevent="attemptUpdateUser" name="myform" v-form>
 
                 <!-- TODO: Need to fix some styling and translation -->
@@ -20,8 +24,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="name" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.name') }}</label>
-                    <div class="col-sm-5">
+                    <label for="name" class="model_label">{{ trans('general.name') }}</label>
+                    <div class="model_input">
                         <input class="form-control"
                                name="name" id="name"
                                type="text"
@@ -33,8 +37,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="email" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.email') }}</label>
-                    <div class="col-sm-5">
+                    <label for="email" class="model_label">{{ trans('general.email') }}</label>
+                    <div class="model_input">
                         <input class="form-control"
                                name="email" id="email"
                                type="email"
@@ -46,8 +50,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="password" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('auth.password') }}</label>
-                    <div class="col-sm-5">
+                    <label for="password" class="model_label">{{ trans('auth.password') }}</label>
+                    <div class="model_input">
                         <input class="form-control"
                                name="password" id="password"
                                type="password"
@@ -56,13 +60,22 @@
                         >
                     </div>
                 </div>
+
                 <!-- TODO: This validation doesn't work -->
-                <span name="roles" v-form-ctrl="user.roles.data[0].id" required>
-                    <model-selector :selected.sync="user.roles.data[0].id" model="role"></model-selector>
-                </span>
+                <div class="form-group">
+                    <span v-form-ctrl="user.roles.data[0].id" name="roles" required>
+                        <model-selector :selected.sync="user.roles.data[0].id" model="role" classes="model_input">
+                        <div slot="label">
+                            <label for="inputModels" class="model_label">
+                                {{ trans('role.model') }}
+                            </label>
+                        </div>
+                    </model-selector>
+                    </span>
+                </div>
 
                 <div class="form-group">
-                    <div class="col-sm-4 col-sm-offset-3">
+                    <div class="model_action">
                         <button type="" class="btn" v-link="{ path: '/users/' }" v-if="myform.$pristine">
                             <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                         </button>
@@ -74,9 +87,13 @@
                         </button>
                     </div>
                 </div>
+
             </form>
+
         </div>
+
     </div>
+
 </template>
 
 <script>

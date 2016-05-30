@@ -1,12 +1,17 @@
 <template>
+
     <div class="panel-heading">
         {{ trans('screen.upload') }}
     </div>
+
     <div class="panel-body">
+
         <div id="dropzone">
             <form class="dropzone" :action="action" id="my-dropzone" v-dropzone></form>
         </div>
+
     </div>
+    
 </template>
 
 <script>

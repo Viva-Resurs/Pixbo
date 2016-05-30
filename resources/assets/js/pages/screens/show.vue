@@ -1,13 +1,17 @@
 <template>
+
     <div class="panel-heading">
         {{ trans('screen.edit') }}
     </div>
-    <div class="panel-body" v-if="$loadingRouteData">
+
+    <div class="panel-body" v-if=" $loadingRouteData ">
         <loading></loading>
     </div>
 
-    <div v-if=" ! $loadingRouteData">
+    <div v-else>
+
         <div class="panel-body">
+
             <schedule :model.sync="screen">
                 <div slot="model_specific_setting">
                     <model-selector :selected.sync="screen.category"
@@ -15,8 +19,11 @@
                     ></model-selector>
                 </div>
             </schedule>
+            
         </div>
+
     </div>
+
 </template>
 
 <script>

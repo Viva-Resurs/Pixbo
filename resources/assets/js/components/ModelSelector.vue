@@ -4,6 +4,7 @@
     </slot>
 
     <div :class="classes">
+        <!-- TODO: 'Fix Mån Tis Ons' in model-selector mode/dropdown title -->
         <select class="form-control selectpicker show-tick"
                 v-model="selected"
                 id="inputModels"
@@ -82,6 +83,7 @@
 
             setSelectPicker() {
                 this.$nextTick(function() {
+                    // TODO: More Lang-fixes...
                     $(this.$els.selectInput).selectpicker({
                         size: 4,
                         iconBase: 'fa',

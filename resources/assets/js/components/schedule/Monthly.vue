@@ -2,28 +2,36 @@
     <div>
         <frequency :frequency.sync="event.frequency" type="month"></frequency>
 
-        <div class="form-group">
-                <label for="inputRecur_day_num">
+        <div>
+            <div>
+                <label class="schedule_label">
                     {{ trans('schedule.week') }}
                     <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_week') }}"></span>
                 </label>
-            <div class="form-group">
-                <div class="form-group col-md-6">
-                    <select v-model="event.monthly_day_num" name="recur_day_num" id="inputRecur_day_num" class="form-control">
-                        <option v-for="order in ordering" :value="$index+1">{{ trans(order) }}</option>
-                    </select>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <model-selector :selected.sync="event.monthly_day_num"
+                                    :options="ordering"
+                                    :type="type"
+                                    classes="schedule_input"
+                    >
+                    </model-selector>
                 </div>
-                <div class="form-group col-md-6">
-                    <select v-model="event.recur_day" name="recur_day" id="inputRecur_day" class="form-control">
-                        <option v-for="day in weekday" :value="$index+1">{{ trans(day+'1') }}</option>
-                    </select>
+                <div class="col-md-6">
+                    <model-selector :selected.sync="event.recur_day"
+                                    :options="weekday"
+                                    :type="type"
+                                    classes="schedule_input"
+                    >
+                    </model-selector>
                 </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="form-group">
-                <label for="inputDays_before" class="control-label">
+        <div>
+            <div>
+                <label for="inputDays_before" class="schedule_label">
                     {{ trans('schedule.days_before_event') }}
                     <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_days_before') }}"></span>
                 </label>
@@ -38,11 +46,12 @@
 </template>
 <script>
     import Frequency from './Frequency.vue'
+    import ModelSelector from '../ModelSelector.vue'
     import { ordering, weekdays, days_before } from '../../option_arrays'
     export default {
         props: ['event'],
 
-        components: { Frequency },
+        components: { Frequency, ModelSelector },
 
         methods : {
             day_type(index) {

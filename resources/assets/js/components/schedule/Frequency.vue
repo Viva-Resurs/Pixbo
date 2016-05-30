@@ -1,13 +1,13 @@
 <template>
-    <div class="form-group">
+    <div>
         <model-selector :selected.sync="frequency"
                         :options="frequency_options"
                         :type="type"
+                        classes="schedule_input"
         >
             <div slot="label">
-                <label for="inputFrequency" class="control-label">
+                <label for="inputFrequency" class="schedule_label">
                     {{ trans('schedule.frequency') }}
-
                 </label>
             </div>
         </model-selector>

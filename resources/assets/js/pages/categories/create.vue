@@ -1,8 +1,11 @@
 <template>
+
     <div class="panel-heading">
         {{ trans('category.create') }}
     </div>
+
     <div class="panel-body">
+
         <form class="form-horizontal" role="form" v-on:submit.prevent="attemptCreateCategory" name="myform" v-form>
 
             <!-- TODO: Need to fix some styling and translation -->
@@ -11,8 +14,8 @@
             </div>
 
             <div class="form-group">
-                <label for="name" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.name') }}</label>
-                <div class="col-sm-5">
+                <label for="name" class="model_label">{{ trans('general.name') }}</label>
+                <div class="model_input">
                     <input class="form-control"
                            name="name" id="name"
                            type="text"
@@ -26,7 +29,7 @@
             </div>
 
             <div class="form-group">
-                <div class="col-sm-4 col-sm-offset-3">
+                <div class="model_action">
                     <button type="" class="btn" v-link="{ path: '/categories/' }" v-if="myform.$pristine">
                         <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                     </button>
@@ -38,8 +41,11 @@
                     </button>
                 </div>
             </div>
+
         </form>
+
     </div>
+
 </template>
 
 <script>

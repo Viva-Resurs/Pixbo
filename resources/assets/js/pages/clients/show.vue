@@ -1,7 +1,9 @@
 <template>
+
     <div class="panel-heading">
         {{ trans('client.edit') }}
     </div>
+    
     <div class="panel-body">
 
         <div class="panel-body" v-if=" $loadingRouteData ">
@@ -21,8 +23,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="name" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.name') }}</label>
-                    <div class="col-sm-5">
+                    <label for="name" class="model_label">{{ trans('general.name') }}</label>
+                    <div class="model_input">
                         <input class="form-control"
                                id="name" name="name"
                                type="text"
@@ -32,9 +34,10 @@
                         >
                     </div>
                 </div>
+
                 <div class="form-group">
-                    <label for="ip_address" class="col-sm-2 col-sm-offset-1 control-label">{{ trans('general.ip_address') }}</label>
-                    <div class="col-sm-5">
+                    <label for="ip_address" class="model_label">{{ trans('general.ip_address') }}</label>
+                    <div class="model_input">
                         <input class="form-control"
                                id="ip_address" name="ip_address"
                                type="text"
@@ -48,9 +51,9 @@
                     
                 <div class="form-group">
                     <span v-form-ctrl="client.screen_group_id" name="screengroup" required>
-                        <model-selector :selected.sync="client.screen_group_id" model="screengroup" classes="col-sm-5">
+                        <model-selector :selected.sync="client.screen_group_id" model="screengroup" classes="model_input">
                         <div slot="label">
-                            <label for="inputModels" class="col-sm-2 col-sm-offset-1 control-label">
+                            <label for="inputModels" class="model_label">
                                 {{ trans('screengroup.model',1) }}
                             </label>
                         </div>
@@ -59,7 +62,7 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-sm-4 col-sm-offset-3">
+                    <div class="model_action">
                         <button type="" class="btn" @click="goBack" v-if="myform.$pristine">
                             <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                         </button>
@@ -71,9 +74,13 @@
                         </button>
                     </div>
                 </div>
+
             </form>
+
         </div>
+
     </div>
+    
 </template>
 
 <script>

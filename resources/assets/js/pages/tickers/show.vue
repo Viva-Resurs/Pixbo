@@ -1,21 +1,38 @@
 <template>
+
     <div class="panel-heading">
-        {{ trans('screen.edit') }}
+        {{ trans('ticker.edit') }}
     </div>
+
     <div class="panel-body" v-if="$loadingRouteData">
         <loading></loading>
     </div>
 
-    <div v-if=" ! $loadingRouteData">
+    <div v-else>
+
         <div class="panel-body">
+
             <schedule :model.sync="ticker">
                 <div slot="model_specific_setting">
-                    <!-- TODO: Add markup -->
-                    <input type="text" v-model="ticker.text" name="ticker_text" id="inputTickerText" class="form-control" title="" required="required">
+                    <div class="form-group">
+                        <label for="ticker_text" class="model_label">{{ trans('general.text') }}</label>
+                        <div class="model_input">
+                            <input class="form-control"
+                                   name="ticker_text" id="inputTickerText"
+                                   type="text"
+                                   v-model="ticker.text"
+                                   required
+                            >
+                        </div>
+                    </div>
+                    <hr>
                 </div>
             </schedule>
+
         </div>
+
     </div>
+
 </template>
 
 <script>
