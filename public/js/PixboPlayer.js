@@ -31,6 +31,10 @@ var PixboPlayer = {
 
     // Setup Dom-connections
     this.DOM.VegasTarget  = $('body');
+
+
+    this.DOM.VegasTarget.append("<div id='ticker-container'></div>");
+
     this.DOM.TickerTarget = $('#ticker-container');
 
     // Start Standby-page
@@ -208,7 +212,7 @@ var PixboPlayer = {
       return console.log('No tickers...');
     
     // Run .ticker() Plugin
-    target.ticker(this.Settings.Ticker);
+    _target.ticker(this.Settings.Ticker);
 
     // Start Controls
     if (this.EnableControls)
@@ -415,7 +419,7 @@ var PixboPlayer = {
 
       Init : function(){
         // This will go through the plugins output and hook into things
-        this.DOM.TickerTarget.find('.ticker-controls').each(function(){
+        PixboPlayer.DOM.TickerTarget.find('.ticker-controls').each(function(){
           // Got ticker-controls element
           PixboPlayer.Controls.Ticker.Element = this;
           this.classList.add('ticker_control');
