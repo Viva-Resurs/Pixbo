@@ -34,6 +34,8 @@ class Screen extends Model
                 $sg->touch();
             }
 
+            // TODO: Shadowevents Photos
+
         });
 
         Screen::updating(function($screen) {
