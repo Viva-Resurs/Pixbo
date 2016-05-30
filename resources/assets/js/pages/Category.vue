@@ -14,7 +14,6 @@
                                     <i class="fa fa-btn fa-fw fa-list"></i>&nbsp;{{ trans('general.archive') }}</span>
                                 </a>
                             </li>
-                            </li>
                             <li>
                                 <a v-link="{ path: '/categories/create' }">
                                     <i class="fa fa-btn fa-fw fa-plus"></i>&nbsp;{{ trans('general.new') }}</span>
