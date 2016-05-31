@@ -1,5 +1,6 @@
 <template>
-    <div>
+
+    <div class="schedule_group">
         <model-selector :selected.sync="frequency"
                         :options="frequency_options"
                         :type="type"
@@ -12,11 +13,12 @@
             </div>
         </model-selector>
     </div>
+    
 </template>
 
 <script>
     import ModelSelector from '../ModelSelector.vue'
-    import { frequency_options } from '../../option_arrays'
+    import { frequency_options, frequency_options1 } from '../../option_arrays'
 
     export default {
         props: [
@@ -43,6 +45,7 @@
         },
 
         ready() {
+            if (this.type=='year') this.frequency_options = frequency_options1;
             this.update()
         }
     }

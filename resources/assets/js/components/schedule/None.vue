@@ -1,6 +1,9 @@
 <template>
-    <div>
+
+    <div class="column">
+
     </div>
+
 </template>
 <script>
     export default {
@@ -9,3 +12,4 @@
         ]
     }
 </script>
+

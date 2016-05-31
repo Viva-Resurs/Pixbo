@@ -1,5 +1,5 @@
 <template>
-
+    <!--TODO: Defaults: Day-repeat -->
     <form class="form-horizontal" v-on:submit.prevent="attemptUpdateSchedule">
 
         <slot name="model_specific_setting">
@@ -8,7 +8,7 @@
 
         <div class="col-lg-6 col-md-6">
 
-            <div>
+            <div class="schedule_group">
                 <label for="text" class="schedule_label">
                     {{ trans('screengroup.model', 1) }}
                     <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_screengroup') }}"></span>
@@ -22,14 +22,15 @@
                 </model-selector>
             </div>
 
-            <period :event.sync="model.event"></period>
-
+            <div class="schedule_group">
+                <period :event.sync="model.event"></period>
+            </div>
 
         </div>
 
         <div class="col-lg-6 col-md-6">
 
-            <div>
+            <div class="schedule_group">
                 <label for="text" class="schedule_label">
                     {{ trans('schedule.repeat') }}
                     <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_repeat_type') }}"></span>
@@ -41,18 +42,20 @@
                 </model-selector>
             </div>
 
-                <component :is="model.event.recur_type"
-                           :event.sync="event"
-                           :weekly_day_num.sync="weekly_day_num"
-                ></component>
+            <component :is="model.event.recur_type"
+                       :event.sync="event"
+                       :weekly_day_num.sync="weekly_day_num"
+            ></component>
 
+            <div class="schedule_group">
+                <!-- Summary -->
+                <label class="schedule_label">{{ trans('general.summary') }}</label>
+                <div class="schedule_input">
+                    {{ summary }}
+                </div>
+            </div>
 
-            <!-- Summary -->
-
-                <label>{{ trans('general.summary') }}</label> {{ summary }}
-
-
-            <div>
+            <div class="schedule_action">
                     <button type="" class="btn" @click="goBack()" v-if="emptyfields">
                         <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                     </button>

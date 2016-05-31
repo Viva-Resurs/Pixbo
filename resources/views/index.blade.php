@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css">
     <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" href="/css/vendor/bootstrap-select.css">
-
+	<link rel="stylesheet" href="/css/vendor/bootstrap-datetimepicker.min.css" />
 </head>
 <body>
 <div id="app">
@@ -18,5 +18,7 @@
 
 <script src="/js/index.js"></script>
 <script src="/js/vendor/bootstrap-select.js"></script>
+<script src="/js/vendor/moment-with-locales.min.js"></script>
+<script src="/js/vendor/bootstrap-datetimepicker.min.js"></script>
 </body>
 </html>
