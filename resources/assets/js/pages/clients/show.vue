@@ -51,7 +51,10 @@
                     
                 <div class="form-group">
                     <span v-form-ctrl="client.screen_group_id" name="screengroup" required>
-                        <model-selector :selected.sync="client.screen_group_id" model="screengroup" classes="model_input">
+                        <model-selector :selected.sync="client.screen_group_id"
+                                        model="screengroup"
+                                        classes="model_input"
+                        >
                         <div slot="label">
                             <label for="inputModels" class="model_label">
                                 {{ trans('screengroup.model',1) }}
@@ -133,14 +136,9 @@
                             message: that.trans('client.updated'),
                             options: {theme: 'success'}
                         })
+                        that.$route.router.go('/clients')
                     },
                     function (response) {
-                        /*
-                        self.messages = []
-                        for (var key in response.entity) {
-                            self.messages.push({type: 'danger', message: response.entity[key]})
-                        }
-                        */
                         that.$dispatch('alert', {
                             message: that.trans('client.updated_fail'),
                             options: {theme: 'error'}
@@ -156,11 +154,6 @@
                     transition.next({client: data})
                 })
             }
-        },
-
-        ready() {
-            console.log(this.$root.previousRoute)
         }
-
     }
 </script>

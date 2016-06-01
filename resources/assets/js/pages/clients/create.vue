@@ -47,7 +47,10 @@
 
             <div class="form-group">
                 <span v-form-ctrl="client.screen_group_id" name="screengroup" required>
-                    <model-selector :selected.sync="client.screen_group_id" model="screengroup" classes="model_input">
+                    <model-selector :selected.sync="client.screen_group_id"
+                                    model="screengroup"
+                                    classes="model_input"
+                    >
                     <div slot="label">
                         <label for="inputModels" class="model_label">
                             {{ trans('screengroup.model') }}

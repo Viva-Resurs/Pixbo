@@ -1,29 +1,30 @@
 <template>
-    <slot name="label">
+    <div>
+        <slot name="label">
 
-    </slot>
+        </slot>
 
-    <div :class="classes">
-        <!-- TODO: 'Fix Mån Tis Ons' in model-selector mode/dropdown title -->
-        <select class="form-control selectpicker show-tick"
-                v-model="selected"
-                id="inputModels"
-                :multiple="multiple"
-                :data-selected-text-format="mode"
-                formated="formated"
-                v-el:select-input
-        >
-            <option v-for="element in models" :value="element.id">{{element.name}}</option>
-            <option v-for="option in options" :value="option.id">
-                <template v-if="formated=='yes'">
-                    {{option.name}}
-                </template>
-                <template v-else>
-                    <template v-if="hasType"> {{trans(option.name) + " " + trans('schedule.'+this.type,option.id).toLowerCase()}} </template>
-                    <template v-else> {{trans(option.name)}} </template>
-                </template>
-            </option>
-        </select>
+        <div :class="classes">
+            <select class="form-control selectpicker show-tick"
+                    v-model="selected"
+                    id="inputModels"
+                    :multiple="multiple"
+                    :data-selected-text-format="mode"
+                    formated="formated"
+                    v-el:select-input
+            >
+                <option v-for="element in models" :value="element.id">{{element.name}}</option>
+                <option v-for="option in options" :value="option.id">
+                    <template v-if="formated=='yes'">
+                        {{option.name}}
+                    </template>
+                    <template v-else>
+                        <template v-if="hasType"> {{trans(option.name) + " " + trans('schedule.'+this.type,option.id).toLowerCase()}} </template>
+                        <template v-else> {{trans(option.name)}} </template>
+                    </template>
+                </option>
+            </select>
+        </div>
     </div>
 </template>
 <script type="text/ecmascript-6">
@@ -62,7 +63,7 @@
 
         data: function () {
             return {
-                models: [] /*screengroups*/
+                models: []
             }
         },
 
@@ -95,7 +96,7 @@
                 this.$nextTick(function() {
                     // TODO: More Lang-fixes...
                     var target = $(this.$els.selectInput);
-                    target.selectpicker({
+                    let g = target.selectpicker({
                         size: 4,
                         iconBase: 'fa',
                         tickIcon: 'fa-check',
@@ -109,6 +110,7 @@
                         },
                         noneSelectedText: this.trans('general.nothing_selected'),
                     });
+                    console.log(g)
                 });
             }
         },
@@ -118,6 +120,6 @@
                 this.getModels();
             if (this.options.length > 0)
                 this.setSelectPicker();
-        },
+        }
     }
 </script>

@@ -46,7 +46,6 @@
                 var token = localStorage.getItem('jwt-token')
 
                 if (token !== null && token !== 'undefined') {
-                    console.log("fetching user")
                     var that = this
                     client({path: '/users/me'}).then(
                             function (response) {
