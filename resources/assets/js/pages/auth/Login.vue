@@ -71,7 +71,7 @@
                 client({ path: '/users/me' }).then(
                         function (response) {
                             that.$dispatch('userHasLoggedIn', response.entity.data)
-                            that.$route.router.go('/auth/profile')
+                            that.$route.router.go({ name: 'screengroups.index'})
                         },
                         function (response) {
                             console.log(response)

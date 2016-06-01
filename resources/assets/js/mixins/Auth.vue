@@ -12,7 +12,6 @@
 
         computed: {
             isAdmin() {
-                console.log(this.$root.user)
                 return this.$root.user.isAdmin;
             },
             isAuthenticated() {

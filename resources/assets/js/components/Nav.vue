@@ -48,7 +48,7 @@
                             <!-- Settings -->
                             <li class="dropdown-header">{{ trans('general.settings') }}</li>
                             <li>
-                                <a v-link="{ path: '/auth/profile' }">
+                                <a v-link="{ name: 'settings.profile' }">
                                     <i class="fa fa-btn fa-fw fa-user"></i>{{ trans('auth.profile') }}
                                 </a>
                             </li>
@@ -72,6 +72,7 @@
     import Auth from '../mixins/Auth.vue'
     module.exports = {
         mixins: [Auth],
+
         data: function () {
             return {
                 navTitle: 'Pixbo'

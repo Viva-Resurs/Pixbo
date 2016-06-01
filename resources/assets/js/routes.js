@@ -11,11 +11,6 @@ module.exports = {
                         component: require('./pages/auth/Login.vue'),
                         guest: true
                     },
-                    '/profile': {
-                        name: 'auth.profile',
-                        component: require('./pages/auth/Profile.vue'),
-                        auth: true
-                    },
                     '/logout': {
                         name: 'auth.logout',
                         component: require('./pages/auth/Logout.vue'),
@@ -149,6 +144,21 @@ module.exports = {
             '/terms': {
                 name: 'terms',
                 component: require('./pages/Terms.vue')
+            },
+            '/settings': {
+                component: require('./pages/Settings.vue'),
+                auth: true,
+                subRoutes: {
+                    '/profile': {
+                        name: 'settings.profile',
+                        component: require('./pages/settings/profile.vue')
+                    },
+                    '/pixbo': {
+                        name: 'settings.pixbo',
+                        component: require('./pages/settings/pixbo.vue')
+                    }
+                }
+
             },
             '*': {
                 component: require('./pages/404.vue')
