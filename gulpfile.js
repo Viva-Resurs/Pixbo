@@ -16,6 +16,7 @@ elixir(function(mix) {
     mix
     	.copy('node_modules/bootstrap-select/dist/js/bootstrap-select.js','public/js/vendor/bootstrap-select.js')
     	.copy('node_modules/bootstrap-select/dist/css/bootstrap-select.css','public/css/vendor/bootstrap-select.css')
+    	.copy('node_modules/moment/min/moment-with-locales.min.js','public/js/vendor/moment-with-locales.min.js')
         .sass('app.scss')
         .browserify('index.js');
 });

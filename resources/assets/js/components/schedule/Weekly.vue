@@ -1,25 +1,29 @@
 <template>
-    <div>
+
+    <div class="column">
+
         <frequency :frequency.sync="event.frequency" type="week"></frequency>
 
-        <div>
+        <div class="schedule_group">
             <!-- TODO: 'Fix Mån Tis Ons' in model-selector mode/dropdown title -->
-                <model-selector :selected.sync="weekly_day_num"
-                                :options="weekdays"
-                                :type="type"
-                                classes="schedule_input"
-                                multiple="true"
-                                mode="count > 3"
-                >
-                    <div slot="label">
-                        <label class="schedule_label">
-                            {{ trans('schedule.weekdays') }}
-                            <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_week_days') }}"></span>
-                        </label>
-                    </div>
-                </model-selector>
+            <model-selector :selected.sync="weekly_day_num"
+                            :options="weekdays"
+                            :type="type"
+                            classes="schedule_input"
+                            multiple="true"
+                            mode="count > 3"
+            >
+                <div slot="label">
+                    <label class="schedule_label">
+                        {{ trans('schedule.weekdays') }}
+                        <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_week_days') }}"></span>
+                    </label>
+                </div>
+            </model-selector>
         </div>
+        
     </div>
+
 </template>
 <script>
     import Frequency from './Frequency.vue'

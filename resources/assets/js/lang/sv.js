@@ -140,7 +140,12 @@ const lang = {
         every_two:                  "Varannan",
         every_three:                "Var tredje",
         every_four:                 "Var fjärde",
-        every_five:                 "Var femte"
+        every_five:                 "Var femte",
+        every1:                     "Varje",
+        every_two1:                 "Vartannat",
+        every_three1:               "Vart tredje",
+        every_four1:                "Vart fjärde",
+        every_five1:                "Vart femte"
     },
     /* ----------------------------- SCREEN ----------------------------- */
     screen: {

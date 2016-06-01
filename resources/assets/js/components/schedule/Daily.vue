@@ -1,7 +1,11 @@
 <template>
-    <div>
+
+    <div class="column">
+
         <frequency :frequency.sync="event.frequency" type="day"></frequency>
+
     </div>
+
 </template>
 <script>
     import Frequency from './Frequency.vue'

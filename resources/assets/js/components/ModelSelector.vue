@@ -10,12 +10,18 @@
                 id="inputModels"
                 :multiple="multiple"
                 :data-selected-text-format="mode"
+                formated="formated"
                 v-el:select-input
         >
             <option v-for="element in models" :value="element.id">{{element.name}}</option>
             <option v-for="option in options" :value="option.id">
-                <template v-if="hasType"> {{trans(option.name) + " " + trans('schedule.'+this.type,1).toLowerCase()}} </template>
-                <template v-else> {{trans(option.name)}} </template>
+                <template v-if="formated=='yes'">
+                    {{option.name}}
+                </template>
+                <template v-else>
+                    <template v-if="hasType"> {{trans(option.name) + " " + trans('schedule.'+this.type,option.id).toLowerCase()}} </template>
+                    <template v-else> {{trans(option.name)}} </template>
+                </template>
             </option>
         </select>
     </div>
@@ -31,6 +37,10 @@
             options: {
                 type: Array,
                 default: val => []
+            },
+            formated: {
+                type: String,
+                default: ''
             },
             mode: {
                 type: String,
@@ -84,10 +94,19 @@
             setSelectPicker() {
                 this.$nextTick(function() {
                     // TODO: More Lang-fixes...
-                    $(this.$els.selectInput).selectpicker({
+                    var target = $(this.$els.selectInput);
+                    target.selectpicker({
                         size: 4,
                         iconBase: 'fa',
                         tickIcon: 'fa-check',
+                        multipleSeparator: ' ',
+                        countSelectedText: function(){
+                            var text = '';
+                            for (var i=0; i<target[0].selectedOptions.length ; i++)
+                                 text += target[0].selectedOptions[i].label.substring(0,3) + ' ';
+                            console.log(text);
+                            return text;
+                        },
                         noneSelectedText: this.trans('general.nothing_selected'),
                     });
                 });
