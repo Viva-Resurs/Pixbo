@@ -29,7 +29,7 @@ class UserController extends BaseController
         return $this->item($user, new UserTransformer());
     }
 
-    // TODO: Need to fix the storing of roles
+
     public function store(Request $request) {
         if (Gate::denies('add_users')) {
             $this->response->error('permission_denied', 401);
@@ -38,15 +38,8 @@ class UserController extends BaseController
         $user = new User;
         $user->fill($request->only(['name', 'email', 'password']));
 
-        // So ugly, TODO make pretty
-        $roles = $request->only('roles');
-        $role_id = [];
-        foreach( $roles as $role)
-            $role_id[] = $role["data"];
-
-
         if($user->save()) {
-            $user->roles()->sync($role_id);
+            $user->roles()->sync($this->getRolesFromRequest($request));
             
             Activity::log([
                 'contentId' => $user->id,
@@ -62,18 +55,21 @@ class UserController extends BaseController
         }
     }
 
+
     public function me() {
         return $this->item($this->getAuthenticatedUser(), new UserTransformer() );
     }
 
-    // TODO: Need to fix the update of roles
+
     public function update(Request $request, $id) {
         if (Gate::denies('edit_users')) {
             $this->response->error('permission_denied', 401);
         }
         $user = User::findOrFail($id);
 
-        if($user->update($request->only(['name', 'email', 'password', 'roles']))) {
+        if($user->update($request->only(['name', 'email', 'password']))) {
+            $user->roles()->sync($this->getRolesFromRequest($request));
+
             Activity::log([
                 'contentId' => $user->id,
                 'contentType' => 'User',
@@ -105,5 +101,13 @@ class UserController extends BaseController
         } else {
             return $this->response->error('could_not_delete_user', 500);
         }
+    }
+
+    protected function getRolesFromRequest(Request $request) {
+        return collect($request
+            ->only('roles'))->collapse()
+            ->flatMap(function($role) {
+                return collect($role)->pluck('id');
+            })->toArray();
     }
 }
