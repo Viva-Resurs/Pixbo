@@ -61,6 +61,7 @@ const lang = {
         edit:                       "Redigera",
         delete:                     "Ta bort",
         ip_address:                 "IP Adress",
+        mac_address:                "MAC Adress",
         age:                        "Ålder",
         email:                      "Email",
         welcome_content :           "Välkommen!",

@@ -30,7 +30,7 @@ class ClientController extends BaseController
             $this->response->error('permission_denied', 401);
         }
         $client = new Client;
-        $client->fill($request->only(['name', 'ip_address', 'screen_group_id']));
+        $client->fill($request->only(['name', 'address', 'screen_group_id']));
 
         if($this->user->clients()->save($client)) {
             Activity::log([
@@ -69,7 +69,7 @@ class ClientController extends BaseController
             throw new NotFoundHttpException;
         }
 
-        if($client->update($request->only(['name', 'ip_address', 'screen_group_id']))) {
+        if($client->update($request->only(['name', 'address', 'screen_group_id']))) {
             Activity::log([
                 'contentId' => $client->id,
                 'contentType' => 'Client',

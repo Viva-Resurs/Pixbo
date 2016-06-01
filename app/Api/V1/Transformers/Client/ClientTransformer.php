@@ -13,7 +13,7 @@ class ClientTransformer extends TransformerAbstract
         return [
             'id' 	            => (int) $client->id,
             'name'              => $client->name,
-            'ip_address'	    => $client->ip_address,
+            'address'	    => $client->address,
         ];
     }
 

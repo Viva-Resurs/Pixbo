@@ -8,7 +8,7 @@ class ScreenGroupListTransformer extends TransformerAbstract
     {
         $client = $screengroup->clients->first();
         if(!is_null($client)) {
-            $client = $client->ip_address;
+            $client = $client->address;
         } else {
             $client = '';
         }

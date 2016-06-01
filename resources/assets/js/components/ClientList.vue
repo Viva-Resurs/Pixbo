@@ -12,7 +12,7 @@
         <tr>
             <th>{{ trans('general.id') }}</th>
             <th>{{ trans('general.name') }}</th>
-            <th>{{ trans('general.ip_address') }}</th>
+            <th>{{ trans('general.mac_address') }}</th>
             <th>{{ trans('screengroup.model', 1) }}</th>
             <th width="120px">{{ trans('general.action') }}</th>
         </tr>
@@ -21,10 +21,10 @@
         <tr v-for="client in clients">
             <td>{{ client.id }}</td>
             <td><a  v-link="{ path: '/clients/'+client.id }">{{ client.name }}</a></td>
-            <td>{{ client.ip_address }}</td>
+            <td>{{ client.address }}</td>
             <td>{{ client.screengroup.data.name }}</td>
             <td>
-                <a class="btn btn-primary btn-xs fa fa-eye" href="/play?mac={{client.ip_address}}&preview=yes" target="_blank"
+                <a class="btn btn-primary btn-xs fa fa-eye" href="/play?mac={{client.address}}&preview=yes" target="_blank"
                    v-tooltip data-original-title="{{ trans('general.preview') }}"></a>
                 <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/clients/'+client.id }"
                    v-tooltip data-original-title="{{ trans('general.edit') }}"></a>

@@ -11,8 +11,8 @@
             <!-- TODO: Need to fix some styling and translation -->
             <div class="errors" v-if="myform.$submitted">
                 <p v-if="myform.name.$error.required">Name is required.</p>
-                <p v-if="myform.ip_address.$error.required">IP Address is required.</p>
-                <p v-if="myform.ip_address.$error.customValidator">IP Address is not valid.</p>
+                <p v-if="myform.address.$error.required">MAC Address is required.</p>
+                <p v-if="myform.address.$error.customValidator">MAC Address is not valid.</p>
                 <p v-if="myform.screengroup.$error.required">Screengroup is required.</p>
             </div>
 
@@ -31,16 +31,17 @@
             </div>
 
             <div class="form-group">
-                <label for="ip_address" class="model_label">{{ trans('general.ip_address') }}</label>
+                <label for="address" class="model_label">{{ trans('general.mac_address') }}</label>
                 <div class="model_input">
                     <input class="form-control"
-                           id="ip_address"
-                           name="ip_address"
+                           id="address"
+                           name="address"
                            type="text"
-                           v-model="client.ip_address"
+                           placeholder="hh:hh:hh:hh:hh:hh"
+                           v-model="client.address"
                            v-form-ctrl
                            required
-                           custom-validator="isIPAddress"
+                           custom-validator="isMacAddress"
                     >
                 </div>
             </div>
@@ -116,7 +117,7 @@
                 client({path: 'clients', entity: this.client}).then(
                     function (response, status) {
                         that.client.name = ''
-                        that.client.ip_address = ''
+                        that.client.address = ''
                         that.client.screengroup_id = ''
                         that.$dispatch('alert', {
                             message: that.trans('client.created'),

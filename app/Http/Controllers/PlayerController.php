@@ -31,10 +31,11 @@ class PlayerController extends Controller {
      * @param $address
      */
     public function show(Request $request, $address) {
-        $client = Client::where('ip_address', $address)->first();
-        if (is_null($client)) {
+        $client = Client::where('address', $address)->firstOrFail();
+
+        /*if (is_null($client)) {
             return abort(404, trans('exceptions.client_not_found'));
-        }
+        }*/
 
         return [
             'photo_list' => $client->getPhotos(),
