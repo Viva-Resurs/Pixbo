@@ -11,6 +11,7 @@
                     :multiple="multiple"
                     :data-selected-text-format="mode"
                     formated="formated"
+
                     v-el:select-input
             >
                 <option v-for="element in models" :value="element.id">{{element.name}}</option>
@@ -19,7 +20,14 @@
                         {{option.name}}
                     </template>
                     <template v-else>
-                        <template v-if="hasType"> {{trans(option.name) + " " + trans('schedule.'+this.type,option.id).toLowerCase()}} </template>
+                        <template v-if="hasType">
+                            <template v-if="option.plural">
+                                {{trans(option.name) + " " + trans('schedule.'+this.type,option.plural).toLowerCase()}}
+                            </template>
+                            <template v-else>
+                                {{trans(option.name) + " " + trans('schedule.'+this.type,option.id).toLowerCase()}}
+                            </template>
+                        </template>
                         <template v-else> {{trans(option.name)}} </template>
                     </template>
                 </option>

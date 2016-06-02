@@ -13,7 +13,7 @@
             </div>
         </model-selector>
     </div>
-    
+
 </template>
 
 <script>

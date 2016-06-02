@@ -7,11 +7,11 @@ export const recur_options = [
 ];
 
 export const frequency_options = [
-    {id: 1, name: 'schedule.every'},
-    {id: 2, name: 'schedule.every_two'},
-    {id: 3, name: 'schedule.every_three'},
-    {id: 4, name: 'schedule.every_four'},
-    {id: 5, name: 'schedule.every_five'},
+    {id: 1, name: 'schedule.every', plural: 1 },
+    {id: 2, name: 'schedule.every_two', plural: 1 },
+    {id: 3, name: 'schedule.every_three', plural: 1 },
+    {id: 4, name: 'schedule.every_four', plural: 1 },
+    {id: 5, name: 'schedule.every_five', plural: 1 },
 ]
 
 export const frequency_options1 = [
