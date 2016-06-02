@@ -4,13 +4,13 @@
         {{ trans('client.edit') }}
     </div>
     
-    <div class="panel-body">
+    <div class="panel-body" v-if=" $loadingRouteData ">
+        <loading></loading>
+    </div>
 
-        <div class="panel-body" v-if=" $loadingRouteData ">
-            <loading></loading>
-        </div>
+    <div v-else>
 
-        <div v-else>
+        <div class="panel-body">
 
             <form class="form-horizontal" role="form" v-on:submit="updateClient" v-form name="myform">
 

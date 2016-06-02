@@ -31,8 +31,8 @@
 
         <div class="schedule_group">
              <model-selector :selected.sync="event.days_before_event"
-                            :options="days_before_converted"
-                            formated="yes"
+                            :options="days_before"
+                            type="day"
                             classes="schedule_input"
             >
                 <div slot="label">
@@ -42,10 +42,6 @@
                     </label>
                 </div>
             </model-selector>
-
-
-
-
 
         </div>
 
@@ -61,30 +57,11 @@
 
         components: { Frequency, ModelSelector },
 
-        methods : {
-            day_type(index) {
-                return (index>1) ? 2 : 1;
-            },
-            day_convert(){
-                for (var i=0; i<this.days_before.length ; i++){
-                    this.days_before_converted[i] = {
-                        name : this.trans(this.days_before[i].name) + " " + this.trans('schedule.day',this.day_type(this.days_before[i].id)).toLowerCase(),
-                        id   : this.days_before[i].id
-                    };
-                }
-            }
-        },
-
-        created(){
-            this.day_convert();
-        },
-
         data() {
             return {
                 ordering: ordering,
                 weekdays1: weekdays1,
-                days_before: days_before,
-                days_before_converted: []
+                days_before: days_before
             }
         }
     }
