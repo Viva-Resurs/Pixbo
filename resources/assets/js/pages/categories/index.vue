@@ -4,7 +4,7 @@
         {{ trans('general.archive') }}
     </div>
 
-    <div class="panel-body" v-if=" $loadingRouteData ">
+    <div class="panel-body" v-if="$loadingRouteData">
         <loading></loading>
     </div>
 
@@ -37,9 +37,8 @@
                 </tr>
             </tbody>
         </table>
+
     </div>
-
-
 
 </template>
 

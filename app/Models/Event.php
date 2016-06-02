@@ -57,12 +57,5 @@ class Event extends Model
         return $this->morphTo();
     }
 
-    public function getStartDateAttribute($value) {
-        return Carbon::parse($value)->format('d-m-y');
-    }
-
-    public function getEndDateAttribute($value) {
-        return Carbon::parse($value)->format('d-m-y');
-    }
 
 }
