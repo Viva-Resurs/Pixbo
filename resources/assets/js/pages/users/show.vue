@@ -120,7 +120,6 @@
                 var that = this
                 client({ path: '/users/' + id }).then(
                     function (response) {
-                        console.log(response)
                         that.$set('user', response.entity.data)
                         successHandler(response.entity.data)
                     },
@@ -155,11 +154,6 @@
                             message: self.trans('user.updated_fail'),
                             options: {theme: 'error'}
                         })
-                        /*self.messages = []
-                        for (var key in response.entity) {
-                            self.messages.push({type: 'danger', message: response.entity[key]})
-                        }
-                        */
                     }
                 )
             }

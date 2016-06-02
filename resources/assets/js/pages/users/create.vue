@@ -99,7 +99,10 @@
 
     // TODO: Need to fix unique validation
 
-    module.exports = {
+    export default {
+
+        components: { ModelSelector },
+
         data: function () {
             return {
                 user: {
@@ -107,15 +110,12 @@
                     email: '',
                     password: '',
                     roles: {
-                        data: null
+                        data: 1
                     }
                 },
                 myform: [],
                 creating: false
             }
-        },
-        components: {
-          ModelSelector
         },
 
         methods: {
@@ -137,9 +137,6 @@
                             message: that.trans('user.created'),
                             options: {theme: 'success'}
                         })
-                        Vue.nextTick(function () {
-                            document.getElementById('nameInput').focus()
-                        })
                         that.creating = false
                         that.$route.router.go('/users')
                     },
@@ -148,13 +145,9 @@
                             message: that.trans('user.created_fail'),
                             options: {theme: 'error'}
                         })
-                        /*
-                        that.messages = []
-                        for (var key in response.entity) {
-                            that.messages.push({type: 'danger', message: response.entity[key]})
-                            that.creating = false
-                        }
-                        */
+                        Vue.nextTick(function () {
+                            document.getElementById('nameInput').focus()
+                        })
                     }
                 )
             }

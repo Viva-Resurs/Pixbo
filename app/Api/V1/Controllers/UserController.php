@@ -39,7 +39,7 @@ class UserController extends BaseController
         $user->fill($request->only(['name', 'email', 'password']));
 
         if($user->save()) {
-            $user->roles()->sync($this->getRolesFromRequest($request));
+            $user->roles()->sync($this->getSlimRolesFromRequest($request));
             
             Activity::log([
                 'contentId' => $user->id,
@@ -68,7 +68,7 @@ class UserController extends BaseController
         $user = User::findOrFail($id);
 
         if($user->update($request->only(['name', 'email', 'password']))) {
-            $user->roles()->sync($this->getRolesFromRequest($request));
+            $user->roles()->sync($this->getFullRolesFromRequest($request));
 
             Activity::log([
                 'contentId' => $user->id,
@@ -103,11 +103,21 @@ class UserController extends BaseController
         }
     }
 
-    protected function getRolesFromRequest(Request $request) {
+    protected function getFullRolesFromRequest(Request $request) {
         return collect($request
             ->only('roles'))->collapse()
             ->flatMap(function($role) {
                 return collect($role)->pluck('id');
             })->toArray();
+    }
+
+    protected function getSlimRolesFromRequest(Request $request) {
+
+        // TODO: Clean this up
+        $arr = [];
+        foreach ($request->only('roles') as $t)
+            $arr[] = $t['data'];
+
+        return $arr;
     }
 }
