@@ -55,12 +55,12 @@
                                         model="screengroup"
                                         classes="model_input"
                         >
-                        <div slot="label">
-                            <label for="inputModels" class="model_label">
-                                {{ trans('screengroup.model',1) }}
-                            </label>
-                        </div>
-                    </model-selector>
+                            <div slot="label">
+                                <label for="inputModels" class="model_label">
+                                    {{ trans('screengroup.model',1) }}
+                                </label>
+                            </div>
+                        </model-selector>
                     </span>
                 </div>
 

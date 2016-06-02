@@ -4,7 +4,7 @@
         {{ trans('screen.edit') }}
     </div>
 
-    <div class="panel-body" v-if=" $loadingRouteData ">
+    <div class="panel-body" v-if="$loadingRouteData">
         <loading></loading>
     </div>
 
@@ -14,12 +14,22 @@
 
             <schedule :model.sync="screen">
                 <div slot="model_specific_setting">
-                    <model-selector :selected.sync="screen.category"
-                                    model="category"
-                    ></model-selector>
+                    <div class="form-group">
+                        <model-selector :selected.sync="screen.category"
+                                        model="category"
+                                        classes="model_input"
+                        >
+                            <div slot="label">
+                                <label for="screen_category" class="model_label">
+                                    {{ trans('category.model') }}
+                                </label>
+                            </div>
+                        </model-selector>
+                    </div>
+                    <hr>
                 </div>
             </schedule>
-            
+
         </div>
 
     </div>
