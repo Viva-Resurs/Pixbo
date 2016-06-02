@@ -9,6 +9,7 @@ $api->version('v1', function ($api) {
     $api->post('auth/recovery', 'App\Api\V1\Controllers\AuthController@recovery');
     $api->post('auth/reset', 'App\Api\V1\Controllers\AuthController@reset');
     $api->get('auth/refresh', 'App\Api\V1\Controllers\AuthController@token');
+    $api->get('validate', 'App\Api\V1\Controllers\ValidationController@validate');
 
     $api->get('users/me', 'App\Api\V1\Controllers\UserController@me');
 
@@ -22,7 +23,6 @@ $api->version('v1', function ($api) {
         $api->resource('tickers', 'App\Api\V1\Controllers\TickerController');
         $api->resource('users', 'App\Api\V1\Controllers\UserController');
         $api->get('roles', 'App\Api\V1\Controllers\RoleController@index');
-
 
     });
 });
