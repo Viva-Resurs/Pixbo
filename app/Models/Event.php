@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\HasShadowEvents;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Event extends Model
 {
@@ -55,4 +56,13 @@ class Event extends Model
     {
         return $this->morphTo();
     }
+
+    public function getStartDateAttribute($value) {
+        return Carbon::parse($value)->format('d-m-y');
+    }
+
+    public function getEndDateAttribute($value) {
+        return Carbon::parse($value)->format('d-m-y');
+    }
+
 }
