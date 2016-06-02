@@ -69,38 +69,56 @@
     export default {
         props: ['event'],
         ready(){
-            $(function () {
-                $('.date').datetimepicker({
-                    format: "DD-MM-YY",
-                    icons: {
-                        time: 'fa fa-clock-o',
-                        date: 'fa fa-calendar',
-                        up: 'fa fa-chevron-up',
-                        down: 'fa fa-chevron-down',
-                        previous: 'fa fa-chevron-left',
-                        next: 'fa fa-chevron-right',
-                        today: 'fa fa-screenshot',
-                        clear: 'fa fa-trash',
-                        close: 'fa fa-remove'
-                    }
-                })
-            });
-            $(function () {
-                $('.time').datetimepicker({
-                    format: "HH:mm",
-                    icons: {
-                        time: 'fa fa-clock-o',
-                        date: 'fa fa-calendar',
-                        up: 'fa fa-chevron-up',
-                        down: 'fa fa-chevron-down',
-                        previous: 'fa fa-chevron-left',
-                        next: 'fa fa-chevron-right',
-                        today: 'fa fa-screenshot',
-                        clear: 'fa fa-trash',
-                        close: 'fa fa-remove'
-                    }
-                })
-            });
+            var test = moment().hour(0);
+            //test.hour(0);
+            //test.minute(0);
+            console.log(test);
+            var options = {
+                showTodayButton: true,
+                toolbarPlacement: 'top',
+                calendarWeeks: true,
+                showClose: true,
+                allowInputToggle: true,
+                minDate: moment().hour(0).minute(0).subtract(1,'d'),
+                maxDate: moment().hour(0).minute(0).add(5,'y'),
+                locale: moment.locale('sv'),
+                tooltips: {
+                    today: this.trans('dateTimePicker.today'),
+                    clear: this.trans('dateTimePicker.clear'),
+                    close: this.trans('dateTimePicker.close'),
+                    selectMonth: this.trans('dateTimePicker.selectMonth'),
+                    prevMonth: this.trans('dateTimePicker.prevMonth'),
+                    nextMonth: this.trans('dateTimePicker.nextMonth'),
+                    selectYear: this.trans('dateTimePicker.selectYear'),
+                    prevYear: this.trans('dateTimePicker.prevYear'),
+                    nextYear: this.trans('dateTimePicker.nextYear'),
+                    selectDecade: this.trans('dateTimePicker.selectDecade'),
+                    prevDecade: this.trans('dateTimePicker.prevDecade'),
+                    nextDecade: this.trans('dateTimePicker.nextDecade'),
+                    prevCentury: this.trans('dateTimePicker.prevCentury'),
+                    nextCentury: this.trans('dateTimePicker.nextCentury')
+                },
+                icons: {
+                    time: 'fa fa-clock-o',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-chevron-up',
+                    down: 'fa fa-chevron-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-crosshairs',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-times'
+                }
+            };
+
+            options.format = "DD-MM-YY";
+            $('.date').datetimepicker(options);
+
+            options.format = "HH:mm";
+            options.showTodayButton = false;
+            options.showClose = false;
+            $('.time').datetimepicker(options);
+
         }
     }
 </script>
