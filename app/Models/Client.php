@@ -74,4 +74,12 @@ class Client extends Model
     public function getPhotos() {
         return $this->screengroup->getActivePhotos();
     }
+
+    public function getAddressAttribute($value) {
+        return strtolower($value);
+    }
+
+    public function setAddressAttribute($value) {
+        $this->attributes['address'] = strtolower($value);
+    }
 }

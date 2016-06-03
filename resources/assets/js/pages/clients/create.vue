@@ -48,6 +48,7 @@
                                v-form-ctrl
                                required
                                custom-validator="isMacAddress"
+                               v-is-unique:client
                         >
                     </div>
                 </div>
@@ -92,12 +93,14 @@
 <script type="text/ecmascript-6">
     import ModelSelector from '../../components/ModelSelector.vue'
     import Validators from '../../mixins/Validators.vue'
+    import IsUnique from '../../directives/IsUnique.vue'
 
     // TODO: Need to add unique validation
 
     module.exports = {
         mixins: [Validators],
         components: { ModelSelector },
+        directives: { IsUnique },
 
         data: function () {
             return {

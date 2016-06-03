@@ -2,7 +2,10 @@
 
 namespace App\Api\V1\Controllers;
 
-use App\Http\Requests;
+use Illuminate\Http\Request;
+use App\Models\Client;
+
+
 
 class ValidationController extends BaseController
 {
@@ -16,21 +19,23 @@ class ValidationController extends BaseController
      * @param null $id
      * @return bool
      */
-    public function validateUnique(Request $request, $id = null) {
+    public function validateUnique(Request $request) {
         $field = $request->get('field');
-        $value = $request->get('value');
+        $value = strtolower($request->get('value'));
+        $model = ucfirst($request->get('model'));
+        $id    = $request->get('id');
 
         // TODO: Refactor this to match all models
         $result = Client::where($field, $value)->first();
 
         if(!is_null($id)) {
             if(!is_null($result)) {
-                return $result->id === $id;
+                return (int)($result->id === $id);
             } else {
-                return true;
+                return 1;
             }
         } else {
-            return $result === null;
+            return (int)($result === null);
         }
     }
 }
