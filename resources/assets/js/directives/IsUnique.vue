@@ -14,7 +14,7 @@
             var self = this;
 
             var isUniqueCheck = function(){
-                client({ path: '/validate/', entity: self.state }).then(
+                client({ path: '/validate', entity: self.state }).then(
                     function (response, status, request) {
                         if (response.entity!="1")
                             self.el._vueFormCtrl.setVadility(false);
