@@ -8,7 +8,7 @@ class ClientListTransformer extends TransformerAbstract
     {
         return [
             'value' 	=> (int) $client->id,
-            'text'      => $client->name,
+            'text'      => ucfirst($client->name),
         ];
     }
 }
