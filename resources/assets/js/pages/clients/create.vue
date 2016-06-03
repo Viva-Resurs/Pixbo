@@ -31,6 +31,7 @@
                                type="text"
                                v-model="client.name"
                                v-form-ctrl
+                               v-is-unique:client
                                required
                         >
                     </div>
@@ -46,9 +47,9 @@
                                placeholder="hh:hh:hh:hh:hh:hh"
                                v-model="client.address"
                                v-form-ctrl
-                               required
                                custom-validator="isMacAddress"
                                v-is-unique:client
+                               required
                         >
                     </div>
                 </div>
