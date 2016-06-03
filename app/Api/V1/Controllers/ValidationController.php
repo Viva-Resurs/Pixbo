@@ -24,18 +24,11 @@ class ValidationController extends BaseController
         $id    = $request->get('id');
 
         // Fix to check against lowercased field
-        $result = $model::where(function($q) use ($field, $value) {
+        $result = $model::where(function($q) use ($field, $value, $id) {
             $q->whereRaw('LOWER(`'.$field.'`) like ?', array($value));
+            $q->where('id', '<>', $id);
         })->first();
 
-        if(!is_null($id)) {
-            if(!is_null($result)) {
-                return (int)($result->id === $id);
-            } else {
-                return 1;
-            }
-        } else {
-            return (int)($result === null);
-        }
+        return (is_null($result)) ? 1 : 0;
     }
 }
