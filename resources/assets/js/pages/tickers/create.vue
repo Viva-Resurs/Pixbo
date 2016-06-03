@@ -65,7 +65,7 @@
                             message: self.trans('ticker.created'),
                             options: {theme: 'success'}
                         })
-                        self.$route.router.go('/tickers')
+                        self.$route.router.go('/tickers/'+response.entity.data.id)
                     },
                     function (response, status) {
                         self.$dispatch('alert', {

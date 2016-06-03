@@ -126,6 +126,7 @@
                             message: self.trans(self.model.type + '.updated'),
                             options: {theme: 'success'}
                         })
+
                         self.goBack()
                     },
                     function (response, status, request) {

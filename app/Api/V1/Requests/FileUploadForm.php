@@ -43,8 +43,8 @@ class FileUploadForm extends Request
 
         //dd($this->all());
         $vm = $this;
-        $result = DB::transaction(function () use ($vm) {
-            $screen = null;
+        $screen = null;
+        $result = DB::transaction(function () use ($vm, $screen) {
             // find or create screen and add photo to it.
             $photo = Photo::getOrCreate($vm->file('file'))->move($vm->file('file'));
             if (!is_null($photo->screen)) {

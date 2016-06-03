@@ -69,10 +69,6 @@
     export default {
         props: ['event'],
         ready(){
-            var test = moment().hour(0);
-            //test.hour(0);
-            //test.minute(0);
-            console.log(test);
             var options = {
                 showTodayButton: true,
                 toolbarPlacement: 'top',

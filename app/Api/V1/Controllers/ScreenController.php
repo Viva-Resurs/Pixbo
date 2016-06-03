@@ -50,7 +50,7 @@ class ScreenController extends BaseController
                 'description' => 'Created a Screen',
                 'details' => $screen->toJson(),
             ]);
-            return $this->response->created();
+            return $screen->id;
         } else {
             return $this->response->error('could_not_create_screen', 500);
         }

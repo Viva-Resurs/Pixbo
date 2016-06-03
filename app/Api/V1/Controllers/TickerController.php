@@ -48,7 +48,7 @@ class TickerController extends BaseController
                 'description' => 'Created a Ticker',
                 'details' => $ticker->toJson(),
             ]);
-            return $this->response->created();
+            return $this->item($ticker, new TickerTransformer());
         } else {
             return $this->response->error('could_not_create_ticker', 500);
         }
