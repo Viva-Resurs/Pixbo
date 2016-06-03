@@ -3,7 +3,6 @@
 namespace App\Api\V1\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Client;
 
 
 
@@ -16,17 +15,18 @@ class ValidationController extends BaseController
      * return false.
      *
      * @param Request $request
-     * @param null $id
      * @return bool
      */
     public function validateUnique(Request $request) {
         $field = $request->get('field');
         $value = strtolower($request->get('value'));
-        $model = ucfirst($request->get('model'));
+        $model = 'App\Models\\'.ucfirst($request->get('model'));
         $id    = $request->get('id');
 
-        // TODO: Refactor this to match all models
-        $result = Client::where($field, $value)->first();
+        // Fix to check against lowercased field
+        $result = $model::where(function($q) use ($field, $value) {
+            $q->whereRaw('LOWER(`'.$field.'`) like ?', array($value));
+        })->first();
 
         if(!is_null($id)) {
             if(!is_null($result)) {
