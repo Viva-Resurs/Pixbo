@@ -61,8 +61,8 @@
 
             </form>
 
-            <screens :screens.sync="screengroup.screens.data"></screens>
-            <tickers :tickers.sync="screengroup.tickers.data"></tickers>
+            <screens :screens.sync="screengroup.screens.data" :id="screengroup.id"></screens>
+            <tickers :tickers.sync="screengroup.tickers.data" :id="screengroup.id"></tickers>
 
         </div>
 
