@@ -20,11 +20,13 @@ class ScreenGroupController extends BaseController
             $this->response->error('permission_denied', 401);
         }
 
+        $screengroups = ScreenGroup::where('id', '<>', 1)->get();
+
         if(Input::get('list')) {
-            return $this->collection(ScreenGroup::all(), new ScreenGroupListTransformer());
+            return $this->collection($screengroups, new ScreenGroupListTransformer());
         }
 
-        return $this->collection(ScreenGroup::all(), new ScreenGroupListTransformer());
+        return $this->collection($screengroups, new ScreenGroupListTransformer());
     }
 
     public function store(Request $request) {

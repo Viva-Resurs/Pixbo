@@ -12,7 +12,8 @@ $settings = [
         'username' => 'moderator',
     ],
     'domain' => "viva.se", // config('app.domain') Server can´t get this?
-    'default_category_name' => "Ej schemalagda"
+    'default_category_name' => "Ej schemalagda",
+    'default_screengroup_dummy_name' => "Dummy"
 ];
 
 return [
@@ -35,6 +36,10 @@ return [
 
         'category' => [
             'default_name' => $settings['default_category_name']
+        ],
+
+        'screengroup' => [
+            'dummy_name' => $settings['default_screengroup_dummy_name']
         ],
 
         'player' => [

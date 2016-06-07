@@ -13,7 +13,7 @@ class ClientTransformer extends TransformerAbstract
         return [
             'id' 	            => (int) $client->id,
             'name'              => ucfirst($client->name),
-            'address'	        => $client->address,
+            'address'	        => $client->address
         ];
     }
 

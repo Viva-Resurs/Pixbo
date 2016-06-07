@@ -108,7 +108,7 @@
                 client: {
                     name: '',
                     ip_address: '',
-                    screen_group_id: 1
+                    screen_group_id: -1
                 },
                 myform: [],
                 creating: false,

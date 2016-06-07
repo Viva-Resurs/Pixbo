@@ -18,10 +18,6 @@ class ClientController extends BaseController
             $this->response->error('permission_denied', 401);
         }
 
-        if(Input::get('list')) {
-            return $this->collection(Client::all(), new ClientListTransformer());
-        }
-
         return $this->collection(Client::all(), new ClientTransformer());
     }
 

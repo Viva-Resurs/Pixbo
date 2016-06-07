@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Category;
+use App\Models\ScreenGroup;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserTableSeeder::class);
         $this->call(SettingsTableSeeder::class);
         $this->call(CategoryTableSeeder::class);
+        $this->call(ScreenGroupTableSeeder::class);
 
         Model::reguard();
     }
@@ -341,3 +343,14 @@ class CategoryTableSeeder extends Seeder {
     }
 }
 
+class ScreenGroupTableSeeder extends Seeder {
+    public function run() {
+        DB::table('screengroups')->delete();
+
+        $screengroup = ScreenGroup::create([
+            'name' => config('pixbo.settings.screengroup.dummy_name'),
+            'desc' => '',
+            'user_id' => 1
+        ]);
+    }
+}

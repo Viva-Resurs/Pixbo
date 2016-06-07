@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="ip_address" class="model_label">{{ trans('general.address') }}</label>
+                    <label for="ip_address" class="model_label">{{ trans('general.mac_address') }}</label>
                     <div class="model_input">
                         <input class="form-control"
                                id="address" name="address"
