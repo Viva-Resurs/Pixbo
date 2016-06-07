@@ -110,7 +110,7 @@
                             },
                             noneSelectedText: this.trans('general.nothing_selected'),
                         });
-                        if (self.model != "")
+                        if (self.models.length > 0)
                             if (self.selected == -1 || self.selected == 1 )
                                 self.selected = self.models[0].id;
                         target.selectpicker('refresh'); // Fix options when creating new things
