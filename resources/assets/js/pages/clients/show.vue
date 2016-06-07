@@ -17,8 +17,8 @@
                 <!-- TODO: Need to fix some styling and translation -->
                 <div class="errors" v-if="myform.$submitted">
                     <p v-if="myform.name.$error.required">Name is required.</p>
-                    <p v-if="myform.ip_address.$error.required">IP Address is required.</p>
-                    <p v-if="myform.ip_address.$error.customValidator">IP Address is not valid.</p>
+                    <p v-if="myform.address.$error.required">IP Address is required.</p>
+                    <p v-if="myform.address.$error.customValidator">IP Address is not valid.</p>
                     <p v-if="myform.screengroup.$error.required">Screengroup is required.</p>
                 </div>
 
@@ -36,15 +36,15 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="ip_address" class="model_label">{{ trans('general.ip_address') }}</label>
+                    <label for="ip_address" class="model_label">{{ trans('general.mac_address') }}</label>
                     <div class="model_input">
                         <input class="form-control"
-                               id="ip_address" name="ip_address"
+                               id="address" name="address"
                                type="text"
-                               v-model="client.ip_address"
+                               v-model="client.address"
                                v-form-ctrl
                                required
-                               custom-validator="isIPAddress"
+                               custom-validator="isMacAddress"
                         >
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                         <button type="" class="btn" @click="goBack" v-if="!myform.$pristine">
                             <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                         </button>
-                        <button type="submit" class="btn btn-primary" :disabled="myform.$invalid">
+                        <button type="submit" v-on:keyup.enter="updateClient" class="btn btn-primary" :disabled="myform.$invalid">
                             <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                         </button>
                     </div>
@@ -101,7 +101,7 @@
                 client: {
                     id: null,
                     name: null,
-                    ip_address: null,
+                    address: null,
                     screen_group_id: null
                 },
                 myform: []

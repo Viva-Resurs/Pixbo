@@ -71,13 +71,13 @@
 
                 <div class="form-group">
                     <div class="model_action">
-                        <button type="" class="btn" v-link="{ path: '/clients/' }" v-if="myform.$pristine">
+                        <button type="" class="btn" @click="goBack" v-if="myform.$pristine">
                             <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                         </button>
-                        <button type="" class="btn" v-link="{ path: '/clients/' }" v-if="!myform.$pristine">
+                        <button type="" class="btn" @click="goBack" v-if="!myform.$pristine">
                             <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                         </button>
-                        <button type="submit" class="btn btn-primary" :disabled="myform.$invalid">
+                        <button type="submit" v-on:keyup.enter="attemptCreate" class="btn btn-primary" :disabled="myform.$invalid">
                             <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                         </button>
                     </div>
@@ -108,7 +108,7 @@
                 client: {
                     name: '',
                     ip_address: '',
-                    screen_group_id: 1
+                    screen_group_id: -1
                 },
                 myform: [],
                 creating: false,

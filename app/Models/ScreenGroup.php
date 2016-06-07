@@ -19,6 +19,29 @@ class ScreenGroup extends Model
         'name',
         'desc',
     ];
+
+    /**
+     * Boot method used to update associations depending on actions.
+     *
+     */
+    public static function boot() {
+        parent::boot();
+
+        ScreenGroup::deleting(function ($screengroup) {
+            $clients = $screengroup->clients;
+            
+            foreach( $clients as $client) {
+                $client->update(['screen_group_id' => 1]);
+                $client->save();
+            }
+            //$screengroup->clients()->sync([]);
+            //dd($screengroup);
+            //$screengroup->clients()->detach();
+
+        });
+    }
+
+
     //protected $touches = ['screens'];
     /**
      * Screen association
