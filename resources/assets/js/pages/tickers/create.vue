@@ -17,13 +17,13 @@
 
             <div class="form-group">
                 <div class="model_action">
-                    <button type="" class="btn" v-link="{ path: '/tickers/' }" v-if="emptyfields">
+                    <button type="" class="btn" @click="goBack" v-if="emptyfields">
                       <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                     </button>
-                    <button type="" class="btn" v-link="{ path: '/tickers/' }" v-if="!emptyfields">
+                    <button type="" class="btn" @click="goBack" v-if="!emptyfields">
                       <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                     </button>
-                    <button type="submit" class="btn btn-primary" :disabled="emptyfields">
+                    <button type="submit" v-on:keyup.enter="createTicker" class="btn btn-primary" :disabled="emptyfields">
                       <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                     </button>
                 </div>
