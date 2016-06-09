@@ -28,7 +28,7 @@
         "classmap": [
             "database",
             "app/Models",
-            "app/console/commands"
+            "app/Console/Commands"
         ],
         "psr-4": {
             "App\\": "app/"
