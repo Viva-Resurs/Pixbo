@@ -14,5 +14,4 @@ storage/database.sqlite
 storage/database.sqlite-journal
 config/jwt.php
 /Vue-template
-/public/js/vendor
-/public/css/vendor
+/public/

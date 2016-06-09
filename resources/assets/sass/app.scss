@@ -13,10 +13,14 @@ $navbar-height: 65px;
 $navbar-background: #f8f8f8;
 
 /*
- * Bootstrap CSS...
+ * Vendor CSS...
  */
 
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "vendor/bootstrap-datetimepicker.min";
+@import "../../../node_modules/bootstrap-select/dist/css/bootstrap-select";
+@import "vendor/font-awesome";
+@import "vendor/dropzone";
 
 /**
  * Elements
