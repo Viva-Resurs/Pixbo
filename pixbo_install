@@ -5,6 +5,7 @@ sudo apt-get update
 
 # Install python tools, like curl
 sudo apt-get install python-software-properties
+sudo apt-get install curl
 
 # Add node PPA
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
@@ -37,7 +38,7 @@ sudo npm install node-gyp@3.3.1 -g
 
 # Install composer
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
-composer self-update
+sudo composer self-update
 
 # Start Installing the repo
 (cd ~/Pixbo-revision && npm install)
