@@ -5,6 +5,3 @@ git pull
 
 # Update JS & SCSS
 gulp
-
-# Restart Apache
-sudo service apache2 restart
