@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use App\Traits\HasRoles;
 
 
 /**
@@ -19,7 +20,7 @@ class User extends Model implements AuthenticatableContract,
                                     AuthorizableContract,
                                     CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword;
+    use Authenticatable, Authorizable, CanResetPassword, HasRoles;
 
     /**
      * The database table used by the model.
@@ -77,64 +78,9 @@ class User extends Model implements AuthenticatableContract,
     public function clients() {
         return $this->hasMany(Client::class);
     }
-
-    /**
-     * Role association
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function roles() {
-        return $this->belongsToMany(Role::class);
-    }
+    
 
     public function categories() {
         return $this->hasMany(Category::class);
-    }
-
-    /***********************************************************************************
-     *                      ACL                                                        *
-     **********************************************************************************/
-
-    /**
-     * Check if the User have a given role
-     *
-     * @param $role
-     * @return bool
-     */
-    public function hasRole($role) {
-        if (is_string($role)) {
-            return $this->roles->contains('name', $role);
-        }
-
-        return !!$role->intersect($this->roles)->count();
-    }
-
-    /**
-     * Assign a given role to the User
-     *
-     * @param $role
-     * @return Model
-     */
-    public function assignRole($role) {
-        if (is_string($role)) {
-            $role_model = Role::where('name', $role)->firstOrFail();
-            return $this->roles()->save($role_model);
-        }
-
-        return $this->roles()->save($role);
-    }
-
-    /**
-     * Get an array of the Users roles
-     *
-     * @return array
-     */
-    public function getRoleAttribute() {
-        $roles       = $this->roles;
-        $roles_array = [];
-        foreach ($roles as $role) {
-            array_push($roles_array, $role->name);
-        }
-        return $roles_array;
     }
 }
