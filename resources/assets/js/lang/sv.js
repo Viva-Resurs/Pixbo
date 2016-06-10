@@ -172,7 +172,12 @@ const lang = {
         updated:                    "Området har uppdaterats.",
         create:                     "Skapa nytt område",
         created:                    "Området har skapats",
-        select:                     "Välj område"
+        select:                     "Välj område",
+        screen_association_removed: "Bilden har tagits bort från området.",
+        ticker_association_removed: "Tickern har tagits bort från området.",
+        screen_association_removed_fail: "Misslyckades att ta bort bilden från området",
+        ticker_association_removed_fail: "Misslyckades att ta bort tickern från området",
+        remove_association:         "Ta bort från området"
     },
     /* ----------------------------- CATEGORY ----------------------------- */
     category: {

@@ -10,7 +10,7 @@
     <div class="panel-body" v-if=" screens.length > 0 ">
         <div class="row">
             <div v-for="screen in screens">
-                <screen-card :screen="screen" :index="$index"></screen-card>
+                <screen-card :screen="screen" :index="$index" :from="from"></screen-card>
             </div>
             </ul>
         </div>
@@ -20,7 +20,7 @@
 <script type="text/ecmascript-6">
     import ScreenCard from './ScreenCard.vue'
     export default {
-        props: ['screens'],
+        props: ['screens','from'],
         components: { ScreenCard }
     }
 </script>

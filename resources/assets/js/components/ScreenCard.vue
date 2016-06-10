@@ -5,10 +5,16 @@
 
             <div class="screencard_tools" role="group">
                 <a class="btn btn-info btn-lg" v-link="{ path: '/screens/'+screen.id }">
-                    <span class="fa fa-calendar" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="Planera"></span>
+                    <span class="fa fa-calendar" v-tooltip data-original-title="{{ trans('screen.edit') }}"></span>
                 </a>
+
                 <a class="btn btn-danger btn-lg" v-on:click="deleteScreen()">
-                    <span class="fa fa-times" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="Ta bort"></span>
+                    <template v-if="this.from=='screengroup'">
+                        <span class="fa fa-minus" v-tooltip data-original-title="{{ trans('screengroup.remove_association') }}"></span>
+                    </template>
+                    <template v-else>
+                        <span class="fa fa-times" v-tooltip data-original-title="{{ trans('general.delete') }}"></span>
+                    </template>
                 </a>
             </div>
         </div>
@@ -17,7 +23,7 @@
 
 <script>
     export default {
-        props: ['screen', 'index'],
+        props: ['screen', 'index', 'from'],
 
         methods: {
             deleteScreen() {

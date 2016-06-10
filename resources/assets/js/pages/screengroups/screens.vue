@@ -4,7 +4,7 @@
 
 <template>
     <!-- TODO: Fix the styling of things-->
-    <screen-list :screens="screens"></screen-list>
+    <screen-list :screens="screens" from="screengroup"></screen-list>
 </template>
 
 <script type="text/ecmascript-6">
@@ -29,13 +29,13 @@
                         function (response) {
                             self.screens.splice(index, 1);
                             self.$dispatch('alert', {
-                                message: self.trans('screen.deleted'),
+                                message: self.trans('screengroup.screen_association_removed'),
                                 options: {theme: 'success'}
                             })
                         },
                         function (response) {
                             self.$dispatch('alert', {
-                                message: self.trans('screen.deleted_fail'),
+                                message: self.trans('screengroup.screen_association_removed_fail'),
                                 options: {theme: 'error'}
                             })
                         }

@@ -4,7 +4,7 @@
 
 <template>
     <!-- TODO: Fix the styling of things-->
-    <ticker-list :tickers="tickers"></ticker-list>
+    <ticker-list :tickers="tickers" from="screengroup"></ticker-list>
 </template>
 
 <script type="text/ecmascript-6">
@@ -28,13 +28,13 @@
                     function (response) {
                         that.tickers.splice(index, 1)
                         that.$dispatch('alert', {
-                            message: that.trans('ticker.deleted'),
+                            message: that.trans('screengroup.ticker_association_removed'),
                             options: {theme: 'success'}
                         })
                     },
                     function (response) {
                         that.$dispatch('alert', {
-                            message: that.trans('ticker.delete_fail'),
+                            message: that.trans('screengroup.ticker_association_removed_fail'),
                             options: {theme: 'error'}
                         })
                     }

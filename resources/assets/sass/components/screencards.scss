@@ -23,3 +23,8 @@
 .screencard_tools .btn {
 	border-top-right-radius: 0px !important;
 }
+.screencard_tools .btn .tooltip {
+	white-space: nowrap;
+	float: none;
+	display: inline-block;
+}

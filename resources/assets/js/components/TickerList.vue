@@ -25,8 +25,14 @@
             <td>
                 <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/tickers/'+ticker.id }"
                    v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
-                <a class="btn btn-primary btn-xs fa fa-times" v-on:click="removeTicker($index)"
-                   v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
+                <template v-if="this.from=='screengroup'">
+                    <a class="btn btn-primary btn-xs fa fa-minus" v-on:click="removeTicker($index)"
+                       v-tooltip data-original-title="{{ trans('screengroup.remove_association')  }}"></a>
+                </template>
+                <template v-else>
+                    <a class="btn btn-primary btn-xs fa fa-times" v-on:click="removeTicker($index)"
+                       v-tooltip data-original-title="{{ trans('general.delete')  }}"></a>
+                </template>
             </td>
         </tr>
         </tbody>
@@ -35,7 +41,7 @@
 
 <script type="text/ecmascript-6">
     export default {
-        props: ['tickers'],
+        props: ['tickers','from'],
 
         methods: {
             removeTicker(index) {
