@@ -21,15 +21,15 @@ trait HasShadowEvents
 
     protected function findShadowInRange($start, $begin, $end) {
         $first_match = $this->shadow_events()
-            ->where('start', '>=', $start)
+            ->where('start', '>=',$start)
             ->where('start', '>=',$begin)
             ->where('start', '<=',$end)
             ->first();
 
         if (is_null($first_match)) {
-            return Carbon::parse($first_match);
+            return $start;
         } else {
-            return Carbon::parse($start['start']);
+            return Carbon::parse($first_match);
         }
     }
 
@@ -113,14 +113,26 @@ trait HasShadowEvents
 
     private function getDate(Event $event)
     {
-        $timeArray = !is_null($event->start_time) ?
-            extractTime($event->start_time) :
-            extractTime('07:00:00');
+        $timeArray = extractTime($event->start_time);
 
         $date = Carbon::parse($event->start_date);
 
         $date->hour = $timeArray[0];
         $date->minute = $timeArray[1];
+        $date->second = "00";
+
+        return $date;
+    }
+
+    private function getEndDate(Event $event)
+    {
+        $timeArray = extractTime($event->end_time);
+
+        $date = Carbon::parse($event->end_date);
+
+        $date->hour = $timeArray[0];
+        $date->minute = $timeArray[1];
+        $date->second = "00";
 
         return $date;
     }
@@ -134,18 +146,28 @@ trait HasShadowEvents
     {
         $start_date = $this->getDate($event);
 
+        $end_date = $this->getEndDate($event);
+
+        $today = Carbon::now();
+        $today->hour = $start_date->hour;
+        $today->minute = $start_date->minute;
+        $today->second = $start_date->second;
+
         // TODO: have some loop to get a closer date to today if possible..
-
-
-        $end = Carbon::parse($start_date)->addDays($this->duration['daily']);
+ 
+        $end = Carbon::parse($today)->addDays($this->duration['daily']);
+        if ($end_date->lte($end))
+            $end = $end_date;
 
         $frequency = $event->frequency;
 
         $start = $this->findShadowInRange(
             $start_date,
-            $start_date->subDays($frequency),
-            $start_date->addDays($frequency)
+            $today->subDays($frequency),
+            $today->addDays($frequency)
         );
+
+
 
         for ($initial = Carbon::parse($start);
              $initial->lte($end);
