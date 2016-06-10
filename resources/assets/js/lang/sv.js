@@ -8,7 +8,8 @@ const lang = {
         password:                   "Lösenord",
         password_repeat:            "Bekräfta lösenord",
         invalid_credentials:        "Ogiltiga uppgifter, försök igen",
-        forgot_password:            "Glömt lösenord?"
+        forgot_password:            "Glömt lösenord?",
+        name:                       "Användarnamn"
     },
     /* ----------------------------- ROLE ----------------------------- */
     role: {

@@ -6,9 +6,9 @@
         <form class="form-horizontal" role="form" v-on:submit="attempt">
 
             <div class="form-group">
-                <label class="col-md-4 control-label">{{ trans('general.email') }}</label>
+                <label class="col-md-4 control-label">{{ trans('auth.name') }}</label>
                 <div class="col-md-6">
-                    <input type="email" class="form-control" v-model="user.email">
+                    <input type="text" class="form-control" v-model="user.name">
                 </div>
             </div>
 
@@ -38,7 +38,7 @@
         data: function () {
             return {
                 user: {
-                    email: null,
+                    name: null,
                     password: null
                 },
                 messages: [],
