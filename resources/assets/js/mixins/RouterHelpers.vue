@@ -6,20 +6,23 @@
 <script type="text/ecmascript-6">
     export default {
         methods: {
-            // TODO: Might want to check if history is empty and if that's the case use a parameter to
-            // get an option where to go. Right now it will resend posts and everything if page is refreshed
             goBack() {
-                let prev = this.$root.history.previous.split('.')
-                if(prev[1] =='create') {
-                    router.go({name: prev[0] + '.index'})    
-                } 
-                else {
-                    if(this.$root.history.params) {
-                        router.go({ name: this.$root.history.previous, params: this.$root.history.params})
-                    } else {
-                        router.go({ name: this.$root.history.previous})
+                if (this.$root && this.$root.history && this.$root.history.previous){
+                    let prev = this.$root.history.previous.split('.')
+                    if(prev[1] == 'create') {
+                        router.go({name: prev[0] + '.index'});
                     }
+                    else {
+                        if(this.$root.history.params)
+                            router.go({ name: this.$root.history.previous, params: this.$root.history.params});
+                        else
+                            router.go({ name: this.$root.history.previous});
+                    }
+                } else if (this.$root && this.$root.$route.path){
+                    let path = this.$root.$route.path.split('/');
+                    router.go({ name: path[1] + '.index' });
                 }
+
             }
         }
     }
