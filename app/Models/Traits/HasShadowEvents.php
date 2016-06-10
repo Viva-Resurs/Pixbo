@@ -19,20 +19,6 @@ trait HasShadowEvents
         return $this->shadow_events()->now()->get();
     }
 
-    protected function findShadowInRange($start, $begin, $end) {
-        $first_match = $this->shadow_events()
-            ->where('start', '>=',$start)
-            ->where('start', '>=',$begin)
-            ->where('start', '<=',$end)
-            ->first();
-
-        if (is_null($first_match)) {
-            return $start;
-        } else {
-            return Carbon::parse($first_match);
-        }
-    }
-
     /**
      * Config on how far into the future the reccuring events should be generated.
      * @var array
@@ -89,6 +75,20 @@ trait HasShadowEvents
         12 => 'december',
     ];
 
+    protected function findShadowInRange($start, $begin, $end) {
+        $first_match = $this->shadow_events()
+            ->where('start', '>=',$start)
+            ->where('start', '>=',$begin)
+            ->where('start', '<=',$end)
+            ->first();
+
+        if (is_null($first_match)) {
+            return $start;
+        } else {
+            return Carbon::parse($first_match);
+        }
+    }
+
     /**
      * Generate shadow events for a given EventMeta.
      *
@@ -137,6 +137,16 @@ trait HasShadowEvents
         return $date;
     }
 
+    private function getToday($time)
+    {
+        $today = Carbon::now();
+        $today->hour = $time->hour;
+        $today->minute = $time->minute;
+        $today->second = $time->second;
+
+        return $today;
+    }
+
     /**
      * Generate daily shadow events.
      *
@@ -145,29 +155,20 @@ trait HasShadowEvents
     private function generateDaily(Event $event)
     {
         $start_date = $this->getDate($event);
-
         $end_date = $this->getEndDate($event);
-
-        $today = Carbon::now();
-        $today->hour = $start_date->hour;
-        $today->minute = $start_date->minute;
-        $today->second = $start_date->second;
-
-        // TODO: have some loop to get a closer date to today if possible..
- 
+        $today = $this->getToday($start_date);
+        $frequency = $event->frequency;
+        
         $end = Carbon::parse($today)->addDays($this->duration['daily']);
+        
         if ($end_date->lte($end))
             $end = $end_date;
-
-        $frequency = $event->frequency;
 
         $start = $this->findShadowInRange(
             $start_date,
             $today->subDays($frequency),
             $today->addDays($frequency)
         );
-
-
 
         for ($initial = Carbon::parse($start);
              $initial->lte($end);
@@ -186,16 +187,20 @@ trait HasShadowEvents
     private function generateWeekly(Event $event)
     {
         $start_date = $this->getDate($event);
-        $weekDays = json_decode(($event->weekly_day_num));
+        $end_date = $this->getEndDate($event);
+        $today = $this->getToday($start_date);
         $frequency = $event->frequency;
+        $weekDays = json_decode(($event->weekly_day_num));
 
-        $end = Carbon::parse($start_date)->addWeeks($this->duration['weekly']);
-
+        $end = Carbon::parse($today)->addWeeks($this->duration['weekly']);
+        
+        if ($end_date->lte($end))
+            $end = $end_date;
 
         $start = $this->findShadowInRange(
             $start_date,
-            $start_date->subWeeks($frequency),
-            $start_date->addWeeks($frequency)
+            $today->subWeeks($frequency),
+            $today->addWeeks($frequency)
         );
 
         for ($initial = Carbon::parse($start);
@@ -227,17 +232,22 @@ trait HasShadowEvents
     private function generateMonthly(Event $event)
     {
         $start_date = $this->getDate($event);
-        $weekDay = $event->getAttribute('recur_day');
-        $week_in_month = (int) $event->getAttribute('monthly_day_num');
-        $days_ahead = $event->getAttribute('days_before_event');
+        $end_date = $this->getEndDate($event);
+        $today = $this->getToday($start_date);
         $frequency = $event->frequency;
-        $end = Carbon::parse($start_date)->addMonths($this->duration['monthly']);
+        $weekDay = $event->recur_day;
+        $week_in_month = (int) $event->monthly_day_num;
+        $days_ahead = $event->days_before_event;
 
+        $end = Carbon::parse($today)->addMonths($this->duration['monthly']);
+        
+        if ($end_date->lte($end))
+            $end = $end_date;
 
         $start = $this->findShadowInRange(
             $start_date,
-            $start_date->subMonths($frequency),
-            $start_date->addMonths($frequency)
+            $today->subMonths($frequency),
+            $today->addMonths($frequency)
         );
 
         for ($initial = Carbon::parse($start);
@@ -277,18 +287,19 @@ trait HasShadowEvents
     private function generateYearly(Event $event)
     {
         $start_date = $this->getDate($event);
+        $end_date = $this->getEndDate($event);
+        $today = $this->getToday($start_date);
         $frequency = $event->frequency;
 
-
-        $end = Carbon::parse($start_date)->addYears($this->duration['yearly']);
-        if ($event->getAttribute('recurring') == 0) {
-            $end = Carbon::parse($start_date);
-        }
+        $end = Carbon::parse($today)->addYears($this->duration['yearly']);
+        
+        if ($end_date->lte($end))
+            $end = $end_date;
 
         $start = $this->findShadowInRange(
             $start_date,
-            $start_date->subYears($frequency),
-            $start_date->addYears($frequency)
+            $today->subYears($frequency),
+            $today->addYears($frequency)
         );
 
         for ($initial = Carbon::parse($start);
