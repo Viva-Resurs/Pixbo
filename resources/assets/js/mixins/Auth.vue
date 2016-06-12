@@ -3,23 +3,79 @@
 */
 
 <script type="text/ecmascript-6">
-    // helper to set first character to be capitalized in a given string.
-    String.prototype.capitalize = function() {
-        return this.charAt(0).toUpperCase() + this.slice(1);
-    }
 
+    import { store } from '../store'
     export default {
+
+        data() {
+            return {
+                store: store
+            }
+        },
+
+        methods: {
+            setLogin(user) {
+                store.user = user;
+                store.authenticated = true;
+                store.token = localStorage.getItem('jwt-token')
+            },
+            destroyLogin(user) {
+                store.user = null;
+                store.token = null;
+                store.authenticated = false;
+                localStorage.removeItem('jwt-token');
+                this.$route.router.go('/auth/login')
+            },
+            getUser() {
+                var token = localStorage.getItem('jwt-token')
+
+                if (token !== null && token !== 'undefined') {
+                    var that = this
+                    client({path: '/users/me'}).then(
+                            function (response) {
+                                // User has successfully logged in using the token from storage
+                                that.setLogin(response.entity.data)
+                                // broadcast an event telling our children that the data is ready and views can be rendered
+                                that.$broadcast('data-loaded')
+                            },
+                            function (response) {
+                                // Login with our token failed, do some cleanup and redirect if we're on an authenticated route
+                                that.destroyLogin()
+                            }
+                    )
+                }
+            },
+        },
 
         computed: {
             isAdmin() {
-                return this.$root.user.isAdmin;
+                return this.store.user.isAdmin;
+            },
+
+            username() {
+                return this.store.user.name
             },
             isAuthenticated() {
-                return this.$root.authenticated
-            },
-            username() {
-                return (this.$root.user.name).capitalize()
+                return this.store.authenticated
             }
+        },
+
+        created() {
+
+            this.$on('alert', function (args) {
+                this.$broadcast('alert', args);
+            })
+
+            this.$on('userHasLoggedOut', function () {
+                this.destroyLogin()
+            })
+
+            this.$on('userHasLoggedIn', function (user) {
+                console.log('user has logged in')
+                this.setLogin(user)
+            })
+
+            this.getUser();
         }
     }
 </script>
