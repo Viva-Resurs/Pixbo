@@ -68,9 +68,7 @@
                         successHandler(response.entity.data)
                     },
                     function (response, status) {
-                        if (_.contains([401, 500], status)) {
-                            that.$dispatch('userHasLoggedOut')
-                        }
+                        console.log('logged out?')
                     }
                 )
             },

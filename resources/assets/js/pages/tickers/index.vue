@@ -38,9 +38,7 @@
                         successHandler(response.entity.data)
                     },
                     function (response, status, request) {
-                        if (status === 401) {
-                            self.$dispatch('userHasLoggedOut')
-                        }
+                        console.log('logged out?')
                     }
                 )
             },
