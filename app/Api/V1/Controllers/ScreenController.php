@@ -33,14 +33,11 @@ class ScreenController extends BaseController
      * @return \Dingo\Api\Http\Response|void
      */
     public function store(FileUploadForm $form) {
-        /*
         if (Gate::denies('add_screens')) {
             $this->response->error('permission_denied', 401);
         }
-        */
 
         $screen = $form->persist();
-
 
         if(!is_null($screen)) {
             Activity::log([
@@ -84,11 +81,8 @@ class ScreenController extends BaseController
         if (Gate::denies('edit_screens')) {
             $this->response->error('permission_denied', 401);
         }
-        $screen = Screen::find($id);
 
-        if(!$screen) {
-            throw new NotFoundHttpException;
-        }
+        $screen = Screen::findOrFail($id);
 
         $result = $form->persist($screen);
 

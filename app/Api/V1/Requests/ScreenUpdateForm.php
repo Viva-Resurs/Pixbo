@@ -36,11 +36,11 @@ class ScreenUpdateForm extends Request
         $newScreen = $this->all();
         $newEvent = $newScreen['event'];
         $newScreengroups = $newScreen['screengroups'];
-
         
         $event = $screen->event->first();
         $event->update($newEvent);
         $screen->screengroups()->sync($newScreengroups);
+        $screen->categories()->sync(array($newScreen['category']));
 
         if($screen->update($newScreen)) {
             return true;
