@@ -24,7 +24,7 @@ class UserTransformer extends TransformerAbstract
             'id' 	            => (int) $user->id,
             'name'              => ucfirst($user->name),
             'email'	            => $user->email,
-            'isAdmin'           => $user->roles()->first()->id === 1,
+            'isAdmin'           => $user->hasRole('admin'),
         ];
     }
 
