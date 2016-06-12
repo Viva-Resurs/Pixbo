@@ -4,7 +4,7 @@
     define(function (require) {
 
         var interceptor;
-
+        var store = require('../store')
         interceptor = require('rest/interceptor');
 
         /**
@@ -30,7 +30,17 @@
             },
             response: function (response) {
                 if (response.status && response.status.code == 401) {
-                    localStorage.removeItem('jwt-token');
+
+                    //TODO: Might want some check to see if it's actually a new token that's sought for and not just permission denied.
+                    client({ path: 'auth/refresh'}).then(
+                        function (response) {
+                            //return response;
+                        },
+                        function (response) {
+                            localStorage.removeItem('jwt-token');
+                            store.user = null;
+                        }
+                    )
                 }
                 if (response.headers && response.headers.Authorization) {
                     localStorage.setItem('jwt-token', response.headers.Authorization)
@@ -38,6 +48,7 @@
                 if (response.entity && response.entity.token && response.entity.token.length > 10) {
                     localStorage.setItem('jwt-token', 'Bearer ' + response.entity.token);
                 }
+
                 return response;
             }
         });

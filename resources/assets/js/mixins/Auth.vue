@@ -55,7 +55,9 @@
             },
 
             username() {
-                return this.store.user.name
+                if(this.store.user)
+                    return this.store.user.name
+                else return null
             },
             isAuthenticated() {
                 return this.store.authenticated
@@ -75,6 +77,10 @@
             this.$on('userHasLoggedIn', function (user) {
                 console.log('user has logged in')
                 this.setLogin(user)
+            })
+
+            this.$on('userHasFetchedToken', function(token) {
+                this.store.token = token;
             })
 
             this.getUser();

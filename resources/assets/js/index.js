@@ -6,6 +6,7 @@ Vue.use(VueRouter)
 // Import 3rd party libraries
 var bootstrap = require('bootstrap-sass');
 import * as vueForm from 'vue-form'
+var _ = require('lodash');
 
 // Import the actual routes, aliases, ...
 import { configRouter } from './routes'
