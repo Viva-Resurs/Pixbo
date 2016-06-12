@@ -49,7 +49,9 @@
 
         computed: {
             isAdmin() {
-                return this.store.user.isAdmin;
+                if(this.store.user)
+                    return this.store.user.isAdmin;
+                else return false
             },
 
             username() {
