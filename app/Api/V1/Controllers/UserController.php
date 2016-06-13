@@ -15,7 +15,7 @@ class UserController extends BaseController
         if (Gate::denies('view_users')) {
             $this->response->error('permission_denied', 401);
         }
-        $users = User::with('roles')->where('id', '<>', $this->getAuthenticatedUser()->id)->get();
+        $users = User::with('roles')->where('id', '<>', $this->user->id)->get();
         return $this->collection($users, new UserTransformer());
         
     }
@@ -57,7 +57,8 @@ class UserController extends BaseController
 
 
     public function me() {
-        return $this->item($this->getAuthenticatedUser(), new UserTransformer() );
+        if ($this->user)
+            return $this->item($this->user, new UserTransformer() );
     }
 
 

@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Password;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Dingo\Api\Exception\ValidationHttpException;
 use Dingo\Api\Exception\TokenInvalidException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class AuthController extends Controller
 {
@@ -129,7 +130,7 @@ class AuthController extends Controller
     public function token(){
         $token = JWTAuth::getToken();
         if(!$token){
-            throw new BadRequestHtttpException('Token not provided');
+            throw new BadRequestHttpException('Token not provided');
         }
         try{
             $token = JWTAuth::refresh($token);

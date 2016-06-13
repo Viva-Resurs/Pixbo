@@ -30,17 +30,23 @@
             },
             response: function (response) {
                 if (response.status && response.status.code == 401) {
+                    if (response.entity.error.message=="Token has expired"){
 
-                    //TODO: Might want some check to see if it's actually a new token that's sought for and not just permission denied.
-                    client({ path: 'auth/refresh'}).then(
-                        function (response) {
-                            //return response;
-                        },
-                        function (response) {
-                            localStorage.removeItem('jwt-token');
-                            store.user = null;
-                        }
-                    )
+                        window.console.info("Expired token...");
+
+                        client({ path: 'auth/refresh'}).then(
+                            function (response) {
+                                window.router.go({name:window.router._currentRoute.name});
+                            },
+                            function (response) {
+                                localStorage.removeItem('jwt-token');
+                            }
+                        );
+                    } else {
+                        localStorage.removeItem('jwt-token');
+                        window.router.go({name: 'auth.login'});
+                    }
+
                 }
                 if (response.headers && response.headers.Authorization) {
                     localStorage.setItem('jwt-token', response.headers.Authorization)
