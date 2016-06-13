@@ -185,7 +185,8 @@ const lang = {
         model:                      "Kategori|Kategorier",
         add:                        "Lägg till kategori",
         create:                     "Skapa ny kategori",
-        edit:                       "Redigera kategori"
+        edit:                       "Redigera kategori",
+        show:                       "Visa kategori"
     },
     /* ----------------------------- TICKER ----------------------------- */
     ticker: {

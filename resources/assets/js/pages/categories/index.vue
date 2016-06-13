@@ -29,10 +29,12 @@
                     <td><a v-link="{ path: '/categories/'+category.id }">{{ category.name }}</a></td>
                     <td>{{ category.numberOfScreens }}</td>
                     <td>
-                        <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/categories/'+category.id }"
-                          v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
-                        <a class="btn btn-primary btn-xs fa fa-times" v-if="category.id !== 1" v-on:click="attemptDeleteCategory($index)"
-                          v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
+                        <a class="btn btn-primary btn-xs fa fa-pencil" v-if="category.id !== 1 && isOwner(category)"
+                            v-link="{ path: '/categories/'+category.id }"
+                            v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
+                        <a class="btn btn-primary btn-xs fa fa-times" v-if="category.id !== 1 && isOwner(category)"
+                            v-on:click="attemptDeleteCategory($index)"
+                            v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
                     </td>
                 </tr>
             </tbody>
@@ -43,18 +45,20 @@
 </template>
 
 <script>
-    import SweetAlert from '../../mixins/SweetAlert.vue'
+    import SweetAlert from '../../mixins/SweetAlert.vue';
+    import Auth from '../../mixins/Auth.vue';
 
     module.exports = {
 
-        mixins:[SweetAlert],
+        mixins:[SweetAlert,Auth],
 
         data: function () {
             return {
                 categories: {
                     id: null,
                     name: null,
-                    screens: null
+                    screens: null,
+                    user_id: null
                 }
             }
         },

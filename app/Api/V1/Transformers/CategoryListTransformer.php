@@ -21,7 +21,8 @@ class CategoryListTransformer extends TransformerAbstract
         return [
             'id' 	            => (int) $category->id,
             'name'              => $category->name,
-            'numberOfScreens'   => $category->screens()->count()
+            'numberOfScreens'   => $category->screens()->count(),
+            'user_id'           => (int) $category->user_id,
         ];
     }
 }

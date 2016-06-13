@@ -23,6 +23,7 @@ class CategoryTransformer extends TransformerAbstract
         return [
             'id' 	            => (int) $category->id,
             'name'              => $category->name,
+            'user_id'           => (int) $category->user_id
         ];
     }
 

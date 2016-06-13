@@ -48,14 +48,15 @@ class CategoryController extends BaseController
         }
         $category = Category::findOrFail($id);
 
-        return $category;
+        return $this->item($category, new CategoryTransformer());
     }
 
     public function update(Request $request, $id) {
-        if (Gate::denies('edit_category')) {
+        $category = Category::findOrFail($id);
+
+        if (Gate::denies('edit_category') && !$category->isOwner($this->user) ) {
             $this->response->error('permission_denied', 401);
         }
-        $category = Category::findOrFail($id);
 
         if($category->update($request->only(['name']))) {
             Activity::log([
@@ -72,10 +73,11 @@ class CategoryController extends BaseController
     }
 
     public function destroy($id) {
-        if (Gate::denies('remove_category')) {
+        $category = Category::findOrFail($id);
+
+        if (Gate::denies('remove_category') && !$category->isOwner($this->user) ) {
             $this->response->error('permission_denied', 401);
         }
-        $category = Category::findOrFail($id);
 
         if($category->delete()) {
             Activity::log([

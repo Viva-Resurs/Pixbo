@@ -45,6 +45,11 @@
                     )
                 }
             },
+            isOwner(model) {
+                if (this.isAdmin)
+                    return true;
+                return model.user_id == this.store.user.id;
+            }
         },
 
         computed: {
