@@ -36,7 +36,8 @@
 
                         client({ path: 'auth/refresh'}).then(
                             function (response) {
-                                window.router.go({name:window.router._currentRoute.name});
+                                // TODO: Fix params when refreshing token
+                                window.router.go({name:window.router._currentRoute.name, params:window.router._currentRoute.params});
                             },
                             function (response) {
                                 localStorage.removeItem('jwt-token');
