@@ -114,6 +114,17 @@
               this.updateSchedule();
             },
 
+            flipDates: function(date){
+                if (!date)
+                    return date;
+                var converted_date = date.split('-');
+                if (date.length==10)
+                    return converted_date[2]+'-'+converted_date[1]+'-'+converted_date[0].substring(2);
+                else if (date.length==8)
+                    return '20'+converted_date[2]+'-'+converted_date[1]+'-'+converted_date[0];
+                else
+                    return date;
+            },
             updateSchedule: function () {
                 // Update model stuff
                 this.encodeModel();
@@ -142,10 +153,14 @@
                 )
             },
             encodeModel() {
+                this.event.start_date = this.flipDates(this.event.start_date);
+                this.event.end_date = this.flipDates(this.event.end_date);
                 this.event.weekly_day_num = JSON.stringify(this.weekly_day_num);
                 this.model.screengroups = this.selected_screengroups;
             },
             decodeModel() {
+                this.event.start_date = this.flipDates(this.event.start_date);
+                this.event.end_date = this.flipDates(this.event.end_date);
                 if(this.model.screengroups != null || this.model.screengroups != [] || this.model.screengroups != "") {
                     var that = this;
                     this.model.screengroups.forEach(function(entry) {

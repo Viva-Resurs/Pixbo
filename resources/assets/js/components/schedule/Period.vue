@@ -107,7 +107,8 @@
                 }
             };
 
-            options.format = "YYYY-MM-DD";
+            options.format = "DD-MM-YY";
+            //options.format = "YYYY-MM-DD";
             $('.date').datetimepicker(options);
 
             options.format = "HH:mm";
