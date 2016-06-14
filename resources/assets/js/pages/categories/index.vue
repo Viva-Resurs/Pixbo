@@ -85,11 +85,12 @@
                 var that = this
                 client({ path: '/categories/' + this.categories[index].id, method: 'DELETE' }).then(
                     function (response) {
-                        that.categories.splice(index, 1)
+                        that.categories.splice(index, 1);
                         that.$dispatch('alert', {
                             message: that.trans('category.deleted'),
                             options: {theme: 'success'}
                         })
+                        that.$route.router.go({name:'categories.index'});
                     },
                     function (response) {
                         that.$dispatch('alert', {

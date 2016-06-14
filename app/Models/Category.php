@@ -9,6 +9,24 @@ class Category extends Model
 {
     protected $fillable = ['name'];
 
+    /**
+     * Boot method used to update associations depending on actions.
+     *
+     */
+    public static function boot() {
+        parent::boot();
+
+        Category::deleting(function ($category) {
+
+            foreach ( $category->screens as $screen ){
+                $category->screens()->detach($screen->id);
+                $screen->categories()->sync([1]);
+            }
+
+        });
+    }
+
+
     public function user() {
         return $this->belongsTo(User::class);
     }

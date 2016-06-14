@@ -66,11 +66,12 @@
 <script>
     import Auth from '../../mixins/Auth.vue';
     import ScreenList from '../../components/ScreenList.vue';
+    import SweetAlert from '../../mixins/SweetAlert.vue';
 
     export default {
 
-        mixins:[Auth],
-        components:{ScreenList},
+        mixins: [Auth, SweetAlert],
+        components: {ScreenList},
 
         data: function () {
             return {
@@ -88,7 +89,6 @@
                 var that = this
                 client({ path: '/categories/' + id }).then(
                     function (response) {
-                        console.log(response)
                         that.$set('category', response.entity.data)
                         successHandler(response.entity.data)
                     },
@@ -125,8 +125,38 @@
                         })
                     }
                 )
+            },
+
+            attemptDeleteScreen(index) {
+                // TODO: Fix text
+                this.confirm({callback:this.deleteScreen, arg:index})
+            },
+
+            deleteScreen(index) {
+                var self = this;
+                client({ path: '/categories/' + self.category.id + '/screen/' + self.category.screens.data[index].id, method: 'DELETE' }).then(
+                        function (response) {
+                            self.category.screens.data.splice(index, 1);
+                            self.$dispatch('alert', {
+                                message: self.trans('categories.screen_association_removed'),
+                                options: {theme: 'success'}
+                            })
+                        },
+                        function (response) {
+                            self.$dispatch('alert', {
+                                message: self.trans('categories.screen_association_removed_fail'),
+                                options: {theme: 'error'}
+                            })
+                        }
+                );
             }
 
+        },
+
+        ready() {
+            this.$on('remove-screen', function (index) {
+                this.attemptDeleteScreen(index)
+            })
         },
 
         route: {

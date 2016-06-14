@@ -8,14 +8,21 @@
                     <span class="fa fa-calendar" v-tooltip data-original-title="{{ trans('screen.edit') }}"></span>
                 </a>
 
-                <a class="btn btn-danger btn-lg" v-on:click="deleteScreen()">
-                    <template v-if="this.from=='screengroup'">
+                <template v-if="from=='screen' || from=='screengroup'">
+                    <a class="btn btn-danger btn-lg" v-on:click="deleteScreen()">
+                        <template v-if="from=='screengroup'">
+                            <span class="fa fa-minus" v-tooltip data-original-title="{{ trans('screengroup.remove_association') }}"></span>
+                        </template>
+                        <template v-else>
+                            <span class="fa fa-times" v-tooltip data-original-title="{{ trans('general.delete') }}"></span>
+                        </template>
+                    </a>
+                </template>
+                <template v-else>
+                    <a v-if="screen.category!=1" class="btn btn-danger btn-lg" v-on:click="deleteScreen()">
                         <span class="fa fa-minus" v-tooltip data-original-title="{{ trans('screengroup.remove_association') }}"></span>
-                    </template>
-                    <template v-else>
-                        <span class="fa fa-times" v-tooltip data-original-title="{{ trans('general.delete') }}"></span>
-                    </template>
-                </a>
+                    </a>
+                </template>
             </div>
         </div>
     </div>

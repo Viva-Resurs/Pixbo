@@ -18,6 +18,7 @@ $api->version('v1', function ($api) {
         // Screen association
         $api->post('screengroups/{screengroup}/screen/{screen}', 'App\Api\V1\Controllers\ScreenScreenGroupController@store');
         $api->delete('screengroups/{screengroup}/screen/{screen}', 'App\Api\V1\Controllers\ScreenScreenGroupController@destroy');
+        $api->delete('categories/{category}/screen/{screen}', 'App\Api\V1\Controllers\ScreenCategoryController@destroy');
 
         // Ticker association
         $api->post('screengroups/{screengroup}/ticker/{ticker}', 'App\Api\V1\Controllers\TickerScreenGroupController@store');

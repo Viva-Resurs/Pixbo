@@ -25,14 +25,11 @@ class Screen extends Model
 
         Screen::deleting(function ($screen) {
             $event = $screen->event->first();
-            $sgs = $screen->screengroups();
             if(!is_null($event))
                 $event->delete();
 
-            foreach($sgs as $sg) {
-                $sg->screens()->detach($screen);
-                $sg->touch();
-            }
+            $screen->screengroups()->detach();
+            $screen->categories()->detach();
 
             // TODO: Shadowevents Photos
 
@@ -66,7 +63,7 @@ class Screen extends Model
     }
 
     /**
-     * Tag association
+     * Category association
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */

@@ -10,7 +10,7 @@
 
     <div v-else>
 
-        <screen-list :screens="screens"></screen-list>
+        <screen-list :screens="screens" from="screen"></screen-list>
 
     </div>
 
