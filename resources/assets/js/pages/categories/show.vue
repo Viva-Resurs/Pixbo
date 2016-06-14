@@ -1,10 +1,7 @@
 <template>
 
-    <div class="panel-heading" v-if="isOwner(category)">
-        {{ trans('category.edit') }}
-    </div>
-    <div class="panel-heading" v-else>
-        {{ trans('category.show') }}
+    <div class="panel-heading">
+        {{ category.name }}
     </div>
 
     <div class="panel-body" v-if=" $loadingRouteData ">

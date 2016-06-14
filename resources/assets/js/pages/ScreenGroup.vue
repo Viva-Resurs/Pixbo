@@ -16,7 +16,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a v-link="{ path: '/screengroups/create' }">
+                                <a v-link="{ path: '/screengroups/create' }" v-if="isAdmin">
                                     <i class="fa fa-btn fa-fw fa-plus"></i>&nbsp;{{ trans('general.new') }}</span>
                                 </a>
                             </li>
@@ -34,17 +34,17 @@
                     <div class="app-tabs">
                         <ul class="nav app-tabs-stacked">
                             <li>
-                                <a v-link="{ path: '/screengroups/screens/create' }">
+                                <a v-link="{ path: '/screens/create' }" >
                                     <i class="fa fa-btn fa-fw fa-plus"></i>&nbsp;{{ trans('screen.add') }}</span>
                                 </a>
                             </li>
                             <li v-if=" $route.params.id>0 ">
-                                <a v-link="{ path: '/screengroups/tickers/create' }">
+                                <a v-link="{ path: '/tickers/create' }">
                                     <i class="fa fa-btn fa-fw fa-plus"></i>&nbsp;{{ trans('ticker.add') }}</span>
                                 </a>
                             </li>
                             <li>
-                                <a v-link="{ path: '/screengroups/clients/create' }">
+                                <a v-link="{ path: '/clients/create' }">
                                     <i class="fa fa-btn fa-fw fa-plus"></i>&nbsp;{{ trans('client.add') }}</span>
                                 </a>
                             </li>
@@ -66,3 +66,11 @@
         </div><!-- End tab panes col-md-9 -->
     </div><!-- End container -->
 </template>
+
+<script type="text/ecmascript-6">
+    import Auth from '../mixins/Auth.vue'
+
+    export default {
+        mixins: [Auth]
+    }
+</script>

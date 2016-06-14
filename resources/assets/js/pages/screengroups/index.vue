@@ -31,9 +31,9 @@
                     <td>
                         <a class="btn btn-primary btn-xs fa fa-eye " href="/play?mac={{screengroup.preview}}&preview=yes" target="_blank"
                            v-tooltip data-original-title="{{ trans('general.preview') }}" :disabled="hasPreview($index)"></a>
-                        <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/screengroups/'+screengroup.id }"
+                        <a class="btn btn-primary btn-xs fa fa-pencil" v-if="isAdmin" v-link="{ path: '/screengroups/'+screengroup.id }"
                            v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
-                        <a class="btn btn-primary btn-xs fa fa-times" v-on:click="attemptDeleteScreengroup($index)"
+                        <a class="btn btn-primary btn-xs fa fa-times" v-if="isAdmin" v-on:click="attemptDeleteScreengroup($index)"
                            v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
                     </td>
                 </tr>
@@ -46,10 +46,11 @@
 
 <script>
     import SweetAlert from '../../mixins/SweetAlert.vue'
+    import Auth from '../../mixins/Auth.vue';
 
     module.exports = {
 
-        mixins:[SweetAlert],
+        mixins:[SweetAlert,Auth],
 
         data: function () {
             return {

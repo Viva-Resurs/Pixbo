@@ -1,7 +1,7 @@
 <template>
 
     <div class="panel-heading">
-        {{ trans('screengroup.edit') }}
+        {{ screengroup.name }}
     </div>
 
     <div class="panel-body" v-if="$loadingRouteData">
@@ -12,7 +12,7 @@
      
         <div class="panel-body">
 
-            <form v-form name="myform" class="form-horizontal" role="form" v-on:submit.prevent="attemptUpdateScreengroup">
+            <form v-if="isAdmin" v-form name="myform" class="form-horizontal" role="form" v-on:submit.prevent="attemptUpdateScreengroup">
 
                 <!-- TODO: Need to fix some styling and translation -->
                 <div class="errors" v-if="myform.$submitted">
@@ -73,9 +73,11 @@
 <script>
     import screens from './screens.vue'
     import tickers from './tickers.vue'
+    import Auth from '../../mixins/Auth.vue'
 
     module.exports = {
 
+        mixins:[Auth],
         components: {
             screens,
             tickers

@@ -160,6 +160,7 @@ const lang = {
         deleted:                    "Bilden har tagits bort.",
         deleted_fail:               "Misslyckades att ta bort bilden, försök igen.",
         edit:                       "Redigera bild",
+        preview:                    "Förhandsvisning",
         updated:                    "Bilden har uppdaterats."
     },
     /* ----------------------------- SCREENGROUP ----------------------------- */
@@ -170,6 +171,7 @@ const lang = {
         deleted:                    "Området har tagits bort.",
         deleted_fail:               "Misslyckades att ta bort området, försök igen.",
         edit:                       "Redigera område",
+        show:                       "Visa område",
         updated:                    "Området har uppdaterats.",
         create:                     "Skapa nytt område",
         created:                    "Området har skapats",
