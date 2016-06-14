@@ -40,6 +40,8 @@
                 vm.$nextTick(function () {
                     vm.durpzone = $("#my-dropzone").dropzone({
                         maxFileSize: 10,
+                        uploadMultiple: false,
+                        maxFiles: 1,
                         acceptedFiles: '.jpg,.jpeg,.png,.bmp',
                         dictDefaultMessage: vm.trans('screen.upload_message'),
                         init: function () {
