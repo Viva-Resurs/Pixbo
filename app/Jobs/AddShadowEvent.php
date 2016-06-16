@@ -31,7 +31,7 @@ class AddShadowEvent extends Job implements SelfHandling
     {
         if (is_null($this->event->eventable)) {
             // TODO: There is a nasty bug somewhere that messes up the data, so when it gets here it blows up
-            dd($this->event);
+            //dd($this->event);
             return;
         }
 
