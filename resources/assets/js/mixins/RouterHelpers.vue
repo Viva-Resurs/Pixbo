@@ -7,6 +7,9 @@
     export default {
         methods: {
             goBack() {
+
+                if ( this.$route.query.screengroup )
+                    return router.go( { path:'/screengroups/'+this.$route.query.screengroup });
                 if (this.$root && this.$root.history && this.$root.history.previous){
                     let prev = this.$root.history.previous.split('.')
                     if(prev[1] == 'create') {

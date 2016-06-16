@@ -45,7 +45,7 @@ class ScreenGroupController extends BaseController
                 'description' => 'Created a ScreenGroup',
                 'details' => $screengroup->toJson(),
             ]);
-            return $this->response->created();
+            return $this->item($screengroup, new ScreenGroupTransformer());
         }
         else {
             return $this->response->error('could_not_create_screengroup', 500);

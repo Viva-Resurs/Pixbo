@@ -12,7 +12,7 @@
 
         <div class="panel-body">
 
-            <form class="form-horizontal" role="form" v-on:submit="updateClient" v-form name="myform">
+            <form class="form-horizontal" role="form" v-on:submit.prevent="attemptUpdateClient" v-form name="myform">
 
                 <!-- TODO: Need to fix some styling and translation -->
                 <div class="errors" v-if="myform.$submitted">
@@ -66,13 +66,13 @@
 
                 <div class="form-group">
                     <div class="model_action">
-                        <button type="" class="btn" @click="goBack" v-if="myform.$pristine">
+                        <button type="button" class="btn" @click="goBack" v-if="myform.$pristine">
                             <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                         </button>
-                        <button type="" class="btn" @click="goBack" v-if="!myform.$pristine">
+                        <button type="button" class="btn" @click="goBack" v-if="!myform.$pristine">
                             <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                         </button>
-                        <button type="submit" v-on:keyup.enter="updateClient" class="btn btn-primary" :disabled="myform.$invalid">
+                        <button type="submit" @keydown.enter.prevent="attemptUpdateClient" class="btn btn-primary" :disabled="myform.$invalid">
                             <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                         </button>
                     </div>
@@ -111,10 +111,10 @@
 
 
             fetch: function (id, successHandler) {
-                var that = this
+                var self = this
                 client({ path: '/clients/' + id }).then(
                     function (response) {
-                        that.$set('client', response.entity.client);
+                        self.$set('client', response.entity.client);
                         successHandler(response.entity.client);
                     },
                     function (response, status, request) {
@@ -127,20 +127,25 @@
                 )
             },
 
-            updateClient: function (e) {
-                e.preventDefault()
-                var that = this
-                client({ path: '/clients/' + this.client.id, entity: this.client, method: 'PUT'}).then(
+            attemptUpdateClient() {
+                if(this.myform.$valid) {
+                    this.updateClient();
+                }
+            },
+
+            updateClient: function () {
+                var self = this
+                client({ path: '/clients/' + self.client.id, entity: self.client, method: 'PUT'}).then(
                     function (response) {
-                        that.$dispatch('alert', {
-                            message: that.trans('client.updated'),
+                        self.$dispatch('alert', {
+                            message: self.trans('client.updated'),
                             options: {theme: 'success'}
                         })
-                        that.$route.router.go('/clients')
+                        self.$route.router.go('/clients')
                     },
                     function (response) {
-                        that.$dispatch('alert', {
-                            message: that.trans('client.updated_fail'),
+                        self.$dispatch('alert', {
+                            message: self.trans('client.updated_fail'),
                             options: {theme: 'error'}
                         })
                     }

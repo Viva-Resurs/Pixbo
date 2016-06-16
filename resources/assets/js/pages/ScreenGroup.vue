@@ -44,7 +44,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a v-link="{ path: '/clients/create' }">
+                                <a v-link="{ path: '/clients/create', query: { screengroup: $route.params.id } }">
                                     <i class="fa fa-btn fa-fw fa-plus"></i>&nbsp;{{ trans('client.add') }}</span>
                                 </a>
                             </li>

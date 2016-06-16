@@ -23,28 +23,6 @@ const lang = {
         confirmButtonText:         "Ta bort",
         cancelButtonText:          "Avbryt"
     },
-    /* ----------------------------- CLIENT ----------------------------- */
-    client: {
-        model:                      "Skärm|Skärmar",
-        add:                        "Lägg till skärm",
-        empty:                      "Det finns inga skärmar än.",
-        deleted:                    "Skärmen har tagits bort.",
-        deleted_fail:               "Misslyckades att ta bort skärmen, försök igen.",
-        edit:                       "Redigera skärm",
-        updated:                    "Skärmen har uppdaterats.",
-        create:                     "Skapa ny Skärm",
-        created:                    "Skärmen har skapats"
-    },
-    /* ----------------------------- USER ----------------------------- */
-    user: {
-        model:                      "Användare|Användare",
-        empty:                      "Det finns inga användare än.",
-        create:                     "Skapa ny användare",
-        deleted:                    "Användaren har tagits bort.",
-        deleted_fail:               "Misslyckades att ta bort användaren, försök igen.",
-        edit:                       "Redigera användare",
-        updated:                    "Användaren har uppdaterats."
-    },
     /* ----------------------------- GENERAL ----------------------------- */
     general: {
         home:                       "Hem",
@@ -155,32 +133,70 @@ const lang = {
         add:                        "Lägg till bild",
         upload:                     "Ladda upp",
         upload_message:             "Dra bilder hit, eller klicka för att bläddra.",
-        uploaded:                   "Bilden har laddats upp.",
+        edit:                       "Redigera bild",
         empty:                      "Det finns inga bilder än.",
+
+        preview:                    "Förhandsvisning",
+
         deleted:                    "Bilden har tagits bort.",
         deleted_fail:               "Misslyckades att ta bort bilden, försök igen.",
-        edit:                       "Redigera bild",
-        preview:                    "Förhandsvisning",
-        updated:                    "Bilden har uppdaterats."
+        updated:                    "Bilden har uppdaterats.",
+        updated_fail:               "Misslyckades att uppdatera bilden, försök igen.",
+        uploaded:                   "Bilden har skapats.",
+        uploaded_fail:              "Misslyckades att ladda upp bilden, försök igen."
+
+    },
+    /* ----------------------------- CLIENT ----------------------------- */
+    client: {
+        model:                      "Skärm|Skärmar",
+        add:                        "Lägg till skärm",
+        create:                     "Skapa ny Skärm",
+        edit:                       "Redigera skärm",
+        empty:                      "Det finns inga skärmar än.",
+
+        deleted:                    "Skärmen har tagits bort.",
+        deleted_fail:               "Misslyckades att ta bort skärmen, försök igen.",
+        updated:                    "Skärmen har uppdaterats.",
+        updated_fail:               "Misslyckades att uppdatera skärmen, försök igen.",
+        created:                    "Skärmen har skapats.",
+        created_fail:               "Misslyckades att skapa skärmen, försök igen."
+    },
+    /* ----------------------------- USER ----------------------------- */
+    user: {
+        model:                      "Användare|Användare",
+        add:                        "Lägg till användare",
+        create:                     "Skapa ny användare",
+        edit:                       "Redigera användare",
+        empty:                      "Det finns inga användare än.",
+
+        deleted:                    "Användaren har tagits bort.",
+        deleted_fail:               "Misslyckades att ta bort användaren, försök igen.",
+        updated:                    "Användaren har uppdaterats.",
+        updated_fail:               "Misslyckades att uppdatera användaren, försök igen.",
+        created:                    "Användaren har skapats.",
+        created_fail:               "Misslyckades att skapa användaren, försök igen."
     },
     /* ----------------------------- SCREENGROUP ----------------------------- */
     screengroup: {
         model:                      "Område|Områden",
         add:                        "Lägg till område",
+        create:                     "Skapa nytt område",
+        edit:                       "Redigera område",
         empty:                      "Det finns inga områden än.",
+
         deleted:                    "Området har tagits bort.",
         deleted_fail:               "Misslyckades att ta bort området, försök igen.",
-        edit:                       "Redigera område",
-        show:                       "Visa område",
         updated:                    "Området har uppdaterats.",
-        create:                     "Skapa nytt område",
-        created:                    "Området har skapats",
-        select:                     "Välj område",
-        screen_association_removed: "Bilden har tagits bort från området.",
-        ticker_association_removed: "Tickern har tagits bort från området.",
+        updated_fail:               "Misslyckades att uppdatera området, försök igen.",
+        created:                    "Området har skapats.",
+        created_fail:               "Misslyckades att skapa området, försök igen.",
+
+        select:                          "Välj område",
+        remove_association:              "Ta bort från området",
+        screen_association_removed:      "Bilden har tagits bort från området.",
         screen_association_removed_fail: "Misslyckades att ta bort bilden från området",
-        ticker_association_removed_fail: "Misslyckades att ta bort tickern från området",
-        remove_association:         "Ta bort från området"
+        ticker_association_removed:      "Tickern har tagits bort från området.",
+        ticker_association_removed_fail: "Misslyckades att ta bort tickern från området"
     },
     /* ----------------------------- CATEGORY ----------------------------- */
     category: {
@@ -188,20 +204,34 @@ const lang = {
         add:                        "Lägg till kategori",
         create:                     "Skapa ny kategori",
         edit:                       "Redigera kategori",
-        show:                       "Visa kategori"
+        empty:                      "Det finns inga kategorier än.",
+
+        deleted:                    "Kategorin har tagits bort.",
+        deleted_fail:               "Misslyckades att ta bort kategorin, försök igen.",
+        updated:                    "Kategorin har uppdaterats.",
+        updated_fail:               "Misslyckades att uppdatera kategorin, försök igen.",
+        created:                    "Kategorin har skapats",
+        created_fail:               "Misslyckades att skapa kategorin, försök igen.",
+
+        select:                          "Välj kategori",
+        remove_association:              "Ta bort från kategori",
+        screen_association_removed:      "Bilden har tagits bort från kategorin.",
+        screen_association_removed_fail: "Misslyckades att ta bort bilden från kategorin"
     },
     /* ----------------------------- TICKER ----------------------------- */
     ticker: {
         model:                      "Ticker|Tickers",
         add:                        "Lägg till ticker",
         create:                     "Skapa ny ticker",
-        archive:                    "Arkiv",
+        edit:                       "Redigera ticker",
         empty:                      "Det finns inga tickers än.",
+        
         deleted:                    "Tickern har tagits bort.",
         deleted_fail:               "Misslyckades att ta bort tickern, försök igen.",
-        edit:                       "Redigera ticker",
         updated:                    "Tickern har uppdaterats.",
-        created:                    "Tickern har skapats"
+        updated_fail:               "Misslyckades att uppdatera tickern, försök igen.",
+        created:                    "Tickern har skapats",
+        created_fail:               "Misslyckades att skapa tickern, försök igen."
     },
     /* ----------------------------- PICKER ----------------------------- */
     dateTimePicker: {

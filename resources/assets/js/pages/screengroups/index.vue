@@ -76,12 +76,13 @@
             },
 
             attemptDeleteScreengroup(index) {
-                this.confirm({callback:this.deleteScreengroup, arg:index})
+                var self = this;
+                this.confirm({callback:self.deleteScreengroup, arg:index})
             },
 
             deleteScreengroup: function (index) {
                 var self = this;
-                client({ path: '/screengroups/' + this.screengroups[index].id, method: 'DELETE' }).then(
+                client({ path: '/screengroups/' + self.screengroups[index].id, method: 'DELETE' }).then(
                     function (response) {
                         self.screengroups.splice(index, 1);
                         self.$dispatch('alert', {

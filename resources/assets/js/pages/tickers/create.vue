@@ -6,7 +6,7 @@
 
     <div class="panel-body">
 
-        <form class="form-horizontal" role="form" v-on:submit="createTicker">
+        <form class="form-horizontal" role="form" v-on:submit.prevent="createTicker">
 
             <div class="form-group">
                 <label for="text" class="model_label">{{ trans('general.text') }}</label>
@@ -17,13 +17,13 @@
 
             <div class="form-group">
                 <div class="model_action">
-                    <button type="" class="btn" @click="goBack" v-if="emptyfields">
+                    <button type="button" class="btn" @click="goBack" v-if="emptyfields">
                       <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                     </button>
-                    <button type="" class="btn" @click="goBack" v-if="!emptyfields">
+                    <button type="button" class="btn" @click="goBack" v-if="!emptyfields">
                       <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                     </button>
-                    <button type="submit" v-on:keyup.enter="createTicker" class="btn btn-primary" :disabled="emptyfields">
+                    <button type="submit" @keydown.enter.prevent="createTicker" class="btn btn-primary" :disabled="emptyfields">
                       <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                     </button>
                 </div>
@@ -55,8 +55,7 @@
         },
 
         methods: {
-            createTicker: function (e) {
-                e.preventDefault()
+            createTicker: function () {
                 var self = this;
                 client({path: 'tickers', entity: this.ticker}).then(
                     function (response, status) {
@@ -65,7 +64,10 @@
                             message: self.trans('ticker.created'),
                             options: {theme: 'success'}
                         })
-                        self.$route.router.go('/tickers/'+response.entity.data.id)
+                        if ( self.$root.history.previous == 'screengroups.show' )
+                            self.$route.router.go( { path:'/tickers/'+response.entity.data.id, query: {screengroup: self.$root.history.params.id }});
+                        else
+                            self.$route.router.go('/tickers/'+response.entity.data.id);
                     },
                     function (response, status) {
                         self.$dispatch('alert', {

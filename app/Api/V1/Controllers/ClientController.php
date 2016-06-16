@@ -5,6 +5,7 @@ namespace App\Api\V1\Controllers;
 use Activity;
 use Gate;
 use Illuminate\Http\Request;
+use App\Api\V1\Requests\ClientCreationForm;
 use App\Models\Client;
 use App\Api\V1\Transformers\Client\ClientTransformer;
 use Input;
@@ -21,14 +22,14 @@ class ClientController extends BaseController
         return $this->collection(Client::all(), new ClientTransformer());
     }
 
-    public function store(Request $request) {
+    public function store(ClientCreationForm $form) {
         if (Gate::denies('add_clients')) {
             $this->response->error('permission_denied', 401);
         }
-        $client = new Client;
-        $client->fill($request->only(['name', 'address', 'screen_group_id']));
+        
+        $client = $form->persist();
 
-        if($this->user->clients()->save($client)) {
+        if($client) {
             Activity::log([
                 'contentId' => $client->id,
                 'contentType' => 'Client',
@@ -47,10 +48,7 @@ class ClientController extends BaseController
         if (Gate::denies('view_clients')) {
             $this->response->error('permission_denied', 401);
         }
-        $client = Client::find($id);
-        if(!$client) {
-            throw new NotFoundHttpException;
-        }
+        $client = Client::findOrFail($id);
 
         return $client;
     }
@@ -59,11 +57,7 @@ class ClientController extends BaseController
         if (Gate::denies('edit_clients')) {
             $this->response->error('permission_denied', 401);
         }
-        $client = Client::find($id);
-
-        if(!$client) {
-            throw new NotFoundHttpException;
-        }
+        $client = Client::findOrFail($id);
 
         if($client->update($request->only(['name', 'address', 'screen_group_id']))) {
             Activity::log([

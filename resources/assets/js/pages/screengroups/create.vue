@@ -44,13 +44,13 @@
 
             <div class="form-group">
                 <div class="model_action">
-                    <button type="" class="btn" v-link="{ path: '/screengroups/' }" v-if="myform.$pristine">
+                    <button type="button" class="btn" @click="goBack" v-if="myform.$pristine">
                         <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                     </button>
-                    <button type="" class="btn" v-link="{ path: '/screengroups/' }" v-if="!myform.$pristine">
+                    <button type="button" class="btn" @click="goBack" v-if="!myform.$pristine">
                         <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                     </button>
-                    <button type="submit" class="btn btn-primary" :disabled="myform.$invalid">
+                    <button type="submit" @keydown.enter.prevent="attemptCreateScreengroup" class="btn btn-primary" :disabled="myform.$invalid">
                         <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                     </button>
                 </div>
@@ -91,7 +91,7 @@
                             message: self.trans('screengroup.created'),
                             options: {theme: 'success'}
                         })
-                        self.$route.router.go('/screengroups')
+                        self.$route.router.go('/screengroups/'+response.entity.data.id);
                     },
                     function (response, status) {
                         self.$dispatch('alert', {

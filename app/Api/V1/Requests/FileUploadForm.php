@@ -58,7 +58,7 @@ class FileUploadForm extends Request
             }
 
             $event = new Event;
-            $event->fill(['start_date' => date('Y-m-d'), 'recur_type' => 'none']);
+            $event->fill(['start_date' => date('Y-m-d'), 'recur_type' => 'daily']);
 
             $screen->photo()->save($photo);
             $screen->event()->save($event);

@@ -22,6 +22,7 @@ class Client extends Model
         'address',
         'screen_group_id',
         'activity',
+        'user_id'
     ];
     protected $appends = ['group'];
     /**

@@ -47,13 +47,13 @@
 
                 <div class="form-group">
                     <div class="model_action">
-                        <button type="" class="btn" v-link="{ path: '/screengroups/' }" v-if="myform.$pristine">
+                        <button type="button" class="btn" @click="goBack" v-if="myform.$pristine">
                             <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                         </button>
-                        <button type="" class="btn" v-link="{ path: '/screengroups/' }" v-if="!myform.$pristine">
+                        <button type="button" class="btn" @click="goBack" v-if="!myform.$pristine">
                             <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                         </button>
-                        <button type="submit" class="btn btn-primary" :disabled="myform.$invalid">
+                        <button type="submit" @keydown.enter.prevent="attemptUpdateScreengroup" class="btn btn-primary" :disabled="myform.$invalid">
                             <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                         </button>
                     </div>
@@ -93,17 +93,17 @@
 
         methods: {
             fetch: function (id, successHandler) {
-                var that = this;
+                var self = this;
                 client({ path: '/screengroups/' + id }).then(
                     function (response) {
-                        that.$set('screengroup', response.entity.data);
+                        self.$set('screengroup', response.entity.data);
                         successHandler(response.entity.data);
                     },
                     function (response, status, request) {
                         if (status === 401) {
                             self.$dispatch('userHasLoggedOut');
                         } else {
-                            console.log(response);
+                            self.$route.router.go('/screengroups');
                         }
                     }
                 );
@@ -117,13 +117,13 @@
 
             updateScreengroup: function () {
                 var self = this;
-                client({ path: '/screengroups/' + this.screengroup.id, entity: this.screengroup, method: 'PUT'}).then(
+                client({ path: '/screengroups/' + self.screengroup.id, entity: self.screengroup, method: 'PUT'}).then(
                     function (response) {
                         self.$dispatch('alert', {
                             message: self.trans('screengroup.updated'),
                             options: {theme: 'success'}
                         })
-                        self.$route.router.go('/screengroups')
+                        self.$route.router.go('/screengroups');
                     },
                     function (response) {
                         self.$dispatch('alert', {

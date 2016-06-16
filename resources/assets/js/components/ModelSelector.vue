@@ -26,6 +26,7 @@
                         {{trans(option.name)}}
                     </template>
                 </option>
+
             </select>
         </div>
     </div>
@@ -81,6 +82,8 @@
                 client({ path: `/${self.model}s` }).then(
                     function (response) {
                         self.$set('models', response.entity.data);
+                        if (self.model == 'screengroup' && self.selected == 1)
+                            self.selected = null;
                         self.setSelectPicker();
                     },
                     function (response, status) {
@@ -94,26 +97,24 @@
             setSelectPicker() {
                 var self = this;
                 this.$nextTick(function() {
+                    var target = $(this.$els.selectInput);
+                    let g = target.selectpicker({
+                        size: 4,
+                        iconBase: 'fa',
+                        tickIcon: 'fa-check',
+                        multipleSeparator: ' ',
+                        countSelectedText: function(){
+                            var text = '';
+                            for (var i=0; i<target[0].selectedOptions.length ; i++)
+                                 text += target[0].selectedOptions[i].label.substring(0,3) + ' ';
+                            return text;
+                        },
+                        noneSelectedText: this.trans('general.nothing_selected'),
+                    });
                     if (self.options.length > 0 || self.models.length > 0){
-                        // TODO: More Lang-fixes...
-                        var target = $(this.$els.selectInput);
-                        let g = target.selectpicker({
-                            size: 4,
-                            iconBase: 'fa',
-                            tickIcon: 'fa-check',
-                            multipleSeparator: ' ',
-                            countSelectedText: function(){
-                                var text = '';
-                                for (var i=0; i<target[0].selectedOptions.length ; i++)
-                                     text += target[0].selectedOptions[i].label.substring(0,3) + ' ';
-                                return text;
-                            },
-                            noneSelectedText: this.trans('general.nothing_selected'),
-                        });
                         if (self.models.length > 0)
-                            if (self.selected == -1 || self.selected == 1 )
+                            if (self.selected == null || self.selected == 1 )
                                 self.selected = self.models[0].id;
-                        target.selectpicker('refresh'); // Fix options when creating new things
                     }
                 });
             }

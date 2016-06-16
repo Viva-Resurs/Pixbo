@@ -56,13 +56,13 @@
             </div>
 
             <div class="schedule_action">
-                    <button type="" class="btn" @click="goBack()" v-if="emptyfields">
+                    <button type="button" class="btn" @click="goBack()" v-if="emptyfields">
                         <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                     </button>
-                    <button type="" class="btn" @click="goBack()" v-if="!emptyfields">
+                    <button type="button" class="btn" @click="goBack()" v-if="!emptyfields">
                         <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                     </button>
-                    <button type="submit" class="btn btn-primary" :disabled="emptyfields">
+                    <button type="submit" @keydown.enter.prevent="attemptUpdateSchedule" class="btn btn-primary" :disabled="emptyfields">
                         <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                     </button>
             </div>
@@ -89,7 +89,7 @@
 
         props: ['model'],
 
-        mixins: ['RouterHelpers'],
+        mixins: [RouterHelpers],
         components: {
             Period,
             none,
@@ -138,7 +138,8 @@
                             options: {theme: 'success'}
                         })
 
-                        self.goBack()
+                        self.goBack();
+
                     },
                     function (response, status, request) {
                         if (status === 401) {

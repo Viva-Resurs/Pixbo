@@ -21,7 +21,7 @@
                         >
                             <div slot="label">
                                 <label for="screen_category" class="model_label">
-                                    {{ trans('category.model') }}
+                                    {{ trans('category.select') }}
                                 </label>
                             </div>
                         </model-selector>
@@ -51,10 +51,14 @@
 
         methods: {
             fetch: function (id, successHandler) {
-                var that = this
+                var self = this
                 client({ path: '/screens/' + id }).then(
                     function (response) {
-                        that.$set('screen', response.entity.data)
+                        self.$set('screen', response.entity.data)
+
+                        if ( self.$route.query.screengroup )
+                            self.screen.screengroups.push( { id: self.$route.query.screengroup });
+                        
                         successHandler(response.entity.data)
                     },
                     function (response, status, request) {

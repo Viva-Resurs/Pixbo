@@ -34,13 +34,13 @@
 
                 <div class="form-group">
                     <div class="model_action">
-                        <button type="" class="btn" @click="goBack" v-if="myform.$pristine">
+                        <button type="button" class="btn" @click="goBack" v-if="myform.$pristine">
                             <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                         </button>
-                        <button type="" class="btn" @click="goBack" v-if="!myform.$pristine">
+                        <button type="button" class="btn" @click="goBack" v-if="!myform.$pristine">
                             <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                         </button>
-                        <button type="submit" v-on:keyup.enter="attemptUpdateCategory" class="btn btn-primary" :disabled="myform.$invalid">
+                        <button type="submit" @keydown.enter.prevent="attemptUpdateCategory" class="btn btn-primary" :disabled="myform.$invalid">
                             <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                         </button>
                     </div>
@@ -48,10 +48,7 @@
 
             </form>
 
-            <!-- Add some show screens component -->
-
             <screen-list :screens="category.screens.data" from="categories">
-                
             </screen-list>
 
         </div>
@@ -135,13 +132,13 @@
                         function (response) {
                             self.category.screens.data.splice(index, 1);
                             self.$dispatch('alert', {
-                                message: self.trans('categories.screen_association_removed'),
+                                message: self.trans('category.screen_association_removed'),
                                 options: {theme: 'success'}
                             })
                         },
                         function (response) {
                             self.$dispatch('alert', {
-                                message: self.trans('categories.screen_association_removed_fail'),
+                                message: self.trans('category.screen_association_removed_fail'),
                                 options: {theme: 'error'}
                             })
                         }

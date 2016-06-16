@@ -49,10 +49,14 @@
 
         methods: {
             fetch: function (id, successHandler) {
-                var that = this
+                var self = this
                 client({ path: '/tickers/' + id }).then(
                         function (response) {
-                            that.$set('ticker', response.entity.data)
+                            self.$set('ticker', response.entity.data)
+                            
+                            if ( self.$route.query.screengroup )
+                                self.ticker.screengroups.push( { id: self.$route.query.screengroup });
+
                             successHandler(response.entity.data)
                         },
                         function (response, status, request) {

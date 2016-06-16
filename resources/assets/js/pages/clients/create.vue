@@ -71,13 +71,13 @@
 
                 <div class="form-group">
                     <div class="model_action">
-                        <button type="" class="btn" @click="goBack" v-if="myform.$pristine">
+                        <button type="button" class="btn" @click="goBack" v-if="myform.$pristine">
                             <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                         </button>
-                        <button type="" class="btn" @click="goBack" v-if="!myform.$pristine">
+                        <button type="button" class="btn" @click="goBack" v-if="!myform.$pristine">
                             <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                         </button>
-                        <button type="submit" v-on:keyup.enter="attemptCreate" class="btn btn-primary" :disabled="myform.$invalid">
+                        <button type="submit" @keydown.enter.prevent="attemptCreate" class="btn btn-primary" :disabled="myform.$invalid">
                             <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                         </button>
                     </div>
@@ -92,14 +92,15 @@
 </template>
 
 <script type="text/ecmascript-6">
-    import ModelSelector from '../../components/ModelSelector.vue'
-    import Validators from '../../mixins/Validators.vue'
-    import IsUnique from '../../directives/IsUnique.vue'
+    import RouterHelpers from '../../mixins/RouterHelpers.vue';
+    import ModelSelector from '../../components/ModelSelector.vue';
+    import Validators from '../../mixins/Validators.vue';
+    import IsUnique from '../../directives/IsUnique.vue';
 
     // TODO: Need to add unique validation
 
     module.exports = {
-        mixins: [Validators],
+        mixins: [Validators, RouterHelpers],
         components: { ModelSelector },
         directives: { IsUnique },
 
@@ -108,7 +109,7 @@
                 client: {
                     name: '',
                     ip_address: '',
-                    screen_group_id: -1
+                    screen_group_id: null
                 },
                 myform: [],
                 creating: false,
@@ -124,27 +125,33 @@
 
             createClient: function () {
 
-                var that = this
-                that.creating = true
-                client({path: 'clients', entity: this.client}).then(
+                var self = this;
+                self.creating = true
+                client({path: 'clients', entity: self.client}).then(
                     function (response, status) {
-                        that.client.name = ''
-                        that.client.address = ''
-                        that.client.screengroup_id = ''
-                        that.$dispatch('alert', {
-                            message: that.trans('client.created'),
+                        self.client.name = ''
+                        self.client.address = ''
+                        self.client.screengroup_id = ''
+                        self.$dispatch('alert', {
+                            message: self.trans('client.created'),
                             options: {theme: 'success'}
                         })
-                        that.creating = false
-                        that.$route.router.go('/clients')
+                        self.creating = false
+                        self.goBack();
                     },
                     function (response, status) {
-                        that.$dispatch('alert', {
-                            message: that.trans('client.created_fail'),
+                        self.$dispatch('alert', {
+                            message: self.trans('client.created_fail'),
                             options: {theme: 'error'}
                         })
                     }
                 )
+            }
+        },
+        created() {
+            if ( this.$route.query.screengroup ){
+                console.log(this.$route.query.screengroup);
+                this.client.screen_group_id = this.$route.query.screengroup;
             }
         }
     }

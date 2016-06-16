@@ -11,7 +11,7 @@
 <!--script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script-->
 
 <script src="/js/vendor.js"></script>
-<script src="/js/index.js"></script>
+<script src="/js/index.js?date={{ date('ymdHis') }}"></script>
 
 </body>
 </html>
