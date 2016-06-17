@@ -124,21 +124,35 @@ trait HasShadowEvents
         return $date;
     }
 
-    private function getEndDate(Event $event)
+    private function getEndDate(Event $event, $type, $duration)
     {
+        // Hämtar dagens datum och lägger till x dagar framåt
+        $parsedType = 'add'.ucfirst($type);
+        $today = $this->getToday($this->start_time);        
+        $maxEndDate = Carbon::parse($today)->$parsedType($duration);
+        $givenDate = null;
+        $returnDate = null;
+
+
+        // Kollar om det finns slut datumm
+        // Hämtar när det är tänkt det skall sluta
+        $givenDate = (!is_null($event->end_date)) ? Carbon::parse($event->end_date) : $maxEndDate;
+        
+        // Kollar om det som finns är kortare än x dagar framåt
+        $returnDate = ($givenDate->lte($maxEndDate)) ? $givenDate : $maxEndDate;        
+        
         $timeArray = extractTime($event->end_time);
 
-        $date = Carbon::parse($event->end_date);
+        $returnDate->hour = $timeArray[0];
+        $returnDate->minute = $timeArray[1];
+        $returnDate->second = "00";
 
-        $date->hour = $timeArray[0];
-        $date->minute = $timeArray[1];
-        $date->second = "00";
-
-        return $date;
+        return $returnDate;
     }
 
     private function getToday($time)
     {
+        $time = Carbon::parse($time);
         $today = Carbon::now();
         $today->hour = $time->hour;
         $today->minute = $time->minute;
@@ -155,23 +169,19 @@ trait HasShadowEvents
     private function generateDaily(Event $event)
     {
         $start_date = $this->getDate($event);
-        $end_date = $this->getEndDate($event);
         $today = $this->getToday($start_date);
+        $end_date = $this->getEndDate($event, 'days', $this->duration['daily']);
         $frequency = $event->frequency;
         
-        $end = Carbon::parse($today)->addDays($this->duration['daily']);
-        
-        if ($end_date->lte($end))
-            $end = $end_date;
-
         $start = $this->findShadowInRange(
             $start_date,
             $today->subDays($frequency),
             $today->addDays($frequency)
         );
 
+
         for ($initial = Carbon::parse($start);
-             $initial->lte($end);
+             $initial->lte($end_date);
              $initial = $initial->addDays($frequency)) {
 
             $addShadowEvent = new AddShadowEvent(Carbon::parse($initial), $event);
@@ -186,16 +196,12 @@ trait HasShadowEvents
      */
     private function generateWeekly(Event $event)
     {
+
         $start_date = $this->getDate($event);
-        $end_date = $this->getEndDate($event);
         $today = $this->getToday($start_date);
+        $end_date = $this->getEndDate($event, 'weeks', $this->duration['weekly']);
         $frequency = $event->frequency;
         $weekDays = json_decode(($event->weekly_day_num));
-
-        $end = Carbon::parse($today)->addWeeks($this->duration['weekly']);
-        
-        if ($end_date->lte($end))
-            $end = $end_date;
 
         $start = $this->findShadowInRange(
             $start_date,
@@ -204,7 +210,7 @@ trait HasShadowEvents
         );
 
         for ($initial = Carbon::parse($start);
-             $initial->lte($end);
+             $initial->lte($end_date);
              $initial = $initial->addWeeks($frequency)) {
             for ($i = 1; $i < 8; $i++) {
                 $day = Carbon::parse($initial)
@@ -212,7 +218,7 @@ trait HasShadowEvents
                     ->addDays($i);
 
                 if (in_array($day->dayOfWeek, $weekDays)
-                    && $day->lte($end)
+                    && $day->lte($end_date)
                     && $day->gte($start)) {
                     $day->hour = $start_date->hour;
                     $day->minute = $start_date->minute;
@@ -232,17 +238,13 @@ trait HasShadowEvents
     private function generateMonthly(Event $event)
     {
         $start_date = $this->getDate($event);
-        $end_date = $this->getEndDate($event);
+        $end_date = $this->getEndDate($event, 'month', $this->duration['monthly']);
         $today = $this->getToday($start_date);
         $frequency = $event->frequency;
         $weekDay = $event->recur_day;
         $week_in_month = (int) $event->monthly_day_num;
         $days_ahead = $event->days_before_event;
 
-        $end = Carbon::parse($today)->addMonths($this->duration['monthly']);
-        
-        if ($end_date->lte($end))
-            $end = $end_date;
 
         $start = $this->findShadowInRange(
             $start_date,
@@ -251,7 +253,7 @@ trait HasShadowEvents
         );
 
         for ($initial = Carbon::parse($start);
-             $initial->lte($end);
+             $initial->lte($end_date);
              $initial = $initial->addMonths($frequency)) {
                 $date_string = $this->order[$week_in_month] . ' ' .
                     $this->days[$weekDay] . ' ' .
@@ -259,7 +261,7 @@ trait HasShadowEvents
                     $initial->year;
             $date = Carbon::parse($date_string);
 
-            if ($date->gte($start) && $date->lte($end)) {
+            if ($date->gte($start) && $date->lte($end_date)) {
                 $date->hour = $start_date->hour;
                 $date->minute = $start_date->minute;
 
@@ -287,14 +289,9 @@ trait HasShadowEvents
     private function generateYearly(Event $event)
     {
         $start_date = $this->getDate($event);
-        $end_date = $this->getEndDate($event);
+        $end_date = $this->getEndDate($event, 'year', $this->duration['yearly']);
         $today = $this->getToday($start_date);
         $frequency = $event->frequency;
-
-        $end = Carbon::parse($today)->addYears($this->duration['yearly']);
-        
-        if ($end_date->lte($end))
-            $end = $end_date;
 
         $start = $this->findShadowInRange(
             $start_date,
@@ -303,9 +300,9 @@ trait HasShadowEvents
         );
 
         for ($initial = Carbon::parse($start);
-             $initial->lte($end);
+             $initial->lte($end_date);
              $initial = $initial->addYears($frequency)) {
-            if ($initial->gte($start) && $initial->lte($end)) {
+            if ($initial->gte($start) && $initial->lte($end_date)) {
                 $addShadowEvent = new AddShadowEvent(Carbon::parse($initial), $event);
                 $this->dispatch($addShadowEvent);
             }

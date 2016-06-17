@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Screen extends Model
 {
     use HasEvents;
+
     protected $table = 'screens';
     protected $touches = ['screengroups'];
 
@@ -27,6 +28,10 @@ class Screen extends Model
             $event = $screen->event->first();
             if(!is_null($event))
                 $event->delete();
+
+            $photo = $screen->photo;
+            if(!is_null($photo))
+                $photo->delete();
 
             $screen->screengroups()->detach();
             $screen->categories()->detach();
@@ -71,4 +76,5 @@ class Screen extends Model
     {
         return $this->belongsToMany(Category::class, 'category_screen')->withTimestamps();
     }
+
 }

@@ -39,6 +39,7 @@ class TickerUpdateForm extends Request
 
         $event = $ticker->event->first();
         $event->update($newEvent);
+        $event->touch();
         $ticker->screengroups()->sync($newScreengroups);
 
         if($ticker->update($newTicker)) {

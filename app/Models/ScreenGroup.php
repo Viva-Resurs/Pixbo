@@ -72,13 +72,15 @@ class ScreenGroup extends Model
      * @return array
      */
     public function getActivePhotos() {
-        return $this->screens->load(['event', 'event.shadow_events'])
-            ->flatMap(function ($screen) {
-                $event = $screen->getActiveEvents();
-                if(!$event->isEmpty()) {
-                    return $screen->photo->pluck('path');
+        $array = [];
+        foreach($this->screens as $screen) {
+            
+            $shadow_event = $screen->getActiveEvents();
+                if(!$shadow_event->isEmpty()) {
+                    $array[] = $screen->photo->path;
                 }
-            });
+        }
+        return $array;
     }
 
     /**
@@ -87,12 +89,16 @@ class ScreenGroup extends Model
      * @return array
      */
     public function getActiveTickers() {
-        return $this->tickers->load(['event', 'event.shadow_events'])
-            ->flatMap(function ($ticker) {
-                $event = $ticker->getActiveEvents();
-                if(!$event->isEmpty()) {
-                    return $ticker->pluck('text');
+
+        $array = [];
+        foreach($this->tickers as $ticker) {
+            
+            $shadow_event = $ticker->getActiveEvents();
+                if(!$shadow_event->isEmpty()) {
+                    $array[] = $ticker->text;
                 }
-            });
+        }
+        
+        return $array;
     }
 }

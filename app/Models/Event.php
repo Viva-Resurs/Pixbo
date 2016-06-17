@@ -41,7 +41,7 @@ class Event extends Model
         Event::deleting(function($event) {
             $event->shadow_events()->delete();
         });
-        Event::updated(function ($event) {
+        Event::updating(function ($event) {
             $event->shadow_events()->delete();
             $event->generateShadowEvents($event);
         });

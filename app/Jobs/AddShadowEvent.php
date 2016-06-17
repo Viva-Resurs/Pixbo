@@ -41,7 +41,7 @@ class AddShadowEvent extends Job implements SelfHandling
 
         $shadow = new ShadowEvent;
 
-        $shadow->title = $this->event->id;
+        $shadow->title = $this->event->eventable_id . ': ' . $this->event->eventable_type;
         $shadow->start = $this->start;
 
         $timeArray = !is_null($this->event['end_time']) ? extractTime($this->event['end_time']) : extractTime('17:30:00');
