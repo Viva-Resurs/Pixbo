@@ -16,7 +16,7 @@
                             </li>
                             <li v-if="isAdmin">
                                 <a v-link="{ name: 'settings.pixbo' }">
-                                    <i class="fa fa-btn fa-fw fa-user"></i>&nbsp;Pixbo</span>
+                                    <i class="fa fa-btn fa-fw fa-play-circle-o"></i>&nbsp;{{ trans('auth.pixbo') }}</span>
                                 </a>
                             </li>
                         </ul>

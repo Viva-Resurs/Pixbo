@@ -37,12 +37,13 @@ class PlayerController extends Controller {
             return abort(404, trans('exceptions.client_not_found'));
         }*/
 
+        //abort('AJ',404);
+
         return [
             'photo_list' => $client->getPhotos(),
             'tickers'    => $client->getTickers(),
             'updated_at' => $client->getLastUpdated(),
-            'settings'   => Settings::getSettings(),
-            'reboot'     => false
+            'settings'   => Settings::getSettings()
         ];
     }
 

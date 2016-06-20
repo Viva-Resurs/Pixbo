@@ -52,6 +52,11 @@
                                     <i class="fa fa-btn fa-fw fa-user"></i>{{ trans('auth.profile') }}
                                 </a>
                             </li>
+                            <li v-if="isAdmin">
+                                <a v-link="{ name: 'settings.pixbo' }">
+                                    <i class="fa fa-btn fa-fw fa-play-circle-o"></i>{{ trans('auth.pixbo') }}
+                                </a>
+                            </li>
 
                             <!-- Logout -->
                             <li class="divider"></li>

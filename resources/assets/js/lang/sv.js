@@ -4,6 +4,7 @@ const lang = {
         login:                      "Logga in",
         logout:                     "Logga ut",
         profile:                    "Profil",
+        pixbo:                      "Pixbo",
         register:                   "Registrera",
         password:                   "Lösenord",
         password_repeat:            "Bekräfta lösenord",
@@ -50,6 +51,17 @@ const lang = {
         save:                       "Spara",
         preview:                    "Förhandsvisa",
         nothing_selected:           "Inget markerat"
+    },
+    /* ----------------------------- SETTINGS ----------------------------- */
+    settings: {
+        profile:                    "Profil",
+        pixbo:                      "Pixbo",
+        vegas_delay:                "Tid mellan bilder",
+        vegas_timer:                "Visa timer i spelaren",
+        ticker_pauseOnItems:        "Tid mellan tickers",
+
+        updated:                    "Inställningarna har uppdaterats.",
+        updated_fail:               "Misslyckades att uppdatera inställningarna, försök igen."
     },
     /* ----------------------------- SCHEDULE ----------------------------- */
     schedule: {

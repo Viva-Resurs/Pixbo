@@ -71,10 +71,6 @@
 
         created() {
 
-            this.$on('alert', function (args) {
-                this.$broadcast('alert', args);
-            })
-
             this.$on('userHasLoggedOut', function () {
                 this.destroyLogin()
             })

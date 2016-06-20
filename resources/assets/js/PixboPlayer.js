@@ -49,10 +49,35 @@ var PixboPlayer = {
     this.Sync(true);
   },
 
+  // No connection-mode
+  ConnectionStatus : function(){
+    if (PixboPlayer.State === 0 ){
+        if (!PixboPlayer.DOM.Warning){
+          PixboPlayer.DOM.Warning = document.createElement("div");
+          PixboPlayer.DOM.VegasTarget.append(PixboPlayer.DOM.Warning);
+          PixboPlayer.DOM.Warning.style.position = "fixed";
+          PixboPlayer.DOM.Warning.style.top = "5px";
+          PixboPlayer.DOM.Warning.style.left = "5px";
+          PixboPlayer.DOM.Warning.style.color = "#f00";
+
+          PixboPlayer.DOM.Warning.classList.add('fa');
+          PixboPlayer.DOM.Warning.classList.add('fa-warning');
+
+        }
+        return false;
+    }
+    else if (PixboPlayer.DOM.Warning) {
+      PixboPlayer.DOM.Warning.style.display = 'none';
+      PixboPlayer.DOM.Warning = false;
+    }
+    return true;
+  },
+
   // Standby-mode
   Standby : function(info){
     if (!this.Backdrop){
       this.Backdrop = document.createElement("canvas");
+      this.Backdrop.id = "Backdrop";
       this.Backdrop.style.position = "fixed";
       this.Backdrop.style.top = "0px";
       this.Backdrop.width = window.innerWidth;
@@ -102,8 +127,14 @@ var PixboPlayer = {
       PixboPlayer.Backdrop.ctx.font      = '96px Verdana';
       PixboPlayer.Backdrop.ctx.fillStyle = '#999';
       switch (PixboPlayer.Backdrop.ctx.info){
-        case "404": {
-          PixboPlayer.Backdrop.ctx.fillText( "Standby", 0, 0 );
+        case 404: {
+          PixboPlayer.Backdrop.ctx.fillText( "Klient saknas", 0, 0 );
+          PixboPlayer.Backdrop.ctx.font      = '40px Verdana';
+          PixboPlayer.Backdrop.ctx.fillText( PixboPlayer.Client_ADDR, 0, 70 );
+          break;
+        }
+        case 500: {
+          PixboPlayer.Backdrop.ctx.fillText( "Server problem", 0, 0 );
           PixboPlayer.Backdrop.ctx.font      = '40px Verdana';
           PixboPlayer.Backdrop.ctx.fillText( PixboPlayer.Client_ADDR, 0, 70 );
           break;
@@ -126,6 +157,7 @@ var PixboPlayer = {
   },
   Ready : function(){
     PixboPlayer.requestFrame = false;
+    PixboPlayer.Backdrop.ctx.info = false;
     //clearTimeout(this.Standby_Animation);
     this.Backdrop.style.display = "none";
   },
@@ -152,6 +184,7 @@ var PixboPlayer = {
       preload: true,
       transitionDuration: 4000,
       delay: 10000,
+      timer: true,
       slides: false /* This property will be set in Start_Vegas()
         [
           { src: "/screens/images/$2y$10$HUabKjNqFsvOV3jsOp5ePuhUDIBag1zELC0BnMUx3OqwEgZ8SaZVa.png" },
@@ -178,20 +211,20 @@ var PixboPlayer = {
     },
   },
   Apply_Settings : function(new_settings){
-    for (var i=0 ; i<new_settings.length ; i++){
+    if (!new_settings)
+      return;
 
-      // Apply Vegas-settings
-      if (new_settings[i].vegas)
-        for (var property in new_settings[i].vegas)
-          if (this.Settings.Vegas.hasOwnProperty(property))
-            this.Settings.Vegas[property] = new_settings[i].vegas[property];
-      
-      // Apply Ticker-settings
-      if (new_settings[i].ticker)
-        for (var property in new_settings[i].ticker)
-          if (this.Settings.Ticker.hasOwnProperty(property))
-            this.Settings.Ticker[property] = new_settings[i].ticker[property];
-    }
+    // Apply Vegas-settings
+    if (new_settings.vegas)
+      for (var property in new_settings.vegas)
+        if (this.Settings.Vegas.hasOwnProperty(property))
+          this.Settings.Vegas[property] = Number( new_settings.vegas[property] );
+    
+    // Apply Ticker-settings
+    if (new_settings.ticker)
+      for (var property in new_settings.ticker)
+        if (this.Settings.Ticker.hasOwnProperty(property))
+          this.Settings.Ticker[property] = Number( new_settings.ticker[property] );
 
     // Add Controls in Settings for Ticker
     if (this.EnableControls)
@@ -250,16 +283,17 @@ var PixboPlayer = {
           type: "get",
           url: "/play/" + PixboPlayer.Client_ADDR,
       });
-      _request.done(function() {
+      _request.done(function(xhr) {
           var _data = JSON.parse(_request.responseText); // Fetch JSON-output
 
-          if (!first_run && _data['reboot']){
+          if (!first_run && PixboPlayer.RebuiltAt != _data.settings.updated.date ){
             console.log("Reloading Page");
             location.reload();
           }
 
-          if(first_run || PixboPlayer.UpdatedAt != _data['updated_at']) { // First run / Newer data found, update player:
-              
+          if(first_run || PixboPlayer.State != xhr.status || PixboPlayer.UpdatedAt != _data['updated_at']) { // First run / Newer data found, update player:
+              PixboPlayer.State = xhr.status;
+
               if (!first_run) {
                 console.log('Client Updated, fetching newer data: (site: '+ PixboPlayer.Client_ADDR +', updated: '+ _data['updated_at'] +')');
               }
@@ -290,6 +324,7 @@ var PixboPlayer = {
           }
       });
       _request.error(function(xhr) {
+        PixboPlayer.State = xhr.status;
         PixboPlayer.Update(
             false,
             false,
@@ -309,6 +344,10 @@ var PixboPlayer = {
       else
         this.Ready();
 
+      // Check connection
+      if (!this.ConnectionStatus())
+        return;
+
       // Apply settings
       this.Apply_Settings(new_settings);
 
@@ -326,6 +365,10 @@ var PixboPlayer = {
 
       // Replace UpdatedAt
       this.UpdatedAt = new_updated_at;
+
+      // Replace RebuiltAt
+      if (new_settings)
+        this.RebuiltAt = new_settings.updated.date;
 
       // Done
   },

@@ -24,6 +24,8 @@ $api->version('v1', function ($api) {
         $api->post('screengroups/{screengroup}/ticker/{ticker}', 'App\Api\V1\Controllers\TickerScreenGroupController@store');
         $api->delete('screengroups/{screengroup}/ticker/{ticker}', 'App\Api\V1\Controllers\TickerScreenGroupController@destroy');
 
+        $api->get('settings', 'App\Api\V1\Controllers\SettingsController@index');
+        $api->put('settings', 'App\Api\V1\Controllers\SettingsController@update');
 
         $api->resource('clients', 'App\Api\V1\Controllers\ClientController');
         $api->resource('categories', 'App\Api\V1\Controllers\CategoryController');

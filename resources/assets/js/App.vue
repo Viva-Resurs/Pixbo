@@ -24,6 +24,11 @@
                     params: null
                 }
             }
+        },
+        created(){
+            this.$on('alert', function (args) {
+                this.$broadcast('alert', args);
+            })
         }
     }
 </script>
