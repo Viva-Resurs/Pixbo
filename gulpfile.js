@@ -12,9 +12,11 @@ require('laravel-elixir-vueify');
  |
  */
 
+elixir.config.js.browserify.options.debug=true;
+
 elixir(function(mix) {
+    /* PixboPlayer */
     mix
-        /* PixboPlayer */
         .sass('PixboPlayer.scss')
         .scripts(
             [
@@ -25,12 +27,14 @@ elixir(function(mix) {
             ],
             'public/js/PixboPlayer.js',
             'resources/assets/js/vendor'
-        )
+        );
 
-        /* Fonts */
+    /* Fonts */
+    mix
         .copy( 'resources/assets/fonts', 'public/fonts' )
 
-        /* Admin GUI */
+    /* Admin GUI */
+    mix
         .sass('app.scss')
         .scripts(
             [
