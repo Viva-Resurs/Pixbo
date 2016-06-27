@@ -28,15 +28,18 @@ class ScreenGroup extends Model
         parent::boot();
 
         ScreenGroup::deleting(function ($screengroup) {
-            $clients = $screengroup->clients;
-            
-            foreach( $clients as $client) {
+            foreach( $screengroup->clients as $client) {
                 $client->update(['screen_group_id' => 1]);
                 $client->save();
             }
-            //$screengroup->clients()->sync([]);
-            //dd($screengroup);
-            //$screengroup->clients()->detach();
+
+            foreach ( $screengroup->screens as $screen ){
+                $screengroup->screens()->detach($screen->id);
+            }
+
+            foreach ( $screengroup->tickers as $ticker ){
+                $screengroup->tickers()->detach($ticker->id);
+            }
 
         });
     }
