@@ -27,7 +27,7 @@
                     </template>
                     <template v-else>
                         <a v-if="ticker.screengroups.length>3" v-link="{ path: '/screengroups/'+sg.id }"
-                           v-tooltip data-original-title='{{sg.name}}'>{{ minify(sg.name) }}</a>
+                           v-tooltip data-original-title='{{sg.name}}'>{{ sg.name.substring(0,7)+'..' }}</a>
                         <a v-else v-link="{ path: '/screengroups/'+sg.id }">{{ sg.name }}</a>
                     </template>
                     
@@ -50,13 +50,7 @@
     export default {
         props: ['tickers','from'],
 
-        computed: {
-
-        },
         methods: {
-            minify(name){
-                return name.substring(0,7)+'..';
-            },
             removeTicker(index) {
                 this.$dispatch('remove-ticker', index)
             },
