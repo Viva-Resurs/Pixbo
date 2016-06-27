@@ -19,7 +19,7 @@ class CreateTickersTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('screen_group_ticker', function (Blueprint $table) {
+        Schema::create('screengroup_ticker', function (Blueprint $table) {
 
             $table->integer('screen_group_id')->unsigned()->index();
             $table->foreign('screen_group_id')->references('id')->on('screengroups')->onDelete('cascade');
@@ -38,6 +38,6 @@ class CreateTickersTable extends Migration
     public function down()
     {
         Schema::drop('tickers');
-        Schema::drop('screen_group_ticker');
+        Schema::drop('screengroup_ticker');
     }
 }

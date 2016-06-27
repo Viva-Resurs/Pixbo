@@ -49,7 +49,7 @@ class Ticker extends Model
      */
     public function screengroups()
     {
-        return $this->belongsToMany(ScreenGroup::class, 'screen_group_ticker')->withTimestamps();
+        return $this->belongsToMany(ScreenGroup::class, 'screengroup_ticker')->withTimestamps();
     }
 
 }

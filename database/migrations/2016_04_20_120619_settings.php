@@ -15,6 +15,7 @@ class Settings extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('vegas_delay')->nullable();
+            $table->boolean('vegas_timer')->default(true);
             $table->integer('ticker_pauseOnItems')->nullable();
             $table->timestamps();
         });

@@ -44,8 +44,6 @@ class ScreenGroup extends Model
         });
     }
 
-
-    //protected $touches = ['screens'];
     /**
      * Screen association
      *
@@ -53,12 +51,12 @@ class ScreenGroup extends Model
      */
 
     public function screens() {
-        return $this->belongsToMany(Screen::class, 'screen_screen_group')->withTimestamps();
+        return $this->belongsToMany(Screen::class, 'screengroup_screen')->withTimestamps();
     }
 
 
     public function tickers() {
-        return $this->belongsToMany(Ticker::class, 'screen_group_ticker')->withTimestamps();
+        return $this->belongsToMany(Ticker::class, 'screengroup_ticker')->withTimestamps();
     }
 
     /**
