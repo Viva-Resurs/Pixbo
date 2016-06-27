@@ -21,6 +21,7 @@
                            type="text"
                            v-model="category.name"
                            v-form-ctrl
+                           v-is-unique:category
                            required
                            minlength="4"
                            maxlength="30"
@@ -49,9 +50,12 @@
 </template>
 
 <script>
-    // TODO: Need to fix unique validation
+    import IsUnique from '../../directives/IsUnique.vue';
 
     export default {
+        
+        directives: { IsUnique },
+
         data: function () {
             return {
                 category: {

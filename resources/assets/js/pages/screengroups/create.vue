@@ -22,6 +22,7 @@
                            type="text"
                            v-model="screengroup.name"
                            v-form-ctrl
+                           v-is-unique:screengroup
                            required
                            minlength="4"
                            maxlength="30"
@@ -63,7 +64,12 @@
 </template>
 
 <script>
-    module.exports = {
+    import IsUnique from '../../directives/IsUnique.vue';
+    
+    export default {
+
+        directives: { IsUnique },
+        
         data: function () {
             return {
                 screengroup: {

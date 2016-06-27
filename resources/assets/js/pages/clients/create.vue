@@ -97,9 +97,8 @@
     import Validators from '../../mixins/Validators.vue';
     import IsUnique from '../../directives/IsUnique.vue';
 
-    // TODO: Need to add unique validation
-
-    module.exports = {
+    export default  {
+        
         mixins: [Validators, RouterHelpers],
         components: { ModelSelector },
         directives: { IsUnique },

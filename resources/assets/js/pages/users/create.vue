@@ -25,6 +25,7 @@
                            type="text"
                            v-model="user.name"
                            v-form-ctrl
+                           v-is-unique:user
                            required
                            minlength="4"
                            maxlength="30"
@@ -40,6 +41,7 @@
                            type="email"
                            v-model="user.email"
                            v-form-ctrl
+                           v-is-unique:user
                            required
                     >
                 </div>
@@ -82,7 +84,6 @@
                     <button type="button" class="btn" @click="goBack" v-if="!myform.$pristine">
                         <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                     </button>
-                    <!-- TODO: ENTER dont update list when done. -->
                     <button type="submit" @keydown.enter.prevent="attemptCreateUser" class="btn btn-primary" :disabled="myform.$invalid">
                         <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                     </button>
@@ -97,13 +98,13 @@
 
 <script>
     import ModelSelector from '../../components/ModelSelector.vue'
-
-    // TODO: Need to fix unique validation
+    import IsUnique from '../../directives/IsUnique.vue';
 
     export default {
 
         components: { ModelSelector },
-
+        directives: { IsUnique },
+        
         data: function () {
             return {
                 user: {
@@ -114,36 +115,29 @@
                         data: 1
                     }
                 },
-                myform: [],
-                creating: false
+                myform: []
             }
         },
 
         methods: {
             attemptCreateUser() {
-              if(this.myform.$valid) {
-                  this.createUser()
-              }
+                if(this.myform.$valid) {
+                    this.createUser()
+                }
             },
             createUser() {
-                var that = this
-                that.creating = true
-                client({path: 'users', entity: that.user}).then(
+                var self = this;
+                client({path: 'users', entity: self.user}).then(
                     function (response, status) {
-                        that.user.name = ''
-                        that.user.email = ''
-                        that.user.password = ''
-                        that.user.roles = null
-                        that.$dispatch('alert', {
-                            message: that.trans('user.created'),
+                        self.$dispatch('alert', {
+                            message: self.trans('user.created'),
                             options: {theme: 'success'}
                         })
-                        that.creating = false
-                        that.$route.router.go('/users')
+                        self.$route.router.go('/users')
                     },
                     function (response, status) {
-                        that.$dispatch('alert', {
-                            message: that.trans('user.created_fail'),
+                        self.$dispatch('alert', {
+                            message: self.trans('user.created_fail'),
                             options: {theme: 'error'}
                         })
                         Vue.nextTick(function () {
