@@ -44,7 +44,10 @@
             },
 
             attemptDeleteTicker(index) {
-                this.confirm({callback:this.deleteTicker, arg:index})
+                this.confirm({
+                    callback:this.deleteTicker, arg:index,
+                    confirmButtonText: this.trans('confirm.confirmButtonText_Delete')
+                })
             },
 
             deleteTicker: function (index) {

@@ -122,8 +122,10 @@
             },
 
             attemptDeleteScreen(index) {
-                // TODO: Fix text
-                this.confirm({callback:this.deleteScreen, arg:index})
+                this.confirm({
+                    callback:this.deleteScreen, arg:index,
+                    text: this.trans('category.remove_association')
+                })
             },
 
             deleteScreen(index) {

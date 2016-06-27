@@ -46,7 +46,10 @@
             },
 
             attemptDeleteScreen(index) {
-                this.confirm({callback:this.deleteScreen, arg:index})
+                this.confirm({
+                    callback:this.deleteScreen, arg:index,
+                    confirmButtonText: this.trans('confirm.confirmButtonText_Delete')
+                })
             },
 
             deleteScreen: function (index) {

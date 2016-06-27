@@ -78,7 +78,10 @@
             },
 
             attemptDeleteCategory(index) {
-                this.confirm({callback:this.deleteCategory, arg:index})
+                this.confirm({
+                    callback:this.deleteCategory, arg:index,
+                    confirmButtonText: this.trans('confirm.confirmButtonText_Delete')
+                })
             },
 
             deleteCategory: function (index) {

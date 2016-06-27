@@ -73,7 +73,10 @@
             },
 
             attemptDeleteUser(index) {
-                this.confirm({callback:this.deleteUser, arg:index})
+                this.confirm({
+                    callback:this.deleteUser, arg:index,
+                    confirmButtonText: this.trans('confirm.confirmButtonText_Delete')
+                })
             },
 
             deleteUser: function (index) {

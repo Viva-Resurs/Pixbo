@@ -21,7 +21,8 @@ const lang = {
     confirm: {
         title:                     "Är du säker?",
         text:                      "Valet går inte att ångra",
-        confirmButtonText:         "Ta bort",
+        confirmButtonText:         "Verkställ",
+        confirmButtonText_Delete:  "Ta bort",
         cancelButtonText:          "Avbryt"
     },
     /* ----------------------------- GENERAL ----------------------------- */

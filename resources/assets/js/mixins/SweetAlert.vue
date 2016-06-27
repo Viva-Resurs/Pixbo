@@ -4,15 +4,14 @@
     export default {
         methods: {
             confirm: function (what){
-                var self = this;
                 swal({
-                    title: self.trans('confirm.title'),
-                    text: self.trans('confirm.text'),
-                    type: "warning",
+                    title: what.title || this.trans('confirm.title'),
+                    text: what.text || this.trans('confirm.text'),
+                    type: what.type || "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: self.trans('confirm.confirmButtonText'),
-                    cancelButtonText: self.trans('confirm.cancelButtonText'),
+                    confirmButtonText: what.confirmButtonText || this.trans('confirm.confirmButtonText'),
+                    cancelButtonText: this.trans('confirm.cancelButtonText'),
                     closeOnConfirm: true
                 }, function(){
                     what.callback(what.arg)

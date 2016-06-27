@@ -46,7 +46,10 @@
             },
 
             attemptDeleteClient(index) {
-                this.confirm({callback:this.deleteClient, arg:index})
+                this.confirm({
+                    callback:this.deleteClient, arg:index,
+                    confirmButtonText: this.trans('confirm.confirmButtonText_Delete')
+                })
             },
 
             deleteClient: function (index) {

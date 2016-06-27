@@ -19,7 +19,10 @@
 
         methods: {
             attemptDeleteTicker(index) {
-                this.confirm({callback:this.deleteTicker, arg:index})
+                this.confirm({
+                    callback:this.deleteTicker, arg:index,
+                    text: this.trans('screengroup.remove_association')
+                })
             },
 
             deleteTicker: function (index) {

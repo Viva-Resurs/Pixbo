@@ -76,8 +76,10 @@
             },
 
             attemptDeleteScreengroup(index) {
-                var self = this;
-                this.confirm({callback:self.deleteScreengroup, arg:index})
+                this.confirm({
+                    callback:this.deleteScreengroup, arg:index,
+                    confirmButtonText: this.trans('confirm.confirmButtonText_Delete')
+                })
             },
 
             deleteScreengroup: function (index) {
