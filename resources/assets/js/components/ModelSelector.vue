@@ -79,7 +79,12 @@
         methods : {
             getModels() {
                 var self = this;
-                client({ path: `/${self.model}s` }).then(
+                // API uses modelnames in plural.
+                var path = (self.model[self.model.length-1] == 'y') ?
+                    '/'+ self.model.substring(0,self.model.length-1) + 'ies' :
+                    '/'+ self.model + 's';
+
+                client({ path: path }).then(
                     function (response) {
                         self.$set('models', response.entity.data);
                         if (self.model == 'screengroup' && self.selected == 1)
