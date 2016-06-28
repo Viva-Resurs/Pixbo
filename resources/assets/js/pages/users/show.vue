@@ -70,7 +70,7 @@
                                 {{ trans('role.model') }}
                             </label>
                         </div>
-                    </model-selector>
+                        </model-selector>
                     </span>
                 </div>
 
@@ -117,45 +117,45 @@
 
         methods: {
             fetch: function (id, successHandler) {
-                var that = this
+                var self = this;
                 client({ path: '/users/' + id }).then(
                     function (response) {
-                        that.$set('user', response.entity.data)
+                        self.$set('user', response.entity.data)
                         successHandler(response.entity.data)
                     },
                     function (response, status, request) {
                         if (status === 401) {
-                            self.$dispatch('userHasLoggedOut')
+                            self.$dispatch('userHasLoggedOut');
                         } else {
-                            console.log(response)
+                            console.log(response);
                         }
                     }
-                )
+                );
             },
 
             attemptUpdateUser() {
                 if(this.myform.$valid) {
-                    this.updateUser()
+                    this.updateUser();
                 }
             },
 
             updateUser() {
-                var self = this
+                var self = this;
                 client({ path: '/users/' + self.user.id, entity: self.user, method: 'PUT'}).then(
                     function (response) {
                         self.$dispatch('alert', {
                             message: self.trans('user.updated'),
                             options: {theme: 'success'}
-                        })
-                        self.$route.router.go('/users')
+                        });
+                        self.$route.router.go('/users');
                     },
                     function (response) {
                         self.$dispatch('alert', {
                             message: self.trans('user.updated_fail'),
                             options: {theme: 'error'}
-                        })
+                        });
                     }
-                )
+                );
             }
 
         },
@@ -164,7 +164,7 @@
             data: function (transition) {
                 this.fetch(this.$route.params.id, function (data) {
                     transition.next({user: data})
-                })
+                });
             }
         }
     }

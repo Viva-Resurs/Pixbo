@@ -65,8 +65,8 @@
             <!-- TODO: Role validation doesn't work -->
             <!-- TODO: When refreshing page here, roles gets lost -->
             <div class="form-group">
-                <span v-form-ctrl="user.roles.data" name="roles" required>
-                    <model-selector :selected.sync="user.roles.data" model="role" classes="model_input">
+                <span v-form-ctrl="user.roles.data[0].id" name="roles" required>
+                    <model-selector :selected.sync="user.roles.data[0].id" model="role" classes="model_input">
                     <div slot="label">
                         <label for="inputModels" class="model_label">
                             {{ trans('role.model') }}
@@ -108,12 +108,13 @@
         data: function () {
             return {
                 user: {
-                    name: '',
-                    email: '',
-                    password: '',
+                    name: null,
+                    email: null,
+                    password: null,
                     roles: {
-                        data: 1
+                        data : [ { id:1 } ]
                     }
+
                 },
                 myform: []
             }

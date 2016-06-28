@@ -26,7 +26,6 @@
             </thead>
             <tbody>
                 <tr v-for="user in users">
-                    <!-- TODO: Hide yourself -->
                     <td>{{ user.id }}</td>
                     <td><a v-link="{ path: '/users/'+user.id }">{{ user.name }}</a></td>
                     <td>{{ user.email }}</td>
@@ -60,42 +59,42 @@
 
         methods: {
             fetch: function (successHandler) {
-                var that = this
+                var self = this;
                 client({ path: '/users' }).then(
                     function (response) {
-                        that.$set('users', response.entity.data)
-                        successHandler(response.entity.data)
+                        self.$set('users', response.entity.data);
+                        successHandler(response.entity.data);
                     },
                     function (response, status) {
-                        console.log('logged out?')
+                        console.log('logged out?');
                     }
-                )
+                );
             },
 
             attemptDeleteUser(index) {
                 this.confirm({
                     callback:this.deleteUser, arg:index,
                     confirmButtonText: this.trans('confirm.confirmButtonText_Delete')
-                })
+                });
             },
 
             deleteUser: function (index) {
-                var that = this
+                var self = this;
                 client({ path: '/users/' + this.users[index].id, method: 'DELETE' }).then(
                     function (response) {
-                        that.users.splice(index, 1)
-                        that.$dispatch('alert', {
-                            message: that.trans('user.deleted'),
+                        self.users.splice(index, 1);
+                        self.$dispatch('alert', {
+                            message: self.trans('user.deleted'),
                             options: {theme: 'success'}
-                        })
+                        });
                     },
                     function (response) {
-                        that.$dispatch('alert', {
-                            message: that.trans('user.deleted_fail'),
+                        self.$dispatch('alert', {
+                            message: self.trans('user.deleted_fail'),
                             options: {theme: 'error'}
-                        })
+                        });
                     }
-                )
+                );
             }
 
         },
@@ -104,7 +103,7 @@
             data: function (transition) {
                 this.fetch(function (data) {
                     transition.next({users: data})
-                })
+                });
             }
         }
 

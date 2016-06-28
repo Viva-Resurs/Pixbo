@@ -110,8 +110,7 @@
                     ip_address: '',
                     screen_group_id: null
                 },
-                myform: [],
-                creating: false,
+                myform: []
             }
         },
 
@@ -125,7 +124,6 @@
             createClient: function () {
 
                 var self = this;
-                self.creating = true
                 client({path: 'clients', entity: self.client}).then(
                     function (response, status) {
                         self.client.name = ''

@@ -39,7 +39,7 @@ class UserController extends BaseController
         $user->fill($request->only(['name', 'email', 'password']));
 
         if($user->save()) {
-            $user->roles()->sync($this->getSlimRolesFromRequest($request));
+            $user->roles()->sync($this->getFullRolesFromRequest($request));
             
             Activity::log([
                 'contentId' => $user->id,

@@ -116,11 +116,15 @@
                         },
                         noneSelectedText: this.trans('general.nothing_selected'),
                     });
+
+
                     if (self.options.length > 0 || self.models.length > 0){
                         if (self.models.length > 0)
                             if (self.selected == null || self.selected == 1 )
                                 self.selected = self.models[0].id;
                     }
+
+                    target.selectpicker('refresh');
                 });
             }
         },

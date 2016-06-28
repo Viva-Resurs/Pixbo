@@ -57,7 +57,7 @@
         methods: {
             createTicker: function () {
                 var self = this;
-                client({path: 'tickers', entity: this.ticker}).then(
+                client({path: 'tickers', entity: self.ticker}).then(
                     function (response, status) {
                         self.ticker.text = '';
                         self.$dispatch('alert', {
