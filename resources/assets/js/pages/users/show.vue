@@ -64,11 +64,11 @@
                 <div class="form-group">
                     <span v-form-ctrl="user.roles.data[0].id" name="roles" required>
                         <model-selector :selected.sync="user.roles.data[0].id" model="role" classes="model_input">
-                        <div slot="label">
-                            <label for="inputModels" class="model_label">
-                                {{ trans('role.model') }}
-                            </label>
-                        </div>
+                            <div slot="label">
+                                <label for="inputModels" class="model_label">
+                                    {{ trans('role.model') }}
+                                </label>
+                            </div>
                         </model-selector>
                     </span>
                 </div>

@@ -48,6 +48,7 @@ Vue.component('footer-component', require('./components/Footer.vue'))
 Vue.component('loading', require('./components/Loading.vue'))
 Vue.directive("dropzone",require('./directives/Dropzone.vue'));
 Vue.directive("tooltip",require('./directives/Tooltip.vue'));
+Vue.directive("popover",require('./directives/Popover.vue'));
 const App = Vue.extend(require('./App.vue'));
 
 router.start(App, '#app')
