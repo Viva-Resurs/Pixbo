@@ -209,7 +209,9 @@ const lang = {
         screen_association_removed:      "Bilden har tagits bort från området.",
         screen_association_removed_fail: "Misslyckades att ta bort bilden från området",
         ticker_association_removed:      "Tickern har tagits bort från området.",
-        ticker_association_removed_fail: "Misslyckades att ta bort tickern från området"
+        ticker_association_removed_fail: "Misslyckades att ta bort tickern från området",
+        client_association_removed:      "Skärmen har tagits bort från området.",
+        client_association_removed_fail: "Misslyckades att ta bort Skärmen från området"
     },
     /* ----------------------------- CATEGORY ----------------------------- */
     category: {

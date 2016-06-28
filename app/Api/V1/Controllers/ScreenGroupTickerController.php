@@ -9,7 +9,7 @@ use Gate;
 use App\Http\Requests;
 use Activity;
 
-class TickerScreenGroupController extends BaseController
+class ScreenGroupTickerController extends BaseController
 {
 
 
@@ -22,7 +22,7 @@ class TickerScreenGroupController extends BaseController
 
         Activity::log([
             'contentId' => $screengroup->id,
-            'contentType' => 'TickerScreengroup',
+            'contentType' => 'ScreenGroupTicker',
             'action' => 'Attach',
             'description' => 'Attached Ticker to ScreenGroup',
             'details' => $screengroup->tickers->toJson(),
@@ -40,7 +40,7 @@ class TickerScreenGroupController extends BaseController
 
         Activity::log([
             'contentId' => $screengroup->id,
-            'contentType' => 'TickerScreengroup',
+            'contentType' => 'ScreenGroupTicker',
             'action' => 'Detach',
             'description' => 'Detached Ticker from ScreenGroup',
             'details' => $screengroup->tickers->toJson(),

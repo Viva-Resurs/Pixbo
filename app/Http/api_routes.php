@@ -20,13 +20,16 @@ $api->version('v1', function ($api) {
     $api->group(['middleware' => ['api.auth']], function ($api) {
 
         // Screen association
-        $api->post('screengroups/{screengroup}/screen/{screen}', 'App\Api\V1\Controllers\ScreenScreenGroupController@store');
-        $api->delete('screengroups/{screengroup}/screen/{screen}', 'App\Api\V1\Controllers\ScreenScreenGroupController@destroy');
-        $api->delete('categories/{category}/screen/{screen}', 'App\Api\V1\Controllers\ScreenCategoryController@destroy');
+        $api->post('screengroups/{screengroup}/screen/{screen}', 'App\Api\V1\Controllers\ScreenGroupScreenController@store');
+        $api->delete('screengroups/{screengroup}/screen/{screen}', 'App\Api\V1\Controllers\ScreenGroupScreenController@destroy');
+        $api->delete('categories/{category}/screen/{screen}', 'App\Api\V1\Controllers\CategoryScreenController@destroy');
 
         // Ticker association
-        $api->post('screengroups/{screengroup}/ticker/{ticker}', 'App\Api\V1\Controllers\TickerScreenGroupController@store');
-        $api->delete('screengroups/{screengroup}/ticker/{ticker}', 'App\Api\V1\Controllers\TickerScreenGroupController@destroy');
+        $api->post('screengroups/{screengroup}/ticker/{ticker}', 'App\Api\V1\Controllers\ScreenGroupTickerController@store');
+        $api->delete('screengroups/{screengroup}/ticker/{ticker}', 'App\Api\V1\Controllers\ScreenGroupTickerController@destroy');
+
+        // Client association
+        $api->delete('screengroups/{screengroup}/client/{client}', 'App\Api\V1\Controllers\ScreenGroupClientController@destroy');
 
         // Settings
         $api->get('settings', 'App\Api\V1\Controllers\SettingsController@index');

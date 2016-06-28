@@ -73,6 +73,7 @@
 
             <screens :screens.sync="screengroup.screens.data" :id="screengroup.id"></screens>
             <tickers :tickers.sync="screengroup.tickers.data" :id="screengroup.id"></tickers>
+            <clients :clients.sync="screengroup.clients.data" :id="screengroup.id"></clients>
 
         </div>
 
@@ -83,6 +84,7 @@
 <script>
     import screens from './screens.vue'
     import tickers from './tickers.vue'
+    import clients from './clients.vue'
     import Auth from '../../mixins/Auth.vue'
 
     module.exports = {
@@ -90,7 +92,8 @@
         mixins:[Auth],
         components: {
             screens,
-            tickers
+            tickers,
+            clients
         },
 
         data: function () {

@@ -9,7 +9,7 @@ use Gate;
 use App\Http\Requests;
 use Activity;
 
-class ScreenScreenGroupController extends BaseController
+class ScreenGroupScreenController extends BaseController
 {
 
 
@@ -22,7 +22,7 @@ class ScreenScreenGroupController extends BaseController
 
         Activity::log([
             'contentId' => $screengroup->id,
-            'contentType' => 'ScreenScreengroup',
+            'contentType' => 'ScreenGroupScreen',
             'action' => 'Attach',
             'description' => 'Attached Screen to ScreenGroup',
             'details' => $screengroup->screens->toJson(),
@@ -40,7 +40,7 @@ class ScreenScreenGroupController extends BaseController
 
         Activity::log([
             'contentId' => $screengroup->id,
-            'contentType' => 'ScreenScreengroup',
+            'contentType' => 'ScreenGroupScreen',
             'action' => 'Detach',
             'description' => 'Detached Screen from ScreenGroup',
             'details' => $screengroup->screens->toJson(),

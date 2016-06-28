@@ -9,7 +9,7 @@ use Gate;
 use App\Http\Requests;
 use Activity;
 
-class ScreenCategoryController extends BaseController
+class CategoryScreenController extends BaseController
 {
 
     public function destroy(Category $category, Screen $screen) {
@@ -24,7 +24,7 @@ class ScreenCategoryController extends BaseController
 
         Activity::log([
             'contentId' => $category->id,
-            'contentType' => 'ScreenCategory',
+            'contentType' => 'CategoryScreen',
             'action' => 'Detach',
             'description' => 'Detached Screen from Category',
             'details' => $category->screens->toJson(),
