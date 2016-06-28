@@ -61,7 +61,6 @@
                     </div>
                 </div>
 
-                <!-- TODO: This validation doesn't work -->
                 <div class="form-group">
                     <span v-form-ctrl="user.roles.data[0].id" name="roles" required>
                         <model-selector :selected.sync="user.roles.data[0].id" model="role" classes="model_input">
