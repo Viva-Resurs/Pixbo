@@ -16,7 +16,7 @@ $navbar-background: #f8f8f8;
  * Vendor CSS...
  */
 
-@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "../../../node_modules/bootstrap/dist/css/bootstrap";
 @import "vendor/bootstrap-datetimepicker.min";
 @import "../../../node_modules/bootstrap-select/dist/css/bootstrap-select";
 @import "vendor/font-awesome";
