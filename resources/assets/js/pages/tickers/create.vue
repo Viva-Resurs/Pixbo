@@ -8,17 +8,10 @@
 
         <form class="form-horizontal" role="form" v-on:submit.prevent="attemptCreate" name="myform" v-form>
 
-            <!-- TODO: Need to fix some styling and translation -->
-            <div v-popover v-if="myform.text.$invalid" class="errors" role="tooltip"
-                 data-trigger="manual"
-                 data-content="Text is required"
-                 data-selector="#text">
-            </div>
-
-            <div class="form-group">
+            <div class="form-group has-feedback {{ (errors) ? 'has-warning' : '' }}">
                 <label for="text" class="model_label">{{ trans('general.text') }}</label>
-                <div class="model_input">
-                    <input class="form-control"
+                <div class="model_input" v-popover data-trigger="manual" data-content="{{ trans('validation.required') }}">
+                    <input class="form-control" tabindex="0"
                            name="text" id="text"
                            type="text"
                            v-model="ticker.text"
@@ -26,7 +19,9 @@
                            required
                            minlength="3"
                            maxlength="50"
-                    >
+                           @keyup="resetState"
+                    ><span class="fa fa-warning form-control-feedback" v-if="errors" ></span>
+
                 </div>
 
             </div>
@@ -59,17 +54,25 @@
                 ticker: {
                     text: '',
                 },
-                myform: []
+                myform: [],
+                errors: false
             }
         },
 
         methods: {
+            resetState(e){
+                if (e.key != 'Enter') {
+                    $('.model_input').popover('hide');
+                    if (!this.myform.text.$invalid)
+                        this.errors = false;
+                }
+            },
             attemptCreate() {
                 if(this.myform.$valid) {
-                    this.createTicker()
+                    this.createTicker();
                 } else {
-                    $('.errors').popover('show')
-                    //$('.errors').keyup(function(){ $('.errors').popover('hide')});
+                    this.errors = true;
+                    $('.model_input').popover('show')                        
                 }
             },
 

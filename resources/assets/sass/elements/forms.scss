@@ -18,7 +18,11 @@
     .model_action {
         @extend .col-sm-6, .col-sm-offset-3;
     }
-    
+
+    // Make fa-icon works in bootstraps form-feedback...
+    .form-control-feedback {
+        top: 9px;
+    }
     .schedule_group {
         padding: 0px 0px 5px 0px;
     }

@@ -25,6 +25,10 @@ const lang = {
         confirmButtonText_Delete:  "Ta bort",
         cancelButtonText:          "Avbryt"
     },
+    /* ----------------------------- VALIDATION ----------------------------- */
+    validation: {
+        required:                  "Fältet måste fyllas i."
+    },
     /* ----------------------------- GENERAL ----------------------------- */
     general: {
         home:                       "Hem",
