@@ -16,7 +16,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a v-link="{ path: '/screengroups/create' }" v-if="isAdmin">
+                                <a v-link="{ path: '/screengroups/create' }" v-if="$root.isAdmin">
                                     <i class="fa fa-btn fa-fw fa-plus"></i>&nbsp;{{ trans('general.new') }}</span>
                                 </a>
                             </li>
@@ -66,11 +66,3 @@
         </div><!-- End tab panes col-md-9 -->
     </div><!-- End container -->
 </template>
-
-<script type="text/ecmascript-6">
-    import Auth from '../mixins/Auth.vue'
-
-    export default {
-        mixins: [Auth]
-    }
-</script>

@@ -11,7 +11,8 @@
             <!-- TODO: Need to fix some styling and translation -->
             <div v-popover v-if="myform.text.$invalid" class="errors" role="tooltip"
                  data-trigger="manual"
-                 data-content="Text is required">
+                 data-content="Text is required"
+                 data-selector="#text">
             </div>
 
             <div class="form-group">

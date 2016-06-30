@@ -9,12 +9,12 @@
                 <div class="panel-body">
                     <div class="app-tabs">
                         <ul class="nav app-tabs-stacked">
-                            <li v-if="isAuthenticated">
+                            <li v-if="$root.isAuthenticated">
                                 <a v-link="{ name: 'settings.profile' }">
                                     <i class="fa fa-btn fa-fw fa-user"></i>&nbsp;{{ trans('auth.profile') }}</span>
                                 </a>
                             </li>
-                            <li v-if="isAdmin">
+                            <li v-if="$root.isAdmin">
                                 <a v-link="{ name: 'settings.pixbo' }">
                                     <i class="fa fa-btn fa-fw fa-play-circle-o"></i>&nbsp;{{ trans('auth.pixbo') }}</span>
                                 </a>
@@ -36,11 +36,3 @@
         </div><!-- End tab panes col-md-9 -->
     </div><!-- End container -->
 </template>
-
-<script type="text/ecmascript-6">
-    import Auth from '../mixins/Auth.vue'
-
-    export default {
-        mixins: [Auth]
-    }
-</script>

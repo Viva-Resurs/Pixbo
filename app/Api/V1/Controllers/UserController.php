@@ -59,6 +59,7 @@ class UserController extends BaseController
     public function me() {
         if ($this->user)
             return $this->item($this->user, new UserTransformer() );
+        return '';
     }
 
 
