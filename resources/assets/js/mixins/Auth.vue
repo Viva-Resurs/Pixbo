@@ -20,6 +20,10 @@
                 store.token = localStorage.getItem('jwt-token');
             },
             destroyLogin(user) {
+                // TODO: Destroy the token on the server so that the previous jwt-token can´t be inserted to grant permission?
+                //       This removes it from the client-storage, and a user may save it while logged in.
+                //       Will read more about jwt-token later to fix this small gap if needed.
+                //       You still need to login to get the token in the first place so...
                 store.user = null;
                 store.token = null;
                 store.authenticated = false;
