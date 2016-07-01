@@ -1,8 +1,11 @@
 <script>
+/**
+ *  @author ToxicTree
+ */
     export default {
         deep: true,
         twoWay: true,
-        bind: function(){
+        bind: function() {
             // Setup State
             this.state = {
                 model: this.arg,
@@ -13,35 +16,55 @@
             
             var self = this;
 
-            var isUniqueCheck = function(){
+            var isUniqueCheck = function(recursively) {
+
+                var value = self.state.value;
+
                 client({ path: '/validate', entity: self.state }).then(
-                    function (response, status, request) {
-                        if (response.entity!="1")
-                            self.el._vueFormCtrl.setVadility(false);
+                    function (response) {
+
+                        // Check if value-update got lost in the delay while waiting for validation
+                        if (self.state.value != value){
+                            // If not called recursively, try again now
+                            if (recursively != 'second_try')
+                                isUniqueCheck('second_try');
+                            // Exit
+                            return;
+                        }
+
+                        // Not valid
+                        if (response.entity!="1"){
+                            self.el._vueFormCtrl.setVadility(false); // bypass the standard vue-form.validate()
+                            self.el._vueFormCtrl.setVadility('is-unique',false); // set custom error
+                        }
+
+                        // Valid
+                        else
+                            self.el._vueFormCtrl.setVadility('is-unique',true); // remove custom error
+
+                        // Trigger a change so vue-form will do it´s work
+                        $(self.el).trigger('change');
                     },
-                    function (response, status, request) {
-                        if (status === 401)
-                            self.$dispatch('userHasLoggedOut')
+                    function (error){
+                        return false;
                     }
-                )
+                );
             };
 
+            this.handler = function() {
 
-            this.handler = function () {
-              // set data back to the vm.
-              // If the directive is bound as v-example="a.b.c",
-              // this will attempt to set `vm.a.b.c` with the
-              // given value.
-              this.set(this.el.value)
-              
-              this.state.value = this.el.value;
+                // Update state
+                self.state.value = self.el.value;
 
-              setTimeout( (function(){ 
-                  if (this.el.classList.contains('vf-valid'))
-                    isUniqueCheck(this.el.value)
-               }).bind(this), 100);
+                // If timer is on, clear
+                if (self.timer)
+                    clearTimeout(self.timer);
 
-            }.bind(this)
+                // Set timer now
+                self.timer = setTimeout(isUniqueCheck, 200);
+
+            };
+
             this.el.addEventListener('input', this.handler)
         },
         unbind: function () {
