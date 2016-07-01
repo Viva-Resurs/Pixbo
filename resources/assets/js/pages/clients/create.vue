@@ -16,9 +16,9 @@
                 <p v-if="myform.screengroup.$error.required">Screengroup is required.</p>
             </div>
 
-            <div class="form-group">
+            <div class="form-group has-feedback {{ (myform.$submitted && myform.name.$invalid) ? 'has-warning' : '' }}">
                 <label for="name" class="model_label">{{ trans('general.name') }}</label>
-                <div class="model_input">
+                <div class="model_input" v-popover data-trigger="manual" data-content="{{ trans('validation.required') }}">
                     <input class="form-control"
                            id="name"
                            name="name"
@@ -26,14 +26,16 @@
                            v-model="client.name"
                            v-form-ctrl
                            v-is-unique:client
+                           v-validation-help
                            required
                     >
+                    <span v-if="myform.$submitted && myform.name.$invalid" class="fa fa-warning form-control-feedback"></span>
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group has-feedback {{ (myform.$submitted && myform.address.$invalid) ? 'has-error' : '' }}">
                 <label for="address" class="model_label">{{ trans('general.mac_address') }}</label>
-                <div class="model_input">
+                <div class="model_input" v-popover data-trigger="manual" data-content="{{ trans('validation.required') }}">
                     <input class="form-control"
                            id="address"
                            name="address"
@@ -43,8 +45,10 @@
                            v-form-ctrl
                            custom-validator="isMacAddress"
                            v-is-unique:client
+                           v-validation-help
                            required
                     >
+                    <span v-if="myform.$submitted && myform.address.$invalid" class="fa fa-warning form-control-feedback"></span>
                 </div>
             </div>
 
@@ -71,7 +75,7 @@
                     <button type="button" class="btn" @click="goBack" v-if="!myform.$pristine">
                         <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                     </button>
-                    <button type="submit" @keydown.enter.prevent="attemptCreate" class="btn btn-primary" :disabled="myform.$invalid">
+                    <button type="submit" @keydown.enter.prevent="attemptCreate" class="btn btn-primary">
                         <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                     </button>
                 </div>
@@ -88,25 +92,33 @@
     import ModelSelector from '../../components/ModelSelector.vue';
     import Validators from '../../mixins/Validators.vue';
     import IsUnique from '../../directives/IsUnique.vue';
+    import ValidationHelp from '../../directives/ValidationHelp.vue';
 
     export default  {
         
         mixins: [Validators, RouterHelpers],
         components: { ModelSelector },
-        directives: { IsUnique },
+        directives: { IsUnique, ValidationHelp },
 
         data: function () {
             return {
                 client: {
                     name: '',
-                    ip_address: '',
+                    adress: '',
                     screen_group_id: null
                 },
                 myform: []
             }
         },
 
+        watch : {
+            myform : function (value) {
+                console.log('value changed to '+value);
+            }
+        },
+
         methods: {
+
             attemptCreate() {
                 if(this.myform.$valid) {
                     this.createClient();
