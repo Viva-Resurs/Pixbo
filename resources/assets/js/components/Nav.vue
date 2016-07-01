@@ -11,7 +11,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <!-- Branding Image -->
-                <a class="navbar-brand" v-link="{ path: '/' }" style="padding-top: 19px;">
+                <a class="navbar-brand" v-link="{ path: '/', exact: true }">
                     <i class="fa fa-play-circle-o"></i> {{ navTitle }}
                 </a>
             </div>
