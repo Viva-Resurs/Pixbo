@@ -6,12 +6,12 @@
 
     <div class="panel-body">
 
-        <form class="form-horizontal" role="form" v-on:submit.prevent="attemptCreate" name="myform" v-form>
+        <form class="form-horizontal" role="form" v-on:submit.prevent="attemptCreate" name="myform" v-form @keyup="resetState">
 
-            <div class="form-group has-feedback {{ (errors) ? 'has-warning' : '' }}">
+            <div class="form-group">
                 <label for="text" class="model_label">{{ trans('general.text') }}</label>
-                <div class="model_input" v-popover data-trigger="manual" data-content="{{ trans('validation.required') }}">
-                    <input class="form-control" tabindex="0"
+                <div class="model_input" v-validation-help>
+                    <input class="form-control"
                            name="text" id="text"
                            type="text"
                            v-model="ticker.text"
@@ -19,8 +19,7 @@
                            required
                            minlength="3"
                            maxlength="50"
-                           @keyup="resetState"
-                    ><span class="fa fa-warning form-control-feedback" v-if="errors" ></span>
+                    >
 
                 </div>
 
@@ -47,7 +46,12 @@
 </template>
 
 <script>
+
+    import ValidationHelp from '../../directives/ValidationHelp.vue';
+
     export default {
+
+        directives: { ValidationHelp },
 
         data: function () {
             return {

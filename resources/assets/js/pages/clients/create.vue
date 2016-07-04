@@ -8,17 +8,9 @@
 
         <form v-form name="myform" class="form-horizontal" role="form" v-on:submit.prevent="attemptCreate">
 
-            <!-- TODO: Need to fix some styling and translation -->
-            <div class="errors" v-if="myform.$submitted">
-                <p v-if="myform.name.$error.required">Name is required.</p>
-                <p v-if="myform.address.$error.required">MAC Address is required.</p>
-                <p v-if="myform.address.$error.customValidator">MAC Address is not valid.</p>
-                <p v-if="myform.screengroup.$error.required">Screengroup is required.</p>
-            </div>
-
-            <div class="form-group has-feedback {{ (myform.$submitted && myform.name.$invalid) ? 'has-warning' : '' }}">
+            <div class="form-group" v-validation-help>
                 <label for="name" class="model_label">{{ trans('general.name') }}</label>
-                <div class="model_input" v-popover data-trigger="manual" data-content="{{ trans('validation.required') }}">
+                <div class="model_input">
                     <input class="form-control"
                            id="name"
                            name="name"
@@ -26,16 +18,14 @@
                            v-model="client.name"
                            v-form-ctrl
                            v-is-unique:client
-                           v-validation-help
                            required
                     >
-                    <span v-if="myform.$submitted && myform.name.$invalid" class="fa fa-warning form-control-feedback"></span>
                 </div>
             </div>
 
-            <div class="form-group has-feedback {{ (myform.$submitted && myform.address.$invalid) ? 'has-error' : '' }}">
+            <div class="form-group" v-validation-help>
                 <label for="address" class="model_label">{{ trans('general.mac_address') }}</label>
-                <div class="model_input" v-popover data-trigger="manual" data-content="{{ trans('validation.required') }}">
+                <div class="model_input">
                     <input class="form-control"
                            id="address"
                            name="address"
@@ -45,10 +35,8 @@
                            v-form-ctrl
                            custom-validator="isMacAddress"
                            v-is-unique:client
-                           v-validation-help
                            required
                     >
-                    <span v-if="myform.$submitted && myform.address.$invalid" class="fa fa-warning form-control-feedback"></span>
                 </div>
             </div>
 

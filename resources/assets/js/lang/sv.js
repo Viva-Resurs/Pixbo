@@ -27,7 +27,9 @@ const lang = {
     },
     /* ----------------------------- VALIDATION ----------------------------- */
     validation: {
-        required:                  "Fältet måste fyllas i."
+        required:                  "Fältet måste fyllas i",
+        isUnique:                  "Fältet är inte unikt",
+        customValidator:           "Fältet innehåller fel"
     },
     /* ----------------------------- GENERAL ----------------------------- */
     general: {
