@@ -6,11 +6,11 @@
 
     <div class="panel-body">
 
-        <form class="form-horizontal" role="form" v-on:submit.prevent="attemptCreate" name="myform" v-form @keyup="resetState">
+        <form class="form-horizontal" role="form" v-on:submit.prevent="attemptCreate" name="myform" v-form>
 
-            <div class="form-group">
+            <div class="form-group" v-validation-help>
                 <label for="text" class="model_label">{{ trans('general.text') }}</label>
-                <div class="model_input" v-validation-help>
+                <div class="model_input">
                     <input class="form-control"
                            name="text" id="text"
                            type="text"
@@ -20,9 +20,7 @@
                            minlength="3"
                            maxlength="50"
                     >
-
                 </div>
-
             </div>
 
             <div class="form-group">
@@ -45,11 +43,12 @@
 
 </template>
 
-<script>
-
-    import ValidationHelp from '../../directives/ValidationHelp.vue';
+<script type="text/ecmascript-6">
+    import ValidationHelp from '../../directives/ValidationHelp.vue'
 
     export default {
+        
+        name: 'Create',
 
         directives: { ValidationHelp },
 
@@ -64,45 +63,51 @@
         },
 
         methods: {
-            resetState(e){
-                if (e.key != 'Enter') {
-                    $('.model_input').popover('hide');
-                    if (!this.myform.text.$invalid)
-                        this.errors = false;
-                }
-            },
+
             attemptCreate() {
-                if(this.myform.$valid) {
+
+                if(this.myform.$valid)
                     this.createTicker();
-                } else {
-                    this.errors = true;
-                    $('.model_input').popover('show')                        
-                }
+
             },
 
-            createTicker: function () {
+            createTicker() {
+
                 var self = this;
+
                 client({path: 'tickers', entity: self.ticker}).then(
+                    
                     function (response, status) {
-                        self.ticker.text = '';
+
                         self.$dispatch('alert', {
                             message: self.trans('ticker.created'),
                             options: {theme: 'success'}
-                        })
+                        });
+
+                        self.ticker.text = '';
+
                         if ( self.$root.history.previous == 'screengroups.show' )
                             self.$route.router.go( { path:'/tickers/'+response.entity.data.id, query: {screengroup: self.$root.history.params.id }});
+
                         else
                             self.$route.router.go('/tickers/'+response.entity.data.id);
+
                     },
+
                     function (response, status) {
+
                         self.$dispatch('alert', {
                             message: self.trans('ticker.created_fail'),
                             options: {theme: 'error'}
-                        })
+                        });
+
                     }
-                )
+
+                );
+
             }
+
         }
+
     }
 </script>
-

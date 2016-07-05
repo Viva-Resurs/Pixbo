@@ -4,7 +4,7 @@
         {{ trans('general.archive') }}
     </div>
 
-    <div class="panel-body" v-if=" $loadingRouteData ">
+    <div class="panel-body" v-if="$loadingRouteData">
         <loading></loading>
     </div>
 
@@ -14,14 +14,17 @@
 
 </template>
 
-<script>
+<script type="text/ecmascript-6">
     import TickerList from '../../components/TickerList.vue'
     import SweetAlert from '../../mixins/SweetAlert.vue'
 
-    module.exports = {
+    export default {
+
+        name: 'Index',
 
         components: { TickerList },
-        mixins:[SweetAlert],
+
+        mixins: [ SweetAlert ],
 
         data: function () {
             return {
@@ -30,43 +33,67 @@
         },
 
         methods: {
-            fetch: function (successHandler) {
-                var that = this
+
+            fetch(successHandler) {
+
+                var self = this;
+
                 client({ path: '/tickers' }).then(
+
                     function (response) {
-                        that.$set('tickers', response.entity.data)
-                        successHandler(response.entity.data)
+
+                        self.$set('tickers', response.entity.data);
+                        successHandler(response.entity.data);
+
                     },
-                    function (response, status, request) {
-                        console.log('logged out?')
+
+                    function (response) {
+
+                        console.log(response);
+
                     }
-                )
+
+                );
+
             },
 
             attemptDeleteTicker(index) {
+
                 this.confirm({
                     callback:this.deleteTicker, arg:index,
                     confirmButtonText: this.trans('confirm.confirmButtonText_Delete')
-                })
+                });
+
             },
 
-            deleteTicker: function (index) {
-                var that = this
-                client({ path: '/tickers/' + this.tickers[index].id, method: 'DELETE' }).then(
+            deleteTicker(index) {
+
+                var self = this;
+
+                client({ path: '/tickers/' + self.tickers[index].id, method: 'DELETE' }).then(
+                    
                     function (response) {
-                        that.tickers.splice(index, 1)
-                        that.$dispatch('alert', {
-                            message: that.trans('ticker.deleted'),
+
+                        self.tickers.splice(index, 1);
+
+                        self.$dispatch('alert', {
+                            message: self.trans('ticker.deleted'),
                             options: {theme: 'success'}
-                        })
+                        });
+
                     },
+
                     function (response) {
-                        that.$dispatch('alert', {
-                            message: that.trans('ticker.delete_fail'),
+
+                        self.$dispatch('alert', {
+                            message: self.trans('ticker.delete_fail'),
                             options: {theme: 'error'}
-                        })
+                        });
+
                     }
-                )
+
+                );
+
             }
 
         },
@@ -74,15 +101,15 @@
         route: {
             data: function (transition) {
                 this.fetch(function (data) {
-                    transition.next({tickers: data})
-                })
+                    transition.next({tickers: data});
+                });
             }
         },
 
-        ready() {
+        ready: function() {
             this.$on('remove-ticker', function (index) {
-                this.attemptDeleteTicker(index)
-            })
+                this.attemptDeleteTicker(index);
+            });
         }
 
     }
