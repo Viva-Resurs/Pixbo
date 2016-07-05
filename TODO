@@ -1,45 +1,4 @@
 # TODO:
 
-- Screengroups:
-	- Check if screengroup.name exists before adding (back-end + form-validation)
-	- Add remove association method / API call
-	- Fix the styling of the displaying of Screens and Tickers
-
-- Screens:
-	- Fix datetimepicker-tooltip-lang src/mapping
-	- CSS
-	- Update Editing
-
-- Tickers:
-
-- Player:
-
-- Users:
-    - Unique validation
-    - Error styling
-    - Validation language
-    - Roles validation not working
-        ( May be able to make the validation inside the component and send back the $myform and manually add it to the validation )
-
-- Clients:
-    - Unique validation
-    - Error styling
-    - Validation language
-
-- Unique validation
-    - Need to figure out the endpoints for the API, need to figure out where and how to do it from client.
-
-- General
-    - Update back/cancel buttons to use the new mixin (goBack), '@click="goBack"'  instead of v-link
-
-- Shadowevent
-	- Need to be fixed (old-dates won´t work, no repeat = no screens)
-
-# Features:
-
-- Added a routerHelper mixin, you can now use the method goBack to go back to your previous page, instead of a prechosen one.
-
 # Add cron entry to install script
     * * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
-
-# Add preview for screengroup/client
