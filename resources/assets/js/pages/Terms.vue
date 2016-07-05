@@ -1,6 +1,7 @@
 <template>
 
     <div class="container app-screen">
+
         <div class="row">
             <div class="tab-content">
                 <div class="tab-pane">
@@ -35,10 +36,18 @@ SOFTWARE.
 </pre>
                         </div>
                     </div>
-                </div><!-- End tab panel -->
-            </div><!-- End tab content -->
-        </div><!-- End tab panes col-md-9 -->
-    </div><!-- End container -->
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 </template>
 
+<script type="text/ecmascript-6">
+    export default {
+        
+        name: 'Terms'
+
+    }
+</script>

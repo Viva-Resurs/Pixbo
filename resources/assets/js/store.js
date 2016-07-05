@@ -8,11 +8,10 @@ export const store = {
         id: null,
         name: null,
         email: null,
-        roles: [],
-
-
+        roles: []
     },
 
     token: null,
     authenticated: null
+    
 }
