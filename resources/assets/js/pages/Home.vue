@@ -12,7 +12,7 @@
                     <div class="app-tabs">
                         <ul class="nav app-tabs-stacked">
                             <li>
-                                <a v-link="{ path: '/home/', exact: true }">
+                                <a v-link="{ path: '/home', exact: true }">
                                     <i class="fa fa-btn fa-fw fa-list"></i>&nbsp;{{ trans('general.welcome') }}</span>
                                 </a>
                             </li>
