@@ -4,17 +4,17 @@
         {{ trans('general.archive') }}
     </div>
 
-    <div class="panel-body" v-if=" $loadingRouteData ">
+    <div class="panel-body" v-if="$loadingRouteData">
         <loading></loading>
     </div>
 
     <div v-else>
 
-        <div class="panel-body" v-if=" users.length == 0 ">
+        <div class="panel-body" v-if="users.length == 0">
             {{ trans('user.empty') }}
         </div>
 
-        <table class="table" v-if=" users.length > 0 ">
+        <table class="table" v-if="users.length > 0">
             <thead>
                 <tr>
                     <th>{{ trans('general.id') }}</th>
@@ -44,12 +44,14 @@
 
 </template>
 
-<script>
+<script type="text/ecmascript-6">
     import SweetAlert from '../../mixins/SweetAlert.vue'
 
-    module.exports = {
+    export default {
 
-        mixins:[SweetAlert],
+        name: 'Index',
+
+        mixins: [ SweetAlert ],
 
         data: function () {
             return {
@@ -58,43 +60,67 @@
         },
 
         methods: {
-            fetch: function (successHandler) {
+
+            fetch(successHandler) {
+
                 var self = this;
+
                 client({ path: '/users' }).then(
+
                     function (response) {
+
                         self.$set('users', response.entity.data);
                         successHandler(response.entity.data);
+
                     },
-                    function (response, status) {
-                        console.log('logged out?');
+
+                    function (response) {
+
+                        console.log(response);
+
                     }
+
                 );
+
             },
 
             attemptDeleteUser(index) {
+
                 this.confirm({
                     callback:this.deleteUser, arg:index,
                     confirmButtonText: this.trans('confirm.confirmButtonText_Delete')
                 });
+
             },
 
-            deleteUser: function (index) {
+            deleteUser(index) {
+
                 var self = this;
-                client({ path: '/users/' + this.users[index].id, method: 'DELETE' }).then(
+
+                client({ path: '/users/' + self.users[index].id, method: 'DELETE' }).then(
+
                     function (response) {
+
                         self.users.splice(index, 1);
+
                         self.$dispatch('alert', {
                             message: self.trans('user.deleted'),
                             options: {theme: 'success'}
                         });
+
                     },
+
                     function (response) {
+
                         self.$dispatch('alert', {
                             message: self.trans('user.deleted_fail'),
                             options: {theme: 'error'}
                         });
+
                     }
+
                 );
+
             }
 
         },
@@ -102,7 +128,7 @@
         route: {
             data: function (transition) {
                 this.fetch(function (data) {
-                    transition.next({users: data})
+                    transition.next({users: data});
                 });
             }
         }

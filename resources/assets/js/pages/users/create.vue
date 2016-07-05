@@ -8,16 +8,7 @@
 
         <form class="form-horizontal" role="form" v-on:submit.prevent="attemptCreateUser" name="myform" v-form>
 
-            <!-- TODO: Need to fix some styling and translation -->
-            <div class="errors" v-if="myform.$submitted">
-                <p v-if="myform.name.$error.required">Name is required.</p>
-                <p v-if="myform.email.$error.required">E-mail is required.</p>
-                <p v-if="myform.email.$error.email">E-mail is not valid.</p>
-                <p v-if="myform.password.$error.required">Password is required.</p>
-                <p v-if="myform.password.$error.minlength">Password is too short.</p>
-            </div>
-
-            <div class="form-group">
+            <div class="form-group" v-validation-help>
                 <label for="name" class="model_label">{{ trans('general.name') }}</label>
                 <div class="model_input">
                     <input class="form-control"
@@ -33,7 +24,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" v-validation-help>
                 <label for="email" class="model_label">{{ trans('general.email') }}</label>
                 <div class="model_input">
                     <input class="form-control"
@@ -47,7 +38,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" v-validation-help>
                 <label for="password" class="model_label">{{ trans('auth.password') }}</label>
                 <div class="model_input">
                     <input class="form-control"
@@ -65,12 +56,12 @@
             <div class="form-group">
                 <span v-form-ctrl="user.roles.data[0].id" name="roles" required>
                     <model-selector :selected.sync="user.roles.data[0].id" model="role" classes="model_input">
-                    <div slot="label">
-                        <label for="inputModels" class="model_label">
-                            {{ trans('role.model') }}
-                        </label>
-                    </div>
-                </model-selector>
+                        <div slot="label">
+                            <label for="inputModels" class="model_label">
+                                {{ trans('role.model') }}
+                            </label>
+                        </div>
+                    </model-selector>
                 </span>
             </div>
 
@@ -82,7 +73,7 @@
                     <button type="button" class="btn" @click="goBack" v-if="!myform.$pristine">
                         <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                     </button>
-                    <button type="submit" @keydown.enter.prevent="attemptCreateUser" class="btn btn-primary" :disabled="myform.$invalid">
+                    <button type="submit" @keydown.enter.prevent="attemptCreateUser" class="btn btn-primary">
                         <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                     </button>
                 </div>
@@ -94,14 +85,18 @@
 
 </template>
 
-<script>
+<script type="text/ecmascript-6">
     import ModelSelector from '../../components/ModelSelector.vue'
-    import IsUnique from '../../directives/IsUnique.vue';
+    import IsUnique from '../../directives/IsUnique.vue'
+    import ValidationHelp from '../../directives/ValidationHelp.vue'
 
     export default {
 
+        name: 'Create',
+
         components: { ModelSelector },
-        directives: { IsUnique },
+
+        directives: { IsUnique, ValidationHelp },
         
         data: function () {
             return {
@@ -119,33 +114,45 @@
         },
 
         methods: {
+
             attemptCreateUser() {
-                if(this.myform.$valid) {
-                    this.createUser()
-                }
+
+                if(this.myform.$valid)
+                    this.createUser();
+
             },
+
             createUser() {
+
                 var self = this;
+
                 client({path: 'users', entity: self.user}).then(
+                    
                     function (response, status) {
+
                         self.$dispatch('alert', {
                             message: self.trans('user.created'),
                             options: {theme: 'success'}
-                        })
-                        self.$route.router.go('/users')
+                        });
+
+                        self.$route.router.go('/users');
+
                     },
+
                     function (response, status) {
+
                         self.$dispatch('alert', {
                             message: self.trans('user.created_fail'),
                             options: {theme: 'error'}
-                        })
-                        Vue.nextTick(function () {
-                            document.getElementById('nameInput').focus()
-                        })
+                        });
+
                     }
-                )
+
+                );
+
             }
+
         }
+
     }
 </script>
-
