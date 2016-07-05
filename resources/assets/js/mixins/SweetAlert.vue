@@ -1,9 +1,12 @@
-<script>
+<script type="text/ecmascript-6">
     import swal from 'sweetalert'
 
     export default {
+
         methods: {
-            confirm: function (what){
+
+            confirm(what) {
+
                 swal({
                     title: what.title || this.trans('confirm.title'),
                     text: what.text || this.trans('confirm.text'),
@@ -13,10 +16,13 @@
                     confirmButtonText: what.confirmButtonText || this.trans('confirm.confirmButtonText'),
                     cancelButtonText: this.trans('confirm.cancelButtonText'),
                     closeOnConfirm: true
-                }, function(){
+                },function(){
                     what.callback(what.arg)
                 });
+
             }
+
         }
+
     };
 </script>
