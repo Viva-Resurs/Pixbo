@@ -44,13 +44,15 @@
 
 </template>
 
-<script>
+<script type="text/ecmascript-6">
     import SweetAlert from '../../mixins/SweetAlert.vue';
     import Auth from '../../mixins/Auth.vue';
 
-    module.exports = {
+    export default {
 
-        mixins:[SweetAlert,Auth],
+        name: 'Index',
+
+        mixins: [ SweetAlert, Auth ],
 
         data: function () {
             return {
@@ -64,44 +66,68 @@
         },
 
         methods: {
-            fetch: function (successHandler) {
-                var that = this
+
+            fetch(successHandler) {
+
+                var self = this;
+                
                 client({ path: '/categories' }).then(
+
                     function (response) {
-                        that.$set('categories', response.entity.data)
-                        successHandler(response.entity.data)
+
+                        self.$set('categories', response.entity.data);
+                        successHandler(response.entity.data);
+
                     },
+
                     function (response, status) {
-                        console.log('logged out?')
+
+                        console.log('logged out?');
+
                     }
-                )
+
+                );
+
             },
 
             attemptDeleteCategory(index) {
+
                 this.confirm({
                     callback:this.deleteCategory, arg:index,
                     confirmButtonText: this.trans('confirm.confirmButtonText_Delete')
-                })
+                });
+
             },
 
-            deleteCategory: function (index) {
-                var that = this
-                client({ path: '/categories/' + this.categories[index].id, method: 'DELETE' }).then(
+            deleteCategory (index) {
+
+                var self = this;
+
+                client({ path: '/categories/' + self.categories[index].id, method: 'DELETE' }).then(
+
                     function (response) {
-                        that.categories.splice(index, 1);
-                        that.$dispatch('alert', {
-                            message: that.trans('category.deleted'),
+
+                        self.categories.splice(index, 1);
+
+                        self.$dispatch('alert', {
+                            message: self.trans('category.deleted'),
                             options: {theme: 'success'}
-                        })
-                        that.$route.router.go({name:'categories.index'});
+                        });
+
+                        self.$route.router.go({name:'categories.index'});
                     },
+
                     function (response) {
-                        that.$dispatch('alert', {
-                            message: that.trans('category.deleted_fail'),
+
+                        self.$dispatch('alert', {
+                            message: self.trans('category.deleted_fail'),
                             options: {theme: 'error'}
-                        })
+                        });
+
                     }
-                )
+
+                );
+
             }
 
         },
@@ -109,8 +135,8 @@
         route: {
             data: function (transition) {
                 this.fetch(function (data) {
-                    transition.next({categories: data})
-                })
+                    transition.next({categories: data});
+                });
             }
         }
 

@@ -8,12 +8,7 @@
 
         <form class="form-horizontal" role="form" v-on:submit.prevent="attemptCreateCategory" name="myform" v-form>
 
-            <!-- TODO: Need to fix some styling and translation -->
-            <div class="errors" v-if="myform.$submitted">
-                <p v-if="myform.name.$error.required">Name is required.</p>
-            </div>
-
-            <div class="form-group">
+            <div class="form-group" v-validation-help>
                 <label for="name" class="model_label">{{ trans('general.name') }}</label>
                 <div class="model_input">
                     <input class="form-control"
@@ -37,7 +32,7 @@
                     <button type="button" class="btn" @click="goBack" v-if="!myform.$pristine">
                         <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                     </button>
-                    <button type="submit" @keydown.enter.prevent="attemptCreateCategory" class="btn btn-primary" :disabled="myform.$invalid">
+                    <button type="submit" @keydown.enter.prevent="attemptCreateCategory" class="btn btn-primary">
                         <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                     </button>
                 </div>
@@ -49,52 +44,67 @@
 
 </template>
 
-<script>
+<script type="text/ecmascript-6">
     import IsUnique from '../../directives/IsUnique.vue';
+    import ValidationHelp from '../../directives/ValidationHelp.vue';
 
     export default {
         
-        directives: { IsUnique },
+        name: 'Create',
+
+        directives: { IsUnique, ValidationHelp },
 
         data: function () {
             return {
                 category: {
                     name: ''
                 },
-                myform: [],
-                creating: false
+                myform: []
             }
         },
 
         methods: {
-            attemptCreateCategory() {
-              if(this.myform.$valid) {
-                  this.createCategory()
-              }
-            },
-            createCategory() {
-                var that = this
-                that.creating = true
-                client({path: 'categories', entity: that.category}).then(
-                    function (response, status) {
-                        that.category.name = ''
-                        that.$dispatch('alert', {
-                            message: that.trans('category.created'),
-                            options: {theme: 'success'}
-                        })
 
-                        that.creating = false
-                        that.$route.router.go('/categories')
-                    },
+            attemptCreateCategory() {
+
+                if(this.myform.$valid)
+                    this.createCategory();
+
+            },
+
+            createCategory() {
+
+                var self = this;
+
+                client({path: 'categories', entity: self.category}).then(
+
                     function (response, status) {
-                        that.$dispatch('alert', {
-                            message: that.trans('category.created_fail'),
+
+                        self.$dispatch('alert', {
+                            message: self.trans('category.created'),
+                            options: {theme: 'success'}
+                        });
+
+                        self.category.name = '';
+
+                        self.$route.router.go('/categories');
+
+                    },
+
+                    function (response, status) {
+
+                        self.$dispatch('alert', {
+                            message: self.trans('category.created_fail'),
                             options: {theme: 'error'}
-                        })
+                        });
+
                     }
-                )
+
+                );
+
             }
+
         }
+
     }
 </script>
-

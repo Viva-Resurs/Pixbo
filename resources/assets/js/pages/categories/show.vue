@@ -1,7 +1,7 @@
 <template>
 
     <div class="panel-heading">
-        {{ category.name }}
+        {{ originalName }}
     </div>
 
     <div class="panel-body" v-if=" $loadingRouteData ">
@@ -14,12 +14,7 @@
 
             <form v-if="isOwner(category)" class="form-horizontal" role="form" v-on:submit.prevent="attemptUpdateCategory" name="myform" v-form>
 
-                <!-- TODO: Need to fix some styling and translation -->
-                <div class="errors" v-if="myform.$submitted">
-                    <p v-if="myform.name.$error.required">Name is required.</p>
-                </div>
-
-                <div class="form-group">
+                <div class="form-group" v-validation-help>
                     <label for="name" class="model_label">{{ trans('general.name') }}</label>
                     <div class="model_input">
                         <input class="form-control"
@@ -50,7 +45,7 @@
                                 <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                             </button>
                         </template>
-                        <button type="submit" @keydown.enter.prevent="attemptUpdateCategory" class="btn btn-primary" :disabled="myform.$invalid">
+                        <button type="submit" @keydown.enter.prevent="attemptUpdateCategory" class="btn btn-primary">
                             <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                         </button>
                     </div>
@@ -67,15 +62,21 @@
 
 </template>
 
-<script>
+<script type="text/ecmascript-6">
     import Auth from '../../mixins/Auth.vue';
     import ScreenList from '../../components/ScreenList.vue';
     import SweetAlert from '../../mixins/SweetAlert.vue';
+    import ValidationHelp from '../../directives/ValidationHelp.vue'
 
     export default {
 
-        mixins: [Auth, SweetAlert],
-        components: {ScreenList},
+        name: 'Show',
+
+        mixins: [ Auth, SweetAlert ],
+
+        components: { ScreenList },
+
+        directives: { ValidationHelp },
 
         data: function () {
             return {
@@ -84,93 +85,132 @@
                     name: null,
                     screens: null
                 },
-                myform: []
+                myform: [],
+                originalName: ''
             }
         },
 
         methods: {
-            fetch: function (id, successHandler) {
-                var that = this
+
+            fetch(id, successHandler) {
+
+                var self = this;
+
                 client({ path: '/categories/' + id }).then(
+
                     function (response) {
-                        that.$set('category', response.entity.data)
-                        successHandler(response.entity.data)
+
+                        self.$set('category', response.entity.data);
+                        self.$set('originalName', self.category.name);
+                        successHandler(response.entity.data);
+
                     },
+
                     function (response, status, request) {
-                        if (status === 401) {
-                            self.$dispatch('userHasLoggedOut')
-                        } else {
-                            console.log(response)
-                        }
+
+                        if (status === 401)
+                            self.$dispatch('userHasLoggedOut');
+
+                        else
+                            console.log(response);
+                        
                     }
-                )
+
+                );
+
             },
 
             attemptUpdateCategory() {
-                if(this.myform.$valid) {
-                    this.updateCategory()
-                }
+
+                if(this.myform.$valid)
+                    this.updateCategory();
+
             },
 
             updateCategory() {
-                var self = this
+
+                var self = this;
+
                 client({ path: '/categories/' + self.category.id, entity: self.category, method: 'PUT'}).then(
+                    
                     function (response) {
+
                         self.$dispatch('alert', {
                             message: self.trans('category.updated'),
                             options: {theme: 'success'}
-                        })
-                        self.$route.router.go('/categories')
+                        });
+
+                        self.$route.router.go('/categories');
+
                     },
+
                     function (response) {
+
                         self.$dispatch('alert', {
                             message: self.trans('category.updated_fail'),
                             options: {theme: 'error'}
-                        })
+                        });
+
                     }
-                )
+
+                );
+
             },
 
             attemptDeleteScreen(index) {
+
                 this.confirm({
                     callback:this.deleteScreen, arg:index,
                     text: this.trans('category.remove_association')
-                })
+                });
+
             },
 
             deleteScreen(index) {
+
                 var self = this;
+
                 client({ path: '/categories/' + self.category.id + '/screen/' + self.category.screens.data[index].id, method: 'DELETE' }).then(
-                        function (response) {
-                            self.category.screens.data.splice(index, 1);
-                            self.$dispatch('alert', {
-                                message: self.trans('category.screen_association_removed'),
-                                options: {theme: 'success'}
-                            })
-                        },
-                        function (response) {
-                            self.$dispatch('alert', {
-                                message: self.trans('category.screen_association_removed_fail'),
-                                options: {theme: 'error'}
-                            })
-                        }
+                    
+                    function (response) {
+
+                        self.category.screens.data.splice(index, 1);
+
+                        self.$dispatch('alert', {
+                            message: self.trans('category.screen_association_removed'),
+                            options: {theme: 'success'}
+                        });
+
+                    },
+
+                    function (response) {
+
+                        self.$dispatch('alert', {
+                            message: self.trans('category.screen_association_removed_fail'),
+                            options: {theme: 'error'}
+                        });
+
+                    }
+
                 );
+
             }
 
         },
 
-        ready() {
+        ready : function() {
             this.$on('remove-screen', function (index) {
-                this.attemptDeleteScreen(index)
-            })
+                this.attemptDeleteScreen(index);
+            });
         },
 
         route: {
             data: function (transition) {
                 this.fetch(this.$route.params.id, function (data) {
-                    transition.next({category: data})
-                })
+                    transition.next({category: data});
+                });
             }
         }
+
     }
 </script>

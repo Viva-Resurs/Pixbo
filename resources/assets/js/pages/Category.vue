@@ -1,5 +1,7 @@
 <template>
+
     <div class="container app-screen">
+
         <!-- Tabs -->
         <div class="col-md-3">
             <div class="panel panel-default panel-flush">
@@ -10,7 +12,7 @@
                     <div class="app-tabs">
                         <ul class="nav app-tabs-stacked">
                             <li>
-                                <a v-link="{ path: '/categories/', exact: true }">
+                                <a v-link="{ path: '/categories', exact: true }">
                                     <i class="fa fa-btn fa-fw fa-list"></i>&nbsp;{{ trans('general.archive') }}</span>
                                 </a>
                             </li>
@@ -24,6 +26,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Tab Panes -->
         <div class="col-md-9">
             <div class="tab-content">
@@ -31,8 +34,18 @@
                     <div class="panel panel-default">
                         <router-view></router-view>
                     </div>
-                </div><!-- End tab panel -->
-            </div><!-- End tab content -->
-        </div><!-- End tab panes col-md-9 -->
-    </div><!-- End container -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 </template>
+
+<script type="text/ecmascript-6">
+    export default {
+        
+        name: 'Category'
+
+    }
+</script>
