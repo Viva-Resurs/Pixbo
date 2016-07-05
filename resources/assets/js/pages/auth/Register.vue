@@ -1,8 +1,11 @@
 <template>
+
     <div class="panel-heading">
         {{ trans('auth.register') }}
     </div>
+
     <div class="panel-body">
+
         <form class="form-horizontal" role="form" v-on:submit="registerUser">
 
             <div class="form-group">
@@ -40,11 +43,17 @@
                     </button>
                 </div>
             </div>
-        </form>
-    </div></template>
 
-<script>
-    module.exports = {
+        </form>
+
+    </div>
+
+</template>
+
+<script type="text/ecmascript-6">
+    export default {
+
+        name: 'Register',
 
         // TODO: Add client validation
 
@@ -62,38 +71,58 @@
         },
 
         methods: {
-            registerUser: function (e) {
-                e.preventDefault()
-                var that = this
-                that.registering = true
+
+            registerUser(e) {
+
+                e.preventDefault();
+
+                var self = this;
+
+                self.registering = true;
+
                 client({ path: '/auth/signup', entity: this.user }).then(
-                        function (response) {
-                            that.getUserData()
-                        },
-                        function (response, status) {
-                            that.messages = []
-                            if (response.status && response.status.code === 422) {
-                                that.messages = []
-                                for (var key in response.entity.error.errors) {
-                                    that.$dispatch('alert', {message: response.entity.error.errors[key][0]})
-                                    that.registering = false
-                                }
+
+                    function (response) {
+
+                        self.getUserData();
+
+                    },
+
+                    function (response, status) {
+
+                        if (response.status && response.status.code === 422) {
+
+                            self.messages = [];
+
+                            for (var key in response.entity.error.errors) {
+
+                                self.$dispatch('alert', {message: response.entity.error.errors[key][0]});
+                                self.registering = false;
+
                             }
+
                         }
-                )
+
+                    }
+
+                );
 
             },
 
-            getUserData: function () {
-                var that = this
+            getUserData() {
+
+                var self = this;
+
                 client({ path: '/users/me' }).then(
                         function (response) {
-                            that.$dispatch('userHasLoggedIn', response.entity.user)
-                            that.$route.router.go('/auth/profile')
+                            self.$dispatch('userHasLoggedIn', response.entity.user)
+                            self.$route.router.go('/auth/profile')
                         }
-                )
+                );
+
             }
+
         }
+
     }
 </script>
-

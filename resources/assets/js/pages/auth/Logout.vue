@@ -1,10 +1,10 @@
-<script>
-    module.exports = {
+<script type="text/ecmascript-6">
+    export default {
 
         route: {
             activate: function (transition) {
-                this.$dispatch('userHasLoggedOut')
-                transition.redirect('/')
+                this.$dispatch('userHasLoggedOut');
+                transition.redirect('/');
             }
         }
 
