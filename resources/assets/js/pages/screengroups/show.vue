@@ -14,13 +14,7 @@
 
             <form v-if="isAdmin" v-form name="myform" class="form-horizontal" role="form" v-on:submit.prevent="attemptUpdateScreengroup">
 
-                <!-- TODO: Need to fix some styling and translation -->
-                <div class="errors" v-if="myform.$submitted">
-                    <p v-if="myform.name.$error.required">Name is required.</p>
-                    <p v-if="myform.desc.$error.required">Description is required.</p>
-                </div>
-            
-                <div class="form-group">
+                <div class="form-group" v-validation-help>
                     <label for="name" class="model_label">{{ trans('general.name') }}</label>
                     <div class="model_input">
                         <input class="form-control"
@@ -32,7 +26,7 @@
                         >
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" v-validation-help>
                     <label for="desc" class="model_label">{{ trans('general.desc') }}</label>
                     <div class="model_input">
                         <input class="form-control"
@@ -63,7 +57,7 @@
                                 <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                             </button>
                         </template>
-                        <button type="submit" @keydown.enter.prevent="attemptUpdateScreengroup" class="btn btn-primary" :disabled="myform.$invalid">
+                        <button type="submit" @keydown.enter.prevent="attemptUpdateScreengroup" class="btn btn-primary">
                             <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                         </button>
                     </div>
@@ -81,20 +75,22 @@
 
 </template>
 
-<script>
-    import screens from './screens.vue'
-    import tickers from './tickers.vue'
-    import clients from './clients.vue'
+<script type="text/ecmascript-6">
     import Auth from '../../mixins/Auth.vue'
+    import Screens from './screens.vue'
+    import Tickers from './tickers.vue'
+    import Clients from './clients.vue'
+    import ValidationHelp from '../../directives/ValidationHelp.vue'
 
-    module.exports = {
+    export default {
 
-        mixins:[Auth],
-        components: {
-            screens,
-            tickers,
-            clients
-        },
+        name: 'Show',
+
+        mixins: [Auth],
+
+        directives: { ValidationHelp },
+
+        components: { Screens, Tickers, Clients },
 
         data: function () {
             return {
@@ -105,46 +101,69 @@
         },
 
         methods: {
-            fetch: function (id, successHandler) {
+
+            fetch(id, successHandler) {
+
                 var self = this;
+
                 client({ path: '/screengroups/' + id }).then(
+                    
                     function (response) {
+
                         self.$set('screengroup', response.entity.data);
                         successHandler(response.entity.data);
+
                     },
+
                     function (response, status, request) {
-                        if (status === 401) {
+
+                        if (status === 401)
                             self.$dispatch('userHasLoggedOut');
-                        } else {
+                        
+                        else
                             self.$route.router.go('/screengroups');
-                        }
+
                     }
+
                 );
+
             },
 
             attemptUpdateScreengroup() {
-                if(this.myform.$valid) {
+
+                if(this.myform.$valid)
                     this.updateScreengroup();
-                }
+
             },
 
-            updateScreengroup: function () {
+            updateScreengroup() {
+
                 var self = this;
+
                 client({ path: '/screengroups/' + self.screengroup.id, entity: self.screengroup, method: 'PUT'}).then(
+                    
                     function (response) {
+
                         self.$dispatch('alert', {
                             message: self.trans('screengroup.updated'),
                             options: {theme: 'success'}
-                        })
+                        });
+
                         self.$route.router.go('/screengroups');
+
                     },
+
                     function (response) {
+
                         self.$dispatch('alert', {
                             message: self.trans('screengroup.updated_fail'),
                             options: {theme: 'error'}
-                        })
+                        });
+
                     }
+
                 );
+
             }
 
         },
@@ -156,5 +175,6 @@
                 });
             }
         }
+
     }
 </script>

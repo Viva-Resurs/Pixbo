@@ -1,5 +1,7 @@
 <template>
+
     <div class="container app-screen">
+
         <!-- Tabs -->
         <div class="col-md-3">
 
@@ -54,6 +56,7 @@
             </div>
 
         </div>
+
         <!-- Tab Panes -->
         <div class="col-md-9">
             <div class="tab-content">
@@ -61,8 +64,18 @@
                     <div class="panel panel-default">
                         <router-view></router-view>
                     </div>
-                </div><!-- End tab panel -->
-            </div><!-- End tab content -->
-        </div><!-- End tab panes col-md-9 -->
-    </div><!-- End container -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 </template>
+
+<script type="text/ecmascript-6">
+    export default {
+        
+        name: 'ScreenGroup'
+
+    }
+</script>

@@ -4,7 +4,7 @@
         {{ trans('general.archive') }}
     </div>
 
-    <div class="panel-body" v-if=" $loadingRouteData ">
+    <div class="panel-body" v-if="$loadingRouteData">
         <loading></loading>
     </div>
 
@@ -44,13 +44,15 @@
 
 </template>
 
-<script>
+<script type="text/ecmascript-6">
     import SweetAlert from '../../mixins/SweetAlert.vue'
-    import Auth from '../../mixins/Auth.vue';
+    import Auth from '../../mixins/Auth.vue'
 
-    module.exports = {
+    export default {
 
-        mixins:[SweetAlert,Auth],
+        name: 'Index',
+
+        mixins: [ SweetAlert, Auth ],
 
         data: function () {
             return {
@@ -59,46 +61,73 @@
         },
 
         methods: {
+
             hasPreview(index) {
-                return this.screengroups[index].preview === ''
+
+                return this.screengroups[index].preview === '';
+
             },
-            fetch: function (successHandler) {
+
+            fetch(successHandler) {
+
                 var self = this;
+
                 client({ path: '/screengroups' }).then(
-                        function (response) {
-                            self.$set('screengroups', response.entity.data);
-                            successHandler(response.entity.data);
-                        },
-                        function (response, status) {
-                            console.log('logged out?')
-                        }
+
+                    function (response) {
+
+                        self.$set('screengroups', response.entity.data);
+                        successHandler(response.entity.data);
+
+                    },
+
+                    function (response) {
+
+                        console.log(response);
+
+                    }
+
                 );
+
             },
 
             attemptDeleteScreengroup(index) {
+
                 this.confirm({
                     callback:this.deleteScreengroup, arg:index,
                     confirmButtonText: this.trans('confirm.confirmButtonText_Delete')
-                })
+                });
+
             },
 
-            deleteScreengroup: function (index) {
+            deleteScreengroup(index) {
+
                 var self = this;
+
                 client({ path: '/screengroups/' + self.screengroups[index].id, method: 'DELETE' }).then(
+                    
                     function (response) {
+
                         self.screengroups.splice(index, 1);
+
                         self.$dispatch('alert', {
                             message: self.trans('screengroup.deleted'),
                             options: {theme: 'success'}
-                        })
+                        });
+
                     },
+
                     function (response) {
+
                         self.$dispatch('alert', {
                             message: self.trans('screengroup.deleted_fail'),
                             options: {theme: 'error'}
-                        })
+                        });
+
                     }
+
                 );
+
             }
 
         },
@@ -107,7 +136,7 @@
             data: function (transition) {
                 this.fetch(function (data) {
                     transition.next({screengroups: data});
-                })
+                });
             }
         }
 
