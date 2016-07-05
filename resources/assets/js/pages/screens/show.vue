@@ -36,10 +36,13 @@
 
 </template>
 
-<script>
+<script type="text/ecmascript-6">
     import Schedule from '../../components/Schedule.vue'
     import ModelSelector from '../../components/ModelSelector.vue'
+
     export default {
+
+        name: 'Show',
 
         components: { Schedule, ModelSelector },
 
@@ -50,32 +53,43 @@
         },
 
         methods: {
-            fetch: function (id, successHandler) {
-                var self = this
+
+            fetch(id, successHandler) {
+
+                var self = this;
+
                 client({ path: '/screens/' + id }).then(
+
                     function (response) {
-                        self.$set('screen', response.entity.data)
+
+                        self.$set('screen', response.entity.data);
 
                         if ( self.$route.query.screengroup )
                             self.screen.screengroups.push( { id: self.$route.query.screengroup });
                         
-                        successHandler(response.entity.data)
+                        successHandler(response.entity.data);
+
                     },
-                    function (response, status, request) {
-                        if (status === 401) {
-                            self.$dispatch('userHasLoggedOut')
-                        }
+
+                    function (response) {
+
+                        console.log(response);
+
                     }
-                )
+
+                );
+
             }
+
         },
 
         route: {
             data: function (transition) {
                 this.fetch(this.$route.params.id, function (data) {
-                    transition.next({screen: data})
-                })
+                    transition.next({screen: data});
+                });
             }
         }
+
     }
 </script>

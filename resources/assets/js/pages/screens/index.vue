@@ -16,14 +16,17 @@
 
 </template>
 
-<script>
+<script type="text/ecmascript-6">
     import ScreenList from '../../components/ScreenList.vue'
     import SweetAlert from '../../mixins/SweetAlert.vue'
 
-    module.exports = {
+    export default {
+
+        name: 'Index',
 
         components: { ScreenList },
-        mixins:[SweetAlert],
+
+        mixins: [ SweetAlert ],
 
         data: function () {
             return {
@@ -32,58 +35,84 @@
         },
 
         methods: {
-            fetch: function (successHandler) {
-                var that = this
+
+            fetch(successHandler) {
+
+                var self = this;
+
                 client({ path: '/screens' }).then(
+
                     function (response) {
-                        that.$set('screens', response.entity.data)
-                        successHandler(response.entity.data)
+
+                        self.$set('screens', response.entity.data);
+                        successHandler(response.entity.data);
+
                     },
-                    function (response, status) {
-                        console.log('logged out?')
+
+                    function (response) {
+
+                        console.log(response);
+
                     }
-                )
+
+                );
+
             },
 
             attemptDeleteScreen(index) {
+
                 this.confirm({
                     callback:this.deleteScreen, arg:index,
                     confirmButtonText: this.trans('confirm.confirmButtonText_Delete')
-                })
+                });
+
             },
 
-            deleteScreen: function (index) {
+            deleteScreen(index) {
+
                 var self = this;
-                client({ path: '/screens/' + this.screens[index].id, method: 'DELETE' }).then(
+
+                client({ path: '/screens/' + self.screens[index].id, method: 'DELETE' }).then(
+
                     function (response) {
+
                         self.screens.splice(index, 1);
+
                         self.$dispatch('alert', {
                             message: self.trans('screen.deleted'),
                             options: {theme: 'success'}
-                        })
+                        });
+
                     },
+
                     function (response) {
+
                         self.$dispatch('alert', {
                             message: self.trans('screen.deleted_fail'),
                             options: {theme: 'error'}
-                        })
+                        });
+
                     }
+
                 );
+
             }
+
         },
 
         route: {
             data: function (transition) {
                 this.fetch(function (data) {
-                    transition.next({screens: data})
-                })
+                    transition.next({screens: data});
+                });
             }
         },
 
-        ready() {
+        ready: function() {
             this.$on('remove-screen', function (index) {
-                this.attemptDeleteScreen(index)
-            })
+                this.attemptDeleteScreen(index);
+            });
         }
+
     }
 </script>

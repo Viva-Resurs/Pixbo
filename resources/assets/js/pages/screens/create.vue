@@ -14,11 +14,14 @@
     
 </template>
 
-<script>
-    module.exports = {
-        props: ['options'],
+<script type="text/ecmascript-6">
+    export default {
 
-        data() {
+        name: 'Create',
+
+        props: [ 'options' ],
+
+        data: function() {
             return {
                 messages: [],
                 durpzone: null,
@@ -26,18 +29,26 @@
         },
 
         computed: {
+
             action() {
-                if(this.options !== undefined) {
-                    return this.options.action !== undefined ? this.options.action : '/api/screens'
-                }
-                return '/api/screens'
+
+                if(this.options !== undefined)
+                    return this.options.action !== undefined ? this.options.action : '/api/screens';
+
+                return '/api/screens';
+
             }
+
         },
 
         methods: {
-            initDropzone: function () {
-                var vm = this
+
+            initDropzone() {
+
+                var vm = this;
+
                 vm.$nextTick(function () {
+
                     vm.durpzone = $("#my-dropzone").dropzone({
                         maxFileSize: 10,
                         uploadMultiple: false,
@@ -45,29 +56,39 @@
                         acceptedFiles: '.jpg,.jpeg,.png,.bmp',
                         dictDefaultMessage: vm.trans('screen.upload_message'),
                         init: function () {
+
                             var self = this;
 
                             // -------- bind events -------- //
 
                             // Send file starts
                             self.on("sending", function (file, xhr, formData) {
+                                
                                 if (localStorage.getItem('jwt-token'))
-                                    xhr.setRequestHeader('Authorization', localStorage.getItem('jwt-token'))
+                                    xhr.setRequestHeader('Authorization', localStorage.getItem('jwt-token'));
+
                             });
 
                             self.on("success", function (response) {
+                                
                                 vm.$dispatch('alert', {
                                     message: vm.trans('screen.uploaded'),
                                     options: {theme: 'success'}
-                                })
+                                });
+
                                 // TODO: Might want to route to the newly created screen instead of it's 'parent'
                                 // the API needs to send back the ID of the new screen.
                                 vm.$route.router.go({ path: '/screens/'+response.xhr.response, query: { screengroup: vm.$root.history.params.id } });
+
                             });
+
                         }
-                    })
-                })
+                    });
+
+                });
+
             }
+
         }
 
     }
