@@ -1,8 +1,11 @@
 <template>
+
     <div class="panel-heading">
         {{ trans('auth.profile') }}
     </div>
+
     <div class="panel-body">
+
         <table class="table table-bordered" v-if="$root.user">
             <tr>
                 <th>{{ trans('general.id') }}</th>
@@ -15,5 +18,15 @@
                 <td>{{ $root.user.email }}</td>
             </tr>
         </table>
+        
     </div>
+
 </template>
+
+<script type="text/ecmascript-6">
+    export default {
+        
+        name: 'Profile'
+
+    }
+</script>
