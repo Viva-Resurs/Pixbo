@@ -4,7 +4,7 @@
         {{ trans('general.archive') }}
     </div>
 
-    <div class="panel-body" v-if=" $loadingRouteData ">
+    <div class="panel-body" v-if="$loadingRouteData">
         <loading></loading>
     </div>
 
@@ -16,14 +16,17 @@
 
 </template>
 
-<script>
+<script type="text/ecmascript-6">
     import ClientList from '../../components/ClientList.vue'
     import SweetAlert from '../../mixins/SweetAlert.vue'
 
-    module.exports = {
+    export default {
+
+        name: 'Index',
 
         components: { ClientList },
-        mixins:[SweetAlert],
+
+        mixins: [ SweetAlert ],
 
         data: function () {
             return {
@@ -32,58 +35,83 @@
         },
 
         methods: {
-            fetch: function (successHandler) {
-                var that = this
+
+            fetch(successHandler) {
+
+                var self = this;
+
                 client({ path: '/clients' }).then(
+
                     function (response) {
-                        that.$set('clients', response.entity.data)
-                        successHandler(response.entity.data)
+
+                        self.$set('clients', response.entity.data);
+                        successHandler(response.entity.data);
+
                     },
+
                     function (response, status) {
-                        console.log('logged out?')
+                        
+                        console.log(response);
+
                     }
-                )
+
+                );
+
             },
 
             attemptDeleteClient(index) {
+
                 this.confirm({
-                    callback:this.deleteClient, arg:index,
+                    callback: this.deleteClient, arg:index,
                     confirmButtonText: this.trans('confirm.confirmButtonText_Delete')
-                })
+                });
+
             },
 
-            deleteClient: function (index) {
-                var that = this
-                client({ path: '/clients/' + this.clients[index].id, method: 'DELETE' }).then(
-                        function (response) {
-                            that.clients.splice(index, 1)
-                            that.$dispatch('alert', {
-                                message: that.trans('client.deleted'),
-                                options: {theme: 'success'}
-                            })
-                        },
-                        function (response) {
-                            that.$dispatch('alert', {
-                                message: that.trans('client.deleted_fail'),
-                                options: {theme: 'error'}
-                            })
-                        }
-                )
+            deleteClient(index) {
+
+                var self = this;
+
+                client({ path: '/clients/' + self.clients[index].id, method: 'DELETE' }).then(
+
+                    function (response) {
+
+                        self.clients.splice(index, 1);
+                        self.$dispatch('alert', {
+                            message: self.trans('client.deleted'),
+                            options: {theme: 'success'}
+                        });
+
+                    },
+
+                    function (response) {
+
+                        self.$dispatch('alert', {
+                            message: self.trans('client.deleted_fail'),
+                            options: {theme: 'error'}
+                        });
+
+                    }
+
+                );
+
             }
+
         },
 
-        ready() {
-          this.$on('remove-client', function (index) {
-              this.attemptDeleteClient(index)
-          })
+        ready: function() {
+            this.$on('remove-client', function (index) {
+                this.attemptDeleteClient(index);
+            })
         },
 
         route: {
             data: function (transition) {
                 this.fetch(function (data) {
-                    transition.next({clients: data})
-                })
+                    transition.next({clients: data});
+                });
             }
         }
+
     }
 </script>

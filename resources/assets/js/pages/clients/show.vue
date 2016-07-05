@@ -4,7 +4,7 @@
         {{ trans('client.edit') }}
     </div>
     
-    <div class="panel-body" v-if=" $loadingRouteData ">
+    <div class="panel-body" v-if="$loadingRouteData">
         <loading></loading>
     </div>
 
@@ -14,15 +14,7 @@
 
             <form class="form-horizontal" role="form" v-on:submit.prevent="attemptUpdateClient" v-form name="myform">
 
-                <!-- TODO: Need to fix some styling and translation -->
-                <div class="errors" v-if="myform.$submitted">
-                    <p v-if="myform.name.$error.required">Name is required.</p>
-                    <p v-if="myform.address.$error.required">IP Address is required.</p>
-                    <p v-if="myform.address.$error.customValidator">IP Address is not valid.</p>
-                    <p v-if="myform.screengroup.$error.required">Screengroup is required.</p>
-                </div>
-
-                <div class="form-group">
+                <div class="form-group" v-validation-help>
                     <label for="name" class="model_label">{{ trans('general.name') }}</label>
                     <div class="model_input">
                         <input class="form-control"
@@ -35,7 +27,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" v-validation-help>
                     <label for="ip_address" class="model_label">{{ trans('general.mac_address') }}</label>
                     <div class="model_input">
                         <input class="form-control"
@@ -86,15 +78,21 @@
     
 </template>
 
-<script>
+<script type="text/ecmascript-6">
     import ModelSelector from '../../components/ModelSelector.vue'
     import Validators from '../../mixins/Validators.vue'
+    import IsUnique from '../../directives/IsUnique.vue'
+    import ValidationHelp from '../../directives/ValidationHelp.vue'
 
-    // TODO: Need to add unique validation
+    export default {
 
-    module.exports = {
-        mixins: [Validators],
+        name: 'Show',
+
+        mixins: [ Validators ],
+
         components: { ModelSelector },
+
+        directives: { IsUnique, ValidationHelp },
 
         data: function () {
             return {
@@ -107,58 +105,78 @@
                 myform: []
             }
         },
+
         methods: {
 
+            fetch(id, successHandler) {
 
-            fetch: function (id, successHandler) {
-                var self = this
+                var self = this;
+
                 client({ path: '/clients/' + id }).then(
+
                     function (response) {
+
                         self.$set('client', response.entity.client);
                         successHandler(response.entity.client);
+
                     },
-                    function (response, status, request) {
-                        if (status === 401) {
-                            self.$dispatch('userHasLoggedOut')
-                        } else {
-                            console.log(response)
-                        }
+
+                    function (response) {
+
+                        console.log(response);
+
                     }
-                )
+
+                );
+
             },
 
             attemptUpdateClient() {
-                if(this.myform.$valid) {
+
+                if(this.myform.$valid)
                     this.updateClient();
-                }
+
             },
 
-            updateClient: function () {
-                var self = this
+            updateClient() {
+
+                var self = this;
+
                 client({ path: '/clients/' + self.client.id, entity: self.client, method: 'PUT'}).then(
+                    
                     function (response) {
+
                         self.$dispatch('alert', {
                             message: self.trans('client.updated'),
                             options: {theme: 'success'}
-                        })
-                        self.$route.router.go('/clients')
+                        });
+
+                        self.$route.router.go('/clients');
+
                     },
+
                     function (response) {
+
                         self.$dispatch('alert', {
                             message: self.trans('client.updated_fail'),
                             options: {theme: 'error'}
-                        })
+                        });
+
                     }
-                )
+
+                );
+
             }
+
         },
 
         route: {
             data: function (transition) {
                 this.fetch(this.$route.params.id, function(data) {
-                    transition.next({client: data})
-                })
+                    transition.next({client: data});
+                });
             }
         }
+
     }
 </script>

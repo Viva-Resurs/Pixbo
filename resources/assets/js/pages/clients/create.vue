@@ -46,12 +46,12 @@
                                     model="screengroup"
                                     classes="model_input"
                     >
-                    <div slot="label">
-                        <label for="inputModels" class="model_label">
-                            {{ trans('screengroup.model') }}
-                        </label>
-                    </div>
-                </model-selector>
+                        <div slot="label">
+                            <label for="inputModels" class="model_label">
+                                {{ trans('screengroup.model') }}
+                            </label>
+                        </div>
+                    </model-selector>
                 </span>
             </div>
 
@@ -76,16 +76,20 @@
 </template>
 
 <script type="text/ecmascript-6">
-    import RouterHelpers from '../../mixins/RouterHelpers.vue';
-    import ModelSelector from '../../components/ModelSelector.vue';
-    import Validators from '../../mixins/Validators.vue';
-    import IsUnique from '../../directives/IsUnique.vue';
-    import ValidationHelp from '../../directives/ValidationHelp.vue';
+    import RouterHelpers from '../../mixins/RouterHelpers.vue'
+    import ModelSelector from '../../components/ModelSelector.vue'
+    import Validators from '../../mixins/Validators.vue'
+    import IsUnique from '../../directives/IsUnique.vue'
+    import ValidationHelp from '../../directives/ValidationHelp.vue'
 
-    export default  {
+    export default {
         
-        mixins: [Validators, RouterHelpers],
+        name: 'Create',
+
+        mixins: [ Validators, RouterHelpers ],
+
         components: { ModelSelector },
+
         directives: { IsUnique, ValidationHelp },
 
         data: function () {
@@ -99,50 +103,55 @@
             }
         },
 
-        watch : {
-            myform : function (value) {
-                console.log('value changed to '+value);
-            }
-        },
-
         methods: {
 
             attemptCreate() {
-                if(this.myform.$valid) {
+
+                if(this.myform.$valid)
                     this.createClient();
-                }
+
             },
 
-            createClient: function () {
+            createClient() {
 
                 var self = this;
+
                 client({path: 'clients', entity: self.client}).then(
-                    function (response, status) {
-                        self.client.name = ''
-                        self.client.address = ''
-                        self.client.screengroup_id = ''
+
+                    function (response) {
+
                         self.$dispatch('alert', {
                             message: self.trans('client.created'),
                             options: {theme: 'success'}
                         })
-                        self.creating = false
+
+                        self.client.name = '';
+                        self.client.address = '';
+                        self.client.screengroup_id = '';
+
                         self.goBack();
+
                     },
-                    function (response, status) {
+
+                    function (response) {
+
                         self.$dispatch('alert', {
                             message: self.trans('client.created_fail'),
                             options: {theme: 'error'}
-                        })
+                        });
+
                     }
-                )
+
+                );
+
             }
+
         },
-        created() {
-            if ( this.$route.query.screengroup ){
-                console.log(this.$route.query.screengroup);
+
+        created : function() {
+            if ( this.$route.query.screengroup )
                 this.client.screen_group_id = this.$route.query.screengroup;
-            }
         }
+
     }
 </script>
-
