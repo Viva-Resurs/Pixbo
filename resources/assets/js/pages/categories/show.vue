@@ -4,7 +4,7 @@
         {{ originalName }}
     </div>
 
-    <div class="panel-body" v-if=" $loadingRouteData ">
+    <div class="panel-body" v-if="$loadingRouteData">
         <loading></loading>
     </div>
 
@@ -63,9 +63,9 @@
 </template>
 
 <script type="text/ecmascript-6">
-    import Auth from '../../mixins/Auth.vue';
-    import ScreenList from '../../components/ScreenList.vue';
-    import SweetAlert from '../../mixins/SweetAlert.vue';
+    import Auth from '../../mixins/Auth.vue'
+    import ScreenList from '../../components/ScreenList.vue'
+    import SweetAlert from '../../mixins/SweetAlert.vue'
     import ValidationHelp from '../../directives/ValidationHelp.vue'
 
     export default {
@@ -106,13 +106,9 @@
 
                     },
 
-                    function (response, status, request) {
+                    function (response) {
 
-                        if (status === 401)
-                            self.$dispatch('userHasLoggedOut');
-
-                        else
-                            console.log(response);
+                        console.log(response);
                         
                     }
 

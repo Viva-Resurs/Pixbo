@@ -45,8 +45,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-    import IsUnique from '../../directives/IsUnique.vue';
-    import ValidationHelp from '../../directives/ValidationHelp.vue';
+    import IsUnique from '../../directives/IsUnique.vue'
+    import ValidationHelp from '../../directives/ValidationHelp.vue'
 
     export default {
         

@@ -45,8 +45,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-    import SweetAlert from '../../mixins/SweetAlert.vue';
-    import Auth from '../../mixins/Auth.vue';
+    import SweetAlert from '../../mixins/SweetAlert.vue'
+    import Auth from '../../mixins/Auth.vue'
 
     export default {
 
@@ -70,7 +70,7 @@
             fetch(successHandler) {
 
                 var self = this;
-                
+
                 client({ path: '/categories' }).then(
 
                     function (response) {
@@ -80,9 +80,9 @@
 
                     },
 
-                    function (response, status) {
+                    function (response) {
 
-                        console.log('logged out?');
+                        console.log(response);
 
                     }
 
