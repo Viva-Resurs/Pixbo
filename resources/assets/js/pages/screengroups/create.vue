@@ -16,7 +16,6 @@
                            type="text"
                            v-model="screengroup.name"
                            v-form-ctrl
-                           v-is-unique:screengroup
                            required
                            minlength="4"
                            maxlength="30"
@@ -58,7 +57,6 @@
 </template>
 
 <script type="text/ecmascript-6">
-    import IsUnique from '../../directives/IsUnique.vue'
     import ValidationHelp from '../../directives/ValidationHelp.vue'
 
     export default {
