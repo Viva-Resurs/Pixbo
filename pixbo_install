@@ -65,7 +65,7 @@ sudo a2enmod rewrite
 sudo service apache2 reload
 sudo service apache2 restart
 
-# cronTab
+# cronTab Should look like this: * * * * * /usr/bin/php ~/Pixbo-revision/artisan schedule:run >> /dev/null
 croncmd="/usr/bin/php ~/Pixbo-revision/artisan schedule:run >> /dev/null"
 cronjob="* * * * * $croncmd"
 ( crontab -l | grep -v "$croncmd" ; echo "$cronjob" ) | crontab -
