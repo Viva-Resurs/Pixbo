@@ -63,7 +63,7 @@
         
         name: 'Create',
 
-        directives: { IsUnique, ValidationHelp },
+        directives: { ValidationHelp },
         
         data: function () {
             return {
