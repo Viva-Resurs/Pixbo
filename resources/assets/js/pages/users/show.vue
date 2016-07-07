@@ -22,6 +22,7 @@
                                type="text"
                                v-model="user.name"
                                v-form-ctrl
+                               v-is-unique:user
                                required
                         >
                     </div>
@@ -35,6 +36,7 @@
                                type="email"
                                v-model="user.email"
                                v-form-ctrl
+                               v-is-unique:user
                                required
                         >
                     </div>
