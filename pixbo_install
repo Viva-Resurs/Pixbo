@@ -66,6 +66,6 @@ sudo service apache2 reload
 sudo service apache2 restart
 
 # cronTab
-croncmd="php ~/Pixbo-revision/artisan schedule:run >> /dev/null"
-cronjob=" * * * * * $croncmd"
+croncmd="/usr/bin/php ~/Pixbo-revision/artisan schedule:run >> /dev/null"
+cronjob="1 23 * * 7 $croncmd"
 ( crontab -l | grep -v "$croncmd" ; echo "$cronjob" ) | crontab -
