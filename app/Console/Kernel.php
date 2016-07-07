@@ -29,11 +29,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        /*
+        
         $schedule->command('pixbo:generate-new-shadowevents')
             ->weekly()->sundays()->at('23:59')->after(function() {
                 Log::info('ShadowEvents has been regenerated.');
             });
-        */
+        
     }
 }
