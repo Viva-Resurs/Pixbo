@@ -5,7 +5,6 @@
         <frequency :frequency.sync="event.frequency" type="week"></frequency>
 
         <div class="schedule_group">
-            <!-- TODO: 'Fix Mån Tis Ons' in model-selector mode/dropdown title -->
             <model-selector :selected.sync="weekly_day_num"
                             :options="weekdays"
                             :type="type"
@@ -25,17 +24,25 @@
     </div>
 
 </template>
-<script>
+
+<script type="text/ecmascript-6">
     import Frequency from './Frequency.vue'
     import { weekdays } from '../../option_arrays'
     import ModelSelector from '../ModelSelector.vue'
+
     export default {
-        props: ['event', 'weekly_day_num'],
+
+        name: 'Weekly',
+
+        props: [ 'event', 'weekly_day_num '],
+
         components: { Frequency, ModelSelector },
-        data() {
+        
+        data: function() {
             return {
                 weekdays: weekdays,
             }
-        },
+        }
+
     }
 </script>

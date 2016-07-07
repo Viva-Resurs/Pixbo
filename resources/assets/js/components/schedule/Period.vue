@@ -1,7 +1,3 @@
-/**
-* Created by Christoffer Isenberg on 19-May-16.
-*/
-
 <template>
 
     <div class="row">
@@ -33,6 +29,7 @@
         </div>
     
     </div>
+
     <div class="row">
 
         <div class="col-lg-6 col-md-6">
@@ -67,8 +64,13 @@
 
 <script type="text/ecmascript-6">
     export default {
-        props: ['event'],
-        ready(){
+
+        name: 'Period',
+
+        props: [ 'event' ],
+
+        ready: function() {
+
             var options = {
                 showTodayButton: true,
                 toolbarPlacement: 'top',
@@ -108,14 +110,16 @@
             };
 
             options.format = "DD-MM-YY";
-            //options.format = "YYYY-MM-DD";
+
             $('.date').datetimepicker(options);
 
             options.format = "HH:mm";
             options.showTodayButton = false;
             options.showClose = false;
+
             $('.time').datetimepicker(options);
 
         }
+
     }
 </script>

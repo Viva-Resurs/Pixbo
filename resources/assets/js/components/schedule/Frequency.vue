@@ -16,37 +16,51 @@
 
 </template>
 
-<script>
+<script type="text/ecmascript-6">
     import ModelSelector from '../ModelSelector.vue'
     import { frequency_options, frequency_options1 } from '../../option_arrays'
 
     export default {
-        props: [
-            'frequency',
-            'type'
-        ],
+
+        name: 'Frequency',
+
+        props: [ 'frequency', 'type' ],
+
         components: { ModelSelector },
-        data() {
+        
+        data: function() {
             return {
                 frequency_options: frequency_options
             }
         },
+
         methods: {
+
             update() {
+
                 this.$nextTick(function() {
+
                     $(this.$el.lastElementChild.firstElementChild).selectpicker({
                         size: 4,
                         iconBase: 'fa',
                         tickIcon: 'fa-check',
                         noneSelectedText: this.trans('general.nothing_selected'),
                     });
+                    
                 });
+
             }
+
         },
 
-        ready() {
-            if (this.type=='year') this.frequency_options = frequency_options1;
-            this.update()
+        ready: function() {
+
+            if (this.type=='year')
+                this.frequency_options = frequency_options1;
+
+            this.update();
+
         }
+
     }
 </script>

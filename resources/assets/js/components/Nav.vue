@@ -1,7 +1,9 @@
 <template>
-    <!-- Navigation -->
+
     <nav class="navbar navbar-default">
+
         <div class="container">
+
             <div class="navbar-header">
                 <!-- Collapsed Hamburger -->
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -15,6 +17,7 @@
                     <i class="fa fa-play-circle-o"></i> {{ navTitle }}
                 </a>
             </div>
+
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a v-link="{ path: '/home/' }">{{ trans('general.home') }}</a></li>
@@ -34,6 +37,7 @@
                     </template>
 
                 </ul>
+
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Login / Registration Links for unauthenticated users -->
@@ -68,20 +72,25 @@
                         </ul>
                     </li>
                 </ul>
+
             </div>
+
         </div>
+        
     </nav>
+
 </template>
 
-<script>
-
+<script type="text/ecmascript-6">
     export default {
 
+        name: 'Nav',
 
         data: function () {
             return {
                 navTitle: 'Pixbo'
             }
         }
+
     }
 </script>

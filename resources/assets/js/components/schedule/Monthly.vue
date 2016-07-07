@@ -42,27 +42,32 @@
                     </label>
                 </div>
             </model-selector>
-
         </div>
 
     </div>
 
 </template>
-<script>
+
+<script type="text/ecmascript-6">
     import Frequency from './Frequency.vue'
     import ModelSelector from '../ModelSelector.vue'
     import { ordering, weekdays1, days_before } from '../../option_arrays'
+    
     export default {
-        props: ['event'],
+
+        name: 'Monthly',
+
+        props: [ 'event' ],
 
         components: { Frequency, ModelSelector },
 
-        data() {
+        data: function() {
             return {
                 ordering: ordering,
                 weekdays1: weekdays1,
                 days_before: days_before
             }
         }
+
     }
 </script>

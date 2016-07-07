@@ -3,14 +3,19 @@
 */
 
 <template>
+
     <vue-toast v-ref:toast></vue-toast>
+
 </template>
 
 <script type="text/ecmascript-6">
     import vueToast from 'vue-toast'
 
     export default {
-        data() {
+
+        name: 'Toaster',
+
+        data: function() {
             return {
                 maxToasts: 6,
                 position: 'top right', // possible '[left, right] [top, bottom]
@@ -19,45 +24,61 @@
                 closeBtn: true
             }
         },
-        components: {
-            vueToast
+
+        components: { vueToast },
+
+        attached: function() {
+            this.resetOptions();
         },
-        attached() {
-            this.resetOptions()
-        },
+
         watch: {
             'maxToasts + position': 'resetOptions'
         },
+
         methods: {
+
             resetOptions() {
+
                 this.$refs.toast.setOptions({
                     maxToasts: this.maxToasts,
                     position: this.position
-                })
+                });
+
             },
+
             showTime(message, options) {
-                let theme =     typeof options.theme !== 'undefined' ? options.theme : this.theme
-                let closeBtn =  typeof options.closeBtn !== 'undefined' ? options.closeBtn : this.closeBtn
-                let timeLife =  typeof options.timeLife !== 'undefined' ? options.timeLife : this.timeLife
+
+                let theme    =  typeof options.theme    !== 'undefined' ? options.theme    : this.theme;
+                let closeBtn =  typeof options.closeBtn !== 'undefined' ? options.closeBtn : this.closeBtn;
+                let timeLife =  typeof options.timeLife !== 'undefined' ? options.timeLife : this.timeLife;
+                
                 if(theme === 'success') {
                     closeBtn = false;
-                    timeLife = 3000
+                    timeLife = 3000;
                 }
 
                 this.$refs.toast.showToast(message, {
                     theme: theme,
                     timeLife: timeLife,
                     closeBtn: closeBtn
-                })
+                });
+
             }
+
         },
-        ready() {
+
+        ready: function() {
+
             this.$on('alert', function (block) {
-                if(typeof block.options === 'undefined') {
-                    block.options = {}
-                }
-                this.showTime(block.message, block.options)
-            })
+
+                if(typeof block.options === 'undefined')
+                    block.options = {};
+
+                this.showTime(block.message, block.options);
+
+            });
+            
         }
+
     }
 </script>

@@ -1,6 +1,9 @@
 <template>
+
     <div class="screencard">
+
         <div class="screencard_content">
+
             <img class="screencard_img" :src="'/' + screen.photo.thumb_path">
 
             <div class="screencard_tools" role="group">
@@ -24,19 +27,26 @@
                     </a>
                 </template>
             </div>
+
         </div>
+
     </div>
+
 </template>
 
-<script>
+<script type="text/ecmascript-6">
     export default {
-        props: ['screen', 'index', 'from'],
+
+        name: 'ScreenCard',
+
+        props: [ 'screen', 'index', 'from' ],
 
         methods: {
             deleteScreen() {
-                this.$dispatch('remove-screen', this.index)
-            },
+                this.$dispatch('remove-screen', this.index);
+            }
         }
+
     }
 </script>
 

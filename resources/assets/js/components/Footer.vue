@@ -1,7 +1,9 @@
 <template>
+
     <div style="margin-top: 125px;">
         <!-- Push Footer -->
     </div>
+
     <footer class="footer">
         <div class="container" style="color: #777;">
             <!-- Company Information -->
@@ -24,10 +26,14 @@
             <div class="clearfix"></div>
         </div>
     </footer>
+
 </template>
 
-<script>
-    module.exports = {
+<script type="text/ecmascript-6">
+    export default {
+
+        name: 'Footer',
+
         data: function () {
             return {
                 links: {
@@ -37,5 +43,6 @@
                 }
             }
         }
+        
     }
 </script>

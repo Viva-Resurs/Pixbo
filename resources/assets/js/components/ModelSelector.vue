@@ -1,5 +1,7 @@
 <template>
+
     <div>
+
         <slot name="label">
 
         </slot>
@@ -26,13 +28,17 @@
                         {{trans(option.name)}}
                     </template>
                 </option>
-
             </select>
         </div>
+
     </div>
+
 </template>
+
 <script type="text/ecmascript-6">
     export default {
+
+        name: 'ModelSelector',
 
         props: {
             selected: [Number, Object],
@@ -68,41 +74,59 @@
         },
 
         computed: {
+
             hasType(){
-                return (this.type!=='')
+                return (this.type!=='');
             },
+
             isModel() {
-                return (this.model!=='')
+                return (this.model!=='');
             }
+
         },
 
-        methods : {
+        methods: {
+
             getModels() {
+
                 var self = this;
+
                 // API uses modelnames in plural.
                 var path = (self.model[self.model.length-1] == 'y') ?
                     '/'+ self.model.substring(0,self.model.length-1) + 'ies' :
                     '/'+ self.model + 's';
 
                 client({ path: path }).then(
+
                     function (response) {
+
                         self.$set('models', response.entity.data);
+
                         if (self.model == 'screengroup' && self.selected == 1)
                             self.selected = null;
+
                         self.setSelectPicker();
+
                     },
-                    function (response, status) {
-                        if (_.contains([401, 500], status)) {
-                            self.$dispatch('userHasLoggedOut');
-                        }
+
+                    function (response) {
+
+                        console.log(response);
+
                     }
+
                 );
+
             },
 
             setSelectPicker() {
+
                 var self = this;
+
                 this.$nextTick(function() {
+
                     var target = $(this.$els.selectInput);
+
                     let g = target.selectpicker({
                         size: 4,
                         iconBase: 'fa',
@@ -111,29 +135,35 @@
                         countSelectedText: function(){
                             var text = '';
                             for (var i=0; i<target[0].selectedOptions.length ; i++)
-                                 text += target[0].selectedOptions[i].label.substring(0,3) + ' ';
+                                text += target[0].selectedOptions[i].label.substring(0,3) + ' ';
                             return text;
                         },
                         noneSelectedText: this.trans('general.nothing_selected'),
                     });
 
 
-                    if (self.options.length > 0 || self.models.length > 0){
+                    if (self.options.length > 0 || self.models.length > 0)
                         if (self.models.length > 0)
                             if (self.selected == null || self.selected == 1 )
                                 self.selected = self.models[0].id;
-                    }
 
                     target.selectpicker('refresh');
+
                 });
+
             }
+
         },
 
-        created(){
+        created: function(){
+
             if (this.model)
                 this.getModels();
+
             else
                 this.setSelectPicker();
+
         }
+
     }
 </script>

@@ -5,11 +5,13 @@
     </div>
 
 </template>
-<script>
+
+<script type="text/ecmascript-6">
     export default {
-        props: [
-            'event'
-        ]
+
+    	name: 'None',
+
+        props: [ 'event' ]
+
     }
 </script>
-

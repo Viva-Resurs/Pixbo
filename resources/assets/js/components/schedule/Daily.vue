@@ -7,11 +7,17 @@
     </div>
 
 </template>
-<script>
+
+<script type="text/ecmascript-6">
     import Frequency from './Frequency.vue'
 
     export default {
-        props: ['event'],
-        components: { Frequency },
+
+    	name: 'Daily',
+
+        props: [ 'event' ],
+
+        components: { Frequency }
+
     }
 </script>
