@@ -1,6 +1,6 @@
 <template>
-    <!--TODO: Defaults: Day-repeat -->
-    <form class="form-horizontal" v-on:submit.prevent="attemptUpdateSchedule">
+
+    <form class="form-horizontal" role="form" v-on:submit.prevent="attemptUpdateSchedule" name="myform" v-form>
 
         <slot name="model_specific_setting">
 
@@ -56,15 +56,15 @@
             </div>
 
             <div class="schedule_action">
-                    <button type="button" class="btn" @click="goBack()" v-if="emptyfields">
-                        <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
-                    </button>
-                    <button type="button" class="btn" @click="goBack()" v-if="!emptyfields">
-                        <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
-                    </button>
-                    <button type="submit" @keydown.enter.prevent="attemptUpdateSchedule" class="btn btn-primary" :disabled="emptyfields">
-                        <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
-                    </button>
+                <button type="button" class="btn" @click="goBack()" v-if="myform.$pristine">
+                    <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
+                </button>
+                <button type="button" class="btn" @click="goBack()" v-if="!myform.$pristine">
+                    <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
+                </button>
+                <button type="submit" @keydown.enter.prevent="attemptUpdateSchedule" class="btn btn-primary">
+                    <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
+                </button>
             </div>
 
         </div>
@@ -73,12 +73,12 @@
 
 </template>
 
-<script>
+<script type="text/ecmascript-6">
     import RouterHelpers from '../mixins/RouterHelpers.vue'
     import { recur_options } from '../option_arrays'
     import ModelSelector from './ModelSelector.vue'
 
-    import Period from './schedule/Period.vue';
+    import Period from './schedule/Period.vue'
     import none from './schedule/None.vue'
     import daily from './schedule/Daily.vue'
     import weekly from './schedule/Weekly.vue'
@@ -87,9 +87,12 @@
 
     export default {
 
-        props: ['model'],
+        name: 'Schedule',
 
-        mixins: [RouterHelpers],
+        props: [ 'model' ],
+
+        mixins: [ RouterHelpers ],
+
         components: {
             Period,
             none,
@@ -104,33 +107,46 @@
             return {
                 recur_options: recur_options,
                 selected_screengroups: [],
-                weekly_day_num: []
+                weekly_day_num: [],
+                myform: []
             };
         },
 
         methods: {
 
             attemptUpdateSchedule() {
-              this.updateSchedule();
+
+                if (this.myform.$valid)
+                    this.updateSchedule();
+
             },
 
-            flipDates: function(date){
+            flipDates(date) {
+
                 if (!date)
                     return date;
+
                 var converted_date = date.split('-');
+
                 if (date.length==10)
                     return converted_date[2]+'-'+converted_date[1]+'-'+converted_date[0].substring(2);
+
                 else if (date.length==8)
                     return '20'+converted_date[2]+'-'+converted_date[1]+'-'+converted_date[0];
+
                 else
                     return date;
+
             },
-            updateSchedule: function () {
-                // Update model stuff
+
+            updateSchedule() {
+
                 this.encodeModel();
 
-                var self = this
-                client({ path: `/${self.model.type}s/${self.model.id}`, entity: self.model, method: 'PUT'}).then(
+                var self = this;
+
+                client({ path: '/'+self.model.type+'s/'+self.model.id, entity: self.model, method: 'PUT'}).then(
+                    
                     function (response) {
 
                         self.$dispatch('alert', {
@@ -141,56 +157,69 @@
                         self.goBack();
 
                     },
-                    function (response, status, request) {
-                        if (status === 401) {
-                            self.$dispatch('userHasLoggedOut')
-                        } else {
-                            self.$dispatch('alert', {
-                                message: self.trans('screen.updated_fail'),
-                                options: {theme: 'error'}
-                            })
-                        }
+
+                    function (response) {
+                        
+                        self.$dispatch('alert', {
+                            message: self.trans('screen.updated_fail'),
+                            options: {theme: 'error'}
+                        });
+                        
                     }
-                )
+
+                );
+
             },
+
             encodeModel() {
+
                 this.event.start_date = this.flipDates(this.event.start_date);
                 this.event.end_date = this.flipDates(this.event.end_date);
                 this.event.weekly_day_num = JSON.stringify(this.weekly_day_num);
                 this.model.screengroups = this.selected_screengroups;
+
             },
+
             decodeModel() {
+
                 this.event.start_date = this.flipDates(this.event.start_date);
                 this.event.end_date = this.flipDates(this.event.end_date);
-                if(this.model.screengroups != null || this.model.screengroups != [] || this.model.screengroups != "") {
-                    var that = this;
+
+                if (this.model.screengroups != null || this.model.screengroups != [] || this.model.screengroups != "") {
+                    
+                    var self = this;
+
                     this.model.screengroups.forEach(function(entry) {
-                        that.selected_screengroups.push(entry.id)
-                    })
+                        self.selected_screengroups.push(entry.id)
+                    });
+
                 }
-                this.weekly_day_num = JSON.parse(this.event.weekly_day_num)
+
+                this.weekly_day_num = JSON.parse(this.event.weekly_day_num);
+
             }
+
         },
 
         computed: {
-            summary: function() {
+
+            summary() {
                 return 'summary_text';
             },
+
             event() {
                 return this.model.event;
             },
-            isValid: function() {
-                // TODO: Fix Validation.
-                // 
-                // Return true if disabled should be set to button
-                return false;
-            },
+
             get_start_time() {
                 return this.model.event.start_time;
             }
+
         },
-        ready: function () {
+
+        ready: function() {
             this.decodeModel();
         },
+
     };
 </script>
