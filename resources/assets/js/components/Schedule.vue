@@ -6,7 +6,7 @@
 
         </slot>
 
-        <div class="col-lg-6 col-md-6">
+        <div class="{{ (advancedMode) ? 'col-lg-6 col-md-6' : 'col-lg-12 col-md-12' }}">
 
             <div class="schedule_group">
                 <label for="text" class="schedule_label">
@@ -28,7 +28,8 @@
 
         </div>
 
-        <div class="col-lg-6 col-md-6">
+
+        <div class="col-lg-6 col-md-6" v-show="advancedMode">
 
             <div class="schedule_group">
                 <label for="text" class="schedule_label">
@@ -55,18 +56,24 @@
                 </div>
             </div>
 
-            <div class="schedule_action">
-                <button type="button" class="btn" @click="goBack()" v-if="myform.$pristine">
-                    <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
-                </button>
-                <button type="button" class="btn" @click="goBack()" v-if="!myform.$pristine">
-                    <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
-                </button>
-                <button type="submit" @keydown.enter.prevent="attemptUpdateSchedule" class="btn btn-primary">
-                    <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
-                </button>
-            </div>
+        </div>
 
+        <div class="schedule_action text-right col-lg-12 col-md-12">
+            
+            <hr>
+            
+            <button type="button" class="btn" @click="toggleMode" v-if="!advancedMode"> Avancerade alternativ </button>
+            <button type="button" class="btn" @click="toggleMode" v-if="advancedMode"> Göm Avancerade alternativ </button>
+
+            <button type="button" class="btn" @click="goBack()" v-if="myform.$pristine">
+                <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
+            </button>
+            <button type="button" class="btn" @click="goBack()" v-if="!myform.$pristine">
+                <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
+            </button>
+            <button type="submit" @keydown.enter.prevent="attemptUpdateSchedule" class="btn btn-primary">
+                <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
+            </button>
         </div>
 
     </form>
@@ -108,11 +115,16 @@
                 recur_options: recur_options,
                 selected_screengroups: [],
                 weekly_day_num: [],
-                myform: []
+                myform: [],
+                advancedMode: false
             };
         },
 
         methods: {
+
+            toggleMode() {
+                this.advancedMode = !this.advancedMode;
+            },
 
             attemptUpdateSchedule() {
 
