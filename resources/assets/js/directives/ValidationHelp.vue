@@ -67,12 +67,18 @@
             }).bind(this);
 
 
-            // Attach EventListeners
+            // Attach EventListeners when nested components are ready
             
-            this.inputElement.addEventListener('blur', this.clearWarning);
-            this.inputElement.addEventListener('input', this.clearWarning);
+            var self = this;
 
-            $(this.inputElement).closest('form')[0].addEventListener('submit', this.checkInput)
+            this.vm.$nextTick(function(){
+
+                self.inputElement.addEventListener('blur', self.clearWarning);
+                self.inputElement.addEventListener('input', self.clearWarning);
+
+                $(self.inputElement).closest('form')[0].addEventListener('submit', self.checkInput)
+
+            })
             
         },
 
