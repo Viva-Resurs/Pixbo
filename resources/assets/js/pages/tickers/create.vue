@@ -57,8 +57,7 @@
                 ticker: {
                     text: '',
                 },
-                myform: [],
-                errors: false
+                myform: []
             }
         },
 

@@ -14,14 +14,17 @@
 
             <schedule :model.sync="ticker">
                 <div slot="model_specific_setting">
-                    <div class="form-group">
+                    <div class="form-group" v-validation-help>
                         <label for="ticker_text" class="model_label">{{ trans('general.text') }}</label>
                         <div class="model_input">
                             <input class="form-control"
                                    name="ticker_text" id="inputTickerText"
                                    type="text"
                                    v-model="ticker.text"
+                                   v-form-ctrl
                                    required
+                                   minlength="3"
+                                   maxlength="50"
                             >
                         </div>
                     </div>
@@ -37,12 +40,15 @@
 
 <script type="text/ecmascript-6">
     import Schedule from '../../components/Schedule.vue'
+    import ValidationHelp from '../../directives/ValidationHelp.vue'
 
     export default {
 
         name: 'Show',
 
         components: { Schedule },
+
+        directives: { ValidationHelp },
 
         data: function () {
             return {
