@@ -10,29 +10,25 @@
 
     <div v-else>
 
-        <div class="panel-body">
-
-            <schedule :model.sync="ticker">
-                <div slot="model_specific_setting">
-                    <div class="form-group" v-validation-help>
-                        <label for="ticker_text" class="model_label">{{ trans('general.text') }}</label>
-                        <div class="model_input">
-                            <input class="form-control"
-                                   name="ticker_text" id="inputTickerText"
-                                   type="text"
-                                   v-model="ticker.text"
-                                   v-form-ctrl
-                                   required
-                                   minlength="3"
-                                   maxlength="50"
-                            >
-                        </div>
+        <schedule :model.sync="ticker">
+            <div slot="model_specific_setting">
+                <div class="form-group" v-validation-help>
+                    <label for="ticker_text" class="model_label">{{ trans('general.text') }}</label>
+                    <div class="model_input">
+                        <input class="form-control"
+                               name="ticker_text" id="inputTickerText"
+                               type="text"
+                               v-model="ticker.text"
+                               v-form-ctrl
+                               required
+                               minlength="3"
+                               maxlength="50"
+                        >
                     </div>
-                    <hr>
                 </div>
-            </schedule>
-
-        </div>
+                <hr>
+            </div>
+        </schedule>
 
     </div>
 

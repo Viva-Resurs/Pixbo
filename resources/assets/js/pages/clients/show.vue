@@ -10,9 +10,9 @@
 
     <div v-else>
 
-        <div class="panel-body">
+        <form class="form-horizontal" role="form" v-on:submit.prevent="attemptUpdateClient" v-form name="myform">
 
-            <form class="form-horizontal" role="form" v-on:submit.prevent="attemptUpdateClient" v-form name="myform">
+            <div class="panel-body">
 
                 <div class="form-group" v-validation-help>
                     <label for="name" class="model_label">{{ trans('general.name') }}</label>
@@ -22,6 +22,7 @@
                                type="text"
                                v-model="client.name"
                                v-form-ctrl
+                               v-is-unique:client
                                required
                         >
                     </div>
@@ -56,23 +57,23 @@
                     </span>
                 </div>
 
-                <div class="form-group">
-                    <div class="model_action">
-                        <button type="button" class="btn" @click="goBack" v-if="myform.$pristine">
-                            <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
-                        </button>
-                        <button type="button" class="btn" @click="goBack" v-if="!myform.$pristine">
-                            <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
-                        </button>
-                        <button type="submit" @keydown.enter.prevent="attemptUpdateClient" class="btn btn-primary" :disabled="myform.$invalid">
-                            <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
-                        </button>
-                    </div>
-                </div>
+            </div>
 
-            </form>
+            <div class="panel-footer text-right">
 
-        </div>
+                <button type="button" class="btn" @click="goBack" v-if="myform.$pristine">
+                    <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
+                </button>
+                <button type="button" class="btn" @click="goBack" v-if="!myform.$pristine">
+                    <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
+                </button>
+                <button type="submit" @keydown.enter.prevent="attemptUpdateClient" class="btn btn-primary">
+                    <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
+                </button>
+                
+            </div>
+
+        </form>
 
     </div>
     

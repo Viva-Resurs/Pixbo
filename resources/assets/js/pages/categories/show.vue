@@ -22,6 +22,7 @@
                                type="text"
                                v-model="category.name"
                                v-form-ctrl
+                               v-is-unique:category
                                required
                         >
                     </div>

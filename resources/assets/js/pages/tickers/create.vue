@@ -4,9 +4,9 @@
         {{ trans('ticker.create') }}
     </div>
 
-    <div class="panel-body">
+    <form class="form-horizontal" role="form" v-on:submit.prevent="attemptCreate" name="myform" v-form>
 
-        <form class="form-horizontal" role="form" v-on:submit.prevent="attemptCreate" name="myform" v-form>
+        <div class="panel-body">
 
             <div class="form-group" v-validation-help>
                 <label for="text" class="model_label">{{ trans('general.text') }}</label>
@@ -23,23 +23,23 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="model_action">
-                    <button type="button" class="btn" @click="goBack" v-if="myform.$pristine">
-                      <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
-                    </button>
-                    <button type="button" class="btn" @click="goBack" v-if="!myform.$pristine">
-                      <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
-                    </button>
-                    <button type="submit" @keydown.enter.prevent="attemptCreate" class="btn btn-primary">
-                      <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
-                    </button>
-                </div>
-            </div>
+        </div>
 
-        </form>
+        <div class="panel-footer text-right">
 
-    </div>
+            <button type="button" class="btn" @click="goBack" v-if="myform.$pristine">
+              <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
+            </button>
+            <button type="button" class="btn" @click="goBack" v-if="!myform.$pristine">
+              <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
+            </button>
+            <button type="submit" @keydown.enter.prevent="attemptCreate" class="btn btn-primary">
+              <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
+            </button>
+            
+        </div>
+
+    </form>
 
 </template>
 

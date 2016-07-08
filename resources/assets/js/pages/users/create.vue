@@ -4,9 +4,10 @@
         {{ trans('user.create') }}
     </div>
 
-    <div class="panel-body">
 
-        <form class="form-horizontal" role="form" v-on:submit.prevent="attemptCreateUser" name="myform" v-form>
+    <form class="form-horizontal" role="form" v-on:submit.prevent="attemptCreateUser" name="myform" v-form>
+        
+        <div class="panel-body">
 
             <div class="form-group" v-validation-help>
                 <label for="name" class="model_label">{{ trans('general.name') }}</label>
@@ -65,23 +66,23 @@
                 </span>
             </div>
 
-            <div class="form-group">
-                <div class="model_action">
-                    <button type="button" class="btn" @click="goBack" v-if="myform.$pristine">
-                        <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
-                    </button>
-                    <button type="button" class="btn" @click="goBack" v-if="!myform.$pristine">
-                        <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
-                    </button>
-                    <button type="submit" @keydown.enter.prevent="attemptCreateUser" class="btn btn-primary">
-                        <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
-                    </button>
-                </div>
-            </div>
-            
-        </form>
+        </div>  
 
-    </div>
+        <div class="panel-footer text-right">
+
+            <button type="button" class="btn" @click="goBack" v-if="myform.$pristine">
+                <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
+            </button>
+            <button type="button" class="btn" @click="goBack" v-if="!myform.$pristine">
+                <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
+            </button>
+            <button type="submit" @keydown.enter.prevent="attemptCreateUser" class="btn btn-primary">
+                <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
+            </button>
+            
+        </div> 
+    
+    </form>
 
 </template>
 

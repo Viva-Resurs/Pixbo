@@ -10,27 +10,23 @@
 
     <div v-else>
 
-        <div class="panel-body">
-
-            <schedule :model.sync="screen">
-                <div slot="model_specific_setting">
-                    <div class="form-group">
-                        <model-selector :selected.sync="screen.category"
-                                        model="category"
-                                        classes="model_input"
-                        >
-                            <div slot="label">
-                                <label for="screen_category" class="model_label">
-                                    {{ trans('category.select') }}
-                                </label>
-                            </div>
-                        </model-selector>
-                    </div>
-                    <hr>
+        <schedule :model.sync="screen">
+            <div slot="model_specific_setting">
+                <div class="form-group">
+                    <model-selector :selected.sync="screen.category"
+                                    model="category"
+                                    classes="model_input"
+                    >
+                        <div slot="label">
+                            <label for="screen_category" class="model_label">
+                                {{ trans('category.select') }}
+                            </label>
+                        </div>
+                    </model-selector>
                 </div>
-            </schedule>
-
-        </div>
+                <hr>
+            </div>
+        </schedule>
 
     </div>
 
