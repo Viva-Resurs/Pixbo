@@ -31,22 +31,22 @@
                 <div class="form-group">
                     <div class="model_action">
                         <template v-if="$root.history.previous && $root.history.previous.indexOf('show')>0">
-                            <button type="button" class="btn" @click="goUp" v-if="myform.$pristine">
+                            <button type="button" class="btn btn-default" @click="goUp" v-if="myform.$pristine">
                                 <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                             </button>
-                            <button type="button" class="btn" @click="goUp" v-if="!myform.$pristine">
+                            <button type="button" class="btn btn-default" @click="goUp" v-if="!myform.$pristine">
                                 <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                             </button>
                         </template>
                         <template v-else>
-                            <button type="button" class="btn" @click="goBack" v-if="myform.$pristine">
+                            <button type="button" class="btn btn-default" @click="goBack" v-if="myform.$pristine">
                                 <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                             </button>
-                            <button type="button" class="btn" @click="goBack" v-if="!myform.$pristine">
+                            <button type="button" class="btn btn-default" @click="goBack" v-if="!myform.$pristine">
                                 <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                             </button>
                         </template>
-                        <button type="submit" @keydown.enter.prevent="attemptUpdateCategory" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary" @keydown.enter.prevent="attemptUpdateCategory">
                             <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                         </button>
                     </div>
@@ -67,6 +67,7 @@
     import Auth from '../../mixins/Auth.vue'
     import ScreenList from '../../components/ScreenList.vue'
     import SweetAlert from '../../mixins/SweetAlert.vue'
+    import IsUnique from '../../directives/IsUnique.vue'
     import ValidationHelp from '../../directives/ValidationHelp.vue'
 
     export default {
@@ -77,7 +78,7 @@
 
         components: { ScreenList },
 
-        directives: { ValidationHelp },
+        directives: { IsUnique, ValidationHelp },
 
         data: function () {
             return {

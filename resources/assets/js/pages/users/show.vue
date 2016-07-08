@@ -70,13 +70,13 @@
 
             <div class="panel-footer text-right">
 
-                <button type="button" class="btn" @click="goBack" v-if="myform.$pristine">
+                <button type="button" class="btn btn-default" @click="goBack" v-if="myform.$pristine">
                     <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                 </button>
-                <button type="button" class="btn" @click="goBack" v-if="!myform.$pristine">
+                <button type="button" class="btn btn-default" @click="goBack" v-if="!myform.$pristine">
                     <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                 </button>
-                <button type="submit" @keydown.enter.prevent="attemptUpdateUser" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary" @keydown.enter.prevent="attemptUpdateUser">
                     <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                 </button>
                 

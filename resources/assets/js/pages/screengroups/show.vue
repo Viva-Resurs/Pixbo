@@ -43,22 +43,22 @@
                 <div class="form-group">
                     <div class="model_action">
                         <template v-if="$root.history.previous && $root.history.previous.indexOf('show')>0">
-                            <button type="button" class="btn" @click="goUp" v-if="myform.$pristine">
+                            <button type="button" class="btn btn-default" @click="goUp" v-if="myform.$pristine">
                                 <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                             </button>
-                            <button type="button" class="btn" @click="goUp" v-if="!myform.$pristine">
+                            <button type="button" class="btn btn-default" @click="goUp" v-if="!myform.$pristine">
                                 <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                             </button>
                         </template>
                         <template v-else>
-                            <button type="button" class="btn" @click="goBack" v-if="myform.$pristine">
+                            <button type="button" class="btn btn-default" @click="goBack" v-if="myform.$pristine">
                                 <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
                             </button>
-                            <button type="button" class="btn" @click="goBack" v-if="!myform.$pristine">
+                            <button type="button" class="btn btn-default" @click="goBack" v-if="!myform.$pristine">
                                 <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
                             </button>
                         </template>
-                        <button type="submit" @keydown.enter.prevent="attemptUpdateScreengroup" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary" @keydown.enter.prevent="attemptUpdateScreengroup">
                             <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                         </button>
                     </div>
