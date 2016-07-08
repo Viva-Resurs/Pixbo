@@ -63,16 +63,16 @@
 
         <div class="panel-footer text-right">
                 
-            <button type="button" class="btn" @click="toggleMode" v-if="!advancedMode"> Avancerade alternativ </button>
-            <button type="button" class="btn" @click="toggleMode" v-if="advancedMode"> Göm Avancerade alternativ </button>
-
-            <button type="button" class="btn" @click="goBack()" v-if="myform.$pristine">
+            <button type="button" class="btn {{ (advancedMode) ? 'btn-primary' : 'btn-default' }}" @click="toggleMode">
+                <i class="fa fa-btn fa-cog"></i>{{ trans('schedule.advanced_options') }}
+            </button>
+            <button type="button" class="btn btn-default" @click="goBack()" v-if="myform.$pristine">
                 <i class="fa fa-btn fa-undo"></i>{{ trans('general.back') }}
             </button>
-            <button type="button" class="btn" @click="goBack()" v-if="!myform.$pristine">
+            <button type="button" class="btn btn-default" @click="goBack()" v-if="!myform.$pristine">
                 <i class="fa fa-btn fa-undo"></i>{{ trans('general.cancel') }}
             </button>
-            <button type="submit" @keydown.enter.prevent="attemptUpdateSchedule" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary" @keydown.enter.prevent="attemptUpdateSchedule">
                 <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
             </button>
 
@@ -218,7 +218,7 @@
         computed: {
 
             summary() {
-                return 'summary_text';
+                return '...';
             },
 
             event() {

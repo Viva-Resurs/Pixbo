@@ -8,8 +8,8 @@
                 <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_start_date') }}"></span>
             </label>
             <div class="input-group date">
-                <input v-model="event.start_date" type="text" name="start_date" id="inputStart_date" class="form-control" required="required" title="">
-                <span class="input-group-addon">
+                <input v-model="event.start_date" type="text" name="start_date" id="inputStart_date" class="form-control" required title="">
+                <span class="input-group-addon btn btn-default">
                     <span class="fa fa-calendar"></span>
                 </span>
             </div>
@@ -22,7 +22,7 @@
             </label>
             <div class="input-group date">
                 <input v-model="event.end_date" type="text" name="start_date" id="inputEnd_date" class="form-control">
-                <span class="input-group-addon">
+                <span class="input-group-addon btn btn-default">
                     <span class="fa fa-calendar"></span>
                 </span>
             </div>
@@ -38,8 +38,8 @@
                 <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_start_time') }}"></span>
             </label>
             <div class="input-group time">
-                <input v-model="event.start_time" type="text" name="start_time" id="inputStart_time" required="required" class="form-control">
-                <span class="input-group-addon">
+                <input v-model="event.start_time" type="text" name="start_time" id="inputStart_time" required class="form-control">
+                <span class="input-group-addon btn btn-default">
                     <span class="fa fa-clock-o"></span>
                 </span>
             </div>
@@ -51,8 +51,8 @@
                 <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_end_time') }}"></span>
             </label>
             <div class="input-group time">
-                <input v-model="event.end_time" type="text" name="end_time" id="inputEnd_time" required="required" class="form-control">
-                <span class="input-group-addon">
+                <input v-model="event.end_time" type="text" name="end_time" id="inputEnd_time" required class="form-control">
+                <span class="input-group-addon btn btn-default">
                     <span class="fa fa-clock-o"></span>
                 </span>
             </div>
@@ -94,7 +94,13 @@
                     prevDecade: this.trans('dateTimePicker.prevDecade'),
                     nextDecade: this.trans('dateTimePicker.nextDecade'),
                     prevCentury: this.trans('dateTimePicker.prevCentury'),
-                    nextCentury: this.trans('dateTimePicker.nextCentury')
+                    nextCentury: this.trans('dateTimePicker.nextCentury'),
+                    incrementHour: this.trans('dateTimePicker.incrementHour'),
+                    decrementHour: this.trans('dateTimePicker.decrementHour'),
+                    incrementMinute: this.trans('dateTimePicker.incrementMinute'),
+                    decrementMinute: this.trans('dateTimePicker.decrementMinute'),
+                    pickMinute: this.trans('dateTimePicker.pickMinute'),
+                    pickHour: this.trans('dateTimePicker.pickHour')
                 },
                 icons: {
                     time: 'fa fa-clock-o',
