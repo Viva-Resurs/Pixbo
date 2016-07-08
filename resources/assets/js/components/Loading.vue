@@ -1,3 +1,7 @@
 <template>
-    Laddar data {{ loadingRouteData }}
+
+    <div class="spinner">
+
+    </div>
+
 </template>

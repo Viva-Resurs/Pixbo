@@ -1,0 +1,32 @@
+
+@keyframes spinner {
+    to {transform: rotate(360deg);}
+}
+ 
+@-webkit-keyframes spinner {
+    to {-webkit-transform: rotate(360deg);}
+}
+ 
+.spinner {
+    width: 200px;
+    height: 200px;
+    margin: auto;
+}
+ 
+.spinner:before {
+    content: 'Loading…';
+    position: absolute;
+
+    width: 200px;
+    height: 200px;
+    margin: auto;
+}
+ 
+.spinner:not(:required):before {
+    content: '';
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    border-top-color: #03ade0;
+    animation: spinner .6s linear infinite;
+    -webkit-animation: spinner .6s linear infinite;
+}
