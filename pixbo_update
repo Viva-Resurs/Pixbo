@@ -3,5 +3,5 @@
 # Pull git repo
 git pull
 
-# Update JS & SCSS
-gulp
+# Update JS & SCSS (run twice)
+gulp && gulp

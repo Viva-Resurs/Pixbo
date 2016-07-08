@@ -18,9 +18,17 @@ class ValidationController extends BaseController
      * @return bool
      */
     public function validateUnique(Request $request) {
+
         $field = $request->get('field');
         $value = strtolower($request->get('value'));
-        $model = 'App\Models\\'.ucfirst($request->get('model'));
+        
+        $model_string = $request->get('model');
+        
+        if($model_string=='screengroup')
+            $model = 'App\\Models\\ScreenGroup';
+        else
+            $model = 'App\Models\\'.ucfirst($request->get('model'));
+        
         $id    = $request->get('id');
 
         // Fix to check against lowercased field

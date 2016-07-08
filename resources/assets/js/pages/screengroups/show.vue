@@ -22,6 +22,7 @@
                                type="text"
                                v-model="screengroup.name"
                                v-form-ctrl
+                               v-is-unique:screengroup
                                required
                         >
                     </div>
@@ -80,6 +81,7 @@
     import Screens from './screens.vue'
     import Tickers from './tickers.vue'
     import Clients from './clients.vue'
+    import IsUnique from '../../directives/IsUnique.vue'
     import ValidationHelp from '../../directives/ValidationHelp.vue'
 
     export default {
@@ -88,7 +90,7 @@
 
         mixins: [Auth],
 
-        directives: { ValidationHelp },
+        directives: { IsUnique, ValidationHelp },
 
         components: { Screens, Tickers, Clients },
 

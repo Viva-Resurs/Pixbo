@@ -31,6 +31,7 @@
 
                 $(this.inputElement).popover({
 
+                    placement: 'bottom',
                     content: this.vm.trans('validation.'+errors[0]),
                     selector: "#"+this.inputElement.id,
                     trigger: 'manual'
