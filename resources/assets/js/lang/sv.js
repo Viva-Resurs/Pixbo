@@ -81,8 +81,7 @@ const lang = {
         tooltip_event_end_time:     "Välj slut-tid",
         tooltip_event_week_days:    "Välj veckodagar",
         tooltip_event_week:         "Välj veckor",
-        tooltip_event_day:          "test",
-        tooltip_event_days_before:  "test",
+        advanced_options:           "Avancerade alternativ",
         zero:                       "Samma",
         one:                        "En",
         two:                        "Två",
@@ -270,7 +269,13 @@ const lang = {
         prevDecade:                 "Tidigare 10 år",
         nextDecade:                 "Nästa 10 år",
         prevCentury:                "Historiskt",
-        nextCentury:                "Långt bort i en avlägsen framtid"
+        nextCentury:                "Långt bort i en avlägsen framtid",
+        incrementHour:              "Framåt en timme",
+        decrementHour:              "Bakåt en timme",
+        incrementMinute:            "Framåt en minut",
+        decrementMinute:            "Bakåt en minut",
+        pickMinute:                 "Välj minut",
+        pickHour:                   "Välj timme"
     }
 }
 
