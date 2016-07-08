@@ -6,9 +6,9 @@
     
     <title>Pixbo::Player</title>
     
-    <link rel="stylesheet" href="css/PixboPlayer.css">
+    <link rel="stylesheet" href="css/PixboPlayer.css?date={{ date('ymdHis') }}">
     
-    <script src="/js/PixboPlayer.js"></script>
+    <script src="/js/PixboPlayer.js?date={{ date('ymdHis') }}"></script>
 
 </head>
 <body>
