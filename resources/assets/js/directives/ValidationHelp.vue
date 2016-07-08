@@ -29,14 +29,24 @@
 
                 this.inputFeedback.style.display="inline";
 
-                $(this.inputElement).popover({
+                if (this.form && !this.form.validationHelp){
 
-                    placement: 'bottom',
-                    content: this.vm.trans('validation.'+errors[0]),
-                    selector: "#"+this.inputElement.id,
-                    trigger: 'manual'
+                    $(this.inputElement).popover({
 
-                }).popover('show');
+                        html : true,
+                        
+                        placement: 'bottom',
+                        //content: "<i class='fa fa-exclamation-circle text-danger'></i> "+this.vm.trans('validation.'+errors[0])+"",
+                        content: "<div>"+this.vm.trans('validation.'+errors[0])+"</div",
+                        selector: "#"+this.inputElement.id,
+                        trigger: 'manual'
+
+                    }).popover('show');
+
+                    // Set validationHelp so only one popover is shown
+                    this.form.validationHelp = true;
+
+                }
 
             }).bind(this);
 
@@ -48,6 +58,9 @@
                 this.inputFeedback.style.display="none";
 
                 $(this.inputElement).popover('destroy');
+
+                if (this.form && this.form.validationHelp)
+                    this.form.validationHelp = false;
 
             }).bind(this);
 
@@ -77,7 +90,9 @@
                 self.inputElement.addEventListener('blur', self.clearWarning);
                 self.inputElement.addEventListener('input', self.clearWarning);
 
-                $(self.inputElement).closest('form')[0].addEventListener('submit', self.checkInput)
+                self.form = $(self.inputElement).closest('form')[0];
+
+                self.form.addEventListener('submit', self.checkInput);
 
             })
             
