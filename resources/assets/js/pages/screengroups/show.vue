@@ -104,7 +104,7 @@
 
         methods: {
 
-            fetch(id, successHandler) {
+            fetch(id) {
 
                 var self = this;
 
@@ -113,17 +113,22 @@
                     function (response) {
 
                         self.$set('screengroup', response.entity.data);
-                        successHandler(response.entity.data);
 
                     },
 
-                    function (response, status, request) {
+                    function (response) {
 
-                        if (status === 401)
-                            self.$dispatch('userHasLoggedOut');
-                        
-                        else
-                            self.$route.router.go('/screengroups');
+                        if (response.entity && response.entity.error)
+                            console.error(response.entity.error.message);
+
+                        if (!self.attempts || self.attempts < 3)
+
+                            setTimeout(function(){
+
+                                self.attempts = (self.attempts) ? self.attempts+1 : 1;
+                                self.fetch(id);
+
+                            },1000);
 
                     }
 
@@ -170,12 +175,8 @@
 
         },
 
-        route: {
-            data: function (transition) {
-                this.fetch(this.$route.params.id, function (data) {
-                    transition.next({screengroup: data});
-                });
-            }
+        created: function(){
+            this.fetch(this.$route.params.id);
         }
 
     }

@@ -13,7 +13,6 @@
     import Toaster from './components/Toaster.vue'
     import { store } from './store'
     import Auth from './mixins/Auth.vue'
-    import ErrorHandler from './mixins/ErrorHandler.vue'
 
     export default {
 

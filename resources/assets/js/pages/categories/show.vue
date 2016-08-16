@@ -94,7 +94,7 @@
 
         methods: {
 
-            fetch(id, successHandler) {
+            fetch(id) {
 
                 var self = this;
 
@@ -104,14 +104,23 @@
 
                         self.$set('category', response.entity.data);
                         self.$set('originalName', self.category.name);
-                        successHandler(response.entity.data);
 
                     },
 
                     function (response) {
 
-                        console.log(response);
-                        
+                        if (response.entity && response.entity.error)
+                            console.error(response.entity.error.message);
+
+                        if (!self.attempts || self.attempts < 3)
+
+                            setTimeout(function(){
+
+                                self.attempts = (self.attempts) ? self.attempts+1 : 1;
+                                self.fetch(id);
+
+                            },1000);
+
                     }
 
                 );
@@ -202,12 +211,8 @@
             });
         },
 
-        route: {
-            data: function (transition) {
-                this.fetch(this.$route.params.id, function (data) {
-                    transition.next({category: data});
-                });
-            }
+        created: function(){
+            this.fetch(this.$route.params.id);
         }
 
     }

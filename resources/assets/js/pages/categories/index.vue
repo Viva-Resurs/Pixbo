@@ -67,7 +67,7 @@
 
         methods: {
 
-            fetch(successHandler) {
+            fetch() {
 
                 var self = this;
 
@@ -76,13 +76,22 @@
                     function (response) {
 
                         self.$set('categories', response.entity.data);
-                        successHandler(response.entity.data);
 
                     },
 
                     function (response) {
 
-                        console.log(response);
+                        if (response.entity && response.entity.error)
+                            console.error(response.entity.error.message);
+
+                        if (!self.attempts || self.attempts < 3)
+
+                            setTimeout(function(){
+
+                                self.attempts = (self.attempts) ? self.attempts+1 : 1;
+                                self.fetch();
+
+                            },1000);
 
                     }
 
@@ -132,12 +141,8 @@
 
         },
 
-        route: {
-            data: function (transition) {
-                this.fetch(function (data) {
-                    transition.next({categories: data});
-                });
-            }
+        created: function(){
+            this.fetch();
         }
 
     }

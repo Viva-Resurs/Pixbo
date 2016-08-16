@@ -50,7 +50,7 @@
 
         methods: {
 
-            fetch(id, successHandler) {
+            fetch(id) {
 
                 var self = this;
 
@@ -63,13 +63,21 @@
                         if ( self.$route.query.screengroup )
                             self.screen.screengroups.push( { id: self.$route.query.screengroup });
                         
-                        successHandler(response.entity.data);
-
                     },
 
                     function (response) {
 
-                        console.log(response);
+                        if (response.entity && response.entity.error)
+                            console.error(response.entity.error.message);
+
+                        if (!self.attempts || self.attempts < 3)
+
+                            setTimeout(function(){
+
+                                self.attempts = (self.attempts) ? self.attempts+1 : 1;
+                                self.fetch(id);
+
+                            },1000);
 
                     }
 
@@ -79,12 +87,8 @@
 
         },
 
-        route: {
-            data: function (transition) {
-                this.fetch(this.$route.params.id, function (data) {
-                    transition.next({screen: data});
-                });
-            }
+        created: function(){
+            this.fetch(this.$route.params.id);
         }
 
     }
