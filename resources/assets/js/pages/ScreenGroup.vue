@@ -28,7 +28,7 @@
             </div>
 
             <!-- Editing -->
-            <div class="panel panel-default panel-flush"  v-if=" $route.params.id>0 ">
+            <div class="panel panel-default panel-flush"  v-if=" $route.params.id>0 && $root.isAuthenticated">
                 <div class="panel-heading">
                     {{ trans('screengroup.edit') }}
                 </div>
@@ -45,7 +45,7 @@
                                     <i class="fa fa-btn fa-fw fa-plus"></i>&nbsp;{{ trans('ticker.add') }}</span>
                                 </a>
                             </li>
-                            <li>
+                            <li v-if="$root.isAdmin">
                                 <a v-link="{ path: '/clients/create', query: { screengroup: $route.params.id } }">
                                     <i class="fa fa-btn fa-fw fa-plus"></i>&nbsp;{{ trans('client.add') }}</span>
                                 </a>
