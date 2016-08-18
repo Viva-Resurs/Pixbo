@@ -32,13 +32,22 @@ class TickerCreationForm extends Request
     }
 
     public function persist() {
-        $vm = $this;
+                
+        $newTicker = $this->all();
         
-        $results = DB::transaction(function () use ($vm) {
-            $ticker = new Ticker($vm->all());
+        $screengroups = [];
+        if ($this->has('screengroups'))
+            $screengroups = $newTicker['screengroups'];
+
+        $results = DB::transaction(function () use ($newTicker,$screengroups) {
+            $ticker = new Ticker($newTicker);
             $ticker->save();
             $event = new Event(['start_date' => date('Y-m-d'), 'recur_type' => 'daily']);
             $ticker->event()->save($event);
+
+            if (count($screengroups)>0)
+                $ticker->screengroups()->sync($screengroups);
+
             $ticker->save();
             return $ticker;
         });

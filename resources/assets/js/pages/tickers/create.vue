@@ -74,6 +74,9 @@
 
                 var self = this;
 
+                if ( self.$root.history.previous == 'screengroups.show' )
+                    self.ticker.screengroups = [parseInt(self.$root.history.params.id)];
+
                 client({path: 'tickers', entity: self.ticker}).then(
                     
                     function (response, status) {
