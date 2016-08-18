@@ -348,6 +348,7 @@ class ScreenGroupTableSeeder extends Seeder {
         DB::table('screengroups')->delete();
 
         $screengroup = ScreenGroup::create([
+            'id' => 1,
             'name' => config('pixbo.settings.screengroup.dummy_name'),
             'desc' => '',
             'user_id' => 1
