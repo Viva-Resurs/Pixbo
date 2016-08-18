@@ -36,7 +36,7 @@ const lang = {
     general: {
         home:                       "Hem",
         welcome:                    "Välkommen",
-        about:                      "Om oss",
+        about:                      "Om Pixbo",
         settings:                   "Inställningar",
         archive:                    "Arkiv",
         new:                        "Lägg till",
