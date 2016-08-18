@@ -54,11 +54,15 @@
 
                 var self = this;
 
+                self.$loadingRouteData = true;
+
                 client({ path: '/screens/' + id }).then(
 
                     function (response) {
 
                         self.$set('screen', response.entity.data);
+
+                        self.$loadingRouteData = false;
 
                         if ( self.$route.query.screengroup )
                             self.screen.screengroups.push( { id: self.$route.query.screengroup });
@@ -70,6 +74,8 @@
                         if (response.entity && response.entity.error)
                             console.error(response.entity.error.message);
 
+                        self.$loadingRouteData = false;
+
                     }
 
                 );
@@ -79,6 +85,7 @@
         },
 
         created: function(){
+            this.$loadingRouteData = true;
             this.fetch(this.$route.params.id);
         }
 

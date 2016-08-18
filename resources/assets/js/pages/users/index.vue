@@ -65,11 +65,15 @@
 
                 var self = this;
 
+                self.$loadingRouteData = true;
+
                 client({ path: '/users' }).then(
 
                     function (response) {
 
                         self.$set('users', response.entity.data);
+
+                        self.$loadingRouteData = false;
 
                     },
 
@@ -77,6 +81,8 @@
 
                         if (response.entity && response.entity.error)
                             console.error(response.entity.error.message);
+
+                        self.$loadingRouteData = false;
 
                         if (!self.attempts || self.attempts < 3)
 

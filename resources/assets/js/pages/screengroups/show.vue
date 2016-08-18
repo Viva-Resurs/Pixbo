@@ -108,11 +108,15 @@
 
                 var self = this;
 
+                self.$loadingRouteData = true;
+
                 client({ path: '/screengroups/' + id }).then(
                     
                     function (response) {
 
                         self.$set('screengroup', response.entity.data);
+
+                        self.$loadingRouteData = false;
 
                     },
 
@@ -120,6 +124,8 @@
 
                         if (response.entity && response.entity.error)
                             console.error(response.entity.error.message);
+
+                        self.$loadingRouteData = false;
 
                     }
 

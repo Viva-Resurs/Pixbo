@@ -98,12 +98,16 @@
 
                 var self = this;
 
+                self.$loadingRouteData = true;
+
                 client({ path: '/categories/' + id }).then(
 
                     function (response) {
 
                         self.$set('category', response.entity.data);
                         self.$set('originalName', self.category.name);
+                        
+                        self.$loadingRouteData = false;
 
                     },
 
@@ -111,6 +115,8 @@
 
                         if (response.entity && response.entity.error)
                             console.error(response.entity.error.message);
+
+                        self.$loadingRouteData = false;
 
                     }
 

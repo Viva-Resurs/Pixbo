@@ -58,6 +58,8 @@
 
                 var self = this;
 
+                self.$loadingRouteData = true;
+
                 client({ path: '/tickers/' + id }).then(
 
                     function (response) {
@@ -67,12 +69,16 @@
                         if ( self.$route.query.screengroup )
                             self.ticker.screengroups.push( { id: self.$route.query.screengroup });
 
+                        self.$loadingRouteData = false;
+
                     },
 
                     function (response) {
 
                         if (response.entity && response.entity.error)
                             console.error(response.entity.error.message);
+
+                        self.$loadingRouteData = false;
 
                     }
 

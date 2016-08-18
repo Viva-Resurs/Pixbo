@@ -72,18 +72,24 @@
 
                 var self = this;
 
+                self.$loadingRouteData = true;
+
                 client({ path: '/screengroups' }).then(
 
                     function (response) {
 
                         self.$set('screengroups', response.entity.data);
-                        
+
+                        self.$loadingRouteData = false;
+
                     },
 
                     function (response) {
 
                         if (response.entity && response.entity.error)
                             console.error(response.entity.error.message);
+
+                        self.$loadingRouteData = false;
 
                         if (!self.attempts || self.attempts < 3)
 

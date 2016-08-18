@@ -120,12 +120,15 @@
 
                 var self = this;
 
+                self.$loadingRouteData = true;
+
                 client({ path: '/users/' + id }).then(
 
                     function (response) {
 
                         self.$set('user', response.entity.data);
-                        successHandler(response.entity.data);
+
+                        self.$loadingRouteData = false;
 
                     },
 
@@ -133,6 +136,8 @@
 
                         if (response.entity && response.entity.error)
                             console.error(response.entity.error.message);
+
+                        self.$loadingRouteData = false;
 
                     }
 
