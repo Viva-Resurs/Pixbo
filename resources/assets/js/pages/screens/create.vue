@@ -67,6 +67,9 @@
                                 if (localStorage.getItem('jwt-token'))
                                     xhr.setRequestHeader('Authorization', localStorage.getItem('jwt-token'));
 
+                                if ( vm.$root.history.previous == 'screengroups.show' )
+                                    formData.set('screengroups',vm.$root.history.params.id);
+
                             });
 
                             self.on("success", function (response) {

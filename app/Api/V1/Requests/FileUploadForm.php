@@ -41,12 +41,17 @@ class FileUploadForm extends Request
 
     public function persist() {
 
-        //dd($this->all());
-        $vm = $this;
+        $newFile = $this->file('file');
+
         $screen = null;
-        $result = DB::transaction(function () use ($vm, $screen) {
+        
+        $screengroups = [];
+        if ($this->has('screengroups'))
+            $screengroups[] = (int) $this->get('screengroups');
+
+        $result = DB::transaction(function () use ($newFile, $screen, $screengroups) {
             // find or create screen and add photo to it.
-            $photo = Photo::getOrCreate($vm->file('file'))->move($vm->file('file'));
+            $photo = Photo::getOrCreate($newFile)->move($newFile);
             if (!is_null($photo->screen)) {
                 $screen = $photo->screen;
             } else {
@@ -54,11 +59,13 @@ class FileUploadForm extends Request
                 $screen->save();
                 $defaultCategory = Category::first();
                 $defaultCategory->addScreen($screen);
-
             }
 
             $event = new Event;
             $event->fill(['start_date' => date('Y-m-d'), 'recur_type' => 'daily']);
+
+            if (count($screengroups)>0)
+                $screen->screengroups()->sync($screengroups);
 
             $screen->photo()->save($photo);
             $screen->event()->save($event);
