@@ -67,40 +67,13 @@
 
         methods: {
 
-            fetch() {
+            fetch(successHandler,errorHandler) {
 
                 var self = this;
 
-                self.$loadingRouteData = true;
-
                 client({ path: '/categories' }).then(
-
-                    function (response) {
-
-                        self.$set('categories', response.entity.data);
-                        
-                        self.$loadingRouteData = false;
-
-                    },
-
-                    function (response) {
-
-                        if (response.entity && response.entity.error)
-                            console.error(response.entity.error.message);
-
-                        self.$loadingRouteData = false;
-
-                        if (!self.attempts || self.attempts < 3)
-
-                            setTimeout(function(){
-
-                                self.attempts = (self.attempts) ? self.attempts+1 : 1;
-                                self.fetch();
-
-                            },1000);
-
-                    }
-
+                    successHandler,
+                    errorHandler
                 );
 
             },
@@ -147,8 +120,15 @@
 
         },
 
-        created: function(){
-            this.fetch();
+        route: {
+            data: function (transition) {
+                this.fetch(function (response) {
+                    transition.next({categories: response.entity.data});
+                },function (response){
+                    transition.next();
+                    console.error(response.entity.error);
+                });
+            }
         }
 
     }

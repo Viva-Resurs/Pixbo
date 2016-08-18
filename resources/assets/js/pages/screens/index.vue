@@ -59,15 +59,6 @@
 
                         self.$loadingRouteData = false;
 
-                        if (!self.attempts || self.attempts < 3)
-
-                            setTimeout(function(){
-
-                                self.attempts = (self.attempts) ? self.attempts+1 : 1;
-                                self.fetch();
-
-                            },1000);
-
                     }
 
                 );
