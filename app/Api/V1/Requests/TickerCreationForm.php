@@ -37,7 +37,7 @@ class TickerCreationForm extends Request
         $results = DB::transaction(function () use ($vm) {
             $ticker = new Ticker($vm->all());
             $ticker->save();
-            $event = new Event(['start_date' => date('Y-m-d')]);
+            $event = new Event(['start_date' => date('Y-m-d'), 'recur_type' => 'daily']);
             $ticker->event()->save($event);
             $ticker->save();
             return $ticker;
