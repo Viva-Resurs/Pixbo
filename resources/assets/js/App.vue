@@ -18,7 +18,7 @@
 
         components: { Toaster },
 
-        mixins: [ Auth, ErrorHandler ],
+        mixins: [ Auth ],
 
         data: function() {
             return {
