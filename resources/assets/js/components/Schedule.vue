@@ -49,14 +49,6 @@
                            :weekly_day_num.sync="weekly_day_num"
                 ></component>
 
-                <div class="schedule_group">
-                    <!-- Summary -->
-                    <label class="schedule_label">{{ trans('general.summary') }}</label>
-                    <div class="schedule_input">
-                        {{ summary }}
-                    </div>
-                </div>
-
             </div>
 
         </div>
