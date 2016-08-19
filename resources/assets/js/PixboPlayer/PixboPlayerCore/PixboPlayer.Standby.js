@@ -71,13 +71,13 @@ PixboPlayer.Standby = function(info){
             this.textAlign = "center"; 
             switch (this.info){
                 case 404: {
-                    this.fillText( "Klient saknas", 0, 0 );
+                    this.fillText( "Client Missing", 0, 0 );
                     this.font = '40px Verdana';
                     this.fillText( PixboPlayer.Client_ADDR, 0, 70 );
                     break;
                 }
                 case 500: {
-                    this.fillText( "Server problem", 0, 0 );
+                    this.fillText( "Internal server error", 0, 0 );
                     this.font = '40px Verdana';
                     this.fillText( PixboPlayer.Client_ADDR, 0, 70 );
                     break;
@@ -85,7 +85,7 @@ PixboPlayer.Standby = function(info){
                 case "NOSCREEN": {
                     this.fillText( "Standby", 0, 0 );
                     this.font = '40px Verdana';
-                    this.fillText( 'Inga bilder...', 0, 70 );
+                    this.fillText( 'No images', 0, 70 );
                     break;
                 }
                 default:
