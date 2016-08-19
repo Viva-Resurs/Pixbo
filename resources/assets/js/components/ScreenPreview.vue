@@ -1,13 +1,17 @@
 <template>
 
-    <div>
-        <img id="ScreenPreviewThumb" class="img-thumbnail" width="100%" @click="showModal = true">
+    <div v-if="loading">
+        <loading></loading>
+    </div>
+
+    <div class="{{(loading) ? 'hidden' : ''}}">
+        <img id="ScreenPreviewThumb" class="img-thumbnail" style="cursor:zoom-in" width="100%" @click="showModal = true">
     </div>
 
     <modal :show.sync="showModal" backdrop="true" width="90%">
         <div slot="modal-header"></div>
         <div slot="modal-body" class="modal-body">
-            <img style="margin: auto auto;" id="ScreenPreview" class="img-responsive" @click="showModal = false">
+            <img style="margin: auto auto; cursor:zoom-out" id="ScreenPreview" class="img-responsive" @click="showModal = false">
         </div>
         <div slot="modal-footer"></div>
     </modal>
@@ -28,7 +32,8 @@
         data: function () {
             return {
                 screen: {},
-                showModal: false
+                showModal: false,
+                loading: true
             }
         },
 
@@ -38,9 +43,13 @@
 
                 var self = this;
 
+                self.loading = true;
+
                 client({ path: '/screens/' + id }).then(
 
                     function (response) {
+
+                        self.loading = false;
 
                         self.$set('screen', response.entity.data);
                         self.setThumb();
@@ -49,7 +58,10 @@
 
                     function (response) {
                         
-                        console.log(response);
+                        if (response.entity && response.entity.error)
+                            console.error(response.entity.error.message);
+
+                        self.loading = false;
 
                     }
 
