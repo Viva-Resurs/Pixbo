@@ -39,6 +39,7 @@ const lang = {
         about:                      "Om Pixbo",
         settings:                   "Inställningar",
         archive:                    "Arkiv",
+        search:                     "Sök",
         new:                        "Lägg till",
         name:                       "Namn",
         desc:                       "Beskrivning",
