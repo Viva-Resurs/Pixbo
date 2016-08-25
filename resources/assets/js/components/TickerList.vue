@@ -62,7 +62,7 @@
             <div class="btn-group" role="group">
                 <button class="btn btn-default" @click="firstPage"><span class="fa fa-btn fa-angle-double-left"></span></button>
             </div>
-            <div v-for="n in createPagination()" class="btn-group" role="group">
+            <div v-for="n in countPages()" class="btn-group" role="group">
                 <button class="btn btn-{{(n+1==getCurrentPage()) ? 'primary' : 'default'}}" @click="toPage(n)">{{n+1}}</button>
             </div>
             <div class="btn-group" role="group">
@@ -89,7 +89,7 @@
                 desc: -1,
                 search: '',
                 offset: 0,
-                maxIthems: 5,
+                maxIthems: 7,
                 maxResults: 7,
             }
         },
@@ -101,17 +101,17 @@
             },
 
             lastPage(){
-                this.offset = this.tickers.length-(this.tickers.length%this.maxIthems);
+                this.offset = this.tickers.length-(((this.tickers.length-1)%this.maxIthems)+1);
             },
 
             toPage(p){
                 this.offset = p*this.maxIthems;
             },
 
-            createPagination(){
+            countPages(){
                 var p = 1;
                 for (var i=0, c=0 ; i<this.tickers.length ; i++, c++){
-                    if (c+1==this.maxIthems){
+                    if (c+1==this.maxIthems && i<this.tickers.length-p){
                         p++; c=0;
                     }
                 }
