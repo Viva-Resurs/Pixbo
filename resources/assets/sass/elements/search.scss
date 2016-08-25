@@ -1,0 +1,19 @@
+.search_group {
+	@extend .form-group, .has-feedback, .form-horizontal;
+}
+
+.search_label {
+	@extend .col-sm-2, .col-sm-offset-1, .control-label;
+	padding-top: 7px;
+}
+
+.search_input {
+	@extend .col-sm-7;
+}
+
+.search_icon {
+	@extend .form-control-feedback;
+	right: 15px;
+	top: 9px;
+	position: absolute;
+}

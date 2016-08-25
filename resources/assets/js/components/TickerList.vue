@@ -6,9 +6,9 @@
 
     <div class="panel-body" v-if="tickers.length > 0">
 
-        <div class="form-group">
-            <label for="search" class="model_label">{{ trans('general.search') }}</label>
-            <div class="model_input">
+        <div class="search_group">
+            <label for="search" class="search_label">{{ trans('general.search') }}</label>
+            <div class="search_input">
                 <input class="form-control"
                        name="search"
                        id="search"
@@ -16,7 +16,7 @@
                        v-model="search"
                        v-on:keyup="resetMaxResults"
                 >
-                <span class="fa fa-btn fa-search form-control-feedback"></span>
+                <span class="fa fa-search search_icon"></span>
             </div>
         </div>
 
@@ -59,7 +59,7 @@
             </tbody>
         </table>
 
-        <div class="btn-toolbar center-block" v-show="search==''">
+        <div class="btn-toolbar pagination" v-show="search==''">
             <div class="btn-group" role="group">
                 <button class="btn btn-default" @click="firstPage"><span class="fa fa-btn fa-angle-double-left"></span></button>
             </div>
@@ -71,7 +71,7 @@
             </div>
         </div>
 
-        <div class="center-block" v-show="search!='' && maxResults!=0">
+        <div class="search" v-show="search!='' && maxResults!=0">
             <button class="btn btn-default" @click="showAllResults">{{ trans('general.showallresults') }}</button>
         </div>
 
