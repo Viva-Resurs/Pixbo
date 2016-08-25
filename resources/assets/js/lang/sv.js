@@ -40,6 +40,7 @@ const lang = {
         settings:                   "Inställningar",
         archive:                    "Arkiv",
         search:                     "Sök",
+        showallresults:             "Visa alla resultat",
         new:                        "Lägg till",
         name:                       "Namn",
         desc:                       "Beskrivning",

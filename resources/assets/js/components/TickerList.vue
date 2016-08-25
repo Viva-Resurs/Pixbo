@@ -14,6 +14,7 @@
                        id="search"
                        type="text"
                        v-model="search"
+                       v-on:keyup="resetMaxResults"
                 >
                 <span class="fa fa-btn fa-search form-control-feedback"></span>
             </div>
@@ -68,6 +69,10 @@
             <div class="btn-group" role="group">
                 <button class="btn btn-default" @click="lastPage"><span class="fa fa-btn fa-angle-double-right"></span></button>
             </div>
+        </div>
+
+        <div class="center-block" v-show="search!='' && maxResults!=0">
+            <button class="btn btn-default" @click="showAllResults">{{ trans('general.showallresults') }}</button>
         </div>
 
     </div>
@@ -136,10 +141,22 @@
                 return false;
             },
 
+            showAllResults(){
+                this.maxResults = 0;
+            },
+
+            resetMaxResults(){
+                this.maxResults = 6;
+            },
+
             pagination(ob,index){
-                // When searching, show max-results
-                if (this.search!='')
-                    return (index<this.maxResults);
+                // When searching, only show matches
+                if (this.search!=''){
+                    if (this.maxResults)
+                        return (index<this.maxResults);
+                    else
+                        return true;
+                }
 
                 // Show contents in range
                 return (index >= this.offset && index < this.offset+this.maxIthems)
