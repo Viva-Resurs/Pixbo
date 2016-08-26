@@ -8,7 +8,13 @@
 }
 
 .search_input {
-	@extend .col-sm-7;
+	@extend .col-sm-offset-2, .col-sm-8;
+	padding-bottom: 15px;
+}
+
+.search_expander {
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .search_icon {

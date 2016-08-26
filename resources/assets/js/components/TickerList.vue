@@ -7,7 +7,6 @@
     <div class="panel-body" v-if="tickers.length > 0">
 
         <div class="search_group">
-            <label for="search" class="search_label">{{ trans('general.search') }}</label>
             <div class="search_input">
                 <input class="form-control"
                        name="search"
@@ -15,6 +14,7 @@
                        type="text"
                        v-model="search"
                        v-on:keyup="resetMaxResults"
+                       placeholder="{{ trans('general.search') }}" 
                 >
                 <span class="fa fa-search search_icon"></span>
             </div>
@@ -31,7 +31,7 @@
             </thead>
             <tbody>
 
-                <tr v-for="ticker in tickers | orderBy order desc | filterBy filter | filterBy pagination">
+                <tr v-for="ticker in tickers | orderBy order desc | filterBy filter | filterBy pagination" class="tickerPost">
                     <td>{{ ticker.id }}</td>
                     <td><a v-link="{ path: '/tickers/'+ticker.id }">{{ ticker.text }}</a></td>
                     <td>
@@ -55,11 +55,17 @@
                         <a v-else class="btn btn-primary btn-xs fa fa-times" v-on:click="removeTicker($index)"
                            v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
                     </td>
+                    <!-- template v-if="toggleShowAllResultsBtn($index)"></template -->
+                </tr>
+                <tr v-if="showAllBtn">
+                    <td colspan="4">
+                        <button class="btn btn-default search_expander" @click="showAllResults">{{ trans('general.showallresults') }}</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
 
-        <div class="btn-toolbar pagination" v-show="search==''">
+        <div class="btn-toolbar pagination" v-show="search=='' && tickers.length>maxIthems">
             <div class="btn-group" role="group">
                 <button class="btn btn-default" @click="firstPage"><span class="fa fa-btn fa-angle-double-left"></span></button>
             </div>
@@ -71,9 +77,7 @@
             </div>
         </div>
 
-        <div class="search" v-show="search!='' && maxResults!=0">
-            <button class="btn btn-default" @click="showAllResults">{{ trans('general.showallresults') }}</button>
-        </div>
+
 
     </div>
 
@@ -94,15 +98,16 @@
                 desc: -1,
                 search: '',
                 offset: 0,
-                maxIthems: 7,
+                maxIthems: 50,
                 maxResults: 7,
+                showAllBtn: false
             }
         },
 
         methods: {
 
             firstPage(){
-                this.offset = 0
+                this.offset = 0;
             },
 
             lastPage(){
@@ -134,32 +139,41 @@
                 }
             },
 
-            filter(ob){
-                for (var property in ob)
-                    if (String(ob[property]).indexOf(this.search)>-1)
+            filter(ob,index){
+                if (this.search!=''){
+                    if (ob.text.toLowerCase().indexOf(this.search.toLowerCase())>-1)
                         return true;
-                return false;
-            },
-
-            showAllResults(){
-                this.maxResults = 0;
-            },
-
-            resetMaxResults(){
-                this.maxResults = 6;
+                    for (var i=0 ; i<ob.screengroups.length ; i++)
+                        if (ob.screengroups[i].name.toLowerCase().indexOf(this.search.toLowerCase())>-1)
+                            return true;
+                    return false;
+                }
+                return true;
             },
 
             pagination(ob,index){
-                // When searching, only show matches
+                // Show results limited by maxResults
                 if (this.search!=''){
                     if (this.maxResults)
                         return (index<this.maxResults);
                     else
                         return true;
                 }
-
                 // Show contents in range
                 return (index >= this.offset && index < this.offset+this.maxIthems)
+            },
+
+            showAllResults(){
+                this.maxResults = 0;
+                this.showAllBtn=false;
+            },
+
+            resetMaxResults(){
+                this.maxResults = 6;
+                if (this.search!='' && this.maxResults!=0 && $('.tickerPost').length>=this.maxResults)
+                    this.showAllBtn=true;
+                else
+                    this.showAllBtn=false;
             },
 
             removeTicker(index) {
