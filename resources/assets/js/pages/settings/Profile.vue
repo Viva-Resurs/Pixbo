@@ -6,16 +6,16 @@
 
     <div class="panel-body">
 
-        <table class="table table-bordered" v-if="$root.user">
+        <table class="table table-bordered" v-if="$root.store.user">
             <tr>
                 <th>{{ trans('general.id') }}</th>
                 <th>{{ trans('general.name') }}</th>
                 <th>{{ trans('general.email') }}</th>
             </tr>
             <tr>
-                <td>{{ $root.user.id }}</td>
-                <td>{{ $root.user.name }}</td>
-                <td>{{ $root.user.email }}</td>
+                <td>{{ $root.store.user.id }}</td>
+                <td>{{ $root.store.user.name }}</td>
+                <td>{{ $root.store.user.email }}</td>
             </tr>
         </table>
         
