@@ -4,7 +4,8 @@
 
         <div class="screencard_content">
 
-            <img class="screencard_img" :src="'/' + screen.photo.thumb_path">
+            <img :src="'/' + screen.photo.thumb_path"
+                class="screencard_img {{(screen.screengroups.length<1 || screen.category==1)?'inactive':''}}">
 
             <div class="screencard_tools" role="group">
                 <a class="btn btn-info btn-lg" v-link="{ path: '/screens/'+screen.id }">
@@ -49,12 +50,3 @@
 
     }
 </script>
-
-<style>
-    .ScreenCard__buttons {
-        position: absolute;
-        top: 0%;
-        left: 100%;
-        margin-left: -52px;
-    }
-</style>

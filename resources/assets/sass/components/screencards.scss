@@ -1,30 +1,38 @@
 .screencard{
-	@extend .col-sm-6, .col-md-3;
-	padding: 7px;
+    @extend .col-sm-6, .col-md-3;
+    padding: 7px;
 }
+
 .screencard_content{
-	/*@extend .thumbnail;*/
-	padding: 3px;
-	border: 1px solid #bbb;
-	border-radius: 3px;
+    padding: 3px;
+    border: 1px solid #bbb;
+    border-radius: 3px;
 }
+
 .screencard_img{
-	width: 100%;
-	height: auto;
+    width: 100%;
+    height: auto;
 }
+
 .screencard_tools{
     @extend .btn-group-vertical;
-	position: absolute;
-	right: 10px;
-	top: 11px;
-	padding: 0px;
-	margin: 0px;
+    position: absolute;
+    right: 10px;
+    top: 11px;
+    padding: 0px;
+    margin: 0px;
 }
+
 .screencard_tools .btn {
-	border-top-right-radius: 0px !important;
+    border-top-right-radius: 0px !important;
 }
+
 .screencard_tools .btn .tooltip {
-	white-space: nowrap;
-	float: none;
-	display: inline-block;
+    white-space: nowrap;
+    float: none;
+    display: inline-block;
+}
+
+.inactive{
+    opacity: 0.5;
 }
