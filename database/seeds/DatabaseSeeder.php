@@ -337,6 +337,7 @@ class CategoryTableSeeder extends Seeder {
         DB::table('categories')->delete();
 
         $category = Category::create([
+            'id' => 1,
             'name' => config('pixbo.settings.category.default_name'),
             'user_id' => 1
         ]);
