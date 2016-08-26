@@ -29,10 +29,10 @@
                     <td><a v-link="{ path: '/categories/'+category.id }">{{ category.name }}</a></td>
                     <td>{{ category.numberOfScreens }}</td>
                     <td>
-                        <a class="btn btn-primary btn-xs fa fa-pencil" v-if="category.id !== 1 && isOwner(category)"
+                        <a class="btn btn-primary btn-xs fa fa-pencil" v-if="category.id !== 1 && $root.isOwner(category)"
                             v-link="{ path: '/categories/'+category.id }"
                             v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
-                        <a class="btn btn-primary btn-xs fa fa-times" v-if="category.id !== 1 && isOwner(category)"
+                        <a class="btn btn-primary btn-xs fa fa-times" v-if="category.id !== 1 && $root.isOwner(category)"
                             v-on:click="attemptDeleteCategory($index)"
                             v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
                     </td>
@@ -46,13 +46,12 @@
 
 <script type="text/ecmascript-6">
     import SweetAlert from '../../mixins/SweetAlert.vue'
-    import Auth from '../../mixins/Auth.vue'
 
     export default {
 
         name: 'Index',
 
-        mixins: [ SweetAlert, Auth ],
+        mixins: [ SweetAlert ],
 
         data: function () {
             return {

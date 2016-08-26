@@ -12,7 +12,7 @@
 
         <div class="panel-body">
 
-            <form v-if="isOwner(category)" class="form-horizontal" role="form" v-on:submit.prevent="attemptUpdateCategory" name="myform" v-form>
+            <form v-if="$root.isOwner(category)" class="form-horizontal" role="form" v-on:submit.prevent="attemptUpdateCategory" name="myform" v-form>
 
                 <div class="form-group" v-validation-help>
                     <label for="name" class="model_label">{{ trans('general.name') }}</label>
@@ -64,7 +64,6 @@
 </template>
 
 <script type="text/ecmascript-6">
-    import Auth from '../../mixins/Auth.vue'
     import ScreenList from '../../components/ScreenList.vue'
     import SweetAlert from '../../mixins/SweetAlert.vue'
     import IsUnique from '../../directives/IsUnique.vue'
@@ -74,7 +73,7 @@
 
         name: 'Show',
 
-        mixins: [ Auth, SweetAlert ],
+        mixins: [ SweetAlert ],
 
         components: { ScreenList },
 

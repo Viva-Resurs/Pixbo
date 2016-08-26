@@ -14,7 +14,7 @@ import { configRouter } from './routes'
 
 // declare global mixins
 Vue.mixin(require('./mixins/Translation.vue'));
-Vue.mixin(require('./mixins/RouterHelpers.vue'))
+Vue.mixin(require('./mixins/RouterHelpers.vue'));
 
 // Create our router object and set options on it
 const router = new VueRouter()

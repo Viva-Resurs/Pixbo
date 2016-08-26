@@ -12,7 +12,7 @@
      
         <div class="panel-body">
 
-            <form v-if="isAdmin" v-form name="myform" class="form-horizontal" role="form" v-on:submit.prevent="attemptUpdateScreengroup">
+            <form v-if="$root.isAdmin" v-form name="myform" class="form-horizontal" role="form" v-on:submit.prevent="attemptUpdateScreengroup">
 
                 <div class="form-group" v-validation-help>
                     <label for="name" class="model_label">{{ trans('general.name') }}</label>
@@ -77,7 +77,6 @@
 </template>
 
 <script type="text/ecmascript-6">
-    import Auth from '../../mixins/Auth.vue'
     import Screens from './screens.vue'
     import Tickers from './tickers.vue'
     import Clients from './clients.vue'
@@ -87,8 +86,6 @@
     export default {
 
         name: 'Show',
-
-        mixins: [Auth],
 
         directives: { IsUnique, ValidationHelp },
 
