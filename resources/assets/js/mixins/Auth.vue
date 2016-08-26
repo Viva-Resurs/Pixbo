@@ -141,6 +141,8 @@
             })
 
             this.getUser();
+            
+            this.loginCheck = setInterval( this.getUser, 1000*30 );
 
         }
 
