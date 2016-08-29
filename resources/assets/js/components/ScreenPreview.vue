@@ -1,7 +1,7 @@
 <template>
 
     <div v-if="loading">
-        <loading></loading>
+        <loadingthumb></loadingthumb>
     </div>
 
     <div class="{{(loading) ? 'hidden' : ''}}">

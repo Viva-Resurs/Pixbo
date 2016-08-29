@@ -46,6 +46,7 @@ Vue.use(vueForm)
 Vue.component('nav-component', require('./components/Nav.vue'))
 Vue.component('footer-component', require('./components/Footer.vue'))
 Vue.component('loading', require('./components/Loading.vue'))
+Vue.component('loadingthumb', require('./components/LoadingThumb.vue'))
 Vue.directive("dropzone",require('./directives/Dropzone.vue'));
 Vue.directive("tooltip",require('./directives/Tooltip.vue'));
 Vue.directive("popover",require('./directives/Popover.vue'));
