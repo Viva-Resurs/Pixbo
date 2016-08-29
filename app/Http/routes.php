@@ -17,6 +17,10 @@ header("Access-Control-Allow-Headers: Authorization, X-Requested-With,  Content-
 
 Route::resource('play', 'PlayerController');
 
+Route::get('/auth/forgot', function () {
+    return view('emails/password');
+});
+
 Route::get('/', function () {
     return view('index');
 });
