@@ -168,7 +168,8 @@ module.exports = {
         router.alias({
             '': '/home/',
             '/': '/home/',
-            '/auth': '/auth/login'
+            '/auth': '/auth/login',
+            '/auth/forgot': '/auth/forgot'
         })
 
         router.beforeEach(function (transition) {
