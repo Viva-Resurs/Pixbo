@@ -21,6 +21,8 @@
                 store.authenticated = true;
                 store.token = localStorage.getItem('jwt-token');
 
+                this.loginCheck = setInterval( this.getUser, 1000*30 );
+
             },
 
             destroyLogin(user) {
@@ -141,8 +143,6 @@
             })
 
             this.getUser();
-            
-            this.loginCheck = setInterval( this.getUser, 1000*30 );
 
         }
 
