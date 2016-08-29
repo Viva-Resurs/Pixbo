@@ -10,7 +10,10 @@ const lang = {
         password_repeat:            "Bekräfta lösenord",
         invalid_credentials:        "Ogiltiga uppgifter, försök igen",
         forgot_password:            "Glömt lösenord?",
-        name:                       "Användarnamn"
+        password_reset:             "Återställ lösenord",
+        name:                       "Användarnamn",
+        password_reset_ok:          "En länk för återställning har nu skickats.",
+        password_reset_fail:        "Misslyckades att skicka länk för återställning, försök igen."
     },
     /* ----------------------------- ROLE ----------------------------- */
     role: {
@@ -30,7 +33,8 @@ const lang = {
         required:                  "Fältet måste fyllas i",
         minlength:                 "För få tecken",
         isUnique:                  "Fältet är inte unikt",
-        customValidator:           "Fältet innehåller fel"
+        customValidator:           "Fältet innehåller fel",
+        email:                     "Ogiltig e-post"
     },
     /* ----------------------------- GENERAL ----------------------------- */
     general: {

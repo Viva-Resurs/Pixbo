@@ -15,6 +15,10 @@ module.exports = {
                         name: 'auth.logout',
                         component: require('./pages/auth/Logout.vue'),
                         auth: true
+                    },
+                    '/forgot': {
+                        name: 'auth.forgot',
+                        component: require('./pages/auth/Forgot.vue')
                     }
                 }
             },
@@ -168,8 +172,7 @@ module.exports = {
         router.alias({
             '': '/home/',
             '/': '/home/',
-            '/auth': '/auth/login',
-            '/auth/forgot': '/auth/forgot'
+            '/auth': '/auth/login'
         })
 
         router.beforeEach(function (transition) {
