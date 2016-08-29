@@ -84,7 +84,6 @@
 </template>
 
 <script type="text/ecmascript-6">
-    import FilterTools from '../components/FilterTools.vue'
 
     export default {
 
