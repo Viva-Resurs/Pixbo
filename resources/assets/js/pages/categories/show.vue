@@ -1,7 +1,7 @@
 <template>
 
     <div class="panel-heading">
-        {{ originalName }}
+        {{ originalName || trans('category.edit') }}
     </div>
 
     <div class="panel-body" v-if="$loadingRouteData">

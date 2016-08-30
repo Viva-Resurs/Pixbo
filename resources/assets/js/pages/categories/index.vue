@@ -55,12 +55,7 @@
 
         data: function () {
             return {
-                categories: {
-                    id: null,
-                    name: null,
-                    screens: null,
-                    user_id: null
-                }
+                categories: []
             }
         },
 
