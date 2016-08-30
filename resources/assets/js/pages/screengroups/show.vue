@@ -1,7 +1,7 @@
 <template>
 
     <div class="panel-heading">
-        {{ screengroup.name }}
+        {{ screengroup.name || trans('screengroup.edit') }}
     </div>
 
     <div class="panel-body" v-if="$loadingRouteData">
