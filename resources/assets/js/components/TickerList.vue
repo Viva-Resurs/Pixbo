@@ -6,7 +6,7 @@
 
     <div class="panel-body" v-if="tickers.length > 0">
 
-        <div class="search_group">
+        <div class="search_group" v-if="this.from!='screengroup'">
             <div class="search_input">
                 <input class="form-control"
                        name="search"
@@ -23,16 +23,41 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>{{ trans('general.id') }}</th>
-                    <th>{{ trans('general.text') }}</th>
-                    <th>{{ trans('screengroup.model') }}</th>
-                    <th width="120px">{{ trans('general.action') }}</th>
+                    <th class="hidden">
+                        {{ trans('general.id') }}
+                        <button class="btn btn-xs fa fa-btn
+                            btn-{{(order=='id')?'primary':'default'}}
+                            fa-caret-{{ (order=='id' && desc==-1) ? 'up' : 'down' }}"
+                            @click="sortBy('id')"></button>
+                    </th>
+                    <th>
+                        {{ trans('general.text') }}
+                        <button class="btn btn-xs fa fa-btn
+                            btn-{{(order=='text')?'primary':'default'}}
+                            fa-sort-alpha-{{ (order=='text' && desc==-1) ? 'desc' : 'asc' }}"
+                            @click="sortBy('text')"></button>
+                    </th>
+                    <th>
+                        {{ trans('screengroup.model') }}
+                        <button class="btn btn-xs fa fa-btn
+                            btn-{{(order=='screengroups')?'primary':'default'}}
+                            fa-sort-amount-{{ (order=='screengroups' && desc==-1) ? 'desc' : 'asc' }}"
+                            @click="sortBy('screengroups')"></button>
+                    </th>
+                    <th>
+                        {{ trans('general.updated_at') }}
+                        <button class="btn btn-xs fa fa-btn
+                            btn-{{(order=='event.updated_at')?'primary':'default'}}
+                            fa-caret-{{ (order=='event.updated_at' && desc==-1) ? 'up' : 'down' }}"
+                            @click="sortBy('event.updated_at','desc')"></button>
+                    </th>
+                    <th width="1px">{{ trans('general.action') }}</th>
                 </tr>
             </thead>
             <tbody>
 
-                <tr v-for="ticker in tickers | orderBy order desc | filterBy filter | filterBy pagination" class="tickerPost">
-                    <td>{{ ticker.id }}</td>
+                <tr v-for="ticker in tickers | orderBy sortFunction | filterBy filter | filterBy pagination" class="tickerPost">
+                    <td class="hidden">{{ ticker.id }}</td>
                     <td><a v-link="{ path: '/tickers/'+ticker.id }">{{ ticker.text }}</a></td>
                     <td>
                         <span v-for="sg in getScreengroup(ticker)">
@@ -47,12 +72,13 @@
                             
                         </span>
                     </td>
+                    <td>{{ ticker.event.updated_at.substring(0,ticker.event.updated_at.indexOf(' ')) }}</td>
                     <td>
                         <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/tickers/'+ticker.id }"
                            v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
-                        <a v-if="this.from=='screengroup'" class="btn btn-primary btn-xs fa fa-minus" v-on:click="removeTicker($index)"
+                        <a v-if="this.from=='screengroup'" class="btn btn-primary btn-xs fa fa-minus" v-on:click="removeTicker(ticker.id)"
                            v-tooltip data-original-title="{{ trans('screengroup.remove_association') }}"></a>
-                        <a v-else class="btn btn-primary btn-xs fa fa-times" v-on:click="removeTicker($index)"
+                        <a v-else class="btn btn-primary hover-danger btn-xs fa fa-times" v-on:click="removeTicker(ticker.id)"
                            v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
                     </td>
                     <!-- template v-if="toggleShowAllResultsBtn($index)"></template -->
@@ -105,6 +131,7 @@
 
         methods: {
 
+            // Navigate in pagination
             firstPage(){
                 this.offset = 0;
             },
@@ -117,6 +144,13 @@
                 this.offset = p*this.maxIthems;
             },
 
+            // Change ordering
+            sortBy(what,desc){
+                this.desc = (this.order == what) ? this.desc*=-1 : (desc) ? -1 : 1;
+                this.order = what || event.updated_at;
+            },
+
+            // Calculate number of pages
             countPages(){
                 var p = 1;
                 for (var i=0, c=0 ; i<this.tickers.length ; i++, c++){
@@ -127,6 +161,7 @@
                 return p;
             },
 
+            // Check which page offset is at
             getCurrentPage(){
                 var p = 1;
                 for (var i=0, c=0 ; i<this.tickers.length ; i++, c++){
@@ -138,6 +173,53 @@
                 }
             },
 
+            // Sorting
+            sortFunction(a, b) {
+                
+                var checkA = a;
+                var checkB = b;
+
+                // Dig down to the properties to compare
+                var level = this.order.split('.');
+
+                for (var i=0; i<level.length ; i++){
+                    if (!checkA[level[i]] || !checkB[level[i]])
+                        return 0;
+                    checkA = checkA[level[i]];
+                    checkB = checkB[level[i]];
+                }
+
+                // Compare numbers
+                if (typeof checkA == 'number'){
+                    if (checkA == checkB)
+                        return 0;
+                    return (checkA - checkB) * this.desc;
+                }
+
+                // Compare strings
+                if (typeof checkA == 'string'){
+                    checkA = checkA.toLowerCase();
+                    checkB = checkB.toLowerCase();
+
+                    // Char by char
+                    for (var i=0 ; i<checkA.length ; i++){
+                        if (checkA[i] < checkB[i])
+                            return -1 * this.desc;
+                        if (checkA[i] > checkB[i])
+                            return 1 * this.desc;
+                    }
+                    return 0;
+                }
+
+                // Compare array lengths
+                if (typeof checkA == 'object'){
+                    if (checkA.length == checkB.length)
+                        return 0;
+                    return (checkA.length - checkB.length) * this.desc;
+                }
+            },
+
+            // Search filter
             filter(ob,index){
                 if (this.search!=''){
                     if (ob.text.toLowerCase().indexOf(this.search.toLowerCase())>-1)
@@ -150,6 +232,7 @@
                 return true;
             },
 
+            // Limit number of posts
             pagination(ob,index){
                 // Show results limited by maxResults
                 if (this.search!=''){
@@ -162,11 +245,13 @@
                 return (index >= this.offset && index < this.offset+this.maxIthems)
             },
 
+            // Turn of limit in search
             showAllResults(){
                 this.maxResults = 0;
                 this.showAllBtn=false;
             },
 
+            // Reset when search changes
             resetMaxResults(){
                 this.maxResults = 6;
                 if (this.search!='' && this.maxResults!=0 && $('.tickerPost').length>=this.maxResults)
@@ -175,8 +260,9 @@
                     this.showAllBtn=false;
             },
 
-            removeTicker(index) {
-                this.$dispatch('remove-ticker', index);
+
+            removeTicker(id) {
+                this.$dispatch('remove-ticker', id);
             },
 
             getScreengroup(ticker) {

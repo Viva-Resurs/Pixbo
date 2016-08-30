@@ -20,27 +20,39 @@
 
         methods: {
 
-            attemptDeleteTicker(index) {
+            attemptDeleteTicker(id) {
 
                 this.confirm({
-                    callback:this.deleteTicker, arg:index,
+                    callback:this.deleteTicker, arg:id,
                     text: this.trans('screengroup.remove_association')
                 });
 
             },
 
-            deleteTicker(index) {
+            deleteTicker(tickerID) {
 
                 var self = this;
 
-                client({ path: '/screengroups/' + self.id + '/ticker/' + self.tickers[index].id, method: 'DELETE' }).then(
+                var removeIndex = -1;
+
+                for (var i=0; i<self.tickers.length ; i++)
+                    if (self.tickers[i].id == tickerID)
+                        removeIndex = i;
+
+                if (removeIndex==-1)
+                    return self.$dispatch('alert', {
+                        message: self.trans('screengroup.ticker_association_removed_fail'),
+                        options: {theme: 'error'}
+                    });
+
+                client({ path: '/screengroups/' + self.id + '/ticker/' + tickerID, method: 'DELETE' }).then(
 
                     function (response) {
 
-                        self.tickers.splice(index, 1);
+                        self.tickers.splice(removeIndex, 1);
 
                         self.$dispatch('alert', {
-                            message: that.trans('screengroup.ticker_association_removed'),
+                            message: self.trans('screengroup.ticker_association_removed'),
                             options: {theme: 'success'}
                         });
 
@@ -49,7 +61,7 @@
                     function (response) {
 
                         self.$dispatch('alert', {
-                            message: that.trans('screengroup.ticker_association_removed_fail'),
+                            message: self.trans('screengroup.ticker_association_removed_fail'),
                             options: {theme: 'error'}
                         });
 
@@ -62,8 +74,8 @@
         },
 
         ready: function() {
-            this.$on('remove-ticker', function (index) {
-                this.attemptDeleteTicker(index);
+            this.$on('remove-ticker', function (id) {
+                this.attemptDeleteTicker(id);
             });
         }
 

@@ -64,7 +64,8 @@ const lang = {
         back:                       "Tillbaka",
         save:                       "Spara",
         preview:                    "Förhandsvisa",
-        nothing_selected:           "Inget markerat"
+        nothing_selected:           "Inget markerat",
+        updated_at:                 "Ändrad"
     },
     /* ----------------------------- SETTINGS ----------------------------- */
     settings: {
