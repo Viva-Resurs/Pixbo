@@ -21,7 +21,10 @@
                 store.authenticated = true;
                 store.token = localStorage.getItem('jwt-token');
 
-                this.loginCheck = setInterval( this.getUser, 1000*30 );
+                if (this.$root.loginCheck)
+                    clearInterval(this.$root.loginCheck);
+                this.$root.loginCheck = false;
+                this.$root.loginCheck = setInterval( this.getUser, 1000*30 );
 
             },
 
@@ -37,6 +40,10 @@
                 store.authenticated = false;
                 
                 localStorage.removeItem('jwt-token');
+                
+                if (this.$root.loginCheck)
+                    clearInterval(this.$root.loginCheck);
+                this.$root.loginCheck = false;
 
                 this.$route.router.go('/auth/login');
 
