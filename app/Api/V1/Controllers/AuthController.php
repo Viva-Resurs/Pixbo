@@ -82,8 +82,13 @@ class AuthController extends Controller
             throw new ValidationHttpException($validator->errors()->all());
         }
 
-        $response = Password::sendResetLink($request->only('email'), function (Message $message) {
-            $message->subject(Config::get('boilerplate.recovery_email_subject'));
+        $user = User::where('email', $request->only('email'))->first();
+
+        $response = Password::sendResetLink($request->only('email'), function (Message $message) use ($user) {
+            $token = Password::createToken( $user );
+            $message->from( 'pixbo@viva.se' );
+            $message->subject('Password Reset @ Pixbo');
+            $message->setBody( view('auth.emails.password',['token'=>$token,'user'=>$user]) );
         });
 
         switch ($response) {
