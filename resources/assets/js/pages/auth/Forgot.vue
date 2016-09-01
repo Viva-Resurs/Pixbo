@@ -91,7 +91,11 @@
                     
                     function (response) {
 
-                        self.done = true;
+                        self.$dispatch('alert', {
+                            message: self.trans('auth.password_reset_ok'),
+                            options: {theme: 'success'}
+                        });
+                        //self.done = true;
 
                     },
 
