@@ -24,6 +24,8 @@
                                v-form-ctrl
                                v-is-unique:user
                                required
+                               minlength="4"
+                               maxlength="30"
                         >
                     </div>
                 </div>
