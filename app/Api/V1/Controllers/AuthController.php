@@ -122,9 +122,9 @@ class AuthController extends Controller
 
         switch ($response) {
             case Password::PASSWORD_RESET:
-                if(Config::get('boilerplate.reset_token_release')) {
-                    return $this->login($request);
-                }
+                //if(Config::get('boilerplate.reset_token_release')) {
+                //    return $this->login($request);
+                //}
                 return $this->response->noContent();
 
             default:
