@@ -8,12 +8,16 @@ const lang = {
         register:                   "Registrera",
         password:                   "Lösenord",
         password_repeat:            "Bekräfta lösenord",
+        password_new:               "Nytt lösenord",
+        password_new_repeat:        "Bekräfta nytt lösenord",
         invalid_credentials:        "Ogiltiga uppgifter, försök igen",
         forgot_password:            "Glömt lösenord?",
         password_reset:             "Återställ lösenord",
         name:                       "Användarnamn",
-        password_reset_ok:          "En länk för återställning har nu skickats.",
-        password_reset_fail:        "Misslyckades att skicka länk för återställning, försök igen."
+        password_reset_ok:          "Lösenordet har återställts.",
+        password_reset_fail:        "Misslyckades att återställa lösenordet, försök igen.",
+        mail_password_reset_ok:     "En länk för återställning har nu skickats.",
+        mail_password_reset_fail:   "Misslyckades att skicka länk för återställning, försök igen."
     },
     /* ----------------------------- ROLE ----------------------------- */
     role: {
@@ -33,6 +37,7 @@ const lang = {
         required:                  "Fältet måste fyllas i",
         minlength:                 "För få tecken",
         isUnique:                  "Fältet är inte unikt",
+        isEqual:                   "Fälten stämmer inte överens",
         customValidator:           "Fältet innehåller fel",
         email:                     "Ogiltig e-post"
     },
@@ -63,6 +68,7 @@ const lang = {
         cancel:                     "Avbryt",
         back:                       "Tillbaka",
         save:                       "Spara",
+        send:                       "Skicka",
         preview:                    "Förhandsvisa",
         nothing_selected:           "Inget markerat",
         updated_at:                 "Ändrad"
