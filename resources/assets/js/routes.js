@@ -19,6 +19,10 @@ module.exports = {
                     '/forgot': {
                         name: 'auth.forgot',
                         component: require('./pages/auth/Forgot.vue')
+                    },
+                    '/forgot/:token/:email': {
+                        name: 'auth.forgot',
+                        component: require('./pages/auth/Forgot.vue')
                     }
                 }
             },
