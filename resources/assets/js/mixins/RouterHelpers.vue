@@ -42,7 +42,10 @@
                 if (this.$route.path){
 
                     let path = this.$root.$route.path.split('/');
-                    router.go({ name: path[1] + '.index' });
+                    if (path[1]=='auth')
+                        router.go({ name: 'auth.login' });
+                    else
+                        router.go({ name: path[1] + '.index' });
 
                 }
                 
