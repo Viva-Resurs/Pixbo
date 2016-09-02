@@ -45,7 +45,8 @@
                     clearInterval(this.$root.loginCheck);
                 this.$root.loginCheck = false;
 
-                this.$route.router.go('/auth/login');
+                if (this.$route.auth)
+                    this.$route.router.go('/auth/login');
 
             },
 

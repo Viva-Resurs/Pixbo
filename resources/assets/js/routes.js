@@ -191,6 +191,7 @@ module.exports = {
                     transition.redirect('/')
                 }
             }
+            
             transition.next()
         })
     }
