@@ -13,7 +13,7 @@
                 </a>
 
                 <template v-if="from=='screen' || from=='screengroup'">
-                    <a class="btn btn-danger btn-lg" v-on:click="deleteScreen()">
+                    <a class="btn btn-danger btn-lg" v-on:click="deleteScreen(screen.id)">
                         <template v-if="from=='screengroup'">
                             <span class="fa fa-minus" v-tooltip data-original-title="{{ trans('screengroup.remove_association') }}"></span>
                         </template>
@@ -40,11 +40,11 @@
 
         name: 'ScreenCard',
 
-        props: [ 'screen', 'index', 'from' ],
+        props: [ 'screen', 'from' ],
 
         methods: {
-            deleteScreen() {
-                this.$dispatch('remove-screen', this.index);
+            deleteScreen(id) {
+                this.$dispatch('remove-screen', this.id);
             }
         }
 
