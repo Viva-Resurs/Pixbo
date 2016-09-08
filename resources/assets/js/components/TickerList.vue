@@ -6,110 +6,78 @@
 
     <div class="panel-body" v-if="tickers.length > 0">
 
-        <div class="search_group" v-if="this.from!='screengroup'">
-            <div class="search_input">
-                <input class="form-control"
-                       name="search"
-                       id="search"
-                       type="text"
-                       v-model="search"
-                       v-on:keyup="resetMaxResults"
-                       placeholder="{{ trans('general.search') }}" 
-                >
-                <span class="fa fa-search search_icon"></span>
-            </div>
-        </div>
+        <search-filter v-if="from!='screengroup'"
+            :search.sync="search"
+        >
+        </search-filter>
 
         <table class="table">
             <thead>
-                <tr>
-                    <th class="hidden">
-                        {{ trans('general.id') }}
-                        <button class="btn btn-xs fa fa-btn
-                            btn-{{(order=='id')?'primary':'default'}}
-                            fa-caret-{{ (order=='id' && desc==-1) ? 'up' : 'down' }}"
-                            @click="sortBy('id')"></button>
-                    </th>
-                    <th>
-                        {{ trans('general.text') }}
-                        <button class="btn btn-xs fa fa-btn
-                            btn-{{(order=='text')?'primary':'default'}}
-                            fa-sort-alpha-{{ (order=='text' && desc==-1) ? 'desc' : 'asc' }}"
-                            @click="sortBy('text')"></button>
-                    </th>
-                    <th>
-                        {{ trans('screengroup.model') }}
-                        <button class="btn btn-xs fa fa-btn
-                            btn-{{(order=='screengroups')?'primary':'default'}}
-                            fa-sort-amount-{{ (order=='screengroups' && desc==-1) ? 'desc' : 'asc' }}"
-                            @click="sortBy('screengroups')"></button>
-                    </th>
-                    <th>
-                        {{ trans('general.updated_at') }}
-                        <button class="btn btn-xs fa fa-btn
-                            btn-{{(order=='event.updated_at')?'primary':'default'}}
-                            fa-caret-{{ (order=='event.updated_at' && desc==-1) ? 'up' : 'down' }}"
-                            @click="sortBy('event.updated_at','desc')"></button>
+                <tr v-if="tickers.length>0">
+                    <th v-for="(key, value) in columns">
+                        {{ value.title }}
+                        <button class="
+                            btn btn-xs fa fa-btn
+                            {{ (this.order==key) ? 'btn-primary ' : 'btn-default '}}
+                            {{ (value.type=='number') ? (this.order==key && this.desc==-1) ? ' fa-caret-up' : ' fa-caret-down' : '' }}
+                            {{ (value.type=='string') ? (this.order==key && this.desc==-1) ? ' fa-sort-alpha-desc' : ' fa-sort-alpha-asc' : '' }}
+                            {{ (value.type=='object') ? (this.order==key && this.desc==-1) ? ' fa-sort-amount-desc' : ' fa-sort-amount-asc' : '' }}
+                        " @click="setOrder(key)"></button>
                     </th>
                     <th width="1px">{{ trans('general.action') }}</th>
                 </tr>
             </thead>
             <tbody>
-
-                <tr v-for="ticker in tickers | orderBy sortFunction | filterBy filter | filterBy pagination" class="tickerPost">
-                    <td class="hidden">{{ ticker.id }}</td>
-                    <td><a v-link="{ path: '/tickers/'+ticker.id }">{{ ticker.text }}</a></td>
+                <tr v-for="object in tickers | orderBy deepSort | filterBy searchFilter | filterBy rangeFilter" v-if="typeof object == 'object'">
+                    <td class="hidden">{{ object.id }}</td>
+                    <td><a v-link="{ path: '/tickers/'+object.id }">{{ object.text }}</a></td>
                     <td>
-                        <span v-for="sg in getScreengroup(ticker)">
+                        <span v-for="sg in object.screengroups">
                             <template v-if="$route.path == '/screengroups/'+sg.id">
                                 <b>{{ sg.name }}</b>
                             </template>
                             <template v-else>
-                                <a v-if="ticker.screengroups.length>3" v-link="{ path: '/screengroups/'+sg.id }"
+                                <a v-if="object.screengroups.length>3" v-link="{ path: '/screengroups/'+sg.id }"
                                    v-tooltip data-original-title='{{sg.name}}'>{{ sg.name.substring(0,7)+'..' }}</a>
                                 <a v-else v-link="{ path: '/screengroups/'+sg.id }">{{ sg.name }}</a>
                             </template>
                             
                         </span>
                     </td>
-                    <td>{{ ticker.event.updated_at.substring(0,ticker.event.updated_at.indexOf(' ')) }}</td>
+                    <td>{{ object.event.updated_at.substring(0,object.event.updated_at.indexOf(' ')) }}</td>
                     <td>
-                        <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/tickers/'+ticker.id }"
+                        <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/tickers/'+object.id }"
                            v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
-                        <a v-if="this.from=='screengroup'" class="btn btn-primary btn-xs fa fa-minus" v-on:click="removeTicker(ticker.id)"
+                        <a v-if="this.from=='screengroup'" class="btn btn-primary btn-xs fa fa-minus" v-on:click="removeObject(object.id)"
                            v-tooltip data-original-title="{{ trans('screengroup.remove_association') }}"></a>
-                        <a v-else class="btn btn-primary hover-danger btn-xs fa fa-times" v-on:click="removeTicker(ticker.id)"
+                        <a v-else class="btn btn-primary hover-danger btn-xs fa fa-times" v-on:click="removeObject(object.id)"
                            v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
-                    </td>
-                    <!-- template v-if="toggleShowAllResultsBtn($index)"></template -->
-                </tr>
-                <tr v-if="showAllBtn">
-                    <td colspan="4">
-                        <button class="btn btn-default search_expander" @click="showAllResults">{{ trans('general.showallresults') }}</button>
                     </td>
                 </tr>
             </tbody>
         </table>
 
-        <div class="btn-toolbar pagination" v-show="search=='' && tickers.length>maxIthems">
-            <div class="btn-group" role="group">
-                <button class="btn btn-default" @click="firstPage"><span class="fa fa-btn fa-angle-double-left"></span></button>
+        <pagination
+            :total.sync="tickers.length"
+            :offset.sync="offset"
+            :limit.sync="limit"
+            :show-pagination="(search=='' && !limitOffBtn)"
+        >
+            <div slot="replacePagination">
+                <button v-if="limitOffBtn" class="btn btn-default search_expander" @click="limitOff = true">
+                    {{ trans('general.showallresults') }}
+                </button>
             </div>
-            <div v-for="n in countPages()" class="btn-group" role="group">
-                <button class="btn btn-{{(n+1==getCurrentPage()) ? 'primary' : 'default'}}" @click="toPage(n)">{{n+1}}</button>
-            </div>
-            <div class="btn-group" role="group">
-                <button class="btn btn-default" @click="lastPage"><span class="fa fa-btn fa-angle-double-right"></span></button>
-            </div>
-        </div>
-
-
+        </pagination>
 
     </div>
 
 </template>
 
 <script type="text/ecmascript-6">
+import SortingData from '../mixins/SortingData.vue'
+import Pagination from './Pagination.vue'
+import SearchFilter from './SearchFilter.vue'
 
     export default {
 
@@ -117,158 +85,60 @@
 
         props: [ 'tickers', 'from' ],
 
+        mixins: [ SortingData ],
+
+        components: [ Pagination, SearchFilter ],
+
         data: function(){
             return {
+                columns: {},
+
+                search: '',
+
+                limitOff: false,
+                limitOffBtn: false,
+                
                 order: 'event.updated_at',
                 desc: -1,
-                search: '',
+
                 offset: 0,
-                maxIthems: 50,
-                maxResults: 7,
-                showAllBtn: false
+                limit: 10,
             }
         },
 
         methods: {
 
-            // Navigate in pagination
-            firstPage(){
-                this.offset = 0;
+            // Use searchFilter
+            searchFilter(object,index){
+                return SearchFilter.filters.searchFilter(object,index,this.search,this.columns);
             },
 
-            lastPage(){
-                this.offset = this.tickers.length-(((this.tickers.length-1)%this.maxIthems)+1);
+            // Use rangeFilter
+            rangeFilter(object,index){
+                return Pagination.filters.rangeFilter(object,index,this);
             },
 
-            toPage(p){
-                this.offset = p*this.maxIthems;
-            },
-
-            // Change ordering
-            sortBy(what,desc){
-                this.desc = (this.order == what) ? this.desc*=-1 : (desc) ? -1 : 1;
-                this.order = what || event.updated_at;
-            },
-
-            // Calculate number of pages
-            countPages(){
-                var p = 1;
-                for (var i=0, c=0 ; i<this.tickers.length ; i++, c++){
-                    if (c+1==this.maxIthems && i<this.tickers.length-p){
-                        p++; c=0;
-                    }
-                }
-                return p;
-            },
-
-            // Check which page offset is at
-            getCurrentPage(){
-                var p = 1;
-                for (var i=0, c=0 ; i<this.tickers.length ; i++, c++){
-                    if (i==this.offset)
-                        return p;
-                    if (c+1==this.maxIthems){
-                        p++; c=0;
-                    }
-                }
-            },
-
-            // Sorting
-            sortFunction(a, b) {
-                
-                var checkA = a;
-                var checkB = b;
-
-                // Dig down to the properties to compare
-                var level = this.order.split('.');
-
-                for (var i=0; i<level.length ; i++){
-                    if (!checkA[level[i]] || !checkB[level[i]])
-                        return 0;
-                    checkA = checkA[level[i]];
-                    checkB = checkB[level[i]];
-                }
-
-                // Compare numbers
-                if (typeof checkA == 'number'){
-                    if (checkA == checkB)
-                        return 0;
-                    return (checkA - checkB) * this.desc;
-                }
-
-                // Compare strings
-                if (typeof checkA == 'string'){
-                    checkA = checkA.toLowerCase();
-                    checkB = checkB.toLowerCase();
-
-                    // Char by char
-                    for (var i=0 ; i<checkA.length ; i++){
-                        if (checkA[i] < checkB[i])
-                            return -1 * this.desc;
-                        if (checkA[i] > checkB[i])
-                            return 1 * this.desc;
-                    }
-                    return 0;
-                }
-
-                // Compare array lengths
-                if (typeof checkA == 'object'){
-                    if (checkA.length == checkB.length)
-                        return 0;
-                    return (checkA.length - checkB.length) * this.desc;
-                }
-            },
-
-            // Search filter
-            filter(ob,index){
-                if (this.search!=''){
-                    if (ob.text.toLowerCase().indexOf(this.search.toLowerCase())>-1)
-                        return true;
-                    for (var i=0 ; i<ob.screengroups.length ; i++)
-                        if (ob.screengroups[i].name.toLowerCase().indexOf(this.search.toLowerCase())>-1)
-                            return true;
-                    return false;
-                }
-                return true;
-            },
-
-            // Limit number of posts
-            pagination(ob,index){
-                // Show results limited by maxResults
-                if (this.search!=''){
-                    if (this.maxResults)
-                        return (index<this.maxResults);
-                    else
-                        return true;
-                }
-                // Show contents in range
-                return (index >= this.offset && index < this.offset+this.maxIthems)
-            },
-
-            // Turn of limit in search
-            showAllResults(){
-                this.maxResults = 0;
-                this.showAllBtn=false;
-            },
-
-            // Reset when search changes
-            resetMaxResults(){
-                this.maxResults = 6;
-                if (this.search!='' && this.maxResults!=0 && $('.tickerPost').length>=this.maxResults)
-                    this.showAllBtn=true;
-                else
-                    this.showAllBtn=false;
-            },
-
-
-            removeTicker(id) {
+            // Removing objects
+            removeObject(id) {
                 this.$dispatch('remove-ticker', id);
-            },
-
-            getScreengroup(ticker) {
-                return ticker.screengroups;
             }
 
+        },
+
+        watch: {
+            // Reset show all results when editing search
+            search: function(val, oldVal){
+                this.offset = 0;
+                this.limitOff = false;
+            }
+        },
+
+        created: function(){
+            this.columns = {
+                'text'             : { title: this.trans('general.text'),       type: 'string', search: true  },
+                'screengroups'     : { title: this.trans('screengroup.model'),  type: 'object', search: true  },
+                'event.updated_at' : { title: this.trans('general.updated_at'), type: 'number', search: false }
+            };
         }
 
     }
