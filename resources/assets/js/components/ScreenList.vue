@@ -1,7 +1,3 @@
-/**
-* Created by Christoffer Isenberg on 16-May-16.
-*/
-
 <template>
 
     <div class="panel-body" v-if="screens.length == 0">
@@ -9,17 +5,40 @@
     </div>
 
     <div class="panel-body" v-if="screens.length > 0">
+
+        <search-filter v-if="from!='screengroup'"
+            :search.sync="search"
+        >
+        </search-filter>
+
         <div class="row">
-            <div v-for="screen in screens">
-                <screen-card :screen="screen" :index="$index" :from="from"></screen-card>
+            <div v-for="screen in screens | orderBy deepSort | filterBy searchFilter | filterBy rangeFilter">
+                <screen-card :screen="screen" :from="from"></screen-card>
             </div>
         </div>
+
+        <pagination
+            :total.sync="screens.length"
+            :offset.sync="offset"
+            :limit.sync="limit"
+            :show-pagination="(search=='' && !limitOffBtn)"
+        >
+            <div slot="replacePagination">
+                <button v-if="limitOffBtn" class="btn btn-default search_expander" @click="limitOff = true">
+                    {{ trans('general.showallresults') }}
+                </button>
+            </div>
+        </pagination>
+
     </div>
 
 </template>
 
 <script type="text/ecmascript-6">
     import ScreenCard from './ScreenCard.vue'
+    import SortingData from '../mixins/SortingData.vue'
+    import Pagination from './Pagination.vue'
+    import SearchFilter from './SearchFilter.vue'
 
     export default {
 
@@ -27,7 +46,56 @@
 
         props: [ 'screens', 'from' ],
 
-        components: { ScreenCard }
+        data: function(){
+            return {
+                columns: {},
+
+                search: '',
+
+                limitOff: false,
+                limitOffBtn: false,
+                
+                order: 'event.updated_at',
+                desc: -1,
+
+                offset: 0,
+                limit: 10,
+            }
+        },
+
+        mixins: [ SortingData ],
+
+        components: [ ScreenCard, Pagination, SearchFilter ],
+
+        methods: {
+
+            // Use searchFilter
+            searchFilter(object,index){
+                return SearchFilter.filters.searchFilter(object,index,this.search,this.columns);
+            },
+
+            // Use rangeFilter
+            rangeFilter(object,index){
+                return Pagination.filters.rangeFilter(object,index,this);
+            },
+
+        },
+
+        watch: {
+            // Reset show all results when editing search
+            search: function(val, oldVal){
+                this.offset = 0;
+                this.limitOff = false;
+            }
+        },
+
+        created: function(){
+            this.columns = {
+                'photo.originalName' : { title: this.trans('general.name'),       type: 'string', search: true  },
+                'screengroups'       : { title: this.trans('screengroup.model'),  type: 'object', search: true  },
+                'event.updated_at'   : { title: this.trans('general.updated_at'), type: 'number', search: false }
+            };
+        }
 
     }
 </script>
