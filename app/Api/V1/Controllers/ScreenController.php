@@ -54,6 +54,35 @@ class ScreenController extends BaseController
     }
 
     /**
+     * Replace a photo
+     *
+     * @param FileUploadForm $form
+     * @return \Dingo\Api\Http\Response|void
+     */
+    public function replacePhoto(FileUploadForm $form, $id) {
+        if (Gate::denies('edit_screens')) {
+            $this->response->error('permission_denied', 401);
+        }
+
+        $screen = Screen::findOrFail($id);
+
+        $result = $form->replacePhoto($screen);
+
+        if($result) {
+            Activity::log([
+                'contentId' => $screen->id,
+                'contentType' => 'Screen',
+                'action' => 'Update',
+                'description' => 'Replaced a Screen',
+                'details' => $screen->toJson(),
+            ]);
+            return $screen->id;
+        } else {
+            return $this->response->error('could_not_replace_screen', 500);
+        }
+    }
+
+    /**
      * Show the Screen
      *
      * @param $id

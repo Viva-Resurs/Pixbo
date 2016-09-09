@@ -40,6 +40,7 @@ $api->version('v1', function ($api) {
         $api->resource('clients', 'App\Api\V1\Controllers\ClientController');
         $api->resource('screengroups', 'App\Api\V1\Controllers\ScreenGroupController');
         $api->resource('screens', 'App\Api\V1\Controllers\ScreenController');
+        $api->post('screens/{id}', 'App\Api\V1\Controllers\ScreenController@replacePhoto');
         $api->resource('tickers', 'App\Api\V1\Controllers\TickerController');
         $api->resource('users', 'App\Api\V1\Controllers\UserController');
         

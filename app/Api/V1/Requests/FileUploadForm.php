@@ -39,6 +39,26 @@ class FileUploadForm extends Request
         ];
     }
 
+    public function replacePhoto($screen) {
+
+        $newFile = $this->file('file');
+
+        $result = DB::transaction(function () use ($newFile, $screen) {
+
+            $photo = $screen->photo;
+            if(!is_null($photo))
+                $photo->delete();
+
+            // find or create screen and add photo to it.
+            $newphoto = Photo::getOrCreate($newFile)->move($newFile);
+ 
+            $screen->photo()->save($newphoto);
+            return $screen;
+        });
+        return $result;
+
+    }
+
     public function persist() {
 
         $newFile = $this->file('file');
