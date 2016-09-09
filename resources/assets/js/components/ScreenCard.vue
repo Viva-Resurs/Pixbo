@@ -4,7 +4,7 @@
 
         <div class="screencard_content">
 
-            <img :src="'/' + screen.photo.thumb_path"
+            <img :src="'/' + ((screen.photo) ? screen.photo.thumb_path : '')"
                 class="screencard_img {{(screen.screengroups.length<1 || screen.category==1)?'inactive':''}}">
 
             <div class="screencard_tools" role="group">

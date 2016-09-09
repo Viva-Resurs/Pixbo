@@ -29,17 +29,12 @@
                         {{ trans('general.file') }}
                     </label>
 
-                    <div class=" model_input">
-                        <input value="{{screen.photo.originalName}}" type="text" name="originalfilename" class="form-control">
+                    <div class="model_input">
+                        <input value="{{ (screen.photo) ? screen.photo.originalName : '' }}" type="text" name="originalfilename" class="form-control">
                         <span class="input-group-addon btn btn-default" @click="changeScreen = true">
                             <span class="fa fa-picture-o"></span>
                         </span>
                     </div>
-
-
-
-
-
                 </div>
                 <div class="form-group" v-else>
                     <div id="dropzone">
