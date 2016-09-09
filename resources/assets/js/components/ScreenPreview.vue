@@ -80,6 +80,12 @@
 
         created: function() {
             this.fetch(this.id);
+            
+            var self = this;
+            
+            this.$on('refresh-thumb', function (id) {
+                self.fetch(id);
+            });
         }
 
     }

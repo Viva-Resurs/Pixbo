@@ -65,7 +65,14 @@
 
         name: 'Screen',
 
-        components: { ScreenPreview }
+        components: { ScreenPreview },
+
+        ready: function(){
+            var self = this;
+            this.$on('refresh-thumb', function (id) {
+                self.$broadcast('refresh-thumb',id);
+            });
+        }
 
     }
 </script>

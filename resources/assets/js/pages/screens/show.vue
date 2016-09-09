@@ -24,6 +24,28 @@
                         </div>
                     </model-selector>
                 </div>
+                <div class="form-group" v-if="!changeScreen">
+                    <label for="originalfilename" class="model_label">
+                        {{ trans('general.file') }}
+                    </label>
+
+                    <div class=" model_input">
+                        <input value="{{screen.photo.originalName}}" type="text" name="originalfilename" class="form-control">
+                        <span class="input-group-addon btn btn-default" @click="changeScreen = true">
+                            <span class="fa fa-picture-o"></span>
+                        </span>
+                    </div>
+
+
+
+
+
+                </div>
+                <div class="form-group" v-else>
+                    <div id="dropzone">
+                        <form class="dropzone" :action="action" id="my-dropzone" v-dropzone></form>
+                    </div>
+                </div>
                 <hr>
             </div>
         </schedule>
@@ -44,8 +66,22 @@
 
         data: function () {
             return {
-                screen: {}
+                screen: {},
+                changeScreen: false
             }
+        },
+
+        computed: {
+
+            action() {
+
+                if(this.options !== undefined)
+                    return this.options.action !== undefined ? this.options.action : '/api/screens';
+
+                return '/api/screens/' + this.screen.id;
+
+            }
+
         },
 
         methods: {
@@ -80,12 +116,63 @@
 
                 );
 
+            },
+
+            initDropzone() {
+
+                var vm = this;
+
+                vm.$nextTick(function () {
+
+                    vm.durpzone = $("#my-dropzone").dropzone({
+                        maxFileSize: 10,
+                        uploadMultiple: false,
+                        maxFiles: 1,
+                        acceptedFiles: '.jpg,.jpeg,.png,.bmp',
+                        dictDefaultMessage: vm.trans('screen.upload_message'),
+                        init: function () {
+
+                            var self = this;
+
+                            // -------- bind events -------- //
+
+                            // Send file starts
+                            self.on("sending", function (file, xhr, formData) {
+                                
+                                if (localStorage.getItem('jwt-token'))
+                                    xhr.setRequestHeader('Authorization', localStorage.getItem('jwt-token'));
+
+                                if ( vm.$root.history.previous == 'screengroups.show' )
+                                    formData.set('screengroups',vm.$root.history.params.id);
+
+                            });
+
+                            self.on("success", function (response) {
+                                
+                                vm.$dispatch('alert', {
+                                    message: vm.trans('screen.uploaded'),
+                                    options: {theme: 'success'}
+                                });
+
+                                vm.$dispatch('refresh-thumb',vm.$route.params.id);
+                                
+                                setTimeout(function(){
+                                    vm.fetch(vm.$route.params.id);
+                                    vm.changeScreen = false;    
+                                },2000);
+
+                            });
+
+                        }
+                    });
+
+                });
+
             }
 
         },
 
         created: function(){
-            this.$loadingRouteData = true;
             this.fetch(this.$route.params.id);
         }
 

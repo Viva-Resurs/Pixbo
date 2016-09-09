@@ -69,6 +69,7 @@ const lang = {
         back:                       "Tillbaka",
         save:                       "Spara",
         send:                       "Skicka",
+        file:                       "Fil",
         preview:                    "Förhandsvisa",
         nothing_selected:           "Inget markerat",
         updated_at:                 "Ändrad"
@@ -166,6 +167,7 @@ const lang = {
         upload:                     "Ladda upp",
         upload_message:             "Dra bilder hit, eller klicka för att bläddra.",
         edit:                       "Redigera bild",
+        change:                     "Byt bild",
         empty:                      "Det finns inga bilder än.",
 
         preview:                    "Förhandsvisning",
