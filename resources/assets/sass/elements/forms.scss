@@ -1,6 +1,6 @@
 .app-screen {
-	label {
-    	font-weight: 300;
+    label {
+        font-weight: 300;
     }
 
     .model_group {
@@ -13,6 +13,17 @@
     
     .model_input {
         @extend .col-sm-7;
+        display: table;
+    }
+
+    // Make borders on .model_input work like .input-group together with input-group-addon
+    .model_input .form-control:first-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    .model_input .form-control:last-child {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
     }
 
     .model_action {
@@ -39,17 +50,4 @@
     .schedule_action {
 
     }
-
-    /*
-    form > div.panel-body > div.form-group > label {
-        @extend .col-sm-2, .col-sm-offset-1;
-    }
-    form > div.panel-body > div.form-group > div {
-        @extend .col-sm-7;
-    }
-
-    option[selected]:before {
-    	
-    }
-    */
 }
