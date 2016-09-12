@@ -8,10 +8,8 @@
         <loading></loading>
     </div>
 
-    <div v-else>
-
+    <div class="panel-body" v-else>
         <screen-list :screens="screens" from="screen"></screen-list>
-
     </div>
 
 </template>

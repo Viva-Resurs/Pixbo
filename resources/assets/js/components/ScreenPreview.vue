@@ -4,20 +4,17 @@
         <loadingthumb></loadingthumb>
     </div>
 
-
-
-    <div class="{{(loading) ? 'hidden' : ''}}">
-<span class="errorthumb fa-stack fa-5x" v-if="errorthumb">
-  <i class="fa fa-file-image-o fa-stack-1x"></i>
-  <i class="fa fa-exclamation fa-stack-1x text-danger"></i>
-</span>
-
-        <img id="ScreenPreviewThumb" class="img-thumbnail" style="cursor:zoom-in" width="100%" @click="showModal = true">
+    <div class="{{(loading) ? 'hidden' : 'previewthumb'}}">
+        <div v-if="errorthumb" class="errorthumb">
+            <span class="fa-stack fa-5x">
+                <i class="fa fa-file-image-o fa-stack-1x"></i>
+                <i class="fa fa-exclamation fa-stack-1x text-danger"></i>
+            </span>
+        </div>
+        <img v-if="!errorthumb" id="ScreenPreviewThumb" class="img-thumbnail" style="cursor:zoom-in" width="100%" @click="showModal = true">
     </div>
 
-
-
-    <modal :show.sync="showModal" backdrop="true" width="90%">
+    <modal :show.sync="showModal" backdrop="true">
         <div slot="modal-header"></div>
         <div slot="modal-body" class="modal-body">
             <img style="margin: auto auto; cursor:zoom-out" id="ScreenPreview" class="img-responsive" @click="showModal = false">

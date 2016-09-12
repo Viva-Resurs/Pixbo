@@ -8,7 +8,7 @@
         <loading></loading>
     </div>
 
-    <div v-else>
+    <div class="panel-body" v-else>
 
         <client-list :clients="clients"></client-list>
         

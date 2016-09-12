@@ -1,7 +1,7 @@
 <template>
-    <div class="pagination col-sm-12">
+    <div class="pagination">
 
-        <div v-if="total>limit" class="col-sm-10 col-xs-10">
+        <div v-if="total>limit" class="pagination_left">
 
             <template v-if="showPagination">
 
@@ -28,12 +28,12 @@
             </template>
         </div>
 
-        <div v-else class="col-sm-10 col-xs-10">
+        <div v-else class="pagination_left">
         </div>
 
 
-        <div class="col-sm-2 col-xs-2"> 
-            <div class="input-group pull-right">
+        <div class="pagination_right"> 
+            <div class="input-group">
                 <select class="form-control selectpicker show-tick"
                         v-model="limit"
                         id="limit"

@@ -4,7 +4,6 @@
         {{ trans('user.create') }}
     </div>
 
-
     <form class="form-horizontal" role="form" v-on:submit.prevent="attemptCreateUser" name="myform" v-form>
         
         <div class="panel-body">

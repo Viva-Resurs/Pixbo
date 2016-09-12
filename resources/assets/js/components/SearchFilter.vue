@@ -1,8 +1,8 @@
 <template>
 
-    <div class="search_group">
+    <div class="searchfilter">
 
-        <div class="search_input">
+        <div class="searchfilter_input">
             <input class="form-control"
                    name="search"
                    id="search"
@@ -10,7 +10,7 @@
                    v-model="search"
                    placeholder="{{ trans('general.search') }}" 
             >
-            <span class="fa fa-search search_icon"></span>
+            <span class="fa fa-search searchfilter_icon"></span>
         </div>
 
     </div>

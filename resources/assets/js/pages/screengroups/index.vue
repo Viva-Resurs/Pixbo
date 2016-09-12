@@ -8,37 +8,37 @@
         <loading></loading>
     </div>
 
-    <div v-else>
+    <div class="panel-body" v-else>
 
-        <div class="panel-body" v-if="screengroups.length == 0 ">
+        <div class="panel-section" v-if="screengroups.length == 0 ">
             {{ trans('screengroup.empty') }}
         </div>
 
-        <table class="table" v-if=" screengroups.length > 0 ">
-            <thead>
-                <tr>
-                    <th>{{ trans('general.id') }}</th>
-                    <th>{{ trans('general.name') }}</th>
-                    <th>{{ trans('general.desc') }}</th>
-                    <th width="120px">{{ trans('general.action') }}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="screengroup in screengroups">
-                    <td>{{ screengroup.id }}</td>
-                    <td><a v-link="{ path: '/screengroups/'+screengroup.id }">{{ screengroup.name }}</a></td>
-                    <td>{{ screengroup.desc }}</td>
-                    <td>
-                        <a class="btn btn-primary btn-xs fa fa-eye " href="/play?mac={{screengroup.preview}}&preview=yes" target="_blank"
-                           v-tooltip data-original-title="{{ trans('general.preview') }}" :disabled="hasPreview($index)"></a>
-                        <a class="btn btn-primary btn-xs fa fa-pencil" v-if="$root.isAdmin" v-link="{ path: '/screengroups/'+screengroup.id }"
-                           v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
-                        <a class="btn btn-primary btn-xs fa fa-times" v-if="$root.isAdmin" v-on:click="attemptDeleteScreengroup($index)"
-                           v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="panel-section" v-if="screengroups.length > 0 ">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>{{ trans('general.name') }}</th>
+                        <th>{{ trans('general.desc') }}</th>
+                        <th width="120px">{{ trans('general.action') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="screengroup in screengroups">
+                        <td><a v-link="{ path: '/screengroups/'+screengroup.id }">{{ screengroup.name }}</a></td>
+                        <td>{{ screengroup.desc }}</td>
+                        <td>
+                            <a class="btn btn-primary btn-xs fa fa-eye " href="/play?mac={{screengroup.preview}}&preview=yes" target="_blank"
+                               v-tooltip data-original-title="{{ trans('general.preview') }}" :disabled="hasPreview($index)"></a>
+                            <a class="btn btn-primary btn-xs fa fa-pencil" v-if="$root.isAdmin" v-link="{ path: '/screengroups/'+screengroup.id }"
+                               v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
+                            <a class="btn btn-primary btn-xs fa fa-times" v-if="$root.isAdmin" v-on:click="attemptDeleteScreengroup($index)"
+                               v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
     </div>
 

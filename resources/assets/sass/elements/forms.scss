@@ -12,12 +12,12 @@
     }
     
     .model_input {
-        @extend .col-sm-7;
+        @extend .col-sm-7, .col-xs-12;
         display: table;
     }
 
     // Make borders on .model_input work like .input-group together with input-group-addon
-    .model_input .form-control:first-child {
+    .model_input .form-control:nth-last-child(2) {
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
     }

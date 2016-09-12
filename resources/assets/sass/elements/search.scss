@@ -1,25 +1,22 @@
-.search_group {
+.searchfilter {
 	@extend .form-group, .has-feedback, .form-horizontal;
+
+	.searchfilter_input {
+		@extend .col-sm-offset-2, .col-sm-8;
+		padding-bottom: 15px;
+
+		.searchfilter_icon {
+			@extend .form-control-feedback;
+			right: 15px;
+			top: 0px !important;
+			position: absolute;
+		}
+
+	}
+
 }
 
-.search_label {
-	@extend .col-sm-2, .col-sm-offset-1, .control-label;
-	padding-top: 7px;
-}
-
-.search_input {
-	@extend .col-sm-offset-2, .col-sm-8;
-	padding-bottom: 15px;
-}
-
-.search_expander {
+.searchresults_expander {
 	margin-left: auto;
 	margin-right: auto;
-}
-
-.search_icon {
-	@extend .form-control-feedback;
-	right: 15px;
-	top: 9px;
-	position: absolute;
 }

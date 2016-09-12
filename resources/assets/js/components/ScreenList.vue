@@ -1,12 +1,12 @@
 <template>
 
-    <div class="panel-body" v-if="screens.length == 0">
+    <div class="panel-section" v-if="screens.length == 0">
         {{ trans('screen.empty') }}
     </div>
 
-    <div class="panel-body" v-if="screens.length > 0">
+    <div class="panel-section" v-if="screens.length > 0">
 
-        <search-filter v-if="from!='screengroup'"
+        <search-filter v-if="from=='screen'"
             :search.sync="search"
         >
         </search-filter>
@@ -24,7 +24,7 @@
             :show-pagination="(search=='' && !limitOffBtn)"
         >
             <div slot="replacePagination">
-                <button v-if="limitOffBtn" class="btn btn-default search_expander" @click="limitOff = true">
+                <button v-if="limitOffBtn" class="btn btn-default searchresults_expander" @click="limitOff = true">
                     {{ trans('general.showallresults') }}
                 </button>
             </div>
