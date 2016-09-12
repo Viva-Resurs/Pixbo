@@ -1,10 +1,10 @@
 .table {
     tr {
         /* Slim all columns (except the first/last) without any wrap */
-        th:not(:first-child):not(:last-child){
+        /*th:not(:first-child):not(:last-child){
             width: 1px;
             white-space: nowrap;
-        }
+        }*/
         /* Pull actions to the right */
         th:last-child {
             text-align: right;
@@ -12,10 +12,10 @@
     }
     tr {
         /* Slim all columns (except the first/last) without any wrap */
-        th:not(:first-child):not(:last-child){
+        /*th:not(:first-child):not(:last-child){
             width: 1px;
             white-space: nowrap;
-        }
+        }*/
         /* Pull actions to the right */
         td:last-child {
             text-align: right;
