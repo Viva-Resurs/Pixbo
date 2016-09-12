@@ -73,14 +73,22 @@ class ScreenGroup extends Model
      * @return array
      */
     public function getActivePhotos() {
+
         $array = [];
+
         foreach($this->screens as $screen) {
-            
-            $shadow_event = $screen->getActiveEvents();
-                if(!$shadow_event->isEmpty()) {
+
+            if($screen->photo){
+
+                $shadow_event = $screen->getActiveEvents();
+                
+                if(!$shadow_event->isEmpty())
                     $array[] = $screen->photo->path;
-                }
+                
+            }
+
         }
+
         return $array;
     }
 
@@ -92,12 +100,14 @@ class ScreenGroup extends Model
     public function getActiveTickers() {
 
         $array = [];
+
         foreach($this->tickers as $ticker) {
             
             $shadow_event = $ticker->getActiveEvents();
-                if(!$shadow_event->isEmpty()) {
-                    $array[] = $ticker->text;
-                }
+            
+            if(!$shadow_event->isEmpty())
+                $array[] = $ticker->text;
+
         }
         
         return $array;
