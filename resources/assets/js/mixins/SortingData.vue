@@ -44,12 +44,37 @@
                     return 0;
                 }
 
-                // Compare array lengths
+                // Compare arrays
                 if (typeof checkA == 'object'){
-                    if (checkA.length == checkB.length)
+                    
+                    // Compare lengths
+                    if (checkA.length != checkB.length)
+                        return (checkA.length - checkB.length) * this.desc;
+
+                    // Compare contents (.name)
+                    for (var i=0 ; i<checkA.length ; i++){
+                        // Nothing to compare
+                        if (!checkA[i].name && !checkB[i].name)
+                            return 0;
+
+                        // Equal
+                        if (checkA[i].name == checkB[i].name)
+                            return 0;
+
+                        // Char by char
+                        for (var c=0 ; c<checkA[i].name.length ; c++){
+                            if (checkA[i].name[c] < checkB[i].name[c])
+                                return 1 * this.desc;
+                            if (checkA[i].name[c] > checkB[i].name[c])
+                                return -1 * this.desc;
+                        }
+
                         return 0;
-                    return (checkA.length - checkB.length) * this.desc;
+
+                    }
+
                 }
+
             },
 
             // Set order & toggle desc
