@@ -63,10 +63,10 @@
 
             },
 
-            attemptDeleteTicker(id) {
+            attemptDeleteTicker(tickerID) {
 
                 this.confirm({
-                    callback:this.deleteTicker, arg:id,
+                    callback:this.deleteTicker, arg:tickerID,
                     confirmButtonText: this.trans('confirm.confirmButtonText_Delete')
                 });
 
@@ -84,7 +84,7 @@
 
                 if (removeIndex==-1)
                     return self.$dispatch('alert', {
-                        message: self.trans('screengroup.ticker_association_removed_fail'),
+                        message: self.trans('ticker.delete_fail'),
                         options: {theme: 'error'}
                     });
 
@@ -117,8 +117,8 @@
         },
 
         ready: function() {
-            this.$on('remove-ticker', function (index) {
-                this.attemptDeleteTicker(index);
+            this.$on('remove-ticker', function (tickerID) {
+                this.attemptDeleteTicker(tickerID);
             });
         },
 
