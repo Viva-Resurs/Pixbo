@@ -34,7 +34,7 @@
         </div>
 
 
-        <div class="pagination_right"> 
+        <div v-show="total>limit && showPagination" class="pagination_right"> 
             <div class="input-group">
                 <select class="form-control selectpicker show-tick"
                         v-model="limit"
