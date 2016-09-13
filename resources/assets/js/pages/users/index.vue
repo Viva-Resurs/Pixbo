@@ -9,47 +9,20 @@
     </div>
 
     <div class="panel-body" v-else>
-
-        <div class="panel-section" v-if="users.length == 0">
-            {{ trans('user.empty') }}
-        </div>
-
-        <div class="panel-section" v-if="users.length > 0">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>{{ trans('general.name') }}</th>
-                        <th>{{ trans('general.email') }}</th>
-                        <th class="slim">{{ trans('role.model') }}</th>
-                        <th class="slim">{{ trans('general.action') }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="user in users">
-                        <td><a v-link="{ path: '/users/'+user.id }">{{ user.name }}</a></td>
-                        <td>{{ user.email }}</td>
-                        <td class="slim"><span v-for="role in user.roles.data">{{ role.name }}</span></td>
-                        <td class="slim">
-                            <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/users/'+user.id }"
-                              v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
-                            <a class="btn btn-primary hover-danger btn-xs fa fa-times" v-on:click="attemptDeleteUser($index)"
-                              v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-    </div>
+        <user-list :users="users"></user-list>
+    </div>   
 
 </template>
 
 <script type="text/ecmascript-6">
+    import UserList from '../../components/UserList.vue'
     import SweetAlert from '../../mixins/SweetAlert.vue'
 
     export default {
 
         name: 'Index',
+
+        components: { UserList },
 
         mixins: [ SweetAlert ],
 
@@ -90,24 +63,36 @@
 
             },
 
-            attemptDeleteUser(index) {
+            attemptDeleteUser(userID) {
 
                 this.confirm({
-                    callback:this.deleteUser, arg:index,
+                    callback:this.deleteUser, arg:userID,
                     confirmButtonText: this.trans('confirm.confirmButtonText_Delete')
                 });
 
             },
 
-            deleteUser(index) {
+            deleteUser(userID) {
 
                 var self = this;
 
-                client({ path: '/users/' + self.users[index].id, method: 'DELETE' }).then(
+                var removeIndex = -1;
+
+                for (var i=0; i<self.users.length ; i++)
+                    if (self.users[i].id == userID)
+                        removeIndex = i;
+
+                if (removeIndex==-1)
+                    return self.$dispatch('alert', {
+                        message: self.trans('user.deleted_fail'),
+                        options: {theme: 'error'}
+                    });
+
+                client({ path: '/users/' + userID, method: 'DELETE' }).then(
 
                     function (response) {
 
-                        self.users.splice(index, 1);
+                        self.users.splice(removeIndex, 1);
 
                         self.$dispatch('alert', {
                             message: self.trans('user.deleted'),
@@ -129,6 +114,12 @@
 
             }
 
+        },
+
+        ready: function() {
+            this.$on('remove-user', function (userID) {
+                this.attemptDeleteTicker(userID);
+            });
         },
 
         created: function(){
