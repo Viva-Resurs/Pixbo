@@ -1,24 +1,18 @@
 .table {
     tr {
-        /* Slim all columns (except the first/last) without any wrap */
-        /*th:not(:first-child):not(:last-child){
+        /* Slim columns without any wrap */
+        .slim {
             width: 1px;
             white-space: nowrap;
-        }*/
-        /* Pull actions to the right */
-        th:last-child {
+        }
+        /* Pull the last column to the right */
+        th:last-child, td:last-child {
             text-align: right;
         }
     }
-    tr {
-        /* Slim all columns (except the first/last) without any wrap */
-        /*th:not(:first-child):not(:last-child){
-            width: 1px;
-            white-space: nowrap;
-        }*/
-        /* Pull actions to the right */
-        td:last-child {
-            text-align: right;
+    tbody {
+        tr:hover {
+            background: $navbar-background;
         }
     }
 }

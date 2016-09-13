@@ -20,19 +20,19 @@
                     <tr>
                         <th>{{ trans('general.name') }}</th>
                         <th>{{ trans('general.desc') }}</th>
-                        <th width="120px">{{ trans('general.action') }}</th>
+                        <th class="slim">{{ trans('general.action') }}</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="screengroup in screengroups">
                         <td><a v-link="{ path: '/screengroups/'+screengroup.id }">{{ screengroup.name }}</a></td>
                         <td>{{ screengroup.desc }}</td>
-                        <td>
+                        <td class="slim">
                             <a class="btn btn-primary btn-xs fa fa-eye " href="/play?mac={{screengroup.preview}}&preview=yes" target="_blank"
                                v-tooltip data-original-title="{{ trans('general.preview') }}" :disabled="hasPreview($index)"></a>
                             <a class="btn btn-primary btn-xs fa fa-pencil" v-if="$root.isAdmin" v-link="{ path: '/screengroups/'+screengroup.id }"
                                v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
-                            <a class="btn btn-primary btn-xs fa fa-times" v-if="$root.isAdmin" v-on:click="attemptDeleteScreengroup($index)"
+                            <a class="btn btn-primary hover-danger btn-xs fa fa-times" v-if="$root.isAdmin" v-on:click="attemptDeleteScreengroup($index)"
                                v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
                         </td>
                     </tr>

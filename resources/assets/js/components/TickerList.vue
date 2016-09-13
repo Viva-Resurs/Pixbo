@@ -14,7 +14,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th v-for="(key, value) in columns">
+                    <th v-for="(key, value) in columns" class="{{ value.classes }}">
                         {{ value.title }}
                         <button class="
                             btn btn-xs fa fa-btn
@@ -24,14 +24,14 @@
                             {{ (value.type=='object') ? (this.order==key && this.desc==-1) ? ' fa-sort-amount-desc' : ' fa-sort-amount-asc' : '' }}
                         " @click="setOrder(key)"></button>
                     </th>
-                    <th width="1px">{{ trans('general.action') }}</th>
+                    <th>{{ trans('general.action') }}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="object in tickers | orderBy deepSort | filterBy searchFilter | filterBy rangeFilter" v-if="typeof object == 'object'">
                     <td class="hidden">{{ object.id }}</td>
                     <td><a v-link="{ path: '/tickers/'+object.id }">{{ object.text }}</a></td>
-                    <td>
+                    <td class="slim">
                         <span v-for="sg in object.screengroups">
                             <template v-if="$route.path == '/screengroups/'+sg.id">
                                 <b>{{ sg.name }}</b>
@@ -44,8 +44,8 @@
                             
                         </span>
                     </td>
-                    <td>{{ object.event.updated_at.substring(0,object.event.updated_at.indexOf(' ')) }}</td>
-                    <td>
+                    <td class="slim">{{ object.event.updated_at.substring(0,object.event.updated_at.indexOf(' ')) }}</td>
+                    <td class="slim">
                         <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/tickers/'+object.id }"
                            v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
                         <a v-if="this.from=='screengroup'" class="btn btn-primary btn-xs fa fa-minus" v-on:click="removeObject(object.id)"
@@ -135,9 +135,9 @@ import SearchFilter from './SearchFilter.vue'
 
         created: function(){
             this.columns = {
-                'text'             : { title: this.trans('general.text'),       type: 'string', search: true  },
-                'screengroups'     : { title: this.trans('screengroup.model'),  type: 'object', search: true  },
-                'event.updated_at' : { title: this.trans('general.updated_at'), type: 'number', search: false }
+                'text'             : { title: this.trans('general.text'),       type: 'string', classes:     '', search: true  },
+                'screengroups'     : { title: this.trans('screengroup.model'),  type: 'object', classes: 'slim', search: true  },
+                'event.updated_at' : { title: this.trans('general.updated_at'), type: 'number', classes: 'slim', search: false }
             };
         }
 

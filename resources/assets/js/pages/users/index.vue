@@ -18,23 +18,21 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>{{ trans('general.id') }}</th>
                         <th>{{ trans('general.name') }}</th>
                         <th>{{ trans('general.email') }}</th>
-                        <th>{{ trans('role.model') }}</th>
-                        <th width="120px">{{ trans('general.action') }}</th>
+                        <th class="slim">{{ trans('role.model') }}</th>
+                        <th class="slim">{{ trans('general.action') }}</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="user in users">
-                        <td>{{ user.id }}</td>
                         <td><a v-link="{ path: '/users/'+user.id }">{{ user.name }}</a></td>
                         <td>{{ user.email }}</td>
-                        <td><span v-for="role in user.roles.data">{{ role.name }}</span></td>
-                        <td>
+                        <td class="slim"><span v-for="role in user.roles.data">{{ role.name }}</span></td>
+                        <td class="slim">
                             <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/users/'+user.id }"
                               v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
-                            <a class="btn btn-primary btn-xs fa fa-times" v-on:click="attemptDeleteUser($index)"
+                            <a class="btn btn-primary hover-danger btn-xs fa fa-times" v-on:click="attemptDeleteUser($index)"
                               v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
                         </td>
                     </tr>

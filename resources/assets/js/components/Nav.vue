@@ -41,7 +41,7 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Login / Registration Links for unauthenticated users -->
-                    <li v-if=" ! $root.isAuthenticated"><a v-link="{ path: '/auth/login' }">{{ trans('auth.login') }}</a></li>
+                    <li v-if="!$root.isAuthenticated"><a v-link="{ path: '/auth/login' }">{{ trans('auth.login') }}</a></li>
                     <!-- Authenticated Right Dropdown -->
                     <li class="dropdown" v-if="$root.isAuthenticated">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
