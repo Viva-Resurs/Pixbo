@@ -14,7 +14,7 @@ const lang = {
         forgot_password:            "Glömt lösenord?",
         password_reset:             "Återställ lösenord",
         name:                       "Användarnamn",
-        password_reset_ok:          "Lösenordet har återställts.",
+        password_reset_ok:          "Lösenordet har återställts!",
         password_reset_fail:        "Misslyckades att återställa lösenordet, försök igen.",
         mail_password_reset_ok:     "En länk för återställning har nu skickats.",
         mail_password_reset_fail:   "Misslyckades att skicka länk för återställning, försök igen."

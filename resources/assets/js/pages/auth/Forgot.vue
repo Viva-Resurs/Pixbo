@@ -65,6 +65,16 @@
 
             </form>
 
+            <div v-if="done">
+
+                <div class="panel-body">
+                    
+                    {{ trans('auth.password_reset_ok'); }}
+
+                </div>
+
+            </div>
+
         </div>
 
         <div v-else>
@@ -106,7 +116,11 @@
             
             <div v-if="done">
 
-                {{ trans('auth.password_reset_ok'); }}
+                <div class="panel-body">
+                    
+                    {{ trans('auth.mail_password_reset_ok'); }}
+
+                </div>
 
             </div>
 
@@ -160,7 +174,7 @@
                             message: self.trans('auth.password_reset_ok'),
                             options: {theme: 'success'}
                         });
-                        //self.done = true;
+                        self.done = true;
 
                     },
 
@@ -196,7 +210,7 @@
                             message: self.trans('auth.mail_password_reset_ok'),
                             options: {theme: 'success'}
                         });
-                        //self.done = true;
+                        self.done = true;
 
                     },
 
