@@ -9,6 +9,23 @@
         <search-filter v-if="from=='screen'"
             :search.sync="search"
         >
+            <div slot="searchfilter_right">
+                <div class="pull-right">
+                    <div class="input-group">
+                        <select class="form-control selectpicker show-tick"
+                                v-model="order"
+                                
+                                id="order"
+                                v-el:select-inputb
+                        >
+                            <option v-for="(key, value) in columns" :value="key">{{value.title}}</option>
+                        </select>
+                        <span class="input-group-addon">
+                            <span class="fa fa-sort"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
         </search-filter>
 
         <div class="row">
@@ -92,9 +109,22 @@
         created: function(){
             this.columns = {
                 'photo.originalName' : { title: this.trans('general.name'),       type: 'string', search: true  },
-                'screengroups'       : { title: this.trans('screengroup.model'),  type: 'object', search: true  },
                 'event.updated_at'   : { title: this.trans('general.updated_at'), type: 'number', search: false }
             };
+
+            this.$nextTick(function() {
+
+                var target = $(this.$els.selectInputb);
+
+                let g = target.selectpicker({
+                    size: 4,
+                    iconBase: 'fa',
+                    tickIcon: 'fa-check'
+                });
+
+                target.selectpicker('refresh');
+
+            });
         }
 
     }
