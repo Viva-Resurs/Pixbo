@@ -2,6 +2,10 @@
 
     <div class="searchfilter">
 
+        <div class="searchfilter_left">
+            <slot name="searchfilter_left"></slot>
+        </div>
+
         <div class="searchfilter_input">
             <input class="form-control"
                    name="search"
@@ -11,6 +15,10 @@
                    placeholder="{{ trans('general.search') }}" 
             >
             <span class="fa fa-search searchfilter_icon"></span>
+        </div>
+
+        <div class="searchfilter_right">
+            <slot name="searchfilter_right"></slot>
         </div>
 
     </div>

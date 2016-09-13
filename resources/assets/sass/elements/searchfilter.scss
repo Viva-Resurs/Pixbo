@@ -1,8 +1,18 @@
 .searchfilter {
-	@extend .form-group, .has-feedback, .form-horizontal;
+	@extend .form-group, .has-feedback, .form-horizontal, .col-sm-12;
+
+	.searchfilter_left {
+		@extend .col-sm-2;
+		padding-bottom: 15px;
+	}
+
+	.searchfilter_right {
+		@extend .col-sm-2;
+		padding-bottom: 15px;
+	}
 
 	.searchfilter_input {
-		@extend .col-sm-offset-2, .col-sm-8;
+		@extend .col-sm-8;
 		padding-bottom: 15px;
 
 		.searchfilter_icon {
