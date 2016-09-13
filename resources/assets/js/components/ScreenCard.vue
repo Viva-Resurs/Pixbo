@@ -6,7 +6,8 @@
 
             <div v-if="screen.photo && screen.photo.thumb_path">
                 <img :src="'/' + screen.photo.thumb_path"
-                    class="screencard_img {{(screen.screengroups.length<1 || screen.category==1)?'inactive':''}}">
+                    class="screencard_img {{(screen.screengroups.length<1 || screen.category==1)?'inactive':''}}"
+                    v-tooltip data-original-title="{{ screen.photo.originalName }}">
             </div>
             <div class="screencard_error" v-else>
                 <span v-else class="fa-stack fa-5x">
