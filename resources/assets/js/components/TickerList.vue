@@ -22,7 +22,7 @@
                             {{ (value.type=='number') ? (this.order==key && this.desc==-1) ? ' fa-caret-up' : ' fa-caret-down' : '' }}
                             {{ (value.type=='string') ? (this.order==key && this.desc==-1) ? ' fa-sort-alpha-desc' : ' fa-sort-alpha-asc' : '' }}
                             {{ (value.type=='object') ? (this.order==key && this.desc==-1) ? ' fa-sort-amount-desc' : ' fa-sort-amount-asc' : '' }}
-                        " @click="setOrder(key)"></button>
+                        " @click="setOrder(key,value.desc)"></button>
                     </th>
                     <th>{{ trans('general.action') }}</th>
                 </tr>
@@ -135,9 +135,9 @@ import SearchFilter from './SearchFilter.vue'
 
         created: function(){
             this.columns = {
-                'text'             : { title: this.trans('general.text'),       type: 'string', classes:     '', search: true  },
-                'screengroups'     : { title: this.trans('screengroup.model'),  type: 'object', classes: 'slim', search: true  },
-                'event.updated_at' : { title: this.trans('general.updated_at'), type: 'number', classes: 'slim', search: false }
+                'text'             : { title: this.trans('general.text'),       type: 'string', classes:     '', search: true              },
+                'screengroups'     : { title: this.trans('screengroup.model'),  type: 'object', classes: 'slim', search: true , desc: true },
+                'event.updated_at' : { title: this.trans('general.updated_at'), type: 'number', classes: 'slim', search: false, desc: true }
             };
         }
 
