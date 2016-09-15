@@ -1,4 +1,3 @@
-
 <template>
 
     <div class="panel-section" v-if="users.length == 0">
@@ -29,7 +28,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="object in users | orderBy deepSort | filterBy searchFilter | filterBy rangeFilter" v-if="typeof object == 'object'">
+                <tr v-for="object in users | filterBy validator | orderBy deepSort | filterBy searchFilter | filterBy rangeFilter">
                     <td class="hidden">{{ object.id }}</td>
                     <td><a v-link="{ path: '/users/'+object.id }">{{ object.name }}</a></td>
                     <td>{{ object.email }}</td>
@@ -95,6 +94,13 @@ import SearchFilter from './SearchFilter.vue'
 
         methods: {
 
+            // Validator filter
+            validator(object,index){
+                if (typeof object != 'object')
+                    return false;
+                return true;
+            },
+            
             // Use searchFilter
             searchFilter(object,index){
                 return SearchFilter.filters.searchFilter(object,index,this.search,this.columns);

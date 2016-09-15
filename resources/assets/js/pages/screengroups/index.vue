@@ -29,11 +29,12 @@
                         <td>{{ screengroup.desc }}</td>
                         <td class="slim">
                             <a class="btn btn-primary btn-xs fa fa-eye " href="/play?mac={{screengroup.preview}}&preview=yes" target="_blank"
-                               v-tooltip data-original-title="{{ trans('general.preview') }}" :disabled="hasPreview($index)"></a>
+                                v-tooltip data-original-title="{{ trans('general.preview') }}" :disabled="hasPreview($index)"></a>
                             <a class="btn btn-primary btn-xs fa fa-pencil" v-if="$root.isAdmin" v-link="{ path: '/screengroups/'+screengroup.id }"
-                               v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
-                            <a class="btn btn-primary hover-danger btn-xs fa fa-times" v-if="$root.isAdmin" v-on:click="attemptDeleteScreengroup($index)"
-                               v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
+                                v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
+                            <a class="btn btn-primary hover-danger btn-xs fa fa-times"
+                                v-if="$root.isAdmin" v-on:click="attemptDeleteScreengroup(screengroup.id)"
+                                v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
                         </td>
                     </tr>
                 </tbody>
@@ -96,24 +97,36 @@
 
             },
 
-            attemptDeleteScreengroup(index) {
+            attemptDeleteScreengroup(screengroupID) {
 
                 this.confirm({
-                    callback:this.deleteScreengroup, arg:index,
+                    callback:this.deleteScreengroup, arg:screengroupID,
                     confirmButtonText: this.trans('confirm.confirmButtonText_Delete')
                 });
 
             },
 
-            deleteScreengroup(index) {
+            deleteScreengroup(screengroupID) {
 
                 var self = this;
 
-                client({ path: '/screengroups/' + self.screengroups[index].id, method: 'DELETE' }).then(
+                var removeIndex = -1;
+
+                for (var i=0; i<self.screengroups.length ; i++)
+                    if (self.screengroups[i].id == screengroupID)
+                        removeIndex = i;
+
+                if (removeIndex==-1)
+                    return self.$dispatch('alert', {
+                        message: self.trans('screengroup.deleted_fail'),
+                        options: {theme: 'error'}
+                    });
+
+                client({ path: '/screengroups/' + screengroupID, method: 'DELETE' }).then(
                     
                     function (response) {
 
-                        self.screengroups.splice(index, 1);
+                        self.screengroups.splice(removeIndex, 1);
 
                         self.$dispatch('alert', {
                             message: self.trans('screengroup.deleted'),

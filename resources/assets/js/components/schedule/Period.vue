@@ -115,7 +115,7 @@
                 }
             };
 
-            options.format = "DD-MM-YY";
+            options.format = "YYYY-MM-DD";
 
             $('.date').datetimepicker(options);
 

@@ -20,24 +20,36 @@
 
         methods: {
 
-            attemptDeleteClient(index) {
+            attemptDeleteClient(clientID) {
 
                 this.confirm({
-                    callback:this.deleteClient, arg:index,
+                    callback:this.deleteClient, arg:clientID,
                     text: this.trans('screengroup.remove_association')
                 });
 
             },
 
-            deleteClient(index) {
+            deleteClient(clientID) {
 
                 var self = this;
 
-                client({ path: '/screengroups/' + this.id + '/client/' + this.clients[index].id, method: 'DELETE' }).then(
+                var removeIndex = -1;
+
+                for (var i=0; i<self.clients.length ; i++)
+                    if (self.clients[i].id == clientID)
+                        removeIndex = i;
+
+                if (removeIndex==-1)
+                    return self.$dispatch('alert', {
+                        message: self.trans('screengroup.client_association_removed_fail'),
+                        options: {theme: 'error'}
+                    });
+
+                client({ path: '/screengroups/' + this.id + '/client/' + clientID, method: 'DELETE' }).then(
                     
                     function (response) {
 
-                        self.clients.splice(index, 1);
+                        self.clients.splice(removeIndex, 1);
 
                         self.$dispatch('alert', {
                             message: self.trans('screengroup.client_association_removed'),
@@ -61,8 +73,8 @@
         },
 
         ready() {
-            this.$on('remove-client', function (index) {
-                this.attemptDeleteClient(index);
+            this.$on('remove-client', function (clientID) {
+                this.attemptDeleteClient(clientID);
             });
         }
 

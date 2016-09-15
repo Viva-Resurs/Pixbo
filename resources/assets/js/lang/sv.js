@@ -71,6 +71,7 @@ const lang = {
         send:                       "Skicka",
         file:                       "Fil",
         preview:                    "Förhandsvisa",
+        order_by:                   "Sortera efter",
         nothing_selected:           "Inget markerat",
         updated_at:                 "Ändrad"
     },

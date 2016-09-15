@@ -28,8 +28,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="object in tickers | orderBy deepSort | filterBy searchFilter | filterBy rangeFilter" v-if="typeof object == 'object'">
-                    <td class="hidden">{{ object.id }}</td>
+                <tr v-for="object in tickers | filterBy validator | orderBy deepSort | filterBy searchFilter | filterBy rangeFilter">
                     <td><a v-link="{ path: '/tickers/'+object.id }">{{ object.text }}</a></td>
                     <td class="slim">
                         <span v-for="sg in object.screengroups">
@@ -107,6 +106,13 @@ import SearchFilter from './SearchFilter.vue'
         },
 
         methods: {
+
+            // Validator filter
+            validator(object,index){
+                if (typeof object != 'object')
+                    return false;
+                return true;
+            },
 
             // Use searchFilter
             searchFilter(object,index){

@@ -32,7 +32,7 @@
                                 v-link="{ path: '/categories/'+category.id }"
                                 v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
                             <a class="btn btn-primary hover-danger btn-xs fa fa-times" v-if="category.id !== 1 && $root.isOwner(category)"
-                                v-on:click="attemptDeleteCategory($index)"
+                                v-on:click="attemptDeleteCategory(category.id)"
                                 v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
                         </td>
                     </tr>
@@ -72,31 +72,42 @@
 
             },
 
-            attemptDeleteCategory(index) {
+            attemptDeleteCategory(categoryID) {
 
                 this.confirm({
-                    callback:this.deleteCategory, arg:index,
+                    callback:this.deleteCategory, arg:categoryID,
                     confirmButtonText: this.trans('confirm.confirmButtonText_Delete')
                 });
 
             },
 
-            deleteCategory (index) {
+            deleteCategory (categoryID) {
 
                 var self = this;
 
-                client({ path: '/categories/' + self.categories[index].id, method: 'DELETE' }).then(
+                var removeIndex = -1;
+
+                for (var i=0; i<self.categories.length ; i++)
+                    if (self.categories[i].id == categoryID)
+                        removeIndex = i;
+
+                if (removeIndex==-1)
+                    return self.$dispatch('alert', {
+                        message: self.trans('category.deleted_fail'),
+                        options: {theme: 'error'}
+                    });
+
+                client({ path: '/categories/' + categoryID, method: 'DELETE' }).then(
 
                     function (response) {
 
-                        self.categories.splice(index, 1);
+                        self.categories.splice(removeIndex, 1);
 
                         self.$dispatch('alert', {
                             message: self.trans('category.deleted'),
                             options: {theme: 'success'}
                         });
 
-                        self.$route.router.go({name:'categories.index'});
                     },
 
                     function (response) {

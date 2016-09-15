@@ -63,24 +63,36 @@
 
             },
 
-            attemptDeleteScreen(index) {
+            attemptDeleteScreen(screenID) {
 
                 this.confirm({
-                    callback:this.deleteScreen, arg:index,
+                    callback:this.deleteScreen, arg:screenID,
                     confirmButtonText: this.trans('confirm.confirmButtonText_Delete')
                 });
 
             },
 
-            deleteScreen(index) {
+            deleteScreen(screenID) {
 
                 var self = this;
 
-                client({ path: '/screens/' + self.screens[index].id, method: 'DELETE' }).then(
+                var removeIndex = -1;
+
+                for (var i=0; i<self.screens.length ; i++)
+                    if (self.screens[i].id == screenID)
+                        removeIndex = i;
+
+                if (removeIndex==-1)
+                    return self.$dispatch('alert', {
+                        message: self.trans('screen.deleted_fail'),
+                        options: {theme: 'error'}
+                    });
+
+                client({ path: '/screens/' + screenID, method: 'DELETE' }).then(
 
                     function (response) {
 
-                        self.screens.splice(index, 1);
+                        self.screens.splice(removeIndex, 1);
 
                         self.$dispatch('alert', {
                             message: self.trans('screen.deleted'),
@@ -105,8 +117,8 @@
         },
 
         ready: function() {
-            this.$on('remove-screen', function (index) {
-                this.attemptDeleteScreen(index);
+            this.$on('remove-screen', function (screenID) {
+                this.attemptDeleteScreen(screenID);
             });
         },
 

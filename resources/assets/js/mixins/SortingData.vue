@@ -12,6 +12,14 @@
                 var checkA = a;
                 var checkB = b;
 
+                // Check Arguments
+                if (!checkA || !checkA)
+                    return 0;
+
+                // Not the same type?
+                if (typeof checkA != typeof checkB)
+                    return 0;
+
                 // Dig down to the properties to compare
                 var level = this.order.split('.');
 

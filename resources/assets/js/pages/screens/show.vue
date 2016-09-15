@@ -129,9 +129,6 @@
 
                             var self = this;
 
-                            // -------- bind events -------- //
-
-                            // Send file starts
                             self.on("sending", function (file, xhr, formData) {
                                 
                                 if (localStorage.getItem('jwt-token'))

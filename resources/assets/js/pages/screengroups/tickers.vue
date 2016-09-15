@@ -20,10 +20,10 @@
 
         methods: {
 
-            attemptDeleteTicker(id) {
+            attemptDeleteTicker(tickerID) {
 
                 this.confirm({
-                    callback:this.deleteTicker, arg:id,
+                    callback:this.deleteTicker, arg:tickerID,
                     text: this.trans('screengroup.remove_association')
                 });
 
@@ -74,8 +74,8 @@
         },
 
         ready: function() {
-            this.$on('remove-ticker', function (id) {
-                this.attemptDeleteTicker(id);
+            this.$on('remove-ticker', function (tickerID) {
+                this.attemptDeleteTicker(tickerID);
             });
         }
 

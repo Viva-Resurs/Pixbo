@@ -20,24 +20,36 @@
 
         methods: {
 
-            attemptDeleteScreen(index) {
+            attemptDeleteScreen(screenID) {
 
                 this.confirm({
-                    callback:this.deleteScreen, arg:index,
+                    callback:this.deleteScreen, arg:screenID,
                     text: this.trans('screengroup.remove_association')
                 });
 
             },
 
-            deleteScreen(index) {
+            deleteScreen(screenID) {
 
                 var self = this;
 
-                client({ path: '/screengroups/' + this.id + '/screen/' + this.screens[index].id, method: 'DELETE' }).then(
+                var removeIndex = -1;
+
+                for (var i=0; i<self.screens.length ; i++)
+                    if (self.screens[i].id == screenID)
+                        removeIndex = i;
+
+                if (removeIndex==-1)
+                    return self.$dispatch('alert', {
+                        message: self.trans('screengroup.screen_association_removed_fail'),
+                        options: {theme: 'error'}
+                    });
+
+                client({ path: '/screengroups/' + self.id + '/screen/' + screenID, method: 'DELETE' }).then(
                     
                     function (response) {
 
-                        self.screens.splice(index, 1);
+                        self.screens.splice(removeIndex, 1);
 
                         self.$dispatch('alert', {
                             message: self.trans('screengroup.screen_association_removed'),
@@ -62,8 +74,8 @@
         },
 
         ready: function() {
-            this.$on('remove-screen', function (index) {
-                this.attemptDeleteScreen(index);
+            this.$on('remove-screen', function (screenID) {
+                this.attemptDeleteScreen(screenID);
             });
         }
 

@@ -17,25 +17,25 @@
             </div>
 
             <div class="screencard_tools" role="group">
-                <a class="btn btn-info btn" v-link="{ path: '/screens/'+screen.id }">
+                <a class="btn btn-info" v-link="{ path: '/screens/'+screen.id }">
                     <span class="fa fa-calendar" v-tooltip data-original-title="{{ trans('screen.edit') }}"></span>
                 </a>
 
-                <template v-if="from=='screen' || from=='screengroup'">
-                    <a class="btn btn-info hover-danger btn" v-on:click="deleteScreen(screen.id)">
-                        <template v-if="from=='screengroup'">
-                            <span class="fa fa-minus" v-tooltip data-original-title="{{ trans('screengroup.remove_association') }}"></span>
-                        </template>
-                        <template v-else>
-                            <span class="fa fa-times" v-tooltip data-original-title="{{ trans('general.delete') }}"></span>
-                        </template>
-                    </a>
-                </template>
-                <template v-else>
-                    <a v-if="screen.category!=1" class="btn btn-info hover-danger btn-xs" v-on:click="deleteScreen()">
-                        <span class="fa fa-minus" v-tooltip data-original-title="{{ trans('screengroup.remove_association') }}"></span>
-                    </a>
-                </template>
+                <a v-if="from=='screengroup'" class="btn btn-info hover-danger"
+                    v-on:click="deleteScreen(screen.id)"
+                >
+                    <span class="fa fa-minus" v-tooltip data-original-title="{{ trans('screengroup.remove_association') }}"></span>
+                </a>
+                <a v-if="from=='screen'" class="btn btn-info hover-danger"
+                    v-on:click="deleteScreen(screen.id)"
+                >
+                    <span class="fa fa-times" v-tooltip data-original-title="{{ trans('general.delete') }}"></span>
+                </a>
+                <a v-if="from!='screen' && from!='screengroup' && screen.category!=1" class="btn btn-info hover-danger"
+                    v-on:click="deleteScreen(screen.id)"
+                >
+                    <span class="fa fa-minus" v-tooltip data-original-title="{{ trans('category.remove_association') }}"></span>
+                </a>
             </div>
 
         </div>
@@ -52,8 +52,8 @@
         props: [ 'screen', 'from' ],
 
         methods: {
-            deleteScreen(id) {
-                this.$dispatch('remove-screen', this.id);
+            deleteScreen(screenID) {
+                this.$dispatch('remove-screen', screenID);
             }
         }
 

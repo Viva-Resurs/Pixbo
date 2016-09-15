@@ -160,24 +160,36 @@
 
             },
 
-            attemptDeleteScreen(index) {
+            attemptDeleteScreen(screenID) {
 
                 this.confirm({
-                    callback:this.deleteScreen, arg:index,
+                    callback:this.deleteScreen, arg:screenID,
                     text: this.trans('category.remove_association')
                 });
 
             },
 
-            deleteScreen(index) {
+            deleteScreen(screenID) {
 
                 var self = this;
 
-                client({ path: '/categories/' + self.category.id + '/screen/' + self.category.screens.data[index].id, method: 'DELETE' }).then(
+                var removeIndex = -1;
+
+                for (var i=0; i<self.category.screens.data.length ; i++)
+                    if (self.category.screens.data[i].id == screenID)
+                        removeIndex = i;
+
+                if (removeIndex==-1)
+                    return self.$dispatch('alert', {
+                        message: self.trans('category.screen_association_removed_fail'),
+                        options: {theme: 'error'}
+                    });
+
+                client({ path: '/categories/' + self.category.id + '/screen/' + screenID, method: 'DELETE' }).then(
                     
                     function (response) {
 
-                        self.category.screens.data.splice(index, 1);
+                        self.category.screens.data.splice(removeIndex, 1);
 
                         self.$dispatch('alert', {
                             message: self.trans('category.screen_association_removed'),
@@ -202,8 +214,8 @@
         },
 
         ready : function() {
-            this.$on('remove-screen', function (index) {
-                this.attemptDeleteScreen(index);
+            this.$on('remove-screen', function (screenID) {
+                this.attemptDeleteScreen(screenID);
             });
         },
 

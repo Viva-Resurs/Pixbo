@@ -118,7 +118,7 @@
 
         ready: function() {
             this.$on('remove-user', function (userID) {
-                this.attemptDeleteTicker(userID);
+                this.attemptDeleteUser(userID);
             });
         },
 

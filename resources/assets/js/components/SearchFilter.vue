@@ -43,6 +43,9 @@
 
                             var check = ob;
 
+                            if (!check)
+                                return false;
+
                             // Dig down to the property to search
                             var level = target.split('.');
 

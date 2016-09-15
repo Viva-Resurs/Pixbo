@@ -33,9 +33,9 @@
                         <template v-if="$root.isAdmin">
                         <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/clients/'+client.id }"
                            v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
-                        <a v-if="this.from=='screengroup'" class="btn btn-primary btn-xs fa fa-minus" v-on:click="removeClient($index)"
+                        <a v-if="this.from=='screengroup'" class="btn btn-primary btn-xs fa fa-minus" v-on:click="removeClient(client.id)"
                            v-tooltip data-original-title="{{ trans('screengroup.remove_association') }}"></a>
-                        <a v-else class="btn btn-primary hover-danger btn-xs fa fa-times" v-on:click="removeClient($index)"
+                        <a v-else class="btn btn-primary hover-danger btn-xs fa fa-times" v-on:click="removeClient(client.id)"
                            v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
                         </template>
                     </td>
@@ -55,8 +55,8 @@
         props: ['clients','from'],
 
         methods: {
-            removeClient(index) {
-                this.$dispatch('remove-client', index);
+            removeClient(clientID) {
+                this.$dispatch('remove-client', clientID);
             }
         }
         

@@ -84,7 +84,7 @@
 
                 if (removeIndex==-1)
                     return self.$dispatch('alert', {
-                        message: self.trans('ticker.delete_fail'),
+                        message: self.trans('ticker.deleted_fail'),
                         options: {theme: 'error'}
                     });
 
@@ -92,7 +92,7 @@
                     
                     function (response) {
 
-                        self.tickers.splice(removeIndex, 1);
+                        self.tickers.splice(removeIndex,1);
 
                         self.$dispatch('alert', {
                             message: self.trans('ticker.deleted'),
@@ -104,7 +104,7 @@
                     function (response) {
 
                         self.$dispatch('alert', {
-                            message: self.trans('ticker.delete_fail'),
+                            message: self.trans('ticker.deleted_fail'),
                             options: {theme: 'error'}
                         });
 

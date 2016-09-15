@@ -7,29 +7,28 @@
     <div class="panel-section" v-if="screens.length > 0">
 
         <search-filter v-if="from=='screen'"
-            :search.sync="search"
+            :search="search"
         >
             <div slot="searchfilter_right">
                 <div class="pull-right">
-                    <div class="input-group">
-                        <select class="form-control selectpicker show-tick"
-                                v-model="order"
-                                
-                                id="order"
-                                v-el:select-inputb
+                    <select class="form-control selectpicker show-tick"
+                        v-model="order"
+                        id="order"
+                        v-el:select-inputb
+                    >
+                        <optgroup label="{{trans('general.order_by')}}">
+                        <option v-for="(key, value) in columns" :value="key"
+                            title="<span class='fa fa-long-arrow-down'></span><span class='fa fa-long-arrow-up'></span>"
                         >
-                            <option v-for="(key, value) in columns" :value="key">{{value.title}}</option>
-                        </select>
-                        <span class="input-group-addon">
-                            <span class="fa fa-sort"></span>
-                        </span>
-                    </div>
+                            {{value.title}}
+                        </option>
+                    </select>
                 </div>
             </div>
         </search-filter>
 
         <div class="row">
-            <div v-for="screen in screens | orderBy deepSort | filterBy searchFilter | filterBy rangeFilter">
+            <div v-for="screen in screens | filterBy validator | orderBy deepSort | filterBy searchFilter | filterBy rangeFilter">
                 <screen-card :screen="screen" :from="from"></screen-card>
             </div>
         </div>
@@ -86,6 +85,13 @@
 
         methods: {
 
+            // Validator filter
+            validator(object,index){
+                if (typeof object != 'object')
+                    return false;
+                return true;
+            },
+
             // Use searchFilter
             searchFilter(object,index){
                 return SearchFilter.filters.searchFilter(object,index,this.search,this.columns);
@@ -116,10 +122,11 @@
 
                 var target = $(this.$els.selectInputb);
 
-                let g = target.selectpicker({
+                target.selectpicker({
                     size: 4,
                     iconBase: 'fa',
-                    tickIcon: 'fa-check'
+                    tickIcon: 'fa-check',
+                    //template: { caret: "<span class='fa fa-long-arrow-down'></span><span class='fa fa-long-arrow-up'></span>" }
                 });
 
                 target.selectpicker('refresh');

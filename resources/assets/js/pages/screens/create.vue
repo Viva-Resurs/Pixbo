@@ -59,9 +59,6 @@
 
                             var self = this;
 
-                            // -------- bind events -------- //
-
-                            // Send file starts
                             self.on("sending", function (file, xhr, formData) {
                                 
                                 if (localStorage.getItem('jwt-token'))
@@ -79,8 +76,6 @@
                                     options: {theme: 'success'}
                                 });
 
-                                // TODO: Might want to route to the newly created screen instead of it's 'parent'
-                                // the API needs to send back the ID of the new screen.
                                 vm.$route.router.go({ path: '/screens/'+response.xhr.response, query: { screengroup: vm.$root.history.params.id } });
 
                             });
