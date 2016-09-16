@@ -20,36 +20,25 @@
 
         methods: {
 
-            attemptDeleteClient(clientID) {
+            attemptDeleteClient(clientob) {
 
                 this.confirm({
-                    callback:this.deleteClient, arg:clientID,
+                    callback:this.deleteClient, arg:clientob,
                     text: this.trans('screengroup.remove_association')
                 });
 
             },
 
-            deleteClient(clientID) {
+            deleteClient(clientob) {
 
                 var self = this;
 
-                var removeIndex = -1;
-
-                for (var i=0; i<self.clients.length ; i++)
-                    if (self.clients[i].id == clientID)
-                        removeIndex = i;
-
-                if (removeIndex==-1)
-                    return self.$dispatch('alert', {
-                        message: self.trans('screengroup.client_association_removed_fail'),
-                        options: {theme: 'error'}
-                    });
-
-                client({ path: '/screengroups/' + this.id + '/client/' + clientID, method: 'DELETE' }).then(
+                client({ path: '/screengroups/' + this.id + '/client/' + clientob.id, method: 'DELETE' }).then(
                     
                     function (response) {
 
-                        self.clients.splice(removeIndex, 1);
+                        clientob.removed = true;
+                        self.clients.reverse(); // Force vue to update view
 
                         self.$dispatch('alert', {
                             message: self.trans('screengroup.client_association_removed'),
@@ -73,8 +62,8 @@
         },
 
         ready() {
-            this.$on('remove-client', function (clientID) {
-                this.attemptDeleteClient(clientID);
+            this.$on('remove-client', function (clientob) {
+                this.attemptDeleteClient(clientob);
             });
         }
 

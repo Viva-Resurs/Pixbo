@@ -63,36 +63,25 @@
 
             },
 
-            attemptDeleteTicker(tickerID) {
+            attemptDeleteTicker(ticker) {
 
                 this.confirm({
-                    callback:this.deleteTicker, arg:tickerID,
+                    callback:this.deleteTicker, arg:ticker,
                     confirmButtonText: this.trans('confirm.confirmButtonText_Delete')
                 });
 
             },
 
-            deleteTicker(tickerID) {
+            deleteTicker(ticker) {
 
                 var self = this;
 
-                var removeIndex = -1;
-
-                for (var i=0; i<self.tickers.length ; i++)
-                    if (self.tickers[i].id == tickerID)
-                        removeIndex = i;
-
-                if (removeIndex==-1)
-                    return self.$dispatch('alert', {
-                        message: self.trans('ticker.deleted_fail'),
-                        options: {theme: 'error'}
-                    });
-
-                client({ path: '/tickers/' + tickerID, method: 'DELETE' }).then(
+                client({ path: '/tickers/' + ticker.id, method: 'DELETE' }).then(
                     
                     function (response) {
 
-                        self.tickers.splice(removeIndex,1);
+                        ticker.removed = true;
+                        self.tickers.reverse(); // Force vue to update view
 
                         self.$dispatch('alert', {
                             message: self.trans('ticker.deleted'),
@@ -117,8 +106,8 @@
         },
 
         ready: function() {
-            this.$on('remove-ticker', function (tickerID) {
-                this.attemptDeleteTicker(tickerID);
+            this.$on('remove-ticker', function (ticker) {
+                this.attemptDeleteTicker(ticker);
             });
         },
 

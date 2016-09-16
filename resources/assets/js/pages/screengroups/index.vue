@@ -9,48 +9,20 @@
     </div>
 
     <div class="panel-body" v-else>
-
-        <div class="panel-section" v-if="screengroups.length == 0 ">
-            {{ trans('screengroup.empty') }}
-        </div>
-
-        <div class="panel-section" v-if="screengroups.length > 0 ">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>{{ trans('general.name') }}</th>
-                        <th>{{ trans('general.desc') }}</th>
-                        <th class="slim">{{ trans('general.action') }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="screengroup in screengroups">
-                        <td><a v-link="{ path: '/screengroups/'+screengroup.id }">{{ screengroup.name }}</a></td>
-                        <td>{{ screengroup.desc }}</td>
-                        <td class="slim">
-                            <a class="btn btn-primary btn-xs fa fa-eye " href="/play?mac={{screengroup.preview}}&preview=yes" target="_blank"
-                                v-tooltip data-original-title="{{ trans('general.preview') }}" :disabled="hasPreview($index)"></a>
-                            <a class="btn btn-primary btn-xs fa fa-pencil" v-if="$root.isAdmin" v-link="{ path: '/screengroups/'+screengroup.id }"
-                                v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
-                            <a class="btn btn-primary hover-danger btn-xs fa fa-times"
-                                v-if="$root.isAdmin" v-on:click="attemptDeleteScreengroup(screengroup.id)"
-                                v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
+        <screengroup-list :screengroups="screengroups"></screengroup-list>
     </div>
 
 </template>
 
 <script type="text/ecmascript-6">
+    import ScreengroupList from '../../components/ScreengroupList.vue'
     import SweetAlert from '../../mixins/SweetAlert.vue'
 
     export default {
 
         name: 'Index',
+
+        components: { ScreengroupList },
 
         mixins: [ SweetAlert ],
 
@@ -61,12 +33,6 @@
         },
 
         methods: {
-
-            hasPreview(index) {
-
-                return this.screengroups[index].preview === '';
-
-            },
 
             fetch() {
 
@@ -97,36 +63,25 @@
 
             },
 
-            attemptDeleteScreengroup(screengroupID) {
+            attemptDeleteScreengroup(screengroup) {
 
                 this.confirm({
-                    callback:this.deleteScreengroup, arg:screengroupID,
+                    callback:this.deleteScreengroup, arg:screengroup,
                     confirmButtonText: this.trans('confirm.confirmButtonText_Delete')
                 });
 
             },
 
-            deleteScreengroup(screengroupID) {
+            deleteScreengroup(screengroup) {
 
                 var self = this;
 
-                var removeIndex = -1;
-
-                for (var i=0; i<self.screengroups.length ; i++)
-                    if (self.screengroups[i].id == screengroupID)
-                        removeIndex = i;
-
-                if (removeIndex==-1)
-                    return self.$dispatch('alert', {
-                        message: self.trans('screengroup.deleted_fail'),
-                        options: {theme: 'error'}
-                    });
-
-                client({ path: '/screengroups/' + screengroupID, method: 'DELETE' }).then(
+                client({ path: '/screengroups/' + screengroup.id, method: 'DELETE' }).then(
                     
                     function (response) {
 
-                        self.screengroups.splice(removeIndex, 1);
+                        screengroup.removed = true;
+                        self.screengroups.reverse(); // Force vue to update view
 
                         self.$dispatch('alert', {
                             message: self.trans('screengroup.deleted'),
@@ -148,6 +103,12 @@
 
             }
 
+        },
+
+        ready: function() {
+            this.$on('remove-screengroup', function (screengroup) {
+                this.attemptDeleteScreengroup(screengroup);
+            });
         },
 
         created: function(){

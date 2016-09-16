@@ -63,36 +63,25 @@
 
             },
 
-            attemptDeleteUser(userID) {
+            attemptDeleteUser(user) {
 
                 this.confirm({
-                    callback:this.deleteUser, arg:userID,
+                    callback:this.deleteUser, arg:user,
                     confirmButtonText: this.trans('confirm.confirmButtonText_Delete')
                 });
 
             },
 
-            deleteUser(userID) {
+            deleteUser(user) {
 
                 var self = this;
 
-                var removeIndex = -1;
-
-                for (var i=0; i<self.users.length ; i++)
-                    if (self.users[i].id == userID)
-                        removeIndex = i;
-
-                if (removeIndex==-1)
-                    return self.$dispatch('alert', {
-                        message: self.trans('user.deleted_fail'),
-                        options: {theme: 'error'}
-                    });
-
-                client({ path: '/users/' + userID, method: 'DELETE' }).then(
+                client({ path: '/users/' + user.id, method: 'DELETE' }).then(
 
                     function (response) {
 
-                        self.users.splice(removeIndex, 1);
+                        user.removed = true;
+                        self.users.reverse();
 
                         self.$dispatch('alert', {
                             message: self.trans('user.deleted'),
@@ -117,8 +106,8 @@
         },
 
         ready: function() {
-            this.$on('remove-user', function (userID) {
-                this.attemptDeleteUser(userID);
+            this.$on('remove-user', function (user) {
+                this.attemptDeleteUser(user);
             });
         },
 

@@ -13,7 +13,7 @@
                 var checkB = b;
 
                 // Check Arguments
-                if (!checkA || !checkA)
+                if (checkA==undefined || checkB==undefined)
                     return 0;
 
                 // Not the same type?
@@ -24,7 +24,7 @@
                 var level = this.order.split('.');
 
                 for (var i=0; i<level.length ; i++){
-                    if (!checkA[level[i]] || !checkB[level[i]])
+                    if (checkA[level[i]]==undefined || checkB[level[i]]==undefined)
                         return 0;
                     checkA = checkA[level[i]];
                     checkB = checkB[level[i]];
@@ -72,9 +72,9 @@
                         // Char by char
                         for (var c=0 ; c<checkA[i].name.length ; c++){
                             if (checkA[i].name[c] < checkB[i].name[c])
-                                return 1 * this.desc;
-                            if (checkA[i].name[c] > checkB[i].name[c])
                                 return -1 * this.desc;
+                            if (checkA[i].name[c] > checkB[i].name[c])
+                                return 1 * this.desc;
                         }
 
                         return 0;

@@ -17,10 +17,15 @@
                         v-el:select-inputb
                     >
                         <optgroup label="{{trans('general.order_by')}}">
-                        <option v-for="(key, value) in columns" :value="key"
+                        <option value="photo.originalName"
                             title="<span class='fa fa-long-arrow-down'></span><span class='fa fa-long-arrow-up'></span>"
                         >
-                            {{value.title}}
+                            {{ trans('general.name') }}
+                        </option>
+                        <option value="event.updated_at"
+                            title="<span class='fa fa-long-arrow-down'></span><span class='fa fa-long-arrow-up'></span>"
+                        >
+                            {{ trans('general.updated_at') }}
                         </option>
                     </select>
                 </div>
@@ -28,7 +33,7 @@
         </search-filter>
 
         <div class="row">
-            <div v-for="screen in screens | filterBy validator | orderBy deepSort | filterBy searchFilter | filterBy rangeFilter">
+            <div v-for="screen in screens | filterBy isNotRemoved | orderBy deepSort | filterBy searchFilter | filterBy rangeFilter">
                 <screen-card :screen="screen" :from="from"></screen-card>
             </div>
         </div>
@@ -53,6 +58,7 @@
 <script type="text/ecmascript-6">
     import ScreenCard from './ScreenCard.vue'
     import SortingData from '../mixins/SortingData.vue'
+    import Validators from '../mixins/Validators.vue'
     import Pagination from './Pagination.vue'
     import SearchFilter from './SearchFilter.vue'
 
@@ -64,9 +70,8 @@
 
         data: function(){
             return {
-                columns: {},
-
                 search: '',
+                targets: ['photo.originalName'],
 
                 limitOff: false,
                 limitOffBtn: false,
@@ -79,22 +84,15 @@
             }
         },
 
-        mixins: [ SortingData ],
+        mixins: [ SortingData, Validators ],
 
         components: [ ScreenCard, Pagination, SearchFilter ],
 
         methods: {
 
-            // Validator filter
-            validator(object,index){
-                if (typeof object != 'object')
-                    return false;
-                return true;
-            },
-
             // Use searchFilter
             searchFilter(object,index){
-                return SearchFilter.filters.searchFilter(object,index,this.search,this.columns);
+                return SearchFilter.filters.searchFilter(object,index,this.search,this.targets);
             },
 
             // Use rangeFilter
@@ -113,11 +111,6 @@
         },
 
         created: function(){
-            this.columns = {
-                'photo.originalName' : { title: this.trans('general.name'),       type: 'string', search: true  },
-                'event.updated_at'   : { title: this.trans('general.updated_at'), type: 'number', search: false }
-            };
-
             this.$nextTick(function() {
 
                 var target = $(this.$els.selectInputb);
@@ -125,8 +118,7 @@
                 target.selectpicker({
                     size: 4,
                     iconBase: 'fa',
-                    tickIcon: 'fa-check',
-                    //template: { caret: "<span class='fa fa-long-arrow-down'></span><span class='fa fa-long-arrow-up'></span>" }
+                    tickIcon: 'fa-check'
                 });
 
                 target.selectpicker('refresh');

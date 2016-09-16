@@ -1,10 +1,10 @@
-<template>
+ <template>
 
-    <div class="panel-section" v-if="users.length == 0">
-        {{ trans('user.empty') }}
+    <div class="panel-section" v-if="screengroups.length == 0">
+        {{ trans('screengroup.empty') }}
     </div>
 
-    <div class="panel-section" v-if="users.length > 0">
+    <div class="panel-section" v-if="screengroups.length > 0">
 
         <search-filter
             :search.sync="search"
@@ -14,44 +14,40 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>{{ trans('general.name') }}
+                    <th>{{ trans('general.desc') }}
                         <button class=" btn btn-xs fa fa-btn
                             {{ (order=='name') ? 'btn-primary ' : 'btn-default '}}
                             {{ (order=='name' && desc==-1) ? ' fa-sort-alpha-desc' : ' fa-sort-alpha-asc'}}
                         " @click="setOrder('name')"></button>
                     </th>
-                    <th>{{ trans('general.email') }}
+                    <th>{{ trans('general.desc') }}
                         <button class=" btn btn-xs fa fa-btn
-                            {{ (order=='email') ? 'btn-primary ' : 'btn-default '}}
-                            {{ (order=='email' && desc==-1) ? ' fa-sort-alpha-desc' : ' fa-sort-alpha-asc'}}
-                        " @click="setOrder('email')"></button>
-                    </th>
-                    <th class="slim">{{ trans('role.model') }}
-                        <button class=" btn btn-xs fa fa-btn
-                            {{ (order=='roles.data') ? 'btn-primary ' : 'btn-default '}}
-                            {{ (order=='roles.data' && desc==-1) ? ' fa-sort-alpha-desc' : ' fa-sort-alpha-asc'}}
-                        " @click="setOrder('roles.data')"></button>
+                            {{ (order=='desc') ? 'btn-primary ' : 'btn-default '}}
+                            {{ (order=='desc' && desc==-1) ? ' fa-sort-alpha-desc' : ' fa-sort-alpha-asc'}}
+                        " @click="setOrder('desc')"></button>
                     </th>
                     <th class="slim">{{ trans('general.action') }}</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="user in users | filterBy isNotRemoved | orderBy deepSort | filterBy searchFilter | filterBy rangeFilter">
-                    <td><a v-link="{ path: '/users/'+user.id }">{{ user.name }}</a></td>
-                    <td>{{ user.email }}</td>
-                    <td class="slim"><span v-for="role in user.roles.data">{{ role.name }}</span></td>
+                <tr v-for="screengroup in screengroups | filterBy isNotRemoved | orderBy deepSort | filterBy searchFilter | filterBy rangeFilter">
+                    <td><a v-link="{ path: '/screengroups/'+screengroup.id }">{{ screengroup.name }}</a></td>
+                    <td>{{ screengroup.desc }}</td>
                     <td class="slim">
-                        <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/users/'+user.id }"
-                           v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
-                        <a v-else class="btn btn-primary hover-danger btn-xs fa fa-times" v-on:click="$dispatch('remove-user', user)"
-                           v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
+                        <a class="btn btn-primary btn-xs fa fa-eye " href="/play?mac={{screengroup.preview}}&preview=yes" target="_blank"
+                            v-tooltip data-original-title="{{ trans('general.preview') }}" :disabled="screengroup.preview === ''"></a>
+                        <a class="btn btn-primary btn-xs fa fa-pencil" v-if="$root.isAdmin" v-link="{ path: '/screengroups/'+screengroup.id }"
+                            v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
+                        <a class="btn btn-primary hover-danger btn-xs fa fa-times"
+                            v-if="$root.isAdmin" v-on:click="$dispatch('remove-screengroup', screengroup)"
+                            v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
                     </td>
                 </tr>
             </tbody>
         </table>
 
         <pagination
-            :total.sync="users.length"
+            :total.sync="screengroups.length"
             :offset.sync="offset"
             :limit.sync="limit"
             :show-pagination="(search=='' && !limitOffBtn)"
@@ -75,9 +71,9 @@
 
     export default {
 
-        name: 'UserList',
+        name: 'ScreengroupList',
 
-        props: [ 'users' ],
+        props: [ 'screengroups' ],
 
         mixins: [ SortingData, Validators ],
 
@@ -86,7 +82,7 @@
         data: function(){
             return {
                 search: '',
-                targets: ['name','email','roles.data'],
+                targets: ['name','desc'],
 
                 limitOff: false,
                 limitOffBtn: false,

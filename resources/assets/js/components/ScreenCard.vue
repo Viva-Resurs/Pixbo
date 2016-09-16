@@ -22,17 +22,17 @@
                 </a>
 
                 <a v-if="from=='screengroup'" class="btn btn-info hover-danger"
-                    v-on:click="deleteScreen(screen.id)"
+                    v-on:click="$dispatch('remove-screen', screen)"
                 >
                     <span class="fa fa-minus" v-tooltip data-original-title="{{ trans('screengroup.remove_association') }}"></span>
                 </a>
                 <a v-if="from=='screen'" class="btn btn-info hover-danger"
-                    v-on:click="deleteScreen(screen.id)"
+                    v-on:click="$dispatch('remove-screen', screen)"
                 >
                     <span class="fa fa-times" v-tooltip data-original-title="{{ trans('general.delete') }}"></span>
                 </a>
                 <a v-if="from!='screen' && from!='screengroup' && screen.category!=1" class="btn btn-info hover-danger"
-                    v-on:click="deleteScreen(screen.id)"
+                    v-on:click="$dispatch('remove-screen', screen)"
                 >
                     <span class="fa fa-minus" v-tooltip data-original-title="{{ trans('category.remove_association') }}"></span>
                 </a>
@@ -49,13 +49,7 @@
 
         name: 'ScreenCard',
 
-        props: [ 'screen', 'from' ],
-
-        methods: {
-            deleteScreen(screenID) {
-                this.$dispatch('remove-screen', screenID);
-            }
-        }
+        props: [ 'screen', 'from' ]
 
     }
 </script>

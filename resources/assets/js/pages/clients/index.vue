@@ -65,36 +65,25 @@
 
             },
 
-            attemptDeleteClient(clientID) {
+            attemptDeleteClient(clientob) {
 
                 this.confirm({
-                    callback: this.deleteClient, arg:clientID,
+                    callback: this.deleteClient, arg:clientob,
                     confirmButtonText: this.trans('confirm.confirmButtonText_Delete')
                 });
 
             },
 
-            deleteClient(clientID) {
+            deleteClient(clientob) {
 
                 var self = this;
 
-                var removeIndex = -1;
-
-                for (var i=0; i<self.clients.length ; i++)
-                    if (self.clients[i].id == clientID)
-                        removeIndex = i;
-
-                if (removeIndex==-1)
-                    return self.$dispatch('alert', {
-                        message: self.trans('client.deleted_fail'),
-                        options: {theme: 'error'}
-                    });
-
-                client({ path: '/clients/' + clientID, method: 'DELETE' }).then(
+                client({ path: '/clients/' + clientob.id, method: 'DELETE' }).then(
 
                     function (response) {
 
-                        self.clients.splice(removeIndex, 1);
+                        clientob.removed = true;
+                        self.clients.reverse(); // Force vue to update view
                         
                         self.$dispatch('alert', {
                             message: self.trans('client.deleted'),
@@ -119,8 +108,8 @@
         },
 
         ready: function() {
-            this.$on('remove-client', function (clientID) {
-                this.attemptDeleteClient(clientID);
+            this.$on('remove-client', function (clientob) {
+                this.attemptDeleteClient(clientob);
             })
         },
 

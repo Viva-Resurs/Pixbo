@@ -8,14 +8,10 @@
                 <div class="btn-group" role="group">
                     <button class="btn btn-default" @click="firstPage"><span class="fa fa-btn fa-angle-double-left"></span></button>
                     <button class="btn btn-default" @click="prevPage"><span class="fa fa-btn fa-angle-left"></span></button>
-                </div>
 
-                <div class="btn-group" role="group" >
                     <button v-for="n in totalPages" class="btn btn-{{(n+1==currentPage)?'primary':'default'}}" @click="toPage(n)">{{n+1}}
                     </button>
-                </div>
 
-                <div class="btn-group" role="group">
                     <button class="btn btn-default" @click="nextPage"><span class="fa fa-btn fa-angle-right"></span></button>
                     <button class="btn btn-default" @click="lastPage"><span class="fa fa-btn fa-angle-double-right"></span></button>
                 </div>

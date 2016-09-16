@@ -38,8 +38,10 @@
         filters: {
             searchFilter(ob,index,search,targets){
                 if (search!=''){
-                    for (var target in targets){
-                        if (target && target.search){
+                    for (var t=0 ; t<targets.length ; t++){
+                        var target = targets[t];
+                    //for (var target in targets){
+                        //if (target && target.search){
 
                             var check = ob;
 
@@ -67,7 +69,7 @@
                                 for (var i=0 ; i<check.length ; i++)
                                     if (check[i].name.toLowerCase().indexOf(search.toLowerCase())>-1)
                                         return true;
-                        }
+                        //}
                     }
                     return false;
                 }

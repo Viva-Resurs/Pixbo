@@ -20,36 +20,25 @@
 
         methods: {
 
-            attemptDeleteTicker(tickerID) {
+            attemptDeleteTicker(ticker) {
 
                 this.confirm({
-                    callback:this.deleteTicker, arg:tickerID,
+                    callback:this.deleteTicker, arg:ticker,
                     text: this.trans('screengroup.remove_association')
                 });
 
             },
 
-            deleteTicker(tickerID) {
+            deleteTicker(ticker) {
 
                 var self = this;
 
-                var removeIndex = -1;
-
-                for (var i=0; i<self.tickers.length ; i++)
-                    if (self.tickers[i].id == tickerID)
-                        removeIndex = i;
-
-                if (removeIndex==-1)
-                    return self.$dispatch('alert', {
-                        message: self.trans('screengroup.ticker_association_removed_fail'),
-                        options: {theme: 'error'}
-                    });
-
-                client({ path: '/screengroups/' + self.id + '/ticker/' + tickerID, method: 'DELETE' }).then(
+                client({ path: '/screengroups/' + self.id + '/ticker/' + ticker.id, method: 'DELETE' }).then(
 
                     function (response) {
 
-                        self.tickers.splice(removeIndex, 1);
+                        ticker.removed = true;
+                        self.tickers.reverse();
 
                         self.$dispatch('alert', {
                             message: self.trans('screengroup.ticker_association_removed'),
@@ -74,8 +63,8 @@
         },
 
         ready: function() {
-            this.$on('remove-ticker', function (tickerID) {
-                this.attemptDeleteTicker(tickerID);
+            this.$on('remove-ticker', function (ticker) {
+                this.attemptDeleteTicker(ticker);
             });
         }
 

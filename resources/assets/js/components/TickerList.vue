@@ -14,43 +14,53 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th v-for="(key, value) in columns" class="{{ value.classes }}">
-                        {{ value.title }}
-                        <button class="
-                            btn btn-xs fa fa-btn
-                            {{ (this.order==key) ? 'btn-primary ' : 'btn-default '}}
-                            {{ (value.type=='number') ? (this.order==key && this.desc==-1) ? ' fa-caret-up' : ' fa-caret-down' : '' }}
-                            {{ (value.type=='string') ? (this.order==key && this.desc==-1) ? ' fa-sort-alpha-desc' : ' fa-sort-alpha-asc' : '' }}
-                            {{ (value.type=='object') ? (this.order==key && this.desc==-1) ? ' fa-sort-amount-desc' : ' fa-sort-amount-asc' : '' }}
-                        " @click="setOrder(key,value.desc)"></button>
+                    <th>{{ trans('general.text') }}
+                        <button class=" btn btn-xs fa fa-btn
+                            {{ (order=='text') ? 'btn-primary ' : 'btn-default '}}
+                            {{ (order=='text' && desc==-1) ? ' fa-sort-alpha-desc' : ' fa-sort-alpha-asc'}}
+                        " @click="setOrder('text')"></button>
                     </th>
-                    <th>{{ trans('general.action') }}</th>
+                    <th class="slim" v-if="from!='screengroup'">{{ this.trans('screengroup.model') }}
+                        <button class=" btn btn-xs fa fa-btn
+                            {{ (order=='screengroups') ? 'btn-primary ' : 'btn-default '}}
+                            {{ (order=='screengroups' && desc==-1) ? ' fa-sort-amount-desc' : ' fa-sort-amount-asc'}}
+                        " @click="setOrder('screengroups')"></button>
+                    </th>
+                    <th class="slim">{{ trans('general.updated_at') }}
+                        <button class=" btn btn-xs fa fa-btn
+                            {{ (order=='event.updated_at') ? 'btn-primary ' : 'btn-default '}}
+                            {{ (order=='event.updated_at' && desc==-1) ? ' fa-caret-up' : ' fa-caret-down'}}
+                        " @click="setOrder('event.updated_at',1)"></button>
+                    </th>
+                    <th class="slim">{{ trans('general.action') }}</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="object in tickers | filterBy validator | orderBy deepSort | filterBy searchFilter | filterBy rangeFilter">
-                    <td><a v-link="{ path: '/tickers/'+object.id }">{{ object.text }}</a></td>
+                <tr v-for="ticker in tickers | filterBy isNotRemoved | orderBy deepSort | filterBy searchFilter | filterBy rangeFilter">
+                    <td><a v-link="{ path: '/tickers/'+ticker.id }">{{ ticker.text }}</a></td>
                     <td class="slim">
-                        <span v-for="sg in object.screengroups">
+                        <span v-for="sg in ticker.screengroups">
                             <template v-if="$route.path == '/screengroups/'+sg.id">
                                 <b>{{ sg.name }}</b>
                             </template>
                             <template v-else>
-                                <a v-if="object.screengroups.length>3" v-link="{ path: '/screengroups/'+sg.id }"
+                                <a v-if="ticker.screengroups.length>3" v-link="{ path: '/screengroups/'+sg.id }"
                                    v-tooltip data-original-title='{{sg.name}}'>{{ sg.name.substring(0,7)+'..' }}</a>
                                 <a v-else v-link="{ path: '/screengroups/'+sg.id }">{{ sg.name }}</a>
                             </template>
                             
                         </span>
                     </td>
-                    <td class="slim">{{ object.event.updated_at.substring(0,object.event.updated_at.indexOf(' ')) }}</td>
+                    <td class="slim">{{ ticker.event.updated_at.substring(0,ticker.event.updated_at.indexOf(' ')) }}</td>
                     <td class="slim">
-                        <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/tickers/'+object.id }"
-                           v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
-                        <a v-if="this.from=='screengroup'" class="btn btn-primary btn-xs fa fa-minus" v-on:click="removeObject(object.id)"
-                           v-tooltip data-original-title="{{ trans('screengroup.remove_association') }}"></a>
-                        <a v-else class="btn btn-primary hover-danger btn-xs fa fa-times" v-on:click="removeObject(object.id)"
-                           v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
+                        <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/tickers/'+ticker.id }"
+                            v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
+                        <a v-if="this.from=='screengroup'" class="btn btn-primary hover-danger btn-xs fa fa-minus"
+                            v-on:click="$dispatch('remove-ticker', ticker)"
+                            v-tooltip data-original-title="{{ trans('screengroup.remove_association') }}"></a>
+                        <a v-else class="btn btn-primary hover-danger btn-xs fa fa-times"
+                            v-on:click="$dispatch('remove-ticker', ticker)"
+                            v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
                     </td>
                 </tr>
             </tbody>
@@ -74,9 +84,10 @@
 </template>
 
 <script type="text/ecmascript-6">
-import SortingData from '../mixins/SortingData.vue'
-import Pagination from './Pagination.vue'
-import SearchFilter from './SearchFilter.vue'
+    import SortingData from '../mixins/SortingData.vue'
+    import Validators from '../mixins/Validators.vue'
+    import Pagination from './Pagination.vue'
+    import SearchFilter from './SearchFilter.vue'
 
     export default {
 
@@ -84,15 +95,14 @@ import SearchFilter from './SearchFilter.vue'
 
         props: [ 'tickers', 'from' ],
 
-        mixins: [ SortingData ],
+        mixins: [ SortingData, Validators ],
 
         components: [ Pagination, SearchFilter ],
 
         data: function(){
             return {
-                columns: {},
-
                 search: '',
+                targets: ['text','screengroups'],
 
                 limitOff: false,
                 limitOffBtn: false,
@@ -107,26 +117,14 @@ import SearchFilter from './SearchFilter.vue'
 
         methods: {
 
-            // Validator filter
-            validator(object,index){
-                if (typeof object != 'object')
-                    return false;
-                return true;
-            },
-
             // Use searchFilter
             searchFilter(object,index){
-                return SearchFilter.filters.searchFilter(object,index,this.search,this.columns);
+                return SearchFilter.filters.searchFilter(object,index,this.search,this.targets);
             },
 
             // Use rangeFilter
             rangeFilter(object,index){
                 return Pagination.filters.rangeFilter(object,index,this);
-            },
-
-            // Removing objects
-            removeObject(id) {
-                this.$dispatch('remove-ticker', id);
             }
 
         },
@@ -137,14 +135,6 @@ import SearchFilter from './SearchFilter.vue'
                 this.offset = 0;
                 this.limitOff = false;
             }
-        },
-
-        created: function(){
-            this.columns = {
-                'text'             : { title: this.trans('general.text'),       type: 'string', classes:     '', search: true              },
-                'screengroups'     : { title: this.trans('screengroup.model'),  type: 'object', classes: 'slim', search: true , desc: true },
-                'event.updated_at' : { title: this.trans('general.updated_at'), type: 'number', classes: 'slim', search: false, desc: true }
-            };
         }
 
     }
