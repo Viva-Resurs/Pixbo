@@ -50,7 +50,7 @@ class ClientController extends BaseController
         }
         $client = Client::findOrFail($id);
 
-        return $client;
+        return $this->item($client, new ClientTransformer());
     }
 
     public function update(Request $request, $id) {

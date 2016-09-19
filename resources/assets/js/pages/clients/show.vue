@@ -8,7 +8,7 @@
         <loading></loading>
     </div>
 
-    <div v-else>
+    <div v-if="!$loadingRouteData">
 
         <form class="form-horizontal" role="form" v-on:submit.prevent="attemptUpdateClient" v-form name="myform">
 
@@ -97,46 +97,12 @@
 
         data: function () {
             return {
-                client: {
-                    id: null,
-                    name: null,
-                    address: null,
-                    screen_group_id: null
-                },
+                client: {},
                 myform: []
             }
         },
 
         methods: {
-
-            fetch(id) {
-
-                var self = this;
-
-                self.$loadingRouteData = true;
-
-                client({ path: '/clients/' + id }).then(
-
-                    function (response) {
-
-                        self.$set('client', response.entity.client);
-                        
-                        self.$loadingRouteData = false;
-
-                    },
-
-                    function (response) {
-
-                        if (response.entity && response.entity.error)
-                            console.error(response.entity.error.message);
-
-                        self.$loadingRouteData = false;
-
-                    }
-
-                );
-
-            },
 
             attemptUpdateClient() {
 
@@ -177,8 +143,19 @@
 
         },
 
-        created: function(){
-            this.fetch(this.$route.params.id);
+        route: {
+            data: function (transition) {
+                var self = this;
+                client({ path: '/clients/' + this.$route.params.id }).then(
+                    function (response) {
+                        transition.next({client: response.entity.data});
+                    },
+                    function (response){
+                        transition.next();
+                        console.error(response.entity.error);
+                    }
+                );
+            }
         }
 
     }

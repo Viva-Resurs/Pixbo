@@ -34,35 +34,6 @@
 
         methods: {
 
-            fetch() {
-
-                var self = this;
-
-                self.$loadingRouteData = true;
-
-                client({ path: '/tickers' }).then(
-
-                    function (response) {
-
-                        self.$set('tickers', response.entity.data);
-
-                        self.$loadingRouteData = false;
-
-                    },
-
-                    function (response) {
-
-                        if (response.entity && response.entity.error)
-                            console.error(response.entity.error.message);
-
-                        self.$loadingRouteData = false;
-
-                    }
-
-                );
-
-            },
-
             attemptDeleteTicker(ticker) {
 
                 this.confirm({
@@ -111,8 +82,18 @@
             });
         },
 
-        created: function(){
-            this.fetch();
+        route: {
+            data: function (transition) {
+                client({ path: '/tickers' }).then(
+                    function (response) {
+                        transition.next({tickers: response.entity.data});
+                    },
+                    function (response){
+                        transition.next();
+                        console.error(response.entity.error);
+                    }
+                );
+            }
         }
 
     }

@@ -34,35 +34,6 @@
 
         methods: {
 
-            fetch() {
-
-                var self = this;
-
-                self.$loadingRouteData = true;
-
-                client({ path: '/users' }).then(
-
-                    function (response) {
-
-                        self.$set('users', response.entity.data);
-
-                        self.$loadingRouteData = false;
-
-                    },
-
-                    function (response) {
-
-                        if (response.entity && response.entity.error)
-                            console.error(response.entity.error.message);
-
-                        self.$loadingRouteData = false;
-
-                    }
-
-                );
-
-            },
-
             attemptDeleteUser(user) {
 
                 this.confirm({
@@ -111,8 +82,18 @@
             });
         },
 
-        created: function(){
-            this.fetch();
+        route: {
+            data: function (transition) {
+                client({ path: '/users' }).then(
+                    function (response) {
+                        transition.next({users: response.entity.data});
+                    },
+                    function (response){
+                        transition.next();
+                        console.error(response.entity.error);
+                    }
+                );
+            }
         }
 
     }

@@ -36,35 +36,6 @@
 
         methods: {
 
-            fetch() {
-
-                var self = this;
-
-                self.$loadingRouteData = true;
-
-                client({ path: '/clients' }).then(
-
-                    function (response) {
-
-                        self.$set('clients', response.entity.data);
-
-                        self.$loadingRouteData = false;
-
-                    },
-
-                    function (response) {
-
-                        if (response.entity && response.entity.error)
-                            console.error(response.entity.error.message);
-
-                        self.$loadingRouteData = false;
-
-                    }
-
-                );
-
-            },
-
             attemptDeleteClient(clientob) {
 
                 this.confirm({
@@ -113,8 +84,18 @@
             })
         },
 
-        created: function(){
-            this.fetch();
+        route: {
+            data: function (transition) {
+                client({ path: '/clients' }).then(
+                    function (response) {
+                        transition.next({clients: response.entity.data});
+                    },
+                    function (response){
+                        transition.next();
+                        console.error(response.entity.error);
+                    }
+                );
+            }
         }
 
     }

@@ -105,47 +105,12 @@
 
         data: function () {
             return {
-                user: {
-                    id: null,
-                    name: null,
-                    email: null,
-                    password: null,
-                    roles: null
-                },
+                user: {},
                 myform: []
             }
         },
 
         methods: {
-
-            fetch(id) {
-
-                var self = this;
-
-                self.$loadingRouteData = true;
-
-                client({ path: '/users/' + id }).then(
-
-                    function (response) {
-
-                        self.$set('user', response.entity.data);
-
-                        self.$loadingRouteData = false;
-
-                    },
-
-                    function (response) {
-
-                        if (response.entity && response.entity.error)
-                            console.error(response.entity.error.message);
-
-                        self.$loadingRouteData = false;
-
-                    }
-
-                );
-
-            },
 
             attemptUpdateUser() {
 
@@ -186,8 +151,18 @@
 
         },
 
-        created: function(){
-            this.fetch(this.$route.params.id);
+        route: {
+            data: function (transition) {
+                client({ path: '/users/' + this.$route.params.id }).then(
+                    function (response) {
+                        transition.next({user: response.entity.data});
+                    },
+                    function (response){
+                        transition.next();
+                        console.error(response.entity.error);
+                    }
+                );
+            }
         }
 
     }

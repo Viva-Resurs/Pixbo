@@ -34,17 +34,6 @@
 
         methods: {
 
-            fetch(successHandler,errorHandler) {
-
-                var self = this;
-
-                client({ path: '/categories' }).then(
-                    successHandler,
-                    errorHandler
-                );
-
-            },
-
             attemptDeleteCategory(category) {
 
                 this.confirm({
@@ -54,7 +43,7 @@
 
             },
 
-            deleteCategory (category) {
+            deleteCategory(category) {
 
                 var self = this;
 
@@ -95,12 +84,15 @@
 
         route: {
             data: function (transition) {
-                this.fetch(function (response) {
-                    transition.next({categories: response.entity.data});
-                },function (response){
-                    transition.next();
-                    console.error(response.entity.error);
-                });
+                client({ path: '/categories' }).then(
+                    function (response) {
+                        transition.next({categories: response.entity.data});
+                    },
+                    function (response){
+                        transition.next();
+                        console.error(response.entity.error);
+                    }
+                );
             }
         }
 

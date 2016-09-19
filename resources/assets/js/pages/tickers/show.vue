@@ -22,7 +22,7 @@
                                v-form-ctrl
                                required
                                minlength="3"
-                               maxlength="50"
+                               maxlength="75"
                         >
                     </div>
                 </div>
@@ -52,44 +52,18 @@
             }
         },
 
-        methods: {
-
-            fetch(id) {
-
-                var self = this;
-
-                self.$loadingRouteData = true;
-
-                client({ path: '/tickers/' + id }).then(
-
+        route: {
+            data: function (transition) {
+                client({ path: '/tickers/' + this.$route.params.id }).then(
                     function (response) {
-
-                        self.$set('ticker', response.entity.data);
-                        
-                        if ( self.$route.query.screengroup )
-                            self.ticker.screengroups.push( { id: self.$route.query.screengroup });
-
-                        self.$loadingRouteData = false;
-
+                        transition.next({ticker: response.entity.data});
                     },
-
-                    function (response) {
-
-                        if (response.entity && response.entity.error)
-                            console.error(response.entity.error.message);
-
-                        self.$loadingRouteData = false;
-
+                    function (response){
+                        transition.next();
+                        console.error(response.entity.error);
                     }
-
                 );
-
             }
-
-        },
-
-        created: function(){
-            this.fetch(this.$route.params.id);
         }
 
     }

@@ -1,7 +1,7 @@
 <template>
 
     <div class="panel-heading">
-        {{ screengroup.name || trans('screengroup.edit') }}
+        {{ (screengroup && screengroup.name) ? screengroup.name : trans('screengroup.edit') }}
     </div>
 
     <div class="panel-body" v-if="$loadingRouteData">
@@ -93,42 +93,12 @@
 
         data: function () {
             return {
-                screengroup: {
-                },
+                screengroup: {},
                 myform: []
             }
         },
 
         methods: {
-
-            fetch(id) {
-
-                var self = this;
-
-                self.$loadingRouteData = true;
-
-                client({ path: '/screengroups/' + id }).then(
-                    
-                    function (response) {
-
-                        self.$set('screengroup', response.entity.data);
-
-                        self.$loadingRouteData = false;
-
-                    },
-
-                    function (response) {
-
-                        if (response.entity && response.entity.error)
-                            console.error(response.entity.error.message);
-
-                        self.$loadingRouteData = false;
-
-                    }
-
-                );
-
-            },
 
             attemptUpdateScreengroup() {
 
@@ -169,8 +139,18 @@
 
         },
 
-        created: function(){
-            this.fetch(this.$route.params.id);
+        route: {
+            data: function (transition) {
+                client({ path: '/screengroups/' + this.$route.params.id }).then(
+                    function (response) {
+                        transition.next({screengroup: response.entity.data});
+                    },
+                    function (response){
+                        transition.next();
+                        console.error(response.entity.error);
+                    }
+                );
+            }
         }
 
     }

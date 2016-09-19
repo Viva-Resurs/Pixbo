@@ -81,38 +81,6 @@
 
         methods: {
 
-            fetch(id) {
-
-                var self = this;
-
-                self.$loadingRouteData = true;
-
-                client({ path: '/screens/' + id }).then(
-
-                    function (response) {
-
-                        self.$set('screen', response.entity.data);
-
-                        self.$loadingRouteData = false;
-
-                        if ( self.$route.query.screengroup )
-                            self.screen.screengroups.push( { id: self.$route.query.screengroup });
-                        
-                    },
-
-                    function (response) {
-
-                        if (response.entity && response.entity.error)
-                            console.error(response.entity.error.message);
-
-                        self.$loadingRouteData = false;
-
-                    }
-
-                );
-
-            },
-
             initDropzone() {
 
                 var vm = this;
@@ -164,8 +132,18 @@
 
         },
 
-        created: function(){
-            this.fetch(this.$route.params.id);
+        route: {
+            data: function (transition) {
+                client({ path: '/screens/' + this.$route.params.id }).then(
+                    function (response) {
+                        transition.next({screen: response.entity.data});
+                    },
+                    function (response){
+                        transition.next();
+                        console.error(response.entity.error);
+                    }
+                );
+            }
         }
 
     }

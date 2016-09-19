@@ -1,7 +1,7 @@
 <template>
 
     <div class="panel-heading">
-        {{ originalName || trans('category.edit') }}
+        {{ (category && category.name) ? category.name : trans('category.edit') }}
     </div>
 
     <div class="panel-body" v-if="$loadingRouteData">
@@ -81,47 +81,12 @@
 
         data: function () {
             return {
-                category: {
-                    id: null,
-                    name: null,
-                    screens: null
-                },
-                myform: [],
-                originalName: ''
+                category: {},
+                myform: []
             }
         },
 
         methods: {
-
-            fetch(id) {
-
-                var self = this;
-
-                self.$loadingRouteData = true;
-
-                client({ path: '/categories/' + id }).then(
-
-                    function (response) {
-
-                        self.$set('category', response.entity.data);
-                        self.$set('originalName', self.category.name);
-                        
-                        self.$loadingRouteData = false;
-
-                    },
-
-                    function (response) {
-
-                        if (response.entity && response.entity.error)
-                            console.error(response.entity.error.message);
-
-                        self.$loadingRouteData = false;
-
-                    }
-
-                );
-
-            },
 
             attemptUpdateCategory() {
 
@@ -208,8 +173,18 @@
             });
         },
 
-        created: function(){
-            this.fetch(this.$route.params.id);
+        route: {
+            data: function (transition) {
+                client({ path: '/categories/' + this.$route.params.id }).then(
+                    function (response) {
+                        transition.next({category: response.entity.data});
+                    },
+                    function (response){
+                        transition.next();
+                        console.error(response.entity.error);
+                    }
+                );
+            }
         }
 
     }
