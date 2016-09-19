@@ -29,15 +29,14 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        if($validator->fails()) {
+        if($validator->fails())
             throw new ValidationHttpException($validator->errors()->all());
-        }
 
         try {
-            if (! $token = JWTAuth::attempt($credentials)) {
+            if (!$token = JWTAuth::attempt($credentials))
                 return $this->response->errorUnauthorized();
-            }
-        } catch (JWTException $e) {
+        }
+        catch (JWTException $e) {
             return $this->response->error('could_not_create_token', 500);
         }
 
@@ -53,21 +52,18 @@ class AuthController extends Controller
 
         $validator = Validator::make($userData, Config::get('boilerplate.signup_fields_rules'));
 
-        if($validator->fails()) {
+        if($validator->fails())
             throw new ValidationHttpException($validator->errors()->all());
-        }
 
         User::unguard();
         $user = User::create($userData);
         User::reguard();
 
-        if(!$user->id) {
+        if (!$user->id)
             return $this->response->error('could_not_create_user', 500);
-        }
 
-        if($hasToReleaseToken) {
+        if ($hasToReleaseToken)
             return $this->login($request);
-        }
         
         return $this->response->created();
     }
@@ -78,9 +74,8 @@ class AuthController extends Controller
             'email' => 'required'
         ]);
 
-        if($validator->fails()) {
+        if($validator->fails())
             throw new ValidationHttpException($validator->errors()->all());
-        }
 
         $user = User::where('email', $request->only('email'))->first();
 
@@ -111,9 +106,8 @@ class AuthController extends Controller
             'password' => 'required|confirmed|min:6',
         ]);
 
-        if($validator->fails()) {
+        if($validator->fails())
             throw new ValidationHttpException($validator->errors()->all());
-        }
         
         $response = Password::reset($credentials, function ($user, $password) {
             $user->password = $password;
@@ -133,15 +127,20 @@ class AuthController extends Controller
     }
 
     public function token(){
+
         $token = JWTAuth::getToken();
-        if(!$token){
+
+        if (!$token)
             throw new BadRequestHttpException('Token not provided');
-        }
-        try{
+
+        try {
             $token = JWTAuth::refresh($token);
-        }catch(TokenInvalidException $e){
+        }
+        catch(TokenInvalidException $e){
             throw new AccessDeniedHttpException('The token is invalid');
         }
+
         return $this->response->withArray(['token'=>$token]);
     }
+
 }

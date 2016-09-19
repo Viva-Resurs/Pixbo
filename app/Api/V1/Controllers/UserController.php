@@ -2,44 +2,52 @@
 
 namespace App\Api\V1\Controllers;
 
-use Activity;
 use Gate;
-use Illuminate\Http\Request;
+use Activity;
+
+use App\Http\Requests;
+
 use App\Models\User;
+
 use App\Api\V1\Transformers\User\UserTransformer;
+
 
 class UserController extends BaseController
 {
+
     public function index() {
 
-        if (Gate::denies('view_users')) {
+        if (Gate::denies('view_users'))
             $this->response->error('permission_denied', 401);
-        }
-        $users = User::with('roles')->where('id', '<>', $this->user->id)->get();
-        return $this->collection($users, new UserTransformer());
         
+        $users = User::with('roles')->where('id', '<>', $this->user->id)->get();
+
+        return $this->collection($users, new UserTransformer());
     }
 
     public function show($id) {
-        if (Gate::denies('view_users')) {
+
+        if (Gate::denies('view_users'))
             $this->response->error('permission_denied', 401);
-        }
-        $user = User::findOrFail($id);
+        
+        $user = User::find($id);
+
+        if (!$user)
+            $this->response->error('not_found', 404);
 
         return $this->item($user, new UserTransformer());
     }
 
-
     public function store(Request $request) {
-        if (Gate::denies('add_users')) {
+
+        if (Gate::denies('add_users'))
             $this->response->error('permission_denied', 401);
-        }
 
         $user = new User;
         $user->fill($request->only(['name', 'email', 'password']));
 
         if($user->save()) {
-            $user->roles()->sync($this->getFullRolesFromRequest($request));
+            $user->roles()->sync($this->getRolesFromRequest($request));
             
             Activity::log([
                 'contentId' => $user->id,
@@ -48,29 +56,33 @@ class UserController extends BaseController
                 'description' => 'Created the user '.$user->name,
                 'details' => $user->toJson(),
             ]);
+
             return $this->response->created();
         }
-        else {
+        else
             return $this->response->error('could_not_create_user', 500);
-        }
     }
 
-
     public function me() {
+
         if ($this->user)
             return $this->item($this->user, new UserTransformer() );
+
         return '';
     }
 
-
     public function update(Request $request, $id) {
-        if (Gate::denies('edit_users')) {
+
+        if (Gate::denies('edit_users'))
             $this->response->error('permission_denied', 401);
-        }
-        $user = User::findOrFail($id);
+        
+        $user = User::find($id);
+
+        if (!$user)
+            $this->response->error('not_found', 404);
 
         if($user->update($request->only(['name', 'email', 'password']))) {
-            $user->roles()->sync($this->getFullRolesFromRequest($request));
+            $user->roles()->sync($this->getRolesFromRequest($request));
 
             Activity::log([
                 'contentId' => $user->id,
@@ -79,17 +91,22 @@ class UserController extends BaseController
                 'description' => 'Updated the user '.$user->name,
                 'details' => $user->toJson(),
             ]);
+
             return $this->response->noContent();
-        } else {
-            return $this->response->error('could_not_update_user', 500);
         }
+        else
+            return $this->response->error('could_not_update_user', 500);
     }
 
     public function destroy($id) {
-        if (Gate::denies('remove_users')) {
+
+        if (Gate::denies('remove_users'))
             $this->response->error('permission_denied', 401);
-        }
-        $user = User::findOrFail($id);
+
+        $user = User::find($id);
+
+        if (!$user)
+            $this->response->error('not_found', 404);
 
         if($user->delete()) {
             Activity::log([
@@ -100,12 +117,12 @@ class UserController extends BaseController
                 'details' => $user->toJson(),
             ]);
             return $this->response->noContent();
-        } else {
-            return $this->response->error('could_not_delete_user', 500);
         }
+        else
+            return $this->response->error('could_not_delete_user', 500);
     }
 
-    protected function getFullRolesFromRequest(Request $request) {
+    protected function getRolesFromRequest(Request $request) {
         return collect($request
             ->only('roles'))->collapse()
             ->flatMap(function($role) {
@@ -113,13 +130,4 @@ class UserController extends BaseController
             })->toArray();
     }
 
-    protected function getSlimRolesFromRequest(Request $request) {
-
-        // TODO: Clean this up
-        $arr = [];
-        foreach ($request->only('roles') as $t)
-            $arr[] = $t['data'];
-
-        return $arr;
-    }
 }

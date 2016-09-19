@@ -2,8 +2,7 @@
 
 namespace App\Api\V1\Controllers;
 
-use Illuminate\Http\Request;
-
+use App\Http\Requests;
 
 
 class ValidationController extends BaseController
@@ -29,7 +28,7 @@ class ValidationController extends BaseController
         else
             $model = 'App\Models\\'.ucfirst($request->get('model'));
         
-        $id    = $request->get('id');
+        $id = $request->get('id');
 
         // Fix to check against lowercased field
         $result = $model::where(function($q) use ($field, $value, $id) {
@@ -39,4 +38,5 @@ class ValidationController extends BaseController
 
         return (is_null($result)) ? 1 : 0;
     }
+
 }
