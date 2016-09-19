@@ -22,7 +22,7 @@
                                v-form-ctrl
                                required
                                minlength="3"
-                               maxlength="75"
+                               maxlength="200"
                         >
                     </div>
                 </div>

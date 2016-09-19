@@ -8,7 +8,7 @@
         <loading></loading>
     </div>
 
-    <div v-if="!$loadingRouteData">
+    <div v-else>
 
         <form class="form-horizontal" role="form" v-on:submit.prevent="attemptUpdateClient" v-form name="myform">
 
