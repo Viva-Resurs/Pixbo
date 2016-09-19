@@ -69,7 +69,7 @@
     <div class="moving_bug bug3 fa fa-1x fa-bug"></div>
         <br>
                 Sorry, we couldn't find what you were looking for :-(<br>
-                <a href="/">Go back to the homepage</a>
+                <a v-link="{ path: '/' }" @click="$root.errors=false">Go back to the homepage</a>
 
     </div>
 </template>

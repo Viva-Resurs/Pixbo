@@ -3,7 +3,8 @@
     <div>
         <nav-component></nav-component>
         <toaster></toaster>
-        <router-view></router-view>
+        <router-view v-show="!errors"></router-view>
+        <error404 v-show="errors"></error404>
         <footer-component></footer-component>
     </div>
 
@@ -13,10 +14,11 @@
     import Toaster from './components/Toaster.vue'
     import { store } from './store'
     import Auth from './mixins/Auth.vue'
+    import error404 from './pages/404.vue'
 
     export default {
 
-        components: { Toaster },
+        components: { Toaster, error404 },
 
         mixins: [ Auth ],
 
@@ -25,7 +27,8 @@
                 history: {
                     previous: null,
                     params: null
-                }
+                },
+                errors: false
             }
         },
 

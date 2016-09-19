@@ -8,7 +8,7 @@
         <loading></loading>
     </div>
 
-    <div v-else>
+    <div v-else v-if="user">
 
         <form class="form-horizontal" role="form" v-on:submit.prevent="attemptUpdateUser" name="myform" v-form>
             
@@ -105,7 +105,7 @@
 
         data: function () {
             return {
-                user: {},
+                user: false,
                 myform: []
             }
         },
@@ -157,10 +157,10 @@
                     function (response) {
                         transition.next({user: response.entity.data});
                     },
-                    function (response){
+                    (function (response){
+                        this.errorHandler(response);
                         transition.next();
-                        console.error(response.entity.error);
-                    }
+                    }).bind(this)
                 );
             }
         }
