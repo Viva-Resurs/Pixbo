@@ -11,7 +11,7 @@ use App\Api\V1\Transformers\RoleTransformer;
 
 class RoleController extends BaseController
 {
-	
+    
     public function index() {
 
         if (Gate::denies('view_roles'))
