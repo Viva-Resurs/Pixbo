@@ -2,7 +2,7 @@
 
 namespace App\Api\V1\Controllers;
 
-use App\Http\Requests;
+use Illuminate\Http\Request;
 
 
 class ValidationController extends BaseController

@@ -5,7 +5,7 @@ namespace App\Api\V1\Controllers;
 use Gate;
 use Activity;
 
-use App\Http\Request;
+use Illuminate\Http\Request;
 
 use App\Models\Client;
 
@@ -114,5 +114,5 @@ class ClientController extends BaseController
         else
             return $this->response->error('could_not_delete_client', 500);
     }
-    
+
 }

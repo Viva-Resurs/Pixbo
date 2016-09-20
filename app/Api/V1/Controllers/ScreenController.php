@@ -5,8 +5,6 @@ namespace App\Api\V1\Controllers;
 use Gate;
 use Activity;
 
-use App\Http\Requests;
-
 use App\Models\Screen;
 
 use App\Api\V1\Requests\FileUploadForm;
@@ -143,5 +141,5 @@ class ScreenController extends BaseController
         else
             return $this->response->error('could_not_delete_screen', 500);
     }
-    
+
 }

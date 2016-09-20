@@ -5,7 +5,7 @@ namespace App\Api\V1\Controllers;
 use Gate;
 use Activity;
 
-use App\Http\Requests;
+use Illuminate\Http\Request;
 
 use App\Models\Settings;
 

@@ -5,8 +5,6 @@ namespace App\Api\V1\Controllers;
 use Gate;
 use Activity;
 
-use App\Http\Requests;
-
 use App\Models\Ticker;
 
 use App\Api\V1\Requests\TickerCreationForm;
