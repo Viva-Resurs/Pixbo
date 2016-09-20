@@ -44,6 +44,10 @@ $api->version('v1', function ($api) {
         $api->resource('tickers', 'App\Api\V1\Controllers\TickerController');
         $api->resource('users', 'App\Api\V1\Controllers\UserController');
         
+        // Activity
+        $api->get('activity', 'App\Api\V1\Controllers\ActivityController@index');
+        $api->delete('activity/{id}', 'App\Api\V1\Controllers\ActivityController@destroy');
+
         // Roles
         $api->get('roles', 'App\Api\V1\Controllers\RoleController@index');
 
