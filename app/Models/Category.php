@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-Use App\Models\User;
+
 
 class Category extends Model
 {
+    
     protected $fillable = ['name'];
 
     /**
@@ -25,7 +26,6 @@ class Category extends Model
 
         });
     }
-
 
     public function user() {
         return $this->belongsTo(User::class);
@@ -46,4 +46,5 @@ class Category extends Model
     public function isOwner(User $user) {
         return $user->id == $this->user_id;
     }
+
 }

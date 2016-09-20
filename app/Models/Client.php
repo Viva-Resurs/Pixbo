@@ -2,17 +2,20 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+
+use Carbon\Carbon;
 
 
 class Client extends Model
 {
+
     /**
      * Table name of model.
      * @var string
      */
     protected $table = 'clients';
+
     /**
      * [$fillable variables allowed for massallocation]
      * @var [String]
@@ -24,7 +27,9 @@ class Client extends Model
         'activity',
         'user_id'
     ];
+
     protected $appends = ['group'];
+
     /**
      * ScreenGroup association
      *
@@ -34,6 +39,7 @@ class Client extends Model
     {
         return $this->belongsTo(ScreenGroup::class, 'screen_group_id');
     }
+
     /**
      * User association
      *
@@ -49,9 +55,9 @@ class Client extends Model
         if (!is_null($value)) {
             $time = Carbon::now()->timestamp($value);
             return $time->diffForHumans();
-        } else {
-            return trans('messages.unknown');
         }
+        else
+            return trans('messages.unknown');
     }
 
     public function getGroupAttribute()

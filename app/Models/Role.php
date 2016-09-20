@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Role extends Model
 {
     protected $table = 'roles';
@@ -15,4 +16,5 @@ class Role extends Model
     public function givePermissionTo(Permission $permission) {
         return $this->permissions()->save($permission);
     }
+    
 }

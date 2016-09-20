@@ -2,13 +2,18 @@
 
 namespace App\Models;
 
-use App\Traits\HasShadowEvents;
 use Illuminate\Database\Eloquent\Model;
+
+use App\Traits\HasShadowEvents;
+
 use Carbon\Carbon;
+
 
 class Event extends Model
 {
+
     use HasShadowEvents;
+
     protected $table = "events";
 
     /**
@@ -31,13 +36,14 @@ class Event extends Model
     protected $touches = ['eventable'];
 
     public static function boot() {
+        
         parent::boot();
 
         /*
         Event::created(function($event) {
             $event->generateShadowEvents($event);
         });
-*/
+        */
         Event::deleting(function($event) {
             $event->shadow_events()->delete();
         });
@@ -56,6 +62,5 @@ class Event extends Model
     {
         return $this->morphTo();
     }
-
 
 }

@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+
 use Image;
+
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 class Photo extends Model
 {
+
     /**
      * Table name of model.
      *
@@ -52,9 +55,8 @@ class Photo extends Model
     {
         $path = 'public' . $this->attributes['path'];
 
-        if (\File::exists($path)) {
+        if (\File::exists($path))
             \File::delete($path);
-        }
 
         parent::delete();
     }
@@ -90,10 +92,11 @@ class Photo extends Model
     public static function getOrCreate(UploadedFile $file)
     {
         $photo = Photo::where(['sha1' => sha1_file($file)])->first();
-        if (!is_null($photo)) {
+        
+        if (!is_null($photo))
             return $photo;
-        } else {
+        else
             return Photo::named($file->getClientOriginalName());
-        }
     }
+
 }

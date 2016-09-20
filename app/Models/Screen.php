@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
-use App\Traits\HasEvents;
 use Illuminate\Database\Eloquent\Model;
+
+use App\Traits\HasEvents;
+
 
 class Screen extends Model
 {
+
     use HasEvents;
 
     protected $table = 'screens';
+    
     protected $touches = ['screengroups'];
 
     protected $fillable = [

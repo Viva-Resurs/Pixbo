@@ -2,20 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Foundation\Auth\Access\Authorizable;
+
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Auth\Passwords\CanResetPassword;
+
 use App\Traits\HasRoles;
 
 
-/**
- * App\Models\User
- *
- */
 class User extends Model implements AuthenticatableContract,
                                     AuthorizableContract,
                                     CanResetPasswordContract
@@ -52,7 +51,7 @@ class User extends Model implements AuthenticatableContract,
      */
     public function setPasswordAttribute($value)
     {
-        if($value != "" || $value != null)
+        if ($value != "" || $value != null)
             $this->attributes['password'] = \Hash::make($value);
     }
 
@@ -79,8 +78,22 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasMany(Client::class);
     }
     
+    /**
+     * Activity association
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function activity() {
+        return $this->hasMany(Activity::class);
+    }
 
+    /**
+     * Category association
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function categories() {
         return $this->hasMany(Category::class);
     }
+
 }

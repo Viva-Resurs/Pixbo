@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+
+use Carbon\Carbon;
+
 
 class ShadowEvent extends Model
 {
@@ -67,25 +69,30 @@ class ShadowEvent extends Model
     public static function clearOldEvents($id)
     {
         $now = Carbon::now();
+
         $delete_rows = ShadowEvent::where(function ($q) use ($now, $id) {
             $q->where('event_id', $id);
             $q->where('end', '<', $now);
         })->delete();
+
         return $delete_rows;
     }
 
     public static function clearAllOldEvents()
     {
         $now = Carbon::now();
+
         $delete_rows = ShadowEvent::where(function ($q) use ($now) {
             $q->where('end', '<', $now);
         })->delete();
+
         return $delete_rows;
     }
 
     public static function generateAllEvents()
     {
         $events = Event::all();
+
         foreach ($events as $event) {
             $event->generateShadowEvents($event);
         }
@@ -115,4 +122,5 @@ class ShadowEvent extends Model
     {
         return Carbon::parse($this->getAttribute('end'));
     }
+    
 }

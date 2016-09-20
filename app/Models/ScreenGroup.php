@@ -6,15 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class ScreenGroup extends Model
 {
-    /**
-     * Database table
-     * @var string
-     */
+
     protected $table = 'screengroups';
-    /**
-     * The attributes that are mass assignable.
-     * @var [type]
-     */
+
     protected $fillable = [
         'name',
         'desc',
@@ -49,12 +43,15 @@ class ScreenGroup extends Model
      *
      * @return [type] [description]
      */
-
     public function screens() {
         return $this->belongsToMany(Screen::class, 'screengroup_screen')->withTimestamps();
     }
 
-
+    /**
+     * Ticker association
+     *
+     * @return [type] [description]
+     */
     public function tickers() {
         return $this->belongsToMany(Ticker::class, 'screengroup_ticker')->withTimestamps();
     }
@@ -112,4 +109,5 @@ class ScreenGroup extends Model
         
         return $array;
     }
+    
 }
