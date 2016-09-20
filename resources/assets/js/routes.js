@@ -112,7 +112,16 @@ module.exports = {
                     }
                 }
             },
-
+            '/activity': {
+                component: require('./pages/Activity.vue'),
+                auth: true,
+                subRoutes: {
+                    '/': {
+                        name: 'activity.index',
+                        component: require('./pages/activity/index.vue')
+                    }
+                }
+            },
             '/tickers': {
                 component: require('./pages/Ticker.vue'),
                 auth: true,

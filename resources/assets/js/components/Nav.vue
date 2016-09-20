@@ -62,6 +62,16 @@
                                 </a>
                             </li>
 
+                            <!-- Only admin area -->
+                            <template v-if="$root.isAuthenticated && $root.isAdmin">
+                                <li class="dropdown-header">{{ trans('general.activity') }}</li>
+                                <li>
+                                    <a v-link="{ name: 'activity.index' }">
+                                        <i class="fa fa-btn fa-fw fa-bar-chart"></i>{{ trans('general.log') }}
+                                    </a>
+                                </li>
+                            </template>
+
                             <!-- Logout -->
                             <li class="divider"></li>
                             <li>

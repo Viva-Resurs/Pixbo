@@ -48,6 +48,7 @@ const lang = {
         about:                      "Om Pixbo",
         settings:                   "Inställningar",
         archive:                    "Arkiv",
+        log:                        "Logg",
         search:                     "Sök",
         showallresults:             "Visa alla resultat",
         new:                        "Lägg till",
@@ -73,7 +74,12 @@ const lang = {
         preview:                    "Förhandsvisa",
         order_by:                   "Sortera efter",
         nothing_selected:           "Inget markerat",
-        updated_at:                 "Ändrad"
+        timestamp:                  "Tidpunkt",
+        activity:                   "Aktivitet",
+        empty:                      "Tomt",
+        
+        deleted:                    "Objektet har tagits bort.",
+        deleted_fail:               "Misslyckades att ta bort objektet, försök igen."
     },
     /* ----------------------------- SETTINGS ----------------------------- */
     settings: {
