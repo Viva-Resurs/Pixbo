@@ -54,6 +54,8 @@
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "touch storage/database.sqlite",
             "php -r \"copy('.env.example', '.env');\"",
+            "php artisan key:generate",
+            "php artisan jwt:generate",
             "php artisan clear-compiled",
             "php artisan optimize"            
         ],
@@ -62,8 +64,7 @@
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-            "php artisan optimize",
-            "php artisan ide-helper:generate"
+            "php artisan optimize"
         ]
     },
     "config": {
