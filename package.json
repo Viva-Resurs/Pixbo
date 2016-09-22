@@ -1,6 +1,8 @@
 {
   "private": true,
-  "devDependencies": {
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "laravel-elixir": "^4.0.0",
     "babel-runtime": "^6.2.0",
     "bootstrap-select": "^1.10.0",
     "gulp": "^3.8.8",
@@ -15,9 +17,5 @@
     "vue-router": "^0.7.7",
     "vue-strap": "^1.0.11",
     "vue-toast": "^2.0.2"
-  },
-  "dependencies": {
-    "bootstrap": "^3.3.6",
-    "laravel-elixir": "^4.0.0"
   }
 }
