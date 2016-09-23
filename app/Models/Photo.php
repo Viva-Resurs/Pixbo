@@ -13,16 +13,16 @@ class Photo extends Model
 {
 
     /**
-     * Table name of model.
+     * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'photos';
 
     /**
-     * [$fillable variables allowed for massallocation]
+     * The attributes that are mass assignable.
      *
-     * @var [String]
+     * @var array
      */
     protected $fillable = [
         'name',
@@ -38,7 +38,7 @@ class Photo extends Model
     /**
      * Get the screens associated with the given image.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function screen()
     {
@@ -60,6 +60,7 @@ class Photo extends Model
 
         parent::delete();
     }
+
 
     public static function named($name)
     {

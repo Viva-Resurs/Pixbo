@@ -55,11 +55,6 @@ class User extends Model implements AuthenticatableContract,
             $this->attributes['password'] = \Hash::make($value);
     }
 
-
-    /***********************************************************************************
-     *                      Associations                                               *
-     **********************************************************************************/
-
     /**
      * Screengroup association
      *

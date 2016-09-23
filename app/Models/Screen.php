@@ -12,14 +12,24 @@ class Screen extends Model
 
     use HasEvents;
 
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
     protected $table = 'screens';
-    
-    protected $touches = ['screengroups'];
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'created_at',
         'updated_at',
     ];
+
+    protected $touches = ['screengroups'];
 
     /**
      * Boot method used to update associations depending on actions.

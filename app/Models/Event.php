@@ -14,10 +14,16 @@ class Event extends Model
 
     use HasShadowEvents;
 
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
     protected $table = "events";
 
     /**
-     * [$fillable description]
+     * The attributes that are mass assignable.
+     *
      * @var array
      */
     protected $fillable = [
@@ -35,18 +41,17 @@ class Event extends Model
 
     protected $touches = ['eventable'];
 
+    /**
+     * Boot method used to update associations depending on actions.
+     *
+     */
     public static function boot() {
-        
         parent::boot();
 
-        /*
-        Event::created(function($event) {
-            $event->generateShadowEvents($event);
-        });
-        */
         Event::deleting(function($event) {
             $event->shadow_events()->delete();
         });
+
         Event::updating(function ($event) {
             $event->shadow_events()->delete();
             $event->generateShadowEvents($event);

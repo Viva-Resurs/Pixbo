@@ -10,6 +10,18 @@ use Carbon\Carbon;
 class ShadowEvent extends Model
 {
 
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'shadow_events';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'title',
         'start',
@@ -122,5 +134,5 @@ class ShadowEvent extends Model
     {
         return Carbon::parse($this->getAttribute('end'));
     }
-    
+
 }
