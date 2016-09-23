@@ -77,6 +77,7 @@ const lang = {
         timestamp:                  "Tidpunkt",
         activity:                   "Aktivitet",
         empty:                      "Tomt",
+        updated_at:                 "Ändrad",
         
         deleted:                    "Objektet har tagits bort.",
         deleted_fail:               "Misslyckades att ta bort objektet, försök igen."
