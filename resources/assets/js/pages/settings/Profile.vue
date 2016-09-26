@@ -18,6 +18,10 @@
                 <td>{{ $root.store.user.email }}</td>
             </tr>
         </table>
+
+        <button v-if="!changePassword" class="btn btn-default" @click="changePassword = true">
+            {{ trans('auth.password_edit') }}
+        </button>
         
     </div>
 
@@ -26,7 +30,14 @@
 <script type="text/ecmascript-6">
     export default {
         
-        name: 'Profile'
+        name: 'Profile',
+
+        data: function(){
+            return {
+                changePassword: false
+            }
+        }
+
 
     }
 </script>

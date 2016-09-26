@@ -8,6 +8,7 @@ const lang = {
         register:                   "Registrera",
         password:                   "Lösenord",
         password_repeat:            "Bekräfta lösenord",
+        password_edit:              "Ändra lösenord",
         password_new:               "Nytt lösenord",
         password_new_repeat:        "Bekräfta nytt lösenord",
         invalid_credentials:        "Ogiltiga uppgifter, försök igen",
