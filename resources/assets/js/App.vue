@@ -12,7 +12,6 @@
 
 <script type="text/ecmascript-6">
     import Toaster from './components/Toaster.vue'
-    import { store } from './store'
     import Auth from './mixins/Auth.vue'
     import error404 from './pages/404.vue'
 

@@ -92,14 +92,6 @@
 
         },
 
-        watch: {
-            // When lang changes
-            search: function(val, oldVal){
-                this.offset = 0;
-                this.limitOff = false;
-            }
-        },
-
         created: function(){
 
             this.setSelectPicker();
