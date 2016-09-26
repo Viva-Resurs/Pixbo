@@ -4,7 +4,6 @@
     define(function (require) {
 
         var interceptor;
-        var store = require('../store')
         interceptor = require('rest/interceptor');
 
         /**

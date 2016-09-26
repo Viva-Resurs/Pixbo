@@ -3,18 +3,18 @@
 }
 
 .app-screen {
-	.btn {
-		transition: background-color 0.2s ease;
-	}
+    .btn {
+        transition: background-color 0.2s ease;
+    }
 
-	.btn-link {
-		font-weight: 300;
-	}
+    .btn-link {
+        font-weight: 300;
+    }
 }
 
 a[disabled] {
-	cursor: not-allowed;
-	pointer-events: none;
+    cursor: not-allowed;
+    pointer-events: none;
 }
 
 .hover-danger:hover {

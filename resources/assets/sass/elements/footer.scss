@@ -1,0 +1,15 @@
+.footer {
+    
+    color: #777;
+    
+    .footer-left {
+        @extend .pull-left;
+        padding-top: 28px;
+    }
+
+    .footer-right {
+        @extend .col-md-1, .pull-right;
+        padding-top: 20px;
+    }
+
+}

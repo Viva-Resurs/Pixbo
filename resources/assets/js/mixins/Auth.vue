@@ -3,13 +3,25 @@
 */
 
 <script type="text/ecmascript-6">
-    import { store } from '../store'
-    
+   
     export default {
 
         data() {
             return {
-                store: store
+                store: {
+                    user: {
+                        id: null,
+                        name: null,
+                        email: null,
+                        roles: []
+                    },
+
+                    lang: null,
+
+                    token: null,
+                    authenticated: null
+                    
+                }
             }
         },
 
@@ -17,9 +29,9 @@
 
             setLogin(user) {
 
-                store.user = user;
-                store.authenticated = true;
-                store.token = localStorage.getItem('jwt-token');
+                this.store.user = user;
+                this.store.authenticated = true;
+                this.store.token = localStorage.getItem('jwt-token');
 
                 if (this.$root.loginCheck)
                     clearInterval(this.$root.loginCheck);
@@ -35,9 +47,9 @@
                 //       Will read more about jwt-token later to fix this small gap if needed.
                 //       You still need to login to get the token in the first place so...
                 
-                store.user = null;
-                store.token = null;
-                store.authenticated = false;
+                this.store.user = null;
+                this.store.token = null;
+                this.store.authenticated = false;
                 
                 localStorage.removeItem('jwt-token');
                 

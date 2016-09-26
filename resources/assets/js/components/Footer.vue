@@ -5,9 +5,9 @@
     </div>
 
     <footer class="footer">
-        <div class="container" style="color: #777;">
+        <div class="container">
             <!-- Company Information -->
-            <div class="pull-left" style="padding-top: 28px;">
+            <div class="footer-left">
                 Copyright &copy; <span>Christoffer Isenberg</span> &amp; <span>Jonathan Timmerlid</span> - <a v-link="{ path: '/terms'}">Terms Of Service</a>
             </div>
             <!-- Social Icons
@@ -23,7 +23,23 @@
                 </a>
             </div>
             -->
-            <div class="clearfix"></div>
+            <div class="footer-right">
+                
+                <div class="input-group">
+                    <select class="form-control selectpicker show-tick dropup"
+                            v-model="$root.langChoise"
+                            id="lang"
+                            v-el:select-input
+                    >
+                        <option v-for="option in langOptions" :value="option">{{option}}</option>
+                    </select>
+                    <span class="input-group-addon">
+                        <span class="fa fa-language"></span>
+                    </span>
+
+                </div>
+
+            </div>
         </div>
     </footer>
 
@@ -40,8 +56,54 @@
                     facebook: '',
                     twitter: '',
                     github: ''
-                }
+                },
+                selectedLang: '',
+                langOptions: ['sv','en']
             }
+        },
+
+        methods: {
+
+            setSelectPicker() {
+
+                this.$nextTick(function() {
+
+                    var target = $(this.$els.selectInput);
+
+                    target.selectpicker({
+                        size: 4,
+                        iconBase: 'fa',
+                        tickIcon: 'fa-check',
+                        multipleSeparator: ' ',
+                        countSelectedText: function(){
+                            var text = '';
+                            for (var i=0; i<target[0].selectedOptions.length ; i++)
+                                text += target[0].selectedOptions[i].label.substring(0,3) + ' ';
+                            return text;
+                        },
+                        noneSelectedText: this.trans('general.nothing_selected'),
+                    });
+
+                    target.selectpicker('refresh');
+
+                });
+
+            }
+
+        },
+
+        watch: {
+            // When lang changes
+            search: function(val, oldVal){
+                this.offset = 0;
+                this.limitOff = false;
+            }
+        },
+
+        created: function(){
+
+            this.setSelectPicker();
+
         }
         
     }

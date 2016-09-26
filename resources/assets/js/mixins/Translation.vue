@@ -1,11 +1,14 @@
 <script type="text/ecmascript-6">
-    import lang from '../lang/sv'
+    import langList from '../lang/'
 
     export default {
 
         data: function(){
             return {
-                lang: lang
+                langList: langList,
+                lang: langList.sv,
+                langChoise: false,
+                defaultLang: 'sv'
             }
         },
 
@@ -31,6 +34,27 @@
                 }
             }
 
+        },
+
+        created: function(){
+            var l = localStorage.getItem('lang');
+            if (l)
+                this.langChoise = l;
+            else
+                localStorage.setItem('lang', this.defaultLang);
+        },
+
+        watch: {
+            // When lang changes
+            langChoise: function(val, oldVal){
+
+                localStorage.setItem('lang', val);
+                
+                this.lang = this.langList[val];
+
+                if (oldVal != false)
+                    location.reload();
+            }
         }
 
     }
