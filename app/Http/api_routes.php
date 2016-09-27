@@ -34,6 +34,7 @@ $api->version('v1', function ($api) {
         // Settings
         $api->get('settings', 'App\Api\V1\Controllers\SettingsController@index');
         $api->put('settings', 'App\Api\V1\Controllers\SettingsController@update');
+        $api->put('profile', 'App\Api\V1\Controllers\UserController@updateMe');
 
         // Models
         $api->resource('categories', 'App\Api\V1\Controllers\CategoryController');

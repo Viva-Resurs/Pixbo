@@ -98,6 +98,37 @@ class UserController extends BaseController
             return $this->response->error('could_not_update_user', 500);
     }
 
+    public function updateMe(Request $request) {
+
+        $user = $this->user;
+
+        if (!$user)
+            $this->response->error('not_found', 404);
+
+        $newData = [];
+
+        if ($request->password!='')
+            $newData['password'] = $request->password;
+        
+        if ($request->email!='')
+            $newData['email'] = $request->email;
+
+        if ($user->update($newData)){
+
+            Activity::log([
+                'contentId' => $user->id,
+                'contentType' => 'User',
+                'action' => 'Update',
+                'description' => 'Updated profile '.$user->name,
+                'details' => $user->toJson(),
+            ]);
+
+            return $this->response->noContent();
+        }
+        else
+            return $this->response->error('could_not_update_profile', 500);
+    }
+
     public function destroy($id) {
 
         if (Gate::denies('remove_users'))
