@@ -90,7 +90,7 @@
 
         name: 'Schedule',
 
-        props: [ 'model' ],
+        props: [ 'model', 'selectedcategories' ],
 
         mixins: [ RouterHelpers ],
 
@@ -163,6 +163,7 @@
 
                 this.event.weekly_day_num = JSON.stringify(this.weekly_day_num);
                 this.model.screengroups = this.selected_screengroups;
+                this.model.categories = this.selectedcategories;
 
             },
 
@@ -174,6 +175,16 @@
 
                     this.model.screengroups.forEach(function(entry) {
                         self.selected_screengroups.push(entry.id)
+                    });
+
+                }
+
+                if (this.model.categories != null || this.model.categories != [] || this.model.categories != "") {
+                    
+                    var self = this;
+
+                    this.model.categories.forEach(function(entry) {
+                        self.selectedcategories.push(entry.id)
                     });
 
                 }

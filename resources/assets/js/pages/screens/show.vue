@@ -10,12 +10,14 @@
 
     <div v-else>
 
-        <schedule :model.sync="screen">
+        <schedule :model.sync="screen" :selectedcategories.sync="selectedcategories">
             <div slot="model_specific_setting">
                 <div class="form-group">
-                    <model-selector :selected.sync="screen.category"
+                    <model-selector :selected.sync="selectedcategories"
                                     model="category"
                                     classes="model_input"
+                                    multiple="true"
+                                    mode="count > 3"
                     >
                         <div slot="label">
                             <label for="screen_category" class="model_label">
@@ -62,6 +64,7 @@
         data: function () {
             return {
                 screen: {},
+                selectedcategories: [],
                 changeScreen: false
             }
         },
