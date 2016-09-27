@@ -8,15 +8,50 @@
 
 ## Development
 
-#### Install needed tools
+#### Install needed* tools
 
-- [PHP](http://php.net/)
+- [PHP](http://php.net/) *
 
-unzip and set Path
+- [Composer](https://getcomposer.org/download/) *
+
+- [NodeJS & npm](https://nodejs.org/en/download/) *
+
+- [Git](https://git-scm.com/download/win)
+
+#### Setup project
+
+- Get repository, example with git:
+
+
+        git clone https://github.com/Viva-Resurs/Pixbo-revision.git
+        cd Pixbo-revision
+
+- Build Project
+
+
+        composer update --no-scripts
+        composer install
+        
+        php artisan migrate
+        php artisan db:seed
+        
+        npm install
+        
+        gulp
+
+#### Run Development Server
+
+
+        php artisan serve
+
+
+#### Troubleshooting
+
+depending on your setup, you might need to add php to PATH
 
         set PATH=%PATH%;C:\php
 
-Create a ``php.ini`` file from ``php.ini-development`` and uncomment following lines:
+If composer install fails, you might need to check your ``php.ini`` file if the following lines are uncommented:
 
         extension_dir = "ext"
         memory_limit = 512M
@@ -25,42 +60,5 @@ Create a ``php.ini`` file from ``php.ini-development`` and uncomment following l
         extension=php_openssl.dll
         extension=php_pdo_sqlite.dll
 
-- [Visual Studio 2013 Community](https://www.visualstudio.com/post-download-vs?sku=community&clcid=0x409)
-
-- [MS Build Tools 2013](https://www.microsoft.com/en-us/download/confirmation.aspx?id=40760)
-
-- [Python 2.7.11](https://www.python.org/downloads/)
-
-- [Ruby](https://www.ruby-lang.org/en/downloads/)
-
-- [Composer](https://getcomposer.org/download/)
-
-- [NodeJS & npm](https://nodejs.org/en/download/)
-
-- [Git](https://git-scm.com/download/win)
-
-#### Setup project
-
-- Get repository:
 
 
-        git clone https://github.com/Viva-Resurs/Pixbo-revision.git
-        cd Pixbo-revision
-
-- Create Database (empty file: ``storage/database.sqlite``)
-
-- Build Project
-
-
-        npm config set msvs_version 2013 --global
-        npm install
-        composer update --no-scripts
-        composer install
-        php artisan migrate
-        php artisan db:seed
-        gulp
-
-#### Run Development Server
-
-
-        php artisan serve
