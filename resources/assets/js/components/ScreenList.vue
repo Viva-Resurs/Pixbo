@@ -7,7 +7,7 @@
     <div class="panel-section" v-if="screens.length > 0">
 
         <search-filter v-if="from=='screen'"
-            :search="search"
+            :search.sync="search"
         >
             <div slot="searchfilter_right">
                 <div class="pull-right">
@@ -71,7 +71,7 @@
         data: function(){
             return {
                 search: '',
-                targets: ['photo.originalName'],
+                targets: ['photo.originalName','screengroups'],
 
                 limitOff: false,
                 limitOffBtn: false,
