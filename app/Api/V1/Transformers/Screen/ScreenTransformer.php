@@ -18,7 +18,7 @@ class ScreenTransformer extends TransformerAbstract
         return [
             'id' 	            => (int) $screen->id,
             'type'              => 'screen',
-            'category'          => $screen->categories()->first()->id,
+            'categories'        => $screen->categories,
             'event'	            => $screen->event->first(),
             'photo'             => $screen->photo,
             'screengroups'      => $screen->screengroups,
