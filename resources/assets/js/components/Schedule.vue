@@ -163,7 +163,7 @@
 
                 this.event.weekly_day_num = JSON.stringify(this.weekly_day_num);
                 this.model.screengroups = this.selected_screengroups;
-                this.model.categories = this.selectedcategories;
+                this.model.categories = (typeof this.selectedcategories == 'object') ? this.selectedcategories : [];
 
             },
 
@@ -179,16 +179,19 @@
 
                 }
 
-                if (this.model.categories != null && this.model.categories != [] && this.model.categories != "") {
-                
-                    this.selectedcategories = [];
+                this.weekly_day_num = JSON.parse(this.event.weekly_day_num);
+
+                this.selectedcategories = [];
+
+                if (typeof this.model.categories != 'undefined') {
 
                     for (var i=0 ; i<this.model.categories.length ; i++)
                         this.selectedcategories.push(this.model.categories[i].id);
 
                 }
 
-                this.weekly_day_num = JSON.parse(this.event.weekly_day_num);
+                if (this.selectedcategories.length == 0)
+                    this.selectedcategories[0] = 1;
 
             }
 
