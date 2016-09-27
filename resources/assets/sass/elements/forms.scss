@@ -16,6 +16,11 @@
         display: table;
     }
 
+    .model_data {
+        @extend .col-sm-7, .col-xs-12;
+        padding: 7px 15px;
+    }
+
     // Make borders on .model_input work like .input-group together with input-group-addon
     .model_input .form-control:nth-last-child(2) {
         border-top-right-radius: 0;

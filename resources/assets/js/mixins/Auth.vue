@@ -148,19 +148,25 @@
 
                 this.destroyLogin();
 
-            })
+            });
 
             this.$on('userHasLoggedIn', function (user) {
 
                 this.setLogin(user);
 
-            })
+            });
 
             this.$on('userHasFetchedToken', function(token) {
 
                 this.store.token = token;
 
-            })
+            });
+
+            this.$on('userHasUpdatedProfile', function () {
+
+                this.getUser();
+
+            });
 
             this.getUser();
 
