@@ -15,7 +15,6 @@
                 <div slot="label">
                     <label class="schedule_label">
                         {{ trans('schedule.weekdays') }}
-                        <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_week_days') }}"></span>
                     </label>
                 </div>
             </model-selector>
@@ -34,7 +33,7 @@
 
         name: 'Weekly',
 
-        props: [ 'event', 'weekly_day_num '],
+        props: [ 'event', 'weekly_day_num' ],
 
         components: { Frequency, ModelSelector },
         

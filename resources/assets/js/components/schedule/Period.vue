@@ -5,7 +5,6 @@
         <div class="col-lg-6 col-md-6">
             <label for="inputStart_date" class="schedule_label">
                 {{ trans('schedule.start_date') }}
-                <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_start_date') }}"></span>
             </label>
             <div class="input-group date">
                 <input v-model="event.start_date" type="text" name="start_date" id="inputStart_date" class="form-control" required title="">
@@ -18,7 +17,6 @@
         <div class="col-lg-6 col-md-6">
             <label for="inputEnd_date" class="schedule_label">
                 {{ trans('schedule.end_date') }}
-                <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_end_date') }}"></span>
             </label>
             <div class="input-group date">
                 <input v-model="event.end_date" type="text" name="start_date" id="inputEnd_date" class="form-control">
@@ -35,7 +33,6 @@
         <div class="col-lg-6 col-md-6">
             <label for="inputStart_time" class="schedule_label">
                 {{ trans('schedule.start_time') }}
-                <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_start_time') }}"></span>
             </label>
             <div class="input-group time">
                 <input v-model="event.start_time" type="text" name="start_time" id="inputStart_time" required class="form-control">
@@ -48,7 +45,6 @@
         <div class="col-lg-6 col-md-6">
             <label for="inputEnd_time" class="schedule_label">
                 {{ trans('schedule.end_time') }}
-                <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_end_time') }}"></span>
             </label>
             <div class="input-group time">
                 <input v-model="event.end_time" type="text" name="end_time" id="inputEnd_time" required class="form-control">

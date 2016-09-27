@@ -7,7 +7,6 @@
         <div class="schedule_group">
             <label class="schedule_label">
                 {{ trans('schedule.week') }}
-                <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_week') }}"></span>
             </label>
             <div class="row">
                 <div class="col-md-6">
@@ -38,7 +37,6 @@
                 <div slot="label">
                     <label for="inputDays_before" class="schedule_label">
                         {{ trans('schedule.days_before_event') }}
-                        <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_event_days_before') }}"></span>
                     </label>
                 </div>
             </model-selector>
