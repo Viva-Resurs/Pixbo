@@ -179,10 +179,14 @@
 
                 }
 
-                this.selectedcategories = [];
+                if (this.model.categories != null && this.model.categories != [] && this.model.categories != "") {
+                
+                    this.selectedcategories = [];
 
-                for (var i=0 ; i<this.model.categories.length ; i++)
-                    this.selectedcategories.push(this.model.categories[i].id);
+                    for (var i=0 ; i<this.model.categories.length ; i++)
+                        this.selectedcategories.push(this.model.categories[i].id);
+
+                }
 
                 this.weekly_day_num = JSON.parse(this.event.weekly_day_num);
 
