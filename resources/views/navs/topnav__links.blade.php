@@ -23,8 +23,6 @@
     @can('add_tickers')
       <li>{!! link_to_action('Admin\TickersController@create', trans_choice('messages.ticker',1)) !!}</li>
     @endcan
-
-
     @can('add_screengroups')
       <li>{!! link_to_action('Admin\ScreenGroupsController@create', trans_choice('messages.screen_group',1)) !!}</li>
     @endcan
@@ -36,5 +34,5 @@
     @endcan
   </ul>
 </li>
-<li>{!! link_to_action('Admin\UsersController@getProfile', trans('messages.settings')) !!}</li>
+<li>{!! link_to_action('Admin\SettingsController@index', trans('messages.settings')) !!}</li>
 @endif

@@ -1,21 +1,13 @@
 @extends('admin')
 
 @section('title')
-    ScreenGroup index
+    Ticker index
 @stop
 
+@section('header')
+    @include('shared.datatables', ['table_id_list_string' => 'tickers_table'])
+@stop
 
 @section('content')
-
-<div class="content">
-
-    <div class="row">
-        @include('tickers.ticker__card')
-    </div>
-
-    @can('view_dashboard')
-
-    @endcan
-</div>
-
+    @include('tickers.table', ['from' => 'tickers'])
 @stop

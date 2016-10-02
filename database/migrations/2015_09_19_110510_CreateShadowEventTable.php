@@ -21,9 +21,9 @@ class CreateShadowEventTable extends Migration {
 			$table->timestamps();
 
 			$table->foreign('event_id')
-			->references('id')
-			->on('events')
-			->onDelete('cascade');;
+				->references('id')
+				->on('events')
+				->onDelete('cascade');;
 		});
 	}
 

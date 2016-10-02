@@ -1,0 +1,9 @@
+.Screengroups {
+	
+}
+.Screengroups_Card{
+   @extend .col-sm-6, .col-md-4;
+}
+.Screengroups_Card_Info {
+	padding-top: 1em;
+}

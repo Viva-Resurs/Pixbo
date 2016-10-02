@@ -1,8 +1,17 @@
 <script>
+    import Tags from './Tags.vue';
+
     export default {
+
 
         template: '#schedule-template',
         props: ['id', 'model'],
+
+        components: {
+
+            'Tagger': Tags,
+
+        },
 
         data: function() {
             return {
@@ -18,9 +27,6 @@
         },
 
         methods: {
-            update_tags: function() {
-
-            },
             send_post: function() {
 
                 var day_num = null;
@@ -50,10 +56,10 @@
 
             send_ajax: function(payload) {
                 var vm = this;
-                this.$http.put('/admin/' + vm.model + 's/' + vm.modelObject.id, payload).then(function (response) {
+                console.log(vm.modelObject);
+                this.$http.put('/admin/' + vm.model + '/' + vm.modelObject.id, payload).then(function (response) {
                     if(response.ok) {
-                        history.back();
-                        //window.location.href = '/admin/' + vm.model + 's';
+                        vm.close_modal();
                     }
                     if(response) {
                         vm.$dispatch('add-alert', response.data);
@@ -75,9 +81,10 @@
             get_model: function() {
                 this.$http.get('/api/' + this.model + '/' + this.id, function(modelObject) {
                     this.modelObject = modelObject;
-                    this.event = modelObject.event.pop();
-                    if(this.model == 'screen')
-                        this.tags = modelObject.tags;
+                    if (modelObject.event)
+                      this.event = modelObject.event.pop();
+                    if(this.model == 'screens')
+                        this.selected_tags = modelObject.tags;
                     this.parse_event();
                     this.set_selected_screengroups();
                 }.bind(this));
@@ -110,6 +117,12 @@
                 for (var i =0;i<sgs;i++) {
                     this.selected_screengroups.push(this.modelObject.screengroups[i].id);
                 }
+            },
+
+            close_modal: function() {
+                var modal = '#' + this.model + '_modal_' + this.modelObject.id;
+                console.log(modal);
+                $(modal).modal('hide');
             }
         },
 
@@ -126,10 +139,18 @@
                 }
                 return tag_string;
             },
+            isValid: function() {
+                if(this.model == 'screens') {
+                    if (this.tags.length > 0)
+                        return true;
+                    else
+                        return false;
+                } else return true;
+            }
         },
          ready: function () {
             this.get_all_screengroups();
-            if(this.model == 'screen')
+            if(this.model == 'screens')
                 this.get_all_tags();
             this.get_model();
         },

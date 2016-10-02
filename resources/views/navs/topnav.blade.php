@@ -12,15 +12,15 @@
 
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
-
-
                 @include('navs.topnav__links')
+                @include('navs.lang')
             </ul>
-                @if($signedIn)
-                    <p class="navbar-text navbar-right">{{ trans('auth.signed_in_as') }} <strong>{{ $user->name }}</strong>. <a href="/auth/logout" class="navbar-link">{{ trans('auth.logout') }}</a></p>
-                @else
-                    <p class="navbar-text navbar-right"><a href="/auth/login" class="navbar-link">{{ trans('auth.login') }}</a></p>
-                @endif
+
+            @if($signedIn)
+                <p class="navbar-text navbar-right">{{ trans('auth.signed_in_as') }} <strong>{{ $user->name }}</strong>. <a href="/auth/logout" class="navbar-link">{{ trans('auth.logout') }}</a></p>
+            @else
+                <p class="navbar-text navbar-right"><a href="/auth/login" class="navbar-link">{{ trans('auth.login') }}</a></p>
+            @endif
 
         </div>
     </div>

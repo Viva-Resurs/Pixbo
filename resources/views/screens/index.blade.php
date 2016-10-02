@@ -4,9 +4,8 @@
     Screen index
 @stop
 
-
 @section('content')
-
-    @include('screens.screens__card', ['from' => 'screen'])
-
+    @foreach ($screens as $card)
+        @include('screens.screen__card', ['from' => 'screens'])
+    @endforeach
 @stop

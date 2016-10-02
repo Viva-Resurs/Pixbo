@@ -4,18 +4,8 @@
     ScreenGroup index
 @stop
 
-
 @section('content')
-
-<div class="content">
-
-    <div class="row">
-        @include('screengroups.screengroup__card')
-    </div>
-
-    @can('view_dashboard')
-
-    @endcan
-</div>
-
+  	@foreach ($screengroups as $card)
+       	@include('screengroups.screengroup__card', ['from' => 'screengroups'])
+    @endforeach
 @stop

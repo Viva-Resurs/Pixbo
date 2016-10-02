@@ -7,6 +7,7 @@ use App\Http\Requests\ScreenGroupRequest;
 use App\Models\Photo;
 use App\Models\Screen;
 use App\Models\ScreenGroup;
+use App\Models\Ticker;
 use Gate;
 use Illuminate\Http\Request as Requests;
 use Request;
@@ -93,13 +94,12 @@ class ScreenGroupsController extends Controller {
 	 * @return \Illuminate\View\View
 	 */
 	public function edit(ScreenGroup $screengroup) {
+
 		if (Gate::denies('edit_screengroups')) {
 			abort(403, trans('auth.access_denied'));
 		}
-		$event   = $screengroup->getEvent();
-		$tickers = $screengroup->tickers;
 
-		return view('screengroups.edit', compact(['screengroup', 'event', 'tickers']));
+		return view('screengroups.edit', compact('screengroup'));
 	}
 
 	/**
@@ -145,41 +145,15 @@ class ScreenGroupsController extends Controller {
 		if (Request::wantsJson()) {
 			return (string) deleted;
 		} else {
-			return redirect('screengroups');
+			return redirect('admin/screengroups');
 		}
 	}
 
-/**
- * Add or find a screen from given file and attatch it to the screengroup.
- *
- * @param ScreenGroup $screengroup
- * @param Request $request
- */
-	public function addScreenFromPhoto(Requests $request, ScreenGroup $screengroup) {
-		if (Gate::denies('add_screengroups')) {
-			abort(403, trans('auth.access_denied'));
-		}
-		$this->validate($request, [
-			'photo' => 'required|mimes:jpg,jpeg,png,bmp',
-		]);
-
-		// find or create screen and add photo to it.
-		$results = DB::transaction(function () use ($request) {
-			$photo = Photo::getOrCreate($request->file('photo'))->move($request->file('photo'));
-			$photo->save();
-
-			// Get a the existing screen and attatch it to screengroup.
-			// Otherwise create a new screen with the photo and then attatch it to the screengroup.
-			$screengroup->assignOrCreateAndAssign($photo);
-		});
-		if (is_null($results)) {
-			flash()->success(trans('messages.screen_created_ok'));
-		} else {
-			flash()->error(trans('messages.screen_created_failed'));
-		}
-
-	}
-
+	/**
+	 * @param Request $request
+	 * @param ScreenGroup $screengroup
+	 * @return mixed
+	 */
 	public function screens(Request $request, ScreenGroup $screengroup) {
 		if (Gate::denies('view_screengroups')) {
 			abort(403, trans('auth.access_denied'));
@@ -188,24 +162,36 @@ class ScreenGroupsController extends Controller {
 	}
 
 /**
- * Make the photo from the given file.
- * @param  UploadedFile $file
- * @return Photo
+ * Remove the association between a given screen and screengroup.
+ *
+ * @param  Requests    $request     [description]
+ * @param  ScreenGroup $screengroup [description]
+ * @param  Screen      $screen      [description]
+ * @return [type]                   [description]
  */
-	public function makePhoto(UploadedFile $file) {
-		return Photo::named($file->getClientOriginalName())
-			->move($file);
-	}
-
 	public function remove_screen_association(Requests $request, ScreenGroup $screengroup, Screen $screen) {
 		if (!is_null($screengroup) && !is_null($screen)) {
-			if ($screengroup->screens()->detach($screen->id)) {
-				flash()->success(trans('messages.screen_association_removed', ['screengroup' => $screengroup->name]));
-			} else {
-				flash()->error(trans('messages.screen_association_removed_failed', ['screengroup' => $screengroup->name]));
-			}
-
+			$screengroup->remove_screen($screen);
+			flash()->success(trans('messages.screen_association_removed'));
 		}
+		$screengroup->touch();
+		return redirect()->back();
+	}
+
+/**
+ * Remove the association between a given ticker and screengroup.
+ *
+ * @param  Requests    $request     [description]
+ * @param  ScreenGroup $screengroup [description]
+ * @param  Ticker      $ticker      [description]
+ * @return [type]                   [description]
+ */
+	public function remove_ticker_association(Requests $request, ScreenGroup $screengroup, Ticker $ticker) {
+		if (!is_null($screengroup) && !is_null($ticker)) {
+			$screengroup->remove_ticker($ticker);
+			flash()->success(trans('messages.ticker_association_removed'));
+		}
+		$screengroup->touch();
 		return redirect()->back();
 	}
 }

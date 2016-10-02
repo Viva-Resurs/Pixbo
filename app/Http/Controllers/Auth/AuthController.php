@@ -32,7 +32,7 @@ class AuthController extends Controller
      * Where to redirect at login.
      * @var string
      */
-    protected $redirectTo = '/admin/dashboard';
+    protected $redirectTo = '/admin/screengroups';
 
     /**
      * Table row in Users for username, also sets login to use

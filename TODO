@@ -1,51 +1,49 @@
 Features:
 
-    * Client
-        * Creation
-            * Create user and associate it to the new client. (Done)
-        * Deletion
-            * Remove the user and flag the ScreenGroup as having no client to play it.
+    * Flödesschema
 
-    * Player
-        * Login client. (middleware) (Done)
-        * Load shadow events for current time. (Done)
-        * AJAX update every n minutes.
-        * Add ticker feed to player.
+    * Schemalägg uppdatering av shadowevents.
+        * Loggar?
 
-    * Shadow Events
-        * Make job to generate shadow events every n days.
-        * Generate shadow event on event changes. (Done)
-
-    * Screen Group
-        * Add (x) button to remove screen association to the current screen group.
-
-    * Screen
-        * Set and view scheduled variable to control screen viewing. (Done)
-
-    * Event
-        * Let user set recurring and use it to generate shadow events. (Done)
+    * API REST
 
     * Tags
-        * Let the user give a screen one or many tags associated with it.
-        * Ajax to give the user suggestion of already existing tags.
+        * Push tags into an array, display properly.
 
-    * Authorization
-        * Roles:
-            * Admin
-                * Everything
-            * Moderator
-                * -Remove ScreenGroup
-                * -View, Edit, Remove Users
-                * -Player
+* Settings
+    * User
+        * Role -- Does not update the value of the model......
 
-            * Client
-                * Only View Player
+    * Dashboard (Admin)
+        * Log
+        * Player
+            * Tickers
+                * fade/print?
+            * Vegas
+                * Timer bar
 
+    * Forms/Edits:
+        Update tags when creating new
+        Checkbox for Screengroup-association
+        Confirm Delete/Remove Association
+        Redirect to show post after edit
 
+    * Users:
+        Log edits
+
+    * Screens:
+        Smaller thumbs
+    
+    * Player:
+        Carusell
 
 Bugs:
+    * When a user changes language the vue-translate doesn't update it's lang files unless the user manually refreshes the site.
 
 
 Remember:
     * Set PHP memory size and upload file size properly.
     * Set environment variable for phpunit \vendor\bin
+
+Done:
+    Validation warn if no tag

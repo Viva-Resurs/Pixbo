@@ -1,35 +1,27 @@
 // browserify entrypoint
 var Vue = require('vue');
-window.Vue = Vue;
+
 Vue.use(require('vue-resource'));
 var vueboot = require('vueboot');
-//Vue.use(require('vue-strap'));
 var bootstrap = require('bootstrap-sass');
-//var vue_strap = require('vue-strap');
 
+Vue.config.debug = true
 
+// Init sessionStorage-handler
+window.PixboStorage = require('./components/SessionStorageHandler.vue');
 
-//import Alert from './components/Alert.vue';
-import Alert from './components/Alert.vue';
-//var alert = require('vue-strap');//src/alert');
-import ScreenGallery from './components/ScreenGallery.vue';
-import Ticker from './components/Ticker.vue';
-import Schedule from './components/Schedule.vue';
+// Import global-mixins
+Vue.mixin(require('./components/Translation.vue'));
 
-
-
-
-
-window.vue_instance = new Vue({
+window.Vue = new Vue({
+    
     el: '#app',
 
     components: {
-        //'Alert': Alert,
-        'screengallery': ScreenGallery,
-        'Tickers': Ticker,
-        'Schedule': Schedule,
         'Alert': vueboot.alert,
         'Toast': vueboot.toast,
+        'Schedule'  : require('./components/Schedule.vue'),
+        'ScreenList': require('./components/ScreenList.vue'),
     },
 
     data: function () {
@@ -41,15 +33,26 @@ window.vue_instance = new Vue({
     methods: {
         addAlert: function(toast) {
             vueboot.toastService.create(toast);
-        }
+        },
     },
 
     events: {
         'add-alert': function(toast) {
             vueboot.toastService.create(toast);
+        },
+        'trans': function (string) {
+            return this.trans(string);
+        },
+        'trans_choice': function (string) {
+            return this.trans_choice(string);
         }
     },
-    ready: function() {
-        var vm = this;
-    }
+
+    created: function() {
+        window.PixboStorage.Load();
+            this.$http.get('/api/locales', function(locale) {
+                window.PixboStorage.Set('lang',locale); // Update Lang-Data
+            });
+    },
+
 });

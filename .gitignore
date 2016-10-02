@@ -3,8 +3,12 @@
 /public/css/app.css
 /public/css/app.css.map
 /public/js/bundle.js
-/public/fonts/
+/public/js/main.js
+/public/js/main.js.map
 /public/screens/*
 Homestead.yaml
 .env
 /storage/database.sqlite
+_ide_helper.php
+composer.lock
+.idea/*

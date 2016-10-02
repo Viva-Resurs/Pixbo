@@ -17,7 +17,9 @@ return [
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
     'username' => 'Username',
     'password' => 'Password',
+    'repeat_password' => 'Repeat',
     'remember_me' => 'Remember Me',
+    'signed_in_as'    => 'Signed in as ',
     'login' => 'Login',
     'logout' => 'Logout',
 

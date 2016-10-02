@@ -5,19 +5,9 @@
 @stop
 
 @section('header')
-    <script type="text/javascript" src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css">
+    @include('shared.datatables', ['table_id_list_string' => 'users_table'])
 @stop
-
 
 @section('content')
-
-@include('users.table')
-
-@stop
-
-@section('footer')
-
-@include('shared.datagrid', ['table_id' => 'user_table'])
-
+	@include('users.table', ['from' => 'users'])
 @stop

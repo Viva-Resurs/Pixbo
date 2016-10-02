@@ -29,8 +29,18 @@ return [
 	'text'                          => 'Text',
 	'activity'                      => 'Aktivitet',
 	'action'                        => 'Åtgärd|Åtgärder',
-	'upload_files'                  => 'Klicka här eller dra en bild hit för att ladda upp den.',
+	'upload'                        => 'Ladda upp',
+	'preview'                       => 'Förhandsvisning',
+	'choose_file'                   => 'Välj fil',
+	'cancel'                        => 'Avbryt',
+	'tag_missing'                   => 'Något är galet, tag saknas.',
+	'unknown'                       => 'Okänt',
+	'offline'                       => 'Offline',
 	//'schedule'                    => 'Planering',
+	'language'                      => 'Välj språk',
+	'en'                            => 'Engelska',
+	'sv'                            => 'Svenska',
+	'no_images'						=> 'Inga bilder',
 
 	/**
 	 * Commonly used words.
@@ -64,6 +74,7 @@ return [
 	'add_ticker'                    => 'Ticker text',
 	'add_screen_group'              => 'Lägg till område',
 	'add_user'                      => 'Lägg till användare',
+	'add_client'                    => 'Lägg till bildskärm',
 
 	// SHOW MODEL
 	'show_screen_group'             => 'Visa område',
@@ -74,6 +85,7 @@ return [
 	'edit_screen_group'             => 'Redigera område',
 	'edit_screen'                   => 'Redigera bild',
 	'edit_client'                   => 'Redigera bildskärm',
+    'edit_user'                     => 'Redigera användare',
 
 	/**
 	 * Time/Date
@@ -84,6 +96,8 @@ return [
 	'end'                           => 'Slut',
 	'day'                           => 'Dag',
 	'week'                          => 'Vecka',
+
+	'period'                        => 'Period',
 
 	'recurring'                     => 'Återkommande',
 
@@ -147,6 +161,14 @@ return [
 	 * Success / Error
 	 */
 
+	// Client
+	'client_created_ok'             => 'Bildskärmen har lagts till.',
+	'client_created_fail'           => 'Misslyckades att skapa skärmen, försök igen.',
+	'client_removed_ok'             => 'Bildskärmen togs bort.',
+	'client_removed_fail'           => 'Misslyckades att ta bort bildskärmen, försök igen.',
+	'client_updated_ok'             => 'Bildskärmen har sparats.',
+	'client_updated_fail'           => 'Misslyckades att spara ändringarna, försök igen.',
+
 	// Screen
 	'screen_created_ok'             => 'Bilden har laddats upp.',
 	'screen_created_fail'           => 'Misslyckades att ladda upp bilden, försök igen.',
@@ -158,6 +180,8 @@ return [
 	// Screengroup
 	'screen_group_created_ok'       => 'Område skapat.',
 	'screen_group_created_fail'     => 'Misslyckades att lägga till område.',
+	'screen_group_updated_ok'		=> 'Området har uppdaterats.',
+	'screen_group_updated_fail'		=> 'Misslyckades att uppdatera området.',
 
 	// Ticker
 	'ticker_created_ok'             => 'Tickern har lagt till.',
@@ -193,9 +217,14 @@ return [
 	'event_frequency_year_tooltip'  => 'Ange antal år mellan varje förekomst.',
 	'event_week_tooltip'            => 'Ange vecka.',
 	'event_day_tooltip'             => 'Ange dag.',
+
+    // TODO: fix the tooltip
 	'event_days_ahead_tooltip'      => 'Om ___ skall visas ett viss antal dagar innan förekomst, ange då antal.',
 
 	'schedule_tooltip'              => 'Planera',
 	'remove_association_tooltip'    => 'Tag bort från :association',
+
+	'atleast_one_tag'               => 'Minst en tagg',
+	'tag_exists'                    => 'Taggen finns redan',
 
 ];

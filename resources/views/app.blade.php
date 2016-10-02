@@ -6,9 +6,10 @@
         @yield('title')
     </title>
     <link rel="stylesheet" type="text/css" href="/css/app.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
-
+    <script type="text/javascript" src="/js/vendor/jquery-2.1.3.min.js"></script>
+    
+    @include('shared.tooltip')
+    @include('shared.datetimepicker')
     {{--
         @if ( Config::get('app.debug') )
             <script type="text/javascript">
@@ -16,31 +17,22 @@
             </script>
         @endif
     --}}
-
     @yield('header')
     @yield('links')
     @yield('styles')
 
-<!-- Application files
-<link rel="stylesheet" href="style.css">
-<script src="script.js"></script>
- -->
 </head>
 <body id="app">
-
+    
     <!-- top_nav -->
     @include('navs.topnav')
-
+    
     <!-- body -->
     @yield('body')
+    
     <script src="/js/main.js"></script>
+    
     @yield('footer')
-
-    <script type="text/javascript">
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
-    </script>
 
 </body>
 </html>

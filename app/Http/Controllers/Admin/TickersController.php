@@ -3,134 +3,128 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Event;
-use App\Models\Screengroup;
+use App\Http\Requests\TickerCreationForm;
+use App\Models\ScreenGroup;
+use App\Models\ShadowEvent;
 use App\Models\Ticker;
-use DB;
 use Gate;
 use Illuminate\Http\Request;
-use Request as RF;
+use App\Http\Requests\TickerUpdateForm;
 
-class TickersController extends Controller {
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index() {
-		if (Gate::denies('view_tickers')) {
-			abort(403, trans('auth.access_denied'));
-		}
+class TickersController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        if (Gate::denies('view_tickers')) {
+            abort(403, trans('auth.access_denied'));
+        }
+        
+        $tickers = Ticker::all();
+        
+        return view('tickers.index', compact('tickers'));
+    }
 
-		$tickers = Ticker::all();
+    public function create()
+    {
+        if (Gate::denies('add_tickers')) {
+            abort(403, trans('auth.access_denied'));
+        }
+        
+        $ticker = new Ticker;
 
-		if (RF::wantsJson()) {
-			return $tickers;
-		} else {
-			return view('tickers.index', compact('tickers'));
-		}
-	}
+        return view('tickers.create', compact('ticker'));
+    }
 
-	public function create() {
-		if (Gate::denies('add_tickers')) {
-			abort(403, trans('auth.access_denied'));
-		}
-		$ticker = new Ticker;
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function store(TickerCreationForm $form)
+    {
+        if (Gate::denies('add_tickers')) {
+            abort(403, trans('auth.access_denied'));
+        }
+        $result = $form->persist();
 
-		return view('tickers.create', compact('ticker'));
-	}
+        if (is_null($result)) {
+            flash()->success(trans('messages.ticker_created_ok'));
+        } else {
+            flash()->error(trans('messages.ticker_created_failed'));
+        }
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param  Request  $request
-	 * @return Response
-	 */
-	public function store(Request $request) {
-		if (Gate::denies('add_tickers')) {
-			abort(403, trans('auth.access_denied'));
-		}
+        return redirect('/admin/tickers/');
+    }
 
-		if ($ticker = new Ticker($request->all())) {
-			$results = DB::transaction(function () use ($ticker) {
-				$ticker->save();
-				$event = new Event;
-				$event->fill(['start_date' => date('Y-m-d')]);
-				$ticker->event()->save($event);
-			});
-			if (is_null($results)) {
-				flash()->success(trans('messages.ticker_created_ok'));
-			} else {
-				flash()->error(trans('messages.ticker_created_failed'));
-			}
+    public function show(Ticker $ticker)
+    {
+        if (Gate::denies('edit_tickers')) {
+            abort(403, trans('auth.access_denied'));
+        }
 
-			if (RF::wantsJson()) {
-				return $ticker;
-			} else {
-				return redirect('/admin/dashboard/');
-			}
-		}
-	}
+        return view('tickers.show', compact(['ticker']));
+    }
 
-	public function show(Ticker $ticker) {
-		if (Gate::denies('edit_tickers')) {
-			abort(403, trans('auth.access_denied'));
-		}
-		if (RF::wantsJson()) {
-			return $screen;
-		} else {
-			return view('tickers.show', compact(['ticker']));
-		}
-	}
+    public function edit(Ticker $ticker)
+    {
+        if (Gate::denies('edit_tickers')) {
+            abort(403, trans('auth.access_denied'));
+        }
+        $event = $ticker->getEvent();
+        $screengroups = Screengroup::all();
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  Request  $request
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update(Request $request, Ticker $ticker) {
-		if (Gate::denies('edit_tickers')) {
-			abort(403, trans('auth.access_denied'));
-		}
-		$event                  = $request->get('event');
-		$day_num                = $request->get('day_num');
-		$event['recur_day_num'] = json_encode(($day_num));
-		$ticker_data            = $request->get('modelObject');
+        return view('tickers.edit', compact(['ticker', 'event', 'screengroups']));
+    }
 
-		$screengroups = $request->get('selected_screengroups');
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  Request  $request
+     * @param  int  $id
+     * @return Response
+     */
+    public function update(TickerUpdateForm $form, Ticker $ticker)
+    {
+        if (Gate::denies('edit_tickers')) {
+            abort(403, trans('auth.access_denied'));
+        }
 
-		$result = DB::transaction(function () use ($ticker, $ticker_data, $event, $screengroups) {
-			$e = Event::find($event['id']);
-			$e->update($event);
-			$ticker->update($ticker_data);
-			$ticker->screengroups()->sync($screengroups);
-		});
+        $result = $form->persist($ticker);
 
-		if (is_null($result)) {
-			return ['type' => 'success', 'dismissible' => true, 'content' => trans('messages.ticker_updated_ok'), 'timeout' => 3000];
-		} else {
-			return ['type' => 'danger', 'dismissible' => true, 'content' => trans('messages.ticker_updated_fail'), 'timeout' => false];
-		}
-	}
+        if (is_null($result)) {
+            return ['type' => 'success', 'dismissible' => true, 'content' => trans('messages.ticker_updated_ok'), 'timeout' => 3000];
+        } else {
+            return ['type' => 'danger', 'dismissible' => true, 'content' => trans('messages.ticker_updated_fail'), 'timeout' => false];
+        }
+    }
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy(ScreenGroup $screengroup, Request $request) {
-		if (Gate::denies('remove_tickers')) {
-			abort(403, trans('auth.access_denied'));
-		}
-		$ticker_request = $request->all();
-		$ticker         = Ticker::where(['id' => $ticker_request['id']])->first();
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function destroy(Ticker $ticker)
+    {
+        if (Gate::denies('remove_tickers')) {
+            abort(403, trans('auth.access_denied'));
+        }
+        $sgs = $ticker->screengroups;
+        $event = $ticker->event[0];
 
-		$deleted = $ticker->delete();
-		if (RF::wantsJson()) {
-			return (string) $deleted;
-		}
-	}
+        if ($deleted = $ticker->delete()) {
+            foreach ($sgs as $sg) {
+                $sg->touch();
+            }
+            ShadowEvent::clearEvent($event->id);
+        }
+
+        return redirect()->back();
+    }
 }

@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\User;
-use DB;
 use Gate;
-use Hash;
 use Illuminate\Http\Request;
 use Request as RF;
 use Validator;
@@ -31,14 +29,34 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
-        if (Gate::denies('view_users')) {
+        if (Gate::denies('edit_users')) {
             abort(403, trans('auth.access_denied'));
         }
-        return $user;
+
+        $roles = Role::where('name', '<>', 'client')->lists('name', 'id')->all();
+        return view('users.edit', compact(['user', 'roles']));
     }
 
+    /**
+     * Update the user
+     * 
+     * @param User $user
+     * @param Request $request
+     * @return mixed
+     */
     public function update(User $user, Request $request)
     {
+        if (Gate::denies('edit_users') && !auth()->user()->id == $user->id) {
+            abort(403, trans('auth.access_denied'));
+        }
+
+        $response = $user->updateUserFromRequest($request);
+        if(is_null($response)) {
+            flash()->success(trans('messages.user_updated_ok'));
+        } else {
+            flash()->error(trans('messages.user_updated_fail'));
+        }
+        return redirect()->back();
     }
 
     public function create()
@@ -50,39 +68,20 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
-        //dd($request);
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255|unique:users',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
         ]);
-        $result = DB::transaction(function () use ($request) {
-            $user = new User;
-            $user->fill([
-                'name' => Request('name'),
-                'email' => Request('name') . '@viva.se',
-                'password' => Hash::make(Request('password')),
-            ])->save();
-            $role = Role::find(Request('role_id'))->first();
-            $user->roles()->save($role);
 
-            $user->save();
-        });
-        if (is_null($result)) {
+        $result = User::createUserFromRequest($request);
+        if (!is_null($result)) {
             flash()->success(trans('messages.user_created_ok'));
         } else {
             flash()->success(trans('messages.user_created_fail'));
         }
 
         return redirect()->action('Admin\UsersController@index');
-    }
-
-    public function getProfile()
-    {
-    }
-
-    public function postProfile()
-    {
     }
 
     public function show(User $user)

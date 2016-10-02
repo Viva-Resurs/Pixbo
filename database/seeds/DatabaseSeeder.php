@@ -3,6 +3,7 @@
 use App\Models\Permission;
 use App\Models\Role;
 use App\User;
+use App\Settings;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 
@@ -17,8 +18,21 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call(RolesTablesSeeder::class);
 		$this->call(UserTableSeeder::class);
+		$this->call(SettingsTableSeeder::class);
 
 		Model::reguard();
+	}
+}
+
+class SettingsTableSeeder extends Seeder {
+	public function run()
+	{
+		DB::table('settings')->delete();
+
+		$settings = Settings::create([
+			'vegas_delay' => config('pixbo.settings.player.vegas.delay'),
+			'ticker_pauseOnItems' => config('pixbo.settings.player.ticker.pauseOnItems')
+		]);
 	}
 }
 
@@ -168,6 +182,11 @@ class RolesTablesSeeder extends Seeder {
 			'name'  => 'remove_tickers',
 			'label' => 'auth.remove_tickers',
 		]);
+		
+		$edit_site_settings = Permission::create([
+			'name' => 'edit_site_settings',
+			'label' => 'auth.edit_site_settings'
+		]);
 
 		/**
 		 * Roles
@@ -216,6 +235,9 @@ class RolesTablesSeeder extends Seeder {
 		$admin->givePermissionTo($add_tickers);
 		$admin->givePermissionTo($edit_tickers);
 		$admin->givePermissionTo($remove_tickers);
+		
+		// Site Settings
+		$admin->givePermissionTo($edit_site_settings);
 
 		// Moderator
 		$moderator = Role::create([
@@ -250,24 +272,18 @@ class UserTableSeeder extends Seeder {
 		DB::table('users')->delete();
 
 		$admin = User::create([
-			'email'    => 'admin@viva.se',
-			'name'     => 'admin',
-			'password' => 'admin',
+			'email'    => config('pixbo.settings.administration.administrator.email'),
+			'name'     => config('pixbo.settings.administration.administrator.username'),
+			'password' => config('pixbo.settings.administration.administrator.password'),
 		]);
 
 		$moderator = User::create([
-			'email'    => 'moderator@viva.se',
-			'name'     => 'moderator',
-			'password' => 'moderator',
+			'email'    => config('pixbo.settings.administration.moderator.email'),
+			'name'     => config('pixbo.settings.administration.moderator.username'),
+			'password' => config('pixbo.settings.administration.moderator.password'),
 		]);
 
 		$admin->assignRole('admin');
 		$moderator->assignRole('moderator');
-
-		foreach (DB::table("users")->get() as $user) {
-			DB::table("users")
-				->where("id", $user->id)
-				->update(array("password" => Hash::make($user->password)));
-		}
 	}
 }
