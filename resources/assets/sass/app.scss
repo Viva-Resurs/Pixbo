@@ -1,0 +1,84 @@
+/*
+ * Variables
+ */
+
+$border-radius-base: 0;
+$brand-primary: #2B5A84;
+$active-icon-color: #6CC94D;
+$btn-border-radius-base: 4px;
+$btn-font-weight: 300;
+$font-family-sans-serif: "Lato", Helvetica, Arial, sans-serif !default;
+$font-size-base: 14px;
+$navbar-height: 65px;
+$navbar-background: #f8f8f8;
+
+/*
+ * Vendor CSS
+ */
+
+@import "../../../node_modules/bootstrap/dist/css/bootstrap";
+@import "vendor/bootstrap-datetimepicker.min";
+@import "../../../node_modules/bootstrap-select/dist/css/bootstrap-select";
+@import "vendor/font-awesome.min";
+@import "vendor/dropzone";
+
+/**
+ * Elements
+ */
+
+@import "elements/buttons";
+@import "elements/forms";
+@import "elements/nav";
+@import "elements/panels";
+@import "elements/tables";
+@import "elements/tooltips";
+@import "elements/searchfilter";
+@import "elements/pagination";
+@import "elements/footer";
+
+/**
+ * Components
+ */
+
+@import "components/tabs";
+@import "components/vue-toast.scss";
+@import "components/screencards.scss";
+@import "components/sweetalert.scss";
+@import "components/loading.scss";
+@import "components/screenpreview.scss";
+
+/*
+ * Misc.
+ */
+
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+body {
+    font-weight: 300;
+    margin-bottom: 80px;
+}
+
+.footer {
+    background-color: #f5f5f5;
+    border-top: 1px solid #e7e7e7;
+    bottom: 0;
+    height: 80px;
+    position: absolute;
+    width: 100%;
+
+    .footer-social-icons {
+        font-size: 32px;
+        padding-top: 18px;
+
+        a {
+            color: #777;
+        }
+    }
+}
+
+[v-cloak] {
+    display: none;
+}

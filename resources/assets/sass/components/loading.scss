@@ -1,0 +1,14 @@
+
+@keyframes spinner {
+    to {transform: rotate(360deg);}
+}
+
+.spinner {
+    width: 200px;
+    height: 200px;
+    margin: auto;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    border-top-color: $brand-primary;
+    animation: spinner .6s linear infinite;
+}

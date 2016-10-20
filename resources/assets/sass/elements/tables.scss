@@ -1,0 +1,18 @@
+.table {
+    tr {
+        /* Slim columns without any wrap */
+        .slim {
+            width: 1px;
+            white-space: nowrap;
+        }
+        /* Pull the last column to the right */
+        th:last-child, td:last-child {
+            text-align: right;
+        }
+    }
+    tbody {
+        tr:hover {
+            background: $navbar-background;
+        }
+    }
+}

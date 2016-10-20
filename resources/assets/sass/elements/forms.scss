@@ -1,0 +1,58 @@
+.app-screen {
+    label {
+        font-weight: 300;
+    }
+
+    .model_group {
+        @extend .form-group;
+    }
+
+    .model_label {
+        @extend .col-sm-2, .col-sm-offset-1, .control-label;
+    }
+    
+    .model_input {
+        @extend .col-sm-7, .col-xs-12;
+        display: table;
+    }
+
+    .model_data {
+        @extend .col-sm-7, .col-xs-12;
+        padding: 7px 15px;
+    }
+
+    // Make borders on .model_input work like .input-group together with input-group-addon
+    .model_input .form-control:nth-last-child(2) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    .model_input .form-control:last-child {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .model_action {
+        @extend .col-sm-6, .col-sm-offset-3;
+    }
+
+    // Make fa-icon work in bootstraps form-feedback...
+    .form-control-feedback {
+        top: 9px;
+    }
+    
+    .schedule_group {
+        padding: 0px 0px 5px 0px;
+    }
+
+    .schedule_label {
+        @extend .control-label;
+    }
+    
+    .schedule_input {
+
+    }
+
+    .schedule_action {
+
+    }
+}

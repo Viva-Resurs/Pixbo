@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Pull git repo
+git pull
+
+# Update JS & SCSS (run twice)
+gulp && gulp

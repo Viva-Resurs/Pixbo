@@ -1,0 +1,17 @@
+.pagination {
+
+}
+
+.pagination_left {
+    @extend .col-sm-10, .col-xs-10;
+    margin-left: 0px;
+    margin-right: auto;
+    padding-left: 0px;
+}
+
+.pagination_right {
+    @extend .col-sm-2, .col-xs-2;
+    margin-left: auto;
+    margin-right: 0px;
+    padding-right: 0px;
+}
