@@ -1,18 +1,16 @@
-/.idea
+# Composer
 /vendor
-/node_modules
-Homestead.yaml
-Homestead.json
-.env
 composer.lock
-.phpstorm.meta.php
-_ide_helper.php
-public/css/app.css*
-public/js/index.js*
-public/images/
-storage/database.sqlite
-storage/database.sqlite-journal
-config/jwt.php
-/Vue-template
-/public/
-artisan.bat
+
+# NPM
+/node_modules
+
+# Builds
+/public/css
+/public/js
+/public/fonts
+
+# Application
+.env
+/storage/*.sqlite
+/public/images
