@@ -25,11 +25,11 @@ sudo chown $USER:$USER /etc/php5/cli/php.ini
 sudo echo "always_populate_raw_post_data = -1" >> /etc/php5/cli/php.ini
 
 # Get the git repo
-git clone https://github.com/Viva-Resurs/Pixbo-revision.git
+git clone https://github.com/Viva-Resurs/Pixbo.git
 
 # Setup apache
 sudo rm -rf /var/www/html
-sudo ln -s ~/Pixbo-revision/public /var/www/html
+sudo ln -s ~/Pixbo/public /var/www/html
 
 
 # Install globally needed npm packages
@@ -41,31 +41,31 @@ curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/loca
 sudo composer self-update
 
 # Start Installing the repo
-(cd ~/Pixbo-revision && npm install)
-(cd ~/Pixbo-revision && composer update --no-scripts)
-touch ~/Pixbo-revision/storage/database.sqlite
-(cd ~/Pixbo-revision && composer install)
-(cd ~/Pixbo-revision && gulp)
-(cd ~/Pixbo-revision && php artisan migrate --seed)
+(cd ~/Pixbo && npm install)
+(cd ~/Pixbo && composer update --no-scripts)
+touch ~/Pixbo/storage/database.sqlite
+(cd ~/Pixbo && composer install)
+(cd ~/Pixbo && gulp)
+(cd ~/Pixbo && php artisan migrate --seed)
 
 # Set App URL
 IP=$(hostname -I | awk '{print $1}')
-echo "APP_URL=$IP" >> ~/Pixbo-revision/.env
+echo "APP_URL=$IP" >> ~/Pixbo/.env
 
 # Set permissions
-sudo chmod 777 -R ~/Pixbo-revision/storage
-mkdir -p ~/Pixbo-revision/public/images/screens
-sudo chmod 777 ~/Pixbo-revision/public/images/screens
+sudo chmod 777 -R ~/Pixbo/storage
+mkdir -p ~/Pixbo/public/images/screens
+sudo chmod 777 ~/Pixbo/public/images/screens
 
 # setup apache
-sudo cp ~/Pixbo-revision/pixbo.conf /etc/apache2/sites-available/pixbo.conf
+sudo cp ~/Pixbo/pixbo.conf /etc/apache2/sites-available/pixbo.conf
 sudo a2dissite 000-default
 sudo a2ensite pixbo
 sudo a2enmod rewrite
 sudo service apache2 reload
 sudo service apache2 restart
 
-# cronTab Should look like this: * * * * * /usr/bin/php ~/Pixbo-revision/artisan schedule:run >> /dev/null
-croncmd="/usr/bin/php ~/Pixbo-revision/artisan schedule:run >> /dev/null"
+# cronTab Should look like this: * * * * * /usr/bin/php ~/Pixbo/artisan schedule:run >> /dev/null
+croncmd="/usr/bin/php ~/Pixbo/artisan schedule:run >> /dev/null"
 cronjob="* * * * * $croncmd"
 ( crontab -l | grep -v "$croncmd" ; echo "$cronjob" ) | crontab -
