@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTickersTable extends Migration
+class CreateTickersTables extends Migration
 {
     /**
      * Run the migrations.
