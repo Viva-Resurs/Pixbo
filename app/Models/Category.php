@@ -13,7 +13,7 @@ class Category extends Model
      *
      * @var string
      */
-    protected $table = 'categories';
+    protected $table = 'category';
 
     /**
      * The attributes that are mass assignable.
@@ -51,10 +51,10 @@ class Category extends Model
     /**
      * Screens association
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function screens() {
-        return $this->belongsToMany(Screen::class, 'category_screen')->withTimestamps();
+        return $this->hasMany(Screen::class, 'category_screen')->withTimestamps();
     }
 
 

@@ -13,7 +13,7 @@ class ScreenGroupTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('screengroups')->delete();
+        DB::table('screengroup')->delete();
 
         $screengroup = ScreenGroup::create([
             'id' => 1,

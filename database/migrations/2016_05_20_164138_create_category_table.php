@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoriesTables extends Migration
+class CreateCategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateCategoriesTables extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('category', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->integer('user_id')->unsigned();
@@ -24,17 +24,16 @@ class CreateCategoriesTables extends Migration
         });
 
         Schema::create('category_screen', function (Blueprint $table) {
-            $table->integer('category_id')->unsigned();
-            $table->integer('screen_id')->unsigned();
-            $table->index(['category_id', 'screen_id']);
+            $table->integer('category_id')->unsigned()->index();
+            $table->integer('screen_id')->unsigned()->index();
 
             $table->foreign('category_id')
                 ->references('id')->on('category')->onDelete('cascade');
+            
             $table->foreign('screen_id')
                 ->references('id')->on('screen')->onDelete('cascade');
 
             $table->timestamps();
-
         });
     }
 
@@ -45,7 +44,7 @@ class CreateCategoriesTables extends Migration
      */
     public function down()
     {
-        Schema::drop('categories');
+        Schema::drop('category');
         Schema::drop('category_screen');
     }
 }

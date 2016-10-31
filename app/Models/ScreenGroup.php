@@ -12,7 +12,7 @@ class ScreenGroup extends Model
      *
      * @var string
      */
-    protected $table = 'screengroups';
+    protected $table = 'screengroup';
 
     /**
      * The attributes that are mass assignable.
@@ -49,12 +49,22 @@ class ScreenGroup extends Model
     }
 
     /**
+     * User association
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
+    /**
      * Screen association
      *
      * @return [type] [description]
      */
     public function screens() {
-        return $this->belongsToMany(Screen::class, 'screengroup_screen')->withTimestamps();
+        return $this->hasMany(Screen::class, 'screengroup_screen')->withTimestamps();
     }
 
     /**
@@ -63,16 +73,16 @@ class ScreenGroup extends Model
      * @return [type] [description]
      */
     public function tickers() {
-        return $this->belongsToMany(Ticker::class, 'screengroup_ticker')->withTimestamps();
+        return $this->hasMany(Ticker::class, 'screengroup_ticker')->withTimestamps();
     }
 
     /**
      * Client association
-     * 
+     *
      * @return [type] [description]
      */
     public function clients() {
-        return $this->hasMany(Client::class);
+        return $this->hasMany(Client::class, 'screengroup_client');
     }
 
     /**
@@ -89,10 +99,10 @@ class ScreenGroup extends Model
             if($screen->photo){
 
                 $shadow_event = $screen->getActiveEvents();
-                
+
                 if(!$shadow_event->isEmpty())
                     $array[] = $screen->photo->path;
-                
+
             }
 
         }
@@ -110,14 +120,14 @@ class ScreenGroup extends Model
         $array = [];
 
         foreach($this->tickers as $ticker) {
-            
+
             $shadow_event = $ticker->getActiveEvents();
-            
+
             if(!$shadow_event->isEmpty())
                 $array[] = $ticker->text;
 
         }
-        
+
         return $array;
     }
 

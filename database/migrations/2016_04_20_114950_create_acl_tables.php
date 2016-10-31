@@ -12,14 +12,14 @@ class CreateAclTables extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('role', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('label')->nullable();
             $table->timestamps();
         });
 
-        Schema::create('permissions', function (Blueprint $table) {
+        Schema::create('permission', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('label')->nullable();
@@ -27,37 +27,37 @@ class CreateAclTables extends Migration
         });
 
         Schema::create('permission_role', function (Blueprint $table) {
-            $table->integer('permission_id')->unsigned();
-            $table->integer('role_id')->unsigned();
-
-            $table->foreign('permission_id')
-                ->references('id')
-                ->on('permissions')
-                ->onDelete('cascade');
+            $table->integer('role_id')->unsigned()->index();
+            $table->integer('permission_id')->unsigned()->index();
 
             $table->foreign('role_id')
                 ->references('id')
-                ->on('roles')
+                ->on('role')
+                ->onDelete('cascade');
+
+            $table->foreign('permission_id')
+                ->references('id')
+                ->on('permission')
                 ->onDelete('cascade');
 
         });
 
         Schema::create('role_user', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned();
-            $table->integer('role_id')->unsigned();
-
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
+            $table->integer('role_id')->unsigned()->index();
+            $table->integer('user_id')->unsigned()->index();
 
             $table->foreign('role_id')
                 ->references('id')
-                ->on('roles')
+                ->on('role')
                 ->onDelete('cascade');
 
-            $table->primary(['user_id', 'role_id']);
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('user')
+                ->onDelete('cascade');
+
         });
+
     }
 
     /**
@@ -67,9 +67,9 @@ class CreateAclTables extends Migration
      */
     public function down()
     {
-        Schema::drop('roles');
-        Schema::drop('permissions');
-        Schema::drop('role_user');
+        Schema::drop('role');
+        Schema::drop('permission');
         Schema::drop('permission_role');
+        Schema::drop('role_user');
     }
 }

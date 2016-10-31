@@ -13,7 +13,7 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('categories')->delete();
+        DB::table('category')->delete();
 
         $category = Category::create([
             'id' => 1,

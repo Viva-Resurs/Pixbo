@@ -13,7 +13,9 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('roles')->delete();
+        DB::table('role')->delete();
+        // DB::table('role_permission')->delete();
+        // DB::table('role_user')->delete();
 
         // Admin
         $admin = Role::create([
@@ -21,54 +23,54 @@ class RolesTableSeeder extends Seeder
           'label' => 'auth.administrator',
         ]);
 
-        $admin->givePermissionTo('view_dashboard');
-        $admin->givePermissionTo('view_player');
+        $admin->givePermission('view_dashboard');
+        $admin->givePermission('view_player');
 
         // Clients
-        $admin->givePermissionTo('view_clients');
-        $admin->givePermissionTo('add_clients');
-        $admin->givePermissionTo('edit_clients');
-        $admin->givePermissionTo('remove_clients');
+        $admin->givePermission('view_clients');
+        $admin->givePermission('add_clients');
+        $admin->givePermission('edit_clients');
+        $admin->givePermission('remove_clients');
 
         // ScreenGroup
-        $admin->givePermissionTo('view_screengroup');
-        $admin->givePermissionTo('add_screengroups');
-        $admin->givePermissionTo('edit_screengroup');
-        $admin->givePermissionTo('remove_screengroup');
+        $admin->givePermission('view_screengroup');
+        $admin->givePermission('add_screengroups');
+        $admin->givePermission('edit_screengroup');
+        $admin->givePermission('remove_screengroup');
 
         // Screen
-        $admin->givePermissionTo('view_screens');
-        $admin->givePermissionTo('add_screens');
-        $admin->givePermissionTo('edit_screens');
-        $admin->givePermissionTo('remove_screens');
+        $admin->givePermission('view_screens');
+        $admin->givePermission('add_screens');
+        $admin->givePermission('edit_screens');
+        $admin->givePermission('remove_screens');
 
         // User
-        $admin->givePermissionTo('view_users');
-        $admin->givePermissionTo('add_users');
-        $admin->givePermissionTo('edit_users');
-        $admin->givePermissionTo('remove_users');
+        $admin->givePermission('view_users');
+        $admin->givePermission('add_users');
+        $admin->givePermission('edit_users');
+        $admin->givePermission('remove_users');
 
         // Role
-        $admin->givePermissionTo('view_roles');
-        $admin->givePermissionTo('add_roles');
-        $admin->givePermissionTo('edit_roles');
-        $admin->givePermissionTo('remove_roles');
+        $admin->givePermission('view_roles');
+        $admin->givePermission('add_roles');
+        $admin->givePermission('edit_roles');
+        $admin->givePermission('remove_roles');
 
         // Ticker
-        $admin->givePermissionTo('view_tickers');
-        $admin->givePermissionTo('add_tickers');
-        $admin->givePermissionTo('edit_tickers');
-        $admin->givePermissionTo('remove_tickers');
+        $admin->givePermission('view_tickers');
+        $admin->givePermission('add_tickers');
+        $admin->givePermission('edit_tickers');
+        $admin->givePermission('remove_tickers');
 
         // Categories
-        $admin->givePermissionTo('view_category');
-        $admin->givePermissionTo('add_category');
-        $admin->givePermissionTo('edit_category');
-        $admin->givePermissionTo('remove_category');
+        $admin->givePermission('view_category');
+        $admin->givePermission('add_category');
+        $admin->givePermission('edit_category');
+        $admin->givePermission('remove_category');
 
         // Site Settings
-        $admin->givePermissionTo('edit_site_settings');
-        $admin->givePermissionTo('view_activity');
+        $admin->givePermission('edit_site_settings');
+        $admin->givePermission('view_activity');
 
 
         // Moderator
@@ -76,27 +78,27 @@ class RolesTableSeeder extends Seeder
           'name'  => 'moderator',
           'label' => 'auth.moderator',
         ]);
-        $moderator->givePermissionTo('dash');
-        $moderator->givePermissionTo('player');
+        $moderator->givePermission('dash');
+        $moderator->givePermission('player');
 
         // ScreenGroup
-        $moderator->givePermissionTo('view_screengroup');
+        $moderator->givePermission('view_screengroup');
 
         // Screen
-        $moderator->givePermissionTo('view_screens');
-        $moderator->givePermissionTo('add_screens');
-        $moderator->givePermissionTo('edit_screens');
-        $moderator->givePermissionTo('remove_screens');
+        $moderator->givePermission('view_screens');
+        $moderator->givePermission('add_screens');
+        $moderator->givePermission('edit_screens');
+        $moderator->givePermission('remove_screens');
 
         // Ticker
-        $moderator->givePermissionTo('view_tickers');
-        $moderator->givePermissionTo('add_tickers');
-        $moderator->givePermissionTo('edit_tickers');
-        $moderator->givePermissionTo('remove_tickers');
+        $moderator->givePermission('view_tickers');
+        $moderator->givePermission('add_tickers');
+        $moderator->givePermission('edit_tickers');
+        $moderator->givePermission('remove_tickers');
 
         // Categories
-        $moderator->givePermissionTo('view_category');
-        $moderator->givePermissionTo('add_category');
+        $moderator->givePermission('view_category');
+        $moderator->givePermission('add_category');
 
 
         // Client

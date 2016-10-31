@@ -13,7 +13,7 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->delete();
+        DB::table('user')->delete();
 
         $admin = User::create([
             'email'    => config('pixbo.settings.administration.administrator.email'),

@@ -17,7 +17,7 @@ class Screen extends Model
      *
      * @var string
      */
-    protected $table = 'screens';
+    protected $table = 'screen';
 
     /**
      * The attributes that are mass assignable.

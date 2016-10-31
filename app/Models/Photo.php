@@ -17,7 +17,7 @@ class Photo extends Model
      *
      * @var string
      */
-    protected $table = 'photos';
+    protected $table = 'photo';
 
     /**
      * The attributes that are mass assignable.
@@ -93,7 +93,7 @@ class Photo extends Model
     public static function getOrCreate(UploadedFile $file)
     {
         $photo = Photo::where(['sha1' => sha1_file($file)])->first();
-        
+
         if (!is_null($photo))
             return $photo;
         else
