@@ -25,8 +25,11 @@ class Role extends Model
     }
 
 
-    public function givePermissionTo(Permission $permission) {
-        return $this->permissions()->save($permission);
+    public function givePermissionTo($permission) {
+        // Attach permission-association using a permission-name
+        $p = Permission::where('name', $permission)->first();
+        if ($p)
+            return $this->permissions()->save( $p );
     }
 
 }
