@@ -57,14 +57,14 @@ class ScreenGroup extends Model
     {
         return $this->belongsTo(User::class);
     }
-    
+
     /**
      * Screen association
      *
      * @return [type] [description]
      */
     public function screens() {
-        return $this->hasMany(Screen::class, 'screengroup_screen')->withTimestamps();
+        return $this->belongsToMany(Screen::class, 'screengroup_screen')->withTimestamps();
     }
 
     /**
@@ -73,7 +73,7 @@ class ScreenGroup extends Model
      * @return [type] [description]
      */
     public function tickers() {
-        return $this->hasMany(Ticker::class, 'screengroup_ticker')->withTimestamps();
+        return $this->belongsToMany(Ticker::class, 'screengroup_ticker')->withTimestamps();
     }
 
     /**
@@ -82,7 +82,7 @@ class ScreenGroup extends Model
      * @return [type] [description]
      */
     public function clients() {
-        return $this->hasMany(Client::class, 'screengroup_client');
+        return $this->hasMany(Client::class);
     }
 
     /**

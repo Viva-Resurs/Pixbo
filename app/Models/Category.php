@@ -51,10 +51,10 @@ class Category extends Model
     /**
      * Screens association
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
     public function screens() {
-        return $this->hasMany(Screen::class, 'category_screen')->withTimestamps();
+        return $this->belongsToMany(Screen::class, 'category_screen')->withTimestamps();
     }
 
 
