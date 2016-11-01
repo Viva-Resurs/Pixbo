@@ -13,14 +13,15 @@ class Permission extends Model
      *
      * @var string
      */
-    protected $table = 'permissions';
+    protected $table = 'permission';
 
     /**
-     * Roles association
+     * Role association
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function roles() {
+    public function roles()
+    {
         return $this->belongsToMany(Role::class);
     }
 

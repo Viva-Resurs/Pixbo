@@ -29,128 +29,128 @@ class PermissionTableSeeder extends Seeder
 
         // Client
         $view_clients = Permission::create([
-            'name'  => 'view_clients',
-            'label' => 'auth.view_clients',
+            'name'  => 'view_client',
+            'label' => 'auth.view_client',
         ]);
 
         $add_clients = Permission::create([
-            'name'  => 'add_clients',
-            'label' => 'auth.add_clients',
+            'name'  => 'add_client',
+            'label' => 'auth.add_client',
         ]);
 
         $edit_clients = Permission::create([
-            'name'  => 'edit_clients',
-            'label' => 'auth.edit_clients',
+            'name'  => 'edit_client',
+            'label' => 'auth.edit_client',
         ]);
 
         $remove_clients = Permission::create([
-            'name'  => 'remove_clients',
-            'label' => 'auth.remove_clients',
+            'name'  => 'remove_client',
+            'label' => 'auth.remove_client',
         ]);
 
         // ScreenGroup
         $view_screengroup = Permission::create([
-            'name'  => 'view_screengroups',
+            'name'  => 'view_screengroup',
             'label' => 'auth.view_screengroup',
         ]);
 
         $add_screengroups = Permission::create([
-            'name'  => 'add_screengroups',
-            'label' => 'auth.add_screengroups',
+            'name'  => 'add_screengroup',
+            'label' => 'auth.add_screengroup',
         ]);
 
         $edit_screengroup = Permission::create([
-            'name'  => 'edit_screengroups',
+            'name'  => 'edit_screengroup',
             'label' => 'auth.edit_screengroup',
         ]);
 
         $remove_screengroup = Permission::create([
-            'name'  => 'remove_screengroups',
+            'name'  => 'remove_screengroup',
             'label' => 'auth.remove_screengroup',
         ]);
 
         // Screens
         $view_screens = Permission::create([
-            'name'  => 'view_screens',
-            'label' => 'auth.view_screens',
+            'name'  => 'view_screen',
+            'label' => 'auth.view_screen',
         ]);
 
         $add_screens = Permission::create([
-            'name'  => 'add_screens',
-            'label' => 'auth.add_screens',
+            'name'  => 'add_screen',
+            'label' => 'auth.add_screen',
         ]);
 
         $edit_screens = Permission::create([
-            'name'  => 'edit_screens',
-            'label' => 'auth.edit_screens',
+            'name'  => 'edit_screen',
+            'label' => 'auth.edit_screen',
         ]);
 
         $remove_screens = Permission::create([
-            'name'  => 'remove_screens',
-            'label' => 'auth.remove_screens',
+            'name'  => 'remove_screen',
+            'label' => 'auth.remove_screen',
         ]);
 
         // Users
         $view_users = Permission::create([
-            'name'  => 'view_users',
-            'label' => 'auth.view_users',
+            'name'  => 'view_user',
+            'label' => 'auth.view_user',
         ]);
 
         $add_users = Permission::create([
-            'name'  => 'add_users',
-            'label' => 'auth.add_users',
+            'name'  => 'add_user',
+            'label' => 'auth.add_user',
         ]);
 
         $edit_users = Permission::create([
-            'name'  => 'edit_users',
-            'label' => 'auth.edit_users',
+            'name'  => 'edit_user',
+            'label' => 'auth.edit_user',
         ]);
 
         $remove_users = Permission::create([
-            'name'  => 'remove_users',
-            'label' => 'auth.remove_users',
+            'name'  => 'remove_user',
+            'label' => 'auth.remove_user',
         ]);
 
         // Roles
         $view_roles = Permission::create([
-            'name'  => 'view_roles',
-            'label' => 'auth.view_roles',
+            'name'  => 'view_role',
+            'label' => 'auth.view_role',
         ]);
 
         $add_roles = Permission::create([
-            'name'  => 'add_roles',
-            'label' => 'auth.add_roles',
+            'name'  => 'add_role',
+            'label' => 'auth.add_role',
         ]);
 
         $edit_roles = Permission::create([
-            'name'  => 'edit_roles',
-            'label' => 'auth.edit_roles',
+            'name'  => 'edit_role',
+            'label' => 'auth.edit_role',
         ]);
 
         $remove_roles = Permission::create([
-            'name'  => 'remove_roles',
-            'label' => 'auth.remove_roles',
+            'name'  => 'remove_role',
+            'label' => 'auth.remove_role',
         ]);
 
         // Tickers
         $view_tickers = Permission::create([
-            'name'  => 'view_tickers',
-            'label' => 'auth.view_tickers',
+            'name'  => 'view_ticker',
+            'label' => 'auth.view_ticker',
         ]);
 
         $add_tickers = Permission::create([
-            'name'  => 'add_tickers',
-            'label' => 'auth.add_tickers',
+            'name'  => 'add_ticker',
+            'label' => 'auth.add_ticker',
         ]);
 
         $edit_tickers = Permission::create([
-            'name'  => 'edit_tickers',
-            'label' => 'auth.edit_tickers',
+            'name'  => 'edit_ticker',
+            'label' => 'auth.edit_ticker',
         ]);
 
         $remove_tickers = Permission::create([
-            'name'  => 'remove_tickers',
-            'label' => 'auth.remove_tickers',
+            'name'  => 'remove_ticker',
+            'label' => 'auth.remove_ticker',
         ]);
 
         // Categories

@@ -27,40 +27,40 @@ class RolesTableSeeder extends Seeder
         $admin->givePermission('view_player');
 
         // Clients
-        $admin->givePermission('view_clients');
-        $admin->givePermission('add_clients');
-        $admin->givePermission('edit_clients');
-        $admin->givePermission('remove_clients');
+        $admin->givePermission('view_client');
+        $admin->givePermission('add_client');
+        $admin->givePermission('edit_client');
+        $admin->givePermission('remove_client');
 
         // ScreenGroup
         $admin->givePermission('view_screengroup');
-        $admin->givePermission('add_screengroups');
+        $admin->givePermission('add_screengroup');
         $admin->givePermission('edit_screengroup');
         $admin->givePermission('remove_screengroup');
 
         // Screen
-        $admin->givePermission('view_screens');
-        $admin->givePermission('add_screens');
-        $admin->givePermission('edit_screens');
-        $admin->givePermission('remove_screens');
+        $admin->givePermission('view_screen');
+        $admin->givePermission('add_screen');
+        $admin->givePermission('edit_screen');
+        $admin->givePermission('remove_screen');
 
         // User
-        $admin->givePermission('view_users');
-        $admin->givePermission('add_users');
-        $admin->givePermission('edit_users');
-        $admin->givePermission('remove_users');
+        $admin->givePermission('view_user');
+        $admin->givePermission('add_user');
+        $admin->givePermission('edit_user');
+        $admin->givePermission('remove_user');
 
         // Role
-        $admin->givePermission('view_roles');
-        $admin->givePermission('add_roles');
-        $admin->givePermission('edit_roles');
-        $admin->givePermission('remove_roles');
+        $admin->givePermission('view_role');
+        $admin->givePermission('add_role');
+        $admin->givePermission('edit_role');
+        $admin->givePermission('remove_role');
 
         // Ticker
-        $admin->givePermission('view_tickers');
-        $admin->givePermission('add_tickers');
-        $admin->givePermission('edit_tickers');
-        $admin->givePermission('remove_tickers');
+        $admin->givePermission('view_ticker');
+        $admin->givePermission('add_ticker');
+        $admin->givePermission('edit_ticker');
+        $admin->givePermission('remove_ticker');
 
         // Categories
         $admin->givePermission('view_category');

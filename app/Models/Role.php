@@ -13,23 +13,26 @@ class Role extends Model
      *
      * @var string
      */
-    protected $table = 'roles';
+    protected $table = 'role';
+
+
+    public function givePermission($permission) {
+        if (is_string($permission)) {
+            $permission_model = Permission::where('name', $permission)->first();
+            if ($permission_model)
+                return $this->permissions()->save($permission_model);
+        }
+        else
+            return $this->permissions()->save( $permission );
+    }
 
     /**
-     * Permissions association
+     * Permission association
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function permissions() {
         return $this->belongsToMany(Permission::class);
-    }
-
-
-    public function givePermissionTo($permission) {
-        // Attach permission-association using a permission-name
-        $p = Permission::where('name', $permission)->first();
-        if ($p)
-            return $this->permissions()->save( $p );
     }
 
 }
