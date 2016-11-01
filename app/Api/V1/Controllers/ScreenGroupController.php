@@ -20,7 +20,7 @@ class ScreenGroupController extends BaseController
 
     public function index() {
 
-        if (Gate::denies('view_screengroups'))
+        if (Gate::denies('view_screengroup'))
             $this->response->error('permission_denied', 401);
 
         $screengroups = ScreenGroup::where('id', '<>', 1)->get();
@@ -32,13 +32,13 @@ class ScreenGroupController extends BaseController
     }
 
     public function store(Request $request) {
-        
-        if (Gate::denies('add_screengroups'))
+
+        if (Gate::denies('add_screengroup'))
             $this->response->error('permission_denied', 401);
 
         $screengroup = new ScreenGroup;
         $screengroup->fill($request->only(['name', 'desc']));
-        
+
         if($this->user->screengroups()->save($screengroup)) {
 
             Activity::log([
@@ -57,9 +57,9 @@ class ScreenGroupController extends BaseController
 
     public function show($id) {
 
-        if (Gate::denies('view_screengroups'))
+        if (Gate::denies('view_screengroup'))
             $this->response->error('permission_denied', 401);
-        
+
         $screengroup = ScreenGroup::find($id);
 
         if (!$screengroup)
@@ -69,17 +69,17 @@ class ScreenGroupController extends BaseController
     }
 
     public function update(Request $request, $id) {
-        
-        if (Gate::denies('edit_screengroups'))
+
+        if (Gate::denies('edit_screengroup'))
             $this->response->error('permission_denied', 401);
-        
+
         $screengroup = ScreenGroup::find($id);
 
         if (!$screengroup)
             $this->response->error('not_found', 404);
 
         if ($screengroup->update($request->only(['name', 'desc']))){
-            
+
             Activity::log([
                 'contentId' => $screengroup->id,
                 'contentType' => 'Screengroup',
@@ -96,9 +96,9 @@ class ScreenGroupController extends BaseController
 
     public function destroy($id) {
 
-        if (Gate::denies('remove_screengroups'))
+        if (Gate::denies('remove_screengroup'))
             $this->response->error('permission_denied', 401);
-        
+
         $screengroup = ScreenGroup::find($id);
 
         if (!$screengroup)

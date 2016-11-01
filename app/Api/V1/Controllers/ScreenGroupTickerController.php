@@ -13,8 +13,8 @@ class ScreenGroupTickerController extends BaseController
 {
 
     public function store(ScreenGroup $screengroup, Ticker $ticker) {
-        
-        if (Gate::denies('edit_screengroups'))
+
+        if (Gate::denies('edit_screengroup'))
             $this->response->error('permission_denied', 401);
 
         $screengroup->tickers()->attach($ticker->id);
@@ -31,8 +31,8 @@ class ScreenGroupTickerController extends BaseController
     }
 
     public function destroy(ScreenGroup $screengroup, Ticker $ticker) {
-        
-        if (Gate::denies('edit_screengroups'))
+
+        if (Gate::denies('edit_screengroup'))
             $this->response->error('permission_denied', 401);
 
         $screengroup->tickers()->detach($ticker->id);

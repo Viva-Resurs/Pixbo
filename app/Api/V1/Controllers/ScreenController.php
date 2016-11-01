@@ -18,7 +18,7 @@ class ScreenController extends BaseController
 
     public function index() {
 
-        if (Gate::denies('view_screens'))
+        if (Gate::denies('view_screen'))
             $this->response->error('permission_denied', 401);
 
         return $this->collection(Screen::all(), new ScreenTransformer());
@@ -26,7 +26,7 @@ class ScreenController extends BaseController
 
     public function store(FileUploadForm $form) {
 
-        if (Gate::denies('add_screens'))
+        if (Gate::denies('add_screen'))
             $this->response->error('permission_denied', 401);
 
         $screen = $form->persist();
@@ -49,7 +49,7 @@ class ScreenController extends BaseController
 
     public function replacePhoto(FileUploadForm $form, $id) {
 
-        if (Gate::denies('edit_screens'))
+        if (Gate::denies('edit_screen'))
             $this->response->error('permission_denied', 401);
 
         $screen = Screen::find($id);
@@ -76,8 +76,8 @@ class ScreenController extends BaseController
     }
 
     public function show($id) {
-        
-        if (Gate::denies('view_screens'))
+
+        if (Gate::denies('view_screen'))
             $this->response->error('permission_denied', 401);
 
         $screen = Screen::with('screengroups','categories')->find($id);
@@ -89,8 +89,8 @@ class ScreenController extends BaseController
     }
 
     public function update(ScreenUpdateForm $form, $id) {
-        
-        if (Gate::denies('edit_screens'))
+
+        if (Gate::denies('edit_screen'))
             $this->response->error('permission_denied', 401);
 
         $screen = Screen::find($id);
@@ -117,10 +117,10 @@ class ScreenController extends BaseController
     }
 
     public function destroy($id) {
-        
-        if (Gate::denies('remove_screens'))
+
+        if (Gate::denies('remove_screen'))
             $this->response->error('permission_denied', 401);
-        
+
         $screen = Screen::find($id);
 
         if (!$screen)

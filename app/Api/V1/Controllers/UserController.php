@@ -17,9 +17,9 @@ class UserController extends BaseController
 
     public function index() {
 
-        if (Gate::denies('view_users'))
+        if (Gate::denies('view_user'))
             $this->response->error('permission_denied', 401);
-        
+
         $users = User::with('roles')->where('id', '<>', $this->user->id)->get();
 
         return $this->collection($users, new UserTransformer());
@@ -27,9 +27,9 @@ class UserController extends BaseController
 
     public function show($id) {
 
-        if (Gate::denies('view_users'))
+        if (Gate::denies('view_user'))
             $this->response->error('permission_denied', 401);
-        
+
         $user = User::find($id);
 
         if (!$user)
@@ -40,7 +40,7 @@ class UserController extends BaseController
 
     public function store(Request $request) {
 
-        if (Gate::denies('add_users'))
+        if (Gate::denies('add_user'))
             $this->response->error('permission_denied', 401);
 
         $user = new User;
@@ -48,7 +48,7 @@ class UserController extends BaseController
 
         if($user->save()) {
             $user->roles()->sync($this->getRolesFromRequest($request));
-            
+
             Activity::log([
                 'contentId' => $user->id,
                 'contentType' => 'User',
@@ -73,9 +73,9 @@ class UserController extends BaseController
 
     public function update(Request $request, $id) {
 
-        if (Gate::denies('edit_users'))
+        if (Gate::denies('edit_user'))
             $this->response->error('permission_denied', 401);
-        
+
         $user = User::find($id);
 
         if (!$user)
@@ -109,7 +109,7 @@ class UserController extends BaseController
 
         if ($request->password!='')
             $newData['password'] = $request->password;
-        
+
         if ($request->email!='')
             $newData['email'] = $request->email;
 
@@ -131,7 +131,7 @@ class UserController extends BaseController
 
     public function destroy($id) {
 
-        if (Gate::denies('remove_users'))
+        if (Gate::denies('remove_user'))
             $this->response->error('permission_denied', 401);
 
         $user = User::find($id);
