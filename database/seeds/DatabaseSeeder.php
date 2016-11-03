@@ -21,9 +21,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(SettingsTableSeeder::class);
 
-        $this->call(ScreenGroupTableSeeder::class);
-        $this->call(CategoryTableSeeder::class);
-
         Model::reguard();
 
     }
