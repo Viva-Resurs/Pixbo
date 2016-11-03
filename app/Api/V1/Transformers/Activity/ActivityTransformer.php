@@ -16,8 +16,8 @@ class ActivityTransformer extends TransformerAbstract
             'id'                => (int) $activity->id,
             'user'              =>
             [
-                'id'   => $activity->user->id,
-                'name' => $activity->user->name
+                'id'   => ($activity->user) ? $activity->user->id : $activity->user_id,
+                'name' => ($activity->user) ? $activity->user->name : 'Deleted User'
             ],
             'model_id'          => $activity->content_id,
             'model'             => $activity->content_type,
