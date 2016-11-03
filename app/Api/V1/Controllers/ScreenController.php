@@ -90,13 +90,16 @@ class ScreenController extends BaseController
 
     public function update(ScreenUpdateForm $form, $id) {
 
-        if (Gate::denies('edit_screen'))
+        if (Gate::denies('view_screen'))
             $this->response->error('permission_denied', 401);
 
         $screen = Screen::find($id);
 
         if (!$screen)
             $this->response->error('not_found', 404);
+
+        if (Gate::denies('edit_screen'))
+            $this->response->error('permission_denied', 401);
 
         $result = $form->persist($screen);
 
@@ -118,13 +121,16 @@ class ScreenController extends BaseController
 
     public function destroy($id) {
 
-        if (Gate::denies('remove_screen'))
+        if (Gate::denies('view_screen'))
             $this->response->error('permission_denied', 401);
 
         $screen = Screen::find($id);
 
         if (!$screen)
             $this->response->error('not_found', 404);
+
+        if (Gate::denies('remove_screen'))
+            $this->response->error('permission_denied', 401);
 
         if($screen->delete()) {
 

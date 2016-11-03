@@ -30,6 +30,8 @@ class Client extends Model
         'user_id'
     ];
 
+    protected $touches = ['screengroup'];
+
     /**
      * User association
      *

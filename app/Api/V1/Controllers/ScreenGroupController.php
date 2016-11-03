@@ -9,8 +9,6 @@ use Illuminate\Http\Request;
 
 use App\Models\ScreenGroup;
 
-use Input;
-
 use App\Api\V1\Transformers\ScreenGroup\ScreenGroupListTransformer;
 use App\Api\V1\Transformers\ScreenGroup\ScreenGroupTransformer;
 
@@ -23,10 +21,7 @@ class ScreenGroupController extends BaseController
         if (Gate::denies('view_screengroup'))
             $this->response->error('permission_denied', 401);
 
-        $screengroups = ScreenGroup::where('id', '<>', 1)->get();
-
-        if(Input::get('list'))
-            return $this->collection($screengroups, new ScreenGroupListTransformer());
+        $screengroups = ScreenGroup::all();
 
         return $this->collection($screengroups, new ScreenGroupListTransformer());
     }
@@ -70,13 +65,16 @@ class ScreenGroupController extends BaseController
 
     public function update(Request $request, $id) {
 
-        if (Gate::denies('edit_screengroup'))
+        if (Gate::denies('view_screengroup'))
             $this->response->error('permission_denied', 401);
 
         $screengroup = ScreenGroup::find($id);
 
         if (!$screengroup)
             $this->response->error('not_found', 404);
+
+        if (Gate::denies('edit_screengroup'))
+            $this->response->error('permission_denied', 401);
 
         if ($screengroup->update($request->only(['name', 'desc']))){
 
@@ -96,13 +94,16 @@ class ScreenGroupController extends BaseController
 
     public function destroy($id) {
 
-        if (Gate::denies('remove_screengroup'))
+        if (Gate::denies('view_screengroup'))
             $this->response->error('permission_denied', 401);
 
         $screengroup = ScreenGroup::find($id);
 
         if (!$screengroup)
             $this->response->error('not_found', 404);
+
+        if (Gate::denies('remove_screengroup'))
+            $this->response->error('permission_denied', 401);
 
         if ($screengroup->delete()){
 

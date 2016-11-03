@@ -65,13 +65,16 @@ class ClientController extends BaseController
 
     public function update(Request $request, $id) {
 
-        if (Gate::denies('edit_client'))
+        if (Gate::denies('view_client'))
             $this->response->error('permission_denied', 401);
 
         $client = Client::find($id);
 
         if (!$client)
             $this->response->error('not_found', 404);
+
+        if (Gate::denies('edit_client'))
+            $this->response->error('permission_denied', 401);
 
         if ($client->update($request->only(['name', 'address', 'screen_group_id']))){
 
@@ -91,13 +94,16 @@ class ClientController extends BaseController
 
     public function destroy($id) {
 
-        if (Gate::denies('remove_client'))
+        if (Gate::denies('view_client'))
             $this->response->error('permission_denied', 401);
 
         $client = Client::find($id);
 
         if (!$client)
             $this->response->error('not_found', 404);
+
+        if (Gate::denies('remove_client'))
+            $this->response->error('permission_denied', 401);
 
         if($client->delete()) {
 

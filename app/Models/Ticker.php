@@ -29,6 +29,8 @@ class Ticker extends Model
         'id',
     ];
 
+    protected $touches = ['screengroups'];
+    
     /**
      * Boot method used to update associations depending on actions.
      *

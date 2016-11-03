@@ -32,7 +32,6 @@ class BaseController extends Controller
         finally {
             return $user;
         }
-
     }
-    
+
 }
