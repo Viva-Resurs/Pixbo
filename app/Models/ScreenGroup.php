@@ -33,7 +33,7 @@ class ScreenGroup extends Model
 
         ScreenGroup::deleting(function ($screengroup) {
             foreach( $screengroup->clients as $client) {
-                $client->update(['screen_group_id' => 1]);
+                $client->update(['screen_group_id' => 0]);
                 $client->save();
             }
 

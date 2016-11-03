@@ -43,27 +43,27 @@ class Client extends Model
     /**
      * ScreenGroup association
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function screengroups()
+    public function screengroup()
     {
-        return $this->belongsToMany(ScreenGroup::class);
+        return $this->belongsTo(ScreenGroup::class, 'screen_group_id');
     }
 
-    // public function getActivityAttribute($value)
-    // {
-    //     if (!is_null($value)) {
-    //         $time = Carbon::now()->timestamp($value);
-    //         return $time->diffForHumans();
-    //     }
-    //     else
-    //         return trans('messages.unknown');
-    // }
+    public function getActivityAttribute($value)
+    {
+        if (!is_null($value)) {
+            $time = Carbon::now()->timestamp($value);
+            return $time->diffForHumans();
+        }
+        else
+            return trans('messages.unknown');
+    }
 
-    // public function getGroupAttribute()
-    // {
-    //     return $this->screengroup->name;
-    // }
+    public function getGroupAttribute()
+    {
+        return $this->screengroup->name;
+    }
 
     public function updateActivity()
     {
