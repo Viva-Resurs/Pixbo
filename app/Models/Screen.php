@@ -29,7 +29,7 @@ class Screen extends Model
         'updated_at',
     ];
 
-    protected $touches = ['screengroups'];
+    //protected $touches = ['screengroups'];
 
     /**
      * Boot method used to update associations depending on actions.
