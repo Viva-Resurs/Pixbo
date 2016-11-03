@@ -4,6 +4,7 @@ composer.lock
 
 # NPM
 /node_modules
+npm-debug.log
 
 # Builds
 /public/css
