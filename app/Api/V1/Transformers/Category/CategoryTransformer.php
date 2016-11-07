@@ -21,9 +21,9 @@ class CategoryTransformer extends TransformerAbstract
     public function transform(Category $category)
     {
         return [
-            'id' 	            => (int) $category->id,
-            'name'              => $category->name,
-            'user_id'           => (int) $category->user_id
+            'id'      => (int) $category->id,
+            'name'    => $category->name,
+            'user_id' => (int) $category->user_id
         ];
     }
 

@@ -19,10 +19,10 @@ class CategoryListTransformer extends TransformerAbstract
     public function transform(Category $category)
     {
         return [
-            'id' 	            => (int) $category->id,
-            'name'              => $category->name,
-            'numberOfScreens'   => $category->screens()->count(),
-            'user_id'           => (int) $category->user_id,
+            'id'              => (int) $category->id,
+            'name'            => $category->name,
+            'numberOfScreens' => $category->screens()->count(),
+            'user_id'         => (int) $category->user_id,
         ];
     }
 }
