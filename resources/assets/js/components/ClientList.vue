@@ -42,7 +42,9 @@
                         <span v-else>{{ client.name }}</span>
                     </td>
                     <td v-if="from!='screengroup'">
-                        <a v-link="{ path: '/screengroups/'+client.screengroup.data.id }">{{ client.screengroup.data.name }}</a>
+                        <template v-if="client.screengroup">
+                            <a v-link="{ path: '/screengroups/'+client.screengroup.data.id }">{{ client.screengroup.data.name }}</a>
+                        </template>
                     </td>
                     <td class="slim" v-if="$root.isAdmin">{{ client.address }}</td>
                     <td class="slim">
@@ -103,7 +105,7 @@
 
                 limitOff: false,
                 limitOffBtn: false,
-                
+
                 order: 'name',
                 desc: 1,
 
