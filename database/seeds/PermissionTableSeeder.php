@@ -13,7 +13,7 @@ class PermissionTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('permission')->delete();
+        DB::table('permission')->truncate();
 
         // Dashboard
         $dash = Permission::create([
