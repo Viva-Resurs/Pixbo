@@ -17,10 +17,7 @@ class CategoryScreenController extends BaseController
         if (Gate::denies('edit_screen'))
             $this->response->error('permission_denied', 401);
 
-        $defaultCategory = Category::findOrFail(1)->first();
-
         $category->screens()->detach($screen->id);
-        $defaultCategory->screens()->attach($screen->id);
 
         Activity::log([
             'contentId' => $category->id,

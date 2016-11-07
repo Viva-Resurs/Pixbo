@@ -31,10 +31,8 @@ class Category extends Model
 
         Category::deleting(function ($category) {
 
-            foreach ( $category->screens as $screen ){
+            foreach ( $category->screens as $screen )
                 $category->screens()->detach($screen->id);
-                $screen->categories()->sync([1]);
-            }
 
         });
     }
@@ -49,21 +47,12 @@ class Category extends Model
     }
 
     /**
-     * Screens association
+     * Screen association
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
     public function screens() {
         return $this->belongsToMany(Screen::class, 'category_screen')->withTimestamps();
-    }
-
-
-    public function addScreen(Screen $screen) {
-        $this->screens()->attach($screen->id);
-    }
-
-    public function removeScreen(Screen $screen) {
-        $this->screens()->detach($screen->id);
     }
 
     public function isOwner(User $user) {
