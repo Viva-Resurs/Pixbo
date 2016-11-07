@@ -1,21 +1,17 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: xergo
  * Date: 20-Apr-16
  * Time: 7:24 PM
  */
-
 namespace App\Api\V1\Transformers\Category;
 
-use App\Api\V1\Transformers\Screen\ScreenTransformer;
 use App\Models\Category;
 use League\Fractal\TransformerAbstract;
 
 class CategoryListTransformer extends TransformerAbstract
 {
-
     public function transform(Category $category)
     {
         return [

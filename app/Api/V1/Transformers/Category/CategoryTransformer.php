@@ -1,17 +1,16 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: xergo
  * Date: 20-Apr-16
  * Time: 7:24 PM
  */
-
 namespace App\Api\V1\Transformers\Category;
 
-use App\Api\V1\Transformers\Screen\ScreenTransformer;
 use App\Models\Category;
 use League\Fractal\TransformerAbstract;
+
+use App\Api\V1\Transformers\Screen\ScreenTransformer;
 
 class CategoryTransformer extends TransformerAbstract
 {
@@ -29,6 +28,7 @@ class CategoryTransformer extends TransformerAbstract
 
     public function includeScreens(Category $category) {
         $screens = $category->screens;
-        return $this->collection($screens, new ScreenTransformer());
+        if ($screens)
+            return $this->collection($screens, new ScreenTransformer());
     }
 }

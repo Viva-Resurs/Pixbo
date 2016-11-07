@@ -14,7 +14,6 @@ use League\Fractal\TransformerAbstract;
 
 class SettingsTransformer extends TransformerAbstract
 {
-
     public function transform(Settings $settings)
     {
         return [
