@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClientsTable extends Migration
+class CreateScreengroupTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,17 +12,13 @@ class CreateClientsTable extends Migration
      */
     public function up()
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create('screengroup', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('address')->unique();
-            $table->integer('activity')->nullable();
+            $table->text('desc');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')
-                ->references('id')->on('users')->onDelete('cascade');
-            $table->integer('screen_group_id')->unsigned()->nullable();
-            $table->foreign('screen_group_id')
-                ->references('id')->on('screengroups');
+                ->references('id')->on('user')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -34,6 +30,6 @@ class CreateClientsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('clients');
+        Schema::drop('screengroup');
     }
 }

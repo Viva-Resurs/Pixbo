@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: xergo
@@ -16,12 +15,12 @@ class ScreenTransformer extends TransformerAbstract
     public function transform(Screen $screen)
     {
         return [
-            'id' 	            => (int) $screen->id,
-            'type'              => 'screen',
-            'categories'        => $screen->categories,
-            'event'	            => $screen->event->first(),
-            'photo'             => $screen->photo,
-            'screengroups'      => $screen->screengroups,
+            'id'           => (int) $screen->id,
+            'type'         => 'screen',
+            'categories'   => $screen->categories,
+            'event'        => $screen->event->first(),
+            'photo'        => $screen->photo,
+            'screengroups' => $screen->screengroups,
         ];
     }
 }

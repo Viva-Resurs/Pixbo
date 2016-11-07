@@ -12,7 +12,7 @@ class ScreenGroup extends Model
      *
      * @var string
      */
-    protected $table = 'screengroups';
+    protected $table = 'screengroup';
 
     /**
      * The attributes that are mass assignable.
@@ -33,7 +33,7 @@ class ScreenGroup extends Model
 
         ScreenGroup::deleting(function ($screengroup) {
             foreach( $screengroup->clients as $client) {
-                $client->update(['screen_group_id' => 1]);
+                $client->update(['screen_group_id' => 0]);
                 $client->save();
             }
 
@@ -46,6 +46,16 @@ class ScreenGroup extends Model
             }
 
         });
+    }
+
+    /**
+     * User association
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -68,7 +78,7 @@ class ScreenGroup extends Model
 
     /**
      * Client association
-     * 
+     *
      * @return [type] [description]
      */
     public function clients() {
@@ -89,10 +99,10 @@ class ScreenGroup extends Model
             if($screen->photo){
 
                 $shadow_event = $screen->getActiveEvents();
-                
+
                 if(!$shadow_event->isEmpty())
                     $array[] = $screen->photo->path;
-                
+
             }
 
         }
@@ -110,14 +120,14 @@ class ScreenGroup extends Model
         $array = [];
 
         foreach($this->tickers as $ticker) {
-            
+
             $shadow_event = $ticker->getActiveEvents();
-            
+
             if(!$shadow_event->isEmpty())
                 $array[] = $ticker->text;
 
         }
-        
+
         return $array;
     }
 

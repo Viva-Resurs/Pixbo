@@ -102,9 +102,6 @@
 
                         self.$set('models', response.entity.data);
 
-                        if (self.model == 'screengroup' && self.selected == 1)
-                            self.selected = null;
-
                         self.setSelectPicker();
 
                     },

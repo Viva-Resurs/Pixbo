@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTickersTable extends Migration
+class CreateTickerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateTickersTable extends Migration
      */
     public function up()
     {
-        Schema::create('tickers', function (Blueprint $table) {
+        Schema::create('ticker', function (Blueprint $table) {
             $table->increments('id');
             $table->text('text');
 
@@ -20,11 +20,14 @@ class CreateTickersTable extends Migration
         });
 
         Schema::create('screengroup_ticker', function (Blueprint $table) {
-
             $table->integer('screen_group_id')->unsigned()->index();
-            $table->foreign('screen_group_id')->references('id')->on('screengroups')->onDelete('cascade');
             $table->integer('ticker_id')->unsigned()->index();
-            $table->foreign('ticker_id')->references('id')->on('tickers')->onDelete('cascade');
+
+            $table->foreign('screen_group_id')
+                ->references('id')->on('screengroup')->onDelete('cascade');
+
+            $table->foreign('ticker_id')
+                ->references('id')->on('ticker')->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -37,7 +40,7 @@ class CreateTickersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('tickers');
+        Schema::drop('ticker');
         Schema::drop('screengroup_ticker');
     }
 }

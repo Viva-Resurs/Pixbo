@@ -15,7 +15,7 @@ class ShadowEvent extends Model
      *
      * @var string
      */
-    protected $table = 'shadow_events';
+    protected $table = 'shadow_event';
 
     /**
      * The attributes that are mass assignable.

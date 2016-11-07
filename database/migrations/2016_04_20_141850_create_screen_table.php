@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateScreenTables extends Migration
+class CreateScreenTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateScreenTables extends Migration
      */
     public function up()
     {
-        Schema::create('screens', function (Blueprint $table) {
+        Schema::create('screen', function (Blueprint $table) {
             $table->increments('id');
 
             $table->timestamps();
@@ -20,18 +20,23 @@ class CreateScreenTables extends Migration
 
         Schema::create('screengroup_screen', function (Blueprint $table) {
             $table->integer('screen_group_id')->unsigned()->index();
-            $table->foreign('screen_group_id')->references('id')->on('screengroups')->onDelete('cascade');
             $table->integer('screen_id')->unsigned()->index();
-            $table->foreign('screen_id')->references('id')->on('screens')->onDelete('cascade');
+
+            $table->foreign('screen_group_id')
+                ->references('id')->on('screengroup')->onDelete('cascade');
+
+            $table->foreign('screen_id')
+                ->references('id')->on('screen')->onDelete('cascade');
+                
             $table->timestamps();
         });
 
-        Schema::create('photos', function (Blueprint $table) {
+        Schema::create('photo', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('screen_id')->nullable();
             $table->foreign('screen_id')
-                ->references('id')->on('screens');
+                ->references('id')->on('screen');
 
             $table->string('name');
             $table->string('originalName');
@@ -50,8 +55,8 @@ class CreateScreenTables extends Migration
      */
     public function down()
     {
-        Schema::drop('screens');
+        Schema::drop('screen');
         Schema::drop('screengroup_screen');
-        Schema::drop('photos');
+        Schema::drop('photo');
     }
 }

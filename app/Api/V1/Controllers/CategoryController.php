@@ -28,7 +28,7 @@ class CategoryController extends BaseController
 
         if (Gate::denies('add_category'))
             $this->response->error('permission_denied', 401);
-        
+
         $category = new Category;
         $category->fill($request->only(['name']));
 
@@ -49,10 +49,10 @@ class CategoryController extends BaseController
     }
 
     public function show($id) {
-        
+
         if (Gate::denies('view_category'))
             $this->response->error('permission_denied', 401);
-        
+
         $category = Category::find($id);
 
         if (!$category)
@@ -62,7 +62,7 @@ class CategoryController extends BaseController
     }
 
     public function update(Request $request, $id) {
-        
+
         if (Gate::denies('view_category'))
             $this->response->error('permission_denied', 401);
 
@@ -75,7 +75,7 @@ class CategoryController extends BaseController
             $this->response->error('permission_denied', 401);
 
         if($category->update($request->only(['name']))) {
-            
+
             Activity::log([
                 'contentId' => $category->id,
                 'contentType' => 'Category',
@@ -104,7 +104,7 @@ class CategoryController extends BaseController
             $this->response->error('permission_denied', 401);
 
         if($category->delete()) {
-            
+
             Activity::log([
                 'contentId' => $category->id,
                 'contentType' => 'Category',

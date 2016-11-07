@@ -17,11 +17,11 @@ class TickerTransformer extends TransformerAbstract
     public function transform(Ticker $ticker)
     {
         return [
-            'id' 	            => (int) $ticker->id,
-            'type'              => 'ticker',
-            'text'              => $ticker->text,
-            'event'	            => $ticker->event->first(),
-            'screengroups'      => $ticker->screengroups,
+            'id'           => (int) $ticker->id,
+            'type'         => 'ticker',
+            'text'         => $ticker->text,
+            'event'        => $ticker->event->first(),
+            'screengroups' => $ticker->screengroups,
         ];
     }
 }

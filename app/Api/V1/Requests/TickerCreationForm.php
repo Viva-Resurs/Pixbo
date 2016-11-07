@@ -32,14 +32,14 @@ class TickerCreationForm extends Request
     }
 
     public function persist() {
-                
+
         $newTicker = $this->all();
-        
+
         $screengroups = [];
         if ($this->has('screengroups'))
-            $screengroups = $newTicker['screengroups'];
+             $screengroups = $newTicker['screengroups'];
 
-        $results = DB::transaction(function () use ($newTicker,$screengroups) {
+        $results = DB::transaction(function () use ($newTicker, $screengroups) {
             $ticker = new Ticker($newTicker);
             $ticker->save();
             $event = new Event(['start_date' => date('Y-m-d'), 'recur_type' => 'daily']);

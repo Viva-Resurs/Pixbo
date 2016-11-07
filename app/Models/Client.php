@@ -15,7 +15,7 @@ class Client extends Model
      *
      * @var string
      */
-    protected $table = 'clients';
+    protected $table = 'client';
 
     /**
      * The attributes that are mass assignable.
@@ -30,17 +30,7 @@ class Client extends Model
         'user_id'
     ];
 
-    protected $appends = ['group'];
-
-    /**
-     * ScreenGroup association
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function screengroup()
-    {
-        return $this->belongsTo(ScreenGroup::class, 'screen_group_id');
-    }
+    protected $touches = ['screengroup'];
 
     /**
      * User association
@@ -52,6 +42,15 @@ class Client extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * ScreenGroup association
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function screengroup()
+    {
+        return $this->belongsTo(ScreenGroup::class, 'screen_group_id');
+    }
 
     public function getActivityAttribute($value)
     {
@@ -72,7 +71,7 @@ class Client extends Model
     {
         $this->activity = time();
     }
-    
+
     public function getLastUpdated() {
         return $this->screengroup->updated_at->toDateTimeString();
     }
@@ -80,7 +79,7 @@ class Client extends Model
     public function getTickers() {
         return $this->screengroup->getActiveTickers();
     }
-    
+
     public function getPhotos() {
         return $this->screengroup->getActivePhotos();
     }

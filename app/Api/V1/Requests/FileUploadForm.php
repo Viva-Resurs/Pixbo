@@ -51,7 +51,7 @@ class FileUploadForm extends Request
 
             // find or create screen and add photo to it.
             $newphoto = Photo::getOrCreate($newFile)->move($newFile);
- 
+
             $screen->photo()->save($newphoto);
             return $screen;
         });
@@ -63,23 +63,21 @@ class FileUploadForm extends Request
 
         $newFile = $this->file('file');
 
-        $screen = null;
-        
         $screengroups = [];
         if ($this->has('screengroups'))
             $screengroups[] = (int) $this->get('screengroups');
 
-        $result = DB::transaction(function () use ($newFile, $screen, $screengroups) {
+        $result = DB::transaction(function () use ($newFile, $screengroups) {
             // find or create screen and add photo to it.
             $photo = Photo::getOrCreate($newFile)->move($newFile);
-            if (!is_null($photo->screen)) {
-                $screen = $photo->screen;
-            } else {
+            //if (!is_null($photo->screen)) {
+            //    $screen = $photo->screen;
+            //} else {
                 $screen = new Screen;
                 $screen->save();
-                $defaultCategory = Category::first();
-                $defaultCategory->addScreen($screen);
-            }
+                //$defaultCategory = Category::first();
+                //$defaultCategory->addScreen($screen);
+            //}
 
             $event = new Event;
             $event->fill(['start_date' => date('Y-m-d'), 'recur_type' => 'daily']);

@@ -17,7 +17,7 @@ class Ticker extends Model
      *
      * @var string
      */
-    protected $table = 'tickers';
+    protected $table = 'ticker';
 
     /**
      * The attributes that are mass assignable.
@@ -30,7 +30,7 @@ class Ticker extends Model
     ];
 
     protected $touches = ['screengroups'];
-
+    
     /**
      * Boot method used to update associations depending on actions.
      *

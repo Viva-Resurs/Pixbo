@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Settings extends Migration
+class CreateUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,12 @@ class Settings extends Migration
      */
     public function up()
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('user', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('vegas_delay')->nullable();
-            $table->boolean('vegas_timer')->default(true);
-            $table->integer('ticker_pauseOnItems')->nullable();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password', 60);
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class Settings extends Migration
      */
     public function down()
     {
-        Schema::drop('settings');
+        Schema::drop('user');
     }
 }
