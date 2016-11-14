@@ -50,7 +50,34 @@
         props: [ 'screen', 'from' ],
         methods: {
             isActive(screen){
-                return (screen.active && screen.active.length>0);
+                // No screengroup
+                if (!screen.screengroups || screen.screengroups.length<1){
+                    console.log('no screengroup')
+                    return false;
+                }
+                // No active events
+                if (!screen.active || !screen.active.length>0){
+                    console.log('not active at the moment')
+
+                    // Has ended?
+                    if (screen.event.end_date && moment().isBefore(screen.event.end_date)){
+                        console.log('has ended...')
+                        return false;
+                    }
+
+                    // Will be active?
+                    if (screen.event.start_date && moment().isBefore(screen.event.start_date)){
+                        console.log('will start later...')
+                        return true;
+                    }
+
+                    // Scheduled?
+                    if (screen.event.recur_type && screen.event.recur_type!='none')
+                        return true;
+
+                }
+                console.log('probably not active.')
+                return false;
             }
         }
     }
