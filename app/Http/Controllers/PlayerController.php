@@ -33,6 +33,9 @@ class PlayerController extends Controller {
     public function show(Request $request, $address) {
         $client = Client::where('address', $address)->firstOrFail();
 
+        if (!$client->screengroup)
+            return '[]';
+
         return [
             'photo_list' => $client->getPhotos(),
             'tickers'    => $client->getTickers(),

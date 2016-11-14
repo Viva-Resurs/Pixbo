@@ -17,6 +17,8 @@ PixboPlayer.Sync = function (first_run) {
             return false;
         }
 
+        if (_data.length<2)
+            return PixboPlayer.Update( false, false, false, false, "NOSCREENGROUP" );
 
         if (!first_run && PixboPlayer.RebuiltAt != _data.settings.updated.date ){
             console.log("Reloading Page");
@@ -56,7 +58,7 @@ PixboPlayer.Sync = function (first_run) {
 };
 
 PixboPlayer.Update = function(new_screens, new_tickers, new_updated_at, new_settings, info) {
-      
+
     // Info & Errors
     if (info)
         return this.Standby(info);
@@ -72,7 +74,7 @@ PixboPlayer.Update = function(new_screens, new_tickers, new_updated_at, new_sett
 
     // Start/Restart Vegas
     this.Start_Vegas( new_screens );
-    
+
     // Start Ticker
     this.Start_Ticker( new_tickers );
 

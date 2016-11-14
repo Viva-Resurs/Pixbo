@@ -1,9 +1,9 @@
 PixboPlayer.Standby = function(info){
-    
+
     var _createBackdrop = function(){
 
         var Backdrop = document.createElement("canvas");
-        
+
         Backdrop.id = "Backdrop";
 
         Backdrop.style.position = "fixed";
@@ -13,7 +13,7 @@ PixboPlayer.Standby = function(info){
         Backdrop.style.zIndex = "1000";
 
         Backdrop.ctx = Backdrop.getContext("2d");
-        
+
         Backdrop.show = function(){
             this.style.display = "block";
         };
@@ -41,7 +41,7 @@ PixboPlayer.Standby = function(info){
         Backdrop.ctx.draw = function(){
 
             this.clearRect( 0, 0, this.canvas.width, this.canvas.height );
-            
+
             this.save();
 
             this.translate( this.canvas.width/2, this.canvas.height/2 );
@@ -68,7 +68,7 @@ PixboPlayer.Standby = function(info){
             // Draw some info
             this.font      = '96px Verdana';
             this.fillStyle = '#999';
-            this.textAlign = "center"; 
+            this.textAlign = "center";
             switch (this.info){
                 case 404: {
                     this.fillText( "Client Missing", 0, 0 );
@@ -86,6 +86,11 @@ PixboPlayer.Standby = function(info){
                     this.fillText( "Standby", 0, 0 );
                     this.font = '40px Verdana';
                     this.fillText( 'No images', 0, 70 );
+                    break;
+                }
+                case "NOSCREENGROUP": {
+                    this.fillText( "Screengroup Missing", 0, 0 );
+                    this.font = '40px Verdana';
                     break;
                 }
                 default:
@@ -107,7 +112,7 @@ PixboPlayer.Standby = function(info){
 
     if (!this.Backdrop)
         _createBackdrop();
-    
+
     else
         this.Backdrop.show();
 
@@ -131,7 +136,7 @@ PixboPlayer.Standby = function(info){
 };
 
 PixboPlayer.Ready = function(){
-    
+
     if (PixboPlayer.Backdrop)
         PixboPlayer.Backdrop.hide();
 
