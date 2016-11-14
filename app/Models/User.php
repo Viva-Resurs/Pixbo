@@ -26,7 +26,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var string
      */
-    protected $table = 'user';
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -63,7 +63,7 @@ class User extends Model implements AuthenticatableContract,
     public function activity() {
         return $this->hasMany(Activity::class);
     }
-    
+
     /**
      * Screengroup association
      *
