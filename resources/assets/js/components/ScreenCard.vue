@@ -55,8 +55,11 @@
                     console.log('no screengroup')
                     return false;
                 }
-                // No active events
-                if (!screen.active || !screen.active.length>0){
+                // Active events
+                if (screen.active && screen.active.length>0){
+                    return true;
+                }
+                else {
                     console.log('not active at the moment')
 
                     // Has ended?
