@@ -11,3 +11,7 @@ Response:
 Solution:
 	uncomment this line in php.ini
 	;always_populate_raw_post_data = -1
+
+Problem: Outdated migration/seeds
+Solution:
+  run 'composer dump-autoload' to refresh migrations and seeds
