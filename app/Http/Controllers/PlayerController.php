@@ -17,7 +17,7 @@ class PlayerController extends Controller {
     public function index(Request $request) {
         $mac     = $request->input('mac');
         $preview = $request->input('preview');
-        
+
         return view('player.index')->with([
             'Client_ADDR' => $mac,
             'preview'     => $preview,
@@ -32,12 +32,6 @@ class PlayerController extends Controller {
      */
     public function show(Request $request, $address) {
         $client = Client::where('address', $address)->firstOrFail();
-
-        /*if (is_null($client)) {
-            return abort(404, trans('exceptions.client_not_found'));
-        }*/
-
-        //abort('AJ',404);
 
         return [
             'photo_list' => $client->getPhotos(),
