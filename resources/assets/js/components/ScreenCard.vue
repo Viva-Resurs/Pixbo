@@ -60,13 +60,13 @@
                     console.log('not active at the moment')
 
                     // Has ended?
-                    if (screen.event.end_date && moment().isBefore(screen.event.end_date)){
+                    if (screen.event.end_date && moment().isBefore(screen.event.end_date+screen.event.end_time)){
                         console.log('has ended...')
                         return false;
                     }
 
                     // Will be active?
-                    if (screen.event.start_date && moment().isBefore(screen.event.start_date)){
+                    if (screen.event.start_date && moment().isBefore(screen.event.start_date+screen.event.start_time)){
                         console.log('will start later...')
                         return true;
                     }
