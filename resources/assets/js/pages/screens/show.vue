@@ -10,10 +10,10 @@
 
     <div v-else>
 
-        <schedule :model.sync="screen" :selectedcategories.sync="selectedcategories">
+        <schedule :model.sync="screen" :selected_categories.sync="selected_categories">
             <div slot="model_specific_setting">
                 <div class="form-group">
-                    <model-selector :selected.sync="selectedcategories"
+                    <model-selector :selected.sync="selected_categories"
                                     model="category"
                                     classes="model_input"
                                     multiple="true"
@@ -64,7 +64,7 @@
         data: function () {
             return {
                 screen: {},
-                selectedcategories: [],
+                selected_categories: [],
                 changeScreen: false
             }
         },
@@ -101,7 +101,7 @@
                             var self = this;
 
                             self.on("sending", function (file, xhr, formData) {
-                                
+
                                 if (localStorage.getItem('jwt-token'))
                                     xhr.setRequestHeader('Authorization', localStorage.getItem('jwt-token'));
 
@@ -111,17 +111,17 @@
                             });
 
                             self.on("success", function (response) {
-                                
+
                                 vm.$dispatch('alert', {
                                     message: vm.trans('screen.uploaded'),
                                     options: {theme: 'success'}
                                 });
 
                                 vm.$dispatch('refresh-thumb',vm.$route.params.id);
-                                
+
                                 setTimeout(function(){
                                     vm.fetch(vm.$route.params.id);
-                                    vm.changeScreen = false;    
+                                    vm.changeScreen = false;
                                 },2000);
 
                             });

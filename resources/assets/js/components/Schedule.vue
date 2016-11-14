@@ -54,7 +54,7 @@
         </div>
 
         <div class="panel-footer text-right">
-                
+
             <button type="button" class="btn {{ (advancedMode) ? 'btn-primary' : 'btn-default' }}" @click="toggleMode">
                 <i class="fa fa-btn fa-cog"></i>{{ trans('schedule.advanced_options') }}
             </button>
@@ -90,7 +90,7 @@
 
         name: 'Schedule',
 
-        props: [ 'model', 'selectedcategories' ],
+        props: [ 'model', 'selected_categories' ],
 
         mixins: [ RouterHelpers ],
 
@@ -134,7 +134,7 @@
                 var self = this;
 
                 client({ path: '/'+self.model.type+'s/'+self.model.id, entity: self.model, method: 'PUT'}).then(
-                    
+
                     function (response) {
 
                         self.$dispatch('alert', {
@@ -147,12 +147,12 @@
                     },
 
                     function (response) {
-                        
+
                         self.$dispatch('alert', {
                             message: self.trans('screen.updated_fail'),
                             options: {theme: 'error'}
                         });
-                        
+
                     }
 
                 );
@@ -163,35 +163,27 @@
 
                 this.event.weekly_day_num = JSON.stringify(this.weekly_day_num);
                 this.model.screengroups = this.selected_screengroups;
-                this.model.categories = (typeof this.selectedcategories == 'object') ? this.selectedcategories : [];
+                this.model.categories = this.selected_categories;
 
             },
 
             decodeModel() {
 
-                if (this.model.screengroups != null || this.model.screengroups != [] || this.model.screengroups != "") {
-                    
-                    var self = this;
+                this.selected_screengroups = [];
 
-                    this.model.screengroups.forEach(function(entry) {
-                        self.selected_screengroups.push(entry.id)
-                    });
+                if (this.model.screengroups)
+                    for (var i=0 ; i<this.model.screengroups.length ; i++)
+                        this.selected_screengroups.push(this.model.screengroups[i].id);
 
-                }
+                this.selected_categories = [];
+
+                if (this.model.categories)
+                    for (var i=0 ; i<this.model.categories.length ; i++)
+                        this.selected_categories.push(this.model.categories[i].id);
 
                 this.weekly_day_num = JSON.parse(this.event.weekly_day_num);
 
-                this.selectedcategories = [];
 
-                if (typeof this.model.categories != 'undefined') {
-
-                    for (var i=0 ; i<this.model.categories.length ; i++)
-                        this.selectedcategories.push(this.model.categories[i].id);
-
-                }
-
-                if (this.selectedcategories.length == 0)
-                    this.selectedcategories[0] = 1;
 
             }
 
