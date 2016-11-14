@@ -6,7 +6,7 @@
 
             <div v-if="screen.photo && screen.photo.thumb_path">
                 <img :src="'/' + screen.photo.thumb_path"
-                    class="screencard_img {{(screen.screengroups.length<1 || screen.category==1)?'inactive':''}}"
+                    :class="'screencard_img ' + ((isActive(screen))?'':'inactive')"
                     v-tooltip data-original-title="{{ screen.photo.originalName }}">
             </div>
             <div class="screencard_error" v-else>
@@ -46,10 +46,12 @@
 
 <script type="text/ecmascript-6">
     export default {
-
         name: 'ScreenCard',
-
-        props: [ 'screen', 'from' ]
-
+        props: [ 'screen', 'from' ],
+        methods: {
+            isActive(screen){
+                return (screen.active && screen.active.length>0);
+            }
+        }
     }
 </script>

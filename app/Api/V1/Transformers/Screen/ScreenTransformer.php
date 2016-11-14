@@ -21,6 +21,7 @@ class ScreenTransformer extends TransformerAbstract
             'event'        => $screen->event->first(),
             'photo'        => $screen->photo,
             'screengroups' => $screen->screengroups,
+            'active'       => $screen->getActiveEvents()
         ];
     }
 }
