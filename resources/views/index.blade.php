@@ -8,9 +8,6 @@
         <div id="app">
             <router-view></router-view>
         </div>
-
-        <script src="/js/vendor.js"></script>
         <script src="/js/index.js?date={{ date('ymdHis') }}"></script>
-
     </body>
 </html>
