@@ -9,7 +9,7 @@
  * -----------------------------------------------------------------------------
  */
 window.$ = window.jQuery = require('../vendor/jquery-2.1.3.min.js');
-require('../vendor/vegas.min.js');
+require('vegas');
 require('../vendor/jquery.ticker.js');
 
 
