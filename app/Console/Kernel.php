@@ -13,9 +13,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \App\Console\Commands\GenerateAllEventShadows::class,
-        \App\Console\Commands\ClearOldEventShadows::class,
-        \App\Console\Commands\ClearAllEventShadows::class,
+        \App\Console\Commands\GenerateShadows::class,
+        \App\Console\Commands\ClearOldShadows::class,
+        \App\Console\Commands\ClearShadows::class,
         \App\Console\Commands\GenerateACL::class
     ];
 

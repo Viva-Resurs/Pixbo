@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\ShadowEvent;
 
-class GenerateAllEventShadows extends Command
+class GenerateShadows extends Command
 {
     /**
      * The name and signature of the console command.

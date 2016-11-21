@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\ShadowEvent;
 
-class ClearOldEventShadows extends Command
+class ClearOldShadows extends Command
 {
     /**
      * The name and signature of the console command.
