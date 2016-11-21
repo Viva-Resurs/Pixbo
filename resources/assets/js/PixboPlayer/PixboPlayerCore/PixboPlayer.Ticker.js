@@ -5,11 +5,11 @@ PixboPlayer.Start_Ticker = function(tickers){
 
     // Get Target
     var target = this.DOM.TickerTarget.find('ul#ticker');
-    
+
     // Check if there is any tickers
     if (!target || target.children().length<1)
         return console.log('No tickers...');
-    
+
     // Run .ticker() Plugin
     target.ticker(this.Settings.Ticker);
 
@@ -23,7 +23,7 @@ PixboPlayer.Put_Tickers = function(tickers){
 
     var content = "<ul id='ticker'>";
 
-    for (i=0 ; i<tickers.length ; i++)
+    for (var i=0 ; i<tickers.length ; i++)
         content += "<li>" + tickers[i] + "</li>";
 
     content += "</ul>";
@@ -62,7 +62,7 @@ PixboPlayer.Controls.Ticker = {
 
                 if (this.classList.contains('jnt-play-pause'))
                     PixboPlayer.Controls.Ticker.Buttons.PlayPause = this;
-                
+
                 // Attach event-listener
                 this.onclick=function (e){
 
@@ -87,7 +87,7 @@ PixboPlayer.Controls.Ticker = {
                 };
 
             });
-            
+
             // Add Classes
             PixboPlayer.Controls.Ticker.Buttons.Prev.classList.add('fa');
             PixboPlayer.Controls.Ticker.Buttons.Prev.classList.add('fa-step-backward');
@@ -95,7 +95,7 @@ PixboPlayer.Controls.Ticker = {
             PixboPlayer.Controls.Ticker.Buttons.Next.classList.add('fa-step-forward');
             PixboPlayer.Controls.Ticker.Buttons.PlayPause.classList.add('fa');
             PixboPlayer.Controls.Ticker.Buttons.PlayPause.classList.add('fa-pause');
-            
+
             // Order Buttons
             $( PixboPlayer.Controls.Ticker.Buttons.PlayPause ).insertBefore( PixboPlayer.Controls.Ticker.Buttons.Next );
 

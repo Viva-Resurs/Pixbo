@@ -1,15 +1,19 @@
 /* -----------------------------------------------------------------------------
  * PixboPlayer.js, written by Jonathan Timmerlid
  *
- * 
- * 
+ *
+ *
  * Documentation about used plugins:
  * Ticker : http://www.jquerynewsticker.com/
  * Vegas  : http://vegas.jaysalvat.com/documentation/
  * -----------------------------------------------------------------------------
  */
+window.$ = window.jQuery = require('../vendor/jquery-2.1.3.min.js');
+require('../vendor/vegas.min.js');
+require('../vendor/jquery.ticker.js');
 
-var PixboPlayer = {
+
+window.PixboPlayer = {
 
     Client_ADDR : false,
     EnableControls : false,
@@ -45,7 +49,15 @@ var PixboPlayer = {
 
         // Run once with 'first start' set
         this.Sync(true);
-        
+
     }
 
 };
+
+require('./PixboPlayerCore/jQuery.live.js');
+require('./PixboPlayerCore/PixboPlayer.ConnectionStatus.js');
+require('./PixboPlayerCore/PixboPlayer.Settings.js');
+require('./PixboPlayerCore/PixboPlayer.Standby.js');
+require('./PixboPlayerCore/PixboPlayer.Sync.js');
+require('./PixboPlayerCore/PixboPlayer.Ticker.js');
+require('./PixboPlayerCore/PixboPlayer.Vegas.js');

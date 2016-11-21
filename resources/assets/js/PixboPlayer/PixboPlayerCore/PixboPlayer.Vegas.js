@@ -1,5 +1,5 @@
 PixboPlayer.Start_Vegas = function(screens){
-    
+
     // Replace screens
     this.Set_Screens(screens);
 
@@ -22,7 +22,7 @@ PixboPlayer.Start_Vegas = function(screens){
     else
         this.DOM.VegasTarget
             .vegas(this.Settings.Vegas);
-    
+
     this.Vegas_Started = true;
 
 };
@@ -31,7 +31,7 @@ PixboPlayer.Set_Screens = function(screens){
 
     this.Screens = [];
 
-    for (i=0 ; i<screens.length ; i++)
+    for (var i=0 ; i<screens.length ; i++)
         this.Screens.push( { src: '/' + screens[i] } );
 
 };
@@ -100,7 +100,7 @@ PixboPlayer.Controls.Vegas = {
             this.Buttons.Play.classList.add('fa-play');
             this.Buttons.Pause.classList.add('fa');
             this.Buttons.Pause.classList.add('fa-pause');
-        
+
         // Attach event-listeners
             this.Buttons.Prev.onclick  = this.Prev;
             this.Buttons.Next.onclick  = this.Next;
