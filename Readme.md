@@ -35,8 +35,6 @@ php artisan migrate
 php artisan db:seed
 
 npm install
-
-gulp
 ```
 
 #### Run Development Server
