@@ -33,7 +33,6 @@ sudo ln -s ~/Pixbo/public /var/www/html
 
 
 # Install globally needed npm packages
-sudo npm install gulp -g
 sudo npm install node-gyp@3.3.1 -g
 
 # Install composer
@@ -45,7 +44,6 @@ sudo composer self-update
 (cd ~/Pixbo && composer update --no-scripts)
 touch ~/Pixbo/storage/database.sqlite
 (cd ~/Pixbo && composer install)
-(cd ~/Pixbo && gulp)
 (cd ~/Pixbo && php artisan migrate --seed)
 
 # Set App URL
