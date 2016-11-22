@@ -3,5 +3,8 @@
 # Pull git repo
 git pull
 
+# Refresh composer
+composer dump-autoload
+
 # Update JS & SCSS
 npm run build
