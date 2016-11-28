@@ -10,7 +10,7 @@
     .model_label {
         @extend .col-sm-2, .col-sm-offset-1, .control-label;
     }
-    
+
     .model_input {
         @extend .col-sm-7, .col-xs-12;
         display: table;
@@ -39,7 +39,7 @@
     .form-control-feedback {
         top: 9px;
     }
-    
+
     .schedule_group {
         padding: 0px 0px 5px 0px;
     }
@@ -47,7 +47,7 @@
     .schedule_label {
         @extend .control-label;
     }
-    
+
     .schedule_input {
 
     }

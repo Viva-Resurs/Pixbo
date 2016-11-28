@@ -4,10 +4,22 @@
     margin-bottom: 40px;
 
     background: $navbar-background;
+    min-height: 50px;
+    height: 50px;
+
+    li {
+        a {
+            height: 50px;
+            padding: 14px 15px 10px 15px;
+
+        }
+
+    }
 
     .navbar-brand {
         font-size: 28px;
-        padding: 12px 15px;
+        height: 50px;
+        padding: 7px 15px;
         i {
             color: #f4645f;
         }
@@ -35,7 +47,7 @@
             border-left: 4px solid $brand-primary;
         }
     }
-    
+
     /* Dropdowns */
     li.dropdown-menu {
         li {

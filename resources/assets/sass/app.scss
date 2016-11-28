@@ -2,22 +2,14 @@
  * Variables
  */
 
-$border-radius-base: 0;
-$brand-primary: #2B5A84;
-$active-icon-color: #6CC94D;
-$btn-border-radius-base: 4px;
-$btn-font-weight: 300;
-$font-family-sans-serif: "Lato", Helvetica, Arial, sans-serif !default;
-$font-size-base: 14px;
-$navbar-height: 65px;
-$navbar-background: #f8f8f8;
+@import "variables";
 
 /*
  * Vendor CSS
  */
 
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-@import "node_modules/eonasdan-bootstrap-datetimepicker/src/sass/_bootstrap-datetimepicker";
+@import "node_modules/eonasdan-bootstrap-datetimepicker/src/sass/bootstrap-datetimepicker";
 @import "node_modules/bootstrap-select/sass/bootstrap-select";
 @import "node_modules/font-awesome/scss/font-awesome";
 @import "node_modules/dropzone/src/dropzone";
