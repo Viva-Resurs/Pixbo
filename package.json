@@ -4,7 +4,7 @@
     "pixboplayer-build-css": "node-sass resources/assets/sass/PixboPlayer.scss public/css/PixboPlayer.css",
     "pixboplayer-build-js": "cross-env NODE_ENV=production browserify -g envify -e resources/assets/js/PixboPlayer/PixboPlayer.js -o public/js/PixboPlayer.js",
     "pixboplayer-watch-css": "node-sass -w resources/assets/sass/PixboPlayer.scss public/css/PixboPlayer.css",
-    "pixboplayer-watch-js": "watchify -vd -p browserify-hmr -e resources/assets/js/PixboPlayer/PixboPlayer.js -o public/js/PixboPlayer.js",
+    "pixboplayer-watch-js": "watchify -vd -e resources/assets/js/PixboPlayer/PixboPlayer.js -o public/js/PixboPlayer.js",
     "ui-watch-css": "node-sass -w resources/assets/sass/app.scss public/css/app.css",
     "ui-watch-js": "watchify -vd -p browserify-hmr -e resources/assets/js/index.js -o public/js/index.js",
     "ui-build-css": "node-sass resources/assets/sass/app.scss public/css/app.css",
