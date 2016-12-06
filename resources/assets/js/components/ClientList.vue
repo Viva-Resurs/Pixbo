@@ -48,19 +48,26 @@
                     </td>
                     <td class="slim" v-if="$root.isAdmin">{{ client.address }}</td>
                     <td class="slim">
-                        <a class="btn btn-primary btn-xs fa fa-eye" href="/play?mac={{client.address}}&preview=yes" target="_blank"
-                            v-tooltip data-original-title="{{ trans('general.preview') }}"
+                        <a class="btn btn-primary btn-xs fa fa-eye"
+                            href="/play?mac={{client.address}}&preview=yes" target="_blank"
+                            v-tooltip
+                            data-original-title="{{ trans('general.preview') }}"
                             :disabled="!client.screengroup"></a>
-                        <template v-if="$root.isAdmin">
-                        <a class="btn btn-primary btn-xs fa fa-pencil" v-link="{ path: '/clients/'+client.id }"
-                            v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
-                        <a v-if="this.from=='screengroup'" class="btn btn-primary hover-danger btn-xs fa fa-minus"
+                        <a class="btn btn-primary btn-xs fa fa-pencil"
+                            v-link="{ path: '/clients/'+client.id }"
+                            v-tooltip
+                            data-original-title="{{ trans('general.edit') }}"
+                            v-if="$root.isAdmin"></a>
+                        <a class="btn btn-primary hover-danger btn-xs fa fa-minus"
                             v-on:click="$dispatch('remove-client', client)"
-                            v-tooltip data-original-title="{{ trans('screengroup.remove_association') }}"></a>
+                            v-tooltip
+                            data-original-title="{{ trans('screengroup.remove_association') }}"
+                            v-if="$root.isAdmin && this.from=='screengroup'"></a>
                         <a v-else class="btn btn-primary hover-danger btn-xs fa fa-times"
                             v-on:click="$dispatch('remove-client', client)"
-                            v-tooltip data-original-title="{{ trans('general.delete') }}"></a>
-                        </template>
+                            v-tooltip
+                            data-original-title="{{ trans('general.delete') }}"
+                            v-if="$root.isAdmin && this.from!='screengroup'"></a>
                     </td>
                 </tr>
             </tbody>
