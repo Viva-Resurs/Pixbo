@@ -20,20 +20,20 @@
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a v-link="{ path: '/home/' }">{{ trans('general.home') }}</a></li>
+                    <li><a class="link" v-link="{ path: '/home/' }">{{ trans('general.home') }}</a></li>
 
                     <!-- Moderator/Admin area-->
                     <template v-if="$root.isAuthenticated">
-                        <li><a v-link="{ path: '/screengroups/' }">{{ trans('screengroup.model', 2) }}</a></li>
-                        <li><a v-link="{ path: '/screens/' }">{{ trans('screen.model', 2) }}</a></li>
-                        <li><a v-link="{ path: '/tickers/' }">{{ trans('ticker.model', 2) }}</a></li>
-                        <li><a v-link="{ path: '/categories/' }">{{ trans('category.model', 2) }}</a></li>
+                        <li><a class="link" v-link="{ path: '/screengroups/' }">{{ trans('screengroup.model', 2) }}</a></li>
+                        <li><a class="link" v-link="{ path: '/screens/' }">{{ trans('screen.model', 2) }}</a></li>
+                        <li><a class="link" v-link="{ path: '/tickers/' }">{{ trans('ticker.model', 2) }}</a></li>
+                        <li><a class="link" v-link="{ path: '/categories/' }">{{ trans('category.model', 2) }}</a></li>
                     </template>
 
                     <!-- Only admin area -->
                     <template v-if="$root.isAuthenticated && $root.isAdmin">
-                        <li><a v-link="{ path: '/users/' }">{{ trans('user.model', 2) }}</a></li>
-                        <li><a v-link="{ path: '/clients/' }">{{ trans('client.model', 2) }}</a></li>
+                        <li><a class="link" v-link="{ path: '/users/' }">{{ trans('user.model', 2) }}</a></li>
+                        <li><a class="link" v-link="{ path: '/clients/' }">{{ trans('client.model', 2) }}</a></li>
                     </template>
 
                 </ul>
@@ -41,7 +41,7 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Login / Registration Links for unauthenticated users -->
-                    <li v-if="!$root.isAuthenticated"><a v-link="{ path: '/auth/login' }">{{ trans('auth.login') }}</a></li>
+                    <li v-if="!$root.isAuthenticated"><a class="link" v-link="{ path: '/auth/login' }">{{ trans('auth.login') }}</a></li>
                     <!-- Authenticated Right Dropdown -->
                     <li class="dropdown" v-if="$root.isAuthenticated">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -86,7 +86,7 @@
             </div>
 
         </div>
-        
+
     </nav>
 
 </template>

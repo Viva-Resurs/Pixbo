@@ -1,81 +1,94 @@
-.navbar {
+nav.navbar {
     font-size: 16px;
     font-weight: 300;
-    margin-bottom: 40px;
-
+    margin-bottom: 10px;
     background: $navbar-background;
+    padding-top: 0px;
+    z-index: 100;
     min-height: 50px;
-    height: 50px;
 
-    li {
-        a {
+    .navbar-header {
+        background: $navbar-background;
+        .navbar-brand {
+            font-size: 28px;
             height: 50px;
-            padding: 14px 15px 10px 15px;
-
+            padding: 10px 15px;
+            i {
+                color: #f4645f;
+            }
         }
-
-    }
-
-    .navbar-brand {
-        font-size: 28px;
-        height: 50px;
-        padding: 7px 15px;
-        i {
-            color: #f4645f;
+        button {
+            margin-top: 7px;
         }
     }
 
-    .navbar-nav {
-        padding-top: 0px;
-    }
+    .navbar-collapse {
+        background: $navbar-background;
+        ul.navbar-nav{
+            li {
+                a.link {
+                    height: 50px;
+                    padding: 19px 15px 0px 15px;
+                }
+            }
+            li.dropdown > a {
+                height: 50px;
+                padding: 19px 15px 0px 15px;
+            }
+        }
+        /* Active V-Link */
+        @media screen and (min-width: 768px) {
+            ul.navbar-nav > li > a.v-link-active {
+                text-decoration: none;
+                border-bottom: 1px solid $brand-primary;
+            }
+            ul.dropdown-menu > li > a.v-link-active {
+                border-left: 1px solid $brand-primary;
+            }
+        }
+        @media screen and (max-width: 768px) {
+            ul.navbar-nav > li > a.v-link-active {
+                border-left: 4px solid $brand-primary;
+            }
+            ul.dropdown-menu > li > a.v-link-active {
+                border-left: 4px solid $brand-primary;
+            }
+        }
+        /* Dropdowns */
+        ul.dropdown-menu {
+            li.dropdown {
+                font-size: 14px;
+                a {
+                    font-weight: 300;
+                    line-height: 25px;
+                    vertical-align: middle;
+                }
+            }
+        }
+        li.dropdown {
+            a.dropdown-toggle {
+                span.fa.fa-caret-down { display:inline-block; }
+                span.fa.fa-caret-up   { display:none;         }
+            }
+        }
+        li.dropdown.open {
+            a.dropdown-toggle {
+                span.fa.fa-caret-down { display:none;         }
+                span.fa.fa-caret-up   { display:inline-block; }
+            }
 
-    /* Active V-Link */
-    @media screen and (min-width: 768px) {
-        ul.navbar-nav > li > a.v-link-active {
-            text-decoration: none;
-            border-bottom: 1px solid $brand-primary;
-        }
-        ul.dropdown-menu > li > a.v-link-active {
-            border-left: 1px solid $brand-primary;
-        }
-    }
-    @media screen and (max-width: 768px) {
-        ul.navbar-nav > li > a.v-link-active {
-            border-left: 4px solid $brand-primary;
-        }
-        ul.dropdown-menu > li > a.v-link-active {
-            border-left: 4px solid $brand-primary;
-        }
-    }
-
-    /* Dropdowns */
-    li.dropdown-menu {
-        li {
-            font-size: 14px;
-            a {
-                font-weight: 300;
-                line-height: 25px;
-                vertical-align: middle;
+            a.dropdown-toggle,
+            a.dropdown-toggle:hover,
+            a.dropdown-toggle:focus {
+                background-color: $navbar-background;
             }
         }
     }
-    li.dropdown {
-        a.dropdown-toggle {
-            span.fa.fa-caret-down { display:inline-block; }
-            span.fa.fa-caret-up   { display:none;         }
-        }
-    }
-    li.dropdown.open {
-        a.dropdown-toggle {
-            span.fa.fa-caret-down { display:none;         }
-            span.fa.fa-caret-up   { display:inline-block; }
-        }
 
-        a.dropdown-toggle,
-        a.dropdown-toggle:hover,
-        a.dropdown-toggle:focus {
-            background-color: $navbar-background;
-        }
-    }
+
+
+
+
+
 
 }
