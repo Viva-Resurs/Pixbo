@@ -218,7 +218,6 @@ return [
 	'event_week_tooltip'            => 'Ange vecka.',
 	'event_day_tooltip'             => 'Ange dag.',
 
-    // TODO: fix the tooltip
 	'event_days_ahead_tooltip'      => 'Om ___ skall visas ett viss antal dagar innan förekomst, ange då antal.',
 
 	'schedule_tooltip'              => 'Planera',

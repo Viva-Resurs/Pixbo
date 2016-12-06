@@ -29,11 +29,8 @@ class AddShadowEvent extends Job implements SelfHandling
      */
     public function handle()
     {
-        if (is_null($this->event->eventable)) {
-            // TODO: There is a nasty bug somewhere that messes up the data, so when it gets here it blows up
-            //dd($this->event);
+        if (is_null($this->event->eventable))
             return;
-        }
 
         $s = $this->event->eventable;
         $s = $s->with('screengroups')->first();

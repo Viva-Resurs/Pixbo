@@ -128,7 +128,7 @@ trait HasShadowEvents
     {
         // Hämtar dagens datum och lägger till x dagar framåt
         $parsedType = 'add'.ucfirst($type);
-        $today = $this->getToday($this->start_time);        
+        $today = $this->getToday($this->start_time);
         $maxEndDate = Carbon::parse($today)->$parsedType($duration);
         $givenDate = null;
         $returnDate = null;
@@ -137,10 +137,10 @@ trait HasShadowEvents
         // Kollar om det finns slut datumm
         // Hämtar när det är tänkt det skall sluta
         $givenDate = (!is_null($event->end_date)) ? Carbon::parse($event->end_date) : $maxEndDate;
-        
+
         // Kollar om det som finns är kortare än x dagar framåt
-        $returnDate = ($givenDate->lte($maxEndDate)) ? $givenDate : $maxEndDate;        
-        
+        $returnDate = ($givenDate->lte($maxEndDate)) ? $givenDate : $maxEndDate;
+
         $timeArray = extractTime($event->end_time);
 
         $returnDate->hour = $timeArray[0];
@@ -172,7 +172,7 @@ trait HasShadowEvents
         $today = $this->getToday($start_date);
         $end_date = $this->getEndDate($event, 'days', $this->duration['daily']);
         $frequency = $event->frequency;
-        
+
         $start = $this->findShadowInRange(
             $start_date,
             $today->subDays($frequency),
@@ -231,7 +231,6 @@ trait HasShadowEvents
 
     /**
      * Generate monthly shadow events.
-     * TODO: Not working properly with the "last friday in the month"
      *
      * @param  Event $event
      */

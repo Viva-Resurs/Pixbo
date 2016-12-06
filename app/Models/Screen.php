@@ -50,8 +50,6 @@ class Screen extends Model
             $screen->screengroups()->detach();
             $screen->categories()->detach();
 
-            // TODO: Shadowevents Photos
-
         });
 
         Screen::updating(function($screen) {

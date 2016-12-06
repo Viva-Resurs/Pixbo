@@ -27,9 +27,7 @@ class ScreenUpdateForm extends Request
      */
     public function rules()
     {
-        // TODO: Add validation to the screen updates.
         return [
-            'selected_tags' => 'required'
         ];
     }
 

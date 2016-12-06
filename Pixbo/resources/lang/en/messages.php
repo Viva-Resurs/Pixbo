@@ -205,7 +205,7 @@ return [
     'screengroup_tooltip'           => 'Select the screengroups you want the screen to be shown in.',
 
     'event_start_date_tooltip'      => 'Set start date.',
-    // TODO: fixa text.
+
     'event_end_date_tooltip'        => 'Set end date, .',
     'event_start_time_tooltip'      => 'Set start time.',
     'event_end_time_tooltip'        => 'Set end time.',
@@ -217,7 +217,7 @@ return [
     'event_week_tooltip'            => 'Set week.',
     'event_day_tooltip'             => 'Set day.',
 
-    // TODO: fix the tooltip
+
     'event_days_ahead_tooltip'      => 'Set number of days ahead of occurence to show.',
 
     'schedule_tooltip'              => 'Schedule',

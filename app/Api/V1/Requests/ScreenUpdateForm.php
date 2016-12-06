@@ -27,7 +27,6 @@ class ScreenUpdateForm extends Request
      */
     public function rules()
     {
-        // TODO: Add validation to the screen updates.
         return [
         ];
     }
@@ -37,7 +36,7 @@ class ScreenUpdateForm extends Request
         $newEvent = $newScreen['event'];
         $newScreengroups = $newScreen['screengroups'];
         $newCategories = $newScreen['categories'];
-        
+
         $event = $screen->event->first();
         $event->update($newEvent);
         $event->touch();
