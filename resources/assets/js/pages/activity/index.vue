@@ -11,7 +11,7 @@
     <div class="panel-body" v-else>
 
         <activity-log :activitylog="activitylog"></activity-log>
-        
+
     </div>
 
 </template>
@@ -55,7 +55,7 @@
 
                         activity.removed = true;
                         self.activitylog.reverse(); // Force vue to update view
-                        
+
                         self.$dispatch('alert', {
                             message: self.trans('general.deleted'),
                             options: {theme: 'success'}

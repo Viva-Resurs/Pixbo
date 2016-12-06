@@ -12,23 +12,24 @@ use App\Api\V1\Transformers\Activity\ActivityTransformer;
 class ActivityController extends BaseController
 {
 
-    public function index() {
+    public function index($user_id = false) {
 
         if (Gate::denies('view_activity'))
             $this->response->error('permission_denied', 401);
 
-        // TODO: Add support for selecting a user
-        
+        if ($user_id)
+            return $this->collection(Activity::where('user_id',$user_id)->get(), new ActivityTransformer());
+
         return $this->collection(Activity::all(), new ActivityTransformer());
     }
-    
+
     public function show($id) {
-        
+
         if (Gate::denies('view_activity'))
             $this->response->error('permission_denied', 401);
 
         $activity = Activity::find($id);
-        
+
         if(!$activity)
             $this->response->error('not_found', 404);
 
@@ -36,13 +37,12 @@ class ActivityController extends BaseController
     }
 
     public function destroy($id) {
-        
-        // TODO: Add edit_activity to permissions?
-        if (Gate::denies('view_activity'))
+
+        if (Gate::denies('edit_activity'))
             $this->response->error('permission_denied', 401);
-        
+
         $activity = Activity::find($id);
-        
+
         if(!$activity)
             $this->response->error('not_found', 404);
 
