@@ -15,3 +15,6 @@ npm-debug.log
 .env
 /storage/*.sqlite
 /public/images
+
+# Old project
+/Pixbo
