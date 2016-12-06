@@ -185,5 +185,10 @@ class PermissionTableSeeder extends Seeder
             'label' => 'auth.view_activity'
         ]);
 
+        $view_activity = Permission::create([
+            'name' => 'edit_activity',
+            'label' => 'auth.edit_activity'
+        ]);
+
     }
 }

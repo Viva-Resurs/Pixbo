@@ -71,6 +71,7 @@ class RolesTableSeeder extends Seeder
         // Site Settings
         $admin->givePermission('edit_site_settings');
         $admin->givePermission('view_activity');
+        $admin->givePermission('edit_activity');
 
 
         // Moderator
