@@ -14,6 +14,7 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->delete();
+        DB::table('role_user')->truncate();
 
         $admin = User::create([
             'email'    => config('pixbo.settings.administration.administrator.email'),
