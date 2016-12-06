@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Pixbo::Admin</title>
-        <link rel="stylesheet" href="/css/app.css">
+        <link rel="stylesheet" href="/css/app.css?date={{ date('ymdHis') }}">
     </head>
     <body>
         <div id="app">
