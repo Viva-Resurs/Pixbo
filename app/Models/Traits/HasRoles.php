@@ -23,7 +23,7 @@ trait HasRoles
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function roles() {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class,'role_user');
     }
 
     /**

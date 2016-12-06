@@ -18,7 +18,7 @@ class UserController extends BaseController
     public function index() {
 
         if (Gate::denies('view_user'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: view_user', 401);
 
         $users = User::with('roles')->where('id', '<>', $this->user->id)->get();
 
@@ -28,7 +28,7 @@ class UserController extends BaseController
     public function show($id) {
 
         if (Gate::denies('view_user'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: view_user', 401);
 
         $user = User::find($id);
 
@@ -41,7 +41,7 @@ class UserController extends BaseController
     public function store(Request $request) {
 
         if (Gate::denies('add_user'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: add_user', 401);
 
         $user = new User;
         $user->fill($request->only(['name', 'email', 'password']));

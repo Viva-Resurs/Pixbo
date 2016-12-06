@@ -18,24 +18,24 @@ class SettingsController extends BaseController
     public function index() {
 
         if (Gate::denies('edit_site_settings'))
-            $this->response->error('permission_denied', 401);
-        
+            $this->response->error('permission_denied: edit_site_settings', 401);
+
         $settings = Settings::first();
 
         return $this->item($settings, new SettingsTransformer());
     }
 
     public function update(Request $request) {
-        
+
         if (Gate::denies('edit_site_settings'))
-            $this->response->error('permission_denied', 401);
-        
+            $this->response->error('permission_denied: edit_site_settings', 401);
+
         $settings = Settings::first();
 
         $new_settings = $request->all();
 
         if($settings->update($new_settings)) {
-            
+
             Activity::log([
                 'user_id' => $this->user,
                 'contentId' => 1,

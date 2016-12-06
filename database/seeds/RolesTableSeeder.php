@@ -86,16 +86,16 @@ class RolesTableSeeder extends Seeder
         $moderator->givePermission('view_screengroup');
 
         // Screen
-        $moderator->givePermission('view_screens');
-        $moderator->givePermission('add_screens');
-        $moderator->givePermission('edit_screens');
-        $moderator->givePermission('remove_screens');
+        $moderator->givePermission('view_screen');
+        $moderator->givePermission('add_screen');
+        $moderator->givePermission('edit_screen');
+        $moderator->givePermission('remove_screen');
 
         // Ticker
-        $moderator->givePermission('view_tickers');
-        $moderator->givePermission('add_tickers');
-        $moderator->givePermission('edit_tickers');
-        $moderator->givePermission('remove_tickers');
+        $moderator->givePermission('view_ticker');
+        $moderator->givePermission('add_ticker');
+        $moderator->givePermission('edit_ticker');
+        $moderator->givePermission('remove_ticker');
 
         // Categories
         $moderator->givePermission('view_category');

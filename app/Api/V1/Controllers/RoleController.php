@@ -15,7 +15,7 @@ class RoleController extends BaseController
     public function index() {
 
         if (Gate::denies('view_role'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: view_role', 401);
 
         return $this->collection(Role::all(), new RoleTransformer());
     }

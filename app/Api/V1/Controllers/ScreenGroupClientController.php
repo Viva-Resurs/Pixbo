@@ -15,7 +15,7 @@ class ScreenGroupClientController extends BaseController
     public function destroy(ScreenGroup $screengroup, Client $client) {
 
         if (Gate::denies('edit_screengroup'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: edit_screengroup', 401);
 
         $client->update(['screen_group_id' => 1]);
         $client->save();

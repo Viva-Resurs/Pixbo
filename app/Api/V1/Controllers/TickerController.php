@@ -19,7 +19,7 @@ class TickerController extends BaseController
     public function index() {
 
         if (Gate::denies('view_ticker'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: view_ticker', 401);
 
         return $this->collection(Ticker::all(), new TickerTransformer());
     }
@@ -27,7 +27,7 @@ class TickerController extends BaseController
     public function store(TickerCreationForm $form) {
 
         if (Gate::denies('add_ticker'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: add_ticker', 401);
 
         $ticker = $form->persist();
 
@@ -50,7 +50,7 @@ class TickerController extends BaseController
     public function show($id) {
 
         if (Gate::denies('view_ticker'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: view_ticker', 401);
 
         $ticker = Ticker::find($id);
 
@@ -63,7 +63,7 @@ class TickerController extends BaseController
     public function update(TickerUpdateForm $form, $id) {
 
         if (Gate::denies('edit_ticker'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: edit_ticker', 401);
 
         $ticker = Ticker::find($id);
 
@@ -91,7 +91,7 @@ class TickerController extends BaseController
     public function destroy($id) {
 
         if (Gate::denies('remove_ticker'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: remove_ticker', 401);
 
         $ticker = Ticker::find($id);
 

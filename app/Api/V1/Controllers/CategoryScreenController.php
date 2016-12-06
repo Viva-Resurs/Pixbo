@@ -15,7 +15,7 @@ class CategoryScreenController extends BaseController
     public function destroy(Category $category, Screen $screen) {
 
         if (Gate::denies('edit_screen'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: edit_screen', 401);
 
         $category->screens()->detach($screen->id);
 

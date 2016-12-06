@@ -15,7 +15,7 @@ class ActivityController extends BaseController
     public function index($user_id = false) {
 
         if (Gate::denies('view_activity'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: view_activity', 401);
 
         if ($user_id)
             return $this->collection(Activity::where('user_id',$user_id)->get(), new ActivityTransformer());
@@ -26,7 +26,7 @@ class ActivityController extends BaseController
     public function show($id) {
 
         if (Gate::denies('view_activity'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: view_activity', 401);
 
         $activity = Activity::find($id);
 
@@ -39,7 +39,7 @@ class ActivityController extends BaseController
     public function destroy($id) {
 
         if (Gate::denies('edit_activity'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: edit_activity', 401);
 
         $activity = Activity::find($id);
 

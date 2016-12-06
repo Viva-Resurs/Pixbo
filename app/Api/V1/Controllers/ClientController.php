@@ -22,7 +22,7 @@ class ClientController extends BaseController
     public function index() {
 
         if (Gate::denies('view_client'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: view_client', 401);
 
         return $this->collection(Client::all(), new ClientTransformer());
     }
@@ -30,7 +30,7 @@ class ClientController extends BaseController
     public function store(ClientCreationForm $form) {
 
         if (Gate::denies('add_client'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: add_client', 401);
 
         $client = $form->persist();
 
@@ -53,7 +53,7 @@ class ClientController extends BaseController
     public function show($id) {
 
         if (Gate::denies('view_client'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: view_client', 401);
 
         $client = Client::find($id);
 
@@ -66,7 +66,7 @@ class ClientController extends BaseController
     public function update(Request $request, $id) {
 
         if (Gate::denies('view_client'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: view_client', 401);
 
         $client = Client::find($id);
 
@@ -74,7 +74,7 @@ class ClientController extends BaseController
             $this->response->error('not_found', 404);
 
         if (Gate::denies('edit_client'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: edit_client', 401);
 
         if ($client->update($request->only(['name', 'address', 'screen_group_id']))){
 
@@ -95,7 +95,7 @@ class ClientController extends BaseController
     public function destroy($id) {
 
         if (Gate::denies('view_client'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: view_client', 401);
 
         $client = Client::find($id);
 
@@ -103,7 +103,7 @@ class ClientController extends BaseController
             $this->response->error('not_found', 404);
 
         if (Gate::denies('remove_client'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: remove_client', 401);
 
         if($client->delete()) {
 

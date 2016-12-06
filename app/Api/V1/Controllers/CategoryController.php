@@ -19,7 +19,7 @@ class CategoryController extends BaseController
     public function index() {
 
         if (Gate::denies('view_category'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: view_category', 401);
 
         return $this->collection(Category::all(), new CategoryListTransformer());
     }
@@ -27,7 +27,7 @@ class CategoryController extends BaseController
     public function store(Request $request) {
 
         if (Gate::denies('add_category'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: add_category', 401);
 
         $category = new Category;
         $category->fill($request->only(['name']));
@@ -51,7 +51,7 @@ class CategoryController extends BaseController
     public function show($id) {
 
         if (Gate::denies('view_category'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: view_category', 401);
 
         $category = Category::find($id);
 
@@ -64,7 +64,7 @@ class CategoryController extends BaseController
     public function update(Request $request, $id) {
 
         if (Gate::denies('view_category'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: view_category', 401);
 
         $category = Category::find($id);
 
@@ -72,7 +72,7 @@ class CategoryController extends BaseController
             $this->response->error('not_found', 404);
 
         if (Gate::denies('edit_category') && !$category->isOwner($this->user) )
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: edit_category', 401);
 
         if($category->update($request->only(['name']))) {
 
@@ -93,7 +93,7 @@ class CategoryController extends BaseController
     public function destroy($id) {
 
         if (Gate::denies('view_category'))
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: view_category', 401);
 
         $category = Category::find($id);
 
@@ -101,7 +101,7 @@ class CategoryController extends BaseController
             $this->response->error('not_found', 404);
 
         if (Gate::denies('remove_category') && !$category->isOwner($this->user) )
-            $this->response->error('permission_denied', 401);
+            $this->response->error('permission_denied: remove_category', 401);
 
         if($category->delete()) {
 
