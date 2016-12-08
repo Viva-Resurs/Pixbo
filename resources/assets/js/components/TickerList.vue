@@ -1,4 +1,4 @@
-<template>
+<template lang="html">
 
     <div class="panel-section" v-if="tickers.length == 0">
         {{ trans('ticker.empty') }}
@@ -9,12 +9,6 @@
         <search-filter v-if="from!='screengroup'"
             :search.sync="search"
         >
-            <div slot="searchfilter_right">
-                <div class="pull-right">
-                    <button class="btn btn-default fa fa-btn fa-bomb" @click="seedTickers">
-                    </button>
-                </div>
-            </div>
         </search-filter>
 
         <table class="table">
@@ -54,7 +48,7 @@
                                    v-tooltip data-original-title='{{sg.name}}'>{{ sg.name.substring(0,7)+'..' }}</a>
                                 <a v-else v-link="{ path: '/screengroups/'+sg.id }">{{ sg.name }}</a>
                             </template>
-                            
+
                         </span>
                     </td>
                     <td class="slim">{{ ticker.event.updated_at.substring(0,ticker.event.updated_at.indexOf(' ')) }}</td>
@@ -112,7 +106,7 @@
 
                 limitOff: false,
                 limitOffBtn: false,
-                
+
                 order: 'event.updated_at',
                 desc: -1,
 
@@ -131,36 +125,6 @@
             // Use rangeFilter
             rangeFilter(object,index){
                 return Pagination.filters.rangeFilter(object,index,this);
-            },
-
-            seedTicker(text){
-                client({path: 'tickers', entity: { text: text } }).then(
-                    
-                    function (response, status) {
-
-                    },
-
-                    function (response, status) {
-
-                        self.$dispatch('alert', {
-                            message: self.trans('ticker.created_fail'),
-                            options: {theme: 'error'}
-                        });
-
-                    }
-
-                );
-            },
-
-            seedTickers(){
-
-                for (var i=0 ; i<20 ; i++){
-
-                    var text = "Ticker Text " + i;
-
-                    this.seedTicker(text);
-                }
-
             }
 
         },
