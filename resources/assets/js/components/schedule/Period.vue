@@ -1,7 +1,7 @@
 <template>
 
     <div class="row">
-    
+
         <div class="col-lg-6 col-md-6">
             <label for="inputStart_date" class="schedule_label">
                 {{ trans('schedule.start_date') }}
@@ -25,7 +25,7 @@
                 </span>
             </div>
         </div>
-    
+
     </div>
 
     <div class="row">
@@ -53,7 +53,7 @@
                 </span>
             </div>
         </div>
-    
+
     </div>
 
 </template>
@@ -73,7 +73,7 @@
                 calendarWeeks: true,
                 showClose: true,
                 allowInputToggle: true,
-                minDate: moment().hour(0).minute(0).subtract(1,'d'),
+                //minDate: moment().hour(0).minute(0).subtract(1,'d'),
                 maxDate: moment().hour(0).minute(0).add(5,'y'),
                 locale: moment.locale('sv'),
                 tooltips: {
