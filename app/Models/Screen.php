@@ -50,6 +50,9 @@ class Screen extends Model
             $screen->screengroups()->detach();
             $screen->categories()->detach();
 
+            foreach($screen->screengroups() as $sg) {
+                $sg->touch();
+            }
         });
 
         Screen::updating(function($screen) {
