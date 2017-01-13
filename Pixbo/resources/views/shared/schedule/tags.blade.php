@@ -1,1 +1,0 @@
-<Tagger :list.sync="selected_tags"></Tagger>
