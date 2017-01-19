@@ -20,6 +20,7 @@
         <div slot="modal-header"></div>
         <div slot="modal-body" class="modal-body">
             <img class="img-responsive previewmodal"
+                v-if="photo"
                 :src.sync="photo.path"
                 @click="showModal = false">
         </div>
@@ -46,7 +47,7 @@
         methods: {
             setThumb(photo) {
                 if (!photo || !photo.thumb_path)
-                    return this.errorthumb = true;
+                    this.errorthumb = true;
                 else
                     this.errorthumb = false;
                 this.photo = photo;
@@ -54,11 +55,11 @@
             }
         },
         created: function() {
-            this.$on('refresh_photo', () => this.loading=true );
+            this.$on('refreshing_photo', () => this.loading=true );
             this.$on('image_updated', this.setThumb);
         },
         destroy: function() {
-            this.$off('refresh_photo')
+            this.$off('refreshing_photo')
             this.$off('image_updated')
         }
     }

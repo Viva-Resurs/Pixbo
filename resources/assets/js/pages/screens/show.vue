@@ -10,7 +10,7 @@
 
     <div v-else>
 
-        <schedule :model.sync="screen" :selected_categories.sync="selected_categories">
+        <schedule v-if="screen" :model.sync="screen" :selected_categories.sync="selected_categories">
             <div slot="model_specific_setting">
                 <div class="form-group">
                     <model-selector :selected.sync="selected_categories"
@@ -31,7 +31,7 @@
                         {{ trans('general.file') }}
                     </label>
 
-                    <div class="model_input">
+                    <div class="model_input" v-if="screen.photo">
                         <input type="text" name="originalfilename" class="form-control"
                             readonly
                             :value.sync="screen.photo.originalName"  >
@@ -40,6 +40,13 @@
                             <span v-if="changeScreen" class="fa fa-undo"></span>
                             <span v-else class="fa fa-picture-o"></span>
                         </span>
+                    </div>
+                    <div v-else>
+                        <button type="button" class="btn btn-default"
+                            @click="changeScreen = !changeScreen">
+                            <span v-if="changeScreen" class="fa fa-undo"></span>
+                            <span v-else class="fa fa-picture-o"></span>
+                        </button>
                     </div>
                 </div>
                 <div class="form-group" v-if="changeScreen">
@@ -64,7 +71,7 @@
         components: { Schedule, ModelSelector },
         data: function() {
             return {
-                screen: {},
+                screen: false,
                 selected_categories: [],
                 changeScreen: false
             }
