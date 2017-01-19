@@ -102,8 +102,8 @@ class ScreenGroupController extends BaseController
         if (!$screengroup)
             $this->response->error('not_found', 404);
 
-        if (Gate::denies('remove_screengroup: remove_screengroup'))
-            $this->response->error('permission_denied', 401);
+        if (Gate::denies('remove_screengroup'))
+            $this->response->error('permission_denied: remove_screengroup', 401);
 
         if ($screengroup->delete()){
 
