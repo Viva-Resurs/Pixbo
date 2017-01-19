@@ -4,20 +4,24 @@
         <loadingthumb></loadingthumb>
     </div>
 
-    <div class="{{(loading) ? 'hidden' : 'previewthumb'}}">
+    <div :class="(loading) ? 'hidden' : 'previewthumb'">
         <div v-if="errorthumb" class="errorthumb">
             <span class="fa-stack fa-5x">
                 <i class="fa fa-file-image-o fa-stack-1x"></i>
                 <i class="fa fa-exclamation fa-stack-1x text-danger"></i>
             </span>
         </div>
-        <img v-if="!errorthumb" id="ScreenPreviewThumb" class="img-thumbnail" style="cursor:zoom-in" width="100%" @click="showModal = true">
+        <img v-if="!errorthumb" class="img-thumbnail"
+            :src.sync="photo.thumb_path"
+            @click="showModal = true">
     </div>
 
-    <modal :show.sync="showModal" backdrop="true">
+    <modal :show.sync="showModal">
         <div slot="modal-header"></div>
         <div slot="modal-body" class="modal-body">
-            <img style="margin: auto auto; cursor:zoom-out" id="ScreenPreview" class="img-responsive" @click="showModal = false">
+            <img class="img-responsive previewmodal"
+                :src.sync="photo.path"
+                @click="showModal = false">
         </div>
         <div slot="modal-footer"></div>
     </modal>
@@ -26,80 +30,36 @@
 
 <script type="text/ecmascript-6">
     export default {
-
         name: 'ScreenPreview',
-
         components: {
             'modal': VueStrap.modal
         },
-
         props: [ 'id' ],
-
-        data: function () {
+        data: function() {
             return {
-                screen: {},
+                photo: false,
                 showModal: false,
                 errorthumb: false,
                 loading: true
             }
         },
-
         methods: {
-
-            fetch(id) {
-
-                var self = this;
-
-                self.loading = true;
-
-                client({ path: '/screens/' + id }).then(
-
-                    function (response) {
-
-                        self.loading = false;
-
-                        self.$set('screen', response.entity.data);
-
-                        self.setThumb();
-
-                    },
-
-                    function (response) {
-                        
-                        if (response.entity && response.entity.error)
-                            console.error(response.entity.error.message);
-
-                        self.loading = false;
-
-                    }
-
-                );
-
-            },
-
-            setThumb() {
-
-                if (!this.screen.photo || !this.screen.photo.thumb_path)
+            setThumb(photo) {
+                if (!photo || !photo.thumb_path)
                     return this.errorthumb = true;
                 else
                     this.errorthumb = false;
-
-                $('#ScreenPreviewThumb').attr('src',this.screen.photo.thumb_path);
-                $('#ScreenPreview').attr('src',this.screen.photo.path);
-
+                this.photo = photo;
+                this.loading = false;
             }
-
         },
-
         created: function() {
-            this.fetch(this.id);
-            
-            var self = this;
-            
-            this.$on('refresh-thumb', function (id) {
-                self.fetch(id);
-            });
+            this.$on('refresh_photo', () => this.loading=true );
+            this.$on('image_updated', this.setThumb);
+        },
+        destroy: function() {
+            this.$off('refresh_photo')
+            this.$off('image_updated')
         }
-
     }
 </script>

@@ -2,6 +2,15 @@
     width: 200px;
     height: 200px;
     margin: auto;
+    img {
+        cursor: zoom-in;
+        width: 100%;
+    }
+}
+
+.previewmodal {
+    margin: auto auto;
+    cursor: zoom-out;
 }
 
 .errorthumb {

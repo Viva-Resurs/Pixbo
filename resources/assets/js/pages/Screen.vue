@@ -62,17 +62,15 @@
     import ScreenPreview from '../components/ScreenPreview.vue'
 
     export default {
-
         name: 'Screen',
-
         components: { ScreenPreview },
-
         ready: function(){
-            var self = this;
-            this.$on('refresh-thumb', function (id) {
-                self.$broadcast('refresh-thumb',id);
-            });
+            this.$on('image_updated', (data) =>
+                this.$broadcast('image_updated', data)
+            );
+            this.$on('refreshing_photo', (data) =>
+                this.$broadcast('refreshing_photo', data)
+            );
         }
-
     }
 </script>
