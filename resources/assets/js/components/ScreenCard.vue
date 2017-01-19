@@ -52,7 +52,8 @@
             isActive(screen){
                 // No screengroup
                 if (!screen.screengroups || screen.screengroups.length<1){
-                    console.log('no screengroup')
+                    if (Vue.config.debug)
+                        console.debug(screen.id+': no screengroup')
                     return false;
                 }
                 // Active events
@@ -60,17 +61,17 @@
                     return true;
                 }
                 else {
-                    console.log('not active at the moment')
-
                     // Has ended?
                     if (screen.event.end_date && moment().isBefore(screen.event.end_date+' '+screen.event.end_time)){
-                        console.log('has ended...')
+                        if (Vue.config.debug)
+                            console.debug(screen.id+': has ended...')
                         return false;
                     }
 
                     // Will be active?
                     if (screen.event.start_date && moment().isBefore(screen.event.start_date+' '+screen.event.start_time)){
-                        console.log('will start later...')
+                        if (Vue.config.debug)
+                            console.debug(screen.id+': will start later...')
                         return true;
                     }
 
@@ -79,7 +80,8 @@
                         return true;
 
                 }
-                console.log('probably not active.')
+                if (Vue.config.debug)
+                    console.debug(screen.id+': probably not active.')
                 return false;
             }
         }
