@@ -4,6 +4,9 @@
     "keywords": ["pixbo", "laravel", "digitalsignage"],
     "license": "MIT",
     "type": "project",
+    "repositories": {
+      "packagist": { "url": "https://packagist.org", "type": "composer" }
+    },
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
