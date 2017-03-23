@@ -2,11 +2,8 @@
     import swal from 'sweetalert'
 
     export default {
-
         methods: {
-
             confirm(what) {
-
                 swal({
                     title: what.title || this.trans('confirm.title'),
                     text: what.text || this.trans('confirm.text'),
@@ -19,10 +16,7 @@
                 },function(){
                     what.callback(what.arg)
                 });
-
             }
-
         }
-
     };
 </script>

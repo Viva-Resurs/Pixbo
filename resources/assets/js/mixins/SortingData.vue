@@ -1,14 +1,10 @@
 <script type="text/ecmascript-6">
-/*
- * @author ToxicTree
- */
     export default {
-
         methods: {
 
             // Sort objects by targeting a deeper property
             deepSort(a, b) {
-                
+
                 var checkA = a;
                 var checkB = b;
 
@@ -54,7 +50,7 @@
 
                 // Compare arrays
                 if (typeof checkA == 'object'){
-                    
+
                     // Compare lengths
                     if (checkA.length != checkB.length)
                         return (checkA.length - checkB.length) * this.desc;
@@ -80,18 +76,14 @@
                         return 0;
 
                     }
-
                 }
-
             },
 
             // Set order & toggle desc
-            setOrder(what,desc){
+            setOrder(what,desc) {
                 this.desc = (this.order == what) ? this.desc*=-1 : (desc) ? -1 : 1;
                 this.order = what || event.updated_at;
-            },
-
+            }
         }
-
     }
 </script>
