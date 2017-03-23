@@ -14,7 +14,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>{{ trans('general.desc') }}
+                    <th>{{ trans('general.name') }}
                         <button class=" btn btn-xs fa fa-btn
                             {{ (order=='name') ? 'btn-primary ' : 'btn-default '}}
                             {{ (order=='name' && desc==-1) ? ' fa-sort-alpha-desc' : ' fa-sort-alpha-asc'}}
@@ -86,7 +86,7 @@
 
                 limitOff: false,
                 limitOffBtn: false,
-                
+
                 order: 'name',
                 desc: 1,
 
