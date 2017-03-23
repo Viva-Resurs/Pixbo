@@ -50,10 +50,11 @@
         "post-install-cmd": [
             "touch storage/database.sqlite",
             "php -r \"copy('.env.example', '.env');\"",
-            "php artisan migrate --seed",
             "php artisan clear-compiled",
             "php artisan optimize",
-            "php artisan key:generate"
+            "php artisan key:generate",
+            "php artisan migrate",
+            "php artisan db:seed"
         ],
         "pre-update-cmd": [
             "php artisan clear-compiled"
