@@ -44,7 +44,6 @@ sudo composer self-update
 (cd ~/Pixbo && composer update --no-scripts)
 touch ~/Pixbo/storage/database.sqlite
 (cd ~/Pixbo && composer install)
-(cd ~/Pixbo && php artisan migrate --seed)
 
 # Set App URL
 IP=$(hostname -I | awk '{print $1}')
