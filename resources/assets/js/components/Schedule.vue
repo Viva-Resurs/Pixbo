@@ -13,7 +13,6 @@
                 <div class="schedule_group">
                     <label for="text" class="schedule_label">
                         {{ trans('screengroup.model', 1) }}
-                        <span class="fa fa-question-circle" v-tooltip data-original-title="{{ trans('schedule.tooltip_screengroup') }}"></span>
                     </label>
                     <model-selector :selected.sync="selected_screengroups"
                                     model="screengroup"
