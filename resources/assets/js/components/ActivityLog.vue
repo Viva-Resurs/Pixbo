@@ -14,7 +14,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>{{ trans('user.model',1) }}
+                    <th class="slim">{{ trans('user.model',1) }}
                         <button class=" btn btn-xs fa fa-btn
                             {{ (order=='user.name') ? 'btn-primary ' : 'btn-default '}}
                             {{ (order=='user.name' && desc==-1) ? ' fa-sort-alpha-desc' : ' fa-sort-alpha-asc'}}
@@ -37,10 +37,10 @@
             </thead>
             <tbody>
                 <tr v-for="activity in activitylog | filterBy isNotRemoved | orderBy deepSort | filterBy searchFilter | filterBy rangeFilter">
-                    <td><a v-link="{ path: '/users/'+activity.user.id }">{{ activity.user.name }}</a></td>
+                    <td class="slim"><a v-link="{ path: '/users/'+activity.user.id }">{{ activity.user.name }}</a></td>
                     <!--td><a v-link="{ path: '/activity/'+activity.id }">{{ activity.desc }}</a></td-->
                     <td>{{ activity.desc }}</td>
-                    <td>{{ activity.datetime.substring(0,activity.datetime.indexOf(' ')) }}</td>
+                    <td class="slim">{{ activity.datetime.substring(0,activity.datetime.indexOf(' ')) }}</td>
                     <td class="slim">
                         <a class="btn btn-primary hover-danger btn-xs fa fa-times"
                             v-on:click="$dispatch('remove-activity', activity)"
@@ -91,7 +91,7 @@
 
                 limitOff: false,
                 limitOffBtn: false,
-                
+
                 order: 'datetime',
                 desc: -1,
 
