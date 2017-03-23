@@ -20,7 +20,7 @@
                             {{ (order=='text' && desc==-1) ? ' fa-sort-alpha-desc' : ' fa-sort-alpha-asc'}}
                         " @click="setOrder('text')"></button>
                     </th>
-                    <th class="slim" v-if="from!='screengroup'">{{ this.trans('screengroup.model') }}
+                    <th class="slim">{{ this.trans('screengroup.model') }}
                         <button class=" btn btn-xs fa fa-btn
                             {{ (order=='screengroups') ? 'btn-primary ' : 'btn-default '}}
                             {{ (order=='screengroups' && desc==-1) ? ' fa-sort-amount-desc' : ' fa-sort-amount-asc'}}
@@ -39,7 +39,7 @@
                 <tr v-for="ticker in tickers | filterBy isNotRemoved | orderBy deepSort | filterBy searchFilter | filterBy rangeFilter">
                     <td><a v-link="{ path: '/tickers/'+ticker.id }">{{ ticker.text }}</a></td>
                     <td class="slim">
-                        <span v-for="sg in ticker.screengroups">
+                        <span v-for="(index, sg) in ticker.screengroups">
                             <template v-if="$route.path == '/screengroups/'+sg.id">
                                 <b>{{ sg.name }}</b>
                             </template>
@@ -48,6 +48,7 @@
                                    v-tooltip data-original-title='{{sg.name}}'>{{ sg.name.substring(0,7)+'..' }}</a>
                                 <a v-else v-link="{ path: '/screengroups/'+sg.id }">{{ sg.name }}</a>
                             </template>
+                            <span v-if="index < ticker.screengroups.length-1">,&nbsp;</span>
 
                         </span>
                     </td>
