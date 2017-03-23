@@ -150,7 +150,6 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Regulus\ActivityLog\ActivityLogServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
