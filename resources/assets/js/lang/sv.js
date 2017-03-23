@@ -78,7 +78,7 @@ const lang = {
         activity:                   "Aktivitet",
         empty:                      "Tomt",
         updated_at:                 "Ändrad",
-        
+
         deleted:                    "Objektet har tagits bort.",
         deleted_fail:               "Misslyckades att ta bort objektet, försök igen."
     },
@@ -230,11 +230,11 @@ const lang = {
         select:                          "Välj område",
         remove_association:              "Ta bort från området",
         screen_association_removed:      "Bilden har tagits bort från området.",
-        screen_association_removed_fail: "Misslyckades att ta bort bilden från området",
+        screen_association_removed_fail: "Misslyckades att ta bort bilden från området, försök igen.",
         ticker_association_removed:      "Tickern har tagits bort från området.",
-        ticker_association_removed_fail: "Misslyckades att ta bort tickern från området",
+        ticker_association_removed_fail: "Misslyckades att ta bort tickern från området, försök igen.",
         client_association_removed:      "Skärmen har tagits bort från området.",
-        client_association_removed_fail: "Misslyckades att ta bort Skärmen från området"
+        client_association_removed_fail: "Misslyckades att ta bort Skärmen från området, försök igen."
     },
     /* ----------------------------- CATEGORY ----------------------------- */
     category: {
@@ -263,7 +263,7 @@ const lang = {
         create:                     "Skapa ny ticker",
         edit:                       "Redigera ticker",
         empty:                      "Det finns inga tickers än.",
-        
+
         deleted:                    "Tickern har tagits bort.",
         deleted_fail:               "Misslyckades att ta bort tickern, försök igen.",
         updated:                    "Tickern har uppdaterats.",
