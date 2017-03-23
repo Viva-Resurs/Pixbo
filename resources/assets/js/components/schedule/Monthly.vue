@@ -1,5 +1,4 @@
 <template>
-
     <div class="column">
 
         <frequency :frequency.sync="event.frequency" type="month"></frequency>
@@ -43,22 +42,17 @@
         </div>
 
     </div>
-
 </template>
 
 <script type="text/ecmascript-6">
     import Frequency from './Frequency.vue'
     import ModelSelector from '../ModelSelector.vue'
     import { ordering, weekdays1, days_before } from '../../option_arrays'
-    
+
     export default {
-
         name: 'Monthly',
-
         props: [ 'event' ],
-
         components: { Frequency, ModelSelector },
-
         data: function() {
             return {
                 ordering: ordering,
@@ -66,6 +60,5 @@
                 days_before: days_before
             }
         }
-
     }
 </script>

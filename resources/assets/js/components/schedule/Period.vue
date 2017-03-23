@@ -1,5 +1,4 @@
 <template>
-
     <div class="row">
 
         <div class="col-lg-6 col-md-6">
@@ -13,7 +12,6 @@
                 </span>
             </div>
         </div>
-
         <div class="col-lg-6 col-md-6">
             <label for="inputEnd_date" class="schedule_label">
                 {{ trans('schedule.end_date') }}
@@ -41,7 +39,6 @@
                 </span>
             </div>
         </div>
-
         <div class="col-lg-6 col-md-6">
             <label for="inputEnd_time" class="schedule_label">
                 {{ trans('schedule.end_time') }}
@@ -55,26 +52,21 @@
         </div>
 
     </div>
-
 </template>
 
 <script type="text/ecmascript-6">
     export default {
-
         name: 'Period',
-
         props: [ 'event' ],
-
         ready: function() {
-
             var options = {
                 showTodayButton: true,
                 toolbarPlacement: 'top',
                 calendarWeeks: true,
                 showClose: true,
                 allowInputToggle: true,
-                //minDate: moment().hour(0).minute(0).subtract(1,'d'),
                 maxDate: moment().hour(0).minute(0).add(5,'y'),
+                format: "YYYY-MM-DD",
                 locale: moment.locale('sv'),
                 tooltips: {
                     today: this.trans('dateTimePicker.today'),
@@ -110,9 +102,6 @@
                     close: 'fa fa-times'
                 }
             };
-
-            options.format = "YYYY-MM-DD";
-
             $('.date').datetimepicker(options);
 
             options.format = "HH:mm";
@@ -120,8 +109,6 @@
             options.showClose = false;
 
             $('.time').datetimepicker(options);
-
         }
-
     }
 </script>

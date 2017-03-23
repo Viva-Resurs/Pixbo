@@ -1,5 +1,4 @@
 <template>
-
     <div class="column">
 
         <frequency :frequency.sync="event.frequency" type="week"></frequency>
@@ -19,9 +18,8 @@
                 </div>
             </model-selector>
         </div>
-        
-    </div>
 
+    </div>
 </template>
 
 <script type="text/ecmascript-6">
@@ -30,18 +28,13 @@
     import ModelSelector from '../ModelSelector.vue'
 
     export default {
-
         name: 'Weekly',
-
         props: [ 'event', 'weekly_day_num' ],
-
         components: { Frequency, ModelSelector },
-        
         data: function() {
             return {
                 weekdays: weekdays,
             }
         }
-
     }
 </script>
