@@ -36,7 +36,8 @@
                             readonly
                             :value.sync="screen.photo.originalName"  >
                         <span class="input-group-addon btn btn-default"
-                            @click="changeScreen = !changeScreen">
+                            @click="changeScreen = !changeScreen"
+                            v-tooltip data-original-title="{{ trans('screen.change') }}">
                             <span v-if="changeScreen" class="fa fa-undo"></span>
                             <span v-else class="fa fa-picture-o"></span>
                         </span>
