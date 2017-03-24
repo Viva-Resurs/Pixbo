@@ -31,12 +31,5 @@ class Kernel extends ConsoleKernel
         $schedule->command('pixbo:generate-shadows')->after(function() {
             Log::info('ShadowEvents has been regenerated.');
         });
-        /*
-        $schedule->command('pixbo:generate-shadows')
-            ->weekly()->sundays()->at('23:59')->after(function() {
-                Log::info('ShadowEvents has been regenerated.');
-            });
-        */
-
     }
 }
