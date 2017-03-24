@@ -23,21 +23,6 @@ class Category extends Model
     protected $fillable = ['name'];
 
     /**
-     * Boot method used to update associations depending on actions.
-     *
-     */
-    public static function boot() {
-        parent::boot();
-
-        Category::deleting(function ($category) {
-
-            foreach ( $category->screens as $screen )
-                $category->screens()->detach($screen->id);
-
-        });
-    }
-
-    /**
      * User association
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

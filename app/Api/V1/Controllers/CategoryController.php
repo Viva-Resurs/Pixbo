@@ -105,6 +105,9 @@ class CategoryController extends BaseController
 
         if($category->delete()) {
 
+            foreach ( $category->screens as $screen )
+                $category->screens()->detach($screen->id);
+
             Activity::log([
                 'contentId' => $category->id,
                 'contentType' => 'Category',
