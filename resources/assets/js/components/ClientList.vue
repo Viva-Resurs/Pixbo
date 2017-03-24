@@ -49,7 +49,7 @@
                     <td class="slim" v-if="$root.isAdmin">{{ client.address }}</td>
                     <td class="slim">
                         <a class="btn btn-primary btn-xs fa fa-eye"
-                            href="/play?mac={{client.address}}&preview=yes" target="_blank"
+                            href="play?mac={{client.address}}&preview=yes" target="_blank"
                             v-tooltip
                             data-original-title="{{ trans('general.preview') }}"
                             :disabled="!client.screengroup"></a>

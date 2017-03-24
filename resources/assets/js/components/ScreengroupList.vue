@@ -34,7 +34,7 @@
                     <td><a v-link="{ path: '/screengroups/'+screengroup.id }">{{ screengroup.name }}</a></td>
                     <td>{{ screengroup.desc }}</td>
                     <td class="slim">
-                        <a class="btn btn-primary btn-xs fa fa-eye " href="/play?mac={{screengroup.preview}}&preview=yes" target="_blank"
+                        <a class="btn btn-primary btn-xs fa fa-eye " href="play?mac={{screengroup.preview}}&preview=yes" target="_blank"
                             v-tooltip data-original-title="{{ trans('general.preview') }}" :disabled="screengroup.preview === ''"></a>
                         <a class="btn btn-primary btn-xs fa fa-pencil" v-if="$root.isAdmin" v-link="{ path: '/screengroups/'+screengroup.id }"
                             v-tooltip data-original-title="{{ trans('general.edit') }}"></a>
