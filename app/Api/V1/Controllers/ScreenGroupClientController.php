@@ -17,7 +17,7 @@ class ScreenGroupClientController extends BaseController
         if (Gate::denies('edit_screengroup'))
             $this->response->error('permission_denied: edit_screengroup', 401);
 
-        $client->update(['screen_group_id' => 1]);
+        $client->update(['screen_group_id' => 0]);
         $client->save();
 
         Activity::log([
