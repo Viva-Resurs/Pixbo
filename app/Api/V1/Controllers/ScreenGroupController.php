@@ -107,6 +107,19 @@ class ScreenGroupController extends BaseController
 
         if ($screengroup->delete()){
 
+            foreach( $screengroup->clients as $client) {
+                $client->update(['screen_group_id' => 0]);
+                $client->save();
+            }
+
+            foreach ( $screengroup->screens as $screen ){
+                $screengroup->screens()->detach($screen->id);
+            }
+
+            foreach ( $screengroup->tickers as $ticker ){
+                $screengroup->tickers()->detach($ticker->id);
+            }
+
             Activity::log([
                'contentId' => $screengroup->id,
                 'contentType' => 'Screengroup',

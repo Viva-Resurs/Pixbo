@@ -25,30 +25,6 @@ class ScreenGroup extends Model
     ];
 
     /**
-     * Boot method used to update associations depending on actions.
-     *
-     */
-    public static function boot() {
-        parent::boot();
-
-        ScreenGroup::deleting(function ($screengroup) {
-            foreach( $screengroup->clients as $client) {
-                $client->update(['screen_group_id' => 0]);
-                $client->save();
-            }
-
-            foreach ( $screengroup->screens as $screen ){
-                $screengroup->screens()->detach($screen->id);
-            }
-
-            foreach ( $screengroup->tickers as $ticker ){
-                $screengroup->tickers()->detach($ticker->id);
-            }
-
-        });
-    }
-
-    /**
      * User association
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
