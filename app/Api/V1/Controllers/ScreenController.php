@@ -105,6 +105,10 @@ class ScreenController extends BaseController
 
         if($result) {
 
+            foreach($screen->screengroups() as $sg) {
+                $sg->touch();
+            }
+
             Activity::log([
                 'contentId' => $screen->id,
                 'contentType' => 'Screen',
@@ -133,6 +137,21 @@ class ScreenController extends BaseController
             $this->response->error('permission_denied: remove_screen', 401);
 
         if($screen->delete()) {
+
+            $event = $screen->event->first();
+            if(!is_null($event))
+                $event->delete();
+
+            $photo = $screen->photo;
+            if(!is_null($photo))
+                $photo->delete();
+
+            foreach($screen->screengroups() as $sg) {
+                $sg->touch();
+            }
+
+            $screen->screengroups()->detach();
+            $screen->categories()->detach();
 
             Activity::log([
                 'contentId' => $screen->id,

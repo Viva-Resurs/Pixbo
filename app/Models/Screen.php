@@ -32,37 +32,6 @@ class Screen extends Model
     protected $touches = ['screengroups'];
 
     /**
-     * Boot method used to update associations depending on actions.
-     *
-     */
-    public static function boot() {
-        parent::boot();
-
-        Screen::deleting(function ($screen) {
-            $event = $screen->event->first();
-            if(!is_null($event))
-                $event->delete();
-
-            $photo = $screen->photo;
-            if(!is_null($photo))
-                $photo->delete();
-
-            $screen->screengroups()->detach();
-            $screen->categories()->detach();
-
-            foreach($screen->screengroups() as $sg) {
-                $sg->touch();
-            }
-        });
-
-        Screen::updating(function($screen) {
-            foreach($screen->screengroups() as $sg) {
-                $sg->touch();
-            }
-        });
-    }
-
-    /**
      * ScreenGroup association
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
