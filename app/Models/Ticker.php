@@ -30,29 +30,6 @@ class Ticker extends Model
     ];
 
     protected $touches = ['screengroups'];
-    
-    /**
-     * Boot method used to update associations depending on actions.
-     *
-     */
-    public static function boot() {
-        parent::boot();
-
-        Ticker::deleting(function ($ticker) {
-            $event = $ticker->event->first();
-            if(!is_null($event))
-                $event->delete();
-
-            $ticker->screengroups()->detach();
-
-        });
-
-        Ticker::updating(function($ticker) {
-            foreach($ticker->screengroups() as $sg) {
-                $sg->touch();
-            }
-        });
-    }
 
     /**
      * ScreenGroup association

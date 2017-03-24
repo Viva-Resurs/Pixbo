@@ -74,6 +74,10 @@ class TickerController extends BaseController
 
         if (!is_null($result)){
 
+            foreach($ticker->screengroups() as $sg) {
+                $sg->touch();
+            }
+
             Activity::log([
                 'contentId' => $ticker->id,
                 'contentType' => 'Ticker',
@@ -99,6 +103,16 @@ class TickerController extends BaseController
             $this->response->error('not_found', 404);
 
         if ($ticker->delete()){
+
+            $event = $ticker->event->first();
+            if(!is_null($event))
+                $event->delete();
+
+            $ticker->screengroups()->detach();
+
+            foreach($ticker->screengroups() as $sg) {
+                $sg->touch();
+            }
 
             Activity::log([
                 'contentId' => $ticker->id,
