@@ -18,7 +18,7 @@ class PlayerController extends Controller {
         $mac     = $request->input('mac');
         $preview = $request->input('preview');
 
-        return view('player.index')->with([
+        return view('player')->with([
             'Client_ADDR' => $mac,
             'preview'     => $preview,
         ]);
