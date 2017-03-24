@@ -12,12 +12,13 @@ use App\Models\Screen;
 class ScreenGroupScreenController extends BaseController
 {
 
-    public function store(ScreenGroup $screengroup, Screen $screen) {
+    /*public function store(ScreenGroup $screengroup, Screen $screen) {
 
         if (Gate::denies('edit_screengroup'))
             $this->response->error('permission_denied: edit_screengroup', 401);
 
         $screengroup->screens()->attach($screen->id);
+        $screengroup->touch();
 
         Activity::log([
             'contentId' => $screengroup->id,
@@ -28,7 +29,7 @@ class ScreenGroupScreenController extends BaseController
         ]);
 
         return $this->response->noContent();
-    }
+    }*/
 
     public function destroy(ScreenGroup $screengroup, Screen $screen) {
 
@@ -36,6 +37,7 @@ class ScreenGroupScreenController extends BaseController
             $this->response->error('permission_denied: edit_screengroup', 401);
 
         $screengroup->screens()->detach($screen->id);
+        $screengroup->touch();
 
         Activity::log([
             'contentId' => $screengroup->id,
