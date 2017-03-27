@@ -45,6 +45,7 @@ const lang = {
     general: {
         home:                       "Hem",
         welcome:                    "Välkommen",
+        start:                      "Start",
         about:                      "Om Pixbo",
         settings:                   "Inställningar",
         archive:                    "Arkiv",
