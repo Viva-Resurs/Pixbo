@@ -2,7 +2,7 @@ PixboPlayer.Sync = function (first_run) {
 
     var request = $.ajax({
         type: "get",
-        url: "/play/" + PixboPlayer.Client_ADDR,
+        url: "play/" + PixboPlayer.Client_ADDR,
         error: function(xhr) {
 
             PixboPlayer.State = xhr.status;
