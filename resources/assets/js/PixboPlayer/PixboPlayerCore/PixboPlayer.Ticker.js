@@ -11,17 +11,17 @@ PixboPlayer.Start_Ticker = function(tickers){
         return console.log('No tickers...');
 
     // Run .ticker() Plugin
-    target.ticker(this.Settings.Ticker);
+    target.webTicker(this.Settings.Ticker);
 
     // Start Controls
-    if (this.EnableControls)
-        this.Controls.Ticker.Init();
+    //if (this.EnableControls)
+    //    this.Controls.Ticker.Init();
 
 };
 
 PixboPlayer.Put_Tickers = function(tickers){
 
-    var content = "<ul id='ticker'>";
+    var content = "<ul id='ticker' class='ticker-content'>";
 
     for (var i=0 ; i<tickers.length ; i++)
         content += "<li>" + tickers[i] + "</li>";
@@ -44,6 +44,9 @@ PixboPlayer.Controls.Ticker = {
 
     Init : function(){
 
+        //var controls = document.createElement('div');
+        //ticker_control
+
         // This will go through the plugins output and hook into things
         PixboPlayer.DOM.TickerTarget.find('.ticker-controls').each(function(){
 
@@ -64,7 +67,7 @@ PixboPlayer.Controls.Ticker = {
                     PixboPlayer.Controls.Ticker.Buttons.PlayPause = this;
 
                 // Attach event-listener
-                this.onclick=function (e){
+                var click = function (e){
 
                     // Using a timer (so that the plugin got some time to do its work before check)
                     setTimeout(function(){
@@ -82,9 +85,18 @@ PixboPlayer.Controls.Ticker = {
 
                         }
 
-                    }, 100);
+                    }, 400);
 
                 };
+                console.log(this);
+                console.log(this.onclick);
+                console.log($(this).data("events"))
+                return;
+                var originalClick = this.onclick;
+                this.onclick = function(e){
+                    originalClick(e);
+                    click(e);
+                }
 
             });
 

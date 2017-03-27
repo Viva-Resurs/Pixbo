@@ -4,13 +4,13 @@
  *
  *
  * Documentation about used plugins:
- * Ticker : http://www.jquerynewsticker.com/
- * Vegas  : http://vegas.jaysalvat.com/documentation/
+ * Vegas     : http://vegas.jaysalvat.com/documentation/
+ * webticker : https://maze.digital/webticker/
  * -----------------------------------------------------------------------------
  */
-window.$ = window.jQuery = require('../vendor/jquery-2.1.3.min.js');
+window.$ = window.jQuery = require('jquery');
 require('vegas');
-require('../vendor/jquery.ticker.js');
+require('webticker/jquery.webticker.js');
 
 
 window.PixboPlayer = {
@@ -35,7 +35,7 @@ window.PixboPlayer = {
         // Setup Dom-connections
         this.DOM.VegasTarget  = $('body');
 
-        this.DOM.VegasTarget.append("<div id='ticker-container'></div>");
+        this.DOM.VegasTarget.append("<div id='ticker-container' class='ticker-wrapper'></div>");
 
         this.DOM.TickerTarget = $('#ticker-container');
 
@@ -54,7 +54,6 @@ window.PixboPlayer = {
 
 };
 
-require('./PixboPlayerCore/jQuery.live.js');
 require('./PixboPlayerCore/PixboPlayer.ConnectionStatus.js');
 require('./PixboPlayerCore/PixboPlayer.Settings.js');
 require('./PixboPlayerCore/PixboPlayer.Standby.js');

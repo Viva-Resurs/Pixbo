@@ -3,6 +3,13 @@ PixboPlayer.Sync = function (first_run) {
     var request = $.ajax({
         type: "get",
         url: "/play/" + PixboPlayer.Client_ADDR,
+        error: function(xhr) {
+
+            PixboPlayer.State = xhr.status;
+
+            PixboPlayer.Update( false, false, false, false, xhr.status );
+
+        }
     });
 
     request.done(function(xhr) {
@@ -44,14 +51,6 @@ PixboPlayer.Sync = function (first_run) {
                 PixboPlayer.Update( false, false, false, false, "NOSCREEN" );
 
         }
-
-    });
-
-    request.error(function(xhr) {
-
-        PixboPlayer.State = xhr.status;
-
-        PixboPlayer.Update( false, false, false, false, xhr.status );
 
     });
 

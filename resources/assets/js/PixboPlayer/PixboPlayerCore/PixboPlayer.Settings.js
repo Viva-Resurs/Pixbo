@@ -1,5 +1,5 @@
 PixboPlayer.Settings = {
-    
+
     Vegas : {
         preload: true,
         transitionDuration: 4000,
@@ -8,7 +8,7 @@ PixboPlayer.Settings = {
         slides: false // This property will be set in Start_Vegas()
     },
 
-    Ticker : {
+    /*Ticker : {
         speed: 0.10,           // The speed of the reveal
         ajaxFeed: false,       // Populate jQuery News Ticker via a feed
         feedUrl: false,        // The URL of the feed
@@ -24,10 +24,15 @@ PixboPlayer.Settings = {
         pauseOnItems: 10000,   // The pause on a news item before being replaced
         fadeInSpeed: 600,      // Speed of fade in animation
         fadeOutSpeed: 300      // Speed of fade out animation
+    },*/
+
+    Ticker : {
+        height: '8.76vh',
+        speed: 75
     },
 
     Set : function(settings){
-        
+
         if (!settings)
             return;
 
@@ -36,7 +41,7 @@ PixboPlayer.Settings = {
             for (var property in settings.vegas)
                 if (PixboPlayer.Settings.Vegas.hasOwnProperty(property))
                     PixboPlayer.Settings.Vegas[property] = Number( settings.vegas[property] );
-        
+
         // Apply Ticker-settings
         if (settings.ticker)
             for (var property in settings.ticker)
