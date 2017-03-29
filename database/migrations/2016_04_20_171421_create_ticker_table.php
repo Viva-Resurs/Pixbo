@@ -40,7 +40,7 @@ class CreateTickerTable extends Migration
      */
     public function down()
     {
-        Schema::drop('ticker');
-        Schema::drop('screengroup_ticker');
+        Schema::dropIfExists('ticker');
+        Schema::dropIfExists('screengroup_ticker');
     }
 }

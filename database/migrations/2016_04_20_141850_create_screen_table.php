@@ -27,7 +27,7 @@ class CreateScreenTable extends Migration
 
             $table->foreign('screen_id')
                 ->references('id')->on('screen')->onDelete('cascade');
-                
+
             $table->timestamps();
         });
 
@@ -55,8 +55,8 @@ class CreateScreenTable extends Migration
      */
     public function down()
     {
-        Schema::drop('screen');
-        Schema::drop('screengroup_screen');
-        Schema::drop('photo');
+        Schema::dropIfExists('screen');
+        Schema::dropIfExists('screengroup_screen');
+        Schema::dropIfExists('photo');
     }
 }

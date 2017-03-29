@@ -30,6 +30,6 @@ class CreateScreengroupTable extends Migration
      */
     public function down()
     {
-        Schema::drop('screengroup');
+        Schema::dropIfExists('screengroup');
     }
 }

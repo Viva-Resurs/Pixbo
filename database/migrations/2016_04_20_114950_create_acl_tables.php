@@ -67,9 +67,9 @@ class CreateAclTables extends Migration
      */
     public function down()
     {
-        Schema::drop('role');
-        Schema::drop('permission');
-        Schema::drop('permission_role');
-        Schema::drop('role_user');
+        Schema::dropIfExists('role');
+        Schema::dropIfExists('permission');
+        Schema::dropIfExists('permission_role');
+        Schema::dropIfExists('role_user');
     }
 }

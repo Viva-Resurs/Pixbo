@@ -56,7 +56,7 @@ class CreateEventTable extends Migration
      */
     public function down()
     {
-        Schema::drop('event');
-        Schema::drop('shadow_event');
+        Schema::dropIfExists('event');
+        Schema::dropIfExists('shadow_event');
     }
 }

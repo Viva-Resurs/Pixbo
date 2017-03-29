@@ -29,7 +29,7 @@ class CreateCategoryTable extends Migration
 
             $table->foreign('category_id')
                 ->references('id')->on('category')->onDelete('cascade');
-            
+
             $table->foreign('screen_id')
                 ->references('id')->on('screen')->onDelete('cascade');
 
@@ -44,7 +44,7 @@ class CreateCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::drop('category');
-        Schema::drop('category_screen');
+        Schema::dropIfExists('category');
+        Schema::dropIfExists('category_screen');
     }
 }
