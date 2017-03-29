@@ -14,4 +14,4 @@ Server software to manage and distribute content to connected displays.
 
 ### Authors
 
-@xergon85 & @ToxicTree
+[xergon85](https://github.com/xergon85) & [ToxicTree](https://github.com/ToxicTree)
