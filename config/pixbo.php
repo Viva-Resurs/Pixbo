@@ -32,7 +32,7 @@ return [
 
         'player' => [
             'ticker' => [
-                'pauseOnItems' => 5000
+                'speed' => 75
             ],
             'vegas' => [
                 'delay' => 10000

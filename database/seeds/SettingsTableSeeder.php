@@ -17,7 +17,7 @@ class SettingsTableSeeder extends Seeder
 
         $settings = Settings::create([
             'vegas_delay' => config('pixbo.settings.player.vegas.delay'),
-            'ticker_pauseOnItems' => config('pixbo.settings.player.ticker.pauseOnItems')
+            'ticker_speed' => config('pixbo.settings.player.ticker.speed')
         ]);
 
     }
