@@ -1,17 +1,17 @@
 # Pixbo
 
-### Installation of the application
+Server software to manage and distribute content to connected displays.
 
-```bash
-wget https://raw.githubusercontent.com/Viva-Resurs/Pixbo/master/pixbo_install && chmod +x pixbo_install && ./pixbo_install
-```
+### Guide
 
-
-### Developing
-
-[Development](docs/Development.md)
-
+- [Setup](docs/Setup.md)
+- [Development](docs/Development.md)
+- [Deploy](docs/Deploy.md)
 
 ### Live test page
 
 [Heroku app](http://pixbo.herokuapp.com/public/).
+
+### Authors
+
+@xergon85 & @ToxicTree
