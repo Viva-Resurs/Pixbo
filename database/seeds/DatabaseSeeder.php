@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(SettingsTableSeeder::class);
 
+        $this->call(InitialDataTableSeeder::class);
+
         Model::reguard();
 
     }

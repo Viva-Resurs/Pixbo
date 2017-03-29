@@ -11,7 +11,7 @@
         </div>
 
     </div>
-    
+
 </template>
 
 <script type="text/ecmascript-6">
@@ -33,9 +33,9 @@
             action() {
 
                 if(this.options !== undefined)
-                    return this.options.action !== undefined ? this.options.action : '/api/screens';
+                    return this.options.action !== undefined ? this.options.action : 'api/screens';
 
-                return '/api/screens';
+                return 'api/screens';
 
             }
 
@@ -60,7 +60,7 @@
                             var self = this;
 
                             self.on("sending", function (file, xhr, formData) {
-                                
+
                                 if (localStorage.getItem('jwt-token'))
                                     xhr.setRequestHeader('Authorization', localStorage.getItem('jwt-token'));
 
@@ -70,7 +70,7 @@
                             });
 
                             self.on("success", function (response) {
-                                
+
                                 vm.$dispatch('alert', {
                                     message: vm.trans('screen.uploaded'),
                                     options: {theme: 'success'}
