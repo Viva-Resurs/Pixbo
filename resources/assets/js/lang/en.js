@@ -89,7 +89,7 @@ const lang = {
         pixbo:                      "Pixbo",
         vegas_delay:                "Time between images",
         vegas_timer:                "Show timer in player",
-        ticker_pauseOnItems:        "Time between tickers",
+        ticker_speed:               "Speed on tickers",
 
         updated:                    "Settings updated.",
         updated_fail:               "Failed to update settings, try again."

@@ -11,7 +11,7 @@
     <div v-else>
 
         <form class="form-horizontal" role="form" v-on:submit.prevent="attemptUpdateSettings" name="myform" v-form>
-            
+
             <div class="panel-body">
 
                 <div class="form-group" v-validation-help>
@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="form-group" v-validation-help>
-                    <label for="ticker_pauseOnItems" class="model_label">{{ trans('settings.ticker_pauseOnItems') }}</label>
+                    <label for="ticker_pauseOnItems" class="model_label">{{ trans('settings.ticker_speed') }}</label>
                     <div class="model_input">
                         <input class="form-control"
                                name="ticker_pauseOnItems" id="ticker_pauseOnItems"
@@ -65,7 +65,7 @@
                 <button type="submit" class="btn btn-primary" @keydown.enter.prevent="attemptUpdateSettings">
                     <i class="fa fa-btn fa-save"></i>{{ trans('general.save') }}
                 </button>
-                
+
             </div>
 
         </form>
@@ -107,7 +107,7 @@
                 var self = this;
 
                 client({ path: '/settings' }).then(
-                    
+
                     function (response) {
 
                         self.$set('settings', response.entity.data);
@@ -138,7 +138,7 @@
                 var self = this;
 
                 client({ path: '/settings', entity: self.settings, method: 'PUT'}).then(
-                    
+
                     function (response) {
 
                         self.$dispatch('alert', {

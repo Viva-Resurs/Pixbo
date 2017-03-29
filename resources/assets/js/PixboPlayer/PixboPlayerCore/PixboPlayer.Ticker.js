@@ -10,7 +10,7 @@ PixboPlayer.Start_Ticker = function(tickers){
     if (!target || target.children().length<1)
         return console.log('No tickers...');
 
-    // Run .ticker() Plugin
+    // Run ticker Plugin
     target.webTicker(this.Settings.Ticker);
 
     // Start Controls
@@ -88,15 +88,6 @@ PixboPlayer.Controls.Ticker = {
                     }, 400);
 
                 };
-                console.log(this);
-                console.log(this.onclick);
-                console.log($(this).data("events"))
-                return;
-                var originalClick = this.onclick;
-                this.onclick = function(e){
-                    originalClick(e);
-                    click(e);
-                }
 
             });
 

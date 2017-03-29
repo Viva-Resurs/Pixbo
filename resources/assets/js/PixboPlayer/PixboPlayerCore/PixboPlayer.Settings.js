@@ -39,14 +39,15 @@ PixboPlayer.Settings = {
         // Apply Vegas-settings
         if (settings.vegas)
             for (var property in settings.vegas)
-                if (PixboPlayer.Settings.Vegas.hasOwnProperty(property))
-                    PixboPlayer.Settings.Vegas[property] = Number( settings.vegas[property] );
+                PixboPlayer.Settings.Vegas[property] = Number( settings.vegas[property] );
 
         // Apply Ticker-settings
         if (settings.ticker)
             for (var property in settings.ticker)
-                if (PixboPlayer.Settings.Ticker.hasOwnProperty(property))
-                    PixboPlayer.Settings.Ticker[property] = Number( settings.ticker[property] );
+                PixboPlayer.Settings.Ticker[property] = Number( settings.ticker[property] );
+
+        // Convert settings HACK
+        PixboPlayer.Settings.Ticker.speed = Number(PixboPlayer.Settings.Ticker.pauseOnItems);
 
         // Add Controls in Settings for Ticker
         if (PixboPlayer.EnableControls)
