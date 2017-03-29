@@ -20,8 +20,8 @@ class Settings extends Model
      *
      * @var array
      */
-    protected $fillable = ['vegas_delay', 'ticker_pauseOnItems', 'vegas_timer'];
-    
+    protected $fillable = ['vegas_delay', 'ticker_speed', 'vegas_timer'];
+
     /**
      * The attributes excluded from the model's JSON form.
      *
@@ -39,16 +39,16 @@ class Settings extends Model
         $settings = Settings::first();
 
         $rawSettings = $settings->getAttributes();
-        
+
         $vegas = [];
         $ticker = [];
-        
+
         foreach ($rawSettings as $key => $value) {
             $keys = explode('_', $key);
 
             if ($keys[0]=='vegas')
                 $vegas[$keys[1]] = $value;
-            
+
             else if ($keys[0]=='ticker')
                 $ticker[$keys[1]] = $value;
         }

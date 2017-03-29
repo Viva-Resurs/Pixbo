@@ -46,9 +46,6 @@ PixboPlayer.Settings = {
             for (var property in settings.ticker)
                 PixboPlayer.Settings.Ticker[property] = Number( settings.ticker[property] );
 
-        // Convert settings HACK
-        PixboPlayer.Settings.Ticker.speed = Number(PixboPlayer.Settings.Ticker.pauseOnItems);
-
         // Add Controls in Settings for Ticker
         if (PixboPlayer.EnableControls)
             PixboPlayer.Settings.Ticker.controls = true;

@@ -28,12 +28,12 @@
                 </div>
 
                 <div class="form-group" v-validation-help>
-                    <label for="ticker_pauseOnItems" class="model_label">{{ trans('settings.ticker_speed') }}</label>
+                    <label for="ticker_speed" class="model_label">{{ trans('settings.ticker_speed') }}</label>
                     <div class="model_input">
                         <input class="form-control"
-                               name="ticker_pauseOnItems" id="ticker_pauseOnItems"
+                               name="ticker_speed" id="ticker_speed"
                                type="number"
-                               v-model="settings.ticker_pauseOnItems"
+                               v-model="settings.ticker_speed"
                                v-form-ctrl
                                required
                         >
@@ -88,7 +88,7 @@
                 settings: {
                     vegas_delay: null,
                     vegas_timer: null,
-                    ticker_pauseOnItems: null
+                    ticker_speed: null
                 },
                 myform: []
             }

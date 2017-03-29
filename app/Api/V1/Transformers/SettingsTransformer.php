@@ -17,9 +17,9 @@ class SettingsTransformer extends TransformerAbstract
     public function transform(Settings $settings)
     {
         return [
-            'vegas_delay'         => $settings->vegas_delay,
-            'vegas_timer'         => (int) $settings->vegas_timer,
-            'ticker_pauseOnItems' => $settings->ticker_pauseOnItems
+            'vegas_delay'  => $settings->vegas_delay,
+            'vegas_timer'  => (int) $settings->vegas_timer,
+            'ticker_speed' => $settings->ticker_speed
         ];
     }
 }
