@@ -32,7 +32,7 @@ PixboPlayer.Set_Screens = function(screens){
     this.Screens = [];
 
     for (var i=0 ; i<screens.length ; i++)
-        this.Screens.push( { src: '/' + screens[i] } );
+        this.Screens.push( { src: screens[i] } );
 
 };
 
