@@ -75,6 +75,16 @@ trait HasShadowEvents
         12 => 'december',
     ];
 
+    /**
+     * Validate frequency
+     * @return int
+     */
+    protected function validateFrequency($frequency) {
+        if (is_null($frequency) || (int) $frequency <= 0)
+            return 1;
+        return (int) $frequency;
+    };
+
     protected function findShadowInRange($start, $begin, $end) {
         $first_match = $this->shadow_events()
             ->where('start', '>=',$start)
@@ -103,7 +113,7 @@ trait HasShadowEvents
 
     private function generateNone(Event $event)
     {
-        $date = $this->getDate($event);
+        $date = $this->getStartDate($event);
 
         ShadowEvent::clearEvent($event->id);
 
@@ -111,9 +121,9 @@ trait HasShadowEvents
         $this->dispatch($addShadowEvent);
     }
 
-    private function getDate(Event $event)
+    private function getStartDate(Event $event)
     {
-        $timeArray = extractTime($event->start_time);
+        $timeArray = (!is_null($event->start_time)) ? extractTime($event->start_time) : ["00","00","00"];
 
         $date = Carbon::parse($event->start_date);
 
@@ -140,8 +150,7 @@ trait HasShadowEvents
 
         // Kollar om det som finns är kortare än x dagar framåt
         $returnDate = ($givenDate->lte($maxEndDate)) ? $givenDate : $maxEndDate;
-
-        $timeArray = extractTime($event->end_time);
+        $timeArray = (!is_null($event->end_time)) ? extractTime($event->end_time) : ["00","00","00"];
 
         $returnDate->hour = $timeArray[0];
         $returnDate->minute = $timeArray[1];
@@ -150,13 +159,14 @@ trait HasShadowEvents
         return $returnDate;
     }
 
-    private function getToday($time)
+    private function getToday($start_date)
     {
-        $time = Carbon::parse($time);
+        $date = Carbon::parse($start_date);
+        $timeArray = [$date->hour, $date->minute, $date->second];
         $today = Carbon::now();
-        $today->hour = $time->hour;
-        $today->minute = $time->minute;
-        $today->second = $time->second;
+        $today->hour = $timeArray[0];
+        $today->minute = $timeArray[0];
+        $today->second = "00";
 
         return $today;
     }
@@ -168,17 +178,16 @@ trait HasShadowEvents
      */
     private function generateDaily(Event $event)
     {
-        $start_date = $this->getDate($event);
+        $start_date = $this->getStartDate($event);
         $today = $this->getToday($start_date);
         $end_date = $this->getEndDate($event, 'days', $this->duration['daily']);
-        $frequency = $event->frequency;
+        $frequency = $this->validateFrequency($event->frequency);
 
         $start = $this->findShadowInRange(
             $start_date,
             $today->subDays($frequency),
             $today->addDays($frequency)
         );
-
 
         for ($initial = Carbon::parse($start);
              $initial->lte($end_date);
@@ -197,10 +206,10 @@ trait HasShadowEvents
     private function generateWeekly(Event $event)
     {
 
-        $start_date = $this->getDate($event);
+        $start_date = $this->getStartDate($event);
         $today = $this->getToday($start_date);
         $end_date = $this->getEndDate($event, 'weeks', $this->duration['weekly']);
-        $frequency = $event->frequency;
+        $frequency = $this->validateFrequency($event->frequency);
         $weekDays = json_decode(($event->weekly_day_num));
 
         $start = $this->findShadowInRange(
@@ -236,10 +245,10 @@ trait HasShadowEvents
      */
     private function generateMonthly(Event $event)
     {
-        $start_date = $this->getDate($event);
+        $start_date = $this->getStartDate($event);
         $end_date = $this->getEndDate($event, 'month', $this->duration['monthly']);
         $today = $this->getToday($start_date);
-        $frequency = $event->frequency;
+        $frequency = $this->validateFrequency($event->frequency);
         $weekDay = $event->recur_day;
         $week_in_month = (int) $event->monthly_day_num;
         $days_ahead = $event->days_before_event;
@@ -287,10 +296,10 @@ trait HasShadowEvents
      */
     private function generateYearly(Event $event)
     {
-        $start_date = $this->getDate($event);
+        $start_date = $this->getStartDate($event);
         $end_date = $this->getEndDate($event, 'year', $this->duration['yearly']);
         $today = $this->getToday($start_date);
-        $frequency = $event->frequency;
+        $frequency = $this->validateFrequency($event->frequency);
 
         $start = $this->findShadowInRange(
             $start_date,
