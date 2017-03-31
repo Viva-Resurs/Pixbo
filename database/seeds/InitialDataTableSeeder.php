@@ -54,8 +54,9 @@ class InitialDataTableSeeder extends Seeder
 
         // Create and attach event to Ticker
         $ticker->event()->save(
-            new Event(['start_date' => date('Y-m-d'), 'recur_type' => 'daily'])
+            $event = new Event(['start_date' => date('Y-m-d'), 'recur_type' => 'daily'])
         );
+        $event->generateShadowEvents($event);
 
         // Attach to screengroup
         $ticker->screengroups()->save($sg);
@@ -81,8 +82,9 @@ class InitialDataTableSeeder extends Seeder
 
         // Create and attach event to Screen
         $screen->event()->save(
-            new Event(['start_date' => date('Y-m-d'), 'recur_type' => 'daily'])
+            $event = new Event(['start_date' => date('Y-m-d'), 'recur_type' => 'daily'])
         );
+        $event->generateShadowEvents($event);
 
         // Attach to screengroup
         $screen->screengroups()->save($sg);
