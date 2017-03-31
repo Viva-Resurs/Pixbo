@@ -83,7 +83,7 @@ trait HasShadowEvents
         if (is_null($frequency) || (int) $frequency <= 0)
             return 1;
         return (int) $frequency;
-    };
+    }
 
     protected function findShadowInRange($start, $begin, $end) {
         $first_match = $this->shadow_events()
