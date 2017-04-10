@@ -14,7 +14,7 @@ PixboPlayer.Sync = function (first_run) {
 
     request.done(function(xhr) {
 
-        var _data;
+        var _data, need_sync = false;
 
         try {
             _data = JSON.parse(request.responseText); // Fetch JSON-output
@@ -32,7 +32,11 @@ PixboPlayer.Sync = function (first_run) {
             location.reload();
         }
 
-        if (first_run || PixboPlayer.State != xhr.status || PixboPlayer.UpdatedAt != _data['updated_at']) {
+        // Check if schedule has changed
+        need_sync = PixboPlayer.CheckContents(_data.photo_list, _data.tickers);
+
+
+        if (first_run || need_sync || PixboPlayer.State != xhr.status || PixboPlayer.UpdatedAt != _data['updated_at']) {
 
             PixboPlayer.State = xhr.status;
 
@@ -54,6 +58,28 @@ PixboPlayer.Sync = function (first_run) {
 
     });
 
+};
+
+PixboPlayer.CheckContents = function(screens, tickers) {
+    if (screens){
+        if (this.Screens.length != screens.length)
+            return true;
+        // TODO: Check screen src attributes here
+        for (var i = 0 ; i < this.Screens.length ; i++){
+            //if (this.Screens[i].photo != screens[i].photo)
+            //    return true;
+        }
+    }
+    if (tickers){
+        if (this.Tickers.length != tickers.length)
+            return true;
+        // TODO: Check ticker text here
+        for (var i = 0 ; i < this.Tickers.length ; i++){
+            //if (this.Tickers[i].text != tickers[i].text)
+            //    return true;
+        }
+    }
+    return false;
 };
 
 PixboPlayer.Update = function(new_screens, new_tickers, new_updated_at, new_settings, info) {
