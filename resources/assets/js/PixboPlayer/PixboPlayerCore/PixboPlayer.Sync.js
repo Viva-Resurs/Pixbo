@@ -75,21 +75,27 @@ PixboPlayer.sameString = function(a, b){
 
 PixboPlayer.CheckContents = function(screens, tickers) {
     if (screens){
-        if (this.Screens.length != screens.length)
+        if (PixboPlayer.Screens.length != screens.length){
+            console.log('Length doesn´t match: '+PixboPlayer.Screens.length+'!='+screens.length);
             return true;
+        }
         for (var i = 0 ; i < this.Screens.length ; i++){
-            if (!PixboPlayer.sameString(this.Screens[i].src != screens[i]))
+            if (!PixboPlayer.sameString(PixboPlayer.Screens[i].src != screens[i])){
+                console.log('Not same string:');
+                console.log(PixboPlayer.Screens[i].src);
+                console.log(screens[i]);
                 return true;
+            }
         }
     }
-    if (tickers){
-        if (this.Tickers.length != tickers.length)
-            return true;
-        for (var i = 0 ; i < this.Tickers.length ; i++){
-            if (!PixboPlayer.sameString(this.Tickers[i] != tickers[i]))
-               return true;
-        }
-    }
+    //if (tickers){
+    //    if (this.Tickers.length != tickers.length)
+    //        return true;
+    //    for (var i = 0 ; i < this.Tickers.length ; i++){
+    //        if (!PixboPlayer.sameString(this.Tickers[i] != tickers[i]))
+    //           return true;
+    //    }
+    //}
     return false;
 };
 
