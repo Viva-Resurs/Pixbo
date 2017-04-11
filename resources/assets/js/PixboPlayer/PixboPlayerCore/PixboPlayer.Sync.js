@@ -65,7 +65,7 @@ PixboPlayer.CheckContents = function(screens, tickers) {
         if (this.Screens.length != screens.length)
             return true;
         for (var i = 0 ; i < this.Screens.length ; i++){
-            if (this.Screens[i].photo != screens[i].photo)
+            if (this.Screens[i] != screens[i])
                 return true;
         }
     }
@@ -73,7 +73,7 @@ PixboPlayer.CheckContents = function(screens, tickers) {
         if (this.Tickers.length != tickers.length)
             return true;
         for (var i = 0 ; i < this.Tickers.length ; i++){
-            if (this.Tickers[i].text != tickers[i].text)
+            if (this.Tickers[i] != tickers[i])
                return true;
         }
     }
