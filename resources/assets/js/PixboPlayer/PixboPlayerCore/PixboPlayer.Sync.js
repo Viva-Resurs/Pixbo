@@ -60,12 +60,25 @@ PixboPlayer.Sync = function (first_run) {
 
 };
 
+PixboPlayer.sameString = function(a, b){
+    if (!a || !b)
+        return false;
+    if (typeof a != 'string' || typeof b != 'string')
+        return false;
+    if (a.length != b.length)
+        return false;
+    for (var i = 0 ; i < a.length ; i++)
+        if (a[i] != b[i])
+            return false;
+    return true;
+};
+
 PixboPlayer.CheckContents = function(screens, tickers) {
     if (screens){
         if (this.Screens.length != screens.length)
             return true;
         for (var i = 0 ; i < this.Screens.length ; i++){
-            if (this.Screens[i] != screens[i])
+            if (!PixboPlayer.sameString(this.Screens[i] != screens[i]))
                 return true;
         }
     }
@@ -73,7 +86,7 @@ PixboPlayer.CheckContents = function(screens, tickers) {
         if (this.Tickers.length != tickers.length)
             return true;
         for (var i = 0 ; i < this.Tickers.length ; i++){
-            if (this.Tickers[i] != tickers[i])
+            if (!PixboPlayer.sameString(this.Tickers[i] != tickers[i]))
                return true;
         }
     }
