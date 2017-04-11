@@ -61,15 +61,20 @@ PixboPlayer.Sync = function (first_run) {
 };
 
 PixboPlayer.sameString = function(a, b){
-    if (!a || !b)
+    if (typeof a != 'string' || typeof b != 'string'){
+        console.log('Not strings');
         return false;
-    if (typeof a != 'string' || typeof b != 'string')
+    }
+    if (a.length != b.length){
+        console.log('Not same length: '+a.length+'!='+b.length);
         return false;
-    if (a.length != b.length)
-        return false;
-    for (var i = 0 ; i < a.length ; i++)
-        if (a[i] != b[i])
+    }
+    for (var i = 0 ; i < a.length ; i++){
+        if (a[i] != b[i]){
+            console.log('Detected unmatch at '+i+' '+a[i]+'!='+b[i]);
             return false;
+        }
+    }
     return true;
 };
 
