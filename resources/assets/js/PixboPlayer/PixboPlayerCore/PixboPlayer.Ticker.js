@@ -21,6 +21,11 @@ PixboPlayer.Start_Ticker = function(tickers){
 
 PixboPlayer.Put_Tickers = function(tickers){
 
+    this.Tickers = [];
+
+    for (var i=0 ; i<tickers.length ; i++)
+        this.Tickers.push( tickers[i] );
+
     var content = "<ul id='ticker' class='ticker-content'>";
 
     for (var i=0 ; i<tickers.length ; i++)

@@ -78,7 +78,7 @@ PixboPlayer.CheckContents = function(screens, tickers) {
         if (this.Screens.length != screens.length)
             return true;
         for (var i = 0 ; i < this.Screens.length ; i++){
-            if (!PixboPlayer.sameString(this.Screens[i] != screens[i]))
+            if (!PixboPlayer.sameString(this.Screens[i].src != screens[i]))
                 return true;
         }
     }

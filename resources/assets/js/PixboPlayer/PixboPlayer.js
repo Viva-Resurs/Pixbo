@@ -19,6 +19,7 @@ window.PixboPlayer = {
     EnableControls : false,
     UpdatedAt : false,
     Screens : [],
+    Tickers : [],
     Vegas_Started : false,
     Backdrop : false,
     Controls : {},
