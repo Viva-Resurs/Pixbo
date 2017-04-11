@@ -85,7 +85,7 @@ PixboPlayer.CheckContents = function(screens, tickers) {
             return true;
         }
         for (var i = 0 ; i < this.Screens.length ; i++){
-            if (!PixboPlayer.sameString(PixboPlayer.Screens[i].src != screens[i])){
+            if (!PixboPlayer.sameString(PixboPlayer.Screens[i].src, screens[i])){
                 console.log('Not same string:');
                 console.log(PixboPlayer.Screens[i].src);
                 console.log(screens[i]);
