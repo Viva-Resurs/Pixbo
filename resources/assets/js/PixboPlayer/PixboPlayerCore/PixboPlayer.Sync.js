@@ -61,46 +61,39 @@ PixboPlayer.Sync = function (first_run) {
 };
 
 PixboPlayer.sameString = function(a, b){
-    if (typeof a != 'string' || typeof b != 'string'){
-        console.log('Not strings');
+    if (!a || !b)
         return false;
-    }
-    if (a.length != b.length){
-        console.log('Not same length: '+a.length+'!='+b.length);
+
+    if (typeof a != 'string' || typeof b != 'string')
         return false;
-    }
-    for (var i = 0 ; i < a.length ; i++){
-        if (a[i] != b[i]){
-            console.log('Detected unmatch at '+i+' '+a[i]+'!='+b[i]);
+
+    if (a.length != b.length)
+        return false;
+
+    for (var i = 0 ; i < a.length ; i++)
+        if (a[i] != b[i])
             return false;
-        }
-    }
+
     return true;
 };
 
 PixboPlayer.CheckContents = function(screens, tickers) {
     if (screens){
-        if (PixboPlayer.Screens.length != screens.length){
-            console.log('Length doesn´t match: '+PixboPlayer.Screens.length+'!='+screens.length);
+        if (PixboPlayer.Screens.length != screens.length)
             return true;
-        }
         for (var i = 0 ; i < this.Screens.length ; i++){
-            if (!PixboPlayer.sameString(PixboPlayer.Screens[i].src, screens[i])){
-                console.log('Not same string:');
-                console.log(PixboPlayer.Screens[i].src);
-                console.log(screens[i]);
+            if (!PixboPlayer.sameString(PixboPlayer.Screens[i].src, screens[i]))
                 return true;
-            }
         }
     }
-    //if (tickers){
-    //    if (this.Tickers.length != tickers.length)
-    //        return true;
-    //    for (var i = 0 ; i < this.Tickers.length ; i++){
-    //        if (!PixboPlayer.sameString(this.Tickers[i] != tickers[i]))
-    //           return true;
-    //    }
-    //}
+    if (tickers){
+        if (this.Tickers.length != tickers.length)
+            return true;
+        for (var i = 0 ; i < this.Tickers.length ; i++){
+            if (!PixboPlayer.sameString(this.Tickers[i], tickers[i]))
+               return true;
+        }
+    }
     return false;
 };
 
